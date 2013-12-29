@@ -28,7 +28,7 @@ body {
     display: table-cell;
     vertical-align: middle;
     text-align: center;
-    text-shadow: 1px 1px 1px #666;
+    /*text-shadow: 1px 1px 1px #666;*/
     color: #fff;
-    font-size: 4em;
+    font-size: 2em;
 }
