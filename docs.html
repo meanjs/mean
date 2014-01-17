@@ -26,13 +26,14 @@
     <meta property="og:url" content="http://meanjs.org" />
 
     <link rel="shortcut icon" href="img/favicon.ico" />
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,600,700,800,300' rel='stylesheet' type='text/css'>
+
 
     <link rel="stylesheet" href="css/bootstrap-journal.min.css">
     <link rel="stylesheet" href="css/common.css">
 </head>
 
-<body>
+<body data-spy="scroll" data-target=".nav-docs">
     <header class="navbar navbar-default navbar-fixed-top" role="banner">
         <div class="container">
             <div class="navbar-header">
@@ -48,7 +49,7 @@
             </div>
             <nav id="navbar" class="collapse navbar-collapse" role="navigation">
                 <ul class="nav navbar-nav navbar-right">
-                    <li>
+                    <li class="active">
                         <a href="docs.html">Docs</a>
                     </li>
                     <li>
@@ -61,7 +62,7 @@
                         <a href="community.html">Community</a>
                     </li>
                     <li>
-                        <a href="http://meanjs.tumblr.com">Blog</a>
+                        <a target="_blank" href="http://meanjs.tumblr.com">Blog</a>
                     </li>
                     <li>
                         <a href="mailto:support@meanjs.org">
@@ -75,58 +76,60 @@
     <section class="content">
         <section class="container">
             <section class="row">
-                <section class="col-md-3">
-                    <div class="list-group">
-                        <a class="list-group-item" href="#overview">
-                        	Overview
-                        </a>
-                        <a class="list-group-item" href="#getting-started">
-                        	Getting Started
-                        </a>
-                        <a class="list-group-item" href="#configuration">
-                        	Configuration
-                        </a>
-                        <a class="list-group-item" href="#troubleshooting">
-                        	Troubleshooting
-                        </a>
-                        <a class="list-group-item" href="#folder-structure">
-                        	Folder Structure
-                        </a>
-                        <a class="list-group-item" href="#npm">
-                        	npm &amp; package.json
-                        </a>
-                        <a class="list-group-item" href="#bower">
-                        	Bower
-                        </a>
-                        <a class="list-group-item" href="#grunt">
-                        	Grunt
-                        </a>
-                        <a class="list-group-item" href="#express">
-                        	Express &amp; Routing
-                        </a>
-                        <a class="list-group-item" href="#passport">
-                        	Passport
-                        </a>
-                        <a class="list-group-item" href="#backend-views">
-                        	Backend Views
-                        </a>
-                        <a class="list-group-item" href="#angularjs-module-system">
-                        	AngularJS Module System
-                        </a>
-                        <a class="list-group-item" href="#server-tests">
-                        	Server Tests
-                        </a>
-                        <a class="list-group-item" href="#angularjs-tests">
-                        	AngularJS Tests
-                        </a>
-                        <a class="list-group-item" href="#article-example">
-                        	The Article Example
-                        </a>
-                    </div>
-                </section>
-
-                <section class="col-md-9">
-                	<h1 id="scrollspy-overview">Overview</h1>
+                <nav class="nav-docs" role="complementary">
+                    <ul class="nav nav-pills nav-stacked">
+                        <li>
+                            <a href="#overview">Overview</a>
+                        </li>
+                        <li>
+                            <a href="#getting-started">Getting Started</a>
+                        </li>
+                        <li>
+                            <a href="#configuration">Configuration</a>
+                        </li>
+                        <li>
+                            <a href="#troubleshooting">Troubleshooting</a>
+                        </li>
+                        <li>
+                            <a href="#folder-structure">Folder Structure</a>
+                        </li>
+                        <li>
+                            <a href="#npm">npm &amp; package.json</a>
+                        </li>
+                        <li>
+                            <a href="#bower">Bower</a>
+                        </li>
+                        <li>
+                            <a href="#grunt">Grunt</a>
+                        </li>
+                        <li>
+                            <a href="#express">Express &amp; Routing</a>
+                        </li>
+                        <li>
+                            <a href="#passport">Passport</a>
+                        </li>
+                        <li>
+                            <a href="#backend-views">Backend Views</a>
+                        </li>
+                        <li>
+                            <a href="#server-tests">Server Tests</a>
+                        </li>
+                        <li>
+                            <a href="#angularjs-tests">AngularJS Tests</a>
+                        </li>
+                        <li>
+                            <a href="#angularjs-modules-system">AngularJS Modules System</a>
+                        </li>
+                        <li>
+                            <a href="#article-example">The Article Example</a>
+                        </li>
+                    </ul>
+                </nav>
+                <section class="col-md-10 col-md-offset-2">
+                    <div class="inner-link-anchor" id="overview"></div>
+                    <section class="page-header">
+                        <h1>Overview</h1>
+                    </section>
                     <section>
                         Thank you for downloading the MEAN.JS boilerplate!
                         <br>
@@ -138,25 +141,1334 @@
                         <dl>
                             <dt>MongoDB</dt>
                             <dd>
-                                Go through <a href="http://mongodb.org">MongoDB Official Website</a> and proceed to its <a href="http://docs.mongodb.org/manual/">Great Manual</a>, which should help you understand NoSQL and MongoDB better.
+                                Go through <a target="_blank" href="http://mongodb.org">MongoDB Official Website</a> and proceed to its <a target="_blank" href="http://docs.mongodb.org/manual/">Great Manual</a>, which should help you understand NoSQL and MongoDB better.
                             </dd>
                             <dt>Express</dt>
                             <dd>
-                                The best way to understand express is through its <a href="http://expressjs.com"> Official Website</a>, particularly <a href="http://expressjs.com/guide.html">The Express Guide</a>, you can also go through this <a href="http://stackoverflow.com/questions/8144214/learning-express-for-node-js">Stackoveflow Thread</a> for more resources.
+                                The best way to understand express is through its <a target="_blank" href="http://expressjs.com"> Official Website</a>, particularly <a target="_blank" href="http://expressjs.com/guide.html">The Express Guide</a>, you can also go through this <a target="_blank" href="http://stackoverflow.com/questions/8144214/learning-express-for-node-js">Stackoveflow Thread</a> for more resources.
                             </dd>
                             <dt>AngularJS</dt>
                             <dd>
-                                Angular's <a href="http://angularjs.org">Official Website</a> is a great starting point. You can also use <a href="http://www.thinkster.io/">Thinkster Popular Guide</a>, and the <a href="https://egghead.io/">Egghead Videos</a>.
+                                Angular's <a target="_blank" href="http://angularjs.org">Official Website</a> is a great starting point. You can also use <a target="_blank" href="http://www.thinkster.io/">Thinkster Popular Guide</a>, and the <a target="_blank" href="https://egghead.io/">Egghead Videos</a>.
                             </dd>
                             <dt>Node.js</dt>
                             <dd>
-                                Start by going through <a href="http://nodejs.org">Node.js Official Website</a> and this <a href="http://stackoverflow.com/questions/2353818/how-do-i-get-started-with-node-js">Stackoveflow Thread</a>, which should get you going with the Node.js platform in no time.
+                                Start by going through <a target="_blank" href="http://nodejs.org">Node.js Official Website</a> and this <a target="_blank" href="http://stackoverflow.com/questions/2353818/how-do-i-get-started-with-node-js">Stackoveflow Thread</a>, which should get you going with the Node.js platform in no time.
                             </dd>
                         </dl>
                         When you're done with those resources and feel you understand the basic prinicpals continue to other sections.
                         <br>
                         <br>Enjoy &amp; keep us updated,
                         <br>The MEAN.JS Team.
+                    </section>
+                    <div class="inner-link-anchor" id="getting-started"></div>
+                    <section class="page-header">
+                        <h1>Getting Started</h1>
+                    </section>
+                    <section>
+                        <p>
+                            In this section you'll learn how to get started with a MEAN.JS application, install all the prerequisites, initialize your application.
+                        </p>
+                        <h2>Prerequisites</h2>
+                        <p>
+                            Before you begin, you should make sure you have installed all these prerequisites on your development machine.
+                        </p>
+                        <br>
+                        <dl class="dl-horizontal">
+                            <dt>Node.js &amp; npm</dt>
+                            <dd>
+                                <a target="_blank" href="http://www.nodejs.org/download">Download &amp; Install</a> Node.js and the npm package manager, if you encounter any problems, you can also use this <a target="_blank" href="https://gist.github.com/isaacs/579814">Github Gist</a> to install Node.js.
+                            </dd>
+                            <dt>MongoDB</dt>
+                            <dd>
+                                <a target="_blank" href="http://www.mongodb.org/downloads">Download &amp; Install</a> MongoDB, and make sure it's running on the default port (27017).
+                            </dd>
+                            <dt>Bower</dt>
+                            <dd>
+                                You're going to use the <a target="_blank" href="http://bower.io">Bower Package Manager</a> to manage your front-end packages, in order to install it make sure you've installed Node.js and npm, then install bower globally using npm:
+                                <pre>$ npm install -g bower</pre>
+                            </dd>
+                            <dt>Grunt</dt>
+                            <dd>
+                                You're going to use the <a target="_blank" href="http://gruntjs.com/">Grunt Task Runner</a> to automate your development process, in order to install it make sure you've installed Node.js and npm, then install grunt globally using npm:
+                                <pre>$ npm install -g grunt-cli</pre>
+                            </dd>
+                        </dl>
+                        <p class="alert alert-info">
+                            <b>Note:</b> Your user might not have enought permissions to install package globally, so use a super user or <b>sudo</b>.
+                        </p>
+                        <h2>Quick Install</h2>
+                        <p>
+                            Once you've installed all the prerequisites, your'e just a few steps away from starting to develop you MEAN application.
+                        </p>
+                        <p>
+                            The first thing you should do is install all of the Node.js dependencies. The boilerplate comes pre-bundled with a <b>package.json</b> file that contains the list of modules you need to start your application, to learn more about the modules installed visit the <a href="#npm">NPM &amp; Package.json</a> section.
+                        </p>
+                        <p>
+                            To install Node.js dependencies you're going to use npm again, just run this in the command-line:
+                            <pre>$ npm install</pre>
+                            <br>This command does a few things:
+                            <ul>
+                                <li>First it will install the dependencies needed for the application to run.</li>
+                                <li>If you're running in a development environment, it will then also install development dependencies needed for testing and running your application.</li>
+                                <li>Finally, when the install process is over, npm will initiate a
+                                    <code>bower install</code>command to install all the front-end modules needed for the application.</li>
+                            </ul>
+                        </p>
+                        <h2>Running Your Application</h2>
+                        <p>
+                            After the install process is over, you'll be able to run your application using Grunt, just run grunt default task:
+                            <pre>$ grunt</pre>
+                            Your application should run on the 3000 port so in your browser just go to
+                            <pre><a target="_blank" href="http://localhost:3000">http://localhost:3000</a>
+                            </pre>
+                        </p>
+                        <p>
+                            Thats it! your application should be running by now, to proceed with your development check the other sections in this documentation.
+                            <br>If you encounter any problem try the <a href="#troubleshooting">Troubleshooting</a> section.
+                        </p>
+                    </section>
+                    <div class="inner-link-anchor" id="configuration"></div>
+                    <section class="page-header">
+                        <h1>Configuration</h1>
+                    </section>
+                    <section>
+                        <p>
+                            So, you have your application running, but how do you configure it?
+                        </p>
+                        <h2>Enviormental Configuration</h2>
+                        <p>
+                            The config folder is where you have all the files organized in a specific structure, which starts with the <b>config.js</b> file.
+                        </p>
+                        <p>
+                            The config file functions as loader for the configurations files placed in the <b>config/env</b> folder, it will load the right configuration file based on the NODE_ENV variable.
+                        </p>
+                        <br>
+                        <p>
+                            There are five default configuration files based on common development pattern:
+                        </p>
+                        <dl>
+                            <dt>config/env/all.js</dt>
+                            <dd>
+                                This file will be loaded in <i>any environment</i>, it has the default properties needed in the application, that will be overwritten by any environment specified configuration.
+                            </dd>
+                            <dt>config/env/development.js</dt>
+                            <dd>
+                                This file will be loaded in a <i>development environment</i>, a property defined here will overwrite the one defined in the all.js file.
+                            </dd>
+                            <dt>config/env/production.js</dt>
+                            <dd>
+                                This file will be loaded in a <i>production environment</i>, a property defined here will overwrite the one defined in the all.js file.
+                            </dd>
+                            <dt>config/env/test.js</dt>
+                            <dd>
+                                This file will be loaded in a <i>test environment</i>, a property defined here will overwrite the one defined in the all.js file.
+                            </dd>
+                            <dt>config/env/travis.js</dt>
+                            <dd>
+                                This file will be loaded in the Travis CI testing environment, a property defined here will overwrite the one defined in the all.js file.
+                            </dd>
+                        </dl>
+                        <p>
+                            To run your application locally with a different environment configuration run the application like this:
+                            <pre>$ NODE_ENV={The Enivronment Name} grunt</pre>
+                        </p>
+                        <h2>Configuration Properties</h2>
+                        <p>
+                            There are a necessery set of configuration properties you will most likely expand with your properties. Here's the review of all the required properties used in the configuration files:
+                        </p>
+                        <dl>
+                            <dt>config.db</dt>
+                            <dd>
+                                This is the MongoDB connection string URI, when bootstrapped, the application will try to connect to the database using this URI, so make sure its the correct one in each environment.
+                            </dd>
+                            <dt>config.port</dt>
+                            <dd>
+                                The port used by the application, default is 3000, but as you can notice in the test.js config file, this can be changed.
+                            </dd>
+                            <dt>config.app.title</dt>
+                            <dd>
+                                This is title used as the HTML page title. Notice that it appears both in the all.js file and in all the non-production configuration files.
+                            </dd>
+                            <dt>config.app.description</dt>
+                            <dd>
+                                This is used in the HTML description meta tag. Notice that it only appears in the all.js file.
+                            </dd>
+                            <dt>config.app.keywords</dt>
+                            <dd>
+                                This is used in the HTML keywords meta tag. Notice that it only appears in the all.js file.
+                            </dd>
+                        </dl>
+                        <h2>Social Configuration Properties</h2>
+                        <p>
+                            The application will use the <a target="_blank" href="http://passportjs.org">Passport</a> module to offer users various login options.
+                        </p>
+                        <p>
+                            Ther are currently four social platforms supported: Facebook, Twitter, Google, and Github. You can also add other platforms using the samples already created.
+                        </p>
+                        <p>
+                            To configure your social application oauth keys there's a property object for each platform:
+                        </p>
+                        <dl>
+                            <dt>config.app.{OAuth Provider}.clientID</dt>
+                            <dd>
+                                Your application oauth id.
+                            </dd>
+                            <dt>config.app.{OAuth Provider}.clientSecret</dt>
+                            <dd>
+                                Your application oauth secret.
+                            </dd>
+                            <dt>config.app.{OAuth Provider}.callbackURL</dt>
+                            <dd>
+                                Your application oauth callback URL.
+                            </dd>
+                        </dl>
+                        <p class="alert alert-info">
+                            Remember to use different configuration for each environment especially your MongoDB URI and social platform oauth keys.
+                        </p>
+                    </section>
+                    <div class="inner-link-anchor" id="troubleshooting"></div>
+                    <section class="page-header">
+                        <h1>Troubleshooting</h1>
+                    </section>
+                    <section>
+                        Sometimes things doesn't go as well as planned and you encounter problems during installation, so what can you do?
+
+                        <h2>Check Node.js and npm Versions</h2>
+                        <p>
+                            The rapid advancements in JavaScript modules can sometimes cause version issues with the MEAN's dependencies. We try to keep up with the stable versions, and make sure the modules versions are compatible with those versions. We can't control the pre-installed platforms versions, so you should check to see you haven't installed a nightly or old versions.
+                        </p>
+                        <dl>
+                            <dt>MongoDB</dt>
+                            <dd>
+                                MongoDB version 2.4.x is supported.
+                            </dd>
+                            <dt>Node.js</dt>
+                            <dd>
+                                Node version 0.10.x is supported.
+                            </dd>
+                            <dt>npm</dt>
+                            <dd>
+                                npm version 1.3.x is supported.
+                            </dd>
+                        </dl>
+                        <h2>Update npm, Bower or Grunt</h2>
+                        <p>
+                            You may find there is a weird error during install like npm's Error: ENOENT, usually updating those tools to the latest version solves the issue.
+                        </p>
+                        <dl>
+                            <dt>Updating npm</dt>
+                            <dd>
+                                To update npm just run this command in the command-line:
+                                <pre>$ npm update -g npm</pre>
+                            </dd>
+                            <dt>Updating Bower</dt>
+                            <dd>
+                                To update bower just run this command in the command-line:
+                                <pre>$ npm update -g bower</pre>
+                            </dd>
+                            <dt>Updating Grunt</dt>
+                            <dd>
+                                To update grunt just run this command in the command-line:
+                                <pre>$ npm update -g grunt-cli</pre>
+                            </dd>
+                        </dl>
+                        <h2>Cleaning npm and Bower cache</h2>
+                        <p>
+                            Both npm and Bower uses a caching system that caches the packages you already installed. Often cleaning npm &amp; Bower's cache can solve some of the issues you encounter during the installation process.
+                        </p>
+                        <dl>
+                            <dt>Cleaning npm's cache</dt>
+                            <dd>
+                                To clean npm's cache just run this command in the command-line:
+                                <pre>$ npm cache clean</pre>
+                            </dd>
+                            <dt>Cleaning Bower's cache</dt>
+                            <dd>
+                                To clean bower's cache just run this command in the command-line:
+                                <pre>$ bower cache clean</pre>
+                            </dd>
+                        </dl>
+                        <h2>Common Issues</h2>
+                        <p>
+                            There are some common errors while installing mean, here's a list of errors and how to solve them:
+                        </p>
+                        <dl>
+                            <dt>Node is running but AgnularJS application won't load</dt>
+                            <dd>
+                                Check to see all your front-end packages were installed.
+                                <a target="_blank" href="https://bower.io/">Bower</a> package manager is used to install the front-end package and it will need a <a target="_blank" href="http://bower.io/#configuration">.bowerrc</a> file to install the packages in the right location.
+                                <br>Bower should install the packages in the <b>public/lib</b> folder, so if this folder or some of its sub-folders doesn't exist, run:
+                                <pre>$ bower update</pre>
+                                This will install the missing packages.
+                            </dd>
+                            <dt>Error: failed to connect to [localhost:27017]</dt>
+                            <dd>
+                                If you use a local MongoDB check to see if its running. In case you use an external service verify the URI in the <a href="#configuration">configuration files</a>.
+                            </dd>
+                        </dl>
+                        <p class="alert alert-warning">
+                            Sometimes its a local issue or something that isn't covered, In those cases you should know you can also contact us via the community page on any issue.
+                        </p>
+                    </section>
+                    <div class="inner-link-anchor" id="folder-structure"></div>
+                    <section class="page-header">
+                        <h1>Folder Structure</h1>
+                    </section>
+                    <section>
+                        <p>
+                            The folder structure is quite self-explanatory, but here's an explaination on what goes where and why.
+                        </p>
+                        <h2>Config</h2>
+                        <p>
+                            The config folder contains the files you need to configure your application.
+                        </p>
+                        <ul>
+                            <li>
+                                <h3>env</h3>
+                                The <b>env</b> folder contains the configuration files loaded by the <b>config.js</b> file according to the current environment, for more info visit the <a href="#configuration">Configuration</a> section.
+                                <p class="alert alert-info">
+                                    <b>When to use:</b>
+                                    Whenever you want to add, change, or remove your configuration properties.
+                                </p>
+                            </li>
+                            <li>
+                                <h3>config.js</h3>
+                                The configuration loader that loads the right configuration from the <b>env</b> folder, for more info visit the <a href="#configuration">Configuration</a> section.
+                            </li>
+                            <li>
+                                <h3>express.js</h3>
+                                Express configuration file, it initializes &amp; configures the Express application.
+                                <p class="alert alert-info">
+                                    <b>When to use:</b>
+                                    Whenever you want to change the way Express is being initialized and configured.
+                                </p>
+                            </li>
+                            <li>
+                                <h3>passport.js</h3>
+                                Passport configuration file, it initializes &amp; configures the Passport's authentication strategies and middlewares, if you'd like to add a new login option this is where you start configuring it.
+                                <p class="alert alert-info">
+                                    <b>When to use:</b>
+                                    Whenever you want to add, change, or remove a <a target="_blank" href="http://passportjs.org/guide/providers/">Passport Strategy</a>.
+                                </p>
+                            </li>
+                            <li>
+                                <h3>routes.js</h3>
+                                <b>Server routing</b> configuration file, this is where you define your Express routes.
+                                <p class="alert alert-info">
+                                    <b>When to use:</b>
+                                    Whenever you want to to add, change, or remove a server route.
+                                </p>
+                            </li>
+                        </ul>
+                        <h2>Public</h2>
+                        <p>
+                            The public folder contains all the static files you use in your application, this is where you store your front-end files.
+                        </p>
+                        <ul>
+                            <li>
+                                <h3>css</h3>
+                                The css folder is where you store your application level CSS files.
+                                <p class="alert alert-info">
+                                    <b>When to use:</b>
+                                    Whenever you want to to add, change, or remove application level CSS files.
+                                </p>
+                            </li>
+                            <li>
+                                <h3>img</h3>
+                                The img folder is where you store your application images.
+                                <p class="alert alert-info">
+                                    <b>When to use:</b>
+                                    Whenever you want to to add, change, or remove images.
+                                </p>
+                            </li>
+                            <li>
+                                <h3>js</h3>
+                                The js folder is where you store your application level scripts.
+                                <ul>
+                                    <li>
+                                        <h3>app.js</h3>
+                                        AngularJS main application file, it takes care of bootstrapping the application and attaching the right modules.
+                                        <p class="alert alert-info">
+                                            <b>When to use:</b>
+                                            Whenever you want to to add, change, or remove a module in your AngularJS application.
+                                        </p>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <h3>modules</h3>
+                                The modules folder is where you store AngularJS application modules, to learn more about it visit the <a href="#angularjs-modules-system">AngularJS Modules System</a> section.
+                                <p class="alert alert-info">
+                                    <b>When to use:</b>
+                                    Whenever you want to to add, change, or remove AngularJS modules.
+                                </p>
+                            </li>
+                        </ul>
+                        <h2>Server</h2>
+                        <p>
+                            The server folder contains all the server files you use in your application, this is where you store your MVC server files.
+                        </p>
+                        <ul>
+                            <li>
+                                <h3>controllers</h3>
+                                The controllers folder is where you store your Express application controllers, this is where you write your backend business logic.
+                                <p class="alert alert-info">
+                                    <b>When to use:</b>
+                                    Whenever you want to to add, change, or remove Express application controllers.
+                                </p>
+                            </li>
+                            <li>
+                                <h3>models</h3>
+                                The models folder is where you store your <a target="_blank" href="http://mongoosejs.com/">Mongoose</a> models, this is where you define your backend models.
+                                <p class="alert alert-info">
+                                    <b>When to use:</b>
+                                    Whenever you want to to add, change, or remove Mongoose models.
+                                </p>
+                            </li>
+                            <li>
+                                <h3>tests</h3>
+                                The tests folder is where you store your <a target="_blank" href="http://visionmedia.github.io/mocha/">Mocha</a> tests, this is how you test your backend business logic.
+                                <p class="alert alert-info">
+                                    <b>When to use:</b>
+                                    Whenever you want to to add, change, or remove Mocha tests.
+                                </p>
+                            </li>
+                            <li>
+                                <h3>views</h3>
+                                The views folder is where define your backend views. Since you'll use AngularJS, server templates are almost meaningless, but you still have to use a template engine to render the main pages, like the index and error pages. For more information visit the <a href="#backend-views">Backend Views</a> section.
+                                <p class="alert alert-info">
+                                    <b>When to use:</b>
+                                    Whenever you want to to add, change, or remove backend views.
+                                </p>
+                            </li>
+                        </ul>
+                        <h2>Application Files</h2>
+                        <p>
+                            There are a few application files stored in root folder.
+                        </p>
+                        <ul>
+                            <li>
+                                <h3>application.js</h3>
+                                Our main application file, where you initialize your Node.js application.
+                            </li>
+                            <li>
+                                <h3>bower.json</h3>
+                                Bower <a target="_blank" href="http://bower.io/#defining-a-package">definition file</a>, where you configure the front-end components you want to use, for more information visit the <a href="#bower">Bower</a> section.
+                                <p class="alert alert-info">
+                                    <b>When to use:</b>
+                                    Whenever you want to to add, change, or remove front-end components.
+                                </p>
+                            </li>
+                            <li>
+                                <h3>gruntfile.js</h3>
+                                Grunt <a target="_blank" href="http://gruntjs.com/sample-gruntfile">definition file</a> is where you define your grant tasks, for more information visit the <a href="#grunt">Grunt</a> section.
+                                <p class="alert alert-info">
+                                    <b>When to use:</b>
+                                    Whenever you want to to add, change, or remove grunt tasks.
+                                </p>
+                            </li>
+                            <li>
+                                <h3>karma.conf.js</h3>
+                                Karma <a target="_blank" href="http://karma-runner.github.io/0.8/config/configuration-file.html">configuration file</a> is where you configure your karma tests.
+                                <p class="alert alert-info">
+                                    <b>When to use:</b>
+                                    Whenever you want to to add, change, or remove front-end tests.
+                                </p>
+                            </li>
+                            <li>
+                                <h3>package.json</h3>
+                                npm <a target="_blank" href="https://npmjs.org/doc/json.html">definition file</a>, where you configure the backend modules you want to use, for more information visit the <a href="#npm">npm &amp; package.json</a> section.
+                                <p class="alert alert-info">
+                                    <b>When to use:</b>
+                                    Whenever you want to to add, change, or remove backend modules.
+                                </p>
+                            </li>
+                            <li>
+                                <h3>Procfile</h3>
+                                Heroku <a target="_blank" href="https://devcenter.heroku.com/articles/procfile">process file</a>, where you configure process you want to run on Heroku's application dyno.
+                                <p class="alert alert-info">
+                                    <b>When to use:</b>
+                                    Whenever you want to to add, change, or remove the process executed by Heroku's dyno.
+                                </p>
+                            </li>
+                        </ul>
+                        <h2>Hidden Configuration Files</h2>
+                        <p class="alert alert-danger">
+                            Notice that sometimes you copy your application folder's content and forget to copy the hidden files, this will cause issues and might break the application.
+                        </p>
+                        <ul>
+                            <li>
+                                <h3>.bowerrc</h3>
+                                Bower configuration file, you use it to tell bower where to install your application components.
+                            </li>
+                            <li>
+                                <h3>.gitignore</h3>
+                                Git <a target="_blank" href="https://help.github.com/articles/ignoring-files">ignore file</a>, you use it to tell git what <b>ignore</b> in next commits. After installation the application generates a lot of code that you don't want to include in your repository, so this is where you tell git to ignore those files.
+                                <p class="alert alert-info">
+                                    <b>When to use:</b>
+                                    Whenever you want to to add, change, or remove files that are ignored by Git.
+                                </p>
+                            </li>
+                            <li>
+                                <h3>.jshintrc</h3>
+                                <a target="_blank" href="http://www.jshint.com/">JSHint</a> configuration file, you use it to configure JSHint special properties.
+                                <p class="alert alert-info">
+                                    <b>When to use:</b>
+                                    Whenever you want to to add, change, or remove JSHint properties.
+                                </p>
+                            </li>
+                            <li>
+                                <h3>.slugignore</h3>
+                                Heroku <a target="_blank" href="https://devcenter.heroku.com/articles/slug-compiler#ignoring-files-with-slugignore">ignore file</a>, you use it to tell Heroku's slug compiler what <b>ignore</b> in next commits, which will prevent oversizing your final slug.
+                                <p class="alert alert-info">
+                                    <b>When to use:</b>
+                                    Whenever you want to to add, change, or remove files that are ignored by Heroku's slug compiler.
+                                </p>
+                            </li>
+                            <li>
+                                <h3>.travis.yml</h3>
+                                Travis <a target="_blank" href="http://about.travis-ci.org/docs/user/build-configuration/">configuration file</a>, you use it to tell travis how you want your builds to be executed.
+                                <p class="alert alert-info">
+                                    <b>When to use:</b>
+                                    Whenever you want to to add, change, or remove TravisCI configuration options.
+                                </p>
+                            </li>
+                        </ul>
+                    </section>
+                    <div class="inner-link-anchor" id="npm"></div>
+                    <section class="page-header">
+                        <h1>npm &amp; package.json</h1>
+                    </section>
+                    <section>
+                        <p>
+                            <a target="_blank" href="https://npmjs.org/">npm</a> is the Node.js package manager that uses a <a target="_blank" href="https://npmjs.org/doc/json.html">json file</a> to configure the backend modules your application will use, the modules will be stored in the <b>node_modules</b> folder.
+                        </p>
+                        <h2>General Dependencies</h2>
+                        <p>
+                            Here's the description of the default dependencies you'll use to bootstrap your MEAN application.
+                        </p>
+                        <dl>
+                            <dt>Express</dt>
+                            <dd>
+                                <a target="_blank" href="http://expressjs.com/">Express</a> is a web framework for Node.js.
+                            </dd>
+                            <dt>doT</dt>
+                            <dd>
+                                <a target="_blank" href="http://olado.github.io/doT/index.html">doT</a> is a template engine for Node.js.
+                            </dd>
+                            <dt>Mongoose</dt>
+                            <dd>
+                                <a target="_blank" href="http://mongoosejs.com/">Mongoose</a> is a Mongodb object modeling module for Node.js.
+                            </dd>
+                            <dt>Connect-mongo</dt>
+                            <dd>
+                                <a target="_blank" href="https://github.com/kcbanner/connect-mongo">Connect-mongo</a> is a Mongodb session store module for Node.js.
+                            </dd>
+                            <dt>Connect-flash</dt>
+                            <dd>
+                                <a target="_blank" href="https://github.com/jaredhanson/connect-flash">Connect-flash</a> is a middleware used to store and retrieve messages from the seesion.
+                            </dd>
+                            <dt>Passport</dt>
+                            <dd>
+                                <a target="_blank" href="http://passportjs.org/">Passport</a> is an authentication middleware for Node.js that enables authentication from various OAuth sources like Facebook, Twitter, etc.
+                            </dd>
+                            <dt>Passport-local</dt>
+                            <dd>
+                                <a target="_blank" href="https://github.com/jaredhanson/passport-local">Passport-local</a> is an authentication strategy for passport that enables users to authenticate using username and password.
+                            </dd>
+                            <dt>Passport-facebook</dt>
+                            <dd>
+                                <a target="_blank" href="https://github.com/jaredhanson/passport-facebook">Passport-facebook</a> is an authentication strategy for passport that enables users to authenticate using their facebook account.
+                            </dd>
+                            <dt>Passport-twitter</dt>
+                            <dd>
+                                <a target="_blank" href="https://github.com/jaredhanson/passport-twitter">Passport-twitter</a> is an authentication strategy for passport that enables users to authenticate using their twitter account.
+                            </dd>
+                            <dt>Passport-github</dt>
+                            <dd>
+                                <a target="_blank" href="https://github.com/jaredhanson/passport-github">Passport-github</a> is an authentication strategy for passport that enables users to authenticate using their github account.
+                            </dd>
+                            <dt>Passport-google-oauth</dt>
+                            <dd>
+                                <a target="_blank" href="https://github.com/jaredhanson/passport-google-oauth">Passport-google-oauth</a> is an authentication strategy for passport that enables users to authenticate using their google account.
+                            </dd>
+                            <dt>Lodash</dt>
+                            <dd>
+                                <a target="_blank" href="http://lodash.com/">Lodash</a> is a JavaScript utility library, for manipulating collections and objects.
+                            </dd>
+                            <dt>Forever</dt>
+                            <dd>
+                                <a target="_blank" href="https://github.com/nodejitsu/forever">Forever</a> is a Node.js module that enable node to run continuously. We use it for consistency when running on Heroku.
+                            </dd>
+                            <dt>Bower</dt>
+                            <dd>
+                                <a target="_blank" href="http://bower.io/">Bower</a> is a package manager for front-end components.
+                            </dd>
+                            <dt>Grunt</dt>
+                            <dd>
+                                <a target="_blank" href="http://gruntjs.com/">Grunt</a> is a JavaScript task runner.
+                            </dd>
+                            <dt>Grunt-CLI</dt>
+                            <dd>
+                                <a target="_blank" href="https://github.com/gruntjs/grunt-cli">Grunt-CLI</a> is Grunt's command line interface.
+                            </dd>
+                        </dl>
+                        <h2>Development Dependencies</h2>
+                        <p>
+                            Here's the description of the development dependencies you'll use to test and run your MEAN application.
+                        </p>
+                        <dl>
+                            <dt>Supertest</dt>
+                            <dd>
+                                <a target="_blank" href="https://github.com/visionmedia/supertest">Supertest</a> is a library for testing Node.js HTTP API.
+                            </dd>
+                            <dt>Should</dt>
+                            <dd>
+                                <a target="_blank" href="https://github.com/visionmedia/should.js/">Should</a> is an <a target="_blank" href="http://en.wikipedia.org/wiki/Assertion_(software_development)">assertion library</a> for BDD testing.
+                            </dd>
+                            <dt>Grunt-Contrib-Watch</dt>
+                            <dd>
+                                <a target="_blank" href="https://github.com/gruntjs/grunt-contrib-watch">Grunt-Contrib-Watch</a> is a grunt task that run tasks whenever watched file change.
+                            </dd>
+                            <dt>Grunt-Contrib-JSHint</dt>
+                            <dd>
+                                <a target="_blank" href="https://github.com/gruntjs/grunt-contrib-jshint">Grunt-Contrib-JSHint</a> is a grunt task that lint js files using <a target="_blank" href="http://www.jshint.com/">JSHint</a>.
+                            </dd>
+                            <dt>Grunt-Nodemon</dt>
+                            <dd>
+                                <a target="_blank" href="https://github.com/ChrisWren/grunt-nodemon">Grunt-Nodemon</a> is a grunt task that runs <a target="_blank" href="https://github.com/remy/nodemon">nodemon</a>.
+                            </dd>
+                            <dt>Grunt-Concurrent</dt>
+                            <dd>
+                                <a target="_blank" href="https://github.com/sindresorhus/grunt-concurrent">Grunt-Concurrent</a> is a grunt task that runs tasks concurrently.
+                            </dd>
+                            <dt>Grunt-Mocha-Test</dt>
+                            <dd>
+                                <a target="_blank" href="https://github.com/pghalliday/grunt-mocha-test">Grunt-Mocha-Test</a> is a grunt task that runs server side mocha tests.
+                            </dd>
+                            <dt>Grunt-Karma</dt>
+                            <dd>
+                                <a target="_blank" href="https://github.com/karma-runner/grunt-karma">Grunt-Karma</a> is a grunt task that runs karma test runner.
+                            </dd>
+                            <dt>Karma</dt>
+                            <dd>
+                                <a target="_blank" href="http://karma-runner.github.io/0.10/index.html">Karma</a> is a test runner for JavaScript.
+                            </dd>
+                            <dt>Karma-Jasmine</dt>
+                            <dd>
+                                <a target="_blank" href="https://github.com/karma-runner/karma-jasmine">Karma-Jasmine</a> is a karma adapter for the <a target="_blank" href="http://pivotal.github.io/jasmine/">Jasmine</a> testing framework.
+                            </dd>
+                            <dt>Karma-Coverage</dt>
+                            <dd>
+                                <a target="_blank" href="https://github.com/karma-runner/karma-coverage">Karma-Coverage</a> is a karma plugin that generates code coverage using <a target="_blank" href="https://github.com/yahoo/istanbul">Istanbul</a>.
+                            </dd>
+                            <dt>Karma-Chrome-Launcher</dt>
+                            <dd>
+                                <a target="_blank" href="https://github.com/karma-runner/karma-chrome-launcher">Karma-Chrome-Launcher</a> is a karma launcher for Chrome and Chrome Canary.
+                            </dd>
+                            <dt>Karma-Firefox-Launcher</dt>
+                            <dd>
+                                <a target="_blank" href="https://github.com/karma-runner/karma-firefox-launcher">Karma-Firefox-Launcher</a> is a karma launcher for Firefox.
+                            </dd>
+                            <dt>Karma-Phantomjs-Launcher</dt>
+                            <dd>
+                                <a target="_blank" href="https://github.com/karma-runner/karma-phantomjs-launcher">Karma-Phantomjs-Launcher</a> is a karma launcher for <a target="_blank" href="http://phantomjs.org/">PhantomJS</a>.
+                            </dd>
+                        </dl>
+                    </section>
+                    <div class="inner-link-anchor" id="bower"></div>
+                    <section class="page-header">
+                        <h1>Bower</h1>
+                    </section>
+                    <section>
+                        <p class="alert alert-danger">
+                            Notice that <b>.bowerrc</b> configuration file is used to change the default install location to <b>public/lib</b>.
+                        </p>
+                        <p>
+                            <a target="_blank" href="https://bower.io/">Bower</a> is a front-end package manager that uses a json file to configure the components your application will use.
+                            <br>Here's the description of the front-end components you'll use to bootstrap your application.
+                        </p>
+                        <dl>
+                            <dt>Bootstrap</dt>
+                            <dd>
+                                <a target="_blank" href="http://getbootstrap.com/">Bootstrap</a> is a front-end framework containing many common web development components.
+                            </dd>
+                            <dt>AngularJS</dt>
+                            <dd>
+                                <a target="_blank" href="http://angularjs.org/">AngularJS</a> is an open-source JavaScript framework.
+                            </dd>
+                            <dt>Angular-Route</dt>
+                            <dd>
+                                <a target="_blank" href="http://docs.angularjs.org/api/ngRoute">Angular-Route</a> provides routing and deeplinking services for AngularJS applications.
+                            </dd>
+                            <dt>Angular-Cookies</dt>
+                            <dd>
+                                <a target="_blank" href="http://docs.angularjs.org/api/ngCookies">Angular-Cookies</a> is convenient wrapper for cookies manipulation.
+                            </dd>
+                            <dt>Angular-Resource</dt>
+                            <dd>
+                                <a target="_blank" href="http://docs.angularjs.org/api/ngResource">Angular-Resource</a> provides interaction support with RESTful services.
+                            </dd>
+                            <dt>Angular-Animate</dt>
+                            <dd>
+                                <a target="_blank" href="http://docs.angularjs.org/api/ngAnimate">Angular-Animate</a> provides JavaScript and CSS3 animation support.
+                            </dd>
+                            <dt>Angular-Mocks</dt>
+                            <dd>
+                                <a target="_blank" href="http://docs.angularjs.org/api/ngMock">Angular-Mocks</a> provides inject and mock support to Angular services unit tests.
+                            </dd>
+                            <dt>Angular-Bootstrap</dt>
+                            <dd>
+                                <a target="_blank" href="http://angular-ui.github.io/bootstrap/">Angular-Bootstrap</a> is a set of bootstrap components written in pure AngularJS.
+                            </dd>
+                            <dt>Angular-UI-Utils</dt>
+                            <dd>
+                                <a target="_blank" href="http://angular-ui.github.io/ui-utils/">Angular-UI-Utils</a> is a set of common utilities for AngularJS.
+                            </dd>
+                        </dl>
+                    </section>
+                    <div class="inner-link-anchor" id="grunt"></div>
+                    <section class="page-header">
+                        <h1>Grunt</h1>
+                    </section>
+                    <section>
+                        <p>
+                            <a target="_blank" href="http://gruntjs.com/">Grunt</a> is a great tool for automating you JavaScript tasks. The ecosystem is huge, containing many common tasks you can use in your daily development process.
+                        </p>
+                        <p>
+                            To configure grunt you start with the gruntfile.js file, where you define the tasks you want to run.
+                            <br>We start with two basic tasks:
+                        </p>
+                        <ul class="list-unstyled">
+                            <li>
+                                <h4>Default</h4>
+                                <p>
+                                    The default task is the task that runs when you type 'grunt' in your command-line, the default task consists of three sub-tasks:
+                                </p>
+                                <ul>
+                                    <li>
+                                        <h5>JSHint</h5>
+                                        <p>Linter task that keep your JavaScript code free of common mistakes and syntax errors.</p>
+                                    </li>
+                                    <li>
+                                        <h5>Watch</h5>
+                                        <p>This watches your file system for changes and automatically reloads the application whenever you change certain files.</p>
+                                    </li>
+                                    <li>
+                                        <h5>Nodemon</h5>
+                                        <p>This runs your Node.js application using nodemon.</p>
+                                    </li>
+                                </ul>
+                                <p>Pleas notice that the last two tasks are wrapped with another task called <b>Concurrent</b> to keep the application continuously running.</p>
+                            </li>
+                            <li>
+                                <h4>Test</h4>
+                                <p>
+                                    This task runs when you type 'grunt test' in your command-line, the test task consists of three sub-tasks:
+                                </p>
+                                <ul>
+                                    <li>
+                                        <h5>env:test</h5>
+                                        <p>This is a simple task that change the NODE_ENV global environment variable to 'test'.</p>
+                                    </li>
+                                    <li>
+                                        <h5>mochaTest</h5>
+                                        <p>This runs the mocha server tests that are located in the <b>server/tests</b> folder.</p>
+                                    </li>
+                                    <li>
+                                        <h5>karma:unit</h5>
+                                        <p>This uses the karma test runner to run the AngularJS unit tests.</p>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <p class="alert alert-info">
+                            We recommend that you visit Grunt's <a target="_blank" href="http://gruntjs.com/getting-started">Documentation Section</a> to learn more about writing your own tasks, and mainly to <b>explore the tasks already written by the community</b>.
+                        </p>
+                    </section>
+                    <div class="inner-link-anchor" id="express"></div>
+                    <section class="page-header">
+                        <h1>Express &amp; Routing</h1>
+                    </section>
+                    <section>
+                        <p>
+                            <a target="_blank" href="http://expressjs.com/">Express</a> is web framework for the Node.js platform. Its robustness and minimalism made it very popular among Node.js developers.
+                        </p>
+                        <p>
+                            Express features is used in a few locations, but the main configuration goes in the <b>config/express.js</b> and <b>config/routes.js</b> files. In the <b>express.js</b> file the application is initialized and cofigured, while the <b>routes.js</b> file contains the set of routes the application will serve.
+                        </p>
+                        <p>
+                            There are a few pre-bundled routes:
+                        </p>
+                        <h2>Authentication Routes</h2>
+                        <dl>
+                            <dt>GET http://localhost:3000/users/me</dt>
+                            <dd>Returns the current authenticated user.</dd>
+                        </dl>
+                        <dl>
+                            <dt>POST http://localhost:3000/auth/signup</dt>
+                            <dd>This is used to sign up a user using username and password.</dd>
+                            <dt>POST http://localhost:3000/auth/signin</dt>
+                            <dd>This is used to sign in a user using username and password.</dd>
+                            <dt>GET http://localhost:3000/auth/signout</dt>
+                            <dd>This is used to sign out the current user.</dd>
+                        </dl>
+                        <dl>
+                            <dt>GET http://localhost:3000/auth/facebook</dt>
+                            <dd>This is used to initialize the Facebook OAuth process.</dd>
+                            <dt>GET http://localhost:3000/auth/facebook/callback</dt>
+                            <dd>This is used as the callback URI for Facebook OAuth process.</dd>
+                        </dl>
+                        <dl>
+                            <dt>GET http://localhost:3000/auth/twitter</dt>
+                            <dd>This is used to initialize the Twitter OAuth process.</dd>
+                            <dt>GET http://localhost:3000/auth/twitter/callback</dt>
+                            <dd>This is used as the callback URI for Twitter OAuth process.</dd>
+                        </dl>
+                        <dl>
+                            <dt>GET http://localhost:3000/auth/github</dt>
+                            <dd>This is used to initialize the Github OAuth process.</dd>
+                            <dt>GET http://localhost:3000/auth/github/callback</dt>
+                            <dd>This is used as the callback URI for Github OAuth process.</dd>
+                        </dl>
+                        <dl>
+                            <dt>GET http://localhost:3000/auth/google</dt>
+                            <dd>This is used to initialize the Google OAuth process.</dd>
+                            <dt>GET http://localhost:3000/auth/google/callback</dt>
+                            <dd>This is used as the callback URI for Google OAuth process.</dd>
+                        </dl>
+                        <p>Please notice that you can add more authentication options using a <a href="#passport">Passport Startegy</a> and this pattern.</p>
+                        <h2>Application Routes</h2>
+                        <dl>
+                            <dt>GET http://localhost:3000/</dt>
+                            <dd>
+                                The main application page. Using AngularJS helps reduce the use of server side templating, and only serve a single application page.
+                                <br>
+                                <br>To learn more about this visit the <a href="#backend-views">Backend Views</a> section.
+                            </dd>
+                        </dl>
+                        <h2>Example Routes</h2>
+                        <p>
+                            An 'Article' example is included with the boilerplate to help you understand how to properly build your RESTful API.
+                        </p>
+                        <dl>
+                            <dt>GET http://localhost:3000/articles</dt>
+                            <dd>
+                                Returns the list of articles.
+                            </dd>
+                            <dt>POST http://localhost:3000/articles</dt>
+                            <dd>
+                                Creates a new article.
+                            </dd>
+                            <dt>GET http://localhost:3000/articles/:articleId</dt>
+                            <dd>
+                                Returns an article by articleId.
+                            </dd>
+                            <dt>PUT http://localhost:3000/articles/:articleId</dt>
+                            <dd>
+                                Updates an article by ID.
+                            </dd>
+                            <dt>DEL http://localhost:3000/articles/:articleId</dt>
+                            <dd>
+                                Deletes an article by ID.
+                            </dd>
+                        </dl>
+                        <p class="alert alert-info">
+                            To learn more about Express you should visit the <a target="_blank" href="http://expressjs.com/guide.html">Guide Section</a> in the official website.
+                        </p>
+                    </section>
+                    <div class="inner-link-anchor" id="passport"></div>
+                    <section class="page-header">
+                        <h1>Passport</h1>
+                    </section>
+                    <section>
+                        <p>
+                            <a target="_blank" href="http://passportjs.org">Passport</a> is an authentication middleware, that allows you to implement <a target="_blank" href="http://passportjs.org/guide/providers/">many authentication methods</a> in your Express application.
+                        </p>
+                        <p>
+                            Passport utilize a modular approach that uses authentication startegies modules, offering a simple, configurable authentication solutions.
+                        </p>
+                        <p>
+                            This boilerplate comes pre-bundled with 5 authentication mechanisms implemented in the <b>config/passport.js</b> file:
+                        </p>
+                        <dl>
+                            <dt>Local</dt>
+                            <dd>
+                                <a target="_blank" href="https://github.com/jaredhanson/passport-local">The Local Strategy</a> is used to authenticate user via username and password.
+                            </dd>
+                            <dt>Facebook</dt>
+                            <dd>
+                                <a target="_blank" href="https://github.com/jaredhanson/passport-facebook">The Facebook Strategy</a> is used to authenticate user via its facebook account.
+                            </dd>
+                            <dt>Twitter</dt>
+                            <dd>
+                                <a target="_blank" href="https://github.com/jaredhanson/passport-twitter">The Twitter Strategy</a> is used to authenticate user via its twitter account.
+                            </dd>
+                            <dt>Google</dt>
+                            <dd>
+                                <a target="_blank" href="https://github.com/jaredhanson/passport-google-oauth">The Google Strategy</a> is used to authenticate user via its google account.
+                            </dd>
+                            <dt>Github</dt>
+                            <dd>
+                                <a target="_blank" href="https://github.com/jaredhanson/passport-github">The Github Strategy</a> is used to authenticate user via its github account.
+                            </dd>
+                        </dl>
+                        <p class="alert alert-info">
+                            To understand Passport better we recommend that you visit the <a target="_blank" href="http://passportjs.org/guide/">Guide Section</a> in the official website.
+                        </p>
+                    </section>
+                    <div class="inner-link-anchor" id="backend-views"></div>
+                    <section class="page-header">
+                        <h1>Backend Views</h1>
+                    </section>
+                    <section>
+                        <p>
+                            AngularJS reduces the need for server side templating. What once was a web application served by server as HTML pages can now be implemented using Angular's template system.
+                        </p>
+                        <h4>So why do you still keep a views folder in your server folder?</h4>
+                        <p>
+                            There are few answers to this question:
+                        </p>
+                        <ol>
+                            <li>
+                                You still need to render the index and error page.
+                            </li>
+                            <li>
+                                You want to render local configuration properties in the template. For instance, the title property from the configuration file can be used in the title element of the HTML page.
+                            </li>
+                            <li>
+                                <a href="#angularjs-modules-system">AngularJS module system</a> is implemented in a way that allows you to automatically load the modules .js files in template.
+                            </li>
+                        </ol>
+                        <p>
+                            So we can't use static templates, and we have to use some kind of template engine, but which one?
+                        </p>
+                        <h2>doT Template Engine</h2>
+                        <p>
+                            <a target="_blank" href="http://olado.github.io/doT/index.html">doT Template Engine</a> is a template engine, written by <a target="_blank" href="https://github.com/olado">Laura Doktorov</a>, a candian engineer looking for a faster template engine.
+                        </p>
+                        <p>
+                            While <a target="_blank" href="http://jade-lang.com/">JADE</a> is the default template engine used by Express, and is by far the most popular template engine, it doesn't suit this boilerplate for several reasons:
+                        </p>
+                        <ol>
+                            <li>Its slower.</li>
+                            <li>It uses its own language, steeping the learning curve.</li>
+                            <li>Most importantly, you don't need it! JADE's greatest advantage is to facilitate the task of writing a lot of HTML that is being served by the server. You're going to use AngularJS client templating engine, thus reliefing the need for server templating.</li>
+                        </ol>
+                        <p>
+                            On the other hand, using doT has a few advantages:
+                        </p>
+                        <ol>
+                            <li>Its fast, like lightening fast.</li>
+                            <li>It uses HTML.</li>
+                            <li>It has all the features we need to render our index and error pages!</li>
+                        </ol>
+                        <p>
+                            To summarize, when coding a Node.js website, you might want to use other template engines, but approaching web application development using AngularJS, we think doT is the best choice.
+                        </p>
+                        <p class="alert alert-info">
+                            To understand doT better we recommend that you visit the <a target="_blank" href="http://olado.github.io/doT/index.html">Official Website</a>.
+                        </p>
+                        <h2>The Views</h2>
+                        <p>
+                            There are 3 files in the views folder:
+                        </p>
+                        <dl>
+                            <dt>Layout</dt>
+                            <dd>
+                                This is most important file, which sets the layout used to render all the other templates.
+                            </dd>
+                            <dt>Index</dt>
+                            <dd>
+                                The index template is served as the main application page.
+                            </dd>
+                            <dt>Error</dt>
+                            <dd>
+                                The error template is served whenever there's a server error.
+                            </dd>
+                        </dl>
+                        <p>
+                            Usually you won't have to change the views, but you might make changes to the layout file when adding front-end components, or chaging something in the HTML.
+                        </p>
+                    </section>
+                    <div class="inner-link-anchor" id="server-tests"></div>
+                    <section class="page-header">
+                        <h1>Server Tests</h1>
+                    </section>
+                    <section>
+                        <p>
+                            We use <a target="_blank" href="http://visionmedia.github.io/mocha/">Mocha</a> to test the server side functionalliy. Mocha tests are asynchronous, easy to maintain, and uses a <a target="_blank" href="http://en.wikipedia.org/wiki/Behavior-driven_development">BDD</a> syntax for readablity.
+                        </p>
+                        <h4>Assertions</h4>
+                        <p>
+                            Mocha needs an external assertion library to predicate the result of each test, in this case <a target="_blank" href="https://github.com/visionmedia/should.js">Should.js</a> is being used. Should is an expressive library aiming to simplify tests and be readable. It extends the Object.prototype with a single non-enumerable getter that allows you to express how that object should behave.
+                        </p>
+                        <h4>Test Files</h4>
+                        <p>
+                            Each entity have its own test file located inside the <b>server/tests</b> folder.
+                        </p>
+                        <h4>Writing Tests</h4>
+                        <p>
+                            There are a few common steps we use to test an entity:
+                        </p>
+                        <ol>
+                            <li>
+                                In the <b>beforeEach</b> or <b>before</b> functions take care of prerequisites and create the objects you are about to use in your tests.
+                            </li>
+                            <li>
+                                For each test start with a <b>describe</b> function to indicate which method is being tested.
+                            </li>
+                            <li>
+                                Next, add your scenario tests using the <b>it</b> function.
+                            </li>
+                            <li>
+                                In the <b>it</b> function run the tests functionallity and use should to decribe what the end result should be.
+                            </li>
+                            <li>
+                                Finally use <b>after</b> or <b>afterEach</b> functions to finallize your tests and clear the test database.
+                            </li>
+                        </ol>
+                        <p class="alert alert-info">
+                            To learn more about how to write your tests visit <a href="#article-example">The Article Example Section</a>.
+                        </p>
+                    </section>
+                    <div class="inner-link-anchor" id="angularjs-tests"></div>
+                    <section class="page-header">
+                        <h1>AngularJS Tests</h1>
+                    </section>
+                    <section>
+                        <p>
+                            Testing is an important feature of the AngularJS framework. It is so well established that the team has create a very cool to automate tests, the <a target="_blank" href="http://karma-runner.github.io/0.10/index.html">Karma Test Runner</a>.
+                        </p>
+                        <p>
+                            The Karma Test Runner is a unique testing tool that enables you to automatically test your code on multiple real browsers using Node.js and Socket.io.
+                        </p>
+                        <p>
+                            Karma is not a testing library, it utilizes other testing frameworks to test your code and comes with different framework adapters, supporting the common testing frameworks.
+                        </p>
+                        <p>
+                            In the AngularJS documentation the team uses <a target="_blank" href="http://pivotal.github.io/jasmine/">Jasmine Testing Framework</a> to unit test the application. So, in the boilerplate we use Jasmine as well.
+                        </p>
+                        <p>
+                            Now Angular supports two kind of tests:
+                        </p>
+                        <dl>
+                            <dt>E2E</dt>
+                            <dd>
+                                End-To-End testing enables to test several parts of the application together, so instead of just testing your controller's methods, you can actually test different scenarios in your application. To understand it better visit the <a target="_blank" href="http://docs.angularjs.org/guide/dev_guide.e2e-testing">AngularJS E2E Testing Section</a>.
+                            </dd>
+                            <dt>Unit</dt>
+                            <dd>
+                                Unit testing is the more common testing method, which enables you to test different units of the application, its a more detailed kind of testing, that neglects the bigger picture and focuses on the single unit functionality. To understand it better visit the <a target="_blank" href="http://docs.angularjs.org/guide/dev_guide.unit-testing">AngularJS Unit Testing Section</a>.
+                            </dd>
+                        </dl>
+                        <p class="alert alert-info">
+                            In the example provided theres only unit testing for the moment, E2E should come out in the next version.
+                        </p>
+                        <h2>Karma Configuration</h2>
+                        <p>
+                            Karma configuration file, <b>karma.conf.js</b>, is the located at the root folder. You can learn more about the different configuration properties in the <a target="_blank" href="http://karma-runner.github.io/0.8/config/configuration-file.html">Configuration Section</a> on the official website.
+                            <br>But here is a quick review of the properties used in the boilerplate:
+                        </p>
+                        <dl>
+                            <dt>Frameworks</dt>
+                            <dd>The testing framework you want to karma to use, in this case Jasmine is userd.</dd>
+                            <dt>Files</dt>
+                            <dd>This is really important! This is the list of files that karma should load before starting the tests. For now you'll have to update it your self but in next versions we'll load the files automatically.</dd>
+                            <dt>LogLevel</dt>
+                            <dd>Determines the logging level of karam's report.</dd>
+                            <dt>Browsers</dt>
+                            <dd>Determines which browsers to launch when testing, the boilerplate comes pre-bundled with 3 launchers: Chrome, Firefox, and PhantomJS.</dd>
+                            <dt>SingleRun</dt>
+                            <dd>Determines if karma will run one time and return the results, or stay connected to watch for changes.</dd>
+                        </dl>
+                        <p>
+                            Notice that karma is executed as a grunt task that looks for the configuration file.
+                        </p>
+                        <h2>Unit Testing</h2>
+                        <p>
+                            In the Article examples attached, there's a unit test example in the <b>tests/article.spec.js</b> file. Notice that we use <a target="_blank" href="http://docs.angularjs.org/api/ngMock">angular-mocks</a> to simulate the HTTP requests. The tests are defined to cover all the CRUD operations, and will test the $resource service as well.
+                        </p>
+
+                        <p>
+                            There are a few common steps we use to unit test the application:
+                        </p>
+                        <ol>
+                            <li>
+                                In the <b>beforeEach</b> function take care of prerequisites and create the objects you are about to use in your tests.
+                            </li>
+                            <li>
+                                For each test start with a <b>describe</b> function to indicate which method is being tested.
+                            </li>
+                            <li>
+                                Next, add your scenario tests using the <b>it</b> function.
+                            </li>
+                            <li>
+                                In the <b>it</b> function run the tests functionallity.
+                            </li>
+                            <li>
+                                Finally use <a target="_blank" href="https://github.com/pivotal/jasmine/wiki/Matchers">Jasmine matchers</a> to test the result.
+                            </li>
+                        </ol>
+                        <p class="alert alert-info">
+                            To learn more about how to write your tests visit <a href="#article-example">The Article Example Section</a>.
+                        </p>
+                    </section>
+                    <div class="inner-link-anchor" id="angularjs-modules-system"></div>
+                    <section class="page-header">
+                        <h1>AngularJS Modules System</h1>
+                    </section>
+                    <div class="inner-link-anchor" id="article-example"></div>
+                    <section class="page-header">
+                        <h1>The Article Example</h1>
+                    </section>
+                    <section>
+                        <p>
+                            The Article example is an end-to-end example that includes the basic CRUD operations, which are most commonly used in content websites. It is divided into two parts: The Express backend module, and The AngularJS front-end module.
+                        </p>
+                        <h2>Express Backend Module</h2>
+                        <p>
+                            We mostly use the Express application as a RESTful API for the AngularJS application. This means the common <a target="_blank" href="http://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller">MVC architecture</a> can be reduced to an MC architecture, where the Model represent the data entities in the system, while the Controller is incharge of the business logic, leaving the View part only in the AngularJS application.
+                        </p>
+                        <h4>Mongoose Model</h4>
+                        <p>
+                            <a target="_blank" href="http://mongoosejs.com/">Mongoose</a> is a Node.js schema-based object modeling module. Mongoose models are defined using a Schema object that allows you to model and validate your data.
+                            <h5>The Mongoose Schema</h5>
+                            <p>The Mongoose schema is used to define the structure of your application's data. Entries are called Documents in the MongoDB context, and schemas describe what types of properties they have, and what references and relations exist between them.</p>
+                            <p>In our article example, we define the type of each property, as well as a possible default value. When necessary, we can also use properties like "trim" to make sure our data is properlly transformed before it is saved.</p>
+                            <h5>Using Validations and Middleware</h5>
+                            <p>We can make sure the data we save complies with specific validation tests, and reject entries which do not comply. In our example, we validate the title returns a true result for "title.length", to ensure it isn't blank. Similarly, we could run any function on the data being saved, and enforce whatever policy we want.</p>
+                            <p><b>Middleware</b> is used whenever we want to execute code before or after we run any kind of operation on an entry. This gives us the opportunity to carry out validation, authorization, monitoring and other operations, before (or after) the entry is operated upon.</p>
+                            <h5>How statics are definded</h5>
+                            <p>We can extended the methods we build into the schema. In our example, we added a "load" method to the article schema, which allows us to automagically load an article, and populate a reference to the document describing the article's author.</p>
+                        </p>
+                        <p class="alert alert-info">
+                            To learn more about Moongose you should visit the <a target="_blank" href="http://mongoosejs.com/">Official Website</a>.
+                        </p>
+                        <h4>Express Controller</h4>
+                        <p>
+                            In MEAN, the controllers are where you'd query your database, and preform any server-side calculations before relying the data to the client. In the example articles controller example we define the basic CRUD operations and other required methods:
+                        </p>
+                        <dl>
+                            <dt>create</dt>
+                            <dd>The create method creates a new Article document.
+                                <dt>read</dt>
+                                <dd>The read method returns a single article.</dd>
+                                <dt>update</dt>
+                                <dd>The update method updates a single article.</dd>
+                                <dt>delete</dt>
+                                <dd>The delete method removes a single article.</dd>
+                                <dt>list</dt>
+                                <dd>The list method returns a list of articles.</dd>
+                                <dt>articleByID</dt>
+                                <dd>The articleByID method sets the current article object by its ID.</dd>
+                                <dt>hasAuthorization</dt>
+                                <dd>The hasAuthorization method checks if the current user create the current article.</dd>
+                        </dl>
+                        <h4>Express Routes</h4>
+                        <p>
+                            In order to expose the controller methods as REST endpoints, we assign the controller methods to Express endpoints. This is done in the <b>config/routes.js</b> file. Here we also hook up the middleware used to make sure a request for updating or removing the article is only allowed by an authorized user.
+                        </p>
+                        <p>
+                            Here are the routes we defined for the article example:
+                        </p>
+                        <dl>
+                            <dt>GET http://localhost:3000/articles</dt>
+                            <dd>
+                                Returns the list of articles.
+                            </dd>
+                            <dt>POST http://localhost:3000/articles</dt>
+                            <dd>
+                                Creates a new article.
+                            </dd>
+                            <dt>GET http://localhost:3000/articles/:articleId</dt>
+                            <dd>
+                                Returns an article by articleId.
+                            </dd>
+                            <dt>PUT http://localhost:3000/articles/:articleId</dt>
+                            <dd>
+                                Updates an article by ID.
+                            </dd>
+                            <dt>DEL http://localhost:3000/articles/:articleId</dt>
+                            <dd>
+                                Deletes an article by ID.
+                            </dd>
+                        </dl>
+                        <h4>Express Mocha Tests</h4>
+                        <p>
+                            We use <a target="_blank" href="http://visionmedia.github.io/mocha/">Mocha</a> tests to verify our model. In this case the we added a test example that cover the article save method. The test is self is broken into three parts:
+                        </p>
+                        <ul class="list-unstyled">
+                            <li>
+                                <h5>Before Testing</h5>
+                                <p>
+                                    Before we test the article save method, we'll create the user object, then save it, and in the callback create a new article object.
+                                </p>
+                            </li>
+                            <li>
+                                <h5>The Tests</h5>
+                                <p>
+                                    Now we're ready to perform our tests. In the first test we'll try to save the article, then use the <a target="_blank" href="https://github.com/visionmedia/should.js">should assertion library</a> to verify it was saved without an error.
+                                </p>
+                                <p>
+                                    In the secodn test, we'll check the article model validation. We'll set the title property to an invalid value, then try to the save the document, we'll use should again to verify that an error has occoured.
+                                </p>
+                            </li>
+                            <li>
+                                <h5>After The Test</h5>
+                                <p>
+                                    Once our testing is over, we can now do cleanup and remove the documents from our test database.
+                                </p>
+                            </li>
+                        </ul>
+
+                        <p class="alert alert-info">
+                            To understand BDD better please visit the <a target="_blank" href="http://visionmedia.github.io/mocha/">Official Mocha Website</a>.
+                        </p>
+                        <h2>AngularJS Front-End Module</h2>
+                        <h4>Folder Structure</h4>
+                        <p>
+                            Each AngularJS module is organized in an isolated folder containing the logical structure of the module functionality. In the Article example case, that folder is located at <b>public/modules/articles</b>. This is the folder structure of the Article module:
+                        </p>
+                        <dl>
+                            <dt>config</dt>
+                            <dd>
+                                The config folder contains any AngularJS configuration related to the articles module, for instance this folder contains the routes.js file, that defines the AngularJS routing for the articles module.
+                            </dd>
+                            <dt>controllers</dt>
+                            <dd>
+                                The controlelrs folder contains any AngularJS controllers related to the articles module.
+                            </dd>
+                            <dt>services</dt>
+                            <dd>
+                                The services folder contains any AngularJS services related to the articles module.
+                            </dd>
+                            <dt>tests</dt>
+                            <dd>
+                                The tests folder contains any Jasmine tests related to the articles module.
+                            </dd>
+                            <dt>views</dt>
+                            <dd>
+                                The views folder contains any AngularJS partial views related to the articles module.
+                            </dd>
+                        </dl>
+                        <p class="alert alert-warning">
+                            The module folder structure is dynamic and may contain any components related to that module. While the article example is simple, modules can become much more complexed, and may contain several services, controller, directives, etc.
+                        </p>
+                        <h4>AngularJS Service</h4>
+                        <p>
+                            The client-side of the article entities is connected to the Express route through an AngularJS Service. In this case, we use <a target="_blank" href="http://docs.angularjs.org/api/ngResource">ngResource</a> to easily connect our RESTful endpoints to Express.
+                        </p>
+                        <p class="alert alert-warning">
+                            The <a target="_blank" href="http://docs.angularjs.org/api/ngResource.$resource">$resource</a> service supports RESTful CRUD endpoints out of the box, <b>except for the update method which requries specifically defining it to use the PUT verb</b>.
+                        </p>
+
+                        <h4>AngularJS Controller</h4>
+                        <p>
+                            The AngularJS controller is where you'll write your logic, in this case the controller is simply corresponding to the RESTful service CRUD operations:
+                        </p>
+                        <dl>
+                            <dt>create</dt>
+                            <dd>The create method is used to create new articles.</dd>
+                            <dt>remove</dt>
+                            <dd>The remove method is used to delete an article.</dd>
+                            <dt>update</dt>
+                            <dd>The update method is used to update an article.</dd>
+                            <dt>findOne</dt>
+                            <dd>The findOne method is used to fetch a single article.</dd>
+                            <dt>find</dt>
+                            <dd>The find method is used to fetch a list of articles.</dd>
+                        </dl>
+                        <h4>AngularJS Views</h4>
+                        <p>
+                            The AngularJS views render the data passed through the controller, in this case each view is a visual representation of a CRUD operation:
+                        </p>
+                        <dl>
+                            <dt>create.html</dt>
+                            <dd>The create.html view is used to create an article.</dd>
+                            <dt>view.html</dt>
+                            <dd>The view.html view is used to present a single article.</dd>
+                            <dt>edit.html</dt>
+                            <dd>The edit view is used to update an article.</dd>
+                            <dt>list.html</dt>
+                            <dd>The list view is used to view a list of articles.</dd>
+                        </dl>
+                        <h4>AngularJS Routes</h4>
+                        <p>
+                            AngularJS use the <a target="_blank" href="http://docs.angularjs.org/api/ngRoute">ngRoute</a> module to define the various routes of the module. Each route is defined using the <b>$routeProvider</b> service, and defines a path to the template, which will be rendered when navigating to a specific URL.
+                        </p>
+                        <p>
+                            In this example we configured 4 routes:
+                        </p>
+                        <dl>
+                            <dt>/#!/articles</dt>
+                            <dd>When navigating to this URL, ngRoute will render the <b>list.html</b> view.</dd>
+                            <dt>/#!/articles/create</dt>
+                            <dd>When navigating to this URL, ngRoute will render the <b>create.html</b> view.</dd>
+                            <dt>/#!/articles/:articleId</dt>
+                            <dd>When navigating to this URL, ngRoute will render the <b>view.html</b> view.</dd>
+                            <dt>/#!/articles/:articleId/edit</dt>
+                            <dd>When navigating to this URL, ngRoute will render the <b>edit.html</b> view.</dd>
+                        </dl>
+                        <p class="alert alert-info">
+                            Notice that we define a routing parameter called articleId, to grab it later in the controller and fetch the correct article.
+                        </p>
+
+                        <h4>AngularJS Unit Tests</h4>
+                        <p>
+                            AngularJS Jasmine tests are a bit trickier, but are mostly done in the same way as Mocha.
+                        </p>
+                        <ul class="list-unstyled">
+                            <li>
+                                <h5>Before Testing</h5>
+                                <p>
+                                    Before testing the article controller, there a few prerequisites we need to take care of:
+                                </p>
+                                <ul>
+                                    <li>Initialize the global variables.</li>
+                                    <li>Add a Jasmine Matcher that <b>compares objects while ignoring the object methods</b>.</li>
+                                    <li>Load the main application module.</li>
+                                    <li>
+                                        Use the inject function to:
+                                        <ol>
+                                            <li>
+                                                Point the global variables to the AngularJS services we are about to use.
+                                            </li>
+                                            <li>
+                                                Create a new ArticleController instance.
+                                            </li>
+                                        </ol>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <h5>The Test</h5>
+                                <p>
+                                    Most of your tests will look quite the same and will include similar steps:
+                                </p>
+                                <ul>
+                                    <li>
+                                        First you'll have to create your sample data.
+                                    </li>
+                                    <li>
+                                        Then, use <a target="_blank" href="http://docs.angularjs.org/api/ngMock">Angular-Mocks</a> to set the <b>httpBackend</b> expected response.
+                                    </li>
+                                    <li>
+                                        Call the controller method you would like to test.
+                                    </li>
+                                    <li>
+                                        Then, use <b>httpBackend.flush()</b> to emulate server response.
+                                    </li>
+                                    <li>
+                                        Finally, use a Jasmine matcher to verify the test result.
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <p class="alert alert-info">
+                            To understand AngularJS unit testing better, please visit the <a target="_blank" href="http://docs.angularjs.org/guide/dev_guide.unit-testing">Unit Testing Section</a> in the official website.
+                        </p>
                     </section>
                 </section>
             </section>
@@ -165,33 +1477,10 @@
     <footer class="container text-center small">
         Maintained by Roie Cohen and Amos Haviv. Licensed under MIT. Documentation licensed under CC BY 3.0. Copyright 2014.
     </footer>
-    <!-- Twitter -->
-    <script>
-    ! function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (!d.getElementById(id)) {
-            js = d.createElement(s);
-            js.id = id;
-            js.src = "//platform.twitter.com/widgets.js";
-            fjs.parentNode.insertBefore(js, fjs);
-        }
-    }(document, "script", "twitter-wjs");
-    </script>
 
-    <!-- Facebook -->
-    <div id="fb-root"></div>
-    <script>
-    (function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s);
-        js.id = id;
-        js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=588647347851720";
-        fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
-    </script>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+
     <!-- Google Analytics-->
     <script>
     (function(i, s, o, g, r, a, m) {

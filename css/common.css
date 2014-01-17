@@ -40,7 +40,7 @@ body {
     padding: 10px 5px;
 }
 .head-banner {
-    margin-top: 50px;
+    margin-top: 40px;
     padding: 40px 0;
 }
 .head-banner-text {
@@ -50,7 +50,7 @@ body {
 	margin-top: 20px;
 }
 .content {
-    margin-top: 60px;
+    margin-top: 70px;
 }
 .social-links {
 	margin-top: 40px;
@@ -59,6 +59,17 @@ body {
     height: 25px;
     margin: 0 1em;
     vertical-align: top;
+}
+.nav-docs {
+	position: fixed;
+}
+.nav-docs>.nav>li>a  {
+	font-size: 0.9em;
+	padding: 5px 10px;
+}
+.inner-link-anchor {
+	position: absolute;
+	margin: -4em;
 }
 footer {
 	border-top: 1px solid #eee;
