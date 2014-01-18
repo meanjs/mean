@@ -44,35 +44,37 @@ body {
     padding: 40px 0;
 }
 .head-banner-text {
-	padding: 20px 0;
+    padding: 20px 0;
 }
 .head-banner-buttons > div {
-	margin-top: 20px;
+    margin-top: 20px;
 }
 .content {
     margin-top: 70px;
 }
 .social-links {
-	margin-top: 40px;
+    margin-top: 40px;
 }
 .social-links li {
     height: 25px;
     margin: 0 1em;
     vertical-align: top;
 }
-.nav-docs {
-	position: fixed;
-}
-.nav-docs>.nav>li>a  {
-	font-size: 0.9em;
-	padding: 5px 10px;
+.nav-docs>.nav>li>a {
+    font-size: 0.9em;
+    padding: 5px 10px;
 }
 .inner-link-anchor {
-	position: absolute;
-	margin: -4em;
+    position: absolute;
+    margin: -4em;
 }
 footer {
-	border-top: 1px solid #eee;
-	margin: 40px 0 20px 0;
-	padding-top: 5px;
+    border-top: 1px solid #eee;
+    margin: 40px 0 20px 0;
+    padding-top: 5px;
+}
+@media (min-width: 992px) {
+    .nav-docs {
+        position: fixed;
+    }
 }
