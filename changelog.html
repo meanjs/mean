@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+    <title>MEAN.JS Changelog</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="MEAN.JS - Full-Stack JavaScript Using MongoDB, Express, AngularJS, and Node.js.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@meanjsorg">
+    <meta name="twitter:title" content="MEAN.JS - Full-Stack JavaScript Boilerplate From Creators of MEAN.IO.">
+    <meta name="twitter:description" content="MEAN.JS - Full-Stack JavaScript Using MongoDB, Express, AngularJS, and Node.js.">
+    <meta name="twitter:image:src" content="http://meanjs.org/img/icon.png">
+
+    <meta property="og:title" content="MEAN.JS - Full-Stack JavaScript Boilerplate From Creators of MEAN.IO." />
+    <meta property="og:description" content="MEAN.JS - Full-Stack JavaScript Using MongoDB, Express, AngularJS, and Node.js." />
+    <meta property="og:image" content="http://meanjs.org/img/icon.png" />
+    <meta property="og:url" content="http://meanjs.org" />
+
+    <link rel="shortcut icon" href="img/favicon.ico" />
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" href="css/bootstrap-journal.min.css">
+    <link rel="stylesheet" href="css/common.css">
+</head>
+
+<body>
+    <header class="navbar navbar-default navbar-fixed-top" role="banner">
+        <div class="container">
+            <div class="navbar-header">
+                <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="http://meanjs.org" class="logo-container">
+                    <img src="img/logo.png" alt="MEAN.JS" height="40">
+                </a>
+            </div>
+            <nav id="navbar" class="collapse navbar-collapse" role="navigation">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="docs.html">Docs</a>
+                    </li>
+                    <li class="active">
+                        <a href="changelog.html">Changelog</a>
+                    </li>
+                    <li>
+                        <a href="roadmap.html">Roadmap</a>
+                    </li>
+                    <li>
+                        <a href="community.html">Community</a>
+                    </li>
+                    <li>
+                        <a href="http://meanjs.tumblr.com">Blog</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <section class="content">
+        <section class="container">
+        	<section class="page-header">
+        		<h1>MEAN.JS Changelog</h1>
+        	</section>
+        	<h1>Version 0.1(19/01/2013)</h1>
+			<h2>Bug Fixes</h2>
+			<p>
+				Several bug fixes including performance and other issues with Express configuration.
+			</p>
+			<h2>Folder Restrucure</h2>
+			<ul>
+				<li>
+					<b>Server.js</b> is now <b>application.js</b>.
+				</li>
+				<li>
+					<b>App</b> folder is now <b>Server</b> folder.
+				</li>
+				<li>
+					<b>app/config/authorization.js</b> was removed, middlewares moved to controllers.
+				</li>
+				<li>
+					<b>tests</b> folder moved to server for Mocha tests, AngularJS Karma tests moved to module folder.
+				</li>
+				<li>
+					AngularJS application views and JS folders were removed, each module now supports its own folder structure to ensure better project development. To learn more about this change please visit the <a href="docs.html#angularjs-modules">AngularJS Modules</a> section in the documentation.
+				</li>
+			</ul>
+			<h2>Templates Changes</h2>
+			<ul>
+				<li>
+					<b>JADE</b> was replaced with <b>doT</b>.
+				</li>
+				<li>
+					Server side authentication views moved to AngularJS views.
+				</li>
+				<li>
+					Error pages were consolidated.
+				</li>
+			</ul>
+			<h2>Design Changes</h2>
+			<ul>
+				<li>
+					<b>Bootstrap 3.0.3</b> support.
+				</li>
+				<li>
+					Views redesigned to support reponsive behaviour.
+				</li>
+			</ul>
+			<h2>AngularJS Module Changes</h2>
+			<p>
+				AngularJS files were moved to ensure a better module system. To learn more about this change, please visit the <a href="docs.html#angularjs-modules">AngularJS Modules</a> section in the documentation.
+			</p>
+        </section>
+    </section>
+    <footer class="container text-center small">
+        Licensed under MIT. Documentation licensed under CC BY 3.0. Copyright 2014.
+    </footer>
+    <!-- Twitter -->
+    <script>
+    ! function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (!d.getElementById(id)) {
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "//platform.twitter.com/widgets.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }
+    }(document, "script", "twitter-wjs");
+    </script>
+
+    <!-- Facebook -->
+    <div id="fb-root"></div>
+    <script>
+    (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=588647347851720";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+    </script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    <!-- Google Analytics-->
+    <script>
+    (function(i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function() {
+            (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-46755880-1', 'meanjs.org');
+    ga('send', 'pageview');
+    </script>
+</body>
+
+</html>
