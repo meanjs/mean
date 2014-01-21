@@ -306,7 +306,7 @@
                             The application will use the <a target="_blank" href="http://passportjs.org">Passport</a> module to offer users various login options.
                         </p>
                         <p>
-                            MEAN.JS currently supports four social platforms: Facebook, Twitter, Google, and Github. You can also add other platforms using a passport-provider package and duplicating the samples logic.
+                            MEAN.JS currently supports four social platforms: Facebook, Twitter, Google, and Linkedin. You can also add other platforms using a passport-provider package and duplicating the samples logic.
                         </p>
                         <p>
                             To configure your social application oauth keys there's a property object for each platform:
@@ -454,14 +454,6 @@
                                     Whenever you want to add, change, or remove a <a target="_blank" href="http://passportjs.org/guide/providers/">Passport Strategy</a>.
                                 </p>
                             </li>
-                            <li>
-                                <h3>routes.js</h3>
-                                <b>Server routing</b> configuration file, this is where you define your Express routes.
-                                <p class="alert alert-info">
-                                    <b>When to use:</b>
-                                    Whenever you want to add, change, or remove a server route.
-                                </p>
-                            </li>
                         </ul>
                         <h2>Public</h2>
                         <p>
@@ -489,7 +481,26 @@
                                 The js folder is where you store your application level scripts.
                                 <ul>
                                     <li>
-                                        <h3>app.js</h3>
+                                        <h3>config.js</h3>
+                                        AngularJS configuration file, it starts with two global properties:
+                                        <dl>
+                                        	<dt>applicationModuleName</dt>
+                                        	<dd>AngularJS is using a module system to bootstrap and application, in this case it will use this property as the main module name.</dd>
+                                        	<dt>applicationModuleDependencies</dt>
+                                        	<dd>
+                                        		AngularJS can dependencies to the main module forcing the application not to start if those dependencies aren't met. In this case we start with the basic AngularJS &amp; Angular-UI dependencies, each module you add to your application can register to this global property and AngularJS will load it automatically.
+                                        		<p class="alert alert-danger">
+                                        			You must add your module name to this list in order to use it in the AngularJS application.
+                                        		</p>
+                                        	</dd>
+                                        </dl>
+                                        <p class="alert alert-info">
+                                            <b>When to use:</b>
+                                            Whenever you want to add, change, or remove an AngularJS global configuration property.
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <h3>application.js</h3>
                                         AngularJS main application file, it takes care of bootstrapping the application and attaching the right modules.
                                         <p class="alert alert-info">
                                             <b>When to use:</b>
@@ -526,6 +537,14 @@
                                 <p class="alert alert-info">
                                     <b>When to use:</b>
                                     Whenever you want to add, change, or remove Mongoose models.
+                                </p>
+                            </li>
+                            <li>
+                                <h3>routes</h3>
+                                The routes folder contains the <b>Server routing</b> configuration files, this is where you define your Express routes, in order to add routes to your module just add a .js file similar to the <b>server/routes/articles.js</b> file and MEAN will automatically load that these routes.
+                                <p class="alert alert-info">
+                                    <b>When to use:</b>
+                                    Whenever you want to add, change, or remove a server route.
                                 </p>
                             </li>
                             <li>
@@ -683,9 +702,9 @@
                             <dd>
                                 <a target="_blank" href="https://github.com/jaredhanson/passport-twitter">Passport-Twitter</a> is an authentication strategy for passport that enables users to authenticate using their Twitter account.
                             </dd>
-                            <dt>Passport-Github</dt>
+                            <dt>Passport-Linkedin</dt>
                             <dd>
-                                <a target="_blank" href="https://github.com/jaredhanson/passport-github">Passport-Github</a> is an authentication strategy for passport that enables users to authenticate using their Github account.
+                                <a target="_blank" href="https://github.com/jaredhanson/passport-linkedin">Passport-Linkedin</a> is an authentication strategy for passport that enables users to authenticate using their Linkedin account.
                             </dd>
                             <dt>Passport-Google-OAuth</dt>
                             <dd>
@@ -894,12 +913,15 @@
                             <a target="_blank" href="http://expressjs.com/">Express</a> is web framework for the Node.js platform. Its robustness and minimalism made it very popular among Node.js developers.
                         </p>
                         <p>
-                            Express configuration is done in the <b>config/express.js</b> and <b>config/routes.js</b> files. In the <b>express.js</b> file the application is initialized and configured, while the <b>routes.js</b> file contains the set of routes the application will serve.
+                            Express configuration is done in the <b>config/express.js</b> In the <b>express.js</b> file the application is initialized and configured, automatically loading the routes files in the <b>server/routes</b> folder, which contains the set of routes the application will serve.
                         </p>
                         <p>
                             There are a few pre-bundled routes:
                         </p>
                         <h2>Authentication Routes</h2>
+                        <p>
+                        	Authentication routes are located in the <b>server/routes/users.js</b> file.
+                        </p>
                         <dl>
                             <dt>GET http://localhost:3000/users/me</dt>
                             <dd>Returns the current authenticated user.</dd>
@@ -926,9 +948,9 @@
                         </dl>
                         <dl>
                             <dt>GET http://localhost:3000/auth/github</dt>
-                            <dd>This is used to initialize the Github OAuth process.</dd>
+                            <dd>This is used to initialize the Linkedin OAuth process.</dd>
                             <dt>GET http://localhost:3000/auth/github/callback</dt>
-                            <dd>This is used as the callback URI for Github OAuth process.</dd>
+                            <dd>This is used as the callback URI for Linkedin OAuth process.</dd>
                         </dl>
                         <dl>
                             <dt>GET http://localhost:3000/auth/google</dt>
@@ -938,6 +960,9 @@
                         </dl>
                         <p>Please notice that you can add more authentication options using a <a href="#passport">Passport Strategy</a> and this pattern.</p>
                         <h2>Application Routes</h2>
+                        <p>
+                        	Application shell routes are located in the <b>server/routes/shell.js</b> file.
+                        </p>
                         <dl>
                             <dt>GET http://localhost:3000/</dt>
                             <dd>
@@ -948,7 +973,7 @@
                         </dl>
                         <h2>Example Routes</h2>
                         <p>
-                            An 'Article' example is included with the boilerplate to help you understand how to properly build your RESTful API.
+                            An 'Article' example is included with the boilerplate to help you understand how to properly build your RESTful API, the routes for this module are located in the <b>server/routes/articles.js</b> file.
                         </p>
                         <dl>
                             <dt>GET http://localhost:3000/articles</dt>
@@ -1007,9 +1032,9 @@
                             <dd>
                                 <a target="_blank" href="https://github.com/jaredhanson/passport-google-oauth">The Google Strategy</a> is used to authenticate user via its Google account.
                             </dd>
-                            <dt>Github</dt>
+                            <dt>Linkedin</dt>
                             <dd>
-                                <a target="_blank" href="https://github.com/jaredhanson/passport-github">The Github Strategy</a> is used to authenticate user via its Github account.
+                                <a target="_blank" href="https://github.com/jaredhanson/passport-linkedin">The Linkedin Strategy</a> is used to authenticate user via its Linkedin account.
                             </dd>
                         </dl>
                         <p class="alert alert-info">
@@ -1266,7 +1291,7 @@
                         </dl>
                         <h4>Express Routes</h4>
                         <p>
-                            In order to expose the controller methods as REST endpoints, we assign the controller methods to Express endpoints. This is done in the <b>config/routes.js</b> file. Here we also hook up the middleware used to make sure a request for updating or removing the article is only allowed by an authorized user.
+                            In order to expose the controller methods as REST endpoints, we assign the controller methods to Express endpoints. This is done in the <b>server/routes/articles.js</b> file. Here we also hook up the middleware used to make sure a request for updating or removing the article is only allowed by an authorized user.
                         </p>
                         <p>
                             Here are the routes we defined for the article example:
