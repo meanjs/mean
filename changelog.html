@@ -55,9 +55,6 @@
                         <a href="changelog.html">Changelog</a>
                     </li>
                     <li>
-                        <a href="roadmap.html">Roadmap</a>
-                    </li>
-                    <li>
                         <a href="community.html">Community</a>
                     </li>
                     <li>
@@ -72,10 +69,10 @@
         	<section class="page-header">
         		<h1>MEAN.JS Changelog</h1>
         	</section>
-        	<h1>Version 0.1(19/01/2013)</h1>
+        	<h1>Version 0.1 (30/01/2013)</h1>
 			<h2>Bug Fixes</h2>
 			<p>
-				Several bug fixes including performance and other issues with Express configuration.
+				Several bug fixes including performance and other issues.
 			</p>
 			<h2>Folder Restrucure</h2>
 			<ul>
@@ -83,16 +80,21 @@
 					<b>Server.js</b> is now <b>application.js</b>.
 				</li>
 				<li>
-					<b>App</b> folder is now <b>Server</b> folder.
+					<b>App</b> folder is now <b>server</b> folder.
+				</li>
+				<li>
+					<b>Routes.js</b> file removed from <b>config</b> folder and split into modular .JS files in the <b>server/routes</b> folder.
 				</li>
 				<li>
 					<b>app/config/authorization.js</b> was removed, middlewares moved to controllers.
 				</li>
 				<li>
-					<b>tests</b> folder moved to server for Mocha tests, AngularJS Karma tests moved to module folder.
+					<b>tests</b> folder moved to server for <b>Mocha tests</b>,<b> AngularJS Karma tests</b> moved to module folder.
 				</li>
 				<li>
-					AngularJS application views and JS folders were removed, each module now supports its own folder structure to ensure better project development. To learn more about this change please visit the <a href="docs.html#angularjs-modules">AngularJS Modules</a> section in the documentation.
+					AngularJS <b>authentication views</b> and <b>JS folders</b> were removed.
+					<br>
+					Each module now supports its own folder structure to ensure better project development. To learn more about this change please visit the <a href="docs.html#angularjs-modules">AngularJS Modules</a> section in the documentation.
 				</li>
 			</ul>
 			<h2>Templates Changes</h2>
