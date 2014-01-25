@@ -1203,7 +1203,12 @@
 							<dt>Frameworks</dt>
 							<dd>The testing framework you want to karma to use, in this case we'll use Jasmine.</dd>
 							<dt>Files</dt>
-							<dd>This is really important! This is the list of files that karma should load before starting the tests. For now you'll have to update it your self but in next versions we'll load the files automatically.</dd>
+							<dd>
+								This is really important! This is the list of files that karma should load before starting the tests. 
+								<p class="alert alert-info">
+									Notice that we load the angular module tests automatically, so whenever you add a new module, Karma will run your tests without you having to change anything at all.
+								</p>
+							</dd>
 							<dt>LogLevel</dt>
 							<dd>Determines the logging level of karma console output.</dd>
 							<dt>Browsers</dt>
@@ -1549,8 +1554,12 @@ ApplicationConfiguration.registerModule('moduleName');
 							<br>
 							MEAN will take care of everything else, like including those files in the layout HTML and bootstrap the AngularJS application using your module as a dependency.
 						</p>
+						<h4>Module Tests</h4>
+						<p>
+							Adding Karma tests is a simple tasks you can follow the <a href="#article-example">Article Example</a> to learn more. but here is another neat feature, loading your module tests is also done automatically! Karam config file will iterate through the module folder and your new module tests as well. Don't worry! if you haven't written any tests it will karma will skip your module and just run the tests you have.
+						</p>
 						<p class="alert alert-danger">
-							<b>Notice:</b> Your test files should end with <b>.spec.js</b> extension so MEAN will ignore them and won't add them in the HTML as script files.
+							<b>Notice:</b> Your test files should end with <b>.spec.js</b> extension or else MEAN won't ignore them and add them in the HTML as script files.
 						</p>
 					</section>
 					<div class="inner-link-anchor" id="article-example"></div>
