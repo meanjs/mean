@@ -1492,9 +1492,9 @@ angular.module(‘application’, [‘application.controllers’, ‘application
 								Third party modules can now be easily shared and implemented.
 							</li>
 						</ol>
-						<h4>ApplicationConfiguration Module</h4>
+						<h4>ApplicationConfiguration</h4>
 						<p>
-							While the angular module system is quite robust it lacks a few options, mainly the abiliy to add dependencies to the main module after it was already created. Because of that we use the <b>ApplicationConfiguration</b> module to maintain a list of modules, which the main module will use as depenedencies. If it weren't for this module you would have to register your module in two place:
+							While the angular module system is quite robust it lacks a few options, mainly the abiliy to add dependencies to the main module after it was already created. Because of that we use the <b>ApplicationConfiguration</b> object to maintain a list of modules, which the main module will use as depenedencies. If it weren't for the <b>ApplicationConfiguration</b>, you would have to register your module in two place:
 						</p>
 						<ol>
 							<li>
@@ -1505,7 +1505,7 @@ angular.module(‘application’, [‘application.controllers’, ‘application
 							</li>
 						</ol>
 						<p>
-							This can become an annoying pitfull, so we added the <b>ApplicationConfiguration</b> module that is loaded before all the modules file. The <b>ApplicationConfiguration</b> global module expose a method named <b>registerModule</b>, this method will create the new angular module and add it to list of dependencies of the main application module. 
+							This can become an annoying pitfull, so we added the <b>ApplicationConfiguration</b> that is loaded before all the modules file. The <b>ApplicationConfiguration</b> global object expose a method named <b>registerModule</b>, this method will create the new angular module and add it to list of dependencies of the main application module. 
 						</p>
 						<p>
 							We recommend that you take a look at the code that is placed inside the <b>/public/js/config.js</b> file.
