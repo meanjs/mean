@@ -1463,7 +1463,7 @@ angular.module(‘application’, [‘application.controllers’, ‘application
 								In the <b>config/express.js</b> file, we iterate over the modules folder to automatically add the .JS and .CSS files to the layout HTML.
 							</li>
 							<li>
-								In the <b>public/js/config.js</b> file we added an array property called <b>applicationModuleDependencies</b>. When you add a new module you can push its name to this array, and your module will automatically be loaded as a dependency to the AngularJS main application module.
+								In the <b>public/js/config.js</b> file we added an array property called <b>applicationModuleDependencies</b>. When you want to add a new module you can create it and push its name to this array using the <b>ApplicationConfiguration.registerModule</b> method, and your module will automatically be loaded as a dependency to the AngularJS main application module.
 							</li>
 						</ol>
 						<p>
