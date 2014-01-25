@@ -416,6 +416,52 @@
 						<p>
 							The folder structure is quite self-explanatory, but here's an explanation on what goes where and why.
 						</p>
+						<h2>App</h2>
+						<p>
+							The server folder contains all the server files you use in your application, this is where you store your MVC server files.
+						</p>
+						<ul>
+							<li>
+								<h3>controllers</h3>
+								The controllers folder is where you store your Express application controllers, this is where you write your backend business logic.
+								<p class="alert alert-info">
+									<b>When to use:</b>
+									Whenever you want to add, change, or remove Express application controllers.
+								</p>
+							</li>
+							<li>
+								<h3>models</h3>
+								The models folder is where you store your <a target="_blank" href="http://mongoosejs.com/">Mongoose</a> models, this is where you define your backend models.
+								<p class="alert alert-info">
+									<b>When to use:</b>
+									Whenever you want to add, change, or remove Mongoose models.
+								</p>
+							</li>
+							<li>
+								<h3>routes</h3>
+								The routes folder contains the <b>Server routing</b> configuration files, this is where you define your Express routes, in order to add routes to your module just add a .js file similar to the <b>app/routes/articles.js</b> file and MEAN will automatically load that these routes.
+								<p class="alert alert-info">
+									<b>When to use:</b>
+									Whenever you want to add, change, or remove a server route.
+								</p>
+							</li>
+							<li>
+								<h3>tests</h3>
+								The tests folder is where you store your <a target="_blank" href="http://visionmedia.github.io/mocha/">Mocha</a> tests, this is how you test your backend business logic.
+								<p class="alert alert-info">
+									<b>When to use:</b>
+									Whenever you want to add, change, or remove Mocha tests.
+								</p>
+							</li>
+							<li>
+								<h3>views</h3>
+								The views folder is where define your backend views. Since you'll use AngularJS, server templates are almost meaningless, but you still have to use a template engine to render the main pages, like the index and error pages. For more information visit the <a href="#backend-views">Backend Views</a> section.
+								<p class="alert alert-info">
+									<b>When to use:</b>
+									Whenever you want to add, change, or remove backend views.
+								</p>
+							</li>
+						</ul>
 						<h2>Config</h2>
 						<p>
 							The config folder contains the files you need to configure your application.
@@ -513,59 +559,13 @@
 								</p>
 							</li>
 						</ul>
-						<h2>Server</h2>
-						<p>
-							The server folder contains all the server files you use in your application, this is where you store your MVC server files.
-						</p>
-						<ul>
-							<li>
-								<h3>controllers</h3>
-								The controllers folder is where you store your Express application controllers, this is where you write your backend business logic.
-								<p class="alert alert-info">
-									<b>When to use:</b>
-									Whenever you want to add, change, or remove Express application controllers.
-								</p>
-							</li>
-							<li>
-								<h3>models</h3>
-								The models folder is where you store your <a target="_blank" href="http://mongoosejs.com/">Mongoose</a> models, this is where you define your backend models.
-								<p class="alert alert-info">
-									<b>When to use:</b>
-									Whenever you want to add, change, or remove Mongoose models.
-								</p>
-							</li>
-							<li>
-								<h3>routes</h3>
-								The routes folder contains the <b>Server routing</b> configuration files, this is where you define your Express routes, in order to add routes to your module just add a .js file similar to the <b>server/routes/articles.js</b> file and MEAN will automatically load that these routes.
-								<p class="alert alert-info">
-									<b>When to use:</b>
-									Whenever you want to add, change, or remove a server route.
-								</p>
-							</li>
-							<li>
-								<h3>tests</h3>
-								The tests folder is where you store your <a target="_blank" href="http://visionmedia.github.io/mocha/">Mocha</a> tests, this is how you test your backend business logic.
-								<p class="alert alert-info">
-									<b>When to use:</b>
-									Whenever you want to add, change, or remove Mocha tests.
-								</p>
-							</li>
-							<li>
-								<h3>views</h3>
-								The views folder is where define your backend views. Since you'll use AngularJS, server templates are almost meaningless, but you still have to use a template engine to render the main pages, like the index and error pages. For more information visit the <a href="#backend-views">Backend Views</a> section.
-								<p class="alert alert-info">
-									<b>When to use:</b>
-									Whenever you want to add, change, or remove backend views.
-								</p>
-							</li>
-						</ul>
 						<h2>Application Files</h2>
 						<p>
 							There are a few application files stored in root folder.
 						</p>
 						<ul>
 							<li>
-								<h3>application.js</h3>
+								<h3>server.js</h3>
 								Our main application file, where you initialize your Node.js application.
 							</li>
 							<li>
@@ -886,7 +886,7 @@
 									</li>
 									<li>
 										<h5>mochaTest</h5>
-										<p>This runs the mocha server tests that are located in the <b>server/tests</b> folder.</p>
+										<p>This runs the mocha server tests that are located in the <b>app/tests</b> folder.</p>
 									</li>
 									<li>
 										<h5>karma:unit</h5>
@@ -908,14 +908,14 @@
 							<a target="_blank" href="http://expressjs.com/">Express</a> is web framework for the Node.js platform. Its robustness and minimalism made it very popular among Node.js developers.
 						</p>
 						<p>
-							Express configuration is done in the <b>config/express.js</b> In the <b>express.js</b> file the application is initialized and configured, automatically loading the routes files in the <b>server/routes</b> folder, which contains the set of routes the application will serve.
+							Express configuration is done in the <b>config/express.js</b> In the <b>express.js</b> file the application is initialized and configured, automatically loading the routes files in the <b>app/routes</b> folder, which contains the set of routes the application will serve.
 						</p>
 						<p>
 							There are a few pre-bundled routes:
 						</p>
 						<h2>Authentication Routes</h2>
 						<p>
-							Authentication routes are located in the <b>server/routes/users.js</b> file.
+							Authentication routes are located in the <b>app/routes/users.js</b> file.
 						</p>
 						<dl>
 							<dt>GET http://localhost:3000/users/me</dt>
@@ -956,7 +956,7 @@
 						<p>Please notice that you can add more authentication options using a <a href="#passport">Passport Strategy</a> and this pattern.</p>
 						<h2>Application Routes</h2>
 						<p>
-							Application shell routes are located in the <b>server/routes/shell.js</b> file.
+							Application shell routes are located in the <b>app/routes/shell.js</b> file.
 						</p>
 						<dl>
 							<dt>GET http://localhost:3000/</dt>
@@ -968,7 +968,7 @@
 						</dl>
 						<h2>Example Routes</h2>
 						<p>
-							An 'Article' example is included with the boilerplate to help you understand how to properly build your RESTful API, the routes for this module are located in the <b>server/routes/articles.js</b> file.
+							An 'Article' example is included with the boilerplate to help you understand how to properly build your RESTful API, the routes for this module are located in the <b>app/routes/articles.js</b> file.
 						</p>
 						<dl>
 							<dt>GET http://localhost:3000/articles</dt>
@@ -1044,7 +1044,7 @@
 						<p>
 							AngularJS reduces the need for server side templating. What once was a web application served by server as HTML pages can now be implemented using Angular's template system.
 						</p>
-						<h4>So why do you still keep a views folder in your server folder?</h4>
+						<h4>So why do you still keep a views folder in your <b>app</b> folder?</h4>
 						<p>
 							There are few answers to this question:
 						</p>
@@ -1124,7 +1124,7 @@
 						</p>
 						<h4>Test Files</h4>
 						<p>
-							Each entity have its own test file located inside the <b>server/tests</b> folder.
+							Each entity have its own test file located inside the <b>app/tests</b> folder.
 						</p>
 						<h4>Writing Tests</h4>
 						<p>
@@ -1574,7 +1574,7 @@ angular.module(moduleName, []);
 						</dl>
 						<h4>Express Routes</h4>
 						<p>
-							In order to expose the controller methods as REST endpoints, we assign the controller methods to Express endpoints. This is done in the <b>server/routes/articles.js</b> file. Here we also hook up the middleware used to make sure a request for updating or removing the article is only allowed by an authorized user.
+							In order to expose the controller methods as REST endpoints, we assign the controller methods to Express endpoints. This is done in the <b>app/routes/articles.js</b> file. Here we also hook up the middleware used to make sure a request for updating or removing the article is only allowed by an authorized user.
 						</p>
 						<p>
 							Here are the routes we defined for the article example:

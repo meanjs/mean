@@ -74,22 +74,21 @@
 			<p>
 				Several bug fixes including performance and other issues.
 			</p>
+			<ul>
+				<li>Fixed tests issues.</li>
+				<li>Fixed heroku deployment issues.</li>
+				<li>Fixed user model issues.</li>
+			</ul>
 			<h2>Folder Restrucure</h2>
 			<ul>
 				<li>
-					<b>Server.js</b> is now <b>application.js</b>.
-				</li>
-				<li>
-					<b>App</b> folder is now <b>server</b> folder.
-				</li>
-				<li>
-					<b>Routes.js</b> file removed from <b>config</b> folder and split into modular .JS files in the <b>server/routes</b> folder.
+					<b>Routes.js</b> file removed from <b>config</b> folder and split into modular .JS files in the <b>app/routes</b> folder.
 				</li>
 				<li>
 					<b>app/config/authorization.js</b> was removed, middlewares moved to controllers.
 				</li>
 				<li>
-					<b>tests</b> folder moved to server for <b>Mocha tests</b>,<b> AngularJS Karma tests</b> moved to module folder.
+					<b>tests</b> folder moved to <b>app</b> folder for <b>Mocha tests</b>,<b> AngularJS Karma tests</b> moved to module folder.
 				</li>
 				<li>
 					AngularJS <b>authentication views</b> and <b>JS folders</b> were removed.
