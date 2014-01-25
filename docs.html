@@ -523,15 +523,21 @@
 								<ul>
 									<li>
 										<h3>config.js</h3>
-										AngularJS configuration file, it starts with two global properties:
+										AngularJS configuration module, it starts with two global properties and one method:
 										<dl>
 											<dt>applicationModuleName</dt>
-											<dd>AngularJS is using a module system to bootstrap and application, in this case it will use this property as the main module name.</dd>
+											<dd>
+												AngularJS is using a module system to bootstrap and application, in this case it will use this property as the main module name.
+											</dd>
 											<dt>applicationModuleDependencies</dt>
 											<dd>
 												AngularJS allows to add dependencies to the main module forcing the application not to start if those dependencies aren't met. In this case we start with the basic AngularJS &amp; Angular-UI dependencies, each module you add to your application can register to the <i>applicationModuleDependencies</i> global property and AngularJS will load it automatically.
+											</dd>
+											<dt>registerModule</dt>
+											<dd>
+												This method is used to register a module as a new module and add it to the main module dependencies.
 												<p class="alert alert-danger">
-													You must push your module name to this array in order to use it in the AngularJS application. To understand this better please visit the <a href="#angularjs-modules">AngularJS Modules</a> section.
+													You must use <b>registerModule</b> method to reigster your module as a dependency for the main application module. To understand this better please visit the <a href="#angularjs-modules">AngularJS Modules</a> section.
 												</p>
 											</dd>
 										</dl>
@@ -665,9 +671,9 @@
 							<dd>
 								<a target="_blank" href="http://expressjs.com/">Express</a> is a web framework for Node.js.
 							</dd>
-							<dt>doT</dt>
+							<dt>Swig</dt>
 							<dd>
-								<a target="_blank" href="http://olado.github.io/doT/index.html">doT</a> is a template engine for Node.js.
+								<a target="_blank" href="http://paularmstrong.github.io/swig/">Swig</a> is a template engine for Node.js.
 							</dd>
 							<dt>Mongoose</dt>
 							<dd>
@@ -1062,9 +1068,9 @@
 						<p>
 							So we can't use static templates, and we have to use some kind of template engine, but which one?
 						</p>
-						<h2>doT Template Engine</h2>
+						<h2>Swig Template Engine</h2>
 						<p>
-							<a target="_blank" href="http://olado.github.io/doT/index.html">doT Template Engine</a> is a template engine, written by <a target="_blank" href="https://github.com/olado">Laura Doktorov</a>, a Canadian engineer looking for a faster template engine.
+							<a target="_blank" href="http://paularmstrong.github.io/swig/">Swig Template Engine</a> is a template engine, written by <a target="_blank" href="https://github.com/paularmstrong">Paul Armstrong</a>.
 						</p>
 						<p>
 							While <a target="_blank" href="http://jade-lang.com/">JADE</a> is the default template engine used by Express, and is by far the most popular template engine, it doesn't suit this boilerplate for several reasons:
@@ -1075,22 +1081,22 @@
 							<li>Most importantly, you don't need it! JADE's greatest advantage is to facilitate the task of writing a lot of HTML that is being served by the server. You're going to use AngularJS client templating engine, thus relieving the need for server templating.</li>
 						</ol>
 						<p>
-							On the other hand, using doT has a few advantages:
+							On the other hand, using Swig has a few advantages:
 						</p>
 						<ol>
-							<li>It's fast, as in <a href="http://ectjs.com/#benchmark">lightening fast</a>.</li>
+							<li>It's faster, as in <a href="http://paularmstrong.github.io/node-templates/benchmarks.html">way faster</a>.</li>
 							<li>It uses HTML.</li>
 							<li>It has all the features we need to render our index and error pages!</li>
 						</ol>
 						<p>
-							To summarize, when coding a Node.js website, you might want to use other template engines, but approaching web application development using AngularJS, we think doT is the best choice.
+							To summarize, when coding a Node.js website, you might want to use other template engines, but approaching web application development using AngularJS, we think Swig is the best choice.
 						</p>
 						<p class="alert alert-info">
-							To understand doT better we recommend that you visit the <a target="_blank" href="http://olado.github.io/doT/index.html">Official Website</a>.
+							To understand Swig better we recommend that you visit the <a target="_blank" href="http://paularmstrong.github.io/swig/">Official Website</a>.
 						</p>
 						<h2>The Views</h2>
 						<p>
-							There are 3 files in the views folder:
+							There are 4 files in the views folder:
 						</p>
 						<dl>
 							<dt>Layout</dt>
@@ -1101,9 +1107,13 @@
 							<dd>
 								The index template is served as the main application page.
 							</dd>
-							<dt>Error</dt>
+							<dt>404</dt>
 							<dd>
-								The error template is served whenever there's a server error.
+								The 404 error template is served whenever express cant find a routing scheme for the current path.
+							</dd>
+							<dt>500</dt>
+							<dd>
+								The 500 error template is served whenever there's a server error.
 							</dd>
 						</dl>
 						<p>
@@ -1482,10 +1492,30 @@ angular.module(‘application’, [‘application.controllers’, ‘application
 								Third party modules can now be easily shared and implemented.
 							</li>
 						</ol>
-
+						<h4>ApplicationConfiguration Module</h4>
+						<p>
+							While the angular module system is quite robust it lacks a few options, mainly the abiliy to add dependencies to the main module after it was already created. Because of that we use the <b>ApplicationConfiguration</b> module to maintain a list of modules, which the main module will use as depenedencies. If it weren't for this module you would have to register your module in two place:
+						</p>
+						<ol>
+							<li>
+								When you create your module using the <code>angular.module(...)</code> method.
+							</li>
+							<li>
+								When you create your main application module you'll have to register your module as a dependency in the dependencies list.
+							</li>
+						</ol>
+						<p>
+							This can become an annoying pitfull, so we added the <b>ApplicationConfiguration</b> module that is loaded before all the modules file. The <b>ApplicationConfiguration</b> global module expose a method named <b>registerModule</b>, this method will create the new angular module and add it to list of dependencies of the main application module. 
+						</p>
+						<p>
+							We recommend that you take a look at the code that is placed inside the <b>/public/js/config.js</b> file.
+						</p>
 						<h4>Module Structure</h4>
 						<p>
-							So how should you add a new module? <br>
+							So how should you add a new module? 
+						</p>
+						<p>
+							
 							To add a new module, you’ll have to create a new folder in the <b>public/modules</b> folder. The directory structure should look something like this:
 						</p>
 <pre>
@@ -1495,34 +1525,32 @@ angular.module(‘application’, [‘application.controllers’, ‘application
 |---css 
 |---directives 
 |---filters 
+|---img 
 |---services 
 |---tests 
 |---views 
 |---module.js
 </pre>
 						<p>
-							In each folder you'll include the appropriate module entities, then delete the empty folders, and add your module.js file, which should look something like this:
+							In each folder you'll include the appropriate module entities, you can also delete the empty folders to keep it clean. 
+						</p>
+						<p>
+							Finally you have to add your module.js file, which should look something like this:
 						</p>
 <pre>
-'use strict'; 
+'use strict';
 
-// Init the module name 
-var moduleName = 'mean.moduleName'; 
-
-// Add the module to the AngularJS configuration file 
-window.config.applicationModuleDependencies.push(moduleName); 
-
-// Create angular module
-angular.module(moduleName, []);
+// Use Applicaion configuration module to register a new module
+ApplicationConfiguration.registerModule('moduleName');
 </pre>
 
 						<p>
-							Thats it! This way you create your module and push it to the dependencies list of your AngularJS main application module. 
+							Thats it! This way the <b>registerModule</b> method will create your module and push it to the dependencies list of your AngularJS main application module. 
 							<br>
 							MEAN will take care of everything else, like including those files in the layout HTML and bootstrap the AngularJS application using your module as a dependency.
 						</p>
 						<p class="alert alert-danger">
-							<b>Notice:</b> Your test files should end with <b>.spec.js</b> extension or MEAN will import them in the HTML as well.
+							<b>Notice:</b> Your test files should end with <b>.spec.js</b> extension so MEAN will ignore them and won't add them in the HTML as script files.
 						</p>
 					</section>
 					<div class="inner-link-anchor" id="article-example"></div>
