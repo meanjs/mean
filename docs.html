@@ -969,7 +969,7 @@
 						<p>Please notice that you can add more authentication options using a <a href="#passport">Passport Strategy</a> and this pattern.</p>
 						<h2>Application Routes</h2>
 						<p>
-							Application shell routes are located in the <b>app/routes/shell.js</b> file.
+							Application core routes are located in the <b>app/routes/core.js</b> file.
 						</p>
 						<dl>
 							<dt>GET http://localhost:3000/</dt>
@@ -1386,32 +1386,32 @@ angular.module(‘application’, [‘application.controllers’, ‘application
 								<th class="text-center" colspan="3">Application</th>
 							</tr>
 							<tr>
-								<th class="text-center">Shell Module</th>
+								<th class="text-center">Core Module</th>
 								<th class="text-center">Users Module</th>
 								<th class="text-center">Articles Module</th>
 							</tr>
 							<tr>
-								<td>ShellController1</td>
+								<td>CoreController1</td>
 								<td>UsersController1</td>
 								<td>ArticlesController1</td>
 							</tr>
 							<tr>
-								<td>ShellController2</td>
+								<td>CoreController2</td>
 								<td>UsersController1</td>
 								<td>ArticlesController2</td>
 							</tr>
 							<tr>
-								<td>ShellService1</td>
+								<td>CoreService1</td>
 								<td>UsersService1</td>
 								<td>ArticlesService1</td>
 							</tr>
 							<tr>
-								<td>ShellFilter1</td>
+								<td>CoreFilter1</td>
 								<td>UsersFilter1</td>
 								<td>ArticlesFilter1</td>
 							</tr>
 							<tr>
-								<td>ShellDirective1</td>
+								<td>CoreDirective1</td>
 								<td>UsersDirective1</td>
 								<td>ArticlesDirective2</td>
 							</tr>
@@ -1439,7 +1439,7 @@ angular.module(‘application’, [‘application.controllers’, ‘application
 |-----services 
 |-----tests 
 |-----views
-|---shell
+|---core
 |-----config
 |-----controllers
 |-----tests
@@ -1454,8 +1454,8 @@ angular.module(‘application’, [‘application.controllers’, ‘application
 							In this case we have 3 modules:
 						</p>
 						<dl>
-							<dt>Shell</dt>
-							<dd>Containing the application shell configuration, controllers, test, and views.</dd>
+							<dt>Core</dt>
+							<dd>Containing the application core configuration, controllers, test, and views.</dd>
 							<dt>Users</dt>
 							<dd>Containing the application authentication configuration, controllers, services, and views.</dd>
 							<dt>Articles</dt>
