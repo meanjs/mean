@@ -536,9 +536,9 @@
 											<dd>
 												AngularJS is using a module system to bootstrap and application, in this case it will use this property as the main module name.
 											</dd>
-											<dt>applicationModuleDependencies</dt>
+											<dt>applicationModuleVendorDependencies</dt>
 											<dd>
-												AngularJS allows to add dependencies to the main module forcing the application not to start if those dependencies aren't met. In this case we start with the basic AngularJS &amp; Angular-UI dependencies, each module you add to your application can register to the <i>applicationModuleDependencies</i> global property and AngularJS will load it automatically.
+												AngularJS allows to add dependencies to the main module forcing the application not to start if those dependencies aren't met. In this case we start with the basic AngularJS &amp; Angular-UI dependencies, each third-party module you add to your application should be added to the <i>applicationModuleVendorDependencies</i> global property and AngularJS will load it automatically.
 											</dd>
 											<dt>registerModule</dt>
 											<dd>
@@ -1475,7 +1475,15 @@ angular.module(‘application’, [‘application.controllers’, ‘application
 								In the <b>config/express.js</b> file, we iterate over the modules folder to automatically add the .JS and .CSS files to the layout HTML.
 							</li>
 							<li>
-								In the <b>public/js/config.js</b> file we added an array property called <b>applicationModuleDependencies</b>. When you want to add a new module you can create it and push its name to this array using the <b>ApplicationConfiguration.registerModule</b> method, and your module will automatically be loaded as a dependency to the AngularJS main application module.
+								<p>
+									There two kind of modules you'll add to your application: third-party modules and custom modules.
+								</p>
+								<p>
+								To add third-party modules use the <b>public/js/config.js</b> file where we added an array property called <b>applicationModuleVendorDependencies</b>. When you add a new third-party module you should add it to this array so the main module can load it as a depenedency. 
+								</p>
+								<p>
+								To register your own module, we created the <b>ApplicationConfiguration.registerModule</b> method. To add your custom module and your module and it will automatically be loaded as a dependency to the AngularJS main application module.
+								</p>
 							</li>
 						</ol>
 						<p>
