@@ -1,58 +1,58 @@
 {
-    "name": "meanjs",
-    "description": "Full-Stack JavaScript with MongoDB, Express, AngularJS, and Node.js.",
-    "version": "0.1.0",
-    "private": false,
-    "author": "https://github.com/meanjs/mean/graphs/contributors",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/meanjs/mean.git"
-    },
-    "engines": {
-        "node": "0.10.x",
-        "npm": "1.2.x"
-    },
-    "scripts": {
-        "start": "node node_modules/grunt-cli/bin/grunt",
-        "test": "node node_modules/grunt-cli/bin/grunt test",
-        "postinstall": "node node_modules/bower/bin/bower update"
-    },
-    "dependencies": {
-        "express": "latest",
-        "consolidate": "latest",
-        "swig": "latest",
-        "mongoose": "latest",
-        "connect-mongo": "latest",
-        "connect-flash": "latest",
-        "crypto": "latest",
-        "passport": "latest",
-        "passport-local": "latest",
-        "passport-facebook": "latest",
-        "passport-twitter": "latest",
-        "passport-linkedin": "latest",
-        "passport-google-oauth": "latest",
-        "lodash": "latest",
-        "forever": "latest",
-        "bower": "latest",
-        "grunt": "latest",
-        "grunt-cli": "latest",
-        "grunt-env": "latest"
-    },
-    "devDependencies": {
-        "supertest": "latest",
-        "should": "latest",
-        "grunt-node-inspector": "latest",
-        "grunt-contrib-watch": "latest",
-        "grunt-contrib-jshint": "latest",
-        "grunt-nodemon": "latest",
-        "grunt-concurrent": "latest",
-        "grunt-mocha-test": "latest",
-        "grunt-karma": "latest",
-        "karma": "latest",
-        "karma-jasmine": "latest",
-        "karma-coverage": "latest",
-        "karma-chrome-launcher": "latest",
-        "karma-firefox-launcher": "latest",
-        "karma-phantomjs-launcher": "latest"
-    }
+	"name": "meanjs",
+	"description": "Full-Stack JavaScript with MongoDB, Express, AngularJS, and Node.js.",
+	"version": "0.1.0",
+	"private": false,
+	"author": "https://github.com/meanjs/mean/graphs/contributors",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/meanjs/mean.git"
+	},
+	"engines": {
+		"node": "0.10.x",
+		"npm": "1.2.x"
+	},
+	"scripts": {
+		"start": "node node_modules/grunt-cli/bin/grunt",
+		"test": "node node_modules/grunt-cli/bin/grunt test",
+		"postinstall": "node node_modules/bower/bin/bower update"
+	},
+	"dependencies": {
+		"express": "latest",
+		"consolidate": "latest",
+		"swig": "latest",
+		"mongoose": "latest",
+		"connect-mongo": "latest",
+		"connect-flash": "latest",
+		"crypto": "latest",
+		"passport": "latest",
+		"passport-local": "latest",
+		"passport-facebook": "latest",
+		"passport-twitter": "latest",
+		"passport-linkedin": "latest",
+		"passport-google-oauth": "latest",
+		"lodash": "latest",
+		"forever": "latest",
+		"bower": "latest",
+		"grunt": "latest",
+		"grunt-cli": "latest",
+		"grunt-env": "latest"
+	},
+	"devDependencies": {
+		"supertest": "latest",
+		"should": "latest",
+		"grunt-node-inspector": "latest",
+		"grunt-contrib-watch": "latest",
+		"grunt-contrib-jshint": "latest",
+		"grunt-nodemon": "latest",
+		"grunt-concurrent": "latest",
+		"grunt-mocha-test": "latest",
+		"grunt-karma": "latest",
+		"karma": "latest",
+		"karma-jasmine": "latest",
+		"karma-coverage": "latest",
+		"karma-chrome-launcher": "latest",
+		"karma-firefox-launcher": "latest",
+		"karma-phantomjs-launcher": "latest"
+	}
 }

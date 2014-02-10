@@ -14,28 +14,28 @@ var UserSchema = new Schema({
 	firstName: {
 		type: String,
 		default: '',
-        trim: true
+		trim: true
 	},
 	lastName: {
 		type: String,
 		default: '',
-        trim: true
+		trim: true
 	},
 	displayName: {
 		type: String,
 		default: '',
-        trim: true
+		trim: true
 	},
 	email: {
 		type: String,
 		default: '',
-        trim: true,
+		trim: true,
 		unique: true
 	},
 	username: {
 		type: String,
 		default: '',
-        trim: true,
+		trim: true,
 		unique: true
 	},
 	provider: {
