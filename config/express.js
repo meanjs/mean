@@ -63,8 +63,12 @@ module.exports = function(db) {
 
 		// Disable views cache
 		app.set('view cache', false);
-		swig.setDefaults({
-			cache: false,
+	});
+
+	// Application Configuration for production environment
+	app.configure('production', function() {
+		app.locals({
+			cache: 'memory' // To solve the SWIG Cache Issues
 		});
 	});
 
