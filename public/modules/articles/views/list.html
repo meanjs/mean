@@ -1,0 +1,15 @@
+<section data-ng-controller="ArticlesController" data-ng-init="find()">
+    <div class="page-header">
+        <h1>Articles</h1>
+    </div>
+    <div class="list-group">
+        <a data-ng-repeat="article in articles" data-ng-href="#!/articles/{{article._id}}" class="list-group-item">
+            <small class="list-group-item-text">{{article.created | date:'medium'}} / {{article.user.displayName}}</small>
+            <h4 class="list-group-item-heading">{{article.title}}</h4>
+            <p class="list-group-item-text">{{article.content}}</p>
+        </a>
+    </div>
+    <div class="alert alert-warning text-center" data-ng-hide="!articles || articles.length">
+    	No articles yet, why don't you <a href="/#!/articles/create">create one</a>?
+    </div>
+</section>

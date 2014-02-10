@@ -1,0 +1,39 @@
+<section class="row" data-ng-controller="AuthenticationController">
+	<h3 class="col-md-12 text-center">Sign in using your social accounts</h3>
+	<div class="col-md-12 text-center">
+		<a href="/auth/facebook" class="undecorated-link">
+			<img src="/modules/users/img/buttons/facebook.png">
+		</a>
+		<a href="/auth/twitter" class="undecorated-link">
+			<img src="/modules/users/img/buttons/twitter.png">
+		</a>
+		<a href="/auth/google" class="undecorated-link">
+			<img src="/modules/users/img/buttons/google.png">
+		</a>
+		<a href="/auth/linkedin" class="undecorated-link">
+			<img src="/modules/users/img/buttons/linkedin.png">
+		</a>
+	</div>
+	<h3 class="col-md-12 text-center">Or with your email</h3>
+	<div class="col-xs-offset-2 col-xs-8 col-md-offset-5 col-md-2">
+		<form data-ng-submit="signin()" class="signin form-horizontal" autocomplete="off">
+			<fieldset>
+				<div class="form-group">
+					<label for="email">Email</label>
+					<input type="text" id="email" name="email" class="form-control" data-ng-model="credentials.email" placeholder="Email">
+				</div>
+				<div class="form-group">
+					<label for="password">Password</label>
+					<input type="password" id="password" name="password" class="form-control" data-ng-model="credentials.password" placeholder="Password">
+				</div>
+				<div class="text-center form-group">
+					<button type="submit" class="btn btn-primary">Sign in</button>&nbsp; or&nbsp;
+					<a href="/#!/signup">Sign up</a>
+				</div>
+				<div data-ng-show="error" class="text-center text-danger">
+					<strong>{{error}}</strong>
+				</div>
+			</fieldset>
+		</form>
+	</div>
+</section>
