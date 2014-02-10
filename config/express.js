@@ -4,106 +4,129 @@
  * Module dependencies.
  */
 var express = require('express'),
-    consolidate = require('consolidate'),
-    mongoStore = require('connect-mongo')(express),
-    flash = require('connect-flash'),
-    helpers = require('view-helpers'),
-    config = require('./config');
+	passport = require('passport'),
+	mongoStore = require('connect-mongo')(express),
+	flash = require('connect-flash'),
+	config = require('./config'),
+	consolidate = require('consolidate'),
+	swig = require('swig'),
+	path = require('path'),
+	utilities = require('./utilities');
 
-module.exports = function(app, passport, db) {
-    app.set('showStackError', true);
+module.exports = function(db) {
+	// Initialize express app
+	var app = express();
 
-    // Prettify HTML
-    app.locals.pretty = true;
-		// cache=memory or swig dies in NODE_ENV=production
-		app.locals.cache = 'memory';
-		
-    // Should be placed before express.static
-    // To ensure that all assets and data are compressed (utilize bandwidth)
-    app.use(express.compress({
-        filter: function(req, res) {
-            return (/json|text|javascript|css/).test(res.getHeader('Content-Type'));
-        },
-        // Levels are specified in a range of 0 to 9, where-as 0 is
-        // no compression and 9 is best compression, but slowest
-        level: 9
-    }));
+	// Initialize models
+	utilities.walk('./app/models', /(.*)\.(js$|coffee$)/).forEach(function(modelPath) {
+		require(path.resolve(modelPath));
+	});
 
-    // Only use logger for development environment
-    if (process.env.NODE_ENV === 'development') {
-        app.use(express.logger('dev'));
-    }
+	// Setting the environment locals
+	app.locals({
+		title: config.app.title,
+		description: config.app.description,
+		keywords: config.app.keywords,
+		facebookAppId: config.facebook.clientID,
+		modulesJSFiles: utilities.walk('./public/modules', /(.*)\.(js)/, /(.*)\.(spec.js)/, './public'),
+		modulesCSSFiles: utilities.walk('./public/modules', /(.*)\.(css)/, null, './public')
+	});
 
-    // assign the template engine to .html files
-    app.engine('html', consolidate[config.templateEngine]);
+	// Passing the request url to environment locals
+	app.use(function(req, res, next) {
+		res.locals.url = req.protocol + ':// ' + req.headers.host + req.url;
+		next();
+	});
 
-    // set .html as the default extension
-    app.set('view engine', 'html');
+	// Should be placed before express.static
+	app.use(express.compress({
+		filter: function(req, res) {
+			return (/json|text|javascript|css/).test(res.getHeader('Content-Type'));
+		},
+		level: 9
+	}));
 
-    // Set views path, template engine and default layout
-    app.set('views', config.root + '/app/views');
+	// Showing stack errors
+	app.set('showStackError', true);
 
-    // Enable jsonp
-    app.enable('jsonp callback');
+	// Set swig as the template engine
+	app.engine('html', consolidate[config.templateEngine]);
 
-    app.configure(function() {
-        // The cookieParser should be above session
-        app.use(express.cookieParser());
+	// Set views path and view engine
+	app.set('view engine', 'html');
+	app.set('views', config.root + '/app/views');
 
-        // Request body parsing middleware should be above methodOverride
-        app.use(express.urlencoded());
-        app.use(express.json());
-        app.use(express.methodOverride());
+	// Application Configuration for development environment
+	app.configure('development', function() {
+		// Enable logger 
+		app.use(express.logger('dev'));
 
-        // Express/Mongo session storage
-        app.use(express.session({
-            secret: config.sessionSecret,
-            store: new mongoStore({
-                db: db.connection.db,
-                collection: config.sessionCollection
-            })
-        }));
+		// Disable views cache
+		app.set('view cache', false);
+		swig.setDefaults({
+			cache: false,
+		});
+	});
 
-        // Dynamic helpers
-        app.use(helpers(config.app.name));
+	//  request body parsing middleware should be above methodOverride
+	app.use(express.urlencoded());
+	app.use(express.json());
+	app.use(express.methodOverride());
 
-        // Use passport session
-        app.use(passport.initialize());
-        app.use(passport.session());
+	// Enable jsonp
+	app.enable('jsonp callback');
 
-        // Connect flash for flash messages
-        app.use(flash());
+	// cookieParser should be above session
+	app.use(express.cookieParser());
 
-        // Routes should be at the last
-        app.use(app.router);
+	// express/mongo session storage
+	app.use(express.session({
+		secret: 'MEAN',
+		store: new mongoStore({
+			db: db.connection.db,
+			collection: config.sessionCollection
+		})
+	}));
 
-        // Setting the fav icon and static folder
-        app.use(express.favicon());
-        app.use(express.static(config.root + '/public'));
+	// use passport session
+	app.use(passport.initialize());
+	app.use(passport.session());
 
-        // Assume "not found" in the error msgs is a 404. this is somewhat
-        // silly, but valid, you can do whatever you like, set properties,
-        // use instanceof etc.
-        app.use(function(err, req, res, next) {
-            // Treat as 404
-            if (~err.message.indexOf('not found')) return next();
+	// connect flash for flash messages
+	app.use(flash());
 
-            // Log it
-            console.error(err.stack);
+	// routes should be at the last
+	app.use(app.router);
 
-            // Error page
-            res.status(500).render('500', {
-                error: err.stack
-            });
-        });
+	// Setting the app router and static folder
+	app.use(express.static(config.root + '/public'));
 
-        // Assume 404 since no middleware responded
-        app.use(function(req, res) {
-            res.status(404).render('404', {
-                url: req.originalUrl,
-                error: 'Not found'
-            });
-        });
+	// Load Routes
+	utilities.walk('./app/routes', /(.*)\.(js$|coffee$)/).forEach(function(routePath) {
+		require(path.resolve(routePath))(app);
+	});
 
-    });
+	// Assume 'not found' in the error msgs is a 404. this is somewhat silly, but valid, you can do whatever you like, set properties, use instanceof etc.
+	app.use(function(err, req, res, next) {
+		// If the error object doesn't exists
+		if (!err) return next();
+
+		// Log it
+		console.error(err.stack);
+
+		// Error page
+		res.status(500).render('500.html', {
+			error: err.stack
+		});
+	});
+
+	// Assume 404 since no middleware responded
+	app.use(function(req, res) {
+		res.status(404).render('404.html', {
+			url: req.originalUrl,
+			error: 'Not Found'
+		});
+	});
+
+	return app;
 };

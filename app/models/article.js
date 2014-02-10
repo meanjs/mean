@@ -6,7 +6,6 @@
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
-
 /**
  * Article Schema
  */
@@ -41,10 +40,12 @@ ArticleSchema.path('title').validate(function(title) {
 /**
  * Statics
  */
-ArticleSchema.statics.load = function(id, cb) {
-    this.findOne({
-        _id: id
-    }).populate('user', 'name username').exec(cb);
+ArticleSchema.statics = {
+    load: function(id, cb) {
+        this.findOne({
+            _id: id
+        }).populate('user', 'displayName').exec(cb);
+    }
 };
 
 mongoose.model('Article', ArticleSchema);

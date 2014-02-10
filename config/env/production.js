@@ -2,9 +2,6 @@
 
 module.exports = {
     db: 'mongodb://localhost/mean',
-    app: {
-        name: 'MEAN - A Modern Stack - Production'
-    },
     facebook: {
         clientID: 'APP_ID',
         clientSecret: 'APP_SECRET',
@@ -15,19 +12,14 @@ module.exports = {
         clientSecret: 'CONSUMER_SECRET',
         callbackURL: 'http://localhost:3000/auth/twitter/callback'
     },
-    github: {
-        clientID: 'APP_ID',
-        clientSecret: 'APP_SECRET',
-        callbackURL: 'http://localhost:3000/auth/github/callback'
-    },
     google: {
         clientID: 'APP_ID',
         clientSecret: 'APP_SECRET',
         callbackURL: 'http://localhost:3000/auth/google/callback'
     },
     linkedin: {
-        clientID: 'API_KEY',
-        clientSecret: 'SECRET_KEY',
-        callbackURL: 'http://localhost:3000/auth/linkedin/callback'
+        clientID: 'APP_ID',
+        clientSecret: 'APP_SECRET',
+        callbackURL: 'http://www.temoj.com/auth/linkedin/callback'
     }
 };

@@ -13,12 +13,13 @@
     "quotmark": "single", // Define quotes to string values.
     "regexp": true, // Prohibit `.` and `[^...]` in regular expressions.
     "undef": true, // Require all non-global variables be declared before they are used.
-    "unused": true, // Warn unused variables.
+    "unused": false, // Warn unused variables.
     "strict": true, // Require `use strict` pragma in every file.
     "trailing": true, // Prohibit trailing whitespaces.
     "smarttabs": false, // Suppresses warnings about mixed tabs and spaces
     "globals": { // Globals variables.
-        "angular": true
+        "angular": true,
+        "ApplicationConfiguration": true
     },
     "predef": [ // Extra globals.
         "define",

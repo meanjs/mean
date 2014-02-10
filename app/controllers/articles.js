@@ -7,19 +7,6 @@ var mongoose = require('mongoose'),
     Article = mongoose.model('Article'),
     _ = require('lodash');
 
-
-/**
- * Find article by id
- */
-exports.article = function(req, res, next, id) {
-    Article.load(id, function(err, article) {
-        if (err) return next(err);
-        if (!article) return next(new Error('Failed to load article ' + id));
-        req.article = article;
-        next();
-    });
-};
-
 /**
  * Create a article
  */
@@ -40,6 +27,13 @@ exports.create = function(req, res) {
 };
 
 /**
+ * Show the current article
+ */
+exports.read = function(req, res) {
+    res.jsonp(req.article);
+};
+
+/**
  * Update a article
  */
 exports.update = function(req, res) {
@@ -49,9 +43,8 @@ exports.update = function(req, res) {
 
     article.save(function(err) {
         if (err) {
-            return res.send('users/signup', {
-                errors: err.errors,
-                article: article
+            res.render('error', {
+                status: 500
             });
         } else {
             res.jsonp(article);
@@ -62,14 +55,13 @@ exports.update = function(req, res) {
 /**
  * Delete an article
  */
-exports.destroy = function(req, res) {
+exports.delete = function(req, res) {
     var article = req.article;
 
     article.remove(function(err) {
         if (err) {
-            return res.send('users/signup', {
-                errors: err.errors,
-                article: article
+            res.render('error', {
+                status: 500
             });
         } else {
             res.jsonp(article);
@@ -78,17 +70,10 @@ exports.destroy = function(req, res) {
 };
 
 /**
- * Show an article
- */
-exports.show = function(req, res) {
-    res.jsonp(req.article);
-};
-
-/**
  * List of Articles
  */
-exports.all = function(req, res) {
-    Article.find().sort('-created').populate('user', 'name username').exec(function(err, articles) {
+exports.list = function(req, res) {
+    Article.find().sort('-created').populate('user', 'displayName').exec(function(err, articles) {
         if (err) {
             res.render('error', {
                 status: 500
@@ -97,4 +82,26 @@ exports.all = function(req, res) {
             res.jsonp(articles);
         }
     });
+};
+
+/**
+ * Article middleware
+ */
+exports.articleByID = function(req, res, next, id) {
+    Article.load(id, function(err, article) {
+        if (err) return next(err);
+        if (!article) return next(new Error('Failed to load article ' + id));
+        req.article = article;
+        next();
+    });
+};
+
+/**
+ * Article authorization middleware
+ */
+exports.hasAuthorization = function(req, res, next) {
+    if (req.article.user.id !== req.user.id) {
+        return res.send(403, 'User is not authorized');
+    }
+    next();
 };
