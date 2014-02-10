@@ -68,7 +68,7 @@ module.exports = function(db) {
 	// Application Configuration for production environment
 	app.configure('production', function() {
 		app.locals({
-			cache: 'memory' // To solve the SWIG Cache Issues
+			cache: 'memory' // To solve SWIG Cache Issues
 		});
 	});
 
