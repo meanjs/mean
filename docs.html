@@ -122,7 +122,7 @@
 				</div>
 				<section class="col-md-10 col-md-offset-2">
 					<i class="small text-muted">
-                		Last updated: 30 Jan 2014.
+                		Last updated: 13 Feb 2014.
                 	</i>
 
 					<div class="inner-link-anchor" id="overview"></div>
@@ -476,6 +476,14 @@
 								</p>
 							</li>
 							<li>
+								<h3>strategies</h3>
+								The <b>strategies</b> folder contains the startegies configuration files loaded by the <b>passport.js</b> file.
+								<p class="alert alert-info">
+									<b>When to use:</b>
+									Whenever you want to add, change, or remove a <a target="_blank" href="http://passportjs.org/guide/providers/">Passport Strategy</a>.
+								</p>
+							</li>
+							<li>
 								<h3>config.js</h3>
 								The configuration loader that loads the right configuration from the <b>env</b> folder, for more information, please visit the <a href="#configuration">Configuration</a> section.
 							</li>
@@ -489,12 +497,9 @@
 							</li>
 							<li>
 								<h3>passport.js</h3>
-								Passport configuration file, it initializes &amp; configures the Passport's authentication strategies and middlewares, if you'd like to add a new login option this is where you start configuring it.
-								<p class="alert alert-info">
-									<b>When to use:</b>
-									Whenever you want to add, change, or remove a <a target="_blank" href="http://passportjs.org/guide/providers/">Passport Strategy</a>.
-								</p>
+								Passport configuration file that initializes &amp; configures the Passport's authentication strategies and middlewares from the <b>strategies</b> folder.
 							</li>
+							<li>
 								<h3>utilities.js</h3>
 								A configuration utilities module, it currently contains only the <b>walk</b> method that MEAN uses to autoload you AngularJS modules files. 
 								<p class="alert alert-info">
