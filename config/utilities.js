@@ -6,7 +6,7 @@
 var fs = require('fs');
 
 // Walk function to recursively get files
-var _walk = function(root, regex, exclude, removePath) {
+var _walk = function(root, includeRegex, excludeRegex, removePath) {
 	var output = [];
 	var directories = [];
 
@@ -16,7 +16,7 @@ var _walk = function(root, regex, exclude, removePath) {
 		var stat = fs.statSync(newPath);
 
 		if (stat.isFile()) {
-			if (regex.test(file) && (!exclude || !exclude.test(file))) {
+			if (includeRegex.test(file) && (!excludeRegex || !excludeRegex.test(file))) {
 				output.push(newPath.replace(removePath, ''));
 			}
 		} else if (stat.isDirectory()) {
@@ -26,7 +26,7 @@ var _walk = function(root, regex, exclude, removePath) {
 
 	// Then recursively add directories
 	directories.forEach(function(directory) {
-		output = output.concat(_walk(directory, regex, exclude, removePath));
+		output = output.concat(_walk(directory, includeRegex, excludeRegex, removePath));
 	});
 
 	return output;
