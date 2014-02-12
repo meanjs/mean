@@ -22,6 +22,6 @@ module.exports = function() {
 
 	// Initialize strategies
 	utilities.walk('./config/strategies', /(.*)\.(js$|coffee$)/).forEach(function(strategyPath) {
-		require(path.resolve(strategyPath));
+		require(path.resolve(strategyPath))();
 	});
 };
