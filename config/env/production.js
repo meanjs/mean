@@ -20,6 +20,6 @@ module.exports = {
 	linkedin: {
 		clientID: 'APP_ID',
 		clientSecret: 'APP_SECRET',
-		callbackURL: 'http://www.temoj.com/auth/linkedin/callback'
+		callbackURL: 'http://localhost:3000/auth/linkedin/callback'
 	}
 };
