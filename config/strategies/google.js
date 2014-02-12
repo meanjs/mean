@@ -22,7 +22,7 @@ module.exports = function() {
 						lastName: profile.name.familyName,
 						displayName: profile.displayName,
 						email: profile.emails[0].value,
-						username: profile.username,
+						username: profile.emails[0].value,
 						provider: 'google',
 						providerData: profile._json
 					});
