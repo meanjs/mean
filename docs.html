@@ -88,6 +88,9 @@
 								<a href="#folder-structure">Folder Structure</a>
 							</li>
 							<li>
+								<a href="#autoload">Autoloaded Files</a>
+							</li>
+							<li>
 								<a href="#npm">NPM</a>
 							</li>
 							<li>
@@ -431,6 +434,7 @@
 							</li>
 							<li>
 								<h3>models</h3>
+								<a href="#autoload" class="label label-danger">Autoloaded</a> <br>
 								The models folder is where you store your <a target="_blank" href="http://mongoosejs.com/">Mongoose</a> models, this is where you define your backend models.
 								<p class="alert alert-info">
 									<b>When to use:</b>
@@ -439,6 +443,7 @@
 							</li>
 							<li>
 								<h3>routes</h3>
+								<a href="#autoload" class="label label-danger">Autoloaded</a> <br>
 								The routes folder contains the <b>Server routing</b> configuration files, this is where you define your Express routes, in order to add routes to your module just add a .js file similar to the <b>app/routes/articles.js</b> file and MEAN will automatically load that these routes.
 								<p class="alert alert-info">
 									<b>When to use:</b>
@@ -477,6 +482,7 @@
 							</li>
 							<li>
 								<h3>strategies</h3>
+								<a href="#autoload" class="label label-danger">Autoloaded</a> <br>
 								The <b>strategies</b> folder contains the startegies configuration files loaded by the <b>passport.js</b> file.
 								<p class="alert alert-info">
 									<b>When to use:</b>
@@ -570,6 +576,7 @@
 							</li>
 							<li>
 								<h3>modules</h3>
+								<a href="#autoload" class="label label-danger">Autoloaded</a> <br>
 								The modules folder is where you store AngularJS application modules, to learn more about it visit the <a href="#angularjs-modules">AngularJS Modules</a> section.
 								<p class="alert alert-info">
 									<b>When to use:</b>
@@ -665,6 +672,25 @@
 								</p>
 							</li>
 						</ul>
+					</section>
+					<div class="inner-link-anchor" id="autoload"></div>
+					<section class="page-header">
+						<h1>Automatically Loaded Files</h1>
+					</section>
+					<section>
+						<p>
+							Through the system we have several object automatically loaded during the application bootstrap. This was done to ease the development process and to help avoid the common mistake of not including your newly created files. The objects that are loaded automatically are:
+						</p>
+						<dl>
+							<dt>app/models</dt>
+							<dd>Mongoose models are registered automatically during the application bootstrap process. So you can just call the <i>mongoose.model('modelName')</i> whenever you need.</dd>
+							<dt>app/routes</dt>
+							<dd>Routing files placed in this folder will be registered automatically with the Express application. So whenever you add a new routing configuration, the new routes will be immediately available.</dd>
+							<dt>config/strategies</dt>
+							<dd>Passport strategies placed in this folder will automatically be loaded by the <i>config/passport.js</i> file. So whenever you add a new strategy, it will be available instantly.</dd>
+							<dt>public/modules</dt>
+							<dd>The new vertical modules scheme allows us to automatically include the module files in your application HTML file, this includes both <b>JavaScript</b> and <b>CSS</b> files. So have fun creating your modules, and don't worry about including your files.</dd>
+						</dl>
 					</section>
 					<div class="inner-link-anchor" id="npm"></div>
 					<section class="page-header">
