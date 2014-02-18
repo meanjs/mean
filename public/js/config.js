@@ -1,6 +1,6 @@
 'use strict';
 
-// Init the pplication configuration module for AngularJS application
+// Init the application configuration module for AngularJS application
 var ApplicationConfiguration = (function() {
 	// Init module configuration options
 	var applicationModuleName = 'mean';
