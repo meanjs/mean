@@ -858,10 +858,6 @@
 							<dd>
 								<a target="_blank" href="http://angularjs.org/">AngularJS</a> is an open-source JavaScript framework.
 							</dd>
-							<dt>Angular-Route</dt>
-							<dd>
-								<a target="_blank" href="http://docs.angularjs.org/api/ngRoute">Angular-Route</a> provides routing and deep linking services for AngularJS applications.
-							</dd>
 							<dt>Angular-Cookies</dt>
 							<dd>
 								<a target="_blank" href="http://docs.angularjs.org/api/ngCookies">Angular-Cookies</a> is convenient wrapper for cookies manipulation.
@@ -885,6 +881,10 @@
 							<dt>Angular-UI-Utils</dt>
 							<dd>
 								<a target="_blank" href="http://angular-ui.github.io/ui-utils/">Angular-UI-Utils</a> is a set of common utilities for AngularJS.
+							</dd>
+							<dt>Angular-UI-Router</dt>
+							<dd>
+								<a target="_blank" href="http://angular-ui.github.io/ui-router/">Angular-UI-Router</a> provides robust routing and deep linking services for AngularJS applications.
 							</dd>
 						</dl>
 					</section>
@@ -1792,20 +1792,20 @@ ApplicationConfiguration.registerModule('moduleName');
 						</dl>
 						<h4>AngularJS Routes</h4>
 						<p>
-							AngularJS use the <a target="_blank" href="http://docs.angularjs.org/api/ngRoute">ngRoute</a> module to define the various routes of the module. Each route is defined using the <b>$routeProvider</b> service, and defines a path to the template, which will be rendered when navigating to a specific URL.
+							AngularJS use the <a target="_blank" href="http://angular-ui.github.io/ui-router/">UI-Router</a> module to define the various routes of the module. Each route is defined using the <b>$stateProvider</b> service, and defines a path to the template, which will be rendered when navigating to a specific URL.
 						</p>
 						<p>
 							In this example we configured 4 routes:
 						</p>
 						<dl>
 							<dt>/#!/articles</dt>
-							<dd>When navigating to this URL, ngRoute will render the <b>list.html</b> view.</dd>
+							<dd>When navigating to this URL, UI-Router will render the <b>list.html</b> view.</dd>
 							<dt>/#!/articles/create</dt>
-							<dd>When navigating to this URL, ngRoute will render the <b>create.html</b> view.</dd>
+							<dd>When navigating to this URL, UI-Router will render the <b>create.html</b> view.</dd>
 							<dt>/#!/articles/:articleId</dt>
-							<dd>When navigating to this URL, ngRoute will render the <b>view.html</b> view.</dd>
+							<dd>When navigating to this URL, UI-Router will render the <b>view.html</b> view.</dd>
 							<dt>/#!/articles/:articleId/edit</dt>
-							<dd>When navigating to this URL, ngRoute will render the <b>edit.html</b> view.</dd>
+							<dd>When navigating to this URL, UI-Router will render the <b>edit.html</b> view.</dd>
 						</dl>
 						<p class="alert alert-info">
 							Notice that we define a routing parameter called articleId, to grab it later in the controller and fetch the correct article.
