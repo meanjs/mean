@@ -1,11 +1,16 @@
 'use strict';
 
 // Setting up route
-angular.module('mean.core').config(['$routeProvider',
-    function($routeProvider) {
-        $routeProvider.
-        when('/', {
-            templateUrl: 'modules/core/views/home.html'
-        });
-    }
+angular.module('mean.core').config(['$stateProvider', '$urlRouterProvider',
+	function($stateProvider, $urlRouterProvider) {
+		// Redirect to home view when route not found
+		$urlRouterProvider.otherwise('/');
+
+		// Home state routing
+		$stateProvider.
+		state('home', {
+			url: '/',
+			templateUrl: 'modules/core/views/home.html'
+		});
+	}
 ]);

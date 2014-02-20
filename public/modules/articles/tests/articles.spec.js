@@ -8,7 +8,7 @@
 			var ArticlesController,
 				scope,
 				$httpBackend,
-				$routeParams,
+				$stateParams,
 				$location;
 
 			// The $resource service augments the response object with methods for updating and deleting the resource.
@@ -36,12 +36,12 @@
 			// The injector ignores leading and trailing underscores here (i.e. _$httpBackend_).
 			// This allows us to inject a service but then attach it to a variable
 			// with the same name as the service.
-			beforeEach(inject(function($controller, $rootScope, _$location_, _$routeParams_, _$httpBackend_) {
+			beforeEach(inject(function($controller, $rootScope, _$location_, _$stateParams_, _$httpBackend_) {
 				// Set a new global scope
 				scope = $rootScope.$new();
 
 				// Point global variables to injected services
-				$routeParams = _$routeParams_;
+				$stateParams = _$stateParams_;
 				$httpBackend = _$httpBackend_;
 				$location = _$location_;
 
@@ -80,7 +80,7 @@
 				});
 
 				// Set the URL parameter
-				$routeParams.articleId = '525a8422f6d0f87f0e407a33';
+				$stateParams.articleId = '525a8422f6d0f87f0e407a33';
 
 				// Set GET response
 				$httpBackend.expectGET(/articles\/([0-9a-fA-F]{24})$/).respond(sampleArticle);

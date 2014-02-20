@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('mean.articles').controller('ArticlesController', ['$scope', '$routeParams', '$location', 'Authentication', 'Articles',
-    function($scope, $routeParams, $location, Authentication, Articles) {
+angular.module('mean.articles').controller('ArticlesController', ['$scope', '$stateParams', '$location', 'Authentication', 'Articles',
+    function($scope, $stateParams, $location, Authentication, Articles) {
         $scope.authentication = Authentication;
 
         $scope.create = function() {
@@ -53,7 +53,7 @@ angular.module('mean.articles').controller('ArticlesController', ['$scope', '$ro
 
         $scope.findOne = function() {
             Articles.get({
-                articleId: $routeParams.articleId
+                articleId: $stateParams.articleId
             }, function(article) {
                 $scope.article = article;
             });

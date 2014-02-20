@@ -5,12 +5,12 @@
 	"dependencies": {
 		"bootstrap": "latest",
 		"angular": "latest",
-		"angular-route": "latest",
 		"angular-cookies": "latest",
 		"angular-resource": "latest",
 		"angular-animate": "latest",
 		"angular-mocks": "latest",
 		"angular-bootstrap": "latest",
-		"angular-ui-utils": "latest"
+		"angular-ui-utils": "latest",
+		"angular-ui-router": "#master" 
 	}
 }
