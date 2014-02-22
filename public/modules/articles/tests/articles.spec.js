@@ -17,18 +17,12 @@
 			// When the toEqualData matcher compares two objects, it takes only object properties into
 			// account and ignores methods.
 			beforeEach(function() {
-				jasmine.addMatchers({
-					toEqualData: function(util, customEqualityTesters) {
-						return {
-							compare: function(actual, expected) {
-								return {
-									pass: angular.equals(actual, expected)
-								};
-							}
-						};
-					}
-				});
-			});
+                this.addMatchers({
+                    toEqualData: function(expected) {
+                        return angular.equals(this.actual, expected);
+                    }
+                });
+            });
 
 			// Then we can start by loading the main application module
 			beforeEach(module('mean'));
