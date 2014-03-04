@@ -14,7 +14,7 @@
 	<meta name="keywords" content="{{keywords}}">
 	<meta name="description" content="{{description}}">
 
-	<!-- Social META -->
+	<!-- Facebook META -->
 	<meta property="fb:app_id" content="{{facebookAppId}}">
 	<meta property="og:site_name" content="{{title}}">
 	<meta property="og:title" content="{{title}}">
@@ -22,6 +22,12 @@
 	<meta property="og:url" content="{{url}}">
 	<meta property="og:image" content="/img/brand/logo.png">
 	<meta property="og:type" content="website">
+
+	<!-- Twitter META -->
+	<meta name="twitter:title" content="{{title}}">
+	<meta name="twitter:description" content="{{description}}">
+	<meta name="twitter:url" content="{{url}}">
+	<meta name="twitter:image" content="http://www.example.com/image.jpg">
 
 	<!-- Fav Icon -->
 	<link href="/img/brand/favicon.ico" rel="shortcut icon" type="image/x-icon">
@@ -53,7 +59,11 @@
 
 	<!--Embedding The User Object-->
 	<script type="text/javascript">
-		var user = {{ user | json | safe }};
+	var user = {
+		{
+			user | json | safe
+		}
+	};
 	</script>
 
 	<!--AngularJS-->
@@ -73,12 +83,10 @@
 
 	<!--Application Modules-->
 	{% for modulesJSFile in modulesJSFiles %}
-		<script type="text/javascript" src="{{modulesJSFile}}"></script>
-	{% endfor %} 
-
-	{% if process.env.NODE_ENV === 'development' %}
-		<!--Livereload script rendered -->
-		<script type="text/javascript" src="http://localhost:35729/livereload.js"></script>
+	<script type="text/javascript" src="{{modulesJSFile}}"></script>
+	{% endfor %} {% if process.env.NODE_ENV === 'development' %}
+	<!--Livereload script rendered -->
+	<script type="text/javascript" src="http://localhost:35729/livereload.js"></script>
 	{% endif %}
 </body>
 
