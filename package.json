@@ -32,6 +32,7 @@
 		"passport-google-oauth": "~0.1.5",
 		"lodash": "~2.4.1",
 		"bower": "~1.2.8",
+		"grunt": "~0.4.2",
 		"forever": "~0.10.11"
 	},
 	"devDependencies": {
