@@ -3,14 +3,14 @@
 	"version": "0.2.1",
 	"description": "Fullstack JavaScript with MongoDB, Express, AngularJS, and Node.js.",
 	"dependencies": {
-		"bootstrap": "latest",
-		"angular": "latest",
-		"angular-cookies": "latest",
-		"angular-resource": "latest",
-		"angular-animate": "latest",
-		"angular-mocks": "latest",
-		"angular-bootstrap": "latest",
-		"angular-ui-utils": "latest",
-		"angular-ui-router": "#master" 
+		"bootstrap": "~3",
+		"angular": "~1.2",
+		"angular-cookies": "~1.2",
+		"angular-resource": "~1.2",
+		"angular-animate": "~1.2",
+		"angular-mocks": "~1.2",
+		"angular-bootstrap": "~0.10.0",
+		"angular-ui-utils": "~0.1.0",
+		"angular-ui-router": "~0.2.9" 
 	}
 }

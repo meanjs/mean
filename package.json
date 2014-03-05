@@ -13,12 +13,12 @@
 		"npm": "1.4.x"
 	},
 	"scripts": {
-		"start": "node node_modules/grunt-cli/bin/grunt",
-		"test": "node node_modules/grunt-cli/bin/grunt test",
-		"postinstall": "node node_modules/bower/bin/bower install"
+		"start": "grunt",
+		"test": "grunt test",
+		"postinstall": "bower install"
 	},
 	"dependencies": {
-		"express": "~3.4.7",
+		"express": "~3.4.8",
 		"consolidate": "~0.10.0",
 		"swig": "~1.3.2",
 		"mongoose": "~3.8.8",
