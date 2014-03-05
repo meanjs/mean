@@ -59,11 +59,7 @@
 
 	<!--Embedding The User Object-->
 	<script type="text/javascript">
-	var user = {
-		{
-			user | json | safe
-		}
-	};
+		var user = {{ user | json | safe }};
 	</script>
 
 	<!--AngularJS-->
@@ -83,10 +79,12 @@
 
 	<!--Application Modules-->
 	{% for modulesJSFile in modulesJSFiles %}
-	<script type="text/javascript" src="{{modulesJSFile}}"></script>
-	{% endfor %} {% if process.env.NODE_ENV === 'development' %}
-	<!--Livereload script rendered -->
-	<script type="text/javascript" src="http://localhost:35729/livereload.js"></script>
+		<script type="text/javascript" src="{{modulesJSFile}}"></script>
+	{% endfor %} 
+
+	{% if process.env.NODE_ENV === 'development' %}
+		<!--Livereload script rendered -->
+		<script type="text/javascript" src="http://localhost:35729/livereload.js"></script>
 	{% endif %}
 </body>
 
