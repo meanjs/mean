@@ -13,7 +13,6 @@ module.exports = function() {
 			callbackURL: config.twitter.callbackURL
 		},
 		function(token, tokenSecret, profile, done) {
-			console.log(profile);
 			User.findOne({
 				'providerData.id_str': profile.id
 			}, function(err, user) {
