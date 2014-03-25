@@ -5,7 +5,7 @@ angular.module('mean.users').controller('SettingsController', ['$scope', '$http'
 		$scope.user = Authentication.user;
 
 		//If user is not signed in then redirect back home
-        if (!$scope.user) $location.path('/');
+		if (!$scope.user) $location.path('/');
 
 		$scope.updateUserProfile = function() {
 			$scope.success = $scope.error = null;
@@ -23,12 +23,12 @@ angular.module('mean.users').controller('SettingsController', ['$scope', '$http'
 			$scope.success = $scope.error = null;
 
 			$http.post('/users/password', $scope.passwordDetails).success(function(response) {
-                // If successful show success message and clear form
+				// If successful show success message and clear form
 				$scope.success = true;
-                $scope.passwordDetails = null;
-            }).error(function(response) {
-                $scope.error = response.message;
-            });
+				$scope.passwordDetails = null;
+			}).error(function(response) {
+				$scope.error = response.message;
+			});
 		};
 	}
 ]);
