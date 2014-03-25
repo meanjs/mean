@@ -8,130 +8,118 @@ var mongoose = require('mongoose'),
 	crypto = require('crypto');
 
 /**
+ * A Validation function for local strategy properties
+ */
+var validateLocalStrategyProperty = function(property) {
+	return ((this.provider !== 'local' && !this.updated) || property.length);
+};
+
+/**
+ * A Validation function for local strategy password
+ */
+var validateLocalStrategyPassword = function(password) {
+	return (this.provider !== 'local' || (password && password.length > 6));
+};
+
+/**
  * User Schema
  */
 var UserSchema = new Schema({
 	firstName: {
 		type: String,
+		trim: true,
 		default: '',
-		trim: true
+		validate: [validateLocalStrategyProperty, 'Please fill in your first name']
 	},
 	lastName: {
 		type: String,
+		trim: true,
 		default: '',
-		trim: true
+		validate: [validateLocalStrategyProperty, 'Please fill in your last name']
 	},
 	displayName: {
 		type: String,
-		default: '',
 		trim: true
 	},
 	email: {
 		type: String,
-		default: '',
 		trim: true,
+		default: '',
+		validate: [validateLocalStrategyProperty, 'Please fill in your email'],
+		match: [/.+\@.+\..+/, 'Please fill a valid email address']
 	},
 	username: {
 		type: String,
+		unique: true,
+		required: 'Please fill in a username',
+		trim: true
+	},
+	password: {
+		type: String,
 		default: '',
-		trim: true,
-		unique: true
+		validate: [validateLocalStrategyPassword, 'Password should be longer']
+	},
+	salt: {
+		type: String
 	},
 	provider: {
 		type: String,
-		required: true
+		required: 'Provider is required'
 	},
-	hashed_password: String,
-	salt: String,
-	providerData: {}
+	providerData: {},
+	updated: {
+		type: Date
+	},
+	created: {
+		type: Date,
+		default: Date.now
+	}
 });
 
 /**
- * Virtuals
- */
-UserSchema.virtual('password').set(function(password) {
-	this._password = password;
-	this.salt = this.makeSalt();
-	this.hashed_password = this.encryptPassword(password);
-}).get(function() {
-	return this._password;
-});
-
-/**
- * Validations
- */
-var validatePresenceOf = function(value) {
-	return value && value.length;
-};
-
-// The below 5 validations only apply if you are signing up traditionally
-UserSchema.path('firstName').validate(function(firstName) {
-	if (this.provider !== 'local') return true;
-	else return firstName.length;
-}, 'First name cannot be blank');
-UserSchema.path('lastName').validate(function(lastName) {
-	if (this.provider !== 'local') return true;
-	else return lastName.length;
-}, 'Last name cannot be blank');
-UserSchema.path('email').validate(function(email) {
-	if (this.provider !== 'local') return true;
-	else return email.length;
-}, 'Email cannot be blank');
-UserSchema.path('username').validate(function(username) {
-	if (this.provider !== 'local') return true;
-	else return username.length;
-}, 'Username cannot be blank');
-UserSchema.path('hashed_password').validate(function(hashed_password) {
-	if (this.provider !== 'local') return true;
-	else return hashed_password.length;
-}, 'Password cannot be blank');
-
-/**
- * Pre-save hook
+ * Hook a pre save method to hash the password
  */
 UserSchema.pre('save', function(next) {
-	if (!this.isNew) return next();
+	if (this.password && this.password.length > 6) {
+		this.salt = new Buffer(crypto.randomBytes(16).toString('base64'), 'base64');
+		this.password = this.hashPassword(this.password);
+	}
 
-	if (!validatePresenceOf(this.password) && this.provider === 'local') next(new Error('Invalid password'));
-	else next();
+	next();
 });
 
 /**
- * Methods
+ * Create instance method for hashing a password
  */
-UserSchema.methods = {
-	/**
-	 * Authenticate - check if the passwords are the same
-	 *
-	 * @param {String} plainText
-	 * @return {Boolean}
-	 * @api public
-	 */
-	authenticate: function(plainText) {
-		return this.encryptPassword(plainText) === this.hashed_password;
-	},
+UserSchema.methods.hashPassword = function(password) {
+	return crypto.pbkdf2Sync(password, this.salt, 10000, 64).toString('base64');
+};
 
-	/**
-	 * Make salt
-	 *
-	 * @return {String}
-	 * @api public
-	 */
-	makeSalt: function() {
-		return Math.round((new Date().valueOf() * Math.random())) + '';
-	},
+/**
+ * Create instance method for authenticating user
+ */
+UserSchema.methods.authenticate = function(password) {
+	return this.password === this.hashPassword(password);
+};
 
-	/**
-	 * Encrypt password
-	 *
-	 * @param {String} password
-	 * @return {String}
-	 * @api public
-	 */
-	encryptPassword: function(password) {
-		if (!password) return '';
-		return crypto.createHmac('sha1', this.salt).update(password).digest('hex');
-	}
+/**
+ * Find possible not used username
+ */
+UserSchema.statics.findUniqueUsername = function(username, suffix, callback) {
+	var _this = this;
+	var possibleUsername = username + (suffix || '');
+
+	_this.findOne({username: possibleUsername}, function(err, user) {
+		if(!err) {
+			if (!user) {
+				callback(possibleUsername);
+			} else {
+				return _this.findUniqueUsername(username, (suffix || 0) + 1, callback);
+			}
+		} else {
+			callback(null);
+		}
+	});
 };
 
 mongoose.model('User', UserSchema);

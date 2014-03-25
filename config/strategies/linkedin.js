@@ -11,30 +11,39 @@ module.exports = function() {
 			consumerKey: config.linkedin.clientID,
 			consumerSecret: config.linkedin.clientSecret,
 			callbackURL: config.linkedin.callbackURL,
+			passReqToCallback: true,
 			profileFields: ['id', 'first-name', 'last-name', 'email-address']
 		},
-		function(accessToken, refreshToken, profile, done) {
-			User.findOne({
-				'providerData.id': profile.id
-			}, function(err, user) {
-				if (!user) {
-					user = new User({
-						firstName: profile.name.givenName,
-						lastName: profile.name.familyName,
-						displayName: profile.displayName,
-						email: profile.emails[0].value,
-						username: profile.emails[0].value,
-						provider: 'linkedin',
-						providerData: profile._json
-					});
-					user.save(function(err) {
-						if (err) console.log(err);
+		function(req, accessToken, refreshToken, profile, done) {
+			if (req.user) {
+				return done(new Error('User is already signed in'), req.user);
+			} else {
+				User.findOne({
+					'provider': 'linkedin',
+					'providerData.id': profile.id
+				}, function(err, user) {
+					if (!user) {
+						var possibleUsername = profile.emails[0].value.split('@')[0];
+
+						User.findUniqueUsername(possibleUsername, null, function(availableUsername) {
+							user = new User({
+								firstName: profile.name.givenName,
+								lastName: profile.name.familyName,
+								displayName: profile.displayName,
+								email: profile.emails[0].value,
+								username: availableUsername,
+								provider: 'linkedin',
+								providerData: profile._json
+							});
+							user.save(function(err) {
+								return done(err, user);
+							});
+						});
+					} else {
 						return done(err, user);
-					});
-				} else {
-					return done(err, user);
-				}
-			});
+					}
+				});
+			}
 		}
 	));
 };

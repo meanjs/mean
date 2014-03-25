@@ -10,30 +10,37 @@ module.exports = function() {
 	passport.use(new TwitterStrategy({
 			consumerKey: config.twitter.clientID,
 			consumerSecret: config.twitter.clientSecret,
-			callbackURL: config.twitter.callbackURL
+			callbackURL: config.twitter.callbackURL,
+			passReqToCallback: true
 		},
-		function(token, tokenSecret, profile, done) {
-			User.findOne({
-				'providerData.id_str': profile.id
-			}, function(err, user) {
-				if (err) {
-					return done(err);
-				}
-				if (!user) {
-					user = new User({
-						displayName: profile.displayName,
-						username: profile.username,
-						provider: 'twitter',
-						providerData: profile._json
-					});
-					user.save(function(err) {
-						if (err) console.log(err);
+		function(req, token, tokenSecret, profile, done) {
+			if (req.user) {
+				return done(new Error('User is already signed in'), req.user);
+			} else {
+				User.findOne({
+					'provider': 'twitter',
+					'providerData.id_str': profile.id
+				}, function(err, user) {
+					if (err) {
+						return done(err);
+					}
+					if (!user) {
+						User.findUniqueUsername(profile.username, null, function(availableUsername) {
+							user = new User({
+								displayName: profile.displayName,
+								username: availableUsername,
+								provider: 'twitter',
+								providerData: profile._json
+							});
+							user.save(function(err) {
+								return done(err, user);
+							});
+						});
+					} else {
 						return done(err, user);
-					});
-				} else {
-					return done(err, user);
-				}
-			});
+					}
+				});
+			}
 		}
 	));
 };

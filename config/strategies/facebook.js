@@ -11,32 +11,39 @@ module.exports = function() {
 			clientID: config.facebook.clientID,
 			clientSecret: config.facebook.clientSecret,
 			callbackURL: config.facebook.callbackURL,
+			passReqToCallback: true
 		},
-		function(accessToken, refreshToken, profile, done) {
-			User.findOne({
-				'providerData.id': profile.id
-			}, function(err, user) {
-				if (err) {
-					return done(err);
-				}
-				if (!user) {
-					user = new User({
-						firstName: profile.name.givenName,
-						lastName: profile.name.familyName,
-						displayName: profile.displayName,
-						email: profile.emails[0].value,
-						username: profile.username,
-						provider: 'facebook',
-						providerData: profile._json
-					});
-					user.save(function(err) {
-						if (err) console.log(err);
+		function(req, accessToken, refreshToken, profile, done) {
+			if (req.user) {
+				return done(new Error('User is already signed in'), req.user);
+			} else {
+				User.findOne({
+					'provider': 'facebook',
+					'providerData.id': profile.id
+				}, function(err, user) {
+					if (err) {
+						return done(err);
+					}
+					if (!user) {
+						User.findUniqueUsername(profile.username, null, function(availableUsername) {
+							user = new User({
+								firstName: profile.name.givenName,
+								lastName: profile.name.familyName,
+								displayName: profile.displayName,
+								email: profile.emails[0].value,
+								username: availableUsername,
+								provider: 'facebook',
+								providerData: profile._json
+							});
+							user.save(function(err) {
+								return done(err, user);
+							});
+						});
+					} else {
 						return done(err, user);
-					});
-				} else {
-					return done(err, user);
-				}
-			});
+					}
+				});
+			}
 		}
 	));
 };
