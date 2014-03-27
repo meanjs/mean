@@ -9,7 +9,6 @@ var express = require('express'),
 	flash = require('connect-flash'),
 	config = require('./config'),
 	consolidate = require('consolidate'),
-	swig = require('swig'),
 	path = require('path'),
 	utilities = require('./utilities');
 
@@ -18,7 +17,7 @@ module.exports = function(db) {
 	var app = express();
 
 	// Initialize models
-	utilities.walk('./app/models', /(.*)\.(js$|coffee$)/).forEach(function(modelPath) {
+	utilities.walk('./app/models').forEach(function(modelPath) {
 		require(path.resolve(modelPath));
 	});
 
@@ -58,7 +57,7 @@ module.exports = function(db) {
 
 	// Application Configuration for development environment
 	app.configure('development', function() {
-		// Enable logger 
+		// Enable logger
 		app.use(express.logger('dev'));
 
 		// Disable views cache
@@ -106,7 +105,7 @@ module.exports = function(db) {
 	app.use(express.static(config.root + '/public'));
 
 	// Load Routes
-	utilities.walk('./app/routes', /(.*)\.(js$|coffee$)/).forEach(function(routePath) {
+	utilities.walk('./app/routes').forEach(function(routePath) {
 		require(path.resolve(routePath))(app);
 	});
 
