@@ -6,7 +6,7 @@
 var utilities = require('./config/utilities');
 
 // Grabbing module files using the walk function
-var modulesJSFiles = utilities.walk('./public/modules', /(.*)\.(js)/, null, null);
+var modulesJSFiles = utilities.walk('./public/modules', /(.*)\.js$/);
 
 // Karma configuration
 module.exports = function(config) {
