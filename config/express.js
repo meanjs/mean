@@ -99,7 +99,11 @@ module.exports = function(db) {
 	// connect flash for flash messages
 	app.use(flash());
 
-	app.use(helmet.defaults());
+	app.use(helmet.xframe());
+	app.use(helmet.iexss());
+	app.use(helmet.contentTypeOptions());
+	app.use(helmet.ienoopen());
+	app.disable('x-powered-by');
 
 	// routes should be at the last
 	app.use(app.router);
