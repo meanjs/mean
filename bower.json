@@ -10,7 +10,7 @@
 		"angular-animate": "~1.2",
 		"angular-mocks": "~1.2",
 		"angular-bootstrap": "~0.10.0",
-		"angular-ui-utils": "~0.1.0",
-		"angular-ui-router": "~0.2.9" 
+		"angular-ui-utils": "~0.1.1",
+		"angular-ui-router": "~0.2.10" 
 	}
 }
