@@ -17,7 +17,8 @@ var ArticleSchema = new Schema({
 	title: {
 		type: String,
 		default: '',
-		trim: true
+		trim: true,
+		required: 'Title cannot be blank'
 	},
 	content: {
 		type: String,
@@ -29,23 +30,5 @@ var ArticleSchema = new Schema({
 		ref: 'User'
 	}
 });
-
-/**
- * Validations
- */
-ArticleSchema.path('title').validate(function(title) {
-	return title.length;
-}, 'Title cannot be blank');
-
-/**
- * Statics
- */
-ArticleSchema.statics = {
-	load: function(id, cb) {
-		this.findOne({
-			_id: id
-		}).populate('user', 'displayName').exec(cb);
-	}
-};
 
 mongoose.model('Article', ArticleSchema);
