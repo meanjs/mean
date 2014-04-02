@@ -1,7 +1,7 @@
 'use strict';
 
 // Setting up route
-angular.module('mean.users').config(['$stateProvider',
+angular.module('users').config(['$stateProvider',
 	function($stateProvider) {
 		// Users state routing
 		$stateProvider.

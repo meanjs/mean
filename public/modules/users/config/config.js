@@ -1,7 +1,7 @@
 'use strict';
 
 // Config HTTP Error Handling
-angular.module('mean.users').config(['$httpProvider',
+angular.module('users').config(['$httpProvider',
 	function($httpProvider) {
 		// Set the httpProvider "not authorized" interceptor
 		$httpProvider.interceptors.push(['$q', '$location', 'Authentication',

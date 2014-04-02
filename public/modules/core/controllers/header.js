@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('mean.core').controller('HeaderController', ['$scope', 'Authentication',
+angular.module('core').controller('HeaderController', ['$scope', 'Authentication',
 	function($scope, Authentication) {
 		$scope.authentication = Authentication;
 		$scope.isCollapsed = false;

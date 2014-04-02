@@ -1,9 +1,12 @@
 'use strict';
 
-module.exports = function(app) {
-	var users = require('../../app/controllers/users');
-	var articles = require('../../app/controllers/articles');
+/**
+ * Module dependencies.
+ */
+var users = require('../../app/controllers/users'),
+	articles = require('../../app/controllers/articles');
 
+module.exports = function(app) {
 	// Article Routes
 	app.get('/articles', articles.list);
 	app.post('/articles', users.requiresLogin, articles.create);
