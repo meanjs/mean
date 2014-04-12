@@ -3,6 +3,9 @@
 var path = require('path'),
 	rootPath = path.normalize(__dirname + '/../..');
 
+var port = process.env.PORT || 3000;
+var appUrl = process.env.APP_URL || ('http://localhost:' + port);
+
 module.exports = {
 	app: {
 		title: 'MEAN.JS',
@@ -10,8 +13,9 @@ module.exports = {
 		keywords: 'mongodb, express, angularjs, node.js, mongoose, passport'
 	},
 	root: rootPath,
-	port: process.env.PORT || 3000,
+	port: port,
+	appUrl: appUrl,
 	templateEngine: 'swig',
-	sessionSecret: 'MEAN',
+	sessionSecret: process.env.SESSION_SECRET || 'MEAN',
 	sessionCollection: 'sessions'
 };
