@@ -248,3 +248,97 @@ exports.hasAuthorization = function(req, res, next) {
 
 	next();
 };
+
+/**
+ * Helper function to save or update a user.
+ * When the user is logged in, it joins the user data to the existing one.
+ * Otherwise it creates a new user.
+ *
+ * @author Kentaro Wakayama
+ *
+ * @date   2014-04-09
+ *
+ * @param  {Object}   req          This is the request object which contains the user when he is signed in.
+ * @param  {String}   token        This is the accesstoken.
+ * @param  {String}   tokenSecret  This is the refreshtoken.
+ * @param  {Object}   profile      This is the user profile of the current provider.
+ * @param  {Function} done         Callback to supply Passport with the user that authenticated.
+ *
+ * @param  {Object}   providerData This Object contains all data which is specific for the provider
+ * @param  {String}   providerData.provider This is the passport provider name.
+ * @param  {String}   providerData.idKey This is the Key / Attribute name for saving / retrieving the provider id.
+ * @param  {String}   providerData.name This is the user's name.
+ * @param  {String}   [providerData.email] This is the user's email.
+ * @param  {String}   providerData.username This is the user's username.
+ *
+ * @return {[type]}                [description]
+ */
+exports.saveOrUpdate = function(req, token, tokenSecret, profile, done, providerData) {
+	var provider = providerData.provider;
+	var idKey = providerData.idKey;
+	var searchProviderKey = provider + '.' + idKey;
+	var searchObject = {};
+	searchObject[searchProviderKey] = profile.id;
+
+	if (!req.user) {
+		// no user active, this is a fresh login
+		User.findOne(searchObject, function(err, user) {
+			if (err) {
+				return done(err);
+			}
+			if (!user) {
+
+				var possibleUsername = '';
+				if (providerData.email) {
+					possibleUsername = providerData.email.split('@')[0];
+				} else {
+					possibleUsername = profile.username;
+				}
+
+				User.findUniqueUsername(possibleUsername, null, function(availableUsername) {
+					user = new User({
+						firstName: providerData.firstName,
+						lastName: providerData.lastName,
+						username: availableUsername,
+						displayName: providerData.displayName,
+						email: providerData.email,
+						provider: provider,
+					});
+
+					user[provider] = profile._json;
+					user[provider].token = token;
+					user[provider].tokenSecret = tokenSecret;
+					user.save(function(err) {
+						if (err) console.log(err);
+						return done(err, user);
+					});
+				});
+			} else {
+				user[provider].token = token;
+				user[provider].tokenSecret = tokenSecret;
+				user.save(function(err) {
+					if (err) console.log(err);
+					return done(err, user);
+				});
+			}
+		});
+	} else {
+		// a user is already logged in, join the provider data to the existing user.
+		User.findById( req.user._id, function(err, user) {
+			if (err) {
+				return done(err);
+			}
+			if (user) {
+				user[provider] = profile._json;
+				user[provider].token = token;
+				user[provider].tokenSecret = tokenSecret;
+				user.save(function(err) {
+					if (err) console.log(err);
+					return done(err, user);
+				});
+			} else {
+				return done(err, user);
+			}
+		});
+	}
+};
