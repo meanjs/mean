@@ -28,7 +28,7 @@ module.exports = function() {
 						message: 'Invalid password'
 					});
 				}
-				
+
 				return done(null, user);
 			});
 		}
