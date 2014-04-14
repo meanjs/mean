@@ -32,6 +32,12 @@ $ sudo npm install -g grunt-cli
 ## Quick Install
 Once you've installed all the prerequisites, you're just a few steps away from starting to develop you MEAN application.
 
+The easiest way to use MEAN.JS as a boilerplate is to download a copy from the [master branch on github][https://github.com/meanjs/mean/archive/master.zip].
+```
+$ wget https://github.com/meanjs/mean/archive/master.zip -O MEANJS.zip; unzip MEANJS.zip; rm MEANJS.zip
+```
+Rename `mean-master` after your project and create your own git repo.  If you'd like to contribute code back to MEAN.JS from your project, see here (tbd).
+
 The first thing you should do is install the Node.js dependencies. The boilerplate comes pre-bundled with a package.json file that contains the list of modules you need to start your application, to learn more about the modules installed visit the NPM & Package.json section.
 
 To install Node.js dependencies you're going to use npm again, in the application folder run this in the command-line:
