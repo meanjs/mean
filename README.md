@@ -32,6 +32,12 @@ $ sudo npm install -g grunt-cli
 ## Quick Install
 Once you've installed all the prerequisites, you're just a few steps away from starting to develop you MEAN application.
 
+The easiest way to use MEAN.JS as a boilerplate is to download a copy from the [master branch on github][https://github.com/meanjs/mean/archive/master.zip].
+```
+$ wget https://github.com/meanjs/mean/archive/master.zip -O MEANJS.zip; unzip MEANJS.zip; rm MEANJS.zip
+```
+Rename `mean-master` after your project and create your own git repo.  If you'd like to contribute code back to MEAN.JS from your project, see here (tbd).
+
 The first thing you should do is install the Node.js dependencies. The boilerplate comes pre-bundled with a package.json file that contains the list of modules you need to start your application, to learn more about the modules installed visit the NPM & Package.json section.
 
 To install Node.js dependencies you're going to use npm again, in the application folder run this in the command-line:
@@ -72,25 +78,3 @@ Browse the live MEAN.JS example on [http://meanjs.herokuapp.com](http://meanjs.h
 
 ## Credits
 Inspired by the great work of [Madhusudhan Srinivasa](https://github.com/madhums/)
-
-## License
-(The MIT License)
-
-Permission is hereby granted, free of charge, to any person obtaining
-a copy of this software and associated documentation files (the
-'Software'), to deal in the Software without restriction, including
-without limitation the rights to use, copy, modify, merge, publish,
-distribute, sublicense, and/or sell copies of the Software, and to
-permit persons to whom the Software is furnished to do so, subject to
-the following conditions:
-
-The above copyright notice and this permission notice shall be
-included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND,
-EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
-CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
-TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
-SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
