@@ -73,7 +73,12 @@ var UserSchema = new Schema({
 	created: {
 		type: Date,
 		default: Date.now
-	}
+	},
+	facebook: {},
+	twitter: {},
+	github: {},
+	google: {},
+	linkedin: {}
 });
 
 /**
