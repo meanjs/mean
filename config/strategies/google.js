@@ -2,7 +2,6 @@
 
 var passport = require('passport'),
 	GoogleStrategy = require('passport-google-oauth').OAuth2Strategy,
-	User = require('mongoose').model('User'),
 	config = require('../config'),
 	users = require('../../app/controllers/users');
 
@@ -15,18 +14,25 @@ module.exports = function() {
 			passReqToCallback: true
 		},
 		function(req, accessToken, refreshToken, profile, done) {
-
-			var providerData = {
+			// Set the provider data and include tokens
+			var providerData = profile._json;
+			providerData.accessToken = accessToken;
+			providerData.refreshToken = refreshToken;
+			
+			// Create the user OAuth profile
+			var providerUserProfile = {
 				firstName: profile.name.givenName,
 				lastName: profile.name.familyName,
 				displayName: profile.displayName,
-				provider: 'google',
-				idKey: 'id',
 				email: profile.emails[0].value,
-				username: profile.username
+				username: profile.username,
+				provider: 'google',
+				providerIdentifierField: 'id',
+				providerData: providerData 
 			};
-			users.saveOrUpdate(req, accessToken, refreshToken, profile, done, providerData);
 
+			// Save the user OAuth profile
+			users.saveOAuthUserProfile(req, providerUserProfile, done);
 		}
 	));
 };

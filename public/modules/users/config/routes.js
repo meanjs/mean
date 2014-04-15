@@ -13,6 +13,10 @@ angular.module('users').config(['$stateProvider',
 			url: '/settings/password',
 			templateUrl: 'modules/users/views/settings/password.html'
 		}).
+		state('accounts', {
+			url: '/settings/accounts',
+			templateUrl: 'modules/users/views/settings/accounts.html'
+		}).
 		state('signup', {
 			url: '/signup',
 			templateUrl: 'modules/users/views/signup.html'
