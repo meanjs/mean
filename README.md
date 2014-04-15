@@ -45,9 +45,9 @@ This will clone the latest version of the MEAN.JS repository to a **meanjs** fol
 ### Downloading The Repository Zip File
 Another way to use the MEAN.JS boilerplate is to download a zip copy from the [master branch on github](https://github.com/meanjs/mean/archive/master.zip). You can also do this using `wget` command:
 ```
-$ wget https://github.com/meanjs/mean/archive/master.zip -O MEANJS.zip; unzip MEANJS.zip; rm MEANJS.zip
+$ wget https://github.com/meanjs/mean/archive/master.zip -O meanjs.zip; unzip meanjs.zip; rm meanjs.zip
 ```
-You'll be able to rename **mean-master** after your project name and create your own git repo.
+Don't forget to rename **mean-master** after your project name.
 
 ## Quick Install
 Once you've downloaded the boilerplate and installed all the prerequisites, you're just a few steps away from starting to develop you MEAN application.
