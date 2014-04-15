@@ -29,14 +29,28 @@ $ npm install -g bower
 $ sudo npm install -g grunt-cli
 ```
 
-## Quick Install
-Once you've installed all the prerequisites, you're just a few steps away from starting to develop you MEAN application.
+## Downloading MEAN.JS
+There are several ways you can get the MEAN.JS boilerplate: 
 
-The easiest way to use MEAN.JS as a boilerplate is to download a copy from the [master branch on github][https://github.com/meanjs/mean/archive/master.zip].
+### Yo Generator 
+The recommended way would be to use the [Official Yo Generator](http://meanjs.org/generator.html) which will generate the latest stable copy of the MEAN.JS boilerplate and supplies multiple sub-generators to ease your daily development cycles.
+
+### Cloning The GitHub Repository
+You can also use Git to directly clone the MEAN.JS repository:
+```
+$ git clone https://github.com/meanjs/mean.git meanjs
+```
+This will clone the latest version of the MEAN.JS repository to a **meanjs** folder.
+
+### Downloading The Repository Zip File
+Another way to use the MEAN.JS boilerplate is to download a zip copy from the [master branch on github](https://github.com/meanjs/mean/archive/master.zip). You can also do this using `wget` command:
 ```
 $ wget https://github.com/meanjs/mean/archive/master.zip -O MEANJS.zip; unzip MEANJS.zip; rm MEANJS.zip
 ```
-Rename `mean-master` after your project and create your own git repo.  If you'd like to contribute code back to MEAN.JS from your project, see here (tbd).
+You'll be able to rename **mean-master** after your project name and create your own git repo.
+
+## Quick Install
+Once you've downloaded the boilerplate and installed all the prerequisites, you're just a few steps away from starting to develop you MEAN application.
 
 The first thing you should do is install the Node.js dependencies. The boilerplate comes pre-bundled with a package.json file that contains the list of modules you need to start your application, to learn more about the modules installed visit the NPM & Package.json section.
 
@@ -78,3 +92,25 @@ Browse the live MEAN.JS example on [http://meanjs.herokuapp.com](http://meanjs.h
 
 ## Credits
 Inspired by the great work of [Madhusudhan Srinivasa](https://github.com/madhums/)
+
+## License
+(The MIT License)
+
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+'Software'), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
