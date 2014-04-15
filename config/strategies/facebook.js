@@ -2,8 +2,8 @@
 
 var passport = require('passport'),
 	FacebookStrategy = require('passport-facebook').Strategy,
-	User = require('mongoose').model('User'),
-	config = require('../config');
+	config = require('../config'),
+	users = require('../../app/controllers/users');
 
 module.exports = function() {
 	// Use facebook strategy
@@ -14,36 +14,25 @@ module.exports = function() {
 			passReqToCallback: true
 		},
 		function(req, accessToken, refreshToken, profile, done) {
-			if (req.user) {
-				return done(new Error('User is already signed in'), req.user);
-			} else {
-				User.findOne({
-					'provider': 'facebook',
-					'providerData.id': profile.id
-				}, function(err, user) {
-					if (err) {
-						return done(err);
-					}
-					if (!user) {
-						User.findUniqueUsername(profile.username, null, function(availableUsername) {
-							user = new User({
-								firstName: profile.name.givenName,
-								lastName: profile.name.familyName,
-								displayName: profile.displayName,
-								email: profile.emails[0].value,
-								username: availableUsername,
-								provider: 'facebook',
-								providerData: profile._json
-							});
-							user.save(function(err) {
-								return done(err, user);
-							});
-						});
-					} else {
-						return done(err, user);
-					}
-				});
-			}
+			// Set the provider data and include tokens
+			var providerData = profile._json;
+			providerData.accessToken = accessToken;
+			providerData.refreshToken = refreshToken;
+
+			// Create the user OAuth profile
+			var providerUserProfile = {
+				firstName: profile.name.givenName,
+				lastName: profile.name.familyName,
+				displayName: profile.displayName,
+				email: profile.emails[0].value,
+				username: profile.username,
+				provider: 'facebook',
+				providerIdentifierField: 'id',
+				providerData: providerData
+			};
+
+			// Save the user OAuth profile
+			users.saveOAuthUserProfile(req, providerUserProfile, done);
 		}
 	));
 };

@@ -67,6 +67,7 @@ var UserSchema = new Schema({
 		required: 'Provider is required'
 	},
 	providerData: {},
+	additionalProvidersData: {},
 	updated: {
 		type: Date
 	},

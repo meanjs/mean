@@ -2,8 +2,8 @@
 
 var passport = require('passport'),
 	TwitterStrategy = require('passport-twitter').Strategy,
-	User = require('mongoose').model('User'),
-	config = require('../config');
+	config = require('../config'),
+	users = require('../../app/controllers/users');
 
 module.exports = function() {
 	// Use twitter strategy
@@ -14,33 +14,22 @@ module.exports = function() {
 			passReqToCallback: true
 		},
 		function(req, token, tokenSecret, profile, done) {
-			if (req.user) {
-				return done(new Error('User is already signed in'), req.user);
-			} else {
-				User.findOne({
-					'provider': 'twitter',
-					'providerData.id_str': profile.id
-				}, function(err, user) {
-					if (err) {
-						return done(err);
-					}
-					if (!user) {
-						User.findUniqueUsername(profile.username, null, function(availableUsername) {
-							user = new User({
-								displayName: profile.displayName,
-								username: availableUsername,
-								provider: 'twitter',
-								providerData: profile._json
-							});
-							user.save(function(err) {
-								return done(err, user);
-							});
-						});
-					} else {
-						return done(err, user);
-					}
-				});
-			}
+			// Set the provider data and include tokens
+			var providerData = profile._json;
+			providerData.token = token;
+			providerData.tokenSecret = tokenSecret;
+
+			// Create the user OAuth profile
+			var providerUserProfile = {
+				displayName: profile.displayName,
+				username: profile.username,
+				provider: 'twitter',
+				providerIdentifierField: 'id_str',
+				providerData: providerData
+			};
+
+			// Save the user OAuth profile
+			users.saveOAuthUserProfile(req, providerUserProfile, done);
 		}
 	));
 };
