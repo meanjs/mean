@@ -21,6 +21,7 @@ angular.module('users').controller('SettingsController', ['$scope', '$http', '$l
 			return $scope.user.provider === provider || ($scope.user.additionalProvidersData && $scope.user.additionalProvidersData[provider]);
 		};
 
+		// Remove a user social account
 		$scope.removeUserSocialAccount = function(provider) {
 			$scope.success = $scope.error = null;
 
@@ -37,6 +38,7 @@ angular.module('users').controller('SettingsController', ['$scope', '$http', '$l
 			});
 		};
 
+		// Update a user profile
 		$scope.updateUserProfile = function() {
 			$scope.success = $scope.error = null;
 			var user = new Users($scope.user);
@@ -49,6 +51,7 @@ angular.module('users').controller('SettingsController', ['$scope', '$http', '$l
 			});
 		};
 
+		// Change user password
 		$scope.changeUserPassword = function() {
 			$scope.success = $scope.error = null;
 
