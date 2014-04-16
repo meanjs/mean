@@ -93,7 +93,7 @@ UserSchema.pre('save', function(next) {
  * Create instance method for hashing a password
  */
 UserSchema.methods.hashPassword = function(password) {
-	if (password) {
+	if (this.salt && password) {
 		return crypto.pbkdf2Sync(password, this.salt, 10000, 64).toString('base64');
 	} else {
 		return password;
@@ -104,9 +104,6 @@ UserSchema.methods.hashPassword = function(password) {
  * Create instance method for authenticating user
  */
 UserSchema.methods.authenticate = function(password) {
-	if (!this.password || !this.salt) {
-		return false;
-	}
 	return this.password === this.hashPassword(password);
 };
 
