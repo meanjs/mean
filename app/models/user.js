@@ -104,6 +104,9 @@ UserSchema.methods.hashPassword = function(password) {
  * Create instance method for authenticating user
  */
 UserSchema.methods.authenticate = function(password) {
+	if (!this.password || !this.salt) {
+		return false;
+	}
 	return this.password === this.hashPassword(password);
 };
 
