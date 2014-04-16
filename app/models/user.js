@@ -67,18 +67,14 @@ var UserSchema = new Schema({
 		required: 'Provider is required'
 	},
 	providerData: {},
+	additionalProvidersData: {},
 	updated: {
 		type: Date
 	},
 	created: {
 		type: Date,
 		default: Date.now
-	},
-	facebook: {},
-	twitter: {},
-	github: {},
-	google: {},
-	linkedin: {}
+	}
 });
 
 /**

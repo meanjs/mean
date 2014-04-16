@@ -8,6 +8,9 @@ var mongoose = require('mongoose'),
 	User = mongoose.model('User'),
 	_ = require('lodash');
 
+/**
+ * Get the error message from error object
+ */
 var getErrorMessage = function(err) {
 	var message = '';
 
@@ -153,7 +156,6 @@ exports.changePassword = function(req, res, next) {
 								});
 							}
 						});
-
 					} else {
 						res.send(400, {
 							message: 'Passwords do not match'
@@ -197,9 +199,8 @@ exports.me = function(req, res) {
  */
 exports.oauthCallback = function(strategy) {
 	return function(req, res, next) {
-		passport.authenticate(strategy, function(err, user, email) {
+		passport.authenticate(strategy, function(err, user, redirectURL) {
 			if (err || !user) {
-				console.log(err);
 				return res.redirect('/#!/signin');
 			}
 			req.login(user, function(err) {
@@ -207,7 +208,7 @@ exports.oauthCallback = function(strategy) {
 					return res.redirect('/#!/signin');
 				}
 
-				return res.redirect('/');
+				return res.redirect(redirectURL || '/');
 			});
 		})(req, res, next);
 	};
@@ -250,94 +251,112 @@ exports.hasAuthorization = function(req, res, next) {
 };
 
 /**
- * Helper function to save or update a user.
- * When the user is logged in, it joins the user data to the existing one.
- * Otherwise it creates a new user.
- *
- * @author Kentaro Wakayama
- *
- * @date   2014-04-09
- *
- * @param  {Object}   req          This is the request object which contains the user when he is signed in.
- * @param  {String}   token        This is the accesstoken.
- * @param  {String}   tokenSecret  This is the refreshtoken.
- * @param  {Object}   profile      This is the user profile of the current provider.
- * @param  {Function} done         Callback to supply Passport with the user that authenticated.
- *
- * @param  {Object}   providerData This Object contains all data which is specific for the provider
- * @param  {String}   providerData.provider This is the passport provider name.
- * @param  {String}   providerData.idKey This is the Key / Attribute name for saving / retrieving the provider id.
- * @param  {String}   providerData.name This is the user's name.
- * @param  {String}   [providerData.email] This is the user's email.
- * @param  {String}   providerData.username This is the user's username.
- *
- * @return {[type]}                [description]
+ * Helper function to save or update a OAuth user profile
  */
-exports.saveOrUpdate = function(req, token, tokenSecret, profile, done, providerData) {
-	var provider = providerData.provider;
-	var idKey = providerData.idKey;
-	var searchProviderKey = provider + '.' + idKey;
-	var searchObject = {};
-	searchObject[searchProviderKey] = profile.id;
-
+exports.saveOAuthUserProfile = function(req, providerUserProfile, done) {
 	if (!req.user) {
-		// no user active, this is a fresh login
-		User.findOne(searchObject, function(err, user) {
+		// Define a search query fields
+		var searchMainProviderIdentifierField = 'providerData.' + providerUserProfile.providerIdentifierField;
+		var searchAdditionalProviderIdentifierField = 'additionalProvidersData.' + providerUserProfile.provider + '.' + providerUserProfile.providerIdentifierField;
+
+		// Define main provider search query
+		var mainProviderSearchQuery = {};
+		mainProviderSearchQuery.provider = providerUserProfile.provider;
+		mainProviderSearchQuery[searchMainProviderIdentifierField] = providerUserProfile.providerData[providerUserProfile.providerIdentifierField];
+
+		// Define additional provider search query
+		var additionalProviderSearchQuery = {};
+		additionalProviderSearchQuery[searchAdditionalProviderIdentifierField] = providerUserProfile.providerData[providerUserProfile.providerIdentifierField];
+
+		// Define a search query to find existing user with current provider profile
+		var searchQuery = {
+			$or: [mainProviderSearchQuery, additionalProviderSearchQuery]
+		};
+
+		User.findOne(searchQuery, function(err, user) {
 			if (err) {
 				return done(err);
-			}
-			if (!user) {
-
-				var possibleUsername = '';
-				if (providerData.email) {
-					possibleUsername = providerData.email.split('@')[0];
-				} else {
-					possibleUsername = profile.username;
-				}
-
-				User.findUniqueUsername(possibleUsername, null, function(availableUsername) {
-					user = new User({
-						firstName: providerData.firstName,
-						lastName: providerData.lastName,
-						username: availableUsername,
-						displayName: providerData.displayName,
-						email: providerData.email,
-						provider: provider,
-					});
-
-					user[provider] = profile._json;
-					user[provider].token = token;
-					user[provider].tokenSecret = tokenSecret;
-					user.save(function(err) {
-						if (err) console.log(err);
-						return done(err, user);
-					});
-				});
 			} else {
-				user[provider].token = token;
-				user[provider].tokenSecret = tokenSecret;
-				user.save(function(err) {
-					if (err) console.log(err);
+				if (!user) {
+					var possibleUsername = providerUserProfile.username || ((providerUserProfile.email) ? providerUserProfile.email.split('@')[0] : '');
+
+					User.findUniqueUsername(possibleUsername, null, function(availableUsername) {
+						user = new User({
+							firstName: providerUserProfile.firstName,
+							lastName: providerUserProfile.lastName,
+							username: availableUsername,
+							displayName: providerUserProfile.displayName,
+							email: providerUserProfile.email,
+							provider: providerUserProfile.provider,
+							providerData: providerUserProfile.providerData
+						});
+
+						// And save the user
+						user.save(function(err) {
+							return done(err, user);
+						});
+					});
+				} else {
 					return done(err, user);
-				});
+				}
 			}
 		});
 	} else {
-		// a user is already logged in, join the provider data to the existing user.
-		User.findById( req.user._id, function(err, user) {
+		// User is already logged in, join the provider data to the existing user
+		User.findById(req.user.id, function(err, user) {
 			if (err) {
 				return done(err);
-			}
-			if (user) {
-				user[provider] = profile._json;
-				user[provider].token = token;
-				user[provider].tokenSecret = tokenSecret;
-				user.save(function(err) {
-					if (err) console.log(err);
+			} else {
+				// Check if user exists, is not signed in using this provider, and doesn't have that provider data already configured
+				if (user && user.provider !== providerUserProfile.provider && (!user.additionalProvidersData || !user.additionalProvidersData[providerUserProfile.provider])) {
+					// Add the provider data to the additional provider data field
+					if (!user.additionalProvidersData) user.additionalProvidersData = {};
+					user.additionalProvidersData[providerUserProfile.provider] = providerUserProfile.providerData;
+
+					// Then tell mongoose that we've updated the additionalProvidersData field
+					user.markModified('additionalProvidersData');
+
+					// And save the user
+					user.save(function(err) {
+						return done(err, user, '/#!/settings/accounts');
+					});
+				} else {
 					return done(err, user);
+				}
+			}
+		});
+	}
+};
+
+/**
+ * Remove OAuth provider
+ */
+exports.removeOAuthProvider = function(req, res, next) {
+	var user = req.user;
+	var provider = req.param('provider');
+
+	if (user && provider) {
+		// Delete the additional provider
+		if (user.additionalProvidersData[provider]) {
+			delete user.additionalProvidersData[provider];
+			
+			// Then tell mongoose that we've updated the additionalProvidersData field
+			user.markModified('additionalProvidersData');
+		}
+
+		user.save(function(err) {
+			if (err) {
+				return res.send(400, {
+					message: getErrorMessage(err)
 				});
 			} else {
-				return done(err, user);
+				req.login(user, function(err) {
+					if (err) {
+						res.send(400, err);
+					} else {
+						res.jsonp(user);
+					}
+				});
 			}
 		});
 	}
