@@ -9,15 +9,14 @@ var express = require('express'),
 	flash = require('connect-flash'),
 	config = require('./config'),
 	consolidate = require('consolidate'),
-	path = require('path'),
-	utilities = require('./utilities');
+	path = require('path');
 
 module.exports = function(db) {
 	// Initialize express app
 	var app = express();
 
-	// Initialize models
-	utilities.walk('./app/models').forEach(function(modelPath) {
+	// Globbing model files
+	config.getGlobbedFiles('./app/models/**/*.js').forEach(function(modelPath) {
 		require(path.resolve(modelPath));
 	});
 
@@ -27,8 +26,8 @@ module.exports = function(db) {
 		description: config.app.description,
 		keywords: config.app.keywords,
 		facebookAppId: config.facebook.clientID,
-		modulesJSFiles: utilities.walk('./public/modules', /(.*)\.(js)/, /(.*)\.(spec.js)/, './public'),
-		modulesCSSFiles: utilities.walk('./public/modules', /(.*)\.(css)/, null, './public')
+		jsFiles: config.getJavaScriptAssets(),
+		cssFiles: config.getCSSAssets()
 	});
 
 	// Passing the request url to environment locals
@@ -104,8 +103,8 @@ module.exports = function(db) {
 	// Setting the app router and static folder
 	app.use(express.static(config.root + '/public'));
 
-	// Load Routes
-	utilities.walk('./app/routes').forEach(function(routePath) {
+	// Globbing routing files
+	config.getGlobbedFiles('./app/routes/**/*.js').forEach(function(routePath) {
 		require(path.resolve(routePath))(app);
 	});
 

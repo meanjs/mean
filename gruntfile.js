@@ -1,5 +1,7 @@
 'use strict';
 
+var config = require('./config/config');
+
 module.exports = function(grunt) {
 	// Project Configuration
 	grunt.initConfig({
@@ -33,6 +35,7 @@ module.exports = function(grunt) {
 			},
 			clientCSS: {
 				files: ['public/**/css/*.css'],
+				tasks: ['csslint'],
 				options: {
 					livereload: true,
 				}
@@ -43,6 +46,31 @@ module.exports = function(grunt) {
 				src: ['gruntfile.js', 'server.js', 'config/**/*.js', 'app/**/*.js', 'public/js/**/*.js', 'public/modules/**/*.js'],
 				options: {
 					jshintrc: true
+				}
+			}
+		},
+		csslint: {
+			options: {
+				csslintrc: '.csslintrc',
+			},
+			all: {
+				src: ['public/modules/**/css/*.css']
+			}
+		},
+		uglify: {
+			production: {
+				options: {
+					mangle: false
+				},
+				files: {
+					'public/dist/application.min.js': config.assets.js
+				}
+			}
+		},
+		cssmin: {
+			combine: {
+				files: {
+					'public/dist/application.min.css': config.assets.css
 				}
 			}
 		},
@@ -80,19 +108,19 @@ module.exports = function(grunt) {
 	});
 
 	//Load NPM tasks 
-	grunt.loadNpmTasks('grunt-contrib-watch');
-	grunt.loadNpmTasks('grunt-contrib-jshint');
-	grunt.loadNpmTasks('grunt-mocha-test');
-	grunt.loadNpmTasks('grunt-karma');
-	grunt.loadNpmTasks('grunt-nodemon');
-	grunt.loadNpmTasks('grunt-concurrent');
-	grunt.loadNpmTasks('grunt-env');
+	require('load-grunt-tasks')(grunt);
 
 	//Making grunt default to force in order not to break the project.
 	grunt.option('force', true);
 
 	//Default task(s).
-	grunt.registerTask('default', ['jshint', 'concurrent']);
+	grunt.registerTask('default', ['jshint', 'csslint', 'concurrent']);
+
+	//Lint task(s).
+	grunt.registerTask('lint', ['jshint', 'csslint']);
+
+	//Build task(s).
+	grunt.registerTask('build', ['jshint', 'csslint', 'uglify', 'cssmin']);
 
 	//Test task.
 	grunt.registerTask('test', ['env:test', 'mochaTest', 'karma:unit']);

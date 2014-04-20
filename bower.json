@@ -5,7 +5,6 @@
 	"dependencies": {
 		"bootstrap": "~3",
 		"angular": "~1.2",
-		"angular-cookies": "~1.2",
 		"angular-resource": "~1.2",
 		"angular-animate": "~1.2",
 		"angular-mocks": "~1.2",

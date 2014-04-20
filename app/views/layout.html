@@ -30,18 +30,11 @@
 	<meta name="twitter:image" content="/img/brand/logo.png">
 
 	<!-- Fav Icon -->
-	<link href="/img/brand/favicon.ico" rel="shortcut icon" type="image/x-icon">
+	<link href="/modules/core/img/brand/favicon.ico" rel="shortcut icon" type="image/x-icon">
 
-	<!-- Bootstrap CSS -->
-	<link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.css">
-	<link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap-theme.css">
-
-	<!-- Application CSS -->
-	<link rel="stylesheet" href="/css/common.css">
-
-	<!--Application Modules CSS-->
-	{% for modulesCSSFile in modulesCSSFiles %}
-	<link rel="stylesheet" href="{{modulesCSSFile}}">{% endfor %}
+	<!--Application CSS Files-->
+	{% for cssFile in cssFiles %}<link rel="stylesheet" href="{{cssFile}}">
+	{% endfor %}
 
 	<!-- HTML5 Shim -->
 	<!--[if lt IE 9]>
@@ -62,29 +55,13 @@
 		var user = {{ user | json | safe }};
 	</script>
 
-	<!--AngularJS-->
-	<script type="text/javascript" src="/lib/angular/angular.js"></script>
-	<script type="text/javascript" src="/lib/angular-resource/angular-resource.js"></script>
-	<script type="text/javascript" src="/lib/angular-cookies/angular-cookies.js"></script>
-	<script type="text/javascript" src="/lib/angular-animate/angular-animate.js"></script>
-
-	<!--Angular UI-->
-	<script type="text/javascript" src="/lib/angular-bootstrap/ui-bootstrap.js"></script>
-	<script type="text/javascript" src="/lib/angular-ui-utils/ui-utils.js"></script>
-	<script type="text/javascript" src="/lib/angular-ui-router/release/angular-ui-router.js"></script>
-
-	<!--AngularJS Application Init-->
-	<script type="text/javascript" src="/js/config.js"></script>
-	<script type="text/javascript" src="/js/application.js"></script>
-
-	<!--Application Modules-->
-	{% for modulesJSFile in modulesJSFiles %}
-		<script type="text/javascript" src="{{modulesJSFile}}"></script>
+	<!--Application JavaScript Files-->
+	{% for jsFile in jsFiles %}<script type="text/javascript" src="{{jsFile}}"></script>
 	{% endfor %} 
 
 	{% if process.env.NODE_ENV === 'development' %}
-		<!--Livereload script rendered -->
-		<script type="text/javascript" src="http://localhost:35729/livereload.js"></script>
+	<!--Livereload script rendered -->
+	<script type="text/javascript" src="http://localhost:35729/livereload.js"></script>
 	{% endif %}
 </body>
 
