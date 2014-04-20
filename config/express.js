@@ -28,6 +28,7 @@ module.exports = function(db) {
 		require(path.resolve(modelPath));
 	});
 
+	// Setting application local variables
 	app.locals.title = config.app.title;
 	app.locals.description = config.app.description;
 	app.locals.keywords = config.app.keywords;
@@ -70,8 +71,7 @@ module.exports = function(db) {
 		app.locals.cache = 'memory';
 	}
 
-
-	//  request body parsing middleware should be above methodOverride
+	// Request body parsing middleware should be above methodOverride
 	app.use(bodyParser.urlencoded());
 	app.use(bodyParser.json());
 	app.use(methodOverride());
@@ -79,10 +79,10 @@ module.exports = function(db) {
 	// Enable jsonp
 	app.enable('jsonp callback');
 
-	// cookieParser should be above session
+	// CookieParser should be above session
 	app.use(cookieParser());
 
-	// express/mongo session storage
+	// Express MongoDB session storage
 	app.use(session({
 		secret: config.sessionSecret,
 		store: new mongoStore({
