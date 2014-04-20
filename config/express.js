@@ -115,14 +115,14 @@ module.exports = function(db) {
 		console.error(err.stack);
 
 		// Error page
-		res.status(500).render('500.html', {
+		res.status(500).render('500.server.view.html', {
 			error: err.stack
 		});
 	});
 
 	// Assume 404 since no middleware responded
 	app.use(function(req, res) {
-		res.status(404).render('404.html', {
+		res.status(404).render('404.server.view.html', {
 			url: req.originalUrl,
 			error: 'Not Found'
 		});

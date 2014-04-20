@@ -6,6 +6,29 @@
 var mongoose = require('mongoose'),
 	Article = mongoose.model('Article'),
 	_ = require('lodash');
+/**
+ * Get the error message from error object
+ */
+var getErrorMessage = function(err) {
+	var message = '';
+
+	if (err.code) {
+		switch (err.code) {
+			case 11000:
+			case 11001:
+				message = 'Unique already exists';
+				break;
+			default:
+				message = 'Something went wrong';
+		}
+	} else {
+		for (var errName in err.errors) {
+			if (err.errors[errName].message) message = err.errors[errName].message;
+		}
+	}
+
+	return message;
+};
 
 /**
  * Create a article
@@ -16,9 +39,8 @@ exports.create = function(req, res) {
 
 	article.save(function(err) {
 		if (err) {
-			return res.send('users/signup', {
-				errors: err.errors,
-				article: article
+			return res.send(400, {
+				message: getErrorMessage(err)
 			});
 		} else {
 			res.jsonp(article);
@@ -43,8 +65,8 @@ exports.update = function(req, res) {
 
 	article.save(function(err) {
 		if (err) {
-			res.render('error', {
-				status: 500
+			return res.send(400, {
+				message: getErrorMessage(err)
 			});
 		} else {
 			res.jsonp(article);
@@ -60,8 +82,8 @@ exports.delete = function(req, res) {
 
 	article.remove(function(err) {
 		if (err) {
-			res.render('error', {
-				status: 500
+			return res.send(400, {
+				message: getErrorMessage(err)
 			});
 		} else {
 			res.jsonp(article);
@@ -75,8 +97,8 @@ exports.delete = function(req, res) {
 exports.list = function(req, res) {
 	Article.find().sort('-created').populate('user', 'displayName').exec(function(err, articles) {
 		if (err) {
-			res.render('error', {
-				status: 500
+			return res.send(400, {
+				message: getErrorMessage(err)
 			});
 		} else {
 			res.jsonp(articles);
