@@ -4,8 +4,16 @@
  * Module dependencies.
  */
 var express = require('express'),
+	morgan = require('morgan'),
+	bodyParser = require('body-parser'),
+	session = require('express-session'),
+	compress = require('compression'),
+	methodOverride = require('method-override'),
+	cookieParser = require('cookie-parser'),
 	passport = require('passport'),
-	mongoStore = require('connect-mongo')(express),
+	mongoStore = require('connect-mongo')({
+		session: session
+	}),
 	flash = require('connect-flash'),
 	config = require('./config'),
 	consolidate = require('consolidate'),
@@ -20,15 +28,12 @@ module.exports = function(db) {
 		require(path.resolve(modelPath));
 	});
 
-	// Setting the environment locals
-	app.locals({
-		title: config.app.title,
-		description: config.app.description,
-		keywords: config.app.keywords,
-		facebookAppId: config.facebook.clientID,
-		jsFiles: config.getJavaScriptAssets(),
-		cssFiles: config.getCSSAssets()
-	});
+	app.locals.title = config.app.title;
+	app.locals.description = config.app.description;
+	app.locals.keywords = config.app.keywords;
+	app.locals.facebookAppId = config.facebook.clientID;
+	app.locals.jsFiles = config.getJavaScriptAssets();
+	app.locals.cssFiles = config.getCSSAssets();
 
 	// Passing the request url to environment locals
 	app.use(function(req, res, next) {
@@ -37,7 +42,7 @@ module.exports = function(db) {
 	});
 
 	// Should be placed before express.static
-	app.use(express.compress({
+	app.use(compress({
 		filter: function(req, res) {
 			return (/json|text|javascript|css/).test(res.getHeader('Content-Type'));
 		},
@@ -54,35 +59,31 @@ module.exports = function(db) {
 	app.set('view engine', 'html');
 	app.set('views', config.root + '/app/views');
 
-	// Application Configuration for development environment
-	app.configure('development', function() {
-		// Enable logger
-		app.use(express.logger('dev'));
+	// Environment dependent middleware
+	if (process.env.NODE_ENV === 'development') {
+		// Enable logger (morgan)
+		app.use(morgan('dev'));
 
 		// Disable views cache
 		app.set('view cache', false);
-	});
+	} else if (process.env.NODE_ENV === 'production') {
+		app.locals.cache = 'memory';
+	}
 
-	// Application Configuration for production environment
-	app.configure('production', function() {
-		app.locals({
-			cache: 'memory' // To solve SWIG Cache Issues
-		});
-	});
 
 	//  request body parsing middleware should be above methodOverride
-	app.use(express.urlencoded());
-	app.use(express.json());
-	app.use(express.methodOverride());
+	app.use(bodyParser.urlencoded());
+	app.use(bodyParser.json());
+	app.use(methodOverride());
 
 	// Enable jsonp
 	app.enable('jsonp callback');
 
 	// cookieParser should be above session
-	app.use(express.cookieParser());
+	app.use(cookieParser());
 
 	// express/mongo session storage
-	app.use(express.session({
+	app.use(session({
 		secret: config.sessionSecret,
 		store: new mongoStore({
 			db: db.connection.db,
@@ -96,9 +97,6 @@ module.exports = function(db) {
 
 	// connect flash for flash messages
 	app.use(flash());
-
-	// routes should be at the last
-	app.use(app.router);
 
 	// Setting the app router and static folder
 	app.use(express.static(config.root + '/public'));
