@@ -233,7 +233,9 @@ exports.userByID = function(req, res, next, id) {
  */
 exports.requiresLogin = function(req, res, next) {
 	if (!req.isAuthenticated()) {
-		return res.send(401, 'User is not logged in');
+		return res.send(401, {
+			message: 'User is not logged in'
+		});
 	}
 
 	next();
@@ -242,12 +244,20 @@ exports.requiresLogin = function(req, res, next) {
 /**
  * User authorizations routing middleware
  */
-exports.hasAuthorization = function(req, res, next) {
-	if (req.profile.id !== req.user.id) {
-		return res.send(403, 'User is not authorized');
-	}
+exports.hasAuthorization = function(roles) {
+	var _this = this;
 
-	next();
+	return function(req, res, next) {
+		_this.requiresLogin(req, res, function() {
+			if (_.intersection(req.user.roles, roles).length) {
+				return next();
+			} else {
+				return res.send(403, {
+					message: 'User is not authorized'
+				});
+			}
+		});
+	};
 };
 
 /**
@@ -339,7 +349,7 @@ exports.removeOAuthProvider = function(req, res, next) {
 		// Delete the additional provider
 		if (user.additionalProvidersData[provider]) {
 			delete user.additionalProvidersData[provider];
-			
+
 			// Then tell mongoose that we've updated the additionalProvidersData field
 			user.markModified('additionalProvidersData');
 		}
