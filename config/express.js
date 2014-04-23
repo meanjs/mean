@@ -10,6 +10,7 @@ var express = require('express'),
 	config = require('./config'),
 	consolidate = require('consolidate'),
 	path = require('path'),
+	helmet = require('helmet'),
 	utilities = require('./utilities');
 
 module.exports = function(db) {
@@ -97,6 +98,12 @@ module.exports = function(db) {
 
 	// connect flash for flash messages
 	app.use(flash());
+
+	app.use(helmet.xframe());
+	app.use(helmet.iexss());
+	app.use(helmet.contentTypeOptions());
+	app.use(helmet.ienoopen());
+	app.disable('x-powered-by');
 
 	// routes should be at the last
 	app.use(app.router);
