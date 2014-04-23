@@ -1,6 +1,7 @@
 'use strict';
 
 var passport = require('passport'),
+	url = require('url'),
 	GoogleStrategy = require('passport-google-oauth').OAuth2Strategy,
 	config = require('../config'),
 	users = require('../../app/controllers/users');
@@ -10,7 +11,7 @@ module.exports = function() {
 	passport.use(new GoogleStrategy({
 			clientID: config.google.clientID,
 			clientSecret: config.google.clientSecret,
-			callbackURL: config.google.callbackURL,
+			callbackURL: url.resolve(config.appUrl, config.google.callbackPath),
 			passReqToCallback: true
 		},
 		function(req, accessToken, refreshToken, profile, done) {
