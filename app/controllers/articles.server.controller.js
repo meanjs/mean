@@ -6,6 +6,7 @@
 var mongoose = require('mongoose'),
 	Article = mongoose.model('Article'),
 	_ = require('lodash');
+
 /**
  * Get the error message from error object
  */
@@ -16,7 +17,7 @@ var getErrorMessage = function(err) {
 		switch (err.code) {
 			case 11000:
 			case 11001:
-				message = 'Unique already exists';
+				message = 'Article already exists';
 				break;
 			default:
 				message = 'Something went wrong';

@@ -7,19 +7,19 @@ angular.module('articles').config(['$stateProvider',
 		$stateProvider.
 		state('listArticles', {
 			url: '/articles',
-			templateUrl: 'modules/articles/views/list.client.view.html'
+			templateUrl: 'modules/articles/views/list.articles.client.view.html'
 		}).
 		state('createArticle', {
 			url: '/articles/create',
-			templateUrl: 'modules/articles/views/create.client.view.html'
+			templateUrl: 'modules/articles/views/create.article.client.view.html'
 		}).
 		state('viewArticle', {
 			url: '/articles/:articleId',
-			templateUrl: 'modules/articles/views/view.client.view.html'
+			templateUrl: 'modules/articles/views/view.article.client.view.html'
 		}).
 		state('editArticle', {
 			url: '/articles/:articleId/edit',
-			templateUrl: 'modules/articles/views/edit.client.view.html'
+			templateUrl: 'modules/articles/views/edit.article.client.view.html'
 		});
 	}
 ]);

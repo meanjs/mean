@@ -7,7 +7,7 @@ var users = require('../../app/controllers/users.server.controller'),
 	articles = require('../../app/controllers/articles.server.controller');
 
 module.exports = function(app) {
-	// Article Routes, using express 4.x syntax
+	// Article Routes
 	app.route('/articles')
 		.get(articles.list)
 		.post(users.requiresLogin, articles.create);

@@ -11,6 +11,8 @@ angular.module('articles').controller('ArticlesController', ['$scope', '$statePa
 			});
 			article.$save(function(response) {
 				$location.path('articles/' + response._id);
+			}, function(errorResponse) {
+				$scope.error = errorResponse.data.message;
 			});
 
 			this.title = '';
@@ -42,6 +44,8 @@ angular.module('articles').controller('ArticlesController', ['$scope', '$statePa
 
 			article.$update(function() {
 				$location.path('articles/' + article._id);
+			}, function(errorResponse) {
+				$scope.error = errorResponse.data.message;
 			});
 		};
 
