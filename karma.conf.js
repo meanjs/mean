@@ -12,7 +12,7 @@ module.exports = function(config) {
 		frameworks: ['jasmine'],
 
 		// List of files / patterns to load in the browser
-		files: applicationConfiguration.assets.js.concat(applicationConfiguration.assets.tests),
+		files: applicationConfiguration.assets.lib.concat(applicationConfiguration.assets.js, applicationConfiguration.assets.tests),
 
 		// Test results reporter to use
 		// Possible values: 'dots', 'progress', 'junit', 'growl', 'coverage'

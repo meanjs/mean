@@ -12,7 +12,7 @@ angular.module('articles').config(['$stateProvider',
 		state('createArticle', {
 			url: '/articles/create',
 			templateUrl: 'modules/articles/views/create-article.client.view.html'
-		}).§
+		}).
 		state('viewArticle', {
 			url: '/articles/:articleId',
 			templateUrl: 'modules/articles/views/view-article.client.view.html'

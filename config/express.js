@@ -58,7 +58,7 @@ module.exports = function(db) {
 
 	// Set views path and view engine
 	app.set('view engine', 'html');
-	app.set('views', config.root + '/app/views');
+	app.set('views', './app/views');
 
 	// Environment dependent middleware
 	if (process.env.NODE_ENV === 'development') {
@@ -99,7 +99,7 @@ module.exports = function(db) {
 	app.use(flash());
 
 	// Setting the app router and static folder
-	app.use(express.static(config.root + '/public'));
+	app.use(express.static(path.resolve('./public')));
 
 	// Globbing routing files
 	config.getGlobbedFiles('./app/routes/**/*.js').forEach(function(routePath) {
