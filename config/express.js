@@ -10,6 +10,7 @@ var express = require('express'),
 	compress = require('compression'),
 	methodOverride = require('method-override'),
 	cookieParser = require('cookie-parser'),
+	helmet = require('helmet'),
 	passport = require('passport'),
 	mongoStore = require('connect-mongo')({
 		session: session
@@ -98,6 +99,13 @@ module.exports = function(db) {
 	// connect flash for flash messages
 	app.use(flash());
 
+	// Use helmet to secure Express headers
+	app.use(helmet.xframe());
+	app.use(helmet.iexss());
+	app.use(helmet.contentTypeOptions());
+	app.use(helmet.ienoopen());
+	app.disable('x-powered-by');
+	
 	// Setting the app router and static folder
 	app.use(express.static(path.resolve('./public')));
 
