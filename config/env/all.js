@@ -9,7 +9,6 @@ module.exports = {
 		description: 'Full-Stack JavaScript with MongoDB, Express, AngularJS, and Node.js',
 		keywords: 'mongodb, express, angularjs, node.js, mongoose, passport'
 	},
-	root: rootPath,
 	port: process.env.PORT || 3000,
 	templateEngine: 'swig',
 	sessionSecret: 'MEAN',
@@ -20,13 +19,15 @@ module.exports = {
 			'public/lib/bootstrap/dist/css/bootstrap-theme.css',
 			'public/modules/**/css/*.css'
 		],
-		js: [
+		lib: [
 			'public/lib/angular/angular.js',
 			'public/lib/angular-resource/angular-resource.js',
 			'public/lib/angular-animate/angular-animate.js',
 			'public/lib/angular-ui-router/release/angular-ui-router.js',
 			'public/lib/angular-ui-utils/ui-utils.js',
-			'public/lib/angular-bootstrap/ui-bootstrap-tpls.js',
+			'public/lib/angular-bootstrap/ui-bootstrap-tpls.js'
+		],
+		js: [
 			'public/config.js',
 			'public/application.js',
 			'public/modules/*/*.js',
