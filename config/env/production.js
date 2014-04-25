@@ -3,6 +3,14 @@
 module.exports = {
 	db: process.env.MONGOHQ_URL || process.env.MONGOLAB_URI || 'mongodb://localhost/mean',
 	assets: {
+		lib: [
+			'public/lib/angular/angular.js',
+			'public/lib/angular-resource/angular-resource.js',
+			'public/lib/angular-animate/angular-animate.js',
+			'public/lib/angular-ui-router/release/angular-ui-router.js',
+			'public/lib/angular-ui-utils/ui-utils.js',
+			'public/lib/angular-bootstrap/ui-bootstrap-tpls.js'
+		],
 		css: 'public/dist/application.min.css',
 		js: 'public/dist/application.min.js'
 	},
