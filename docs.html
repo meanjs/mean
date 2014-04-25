@@ -124,6 +124,9 @@
 								<a href="#angularjs-modules">AngularJS Modules</a>
 							</li>
 							<li>
+								<a href="#menus">AngularJS Menus Service</a>
+							</li>
+							<li>
 								<a href="#article-example">The Article Example</a>
 							</li>
 						</ul>
@@ -329,6 +332,35 @@
 								This is used in the HTML keywords META tag. Notice that it only appears in the all.js file and can be overwritten by an environment specific property.
 							</dd>
 						</dl>
+						<h2>Assets Configuration</h2>
+						<p>
+							One of the major issues dealing with applications development is assets management. While <b>bower</b> helps you download and update the project front-end dependencies, you would still need to include the packages JavaScript files in several places including your main application page, <b>Karma</b> configuration file and the <b>uglify</b> grunt task. Furthermore, you may want to use different assets for different environments. 
+						</p>
+						<p>
+							For this purpose we included the <b>config.assets</b> field in the environments configuration files. Using this configuration option allows you to organize all your assets inclusion in a single place. The <b>config.assets</b> field has a few properties: 
+						</p>
+						<dl>
+							<dt>config.assets.css</dt>
+							<dd>
+							A list of glob patterns indicating the project css files.
+							</dd>
+							<dt>config.assets.lib</dt>
+							<dd>
+							A list of glob patterns idicating the project JavaScript packages files.
+							</dd>
+							<dt>config.assets.js</dt>
+							<dd>
+							A list of glob patterns idicating the project JavaScript project files.
+							</dd>
+							<dt>config.assets.tests</dt>
+							<dd>
+							A list of glob patterns idicating the project <b>Jasmine</b> test files.
+							</dd>
+						</dl>
+						<p class="alert alert-info">
+							<b>Note:</b> You can also include CDN paths to load packages files directly from their official CDN. 
+						</p>
+						<br>
 						<h2>Social Configuration Properties</h2>
 						<p>
 							The application will use the <a target="_blank" href="http://passportjs.org">Passport</a> module to offer users various login options.
@@ -535,14 +567,6 @@
 								<h3>passport.js</h3>
 								Passport configuration file that initializes &amp; configures the Passport's authentication strategies and middlewares from the <b>strategies</b> folder.
 							</li>
-							<li>
-								<h3>utilities.js</h3>
-								A configuration utilities module, it currently contains only the <b>walk</b> method that MEAN uses to autoload you AngularJS modules files.
-								<p class="alert alert-info">
-									<b>When to use:</b>
-									Whenever you want to add a utility function that is used in different places across the application.
-								</p>
-							</li>
 						</ul>
 						<h2>Public</h2>
 						<p>
@@ -550,59 +574,8 @@
 						</p>
 						<ul>
 							<li>
-								<h3>css</h3>
-								The css folder is where you store your application level CSS files.
-								<p class="alert alert-info">
-									<b>When to use:</b>
-									Whenever you want to add, change, or remove application level CSS files.
-								</p>
-							</li>
-							<li>
-								<h3>img</h3>
-								The img folder is where you store your application images.
-								<p class="alert alert-info">
-									<b>When to use:</b>
-									Whenever you want to add, change, or remove images.
-								</p>
-							</li>
-							<li>
-								<h3>js</h3>
-								The js folder is where you store your application level scripts.
-								<ul>
-									<li>
-										<h3>config.js</h3>
-										AngularJS configuration module, it starts with two global properties and one method:
-										<dl>
-											<dt>applicationModuleName</dt>
-											<dd>
-												AngularJS is using a module system to bootstrap and application, in this case it will use this property as the main module name.
-											</dd>
-											<dt>applicationModuleVendorDependencies</dt>
-											<dd>
-												AngularJS allows to add dependencies to the main module forcing the application not to start if those dependencies aren't met. In this case we start with the basic AngularJS &amp; Angular-UI dependencies, each third-party module you add to your application should be added to the <i>applicationModuleVendorDependencies</i> global property and AngularJS will load it automatically.
-											</dd>
-											<dt>registerModule</dt>
-											<dd>
-												This method is used to register a module as a new module and add it to the main module dependencies.
-												<p class="alert alert-danger">
-													Although you don't have to, it is highly recommended that you use <b>registerModule</b> method to reigster your module as a dependency for the main application module. To understand this better please visit the <a href="#angularjs-modules">AngularJS Modules</a> section.
-												</p>
-											</dd>
-										</dl>
-										<p class="alert alert-info">
-											<b>When to use:</b>
-											Whenever you want to add, change, or remove an AngularJS global configuration property.
-										</p>
-									</li>
-									<li>
-										<h3>application.js</h3>
-										AngularJS main application file, it takes care of bootstrapping the application and attaching the right modules.
-										<p class="alert alert-info">
-											<b>When to use:</b>
-											Whenever you want to add, change, or remove a module in your AngularJS application.
-										</p>
-									</li>
-								</ul>
+								<h3>dist</h3>
+								The distribution folder is where you store your application compressed CSS and JavaScript assets. The <b>uglify</b> and <b>cssmin</b> grunt tasks are using this as their build target folder.
 							</li>
 							<li>
 								<h3>modules</h3>
@@ -611,6 +584,39 @@
 								<p class="alert alert-info">
 									<b>When to use:</b>
 									Whenever you want to add, change, or remove AngularJS modules.
+								</p>
+							</li>
+							<li>
+								<h3>config.js</h3>
+								AngularJS configuration module, it starts with two global properties and one method:
+								<dl>
+									<dt>applicationModuleName</dt>
+									<dd>
+										AngularJS is using a module system to bootstrap and application, in this case it will use this property as the main module name.
+									</dd>
+									<dt>applicationModuleVendorDependencies</dt>
+									<dd>
+										AngularJS allows to add dependencies to the main module forcing the application not to start if those dependencies aren't met. In this case we start with the basic AngularJS &amp; Angular-UI dependencies, each third-party module you add to your application should be added to the <i>applicationModuleVendorDependencies</i> global property and AngularJS will load it automatically.
+									</dd>
+									<dt>registerModule</dt>
+									<dd>
+										This method is used to register a module as a new module and add it to the main module dependencies.
+										<p class="alert alert-danger">
+											Although you don't have to, it is highly recommended that you use <b>registerModule</b> method to reigster your module as a dependency for the main application module. To understand this better please visit the <a href="#angularjs-modules">AngularJS Modules</a> section.
+										</p>
+									</dd>
+								</dl>
+								<p class="alert alert-info">
+									<b>When to use:</b>
+									Whenever you want to add, change, or remove an AngularJS global configuration property.
+								</p>
+							</li>
+							<li>
+								<h3>application.js</h3>
+								AngularJS main application file, it takes care of bootstrapping the application and attaching the right modules.
+								<p class="alert alert-info">
+									<b>When to use:</b>
+									Whenever you want to add, change, or remove a module in your AngularJS application.
 								</p>
 							</li>
 						</ul>
@@ -668,6 +674,14 @@
 							<li>
 								<h3>.bowerrc</h3>
 								Bower configuration file, you use it to tell bower where to install your application components.
+							</li>
+							<li>
+								<h3>.csslintrc</h3>
+								<a target="_blank" href="http://csslint.net/">CSSLint</a> configuration file, you use it to configure CSSLint special properties.
+								<p class="alert alert-info">
+									<b>When to use:</b>
+									Whenever you want to add, change, or remove  CSSLint properties.
+								</p>
 							</li>
 							<li>
 								<h3>.gitignore</h3>
@@ -1642,6 +1656,66 @@ ApplicationConfiguration.registerModule('moduleName');
 						</p>
 						<p class="alert alert-danger">
 							<b>Notice:</b> Your test files should end with <b>.spec.js</b> extension or else MEAN won't ignore them and add them in the HTML as script files.
+						</p>
+					</section>
+					<div class="inner-link-anchor" id="menus"></div>
+					<section class="page-header">
+						<h1>AngularJS Menus Service</h1>
+					</section>
+					<section>
+						<p>
+							In the 0.3.x version, MEAN.JS has introduced a new AngularJS service that helps you manage your application menus. The menu service has several methods:
+						</p>
+						<dl>
+							<dt>Menus.getMenu(menuId)</dt>
+							<dd>
+								Returns a menu object identified by the menuId argument.
+							</dd>
+							<dt>Menus.addMenu(menuId, [requiresAuthentication], [roles])</dt>
+							<dd>
+								Creates a new menu object, which will be identified by the menuId argument. This method also include two optional arguments:
+								<ol>
+									<li>
+										<b>requiresAuthentication</b> (Default: true) - Indicates whether a menu should be displayed only to authenticated users.
+									</li>
+									<li>
+										<b>roles</b> (Default: ['user']) - An array indicating the roles that are allowed to view this menu.
+									</li>
+								</ol>
+							</dd>
+							<dt>Menus.addMenuItem(menuId, menuItemTitle, menuItemURL, [menuItemUIRoute], [requiresAuthentication], [roles]);</dt>
+							<dd>
+								Creates a new menu item object. This method also include couple of arguments:
+								<ol>
+									<li>
+										<b>menuItemTitle</b> - A String title for the menu item.
+									</li>
+									<li>
+										<b>menuItemURL</b> - The path this menu item will link to.
+									</li>
+									<li>
+										<b>menuItemUIRoute</b> - The UIRoute value, which is used to define the URL scheme where this menu item is marked as active.
+									</li>
+									<li>
+										<b>requiresAuthentication</b> (Default: true) - Indicates whether a menu should be displayed only to authenticated users.
+									</li>
+									<li>
+										<b>roles</b> (Default: ['user']) - An array indicating the roles that are allowed to view this menu.
+									</li>
+								</ol>
+							</dd>
+						</dl>
+						<p>
+							Using the Menus service is usully done in a configuration sections of your application modules. A simple configuratio would look like this:
+						</p>
+<pre>angular.module('example').run(['Menus',
+	function(Menus) {
+		// Set top bar menu items
+		Menus.addMenuItem('topbar', 'Example', 'example');
+	}
+]);</pre>
+						<p class="alert alert-info">
+							To learn more about the Menus service, visit <a href="#article-example">The Article Example Section</a>.
 						</p>
 					</section>
 					<div class="inner-link-anchor" id="article-example"></div>
