@@ -3,7 +3,7 @@
 		<h1>{{article.title}}</h1>
 	</div>
 
-	<div class="pull-right" data-ng-show="authentication.user._id == article.user._id || true">
+	<div class="pull-right" data-ng-show="authentication.user._id == article.user._id">
 		<a class="btn btn-primary" href="/#!/articles/{{article._id}}/edit">
 			<i class="glyphicon glyphicon-edit"></i>
 		</a>
