@@ -128,9 +128,6 @@ module.exports = function(grunt) {
     // Build task(s).
     grunt.registerTask('build', ['jshint', 'csslint', 'loadConfig' ,'uglify', 'cssmin']);
 
-    // Build task(s).
-    grunt.registerTask('heroku-deploy', ['jshint', 'csslint', 'uglify', 'cssmin']);
-
     // Test task.
     grunt.registerTask('test', ['env:test', 'mochaTest', 'karma:unit']);
 };
