@@ -1784,7 +1784,7 @@ ApplicationConfiguration.registerModule('moduleName');
 							<dd>
 								Returns a menu object identified by the menuId argument.
 							</dd>
-							<dt>Menus.addMenu(menuId, [requiresAuthentication], [roles])</dt>
+							<dt>Menus.addMenu(menuId, [isPublic], [roles])</dt>
 							<dd>
 								Creates a new menu object, which will be identified by the menuId argument. This method also include three arguments:
 								<ol>
@@ -1792,14 +1792,14 @@ ApplicationConfiguration.registerModule('moduleName');
 										<b>menuId</b> (Required) - Indicates the menu identifier for future reference.
 									</li>
 									<li>
-										<b>requiresAuthentication</b> (Optional; Default: true) - Indicates whether a menu should be displayed only to authenticated users.
+										<b>isPublic</b> (Optional; Default: false) - Indicates whether a menu should be displayed only to authenticated users.
 									</li>
 									<li>
 										<b>roles</b> (Default: ['user']) - An array indicating the roles that are allowed to view this menu.
 									</li>
 								</ol>
 							</dd>
-							<dt>Menus.addMenuItem(menuId, menuItemTitle, menuItemURL, [menuItemUIRoute], [requiresAuthentication], [roles]);</dt>
+							<dt>Menus.addMenuItem(menuId, menuItemTitle, menuItemURL, [menuItemUIRoute], [isPublic], [roles]);</dt>
 							<dd>
 								Creates a new menu item object. This method also include couple of arguments:
 								<ol>
@@ -1816,10 +1816,10 @@ ApplicationConfiguration.registerModule('moduleName');
 										<b>menuItemUIRoute</b> (Optional; Default: menuItemURL) - The UIRoute value, which is used to define the URL scheme where this menu item is marked as active.
 									</li>
 									<li>
-										<b>requiresAuthentication</b> (Optional; Default: true)  - Indicates whether a menu should be displayed only to authenticated users.
+										<b>isPublic</b> (Optional; Default: menu.isPublic)  - Indicates whether a menu item should be displayed only to authenticated users.
 									</li>
 									<li>
-										<b>roles</b> (Optional; Default: ['user']) - An array indicating the roles that are allowed to view this menu.
+										<b>roles</b> (Optional; Default: ['user']) - An array indicating the roles that are allowed to view this menu item.
 									</li>
 								</ol>
 							</dd>
