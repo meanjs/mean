@@ -20,7 +20,7 @@ angular.module('core').service('Menus', [
 					}
 				} 
 			} else {
-				return !this.requiresAuthentication;
+				return this.isPublic;
 			}
 
 			return false;
@@ -51,10 +51,10 @@ angular.module('core').service('Menus', [
 		};
 
 		// Add new menu object by menu id
-		this.addMenu = function(menuId, requiresAuthentication, roles) {
+		this.addMenu = function(menuId, isPublic, roles) {
 			// Create the new menu
 			this.menus[menuId] = {
-				requiresAuthentication: requiresAuthentication || true,
+				isPublic: isPublic || false,
 				roles: roles || this.defaultRoles,
 				items: [],
 				shouldRender: shouldRender
@@ -74,7 +74,7 @@ angular.module('core').service('Menus', [
 		};
 
 		// Add menu item object
-		this.addMenuItem = function(menuId, menuItemTitle, menuItemURL, menuItemUIRoute, requiresAuthentication, roles) {
+		this.addMenuItem = function(menuId, menuItemTitle, menuItemURL, menuItemUIRoute, isPublic, roles) {
 			// Validate that the menu exists
 			this.validateMenuExistance(menuId);
 
@@ -83,7 +83,7 @@ angular.module('core').service('Menus', [
 				title: menuItemTitle,
 				link: menuItemURL,
 				uiRoute: menuItemUIRoute || ('/' + menuItemURL),
-				requiresAuthentication: requiresAuthentication || false,
+				isPublic: isPublic || this.menus[menuId].isPublic,
 				roles: roles || this.defaultRoles,
 				shouldRender: shouldRender
 			});
