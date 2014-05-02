@@ -37,10 +37,6 @@ angular.module('articles').controller('ArticlesController', ['$scope', '$statePa
 
 		$scope.update = function() {
 			var article = $scope.article;
-			if (!article.updated) {
-				article.updated = [];
-			}
-			article.updated.push(new Date().getTime());
 
 			article.$update(function() {
 				$location.path('articles/' + article._id);
@@ -50,16 +46,12 @@ angular.module('articles').controller('ArticlesController', ['$scope', '$statePa
 		};
 
 		$scope.find = function() {
-			Articles.query(function(articles) {
-				$scope.articles = articles;
-			});
+			$scope.articles = Articles.query();
 		};
 
 		$scope.findOne = function() {
-			Articles.get({
+			$scope.article = Articles.get({
 				articleId: $stateParams.articleId
-			}, function(article) {
-				$scope.article = article;
 			});
 		};
 	}
