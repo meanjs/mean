@@ -9,7 +9,7 @@
             <p class="list-group-item-text">{{article.content}}</p>
         </a>
     </div>
-    <div class="alert alert-warning text-center" data-ng-hide="!articles || articles.length">
+    <div class="alert alert-warning text-center" data-ng-hide="!articles.$resolved || articles.length">
     	No articles yet, why don't you <a href="/#!/articles/create">create one</a>?
     </div>
 </section>
