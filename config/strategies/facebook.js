@@ -1,10 +1,13 @@
 'use strict';
 
+/**
+ * Module dependencies.
+ */
 var passport = require('passport'),
 	url = require('url'),
 	FacebookStrategy = require('passport-facebook').Strategy,
 	config = require('../config'),
-	users = require('../../app/controllers/users.server.controller');
+	users = require('../../app/controllers/users');
 
 module.exports = function() {
 	// Use facebook strategy

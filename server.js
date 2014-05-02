@@ -2,7 +2,8 @@
 /**
  * Module dependencies.
  */
-var config = require('./config/config'),
+var init = require('./config/init')(),
+	config = require('./config/config'),
 	mongoose = require('mongoose');
 
 /**
@@ -26,5 +27,4 @@ app.listen(config.port);
 exports = module.exports = app;
 
 // Logging initialization
-console.log('Using the "' + process.env.NODE_ENV + '" envrionment file');
 console.log('MEAN.JS application started on port ' + config.port);

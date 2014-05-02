@@ -1,26 +1,21 @@
 'use strict';
 
+/**
+ * Module dependencies.
+ */
 var _ = require('lodash'),
     glob = require('glob');
 
 /**
- * Before we begin, lets set the envrionment variable
- * We'll Look for a valid NODE_ENV variable and if one cannot be found load the development NODE_ENV
+ * Load app configurations
  */
-glob('./config/env/' + process.env.NODE_ENV + '.js', {
-    sync: true
-}, function(err, environmentFiles) {
-    process.env.NODE_ENV = environmentFiles.length ? process.env.NODE_ENV : 'development';
-});
-
-// Load app configurations
 module.exports = _.extend(
     require('./env/all'),
     require('./env/' + process.env.NODE_ENV) || {}
 );
 
 /**
- * Get the modules JavaScript files
+ * Get files by glob patterns
  */
 module.exports.getGlobbedFiles = function(globPatterns, removeRoot) {
     // For context switching

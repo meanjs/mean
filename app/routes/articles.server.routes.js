@@ -3,8 +3,8 @@
 /**
  * Module dependencies.
  */
-var users = require('../../app/controllers/users.server.controller'),
-	articles = require('../../app/controllers/articles.server.controller');
+var users = require('../../app/controllers/users'),
+	articles = require('../../app/controllers/articles');
 
 module.exports = function(app) {
 	// Article Routes

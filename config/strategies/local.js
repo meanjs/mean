@@ -1,5 +1,8 @@
 'use strict';
 
+/**
+ * Module dependencies.
+ */
 var passport = require('passport'),
 	LocalStrategy = require('passport-local').Strategy,
 	User = require('mongoose').model('User');

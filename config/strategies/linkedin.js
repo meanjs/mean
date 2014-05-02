@@ -1,10 +1,13 @@
 'use strict';
 
+/**
+ * Module dependencies.
+ */
 var passport = require('passport'),
 	url = require('url'),
 	LinkedInStrategy = require('passport-linkedin').Strategy,
 	config = require('../config'),
-	users = require('../../app/controllers/users.server.controller');
+	users = require('../../app/controllers/users');
 
 module.exports = function() {
 	// Use linkedin strategy
