@@ -85,13 +85,13 @@
 								<a href="#getting-started">Getting Started</a>
 							</li>
 							<li>
-								<a href="#configuration">Configuration</a>
-							</li>
-							<li>
 								<a href="#troubleshooting">Troubleshooting</a>
 							</li>
 							<li>
 								<a href="#folder-structure">Folder Structure</a>
+							</li>
+							<li>
+								<a href="#configuration">Configuration</a>
 							</li>
 							<li>
 								<a href="#autoload">Autoloaded Files</a>
@@ -124,6 +124,9 @@
 								<a href="#angularjs-modules">AngularJS Modules</a>
 							</li>
 							<li>
+								<a href="#menus">AngularJS Menus Service</a>
+							</li>
+							<li>
 								<a href="#article-example">The Article Example</a>
 							</li>
 						</ul>
@@ -131,7 +134,7 @@
 				</div>
 				<section class="col-md-10 col-md-offset-2">
 					<i class="small text-muted">
-						Last updated: 16 Apr 2014.
+						Last updated: 04 May 2014.
 					</i>
 
 					<div class="inner-link-anchor" id="overview"></div>
@@ -256,105 +259,6 @@
 						<p>
 							That's it! your application should be running by now, to proceed with your development check the other sections in this documentation.
 							<br>If you encounter any problem try the <a href="#troubleshooting">Troubleshooting</a> section.
-						</p>
-					</section>
-					<div class="inner-link-anchor" id="configuration"></div>
-					<section class="page-header">
-						<h1>Configuration</h1>
-					</section>
-					<section>
-						<p>
-							So, you have your application running, but how do you configure it?
-						</p>
-						<h2>Environmental Configuration</h2>
-						<p>
-							The config folder is where you have all the files organized in a specific structure, which starts with the <b>config.js</b> file.
-						</p>
-						<p>
-							The config file functions as loader for the configurations files placed in the <b>config/env</b> folder, it will load the right configuration file based on the NODE_ENV variable.
-						</p>
-						<br>
-						<p>
-							There are five default configuration files based on common development pattern:
-						</p>
-						<dl>
-							<dt>config/env/all.js</dt>
-							<dd>
-								This file will be loaded in <i>all the environments</i>, and contains the default properties that will be overwritten by any environment specified configuration.
-							</dd>
-							<dt>config/env/development.js</dt>
-							<dd>
-								This file will be loaded in a <i>development environment</i>, a property defined here will overwrite the one defined in the all.js file.
-							</dd>
-							<dt>config/env/production.js</dt>
-							<dd>
-								This file will be loaded in a <i>production environment</i>, a property defined here will overwrite the one defined in the all.js file.
-							</dd>
-							<dt>config/env/test.js</dt>
-							<dd>
-								This file will be loaded in a <i>test environment</i>, a property defined here will overwrite the one defined in the all.js file.
-							</dd>
-							<dt>config/env/travis.js</dt>
-							<dd>
-								This file will be loaded in the Travis CI testing environment, a property defined here will overwrite the one defined in the all.js file.
-							</dd>
-						</dl>
-						<p>
-							To run your application with a different environment configuration run the application like this:
-							<pre>$ NODE_ENV={The Environment Name} grunt</pre>
-						</p>
-						<h2>Configuration Properties</h2>
-						<p>
-							MEAN.JS comes with a default set of configuration properties you will most likely expand with your properties. Here's the review of all the required properties used in the configuration files:
-						</p>
-						<dl>
-							<dt>config.db</dt>
-							<dd>
-								This is the MongoDB connection string URI, when bootstrapped, the application will try to connect to the database using this URI, so make sure its the correct one in each environment.
-							</dd>
-							<dt>config.port</dt>
-							<dd>
-								The port used by the application, default is 3000, but as you can notice in the test.js config file, this can be changed.
-							</dd>
-							<dt>config.app.title</dt>
-							<dd>
-								This is title used as the HTML page title. Notice that it appears both in the all.js file and in all the non-production configuration files.
-							</dd>
-							<dt>config.app.description</dt>
-							<dd>
-								This is used in the HTML description META tag. Notice that it only appears in the all.js file and can be overwritten by an environment specific property.
-							</dd>
-							<dt>config.app.keywords</dt>
-							<dd>
-								This is used in the HTML keywords META tag. Notice that it only appears in the all.js file and can be overwritten by an environment specific property.
-							</dd>
-						</dl>
-						<h2>Social Configuration Properties</h2>
-						<p>
-							The application will use the <a target="_blank" href="http://passportjs.org">Passport</a> module to offer users various login options.
-						</p>
-						<p>
-							MEAN.JS currently supports four social platforms: Facebook, Twitter, Google, and Linkedin. You can also add other platforms using a passport-provider package and duplicating the samples logic.
-						</p>
-						<p>
-							To configure your social application oauth keys there's a property object for each platform:
-						</p>
-						<dl>
-							<dt>config.app.{OAuth Provider}.clientID</dt>
-							<dd>
-								Your application oauth id.
-							</dd>
-							<dt>config.app.{OAuth Provider}.clientSecret</dt>
-							<dd>
-								Your application oauth secret.
-							</dd>
-							<dt>config.app.{OAuth Provider}.callbackURL</dt>
-							<dd>
-								Your application oauth callback URL.
-							</dd>
-						</dl>
-						<p class="alert alert-info">
-							Remember to use different configuration for each environment especially your MongoDB URI and social platform OAuth Keys.
 						</p>
 					</section>
 					<div class="inner-link-anchor" id="troubleshooting"></div>
@@ -535,14 +439,6 @@
 								<h3>passport.js</h3>
 								Passport configuration file that initializes &amp; configures the Passport's authentication strategies and middlewares from the <b>strategies</b> folder.
 							</li>
-							<li>
-								<h3>utilities.js</h3>
-								A configuration utilities module, it currently contains only the <b>walk</b> method that MEAN uses to autoload you AngularJS modules files.
-								<p class="alert alert-info">
-									<b>When to use:</b>
-									Whenever you want to add a utility function that is used in different places across the application.
-								</p>
-							</li>
 						</ul>
 						<h2>Public</h2>
 						<p>
@@ -550,59 +446,8 @@
 						</p>
 						<ul>
 							<li>
-								<h3>css</h3>
-								The css folder is where you store your application level CSS files.
-								<p class="alert alert-info">
-									<b>When to use:</b>
-									Whenever you want to add, change, or remove application level CSS files.
-								</p>
-							</li>
-							<li>
-								<h3>img</h3>
-								The img folder is where you store your application images.
-								<p class="alert alert-info">
-									<b>When to use:</b>
-									Whenever you want to add, change, or remove images.
-								</p>
-							</li>
-							<li>
-								<h3>js</h3>
-								The js folder is where you store your application level scripts.
-								<ul>
-									<li>
-										<h3>config.js</h3>
-										AngularJS configuration module, it starts with two global properties and one method:
-										<dl>
-											<dt>applicationModuleName</dt>
-											<dd>
-												AngularJS is using a module system to bootstrap and application, in this case it will use this property as the main module name.
-											</dd>
-											<dt>applicationModuleVendorDependencies</dt>
-											<dd>
-												AngularJS allows to add dependencies to the main module forcing the application not to start if those dependencies aren't met. In this case we start with the basic AngularJS &amp; Angular-UI dependencies, each third-party module you add to your application should be added to the <i>applicationModuleVendorDependencies</i> global property and AngularJS will load it automatically.
-											</dd>
-											<dt>registerModule</dt>
-											<dd>
-												This method is used to register a module as a new module and add it to the main module dependencies.
-												<p class="alert alert-danger">
-													Although you don't have to, it is highly recommended that you use <b>registerModule</b> method to reigster your module as a dependency for the main application module. To understand this better please visit the <a href="#angularjs-modules">AngularJS Modules</a> section.
-												</p>
-											</dd>
-										</dl>
-										<p class="alert alert-info">
-											<b>When to use:</b>
-											Whenever you want to add, change, or remove an AngularJS global configuration property.
-										</p>
-									</li>
-									<li>
-										<h3>application.js</h3>
-										AngularJS main application file, it takes care of bootstrapping the application and attaching the right modules.
-										<p class="alert alert-info">
-											<b>When to use:</b>
-											Whenever you want to add, change, or remove a module in your AngularJS application.
-										</p>
-									</li>
-								</ul>
+								<h3>dist</h3>
+								The distribution folder is where you store your application compressed CSS and JavaScript assets. The <b>uglify</b> and <b>cssmin</b> grunt tasks are using this as their build target folder.
 							</li>
 							<li>
 								<h3>modules</h3>
@@ -611,6 +456,39 @@
 								<p class="alert alert-info">
 									<b>When to use:</b>
 									Whenever you want to add, change, or remove AngularJS modules.
+								</p>
+							</li>
+							<li>
+								<h3>config.js</h3>
+								AngularJS configuration module, it starts with two global properties and one method:
+								<dl>
+									<dt>applicationModuleName</dt>
+									<dd>
+										AngularJS is using a module system to bootstrap and application, in this case it will use this property as the main module name.
+									</dd>
+									<dt>applicationModuleVendorDependencies</dt>
+									<dd>
+										AngularJS allows to add dependencies to the main module forcing the application not to start if those dependencies aren't met. In this case we start with the basic AngularJS &amp; Angular-UI dependencies, each third-party module you add to your application should be added to the <i>applicationModuleVendorDependencies</i> global property and AngularJS will load it automatically.
+									</dd>
+									<dt>registerModule</dt>
+									<dd>
+										This method is used to register a module as a new module and add it to the main module dependencies.
+										<p class="alert alert-danger">
+											Although you don't have to, it is highly recommended that you use <b>registerModule</b> method to reigster your module as a dependency for the main application module. To understand this better please visit the <a href="#angularjs-modules">AngularJS Modules</a> section.
+										</p>
+									</dd>
+								</dl>
+								<p class="alert alert-info">
+									<b>When to use:</b>
+									Whenever you want to add, change, or remove an AngularJS global configuration property.
+								</p>
+							</li>
+							<li>
+								<h3>application.js</h3>
+								AngularJS main application file, it takes care of bootstrapping the application and attaching the right modules.
+								<p class="alert alert-info">
+									<b>When to use:</b>
+									Whenever you want to add, change, or remove a module in your AngularJS application.
 								</p>
 							</li>
 						</ul>
@@ -670,6 +548,14 @@
 								Bower configuration file, you use it to tell bower where to install your application components.
 							</li>
 							<li>
+								<h3>.csslintrc</h3>
+								<a target="_blank" href="http://csslint.net/">CSSLint</a> configuration file, you use it to configure CSSLint special properties.
+								<p class="alert alert-info">
+									<b>When to use:</b>
+									Whenever you want to add, change, or remove  CSSLint properties.
+								</p>
+							</li>
+							<li>
 								<h3>.gitignore</h3>
 								Git <a target="_blank" href="https://help.github.com/articles/ignoring-files">ignore file</a>, you use it to tell git what <b>ignore</b> in next commits. After installation the application generates a lot of code that you don't want to include in your repository, so this is where you tell git to ignore those files.
 								<p class="alert alert-info">
@@ -702,6 +588,144 @@
 								</p>
 							</li>
 						</ul>
+					</section>
+					<div class="inner-link-anchor" id="configuration"></div>
+					<section class="page-header">
+						<h1>Configuration</h1>
+					</section>
+					<section>
+						<p>
+							So, you have your application running, but how do you configure it?
+						</p>
+						<h2>Environmental Configuration</h2>
+						<p>
+							The config folder is where you have all the files are organized in a specific structure, which starts with the <b>config.js</b> file.
+						</p>
+						<p>
+							The config file functions as loader for the configurations files placed in the <b>config/env</b> folder, it will load the right configuration file based on the NODE_ENV variable.
+						</p>
+						<br>
+						<p>
+							There are five default configuration files based on common development pattern:
+						</p>
+						<dl>
+							<dt>config/env/all.js</dt>
+							<dd>
+								This file will be loaded in <i>all the environments</i>, and contains the default properties that will be overwritten by any environment specified configuration.
+							</dd>
+							<dt>config/env/development.js</dt>
+							<dd>
+								This file will be loaded in a <i>development environment</i>, a property defined here will overwrite the one defined in the all.js file.
+							</dd>
+							<dt>config/env/production.js</dt>
+							<dd>
+								This file will be loaded in a <i>production environment</i>, a property defined here will overwrite the one defined in the all.js file.
+							</dd>
+							<dt>config/env/test.js</dt>
+							<dd>
+								This file will be loaded in a <i>test environment</i>, a property defined here will overwrite the one defined in the all.js file.
+							</dd>
+							<dt>config/env/travis.js</dt>
+							<dd>
+								This file will be loaded in the Travis CI testing environment, a property defined here will overwrite the one defined in the all.js file.
+							</dd>
+						</dl>
+						<p>
+							To run your application with a different environment configuration run the application like this:
+							<pre>$ NODE_ENV={The Environment Name} grunt</pre>
+						</p>
+						<h2>Configuration Properties</h2>
+						<p>
+							MEAN.JS comes with a default set of configuration properties you will most likely expand with your properties. Here's the review of all the required properties used in the configuration files:
+						</p>
+						<dl>
+							<dt>config.db</dt>
+							<dd>
+								This is the MongoDB connection string URI, when bootstrapped, the application will try to connect to the database using this URI, so make sure its the correct one in each environment.
+							</dd>
+							<dt>config.port</dt>
+							<dd>
+								The port used by the application, default is 3000, but as you can notice in the test.js config file, this can be changed.
+							</dd>
+							<dt>config.app.title</dt>
+							<dd>
+								This is title used as the HTML page title. Notice that it appears both in the all.js file and in all the non-production configuration files.
+							</dd>
+							<dt>config.app.description</dt>
+							<dd>
+								This is used in the HTML description META tag. Notice that it only appears in the all.js file and can be overwritten by an environment specific property.
+							</dd>
+							<dt>config.app.keywords</dt>
+							<dd>
+								This is used in the HTML keywords META tag. Notice that it only appears in the all.js file and can be overwritten by an environment specific property.
+							</dd>
+						</dl>
+						<h2>Assets Configuration</h2>
+						<p>
+							One of the major issues dealing with applications development is assets management. While <b>bower</b> helps you download and update the project front-end dependencies, you would still need to include the packages JavaScript files in several places including your main application page, <b>Karma</b> configuration file and the <b>uglify</b> grunt task. Furthermore, you may want to use different assets for different environments. 
+						</p>
+						<p>
+							For this purpose we included the <b>config.assets</b> field in the environments configuration files. Using this configuration option allows you to organize all your assets inclusion in a single place. The <b>config.assets</b> field has a few properties: 
+						</p>
+						<dl>
+							<dt>config.assets.css</dt>
+							<dd>
+							A list of glob patterns indicating the project css files.
+							</dd>
+							<dt>config.assets.js</dt>
+							<dd>
+								A list of glob patterns idicating the project JavaScript project files.
+							</dd>
+							<dt>config.assets.tests</dt>
+							<dd>
+								A list of glob patterns idicating the project <b>Jasmine</b> test files.
+							</dd>
+							<dt>config.assets.lib</dt>
+							<dd>
+								<p>A list of glob patterns idicating the project packages files. We seperate those from other files so you could use CDN assets in your production configuration.</p>
+								<dl>
+									<dt>config.assets.lib.css</dt>
+									<dd>
+									A list of glob patterns idicating the project packages CSS files.
+									</dd>
+									<dt>config.assets.lib.js</dt>
+									<dd>
+									A list of glob patterns idicating the project packages JavaScript files.
+									</dd>
+								</dl>
+							</dd>
+						</dl>
+						<p class="alert alert-info">
+							<b>Note:</b> You can also include CDN paths to load packages files directly from their official CDN. 
+						</p>
+						<br>
+						<h2>Social Configuration Properties</h2>
+						<p>
+							The application will use the <a target="_blank" href="http://passportjs.org">Passport</a> module to offer users various login options.
+						</p>
+						<p>
+							MEAN.JS currently supports four social platforms: Facebook, Twitter, Google, and Linkedin. You can also add other platforms using a passport-provider package and duplicating the samples logic.
+						</p>
+						<p>
+							To configure your social application oauth keys there's a property object for each platform:
+						</p>
+						<dl>
+							<dt>config.app.{OAuth Provider}.clientID</dt>
+							<dd>
+								Your application oauth id.
+							</dd>
+							<dt>config.app.{OAuth Provider}.clientSecret</dt>
+							<dd>
+								Your application oauth secret.
+							</dd>
+							<dt>config.app.{OAuth Provider}.callbackURL</dt>
+							<dd>
+								Your application oauth callback URL.
+							</dd>
+						</dl>
+						<p class="alert alert-info">
+							Remember to use different configuration for each environment especially your MongoDB URI and social platform OAuth Keys.
+						</p>
 					</section>
 					<div class="inner-link-anchor" id="autoload"></div>
 					<section class="page-header">
@@ -738,6 +762,38 @@
 							<dt>Express</dt>
 							<dd>
 								<a target="_blank" href="http://expressjs.com/">Express</a> is a web framework for Node.js.
+							</dd>
+							<dt>Express-Session</dt>
+							<dd>
+								<a target="_blank" href="https://github.com/expressjs/session">Express-Session</a> is the session middleware for Express 4.x applications.
+							</dd>
+							<dt>Body-Parser</dt>
+							<dd>
+								<a target="_blank" href="https://github.com/expressjs/body-parser">Body-Parser</a> is a body parsing middleware for Express 4.x applications.
+							</dd>
+							<dt>Cookie-Parser</dt>
+							<dd>
+								<a target="_blank" href="https://github.com/expressjs/cookie-parser">Cookie-Parser</a> is a cookie parsing middleware for Express 4.x applications.
+							</dd>
+							<dt>Compression</dt>
+							<dd>
+								<a target="_blank" href="https://github.com/expressjs/compression">Compression</a> is a compression middleware for Express 4.x applications.
+							</dd>
+							<dt>Method-Override</dt>
+							<dd>
+								<a target="_blank" href="https://github.com/expressjs/method-override">Method-Override</a> provides faux HTTP method support for Express 4.x applications.
+							</dd>
+							<dt>Morgan</dt>
+							<dd>
+								<a target="_blank" href="https://github.com/expressjs/morgan">Morgan</a> is the connect logger module for Express 4.x applications.
+							</dd>
+							<dt>Helmet</dt>
+							<dd>
+								<a target="_blank" href="https://github.com/evilpacket/helmet">Helmet</a> is a set of middlewares that implement various security headers for Express applications.
+							</dd>
+							<dt>Glob</dt>
+							<dd>
+								<a target="_blank" href="https://github.com/isaacs/node-glob">Glob</a> provides glob  functionality for node.js applications.
 							</dd>
 							<dt>Consolidate</dt>
 							<dd>
@@ -823,7 +879,23 @@
 							</dd>
 							<dt>Grunt-Contrib-JSHint</dt>
 							<dd>
-								<a target="_blank" href="https://github.com/gruntjs/grunt-contrib-jshint">Grunt-Contrib-JSHint</a> is a grunt task that lint js files using <a target="_blank" href="http://www.jshint.com/">JSHint</a>.
+								<a target="_blank" href="https://github.com/gruntjs/grunt-contrib-jshint">Grunt-Contrib-JSHint</a> is a grunt task that lint JavaScript files using <a target="_blank" href="http://www.jshint.com/">JSHint</a>.
+							</dd>
+							<dt>Grunt-Contrib-CSSLint</dt>
+							<dd>
+								<a target="_blank" href="https://github.com/gruntjs/grunt-contrib-csslint">Grunt-Contrib-CSSLint</a> is a grunt task that lint CSS files using <a target="_blank" href="https://github.com/CSSLint/csslint">JSHint</a>.
+							</dd>
+							<dt>Grunt-Contrib-Uglify</dt>
+							<dd>
+								<a target="_blank" href="https://github.com/gruntjs/grunt-contrib-uglify">Grunt-Contrib-Uglify</a> is a grunt task that concat and minifies JavaScript files.
+							</dd>
+							<dt>Grunt-Contrib-CSSMin</dt>
+							<dd>
+								<a target="_blank" href="https://github.com/gruntjs/grunt-contrib-cssmin">Grunt-Contrib-CSSMin</a> is a grunt task that concat and minifies CSS files.
+							</dd>
+							<dt>Load-Grunt-Tasks</dt>
+							<dd>
+								<a target="_blank" href="https://github.com/sindresorhus/load-grunt-tasks">Load-Grunt-Tasks</a> is a grunt task that automatically loads multiple grunt tasks.
 							</dd>
 							<dt>Grunt-Nodemon</dt>
 							<dd>
@@ -904,6 +976,10 @@
 							<dd>
 								<a target="_blank" href="http://docs.angularjs.org/api/ngMock">Angular-Mocks</a> provides inject and mock support to AngularJS services unit tests.
 							</dd>
+							<dt>Angular-Sanitize</dt>
+							<dd>
+								<a target="_blank" href="http://docs.angularjs.org/api/ngSanitize">Angular-Sanitize</a> provides a functionality to sanitize HTML.
+							</dd>
 							<dt>Angular-Bootstrap</dt>
 							<dd>
 								<a target="_blank" href="http://angular-ui.github.io/bootstrap/">Angular-Bootstrap</a> is a set of bootstrap components written in pure AngularJS.
@@ -942,6 +1018,10 @@
 										<p>Linter task that keep your JavaScript code free of common mistakes and syntax errors.</p>
 									</li>
 									<li>
+										<h5>CSSLint</h5>
+										<p>Linter task that keep your CSS code free of common mistakes and syntax errors.</p>
+									</li>
+									<li>
 										<h5>Watch</h5>
 										<p>This watches your file system for changes and automatically reloads the application whenever you change certain files.</p>
 									</li>
@@ -950,7 +1030,54 @@
 										<p>This runs your Node.js application using nodemon.</p>
 									</li>
 								</ul>
-								<p>Pleas notice that the last two tasks are wrapped with another task called <b>Concurrent</b> to keep the application continuously running.</p>
+								<p>Please notice that the last two tasks are wrapped with another task called <b>Concurrent</b> to keep the application continuously running.</p>
+							</li>
+							<li>
+								<h4>Lint</h4>
+								<p>
+									This task runs when you type 'grunt lint' in your command-line, the test task consists of two sub-tasks:
+								</p>
+								<ul>
+									<li>
+										<h5>JSHint</h5>
+										<p>Linter task that keep your JavaScript code free of common mistakes and syntax errors.</p>
+									</li>
+									<li>
+										<h5>CSSLint</h5>
+										<p>Linter task that keep your CSS code free of common mistakes and syntax errors.</p>
+									</li>
+								</ul>
+							</li>
+							<li>
+								<h4>Build</h4>
+								<p>
+									This task runs when you type 'grunt build' in your command-line, the test task consists of two sub-tasks:
+								</p>
+								<ul>
+									<li>
+										<h5>JSHint</h5>
+										<p>Linter task that keep your JavaScript code free of common mistakes and syntax errors.</p>
+									</li>
+									<li>
+										<h5>CSSLint</h5>
+										<p>Linter task that keep your CSS code free of common mistakes and syntax errors.</p>
+									</li>
+									<li>
+										<h5>LoadConfig</h5>
+										<p>A task that loads the environmental configuration file for the uglify and cssmin tasks.</p>
+									</li>
+									<li>
+										<h5>Uglify</h5>
+										<p>A task that concat and minifies JavaScript files.</p>
+									</li>
+									<li>
+										<h5>CSSMin</h5>
+										<p>A task that concat and minifies CSS files.</p>
+									</li>
+								</ul>
+								<p class="alert alert-info">
+									<b>Remember</b> to use the build task before deploying your application to a production environment.
+								</p>
 							</li>
 							<li>
 								<h4>Test</h4>
@@ -959,15 +1086,15 @@
 								</p>
 								<ul>
 									<li>
-										<h5>env:test</h5>
+										<h5>Env:test</h5>
 										<p>This is a simple task that changes the NODE_ENV global environment variable to 'test'.</p>
 									</li>
 									<li>
-										<h5>mochaTest</h5>
+										<h5>MochaTest</h5>
 										<p>This runs the mocha server tests that are located in the <b>app/tests</b> folder.</p>
 									</li>
 									<li>
-										<h5>karma:unit</h5>
+										<h5>Karma:unit</h5>
 										<p>This uses the karma test runner to run the AngularJS unit tests.</p>
 									</li>
 								</ul>
@@ -993,7 +1120,7 @@
 						</p>
 						<h2>Authentication Routes</h2>
 						<p>
-							Authentication routes are located in the <b>app/routes/users.js</b> file.
+							Authentication routes are located in the <b>app/routes/users.server.routes.js</b> file.
 						</p>
 						<dl>
 							<dt>GET http://localhost:3000/users/me</dt>
@@ -1034,7 +1161,7 @@
 						<p>Please notice that you can add more authentication options using a <a href="#passport">Passport Strategy</a> and this pattern.</p>
 						<h2>Application Routes</h2>
 						<p>
-							Application core routes are located in the <b>app/routes/core.js</b> file.
+							Application core routes are located in the <b>app/routes/core.server.routes.js</b> file.
 						</p>
 						<dl>
 							<dt>GET http://localhost:3000/</dt>
@@ -1046,7 +1173,7 @@
 						</dl>
 						<h2>Example Routes</h2>
 						<p>
-							An 'Article' example is included with the boilerplate to help you understand how to properly build your RESTful API, the routes for this module are located in the <b>app/routes/articles.js</b> file.
+							An 'Article' example is included with the boilerplate to help you understand how to properly build your RESTful API, the routes for this module are located in the <b>app/routes/articles.server.routes.js</b> file.
 						</p>
 						<dl>
 							<dt>GET http://localhost:3000/articles</dt>
@@ -1543,7 +1670,7 @@ angular.module(‘application’, [‘application.controllers’, ‘application
 									There two kind of modules you'll add to your application: third-party modules and custom modules.
 								</p>
 								<p>
-									To add third-party modules use the <b>public/js/config.js</b> file where we added an array property called <b>applicationModuleVendorDependencies</b>. When you add a new third-party module you should add it to this array so the main module can load it as a depenedency.
+									To add third-party modules use the <b>public/config.js</b> file where we added an array property called <b>applicationModuleVendorDependencies</b>. When you add a new third-party module you should add it to this array so the main module can load it as a depenedency.
 								</p>
 								<p>
 									To register your own module, we created the <b>ApplicationConfiguration.registerModule</b> method. To add your custom module and your module and it will automatically be loaded as a dependency to the AngularJS main application module.
@@ -1593,7 +1720,7 @@ angular.module(‘application’, [‘application.controllers’, ‘application
 							This can become an annoying pitfull, so we added the <b>ApplicationConfiguration</b> that is loaded before all the modules file. The <b>ApplicationConfiguration</b> global object expose a method named <b>registerModule</b>, this method will create the new angular module and add it to list of dependencies of the main application module.
 						</p>
 						<p>
-							We recommend that you take a look at the code that is placed inside the <b>/public/js/config.js</b> file.
+							We recommend that you take a look at the code that is placed inside the <b>/public/config.js</b> file.
 						</p>
 						<h4>Module Structure</h4>
 						<p>
@@ -1641,7 +1768,73 @@ ApplicationConfiguration.registerModule('moduleName');
 							But here is another neat feature: loading your module tests is also done automatically! Karam config file will iterate through the module folder and add your new module tests as well. Don't worry! if you haven't written any tests karma will skip your module and just run the tests you already have.
 						</p>
 						<p class="alert alert-danger">
-							<b>Notice:</b> Your test files should end with <b>.spec.js</b> extension or else MEAN won't ignore them and add them in the HTML as script files.
+							<b>Notice:</b> Your test files should be placed in the <b>module/tests</b> folder or else MEAN won't ignore them and add them in the HTML as script files.
+						</p>
+					</section>
+					<div class="inner-link-anchor" id="menus"></div>
+					<section class="page-header">
+						<h1>AngularJS Menus Service</h1>
+					</section>
+					<section>
+						<p>
+							In the 0.3.x version, MEAN.JS has introduced a new AngularJS service that helps you manage your application menus. The menu service has several methods:
+						</p>
+						<dl>
+							<dt>Menus.getMenu(menuId)</dt>
+							<dd>
+								Returns a menu object identified by the menuId argument.
+							</dd>
+							<dt>Menus.addMenu(menuId, [isPublic], [roles])</dt>
+							<dd>
+								Creates a new menu object, which will be identified by the menuId argument. This method also include three arguments:
+								<ol>
+									<li>
+										<b>menuId</b> (Required) - Indicates the menu identifier for future reference.
+									</li>
+									<li>
+										<b>isPublic</b> (Optional; Default: false) - Indicates whether a menu should be displayed only to authenticated users.
+									</li>
+									<li>
+										<b>roles</b> (Default: ['user']) - An array indicating the roles that are allowed to view this menu.
+									</li>
+								</ol>
+							</dd>
+							<dt>Menus.addMenuItem(menuId, menuItemTitle, menuItemURL, [menuItemUIRoute], [isPublic], [roles]);</dt>
+							<dd>
+								Creates a new menu item object. This method also include couple of arguments:
+								<ol>
+									<li>
+										<b>menuId</b> (Required) - Indicates the menu identifier for future reference.
+									</li>
+									<li>
+										<b>menuItemTitle</b> (Required) - A String title for the menu item.
+									</li>
+									<li>
+										<b>menuItemURL</b> (Required) - The path this menu item will link to.
+									</li>
+									<li>
+										<b>menuItemUIRoute</b> (Optional; Default: menuItemURL) - The UIRoute value, which is used to define the URL scheme where this menu item is marked as active.
+									</li>
+									<li>
+										<b>isPublic</b> (Optional; Default: menu.isPublic)  - Indicates whether a menu item should be displayed only to authenticated users.
+									</li>
+									<li>
+										<b>roles</b> (Optional; Default: ['user']) - An array indicating the roles that are allowed to view this menu item.
+									</li>
+								</ol>
+							</dd>
+						</dl>
+						<p>
+							Using the Menus service is usully done in a configuration sections of your application modules. A simple configuratio would look like this:
+						</p>
+<pre>angular.module('example').run(['Menus',
+	function(Menus) {
+		// Set top bar menu items
+		Menus.addMenuItem('topbar', 'Example', 'example');
+	}
+]);</pre>
+						<p class="alert alert-info">
+							To learn more about the Menus service, visit <a href="#article-example">The Article Example Section</a>.
 						</p>
 					</section>
 					<div class="inner-link-anchor" id="article-example"></div>
@@ -1810,13 +2003,13 @@ ApplicationConfiguration.registerModule('moduleName');
 							The AngularJS views render the data passed through the controller, in this case each view is a visual representation of a CRUD operation:
 						</p>
 						<dl>
-							<dt>create.html</dt>
+							<dt>create-article.client.view.html</dt>
 							<dd>The create.html view is used to create an article.</dd>
-							<dt>view.html</dt>
+							<dt>view-article.client.view.html</dt>
 							<dd>The view.html view is used to present a single article.</dd>
-							<dt>edit.html</dt>
+							<dt>edit-article.client.view.html</dt>
 							<dd>The edit view is used to update an article.</dd>
-							<dt>list.html</dt>
+							<dt>list-articles.client.view.html</dt>
 							<dd>The list view is used to view a list of articles.</dd>
 						</dl>
 						<h4>AngularJS Routes</h4>
@@ -1828,16 +2021,28 @@ ApplicationConfiguration.registerModule('moduleName');
 						</p>
 						<dl>
 							<dt>/#!/articles</dt>
-							<dd>When navigating to this URL, UI-Router will render the <b>list.html</b> view.</dd>
+							<dd>When navigating to this URL, UI-Router will render the <b>list-articles.client.view.html</b> view.</dd>
 							<dt>/#!/articles/create</dt>
-							<dd>When navigating to this URL, UI-Router will render the <b>create.html</b> view.</dd>
+							<dd>When navigating to this URL, UI-Router will render the <b>create-article.client.view.html</b> view.</dd>
 							<dt>/#!/articles/:articleId</dt>
-							<dd>When navigating to this URL, UI-Router will render the <b>view.html</b> view.</dd>
+							<dd>When navigating to this URL, UI-Router will render the <b>view-article.client.view.html</b> view.</dd>
 							<dt>/#!/articles/:articleId/edit</dt>
-							<dd>When navigating to this URL, UI-Router will render the <b>edit.html</b> view.</dd>
+							<dd>When navigating to this URL, UI-Router will render the <b>edit-article.client.view.html</b> view.</dd>
 						</dl>
 						<p class="alert alert-info">
 							Notice that we define a routing parameter called articleId, to grab it later in the controller and fetch the correct article.
+						</p>
+
+						<h4>AngularJS Menu Items</h4>
+						<p>
+							Your stack is bundled with an <a href="#menus">AngularJS Menus Service</a> that enables to add menu items directly from the module configuration file. In the article example you can see how the two menu items are added to the top bar menu in the <b>articles.client.config.js</b> file:
+<pre>angular.module('articles').run(['Menus',
+	function(Menus) {
+		// Set top bar menu items
+		Menus.addMenuItem('topbar', 'Articles', 'articles');
+		Menus.addMenuItem('topbar', 'New Article', 'articles/create');
+	}
+]);</pre>
 						</p>
 
 						<h4>AngularJS Unit Tests</h4>
