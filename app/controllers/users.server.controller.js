@@ -36,6 +36,9 @@ var getErrorMessage = function(err) {
  * Signup
  */
 exports.signup = function(req, res) {
+	// For security measurement we remove the roles from the req.body object
+	delete req.body.roles;
+	
 	// Init Variables
 	var user = new User(req.body);
 	var message = null;
@@ -44,6 +47,7 @@ exports.signup = function(req, res) {
 	user.provider = 'local';
 	user.displayName = user.firstName + ' ' + user.lastName;
 
+	// Then save the user 
 	user.save(function(err) {
 		if (err) {
 			return res.send(400, {
@@ -95,6 +99,9 @@ exports.update = function(req, res) {
 	// Init Variables
 	var user = req.user;
 	var message = null;
+
+	// For security measurement we remove the roles from the req.body object
+	delete req.body.roles;
 
 	if (user) {
 		// Merge existing user
@@ -233,7 +240,9 @@ exports.userByID = function(req, res, next, id) {
  */
 exports.requiresLogin = function(req, res, next) {
 	if (!req.isAuthenticated()) {
-		return res.send(401, 'User is not logged in');
+		return res.send(401, {
+			message: 'User is not logged in'
+		});
 	}
 
 	next();
@@ -242,12 +251,20 @@ exports.requiresLogin = function(req, res, next) {
 /**
  * User authorizations routing middleware
  */
-exports.hasAuthorization = function(req, res, next) {
-	if (req.profile.id !== req.user.id) {
-		return res.send(403, 'User is not authorized');
-	}
+exports.hasAuthorization = function(roles) {
+	var _this = this;
 
-	next();
+	return function(req, res, next) {
+		_this.requiresLogin(req, res, function() {
+			if (_.intersection(req.user.roles, roles).length) {
+				return next();
+			} else {
+				return res.send(403, {
+					message: 'User is not authorized'
+				});
+			}
+		});
+	};
 };
 
 /**
@@ -339,7 +356,7 @@ exports.removeOAuthProvider = function(req, res, next) {
 		// Delete the additional provider
 		if (user.additionalProvidersData[provider]) {
 			delete user.additionalProvidersData[provider];
-			
+
 			// Then tell mongoose that we've updated the additionalProvidersData field
 			user.markModified('additionalProvidersData');
 		}

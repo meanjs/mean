@@ -9,8 +9,8 @@
 		<a href="/#!/" class="navbar-brand">MEAN.JS</a>
 	</div>
 	<nav class="collapse navbar-collapse" collapse="!isCollapsed" role="navigation">
-		<ul class="nav navbar-nav" data-ng-show="authentication.user">
-			<li data-ng-repeat="item in menu" data-ng-show="authentication.user" ui-route="{{item.uiRoute}}" ng-class="{active: $uiRoute}">
+		<ul class="nav navbar-nav" data-ng-if="menu.shouldRender(authentication.user);">
+			<li data-ng-repeat="item in menu.items" data-ng-if="item.shouldRender(authentication.user);" ui-route="{{item.uiRoute}}" ng-class="{active: $uiRoute}">
 				<a href="/#!/{{item.link}}">{{item.title}}</a>
 			</li>
 		</ul>

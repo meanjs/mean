@@ -68,6 +68,13 @@ var UserSchema = new Schema({
 	},
 	providerData: {},
 	additionalProvidersData: {},
+	roles: {
+		type: [{
+			type: String,
+			enum: ['user', 'admin']
+		}],
+		default: ['user']
+	},
 	updated: {
 		type: Date
 	},
@@ -114,8 +121,10 @@ UserSchema.statics.findUniqueUsername = function(username, suffix, callback) {
 	var _this = this;
 	var possibleUsername = username + (suffix || '');
 
-	_this.findOne({username: possibleUsername}, function(err, user) {
-		if(!err) {
+	_this.findOne({
+		username: possibleUsername
+	}, function(err, user) {
+		if (!err) {
 			if (!user) {
 				callback(possibleUsername);
 			} else {

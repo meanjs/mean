@@ -3,10 +3,7 @@
 /**
  * Module dependencies.
  */
-var utilities = require('./config/utilities');
-
-// Grabbing module files using the walk function
-var modulesJSFiles = utilities.walk('./public/modules', /(.*)\.js$/);
+var applicationConfiguration = require('./config/config');
 
 // Karma configuration
 module.exports = function(config) {
@@ -15,18 +12,7 @@ module.exports = function(config) {
 		frameworks: ['jasmine'],
 
 		// List of files / patterns to load in the browser
-		files: [
-			'public/lib/angular/angular.js',
-			'public/lib/angular-animate/angular-animate.js',
-			'public/lib/angular-mocks/angular-mocks.js',
-			'public/lib/angular-cookies/angular-cookies.js',
-			'public/lib/angular-resource/angular-resource.js',
-			'public/lib/angular-bootstrap/ui-bootstrap.js',
-			'public/lib/angular-ui-utils/ui-utils.js',
-			'public/lib/angular-ui-router/release/angular-ui-router.js',
-			'public/js/config.js',
-			'public/js/application.js',
-		].concat(modulesJSFiles),
+		files: applicationConfiguration.assets.lib.js.concat(applicationConfiguration.assets.js, applicationConfiguration.assets.tests),
 
 		// Test results reporter to use
 		// Possible values: 'dots', 'progress', 'junit', 'growl', 'coverage'

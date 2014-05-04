@@ -3,7 +3,7 @@
         <h1>New Article</h1>
     </div>
     <div class="col-md-12">
-        <form class="form-horizontal" data-ng-submit="create()">
+        <form class="form-horizontal" data-ng-submit="create()" novalidate>
             <fieldset>
                 <div class="form-group">
                     <label class="control-label" for="title">Title</label>
@@ -20,6 +20,9 @@
                 <div class="form-group">
                     <input type="submit" class="btn btn-default">
                 </div>
+				<div data-ng-show="error" class="text-danger">
+					<strong>{{error}}</strong>
+				</div>
             </fieldset>
         </form>
     </div>
