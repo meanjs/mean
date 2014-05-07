@@ -14,7 +14,7 @@ module.exports = function() {
 	passport.use(new LinkedInStrategy({
 			consumerKey: config.linkedin.clientID,
 			consumerSecret: config.linkedin.clientSecret,
-			callbackURL: config.linkedin.callbackPath,
+			callbackURL: config.linkedin.callbackURL,
 			passReqToCallback: true,
 			profileFields: ['id', 'first-name', 'last-name', 'email-address']
 		},

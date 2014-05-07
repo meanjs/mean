@@ -14,7 +14,7 @@ module.exports = function() {
 	passport.use(new FacebookStrategy({
 			clientID: config.facebook.clientID,
 			clientSecret: config.facebook.clientSecret,
-			callbackURL: config.facebook.callbackPath,
+			callbackURL: config.facebook.callbackURL,
 			passReqToCallback: true
 		},
 		function(req, accessToken, refreshToken, profile, done) {
