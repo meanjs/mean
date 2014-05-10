@@ -10,13 +10,13 @@
 	</div>
 	<nav class="collapse navbar-collapse" collapse="!isCollapsed" role="navigation">
 		<ul class="nav navbar-nav" data-ng-if="menu.shouldRender(authentication.user);">
-			<li data-ng-repeat="item in menu.items" data-ng-if="item.shouldRender(authentication.user);" ng-switch="item.class" class="{{item.class}}" ui-route="{{item.uiRoute}}" ng-class="{active: $uiRoute}">
+			<li data-ng-repeat="item in menu.items" data-ng-if="item.shouldRender(authentication.user);" ng-switch="item.mClass" class="{{item.mClass}}" ui-route="{{item.uiRoute}}" ng-class="{active: $uiRoute}">
 				<a ng-switch-when="dropdown" href="#" class="dropdown-toggle" data-toggle="dropdown">
 		                    {{item.title}}
 		                    <b class="caret"></b>
 		                </a>
 		                <ul ng-switch-when="dropdown" class="dropdown-menu"> 
-		                    <li data-ng-repeat="subitem in item.subitems">
+		                    <li data-ng-repeat="subitem in item.subitems"  data-ng-if="subitem.shouldRender(authentication.user);" ui-route="{{subitem.uiRoute}}" ng-class="{active: $uiRoute}">
 		                        <a href="/#!/{{subitem.link}}">{{subitem.title}}</a>
 		                    </li>                
 		                </ul>

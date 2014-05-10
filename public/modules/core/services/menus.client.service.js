@@ -82,7 +82,7 @@ angular.module('core').service('Menus', [
 			this.menus[menuId].items.push({
 				title: menuItemTitle,
 				link: menuItemURL,
-				class: menuClass || '',
+				mClass: menuClass || '',
 				uiRoute: menuItemUIRoute || ('/' + menuItemURL),
 				isPublic: isPublic || this.menus[menuId].isPublic,
 				roles: roles || this.defaultRoles,
