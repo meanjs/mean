@@ -142,7 +142,7 @@ angular.module('core').service('Menus', [
 	            // Search for menu item to remove
 	            for (var itemIndex in this.menus[menuId].items) {
 	                for (var subitemIndex in this.menus[menuId].items[itemIndex].subitems) {
-	                    if (this.menus[menuId].items[itemIndex].subitems[subitemIndex].link === menuItemURL) {
+	                    if (this.menus[menuId].items[itemIndex].subitems[subitemIndex].link === submenuItemURL) {
 	                        this.menus[menuId].items[itemIndex].subitems.splice(subitemIndex, 1);
 	                    }
 	                }
