@@ -80,9 +80,9 @@ angular.module('core').service('Menus', [
 
 			// Push new menu item
 			this.menus[menuId].items.push({
-				class: (menuClass === 'dropdown') ? menuClass : '',
 				title: menuItemTitle,
 				link: menuItemURL,
+				class: menuClass || '',
 				uiRoute: menuItemUIRoute || ('/' + menuItemURL),
 				isPublic: isPublic || this.menus[menuId].isPublic,
 				roles: roles || this.defaultRoles,
