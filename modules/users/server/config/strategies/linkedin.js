@@ -5,17 +5,17 @@
  */
 var passport = require('passport'),
 	url = require('url'),
-	FacebookStrategy = require('passport-facebook').Strategy,
-	config = require('../config'),
-	users = require('../../app/controllers/users');
+	LinkedInStrategy = require('passport-linkedin').Strategy,
+	users = require('../../controllers/users');
 
-module.exports = function() {
-	// Use facebook strategy
-	passport.use(new FacebookStrategy({
-			clientID: config.facebook.clientID,
-			clientSecret: config.facebook.clientSecret,
-			callbackURL: config.facebook.callbackURL,
-			passReqToCallback: true
+module.exports = function(config) {
+	// Use linkedin strategy
+	passport.use(new LinkedInStrategy({
+			consumerKey: config.linkedin.clientID,
+			consumerSecret: config.linkedin.clientSecret,
+			callbackURL: config.linkedin.callbackURL,
+			passReqToCallback: true,
+			profileFields: ['id', 'first-name', 'last-name', 'email-address']
 		},
 		function(req, accessToken, refreshToken, profile, done) {
 			// Set the provider data and include tokens
@@ -30,7 +30,7 @@ module.exports = function() {
 				displayName: profile.displayName,
 				email: profile.emails[0].value,
 				username: profile.username,
-				provider: 'facebook',
+				provider: 'linkedin',
 				providerIdentifierField: 'id',
 				providerData: providerData
 			};

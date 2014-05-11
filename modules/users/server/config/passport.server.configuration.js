@@ -2,10 +2,13 @@
 
 var passport = require('passport'),
 	User = require('mongoose').model('User'),
-	path = require('path'),
-	config = require('./config');
+	path = require('path');
 
-module.exports = function() {
+module.exports = function(app, config) {
+	// use passport session
+	app.use(passport.initialize());
+	app.use(passport.session());
+
 	// Serialize sessions
 	passport.serializeUser(function(user, done) {
 		done(null, user.id);
@@ -21,7 +24,7 @@ module.exports = function() {
 	});
 
 	// Initialize strategies
-	config.getGlobbedFiles('./config/strategies/**/*.js').forEach(function(strategy) {
-		require(path.resolve(strategy))();
+	config.getGlobbedFiles(path.join(__dirname, 'strategies/*.js')).forEach(function(strategy) {
+		require(path.resolve(strategy))(config);
 	});
 };

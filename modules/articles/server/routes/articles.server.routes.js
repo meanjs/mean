@@ -3,8 +3,9 @@
 /**
  * Module dependencies.
  */
-var users = require('../../app/controllers/users'),
-	articles = require('../../app/controllers/articles');
+var path = require('path'),
+	users = require(path.resolve('./modules/users/server/controllers/users')),
+	articles = require('../controllers/articles');
 
 module.exports = function(app) {
 	// Article Routes

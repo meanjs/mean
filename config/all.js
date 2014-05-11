@@ -26,17 +26,17 @@ module.exports = {
 			]
 		},
 		css: [
-			'public/modules/**/css/*.css'
+			'modules/**/client/css/*.css'
 		],
 		js: [
 			'public/config.js',
 			'public/application.js',
-			'public/modules/*/*.js',
-			'public/modules/*/*[!tests]*/*.js'
+			'modules/*/client/*.js',
+			'modules/*/client/*[!tests]*/*.js'
 		],
 		tests: [
 			'public/lib/angular-mocks/angular-mocks.js',
-			'public/modules/*/tests/*.js'
+			'modules/*/client/tests/*.js'
 		]
 	}
 };

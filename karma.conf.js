@@ -3,7 +3,8 @@
 /**
  * Module dependencies.
  */
-var applicationConfiguration = require('./config/config');
+var MEAN = require('mean-core'),
+	application = new MEAN();
 
 // Karma configuration
 module.exports = function(config) {
@@ -12,7 +13,7 @@ module.exports = function(config) {
 		frameworks: ['jasmine'],
 
 		// List of files / patterns to load in the browser
-		files: applicationConfiguration.assets.lib.js.concat(applicationConfiguration.assets.js, applicationConfiguration.assets.tests),
+		files: application.config.assets.lib.js.concat(application.config.assets.js, application.config.assets.tests),
 
 		// Test results reporter to use
 		// Possible values: 'dots', 'progress', 'junit', 'growl', 'coverage'

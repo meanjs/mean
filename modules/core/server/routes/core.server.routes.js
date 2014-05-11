@@ -2,6 +2,6 @@
 
 module.exports = function(app) {
 	// Root routing
-	var core = require('../../app/controllers/core');
+	var core = require('../controllers/core');
 	app.route('/').get(core.index);
 };
