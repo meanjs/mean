@@ -47,15 +47,9 @@ describe('User Model Unit Tests:', function() {
             });
         });
 
-<<<<<<< HEAD
 		it('should be able to save without problems', function(done) {
 			user.save(done);
 		});
-=======
-        it('should be able to save whithout problems', function(done) {
-            user.save(done);
-        });
->>>>>>> pr/63
 
         it('should fail to save an existing user again', function(done) {
             user.save();
