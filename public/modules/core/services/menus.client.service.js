@@ -74,7 +74,7 @@ angular.module('core').service('Menus', [
 		};
 
 		// Add menu item object
-		this.addMenuItem = function(menuId, menuItemTitle, menuItemURL, menuItemUIRoute, isPublic, roles) {
+		this.addMenuItem = function(menuId, menuItemTitle, menuItemURL, menuClass, menuItemUIRoute, isPublic, roles) {
 			// Validate that the menu exists
 			this.validateMenuExistance(menuId);
 
@@ -82,15 +82,41 @@ angular.module('core').service('Menus', [
 			this.menus[menuId].items.push({
 				title: menuItemTitle,
 				link: menuItemURL,
+				mClass: menuClass || '',
 				uiRoute: menuItemUIRoute || ('/' + menuItemURL),
 				isPublic: isPublic || this.menus[menuId].isPublic,
 				roles: roles || this.defaultRoles,
+                		subitems: [],
 				shouldRender: shouldRender
 			});
 
 			// Return the menu object
 			return this.menus[menuId];
 		};
+		
+		// Add submenu item object
+	        this.addSubMenuItem = function(menuId, rootMenuItemURL, menuItemTitle, menuItemURL, menuItemUIRoute, isPublic, roles) {
+	            // Validate that the menu exists
+	            this.validateMenuExistance(menuId);
+	
+	            // Search for menu item
+	            for (var itemIndex in this.menus[menuId].items) {
+	                if (this.menus[menuId].items[itemIndex].link === rootMenuItemURL) {
+	                    // Push new submenu item
+	                    this.menus[menuId].items[itemIndex].subitems.push({
+	                        title: menuItemTitle,
+	                        link: menuItemURL,
+	                        uiRoute: menuItemUIRoute || ('/' + menuItemURL),
+	                        isPublic: isPublic || this.menus[menuId].isPublic,
+	                        roles: roles || this.defaultRoles,
+	                        shouldRender: shouldRender
+	                    });
+	                }
+	            }                        
+	
+	            // Return the menu object
+	            return this.menus[menuId];
+	        };
 
 		// Remove existing menu object by menu id
 		this.removeMenuItem = function(menuId, menuItemURL) {
@@ -107,6 +133,24 @@ angular.module('core').service('Menus', [
 			// Return the menu object
 			return this.menus[menuId];
 		};
+		
+		// Remove existing menu object by menu id
+	        this.removeSubMenuItem = function(menuId, submenuItemURL) {
+	            // Validate that the menu exists
+	            this.validateMenuExistance(menuId);
+	
+	            // Search for menu item to remove
+	            for (var itemIndex in this.menus[menuId].items) {
+	                for (var subitemIndex in this.menus[menuId].items[itemIndex].subitems) {
+	                    if (this.menus[menuId].items[itemIndex].subitems[subitemIndex].link === submenuItemURL) {
+	                        this.menus[menuId].items[itemIndex].subitems.splice(subitemIndex, 1);
+	                    }
+	                }
+	            }
+	
+	            // Return the menu object
+	            return this.menus[menuId];
+	        };
 
 		//Adding the topbar menu
 		this.addMenu('topbar');
