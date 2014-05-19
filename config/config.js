@@ -34,7 +34,7 @@ module.exports.getGlobbedFiles = function(globPatterns, removeRoot) {
         });
     } else if (_.isString(globPatterns)) {
         if (urlRegex.test(globPatterns)) {
-        	output.push(globPatterns);
+            output.push(globPatterns);
         } else {
             glob(globPatterns, {
                 sync: true
