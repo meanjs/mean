@@ -82,11 +82,11 @@ angular.module('core').service('Menus', [
 			this.menus[menuId].items.push({
 				title: menuItemTitle,
 				link: menuItemURL,
-				mClass: menuClass || '',
+				menuClass: menuClass || '',
 				uiRoute: menuItemUIRoute || ('/' + menuItemURL),
 				isPublic: isPublic || this.menus[menuId].isPublic,
 				roles: roles || this.defaultRoles,
-				subitems: [],
+				items: [],
 				shouldRender: shouldRender
 			});
 
@@ -103,7 +103,7 @@ angular.module('core').service('Menus', [
 			for (var itemIndex in this.menus[menuId].items) {
 				if (this.menus[menuId].items[itemIndex].link === rootMenuItemURL) {
 					// Push new submenu item
-					this.menus[menuId].items[itemIndex].subitems.push({
+					this.menus[menuId].items[itemIndex].items.push({
 						title: menuItemTitle,
 						link: menuItemURL,
 						uiRoute: menuItemUIRoute || ('/' + menuItemURL),
@@ -141,9 +141,9 @@ angular.module('core').service('Menus', [
 
 			// Search for menu item to remove
 			for (var itemIndex in this.menus[menuId].items) {
-				for (var subitemIndex in this.menus[menuId].items[itemIndex].subitems) {
-					if (this.menus[menuId].items[itemIndex].subitems[subitemIndex].link === submenuItemURL) {
-						this.menus[menuId].items[itemIndex].subitems.splice(subitemIndex, 1);
+				for (var subitemIndex in this.menus[menuId].items[itemIndex].items) {
+					if (this.menus[menuId].items[itemIndex].items[subitemIndex].link === submenuItemURL) {
+						this.menus[menuId].items[itemIndex].items.splice(subitemIndex, 1);
 					}
 				}
 			}
