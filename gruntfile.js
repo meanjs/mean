@@ -55,13 +55,20 @@ module.exports = function(grunt) {
                 src: ['public/modules/**/css/*.css']
             }
         },
+        ngmin: {
+            production: {
+                files: {
+                    'public/dist/application.js': '<%= applicationJavaScriptFiles %>'
+                }
+            }
+        },
         uglify: {
             production: {
                 options: {
                     mangle: false
                 },
                 files: {
-                    'public/dist/application.min.js': '<%= applicationJavaScriptFiles %>'
+                    'public/dist/application.min.js': 'public/dist/application.js'
                 }
             }
         },
@@ -127,7 +134,7 @@ module.exports = function(grunt) {
     grunt.registerTask('lint', ['jshint', 'csslint']);
 
     // Build task(s).
-    grunt.registerTask('build', ['jshint', 'csslint', 'loadConfig' ,'uglify', 'cssmin']);
+    grunt.registerTask('build', ['jshint', 'csslint', 'loadConfig', 'ngmin', 'uglify', 'cssmin']);
 
     // Test task.
     grunt.registerTask('test', ['env:test', 'mochaTest', 'karma:unit']);
