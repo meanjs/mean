@@ -80,8 +80,22 @@ module.exports = function(grunt) {
                 }
             }
         },
+        'node-inspector': {
+            custom: {
+                options: {
+                    'web-port': 1337,
+                    'web-host': 'localhost',
+                    'debug-port': 5858,
+                    'save-live-edit': true,
+                    'no-preload': true,
+                    'stack-trace-limit': 50,
+                    'hidden': []
+                }
+            }
+        },
         concurrent: {
-            tasks: ['nodemon', 'watch'],
+            default: ['nodemon', 'watch'],
+            debug: ['nodemon', 'watch', 'node-inspector'],
             options: {
                 logConcurrentOutput: true
             }
@@ -121,7 +135,10 @@ module.exports = function(grunt) {
     });
 
     // Default task(s).
-    grunt.registerTask('default', ['jshint', 'csslint', 'concurrent']);
+    grunt.registerTask('default', ['jshint', 'csslint', 'concurrent:default']);
+
+    // Debug task.
+    grunt.registerTask('debug', ['jshint', 'csslint', 'concurrent:debug']);
 
     // Lint task(s).
     grunt.registerTask('lint', ['jshint', 'csslint']);
