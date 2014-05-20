@@ -216,6 +216,9 @@
 						<p>
 							The recommended way would be to use the <a href="http://meanjs.org/generator.html">official Yo Generator</a> which will generate the latest stable copy of the MEAN.JS boilerplate and supply multiple sub-generators to ease your daily development cycles.
 						</p>
+						<p class="alert alert-info">
+							<b>Note:</b> If you want to support <em>git merge</em> updates it would be better to use <em>git clone</em> for your initial project creation, don't worry you'd still be able use the generator.
+						</p>
 						<h3>Cloning The GitHub Repository</h3>
 							<p>
 								You can also use Git to directly clone the MEAN.JS repository:
@@ -1011,6 +1014,31 @@
 								<h4>Default</h4>
 								<p>
 									The default task is the task that runs when you type 'grunt' in your command-line, the default task consists of three sub-tasks:
+								</p>
+								<ul>
+									<li>
+										<h5>JSHint</h5>
+										<p>Linter task that keep your JavaScript code free of common mistakes and syntax errors.</p>
+									</li>
+									<li>
+										<h5>CSSLint</h5>
+										<p>Linter task that keep your CSS code free of common mistakes and syntax errors.</p>
+									</li>
+									<li>
+										<h5>Watch</h5>
+										<p>This watches your file system for changes and automatically reloads the application whenever you change certain files.</p>
+									</li>
+									<li>
+										<h5>Nodemon</h5>
+										<p>This runs your Node.js application using nodemon.</p>
+									</li>
+								</ul>
+								<p>Please notice that the last two tasks are wrapped with another task called <b>Concurrent</b> to keep the application continuously running.</p>
+							</li>
+							<li>
+								<h4>Debug</h4>
+								<p>
+									Same as default but will also start node-inspector for debugging.
 								</p>
 								<ul>
 									<li>
