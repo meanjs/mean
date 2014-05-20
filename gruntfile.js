@@ -1,47 +1,57 @@
 'use strict';
 
 module.exports = function(grunt) {
+	// Unified Watch Object
+	var watchFiles = {
+		serverViews: ['app/views/**/*.*'], 
+		serverJS: ['gruntfile.js', 'server.js', 'config/**/*.js', 'app/**/*.js'],
+		clientViews: ['public/modules/**/views/*.html'],
+		clientJS: ['public/js/*.js', 'public/modules/**/*.js'],
+		clientCSS: ['public/modules/**/*.css'],
+		mochaTests: ['app/tests/**/*.js']
+	};
+
 	// Project Configuration
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
 		watch: {
 			serverViews: {
-				files: ['app/views/**'],
+				files: watchFiles.serverViews,
 				options: {
-					livereload: true,
+					livereload: true
 				}
 			},
 			serverJS: {
-				files: ['gruntfile.js', 'server.js', 'config/**/*.js', 'app/**/*.js'],
+				files: watchFiles.serverJS,
 				tasks: ['jshint'],
 				options: {
-					livereload: true,
+					livereload: true
 				}
 			},
 			clientViews: {
-				files: ['public/modules/**/views/*.html'],
+				files: watchFiles.clientViews,
 				options: {
 					livereload: true,
 				}
 			},
 			clientJS: {
-				files: ['public/js/*.js', 'public/modules/**/*.js'],
+				files: watchFiles.clientJS,
 				tasks: ['jshint'],
 				options: {
-					livereload: true,
+					livereload: true
 				}
 			},
 			clientCSS: {
-				files: ['public/**/css/*.css'],
+				files: watchFiles.clientCSS,
 				tasks: ['csslint'],
 				options: {
-					livereload: true,
+					livereload: true
 				}
 			}
 		},
 		jshint: {
 			all: {
-				src: ['gruntfile.js', 'server.js', 'config/**/*.js', 'app/**/*.js', 'public/js/**/*.js', 'public/modules/**/*.js'],
+				src: watchFiles.clientJS.concat(watchFiles.serverJS),
 				options: {
 					jshintrc: true
 				}
@@ -52,7 +62,7 @@ module.exports = function(grunt) {
 				csslintrc: '.csslintrc',
 			},
 			all: {
-				src: ['public/modules/**/css/*.css']
+				src: watchFiles.clientCSS
 			}
 		},
 		uglify: {
@@ -76,7 +86,9 @@ module.exports = function(grunt) {
 			dev: {
 				script: 'server.js',
 				options: {
-					nodeArgs: ['--debug']
+					nodeArgs: ['--debug'],
+					ext: 'js, html',
+					watch: watchFiles.serverViews.concat(watchFiles.serverJS)
 				}
 			}
 		},
@@ -113,7 +125,7 @@ module.exports = function(grunt) {
 			}
 		},
 		mochaTest: {
-			src: ['app/tests/**/*.js'],
+			src: watchFiles.mochaTests,
 			options: {
 				reporter: 'spec',
 				require: 'server.js'
