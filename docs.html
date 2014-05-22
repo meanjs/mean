@@ -134,7 +134,7 @@
 				</div>
 				<section class="col-md-10 col-md-offset-2">
 					<i class="small text-muted">
-						Last updated: 04 May 2014.
+						Last updated: 20 May 2014.
 					</i>
 
 					<div class="inner-link-anchor" id="overview"></div>
@@ -876,6 +876,10 @@
 							<dd>
 								<a target="_blank" href="https://github.com/visionmedia/should.js/">Should</a> is an <a target="_blank" href="http://en.wikipedia.org/wiki/Assertion_(software_development)">assertion library</a> for BDD testing.
 							</dd>
+							<dt>Grunt-Node-Inspector</dt>
+							<dd>
+								<a target="_blank" href="https://github.com/ChrisWren/grunt-node-inspector">Grunt-Node-Inspector</a> is grunt task that that runs the <a href="https://github.com/node-inspector/node-inspector">node-inspector</a> debugging tool for Node.js applications.
+							</dd>
 							<dt>Grunt-Contrib-Watch</dt>
 							<dd>
 								<a target="_blank" href="https://github.com/gruntjs/grunt-contrib-watch">Grunt-Contrib-Watch</a> is a grunt task that runs tasks whenever watched file change.
@@ -887,6 +891,10 @@
 							<dt>Grunt-Contrib-CSSLint</dt>
 							<dd>
 								<a target="_blank" href="https://github.com/gruntjs/grunt-contrib-csslint">Grunt-Contrib-CSSLint</a> is a grunt task that lint CSS files using <a target="_blank" href="https://github.com/CSSLint/csslint">JSHint</a>.
+							</dd>
+							<dt>Grunt-NGmin</dt>
+							<dd>
+								<a target="_blank" href="https://github.com/btford/ngmin">Grunt-NGmin</a> is a grunt task that pre-minifies AngularJS files.
 							</dd>
 							<dt>Grunt-Contrib-Uglify</dt>
 							<dd>
@@ -1057,6 +1065,10 @@
 										<h5>Nodemon</h5>
 										<p>This runs your Node.js application using nodemon.</p>
 									</li>
+									<li>
+										<h5>Node-Inspector</h5>
+										<p>This runs the <a href="https://github.com/node-inspector/node-inspector">node-inspector</a> debugging module.</p>
+									</li>
 								</ul>
 								<p>Please notice that the last two tasks are wrapped with another task called <b>Concurrent</b> to keep the application continuously running.</p>
 							</li>
@@ -1093,6 +1105,10 @@
 									<li>
 										<h5>LoadConfig</h5>
 										<p>A task that loads the environmental configuration file for the uglify and cssmin tasks.</p>
+									</li>
+									<li>
+										<h5>NGMin</h5>
+										<p>A task that pre-minifies AngularJS files.</p>
 									</li>
 									<li>
 										<h5>Uglify</h5>
@@ -1832,7 +1848,34 @@ ApplicationConfiguration.registerModule('moduleName');
 								Creates a new menu item object. This method also include couple of arguments:
 								<ol>
 									<li>
-										<b>menuId</b> (Required) - Indicates the menu identifier for future reference.
+										<b>menuId</b> (Required) - Indicates the menu identifier.
+									</li>
+									<li>
+										<b>menuItemTitle</b> (Required) - A String title for the menu item.
+									</li>
+									<li>
+										<b>menuItemURL</b> (Required) - The path this menu item will link to.
+									</li>
+									<li>
+										<b>menuItemUIRoute</b> (Optional; Default: menuItemURL) - The UIRoute value, which is used to define the URL scheme where this menu item is marked as active.
+									</li>
+									<li>
+										<b>isPublic</b> (Optional; Default: menu.isPublic)  - Indicates whether a menu item should be displayed only to authenticated users.
+									</li>
+									<li>
+										<b>roles</b> (Optional; Default: ['user']) - An array indicating the roles that are allowed to view this menu item.
+									</li>
+								</ol>
+							</dd>
+							<dt>Menus.addSubMenuItem(menuId, rootMenuItemURL, menuItemTitle, menuItemURL, [menuItemUIRoute], [isPublic], [roles]);</dt>
+							<dd>
+								Adds a submenu item to an existing item object. This method also include couple of arguments:
+								<ol>
+									<li>
+										<b>menuId</b> (Required) - Indicates the menu identifier.
+									</li>
+									<li>
+										<b>rootMenuItemURL</b> (Required) - Indicates the root menu item identifier.
 									</li>
 									<li>
 										<b>menuItemTitle</b> (Required) - A String title for the menu item.
@@ -2067,8 +2110,9 @@ ApplicationConfiguration.registerModule('moduleName');
 <pre>angular.module('articles').run(['Menus',
 	function(Menus) {
 		// Set top bar menu items
-		Menus.addMenuItem('topbar', 'Articles', 'articles');
-		Menus.addMenuItem('topbar', 'New Article', 'articles/create');
+		Menus.addMenuItem('topbar', 'Articles', 'articles', 'dropdown', '/articles(/create)?');
+		Menus.addSubMenuItem('topbar', 'articles', 'List Articles', 'articles');
+		Menus.addSubMenuItem('topbar', 'articles', 'New Article', 'articles/create');
 	}
 ]);</pre>
 						</p>
