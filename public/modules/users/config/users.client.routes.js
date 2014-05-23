@@ -24,6 +24,14 @@ angular.module('users').config(['$stateProvider',
 		state('signin', {
 			url: '/signin',
 			templateUrl: 'modules/users/views/signin.client.view.html'
+		}).
+		state('forgot', {
+			url: '/forgot',
+			templateUrl: 'modules/users/views/forgot.client.view.html'
+		}).
+		state('reset', {
+			url: '/reset/:token',
+			templateUrl: 'modules/users/views/reset.client.view.html'
 		});
 	}
 ]);
