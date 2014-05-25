@@ -320,7 +320,7 @@ exports.saveOAuthUserProfile = function(req, providerUserProfile, done) {
 		});
 	} else {
 		// User is already logged in, join the provider data to the existing user
-		User.findById(req.user.id, function(err, user) {
+		User.findById(req.user.id, '-salt -password', function(err, user) {
 			if (err) {
 				return done(err);
 			} else {
