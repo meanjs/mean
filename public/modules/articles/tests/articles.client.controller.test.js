@@ -8,7 +8,8 @@
 			scope,
 			$httpBackend,
 			$stateParams,
-			$location;
+			$location,
+			sampleArticles;
 
 		// The $resource service augments the response object with methods for updating and deleting the resource.
 		// If we were to use the standard toEqual matcher, our tests would fail because the test values would not match
@@ -50,23 +51,25 @@
 			});
 		}));
 
-		it('$scope.find() should create an array with at least one article object fetched from XHR', inject(function(Articles) {
+		// Handle controller initialization logic and data fixtures
+		beforeEach(inject(function(Articles) {
 			// Create sample article using the Articles service
 			var sampleArticle = new Articles({
 				title: 'An Article about MEAN',
 				content: 'MEAN rocks!'
 			});
 
-			// Create a sample articles array that includes the new article
-			var sampleArticles = [sampleArticle];
+			// Add the sample article to the sampleArticles array
+			sampleArticles = [sampleArticle];
 
 			// Set GET response
 			$httpBackend.expectGET('articles').respond(sampleArticles);
 
-			// Run controller functionality
-			scope.find();
+			// Run the controller initialization functionality
 			$httpBackend.flush();
+		}));
 
+		it('should update the list of Articles on initialization', inject(function(Articles) {
 			// Test scope value
 			expect(scope.articles).toEqualData(sampleArticles);
 		}));
