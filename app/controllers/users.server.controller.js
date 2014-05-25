@@ -38,7 +38,7 @@ var getErrorMessage = function(err) {
 exports.signup = function(req, res) {
 	// For security measurement we remove the roles from the req.body object
 	delete req.body.roles;
-	
+
 	// Init Variables
 	var user = new User(req.body);
 	var message = null;
@@ -320,28 +320,24 @@ exports.saveOAuthUserProfile = function(req, providerUserProfile, done) {
 		});
 	} else {
 		// User is already logged in, join the provider data to the existing user
-		User.findById(req.user.id, function(err, user) {
-			if (err) {
-				return done(err);
-			} else {
-				// Check if user exists, is not signed in using this provider, and doesn't have that provider data already configured
-				if (user && user.provider !== providerUserProfile.provider && (!user.additionalProvidersData || !user.additionalProvidersData[providerUserProfile.provider])) {
-					// Add the provider data to the additional provider data field
-					if (!user.additionalProvidersData) user.additionalProvidersData = {};
-					user.additionalProvidersData[providerUserProfile.provider] = providerUserProfile.providerData;
+		var user = req.user;
 
-					// Then tell mongoose that we've updated the additionalProvidersData field
-					user.markModified('additionalProvidersData');
+		// Check if user exists, is not signed in using this provider, and doesn't have that provider data already configured
+		if (user.provider !== providerUserProfile.provider && (!user.additionalProvidersData || !user.additionalProvidersData[providerUserProfile.provider])) {
+			// Add the provider data to the additional provider data field
+			if (!user.additionalProvidersData) user.additionalProvidersData = {};
+			user.additionalProvidersData[providerUserProfile.provider] = providerUserProfile.providerData;
 
-					// And save the user
-					user.save(function(err) {
-						return done(err, user, '/#!/settings/accounts');
-					});
-				} else {
-					return done(err, user);
-				}
-			}
-		});
+			// Then tell mongoose that we've updated the additionalProvidersData field
+			user.markModified('additionalProvidersData');
+
+			// And save the user
+			user.save(function(err) {
+				return done(err, user, '/#!/settings/accounts');
+			});
+		} else {
+			return done(new Error('User is already connected using this provider'), user);
+		}
 	}
 };
 

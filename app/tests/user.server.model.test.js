@@ -47,7 +47,7 @@ describe('User Model Unit Tests:', function() {
 			});
 		});
 
-		it('should be able to save whithout problems', function(done) {
+		it('should be able to save without problems', function(done) {
 			user.save(done);
 		});
 
