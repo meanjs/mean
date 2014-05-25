@@ -45,16 +45,14 @@ angular.module('articles').controller('ArticlesController', ['$scope', '$statePa
 			});
 		};
 
+		$scope.find = function() {
+			$scope.articles = Articles.query();
+		};
+
 		$scope.findOne = function() {
 			$scope.article = Articles.get({
 				articleId: $stateParams.articleId
 			});
 		};
-
-		$scope.find = function() {
-			$scope.articles = Articles.query();
-		};
-
-		updateArticleList();
 	}
 ]);
