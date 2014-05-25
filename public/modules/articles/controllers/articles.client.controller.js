@@ -2,6 +2,10 @@
 
 angular.module('articles').controller('ArticlesController', ['$scope', '$stateParams', '$location', 'Authentication', 'Articles',
 	function($scope, $stateParams, $location, Authentication, Articles) {
+		function updateArticleList() {
+			$scope.articles = Articles.query();
+		}
+
 		$scope.authentication = Authentication;
 
 		$scope.create = function() {
@@ -45,14 +49,12 @@ angular.module('articles').controller('ArticlesController', ['$scope', '$statePa
 			});
 		};
 
-		$scope.find = function() {
-			$scope.articles = Articles.query();
-		};
-
 		$scope.findOne = function() {
 			$scope.article = Articles.get({
 				articleId: $stateParams.articleId
 			});
 		};
+
+		updateArticleList();
 	}
 ]);
