@@ -87,7 +87,7 @@ module.exports = function(grunt) {
 				script: 'server.js',
 				options: {
 					nodeArgs: ['--debug'],
-					ext: 'js, html',
+					ext: 'js,html',
 					watch: watchFiles.serverViews.concat(watchFiles.serverJS)
 				}
 			}
