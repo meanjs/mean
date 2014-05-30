@@ -1,17 +1,44 @@
 'use strict';
 
+<<<<<<< HEAD
 angular.module('users').controller('AuthenticationController', ['$scope', '$http', '$location', 'Authentication',
-    function($scope, $http, $location, Authentication) {
+	function($scope, $http, $location, Authentication) {
+		$scope.authentication = Authentication;
+=======
+angular.module('users').controller('AuthenticationController', ['$scope', '$stateParams', '$http', '$location', 'Authentication',
+    function($scope, $stateParams, $http, $location, Authentication) {
         $scope.authentication = Authentication;
+>>>>>>> pr/73
 
-        //If user is signed in then redirect back home
-        if ($scope.authentication.user) $location.path('/');
+		//If user is signed in then redirect back home
+		if ($scope.authentication.user) $location.path('/');
 
-        $scope.signup = function() {
-            $http.post('/auth/signup', $scope.credentials).success(function(response) {
-                //If successful we assign the response to the global user model
-                $scope.authentication.user = response;
+		$scope.signup = function() {
+			$http.post('/auth/signup', $scope.credentials).success(function(response) {
+				//If successful we assign the response to the global user model
+				$scope.authentication.user = response;
 
+				//And redirect to the index page
+				$location.path('/');
+			}).error(function(response) {
+				$scope.error = response.message;
+			});
+		};
+
+		$scope.signin = function() {
+			$http.post('/auth/signin', $scope.credentials).success(function(response) {
+				//If successful we assign the response to the global user model
+				$scope.authentication.user = response;
+
+<<<<<<< HEAD
+				//And redirect to the index page
+				$location.path('/');
+			}).error(function(response) {
+				$scope.error = response.message;
+			});
+		};
+	}
+=======
                 //And redirect to the index page
                 $location.path('/');
             }).error(function(response) {
@@ -19,16 +46,37 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$http
             });
         };
 
-        $scope.signin = function() {
-            $http.post('/auth/signin', $scope.credentials).success(function(response) {
-                //If successful we assign the response to the global user model
-                $scope.authentication.user = response;
+        $scope.forgot = function() {
+            $scope.success = $scope.error = null;
 
-                //And redirect to the index page
-                $location.path('/');
+            $http.post('/auth/forgot', $scope.credentials).success(function(response) {
+                // Show user success message and clear form
+                $scope.credentials = null;
+                $scope.success = response.message;
+
+            }).error(function(response) {
+                // Show user error message and clear form
+                $scope.credentials = null;
+                $scope.error = response.message;
+            });
+        };
+
+        // Change user password
+        $scope.reset = function() {
+            $scope.success = $scope.error = null;
+
+            $http.post('/auth/reset/' + $stateParams.token, 
+                            $scope.passwordDetails).success(function(response) {
+                
+                // If successful show success message and clear form
+                $scope.success = response.message;
+                $scope.passwordDetails = null;
+
             }).error(function(response) {
                 $scope.error = response.message;
             });
         };
+
     }
+>>>>>>> pr/73
 ]);

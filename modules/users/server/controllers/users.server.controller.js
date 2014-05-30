@@ -7,6 +7,12 @@ var mongoose = require('mongoose'),
 	passport = require('passport'),
 	User = mongoose.model('User'),
 	_ = require('lodash');
+	/* Requires for reset password */
+var	nodemailer = require('nodemailer');
+var	LocalStrategy = require('passport-local').Strategy;
+var	bcrypt = require('bcrypt-nodejs');
+var	async = require('async');
+var	crypto = require('crypto');
 
 /**
  * Get the error message from error object
@@ -38,7 +44,7 @@ var getErrorMessage = function(err) {
 exports.signup = function(req, res) {
 	// For security measurement we remove the roles from the req.body object
 	delete req.body.roles;
-	
+
 	// Init Variables
 	var user = new User(req.body);
 	var message = null;
@@ -90,6 +96,160 @@ exports.signin = function(req, res, next) {
 			});
 		}
 	})(req, res, next);
+};
+
+/**
+ * Forgot for reset password (forgot POST)
+ */
+exports.forgot = function(req, res, next) {
+    async.waterfall([
+    	// Generate random token
+        function(done) {
+            crypto.randomBytes(20, function(err, buf) {
+                var token = buf.toString('hex');
+                done(err, token);
+            });
+        },
+        // Lookup user by email address
+        function(token, done) {
+        	if (req.body.email) {
+	        	User.findOne({ email: req.body.email }, function(err, user) {
+	          		if (!user) {
+	            		return res.send(400, {
+							message: 'No account with that email address exists'
+						});
+	          		}
+
+	          		user.resetPasswordToken = token;
+	          		user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
+
+	          		user.save(function(err) {
+	          		    done(err, token, user);
+	          		});
+	        	});
+	        } else {
+	        	return res.send(400, {
+	        		message: 'Email field must not be blank'
+	        	});
+	        }
+
+      	},
+      	// If valid email, send reset email using service
+      	function(token, user, done) {
+      		var smtpTransport = nodemailer.createTransport('SMTP', {
+        		service: 'SendGrid', // Choose email service, default SendGrid
+        		auth: {
+          			user: 'your_sendgrid_email@domain.com',
+          			pass: 'your_sendgrid_password'
+        		}
+      		});
+      		var mailOptions = {
+        		to: user.email,
+        		from: 'your_email@domain.com',
+        		subject: 'Password Reset',
+        		text: 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
+          		'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
+          		'http://' + req.headers.host + '/auth/reset/' + token + '\n\n' +
+          		'If you did not request this, please ignore this email and your password will remain unchanged.\n'
+      		};
+      		smtpTransport.sendMail(mailOptions, function(err) {
+      			res.send(200, {
+					message: 'An email has been sent to ' + user.email + ' with further instructions.'
+				});
+				done(err, 'done');
+      		});
+    	}
+    ], function(err) {
+    	if (err) return next(err);
+  	});
+};
+
+/**
+ * Reset password GET from email token
+ */
+exports.resetGet = function(req, res) {
+  	User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
+    	if (!user) {
+    		// res.render('404');
+       		res.send(400, {
+					message: 'Password reset token is invalid or has expired.'
+			});
+      		return res.redirect('/#!/forgot');
+    	}
+
+  		res.redirect('/#!/reset/' + req.params.token);
+
+  	});
+};
+
+/**
+ * Reset password POST from email token
+ */
+exports.resetPost = function(req, res) {
+	// Init Variables
+    var passwordDetails = req.body;
+    var message = null;
+
+	async.waterfall([
+    	function(done) {
+      		User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
+	            if (!err && user) {
+                    if (passwordDetails.newPassword === passwordDetails.verifyPassword) {
+                        user.password = passwordDetails.newPassword;
+                        user.resetPasswordToken = undefined;
+        				user.resetPasswordExpires = undefined;
+
+                        user.save(function(err) {
+                            if (err) {
+                                return res.send(400, {
+                                    message: getErrorMessage(err)
+                                });
+                            } else {
+                                req.login(user, function(err) {
+                                    if (err) {
+                                        res.send(400, err);
+                                    } else {
+                                        done(err, user);
+                                    }
+                                });
+                            }
+                        });
+                    } else {
+                        return res.send(400, {
+                            message: 'Passwords do not match'
+                        });
+                    }
+	            } else {
+	                return res.send(400, {
+	                    message: 'Password reset token is invalid or has expired.'
+	                });
+	            }
+      		});
+    	},
+    	function(user, done) {
+      		var smtpTransport = nodemailer.createTransport('SMTP', {
+        		service: 'SendGrid',
+        		auth: {
+          			user: 'your_sendgrid_email@domain.com',
+          			pass: 'your_sendgrid_password'
+        		}
+      		});
+      		var mailOptions = {
+        		to: user.email,
+        		from: 'your_email@domain.com',
+        		subject: 'Your password has been changed',
+        		text: 'Hello,\n\n' +
+          		'This is a confirmation that the password for your account ' + user.email + ' has just been changed.\n'
+      		};
+      		smtpTransport.sendMail(mailOptions, function(err) {
+      			res.send(200, {
+					message: 'Password changed successfully'
+				});
+      		});
+    	}
+  	], function(err) {
+    	res.redirect('/');
+  	});
 };
 
 /**
@@ -320,28 +480,24 @@ exports.saveOAuthUserProfile = function(req, providerUserProfile, done) {
 		});
 	} else {
 		// User is already logged in, join the provider data to the existing user
-		User.findById(req.user.id, function(err, user) {
-			if (err) {
-				return done(err);
-			} else {
-				// Check if user exists, is not signed in using this provider, and doesn't have that provider data already configured
-				if (user && user.provider !== providerUserProfile.provider && (!user.additionalProvidersData || !user.additionalProvidersData[providerUserProfile.provider])) {
-					// Add the provider data to the additional provider data field
-					if (!user.additionalProvidersData) user.additionalProvidersData = {};
-					user.additionalProvidersData[providerUserProfile.provider] = providerUserProfile.providerData;
+		var user = req.user;
 
-					// Then tell mongoose that we've updated the additionalProvidersData field
-					user.markModified('additionalProvidersData');
+		// Check if user exists, is not signed in using this provider, and doesn't have that provider data already configured
+		if (user.provider !== providerUserProfile.provider && (!user.additionalProvidersData || !user.additionalProvidersData[providerUserProfile.provider])) {
+			// Add the provider data to the additional provider data field
+			if (!user.additionalProvidersData) user.additionalProvidersData = {};
+			user.additionalProvidersData[providerUserProfile.provider] = providerUserProfile.providerData;
 
-					// And save the user
-					user.save(function(err) {
-						return done(err, user, '/#!/settings/accounts');
-					});
-				} else {
-					return done(err, user);
-				}
-			}
-		});
+			// Then tell mongoose that we've updated the additionalProvidersData field
+			user.markModified('additionalProvidersData');
+
+			// And save the user
+			user.save(function(err) {
+				return done(err, user, '/#!/settings/accounts');
+			});
+		} else {
+			return done(new Error('User is already connected using this provider'), user);
+		}
 	}
 };
 
