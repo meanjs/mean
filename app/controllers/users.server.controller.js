@@ -140,45 +140,51 @@ exports.changePassword = function(req, res, next) {
 	var message = null;
 
 	if (req.user) {
-		User.findById(req.user.id, function(err, user) {
-			if (!err && user) {
-				if (user.authenticate(passwordDetails.currentPassword)) {
-					if (passwordDetails.newPassword === passwordDetails.verifyPassword) {
-						user.password = passwordDetails.newPassword;
+		if (passwordDetails.newPassword) {
+			User.findById(req.user.id, function(err, user) {
+				if (!err && user) {
+					if (user.authenticate(passwordDetails.currentPassword)) {
+						if (passwordDetails.newPassword === passwordDetails.verifyPassword) {
+							user.password = passwordDetails.newPassword;
 
-						user.save(function(err) {
-							if (err) {
-								return res.send(400, {
-									message: getErrorMessage(err)
-								});
-							} else {
-								req.login(user, function(err) {
-									if (err) {
-										res.send(400, err);
-									} else {
-										res.send({
-											message: 'Password changed successfully'
-										});
-									}
-								});
-							}
-						});
+							user.save(function(err) {
+								if (err) {
+									return res.send(400, {
+										message: getErrorMessage(err)
+									});
+								} else {
+									req.login(user, function(err) {
+										if (err) {
+											res.send(400, err);
+										} else {
+											res.send({
+												message: 'Password changed successfully'
+											});
+										}
+									});
+								}
+							});
+						} else {
+							res.send(400, {
+								message: 'Passwords do not match'
+							});
+						}
 					} else {
 						res.send(400, {
-							message: 'Passwords do not match'
+							message: 'Current password is incorrect'
 						});
 					}
 				} else {
 					res.send(400, {
-						message: 'Current password is incorrect'
+						message: 'User is not found'
 					});
 				}
-			} else {
-				res.send(400, {
-					message: 'User is not found'
-				});
-			}
-		});
+			});
+		} else {
+			res.send(400, {
+				message: 'Please provide a new password'
+			});
+		}
 	} else {
 		res.send(400, {
 			message: 'User is not signed in'
