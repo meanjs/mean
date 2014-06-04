@@ -3,7 +3,7 @@
 		<h1>New Article</h1>
 	</div>
 	<div class="col-md-12">
-		<form class="form-horizontal" data-ng-submit="create()" novalidate>
+		<form name="articleForm" class="form-horizontal" data-ng-submit="articleForm.$valid && create()" novalidate>
 			<fieldset>
 				<div class="form-group">
 					<label class="control-label" for="title">Title</label>
