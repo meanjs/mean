@@ -1,7 +1,7 @@
 <section class="row" data-ng-controller="SettingsController">
 	<h3 class="col-md-12 text-center">Edit your profile</h3>
 	<div class="col-xs-offset-2 col-xs-8 col-md-offset-5 col-md-2">
-		<form data-ng-submit="updateUserProfile()" class="signin form-horizontal" autocomplete="off">
+		<form name="userForme" data-ng-submit="userForm.$valid && updateUserProfile()" class="signin form-horizontal" autocomplete="off">
 			<fieldset>
 				<div class="form-group">
 					<label for="firstName">First Name</label>
@@ -13,7 +13,7 @@
 				</div>
 				<div class="form-group">
 					<label for="email">Email</label>
-					<input type="text" id="email" name="email" class="form-control" data-ng-model="user.email" placeholder="Email">
+					<input type="email" id="email" name="email" class="form-control" data-ng-model="user.email" placeholder="Email">
 				</div>
 				<div class="form-group">
 					<label for="username">Username</label>
