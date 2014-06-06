@@ -3,19 +3,25 @@
 		<h1>New Article</h1>
 	</div>
 	<div class="col-md-12">
-		<form name="articleForm" class="form-horizontal" data-ng-submit="articleForm.$valid && create()" novalidate>
+		<form name="articleForm" class="form-horizontal" data-ng-submit="create(articleForm.$valid)" novalidate>
 			<fieldset>
-				<div class="form-group">
+				<div class="form-group" ng-class="{ 'has-error' : submitted && articleForm.title.$invalid}">
 					<label class="control-label" for="title">Title</label>
 					<div class="controls">
-						<input type="text" data-ng-model="title" id="title" class="form-control" placeholder="Title" required>
+						<input name="title" type="text" data-ng-model="title" id="title" class="form-control" placeholder="Title" required>
 					</div>
-				</div>
-				<div class="form-group">
+			    		<div ng-show="submitted && articleForm.title.$invalid" class="help-block">
+						<p ng-show="articleForm.title.$error.required" class="text-danger">Title is required</p>
+                    			</div>
+                		</div>
+				<div class="form-group" ng-class="{ 'has-error' : submitted && articleForm.content.$invalid}">
 					<label class="control-label" for="content">Content</label>
 					<div class="controls">
-						<textarea data-ng-model="content" id="content" class="form-control" cols="30" rows="10" placeholder="Content"></textarea>
+						<textarea name="content" data-ng-model="content" id="content" class="form-control" cols="30" rows="10" placeholder="Content" required></textarea>
 					</div>
+                    			<div ng-show="submitted && articleForm.title.$invalid" class="help-block">
+				    		<p ng-show="articleForm.content.$error.required" class="text-danger">Content is required</p>
+                    			</div>
 				</div>
 				<div class="form-group">
 					<input type="submit" class="btn btn-default">
