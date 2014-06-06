@@ -5,22 +5,22 @@ angular.module('articles').controller('ArticlesController', ['$scope', '$statePa
 		$scope.authentication = Authentication;
 
 		$scope.create = function(isValid) {
-	            if (isValid) {
-	                var article = new Articles({
-	                    title: this.title,
-	                    content: this.content
-	                });
-	                article.$save(function(response) {
-	                    $location.path('articles/' + response._id);
-	                }, function(errorResponse) {
-	                    $scope.error = errorResponse.data.message;
-	                });
-	
-	                this.title = '';
-	                this.content = '';
-	            }else{
-	                $scope.submitted = true;
-	            }
+			if (isValid) {
+				var article = new Articles({
+					title: this.title,
+					content: this.content
+				});
+				article.$save(function(response) {
+					$location.path('articles/' + response._id);
+				}, function(errorResponse) {
+					$scope.error = errorResponse.data.message;
+				});
+			
+				this.title = '';
+				this.content = '';
+			} else {
+				$scope.submitted = true;
+			}
 		};
 
 		$scope.remove = function(article) {
@@ -40,17 +40,17 @@ angular.module('articles').controller('ArticlesController', ['$scope', '$statePa
 		};
 
 		$scope.update = function(isValid) {
-	            if (isValid) {
-	                var article = $scope.article;
+	            	if (isValid) {
+	                	var article = $scope.article;
 	
-	                article.$update(function() {
-	                    $location.path('articles/' + article._id);
-	                }, function(errorResponse) {
-	                    $scope.error = errorResponse.data.message;
-	                });
-	            }else{
-	                $scope.submitted = true;
-	            }
+	                	article.$update(function() {
+	                    		$location.path('articles/' + article._id);
+	                	}, function(errorResponse) {
+	                    		$scope.error = errorResponse.data.message;
+	                	});
+		            } else {
+		                	scope.submitted = true;
+		            }
 		};
 
 		$scope.find = function() {
