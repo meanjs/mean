@@ -13,7 +13,7 @@ RUN npm install -g bower > /dev/null
 
 # Install Mean.JS packages
 ADD package.json /home/mean/package.json
-RUN npm install
+RUN npm install > /dev/null
 
 ADD .bowerrc /home/mean/.bowerrc
 ADD bower.json /home/mean/bower.json
