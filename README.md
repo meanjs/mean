@@ -82,9 +82,17 @@ If you encounter any problem try the Troubleshooting section.
 * Install [Docker](http://www.docker.com/)
 * Install [Fig](https://github.com/orchardup/fig)
 
-* For local development and testing: 
+* Local development and testing with fig: 
 ```
 $ fig up
+```
+
+* Local development and testing with just Docker:
+```
+$ docker build -t mean .
+$ docker run -p 27017:27017 -d --name db mongo
+$ docker run -p 3000:3000 --link db:db_1 mean
+$
 ```
 
 
