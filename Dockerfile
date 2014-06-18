@@ -18,7 +18,7 @@ RUN npm install > /dev/null
 ADD .bowerrc /home/mean/.bowerrc
 ADD bower.json /home/mean/bower.json
 # why doesnt this work via npm install?
-RUN bower install --config.interactive=false --allow-root
+RUN bower install --config.interactive=false --allow-root > /dev/null
 
 # Make everything available for start
 ADD . /home/mean
