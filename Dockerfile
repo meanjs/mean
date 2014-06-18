@@ -13,7 +13,12 @@ RUN npm install -g bower > /dev/null
 
 # Install Mean.JS packages
 ADD package.json /home/mean/package.json
-RUN npm install > /dev/null
+RUN npm install
+
+ADD .bowerrc /home/mean/.bowerrc
+ADD bower.json /home/mean/bower.json
+# why doesnt this work via npm install?
+RUN bower install --config.interactive=false --allow-root
 
 # Make everything available for start
 ADD . /home/mean
