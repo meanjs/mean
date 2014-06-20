@@ -1,6 +1,3 @@
-# 
-# Note "> /dev/null" workaround for fig-bug https://github.com/orchardup/fig/issues/239
-#
 FROM dockerfile/nodejs
 
 MAINTAINER Matthias Luebken, matthias@catalyst-zero.com
@@ -8,17 +5,17 @@ MAINTAINER Matthias Luebken, matthias@catalyst-zero.com
 WORKDIR /home/mean
 
 # Install Mean.JS Prerequisites
-RUN npm install -g grunt-cli > /dev/null
-RUN npm install -g bower > /dev/null
+RUN npm install -g grunt-cli
+RUN npm install -g bower
 
 # Install Mean.JS packages
 ADD package.json /home/mean/package.json
-RUN npm install > /dev/null
+RUN npm install
 
+# Manually trigger bower. Why doesnt this work via npm install?
 ADD .bowerrc /home/mean/.bowerrc
 ADD bower.json /home/mean/bower.json
-# why doesnt this work via npm install?
-RUN bower install --config.interactive=false --allow-root > /dev/null
+RUN bower install --config.interactive=false --allow-root
 
 # Make everything available for start
 ADD . /home/mean
