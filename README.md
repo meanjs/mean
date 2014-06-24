@@ -83,18 +83,22 @@ If you encounter any problem try the Troubleshooting section.
 * Install [Fig](https://github.com/orchardup/fig)
 
 * Local development and testing with fig: 
-```
+```bash
 $ fig up
 ```
 
 * Local development and testing with just Docker:
-```
+```bash
 $ docker build -t mean .
 $ docker run -p 27017:27017 -d --name db mongo
 $ docker run -p 3000:3000 --link db:db_1 mean
 $
 ```
 
+* To enable live reload forward 35729 port and mount /app and /public as volumes:
+```bash
+$ docker run -p 3000:3000 -p 35729:35729 -v /Users/mdl/workspace/mean-stack/mean/public:/home/mean/public -v /Users/mdl/workspa/mean-stack/mean/app:/home/mean/app --link db:db_1 mean
+```
 
 ## Getting Started With MEAN.JS
 You have your application running but there are a lot of stuff to understand, we recommend you'll go over the [Offical Documentation](http://meanjs.org/docs.html). 
