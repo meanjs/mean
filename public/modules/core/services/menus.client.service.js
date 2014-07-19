@@ -85,7 +85,7 @@ angular.module('core').service('Menus', [
 				menuItemType: menuItemType || 'item',
 				menuItemClass: menuItemType,
 				uiRoute: menuItemUIRoute || ('/' + menuItemURL),
-				isPublic: isPublic || this.menus[menuId].isPublic,
+				isPublic: isPublic === null && this.menus[menuId].isPublic || isPublic,
 				roles: roles || this.defaultRoles,
 				items: [],
 				shouldRender: shouldRender
@@ -108,7 +108,7 @@ angular.module('core').service('Menus', [
 						title: menuItemTitle,
 						link: menuItemURL,
 						uiRoute: menuItemUIRoute || ('/' + menuItemURL),
-						isPublic: isPublic || this.menus[menuId].isPublic,
+						isPublic: isPublic === null && this.menus[menuId].isPublic || isPublic,
 						roles: roles || this.defaultRoles,
 						shouldRender: shouldRender
 					});
