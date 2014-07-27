@@ -1,0 +1,19 @@
+<section data-ng-controller="QasController" data-ng-init="find()">
+    <div class="page-header">
+        <h1>LIST</h1>
+        
+    </div>
+    <div class="list-group">
+        <a data-ng-repeat="qa in qas" data-ng-href="#!/qas/{{qa._id}}" class="list-group-item">
+            <small class="list-group-item-text">{{qa.created | date:'medium'}} / {{qa.user.displayName}}</small>
+            <h4 class="list-group-item-heading">{{qa.question}}</h4>
+            <img ng-src="{{qa.imageURL}}" height="50" >
+            <p class="list-group-item-text">{{qa.choices.length}}</p>
+			
+        </a>
+		
+    </div>
+    <div class="alert alert-warning text-center" data-ng-hide="!qas || qas.length">
+    	No qas yet, why don't you <a href="/#!/qas/create">create one</a>?
+    </div>
+</section>

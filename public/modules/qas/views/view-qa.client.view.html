@@ -1,0 +1,24 @@
+<section data-ng-controller="QasController" data-ng-init="findOne()">
+	<div class="page-header">
+		 <h1>{{qa.question}}</h1>
+    </div>
+
+    <div class="pull-right" data-ng-show="authentication.user._id == qa.user._id">
+        <a class="btn btn-primary" href="/#!/qas/{{qa._id}}/edit">
+            <i class="glyphicon glyphicon-edit"></i>
+        </a>
+        <a class="btn btn-primary" data-ng-click="remove();">
+            <i class="glyphicon glyphicon-trash"></i>
+        </a>
+    </div>
+    <small>
+        <em class="text-muted">Updated on {{qa.created | date:'mediumDate'}} by {{qa.user.displayName}}</em>
+    </small>
+    <p class="lead">
+        {{qa.question}}
+		<br>
+        <img ng-src="{{qa.imageURL}}" height="100" >
+        <div ng-repeat="choices in qa.choices"> {{choices.text}}<br></div>
+    </p>
+    
+</section>
