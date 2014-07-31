@@ -1,9 +1,7 @@
 'use strict';
 
-var DB_HOST = process.env.DB_1_PORT_27017_TCP_ADDR || 'localhost';
-
 module.exports = {
-	db: 'mongodb://' + DB_HOST + '/mean-dev',
+	db: 'mongodb://' + (process.env.DB_1_PORT_27017_TCP_ADDR || 'localhost') + '/mean-dev',
 	app: {
 		title: 'MEAN.JS - Development Environment'
 	},
@@ -26,5 +24,15 @@ module.exports = {
 		clientID: process.env.LINKEDIN_ID || 'APP_ID',
 		clientSecret: process.env.LINKEDIN_SECRET || 'APP_SECRET',
 		callbackURL: 'http://localhost:3000/auth/linkedin/callback'
+	},
+	mailer: {
+		fromEmail: process.env.MAILER_FROM_EMAIL || 'MAILER_FROM_EMAIL',
+		options: {
+			service: process.env.MAILER_SERVICE_PROVIDER || 'MAILER_SERVICE_PROVIDER',
+			auth: {
+				user: process.env.MAILER_EMAIL_ID || 'MAILER_EMAIL_ID',
+				pass: process.env.MAILER_PASSWORD || 'MAILER_PASSWORD'
+			}
+		}
 	}
 };

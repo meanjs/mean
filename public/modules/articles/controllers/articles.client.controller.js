@@ -49,7 +49,7 @@ angular.module('articles').controller('ArticlesController', ['$scope', '$statePa
 	                    		$scope.error = errorResponse.data.message;
 	                	});
 		            } else {
-		                	scope.submitted = true;
+		                	$scope.submitted = true;
 		            }
 		};
 

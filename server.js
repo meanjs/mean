@@ -12,19 +12,24 @@ var init = require('./config/init')(),
  */
 
 // Bootstrap db connection
-var db = mongoose.connect(config.db);
+var db = mongoose.connect(config.db, function(err) {
+	if (err) {
+		console.log(err);
+		console.error('\x1b[31m', 'Could not connect to MongoDB!');
+	} else {
+		// Init the express application
+		var app = require('./config/express')(db);
 
-// Init the express application
-var app = require('./config/express')(db);
+		// Bootstrap passport config
+		require('./config/passport')();
 
-// Bootstrap passport config
-require('./config/passport')();
+		// Start the app by listening on <port>
+		app.listen(config.port);
 
-// Start the app by listening on <port>
-app.listen(config.port);
+		// Expose app
+		exports = module.exports = app;
 
-// Expose app
-exports = module.exports = app;
-
-// Logging initialization
-console.log('MEAN.JS application started on port ' + config.port);
+		// Logging initialization
+		console.log('MEAN.JS application started on port ' + config.port);
+	}
+});

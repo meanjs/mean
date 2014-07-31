@@ -22,7 +22,7 @@ module.exports.getGlobbedFiles = function(globPatterns, removeRoot) {
 	var _this = this;
 
 	// URL paths regex
-	var urlRegex = new RegExp('^(?:[a-z]+:)?//', 'i');
+	var urlRegex = new RegExp('^(?:[a-z]+:)?\/\/', 'i');
 
 	// The output array
 	var output = [];
