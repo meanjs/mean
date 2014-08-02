@@ -159,7 +159,8 @@ exports.reset = function(req, res, next) {
 		},
 		function(user, done) {
 			res.render('templates/reset-password-confirm-email', {
-				name: user.displayName
+				name: user.displayName,
+				appName: config.app.title
 			}, function(err, emailHTML) {
 				done(err, emailHTML, user);
 			});
