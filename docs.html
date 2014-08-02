@@ -134,7 +134,7 @@
 				</div>
 				<section class="col-md-10 col-md-offset-2">
 					<i class="small text-muted">
-						Last updated: 24 May 2014.
+						Last updated: 3 Aug 2014.
 					</i>
 
 					<div class="inner-link-anchor" id="overview"></div>
@@ -216,12 +216,14 @@
 						<p>The recommended way would be to use the <a href="http://meanjs.org/generator.html">official Yo Generator</a> which will generate the latest stable copy of the MEAN.JS boilerplate and supply multiple sub-generators to ease your daily development cycles.
 						</p>
 						<p class="alert alert-info">
-							<b>Note:</b> If you want to support <em>git merge</em> updates it would be better to use <em>git clone</em> for your initial project creation, don't worry you'd still be able use the generator.
+							<b>Note:</b> If you want to support
+							<em>git merge</em>updates it would be better to use
+							<em>git clone</em>for your initial project creation, don't worry you'd still be able use the generator.
 						</p>
 						<h3>Cloning The GitHub Repository</h3>
-							<p>
-								You can also use Git to directly clone the MEAN.JS repository:
-							</p>
+						<p>
+							You can also use Git to directly clone the MEAN.JS repository:
+						</p>
 						<pre>$ git clone https://github.com/meanjs/mean.git meanjs</pre>
 						<p>
 							This will clone the latest version of the MEAN.JS repository to a meanjs folder.
@@ -401,6 +403,16 @@
 									<b>When to use:</b>
 									Whenever you want to add, change, or remove backend views.
 								</p>
+								<ul>
+									<li>
+										<h3>templates</h3>
+										A backend templates folder, currently used for emails templates.
+										<p class="alert alert-info">
+											<b>When to use:</b>
+											Whenever you want to add, change, or remove backend templates.
+										</p>
+									</li>
+								</ul>
 							</li>
 						</ul>
 						<h2>Config</h2>
@@ -436,6 +448,10 @@
 									<b>When to use:</b>
 									Whenever you want to change the way Express is being initialized and configured.
 								</p>
+							</li>
+							<li>
+								<h3>init.js</h3>
+								The initialization file that set up a few project related configuraiton.
 							</li>
 							<li>
 								<h3>passport.js</h3>
@@ -512,6 +528,18 @@
 								</p>
 							</li>
 							<li>
+								<h3>Dockerfile</h3>
+								<a target="_blank" href="https://www.docker.com/">Docker</a> <a target="_blank" href="https://docs.docker.com/reference/builder/">configuration file</a>, where you configure all the commands you would normally execute manually in order to build a Docker image.
+								<p class="alert alert-info">
+									<b>When to use:</b>
+									Whenever you want to configure your Docker images.
+								</p>
+							</li>
+							<li>
+								<h3>fig.yml</h3>
+								<a target="_blank" href="https://www.docker.com/">Docker</a> development environment <a target="_blank" href="http://www.fig.sh/yml.html">configuration file</a>, where you configure your application environment with Docker .
+							</li>
+							<li>
 								<h3>gruntfile.js</h3>
 								Grunt <a target="_blank" href="http://gruntjs.com/sample-gruntfile">definition file</a> is where you define your grant tasks, for more information visit the <a href="#grunt">Grunt</a> section.
 								<p class="alert alert-info">
@@ -554,8 +582,12 @@
 								<a target="_blank" href="http://csslint.net/">CSSLint</a> configuration file, you use it to configure CSSLint special properties.
 								<p class="alert alert-info">
 									<b>When to use:</b>
-									Whenever you want to add, change, or remove  CSSLint properties.
+									Whenever you want to add, change, or remove CSSLint properties.
 								</p>
+							</li>
+							<li>
+								<h3>.editconfig</h3>
+								<a target="_blank" href="http://editorconfig.org/">EditorConfig</a> configuration file, you use it to configure consistent coding styles between different editors and IDEs.
 							</li>
 							<li>
 								<h3>.gitignore</h3>
@@ -664,15 +696,15 @@
 						</dl>
 						<h2>Assets Configuration</h2>
 						<p>
-							One of the major issues dealing with applications development is assets management. While <b>bower</b> helps you download and update the project front-end dependencies, you would still need to include the packages JavaScript files in several places including your main application page, <b>Karma</b> configuration file and the <b>uglify</b> grunt task. Furthermore, you may want to use different assets for different environments. 
+							One of the major issues dealing with applications development is assets management. While <b>bower</b> helps you download and update the project front-end dependencies, you would still need to include the packages JavaScript files in several places including your main application page, <b>Karma</b> configuration file and the <b>uglify</b> grunt task. Furthermore, you may want to use different assets for different environments.
 						</p>
 						<p>
-							For this purpose we included the <b>config.assets</b> field in the environments configuration files. Using this configuration option allows you to organize all your assets inclusion in a single place. The <b>config.assets</b> field has a few properties: 
+							For this purpose we included the <b>config.assets</b> field in the environments configuration files. Using this configuration option allows you to organize all your assets inclusion in a single place. The <b>config.assets</b> field has a few properties:
 						</p>
 						<dl>
 							<dt>config.assets.css</dt>
 							<dd>
-							A list of glob patterns indicating the project css files.
+								A list of glob patterns indicating the project css files.
 							</dd>
 							<dt>config.assets.js</dt>
 							<dd>
@@ -688,19 +720,18 @@
 								<dl>
 									<dt>config.assets.lib.css</dt>
 									<dd>
-									A list of glob patterns idicating the project packages CSS files.
+										A list of glob patterns idicating the project packages CSS files.
 									</dd>
 									<dt>config.assets.lib.js</dt>
 									<dd>
-									A list of glob patterns idicating the project packages JavaScript files.
+										A list of glob patterns idicating the project packages JavaScript files.
 									</dd>
 								</dl>
 							</dd>
 						</dl>
 						<p class="alert alert-info">
-							<b>Note:</b> You can also include CDN paths to load packages files directly from their official CDN. 
+							<b>Note:</b> You can also include CDN paths to load packages files directly from their official CDN.
 						</p>
-						<br>
 						<h2>Social Configuration Properties</h2>
 						<p>
 							The application will use the <a target="_blank" href="http://passportjs.org">Passport</a> module to offer users various login options.
@@ -728,6 +759,31 @@
 						<p class="alert alert-info">
 							Remember to use different configuration for each environment especially your MongoDB URI and social platform OAuth Keys.
 						</p>
+						<h2>Nodemailer Configuration Properties</h2>
+						<p>
+							The application will use the <a target="_blank" href="http://www.nodemailer.com/">Nodemailer</a> module to send email notifications.
+						</p>
+						<p>
+							To configure nodemailer there are several properties:
+						</p>
+						<dl>
+							<dt>config.mailer.from</dt>
+							<dd>
+								The sender address you want to use. (Example: John Doe &lt;johndoe@example.com&gt;)
+							</dd>
+							<dt>config.mailer.options.service</dt>
+							<dd>
+								The Email service you would like to use. (Example: gmail)
+							</dd>
+							<dt>config.mailer.options.auth.user</dt>
+							<dd>
+								The Email service username.
+							</dd>
+							<dt>config.mailer.options.auth.password</dt>
+							<dd>
+								The Email service password.
+							</dd>
+						</dl>
 					</section>
 					<div class="inner-link-anchor" id="autoload"></div>
 					<section class="page-header">
@@ -795,7 +851,7 @@
 							</dd>
 							<dt>Glob</dt>
 							<dd>
-								<a target="_blank" href="https://github.com/isaacs/node-glob">Glob</a> provides glob  functionality for node.js applications.
+								<a target="_blank" href="https://github.com/isaacs/node-glob">Glob</a> provides glob functionality for node.js applications.
 							</dd>
 							<dt>Consolidate</dt>
 							<dd>
@@ -860,6 +916,10 @@
 							<dt>Grunt-CLI</dt>
 							<dd>
 								<a target="_blank" href="https://github.com/gruntjs/grunt-cli">Grunt-CLI</a> is Grunt's command line interface.
+							</dd>
+							<dt>nodemailer</dt>
+							<dd>
+								<a target="_blank" href="https://github.com/andris9/Nodemailer">Nodemailer</a> is an email sending module.
 							</dd>
 						</dl>
 						<h2>Development Dependencies</h2>
@@ -1301,6 +1361,9 @@
 								You still need to render the index and error page.
 							</li>
 							<li>
+								You might need to render HTML templates for your email notifications.
+							</li>
+							<li>
 								You want to render local configuration properties in the template. For instance, the title property from the configuration file can be used in the title element of the HTML page.
 							</li>
 							<li>
@@ -1358,9 +1421,20 @@
 								The 500 error template is served whenever there's a server error.
 							</dd>
 						</dl>
+						<h2>The Templates</h2>
 						<p>
-							Usually you won't have to change the views, but you might make changes to the layout file when adding front-end components, or changing something in the HTML.
+							The templates folder is placed inside the views folder and currently contains 2 files:
 						</p>
+						<dl>
+							<dt>Reset Password Email</dt>
+							<dd>
+								An email template sent to users after they've request to reset their password.
+							</dd>
+							<dt>Reset Password Confirmation Email</dt>
+							<dd>
+								An email template sent to users after they've reset their password.
+							</dd>
+						</dl>
 					</section>
 					<div class="inner-link-anchor" id="server-tests"></div>
 					<section class="page-header">
@@ -1499,7 +1573,7 @@
 							When we started with MEAN one of our major concerns was how to structure our AngularJS application, and on the first few AngularJS applications, we used the great <a href="https://github.com/angular/angular-seed">AngularJS Seed Project</a> provided by the AngularJS team.
 							<br>The basic structure for this project is quite simple:
 						</p>
-<pre>
+						<pre>
 |-css
 |---app.css
 |-img
@@ -1520,7 +1594,7 @@ index.html
 						<p>
 							Then we changed the structure a bit to look something like this:
 						</p>
-<pre>
+						<pre>
 |-css 
 |---app.css 
 |-img 
@@ -1553,7 +1627,7 @@ index.html
 						<p>
 							AngularJS module system is a core feature when developing AngularJS applications; actually every AngularJS application is basically an AngularJS module. The other thing about AngularJS modules is that when defining a module you can also include sub-modules as dependencies. It usually looks something like this:
 						</p>
-<pre>
+						<pre>
 angular.module(‘FirstDependency’, []);
 angular.module(‘SecondDependency’, []); 
 angular.module(‘MainModule’, [‘FirstDependency’, ‘SecondDependency’]);
@@ -1561,7 +1635,7 @@ angular.module(‘MainModule’, [‘FirstDependency’, ‘SecondDependency’]
 						<p>
 							In this example we define the first and second modules and then we define the main module with the two sub-modules as dependencies. Later when you want to define an AngularJS entity you can simply use the sub modules as way to separate your application logic. For example defining a controller will look something like this:
 						</p>
-<pre>
+						<pre>
 angular.module(‘FirstDependency’).controller(…);
 </pre>
 						<h4>AngularJS Horizontal Modules</h4>
@@ -1569,7 +1643,7 @@ angular.module(‘FirstDependency’).controller(…);
 							In their seed project, the AngularJS team recommends using modules in a horizontal way that ends up looking like this:
 						</p>
 
-<pre>
+						<pre>
 angular.module(‘application.controllers’, []);
 angular.module(‘application.services’, []);
 angular.module(‘application’, [‘application.controllers’, ‘application.services’]);
@@ -1662,7 +1736,7 @@ angular.module(‘application’, [‘application.controllers’, ‘application
 						<p>
 							So we converted our application structure to a vertical structure to fit the vertical modular approach:
 						</p>
-<pre>						
+						<pre>						
 |-css 
 |-img 
 |-js 
@@ -1773,7 +1847,7 @@ angular.module(‘application’, [‘application.controllers’, ‘application
 
 							To add a new module, you’ll have to create a new folder in the <b>public/modules</b> folder. The directory structure should look something like this:
 						</p>
-<pre>
+						<pre>
 |-module 
 |---config 
 |---controllers 
@@ -1792,7 +1866,7 @@ angular.module(‘application’, [‘application.controllers’, ‘application
 						<p>
 							Finally you have to add your module.js file, which should look something like this:
 						</p>
-<pre>
+						<pre>
 'use strict';
 
 // Use Applicaion configuration module to register a new module
@@ -1859,7 +1933,7 @@ ApplicationConfiguration.registerModule('moduleName');
 										<b>menuItemUIRoute</b> (Optional; Default: menuItemURL) - The UIRoute value, which is used to define the URL scheme where this menu item is marked as active.
 									</li>
 									<li>
-										<b>isPublic</b> (Optional; Default: menu.isPublic)  - Indicates whether a menu item should be displayed only to authenticated users.
+										<b>isPublic</b> (Optional; Default: menu.isPublic) - Indicates whether a menu item should be displayed only to authenticated users.
 									</li>
 									<li>
 										<b>roles</b> (Optional; Default: ['user']) - An array indicating the roles that are allowed to view this menu item.
@@ -1886,7 +1960,7 @@ ApplicationConfiguration.registerModule('moduleName');
 										<b>menuItemUIRoute</b> (Optional; Default: menuItemURL) - The UIRoute value, which is used to define the URL scheme where this menu item is marked as active.
 									</li>
 									<li>
-										<b>isPublic</b> (Optional; Default: menu.isPublic)  - Indicates whether a menu item should be displayed only to authenticated users.
+										<b>isPublic</b> (Optional; Default: menu.isPublic) - Indicates whether a menu item should be displayed only to authenticated users.
 									</li>
 									<li>
 										<b>roles</b> (Optional; Default: ['user']) - An array indicating the roles that are allowed to view this menu item.
@@ -1897,7 +1971,7 @@ ApplicationConfiguration.registerModule('moduleName');
 						<p>
 							Using the Menus service is usually done in a configuration sections of your application modules. A simple configuration would look like this:
 						</p>
-<pre>angular.module('example').run(['Menus',
+						<pre>angular.module('example').run(['Menus',
 	function(Menus) {
 		// Set top bar menu items
 		Menus.addMenuItem('topbar', 'Example', 'example');
@@ -2106,7 +2180,7 @@ ApplicationConfiguration.registerModule('moduleName');
 						<h4>AngularJS Menu Items</h4>
 						<p>
 							Your stack is bundled with an <a href="#menus">AngularJS Menus Service</a> that enables to add menu items directly from the module configuration file. In the article example you can see how the two menu items are added to the top bar menu in the <b>articles.client.config.js</b> file:
-<pre>angular.module('articles').run(['Menus',
+							<pre>angular.module('articles').run(['Menus',
 	function(Menus) {
 		// Set top bar menu items
 		Menus.addMenuItem('topbar', 'Articles', 'articles', 'dropdown', '/articles(/create)?');
