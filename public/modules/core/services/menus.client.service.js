@@ -2,6 +2,7 @@
 
 //Menu service used for managing  menus
 angular.module('core').service('Menus', [
+
 	function() {
 		// Define a set of default roles
 		this.defaultRoles = ['user'];
@@ -74,7 +75,7 @@ angular.module('core').service('Menus', [
 		};
 
 		// Add menu item object
-		this.addMenuItem = function(menuId, menuItemTitle, menuItemURL, menuItemType, menuItemUIRoute, isPublic, roles) {
+		this.addMenuItem = function(menuId, menuItemTitle, menuItemURL, menuItemType, menuItemUIRoute, isPublic, roles, position) {
 			// Validate that the menu exists
 			this.validateMenuExistance(menuId);
 
@@ -85,8 +86,9 @@ angular.module('core').service('Menus', [
 				menuItemType: menuItemType || 'item',
 				menuItemClass: menuItemType,
 				uiRoute: menuItemUIRoute || ('/' + menuItemURL),
-				isPublic: isPublic || this.menus[menuId].isPublic,
+				isPublic: ((isPublic === null || typeof isPublic === 'undefined') ? this.menus[menuId].isPublic : isPublic),
 				roles: roles || this.defaultRoles,
+				position: position || 0,
 				items: [],
 				shouldRender: shouldRender
 			});
@@ -96,7 +98,7 @@ angular.module('core').service('Menus', [
 		};
 
 		// Add submenu item object
-		this.addSubMenuItem = function(menuId, rootMenuItemURL, menuItemTitle, menuItemURL, menuItemUIRoute, isPublic, roles) {
+		this.addSubMenuItem = function(menuId, rootMenuItemURL, menuItemTitle, menuItemURL, menuItemUIRoute, isPublic, roles, position) {
 			// Validate that the menu exists
 			this.validateMenuExistance(menuId);
 
@@ -108,8 +110,9 @@ angular.module('core').service('Menus', [
 						title: menuItemTitle,
 						link: menuItemURL,
 						uiRoute: menuItemUIRoute || ('/' + menuItemURL),
-						isPublic: isPublic || this.menus[menuId].isPublic,
+						isPublic: ((isPublic === null || typeof isPublic === 'undefined') ? this.menus[menuId].items[itemIndex].isPublic : isPublic),
 						roles: roles || this.defaultRoles,
+						position: position || 0,
 						shouldRender: shouldRender
 					});
 				}

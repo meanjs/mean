@@ -11,12 +11,12 @@ angular.module('articles').controller('ArticlesController', ['$scope', '$statePa
 			});
 			article.$save(function(response) {
 				$location.path('articles/' + response._id);
+
+				$scope.title = '';
+				$scope.content = '';
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
-
-			this.title = '';
-			this.content = '';
 		};
 
 		$scope.remove = function(article) {

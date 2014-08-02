@@ -4,32 +4,9 @@
  * Module dependencies.
  */
 var mongoose = require('mongoose'),
+	errorHandler = require('./errors'),
 	Article = mongoose.model('Article'),
 	_ = require('lodash');
-
-/**
- * Get the error message from error object
- */
-var getErrorMessage = function(err) {
-	var message = '';
-
-	if (err.code) {
-		switch (err.code) {
-			case 11000:
-			case 11001:
-				message = 'Article already exists';
-				break;
-			default:
-				message = 'Something went wrong';
-		}
-	} else {
-		for (var errName in err.errors) {
-			if (err.errors[errName].message) message = err.errors[errName].message;
-		}
-	}
-
-	return message;
-};
 
 /**
  * Create a article
@@ -40,8 +17,8 @@ exports.create = function(req, res) {
 
 	article.save(function(err) {
 		if (err) {
-			return res.send(400, {
-				message: getErrorMessage(err)
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
 			res.jsonp(article);
@@ -66,8 +43,8 @@ exports.update = function(req, res) {
 
 	article.save(function(err) {
 		if (err) {
-			return res.send(400, {
-				message: getErrorMessage(err)
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
 			res.jsonp(article);
@@ -83,8 +60,8 @@ exports.delete = function(req, res) {
 
 	article.remove(function(err) {
 		if (err) {
-			return res.send(400, {
-				message: getErrorMessage(err)
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
 			res.jsonp(article);
@@ -98,8 +75,8 @@ exports.delete = function(req, res) {
 exports.list = function(req, res) {
 	Article.find().sort('-created').populate('user', 'displayName').exec(function(err, articles) {
 		if (err) {
-			return res.send(400, {
-				message: getErrorMessage(err)
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
 			res.jsonp(articles);
@@ -124,7 +101,7 @@ exports.articleByID = function(req, res, next, id) {
  */
 exports.hasAuthorization = function(req, res, next) {
 	if (req.article.user.id !== req.user.id) {
-		return res.send(403, {
+		return res.status(403).send({
 			message: 'User is not authorized'
 		});
 	}
