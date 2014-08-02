@@ -1,6 +1,16 @@
 'use strict';
 
-module.exports.authentication = require('./users/users.authentication');
-module.exports.authorization = require('./users/users.authorization');
-module.exports.password = require('./users/users.password');
-module.exports.profile = require('./users/users.profile');
+/**
+ * Module dependencies.
+ */
+var _ = require('lodash');
+
+/**
+ * Extend user's controller
+ */
+module.exports = _.extend(
+	require('./users/users.authentication'),
+	require('./users/users.authorization'),
+	require('./users/users.password'),
+	require('./users/users.profile')
+);

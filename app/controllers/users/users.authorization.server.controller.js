@@ -26,7 +26,7 @@ exports.userByID = function(req, res, next, id) {
  */
 exports.requiresLogin = function(req, res, next) {
 	if (!req.isAuthenticated()) {
-		return res.send(401, {
+		return res.status(401).send({
 			message: 'User is not logged in'
 		});
 	}
@@ -45,7 +45,7 @@ exports.hasAuthorization = function(roles) {
 			if (_.intersection(req.user.roles, roles).length) {
 				return next();
 			} else {
-				return res.send(403, {
+				return res.status(403).send({
 					message: 'User is not authorized'
 				});
 			}

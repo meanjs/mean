@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = {
-	db: process.env.MONGOHQ_URL || process.env.MONGOLAB_URI || 'mongodb://' + (process.env.DB_1_PORT_27017_TCP_ADDR || 'localhost') + '/mean',
+	db: process.env.MONGOHQ_URL || process.env.MONGOLAB_URI || 'mongodb://localhost/mean',
 	assets: {
 		lib: {
 			css: [
@@ -41,7 +41,7 @@ module.exports = {
 		callbackURL: 'http://localhost:3000/auth/linkedin/callback'
 	},
 	mailer: {
-		fromEmail: process.env.MAILER_FROM_EMAIL || 'MAILER_FROM_EMAIL',
+		from: process.env.MAILER_FROM || 'MAILER_FROM',
 		options: {
 			service: process.env.MAILER_SERVICE_PROVIDER || 'MAILER_SERVICE_PROVIDER',
 			auth: {

@@ -17,7 +17,7 @@ exports.create = function(req, res) {
 
 	article.save(function(err) {
 		if (err) {
-			return res.send(400, {
+			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
@@ -43,7 +43,7 @@ exports.update = function(req, res) {
 
 	article.save(function(err) {
 		if (err) {
-			return res.send(400, {
+			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
@@ -60,7 +60,7 @@ exports.delete = function(req, res) {
 
 	article.remove(function(err) {
 		if (err) {
-			return res.send(400, {
+			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
@@ -75,7 +75,7 @@ exports.delete = function(req, res) {
 exports.list = function(req, res) {
 	Article.find().sort('-created').populate('user', 'displayName').exec(function(err, articles) {
 		if (err) {
-			return res.send(400, {
+			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
@@ -101,7 +101,7 @@ exports.articleByID = function(req, res, next, id) {
  */
 exports.hasAuthorization = function(req, res, next) {
 	if (req.article.user.id !== req.user.id) {
-		return res.send(403, {
+		return res.status(403).send({
 			message: 'User is not authorized'
 		});
 	}

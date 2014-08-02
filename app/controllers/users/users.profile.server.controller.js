@@ -28,13 +28,13 @@ exports.update = function(req, res) {
 
 		user.save(function(err) {
 			if (err) {
-				return res.send(400, {
+				return res.status(400).send({
 					message: errorHandler.getErrorMessage(err)
 				});
 			} else {
 				req.login(user, function(err) {
 					if (err) {
-						res.send(400, err);
+						res.status(400).send(err);
 					} else {
 						res.jsonp(user);
 					}
@@ -42,7 +42,7 @@ exports.update = function(req, res) {
 			}
 		});
 	} else {
-		res.send(400, {
+		res.status(400).send({
 			message: 'User is not signed in'
 		});
 	}
@@ -147,13 +147,13 @@ exports.removeOAuthProvider = function(req, res, next) {
 
 		user.save(function(err) {
 			if (err) {
-				return res.send(400, {
+				return res.status(400).send({
 					message: errorHandler.getErrorMessage(err)
 				});
 			} else {
 				req.login(user, function(err) {
 					if (err) {
-						res.send(400, err);
+						res.status(400).send(err);
 					} else {
 						res.jsonp(user);
 					}

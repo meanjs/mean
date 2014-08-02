@@ -4,23 +4,19 @@ angular.module('articles').controller('ArticlesController', ['$scope', '$statePa
 	function($scope, $stateParams, $location, Authentication, Articles) {
 		$scope.authentication = Authentication;
 
-		$scope.create = function(isValid) {
-			if (isValid) {
-				var article = new Articles({
-					title: this.title,
-					content: this.content
-				});
-				article.$save(function(response) {
-					$location.path('articles/' + response._id);
-				}, function(errorResponse) {
-					$scope.error = errorResponse.data.message;
-				});
-			
-				this.title = '';
-				this.content = '';
-			} else {
-				$scope.submitted = true;
-			}
+		$scope.create = function() {
+			var article = new Articles({
+				title: this.title,
+				content: this.content
+			});
+			article.$save(function(response) {
+				$location.path('articles/' + response._id);
+
+				$scope.title = '';
+				$scope.content = '';
+			}, function(errorResponse) {
+				$scope.error = errorResponse.data.message;
+			});
 		};
 
 		$scope.remove = function(article) {
@@ -39,18 +35,14 @@ angular.module('articles').controller('ArticlesController', ['$scope', '$statePa
 			}
 		};
 
-		$scope.update = function(isValid) {
-	            	if (isValid) {
-	                	var article = $scope.article;
-	
-	                	article.$update(function() {
-	                    		$location.path('articles/' + article._id);
-	                	}, function(errorResponse) {
-	                    		$scope.error = errorResponse.data.message;
-	                	});
-		            } else {
-		                	$scope.submitted = true;
-		            }
+		$scope.update = function() {
+			var article = $scope.article;
+
+			article.$update(function() {
+				$location.path('articles/' + article._id);
+			}, function(errorResponse) {
+				$scope.error = errorResponse.data.message;
+			});
 		};
 
 		$scope.find = function() {

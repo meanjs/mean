@@ -32,13 +32,13 @@ exports.forgot = function(req, res, next) {
 			if (req.body.username) {
 				User.findOne({
 					username: req.body.username
-				}, function(err, user) {
+				}, '-salt -password', function(err, user) {
 					if (!user) {
-						return res.send(400, {
+						return res.status(400).send({
 							message: 'No account with that username has been found'
 						});
 					} else if (user.provider !== 'local') {
-						return res.send(400, {
+						return res.status(400).send({
 							message: 'It seems like you signed up using your ' + user.provider + ' account'
 						});
 					} else {
@@ -51,7 +51,7 @@ exports.forgot = function(req, res, next) {
 					}
 				});
 			} else {
-				return res.send(400, {
+				return res.status(400).send({
 					message: 'Username field must not be blank'
 				});
 			}
@@ -70,7 +70,7 @@ exports.forgot = function(req, res, next) {
 			var smtpTransport = nodemailer.createTransport(config.mailer.options);
 			var mailOptions = {
 				to: user.email,
-				from: config.mailer.fromEmail,
+				from: config.mailer.from,
 				subject: 'Password Reset',
 				html: emailHTML
 			};
@@ -129,13 +129,13 @@ exports.reset = function(req, res, next) {
 
 						user.save(function(err) {
 							if (err) {
-								return res.send(400, {
+								return res.status(400).send({
 									message: errorHandler.getErrorMessage(err)
 								});
 							} else {
 								req.login(user, function(err) {
 									if (err) {
-										res.send(400, err);
+										res.status(400).send(err);
 									} else {
 										// Return authenticated user 
 										res.jsonp(user);
@@ -146,12 +146,12 @@ exports.reset = function(req, res, next) {
 							}
 						});
 					} else {
-						return res.send(400, {
+						return res.status(400).send({
 							message: 'Passwords do not match'
 						});
 					}
 				} else {
-					return res.send(400, {
+					return res.status(400).send({
 						message: 'Password reset token is invalid or has expired.'
 					});
 				}
@@ -169,7 +169,7 @@ exports.reset = function(req, res, next) {
 			var smtpTransport = nodemailer.createTransport(config.mailer.options);
 			var mailOptions = {
 				to: user.email,
-				from: config.mailer.fromEmail,
+				from: config.mailer.from,
 				subject: 'Your password has been changed',
 				html: emailHTML
 			};
@@ -200,13 +200,13 @@ exports.changePassword = function(req, res, next) {
 
 							user.save(function(err) {
 								if (err) {
-									return res.send(400, {
+									return res.status(400).send({
 										message: errorHandler.getErrorMessage(err)
 									});
 								} else {
 									req.login(user, function(err) {
 										if (err) {
-											res.send(400, err);
+											res.status(400).send(err);
 										} else {
 											res.send({
 												message: 'Password changed successfully'
@@ -216,28 +216,28 @@ exports.changePassword = function(req, res, next) {
 								}
 							});
 						} else {
-							res.send(400, {
+							res.status(400).send({
 								message: 'Passwords do not match'
 							});
 						}
 					} else {
-						res.send(400, {
+						res.status(400).send({
 							message: 'Current password is incorrect'
 						});
 					}
 				} else {
-					res.send(400, {
+					res.status(400).send({
 						message: 'User is not found'
 					});
 				}
 			});
 		} else {
-			res.send(400, {
+			res.status(400).send({
 				message: 'Please provide a new password'
 			});
 		}
 	} else {
-		res.send(400, {
+		res.status(400).send({
 			message: 'User is not signed in'
 		});
 	}

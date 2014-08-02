@@ -1,6 +1,6 @@
 {
 	"name": "meanjs",
-	"version": "0.4.0",
+	"version": "0.3.2",
 	"description": "Fullstack JavaScript with MongoDB, Express, AngularJS, and Node.js.",
 	"dependencies": {
 		"bootstrap": "~3",

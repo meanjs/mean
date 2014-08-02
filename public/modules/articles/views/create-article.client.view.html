@@ -10,18 +10,18 @@
 					<div class="controls">
 						<input name="title" type="text" data-ng-model="title" id="title" class="form-control" placeholder="Title" required>
 					</div>
-			    		<div ng-show="submitted && articleForm.title.$invalid" class="help-block">
+					<div ng-show="submitted && articleForm.title.$invalid" class="help-block">
 						<p ng-show="articleForm.title.$error.required" class="text-danger">Title is required</p>
-                    			</div>
-                		</div>
+					</div>
+				</div>
 				<div class="form-group" ng-class="{ 'has-error' : submitted && articleForm.content.$invalid}">
 					<label class="control-label" for="content">Content</label>
 					<div class="controls">
 						<textarea name="content" data-ng-model="content" id="content" class="form-control" cols="30" rows="10" placeholder="Content" required></textarea>
 					</div>
-                    			<div ng-show="submitted && articleForm.title.$invalid" class="help-block">
-				    		<p ng-show="articleForm.content.$error.required" class="text-danger">Content is required</p>
-                    			</div>
+					<div ng-show="submitted && articleForm.title.$invalid" class="help-block">
+						<p ng-show="articleForm.content.$error.required" class="text-danger">Content is required</p>
+					</div>
 				</div>
 				<div class="form-group">
 					<input type="submit" class="btn btn-default">

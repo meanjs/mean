@@ -27,7 +27,7 @@ exports.signup = function(req, res) {
 	// Then save the user 
 	user.save(function(err) {
 		if (err) {
-			return res.send(400, {
+			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
@@ -37,7 +37,7 @@ exports.signup = function(req, res) {
 
 			req.login(user, function(err) {
 				if (err) {
-					res.send(400, err);
+					res.status(400).send(err);
 				} else {
 					res.jsonp(user);
 				}
@@ -52,7 +52,7 @@ exports.signup = function(req, res) {
 exports.signin = function(req, res, next) {
 	passport.authenticate('local', function(err, user, info) {
 		if (err || !user) {
-			res.send(400, info);
+			res.status(400).send(info);
 		} else {
 			// Remove sensitive data before login
 			user.password = undefined;
@@ -60,7 +60,7 @@ exports.signin = function(req, res, next) {
 
 			req.login(user, function(err) {
 				if (err) {
-					res.send(400, err);
+					res.status(400).send(err);
 				} else {
 					res.jsonp(user);
 				}
