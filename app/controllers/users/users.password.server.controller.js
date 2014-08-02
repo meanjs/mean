@@ -75,7 +75,7 @@ exports.forgot = function(req, res, next) {
 				html: emailHTML
 			};
 			smtpTransport.sendMail(mailOptions, function(err) {
-				res.send(200, {
+				res.send({
 					message: 'An email has been sent to ' + user.email + ' with further instructions.'
 				});
 				done(err, 'done');
