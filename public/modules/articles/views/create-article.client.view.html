@@ -19,7 +19,7 @@
 					<div class="controls">
 						<textarea name="content" data-ng-model="content" id="content" class="form-control" cols="30" rows="10" placeholder="Content" required></textarea>
 					</div>
-					<div ng-show="submitted && articleForm.title.$invalid" class="help-block">
+					<div ng-show="submitted && articleForm.content.$invalid" class="help-block">
 						<p ng-show="articleForm.content.$error.required" class="text-danger">Content is required</p>
 					</div>
 				</div>
