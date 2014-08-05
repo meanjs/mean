@@ -75,10 +75,13 @@ exports.forgot = function(req, res, next) {
 				html: emailHTML
 			};
 			smtpTransport.sendMail(mailOptions, function(err) {
-				res.send({
-					message: 'An email has been sent to ' + user.email + ' with further instructions.'
-				});
-				done(err, 'done');
+				if (!err) {
+					res.send({
+						message: 'An email has been sent to ' + user.email + ' with further instructions.'
+					});
+				}
+
+				done(err);
 			});
 		}
 	], function(err) {
@@ -174,6 +177,7 @@ exports.reset = function(req, res, next) {
 				subject: 'Your password has been changed',
 				html: emailHTML
 			};
+			
 			smtpTransport.sendMail(mailOptions, function(err) {
 				done(err, 'done');
 			});
