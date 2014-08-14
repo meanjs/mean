@@ -5,14 +5,14 @@
  */
 var errorHandler = require('../errors'),
 	passport = require('passport'),
-    userAuthService = require('../../services/users.authentication.server.service');
+    userAuthenticationService = require('../../services/users.authentication.server.service');
 
 /**
  * Signup
  */
 exports.signup = function(req, res) {
     // Signup user throughout service
-    userAuthService.signup(req.body, function(err, user){
+    userAuthenticationService.signup(req.body, function(err, user){
         if (err) {
             return res.status(400).send({
                 message: errorHandler.getErrorMessage(err)
@@ -36,7 +36,7 @@ exports.signup = function(req, res) {
 exports.signin = function(req, res, next) {
 	passport.authenticate('local',
         function(err, user, info) {
-            userAuthService.authenticate(err, user, info, function (err, user) {
+            userAuthenticationService.authenticate(err, user, info, function (err, user) {
                 if (err || !user) {
                     return res.status(400).send(info);
                 }
@@ -85,14 +85,14 @@ exports.oauthCallback = function(strategy) {
  */
 exports.saveOAuthUserProfile = function(req, providerUserProfile, done) {
 	if (!req.user) {
-        userAuthService.saveNewOAuthUserProfile(
+        userAuthenticationService.saveNewOAuthUserProfile(
             providerUserProfile,
             function(err, user){
                 return done(err, user);
             }
         );
 	} else {
-        userAuthService.saveExistingOAuthUserProfile(
+        userAuthenticationService.saveExistingOAuthUserProfile(
             req.user,
             providerUserProfile,
             function(err, user){
@@ -112,7 +112,7 @@ exports.saveOAuthUserProfile = function(req, providerUserProfile, done) {
 exports.removeOAuthProvider = function(req, res, next) {
 	var provider = req.param('provider');
 
-    userAuthService.removeOAuthProvider(req.user, provider, function(err, user){
+    userAuthenticationService.removeOAuthProvider(req.user, provider, function(err, user){
         if (err){
             return res.status(400).send({
                 message: errorHandler.getErrorMessage(err)
