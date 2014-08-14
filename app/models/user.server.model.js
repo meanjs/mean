@@ -3,7 +3,8 @@
 /**
  * Module dependencies.
  */
-var mongoose = require('mongoose'),
+var _ = require('lodash'),
+    mongoose = require('mongoose'),
 	Schema = mongoose.Schema,
 	crypto = require('crypto');
 
@@ -119,6 +120,15 @@ UserSchema.methods.hashPassword = function(password) {
  */
 UserSchema.methods.authenticate = function(password) {
 	return this.password === this.hashPassword(password);
+};
+
+/**
+ * checks if user have all specified roles
+ * @param roles - {Array} of roles
+ * @returns - {Boolean}
+ */
+UserSchema.methods.hasRoles = function(roles){
+    return _.intersection(this.roles, roles).length > 0;
 };
 
 /**
