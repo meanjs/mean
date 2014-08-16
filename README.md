@@ -82,10 +82,15 @@ To create an HTTPS server, you need an SSL certificate.
 
 You can provide a certificate signed by a Certificate Authority (CA) or a self-signed certificate. In a production environment, it is recommended to use a CA-signed certificate. For development and test environment, a self-signed certificate can be used.
 
-To generate a self-signed certificate, run the following in your shell:
+To generate a self-signed certificate, run script:
 ```
 $ cd config/sslcert/
-$ openssl genrsa -out key.pem
+$ ./gen-certs
+```
+or run the following in your shell:
+```
+$ cd config/sslcert/
+$ openssl genrsa -out key.pem -aes256 1024
 $ openssl req -new -key key.pem -out csr.pem
 $ openssl x509 -req -days 9999 -in csr.pem -signkey key.pem -out cert.pem
 $ rm csr.pem
@@ -95,7 +100,7 @@ This will leave you with cert.pem (the certificate) and key.pem (the private key
 
 Now you can run your app securely in production mode:
 ```
-sudo NODE_ENV=production grunt
+sudo NODE_ENV=secure grunt
 ```
 NOTE: if you use higher port numbers, you don't need to run with sudo
 
