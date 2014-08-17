@@ -4,6 +4,7 @@
  * Module dependencies.
  */
 var mongoose = require('mongoose'),
+    config = require('../../config/config'),
 	Schema = mongoose.Schema;
 
 mongoose.set('debug', config.mongoose ? config.mongoose.debug || false : false);
