@@ -6,7 +6,7 @@
 var mongoose = require('mongoose'),
 	Schema = mongoose.Schema;
 
-mongoose.set('debug', config.mongoose.debug || false);
+mongoose.set('debug', config.mongoose ? config.mongoose.debug || false : false);
 
 /**
  * Article Schema
