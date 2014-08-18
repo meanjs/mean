@@ -6,7 +6,10 @@
 var mongoose = require('mongoose'),
 	errorHandler = require('./errors'),
 	Article = mongoose.model('Article'),
+    config = require('../../config/config'),
 	_ = require('lodash');
+
+mongoose.set('debug', config.mongoose && config.mongoose.debug);
 
 /**
  * Create a article
