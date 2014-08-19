@@ -10,6 +10,11 @@
 		"angular-mocks": "~1.2",
 		"angular-bootstrap": "~0.11.0",
 		"angular-ui-utils": "~0.1.1",
-		"angular-ui-router": "~0.2.10" 
+		"angular-ui-router": "~0.2.10",
+        "angular-cookies": "~1.2",
+        "angular-translate": "~2.2.0",
+        "angular-translate-loader-static-files": "~2.2.0",
+        "angular-translate-storage-local": "~2.2.0",
+        "angular-translate-storage-cookie": "~2.2.0"
 	}
 }

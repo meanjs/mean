@@ -59,6 +59,12 @@ var UserSchema = new Schema({
 		default: '',
 		validate: [validateLocalStrategyPassword, 'Password should be longer']
 	},
+    language: {
+        type: String,
+        default: 'en',
+        required: 'Please select language',
+        enum: ['es', 'en']
+    },
 	salt: {
 		type: String
 	},

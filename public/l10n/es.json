@@ -1,0 +1,75 @@
+{
+    "header": {
+        "TOGGLE_NAVIGATION": "Cambiar navegación",
+        "SIGN_UP": "Registrarse",
+        "SIGN_IN": "Entrar",
+        "EDIT_PROFILE": "Editar perfil",
+        "MANAGE_SOCIAL_ACCOUNTS": "Administrar Redes Sociales",
+        "CHANGE_PASSWORD": "Cambiar contraseña",
+        "SIGN_OUT": "Salir"
+    },
+    "signin" : {
+        "SIGN_IN_USING_YOUR_SOCIAL_ACCOUNTS": "Entra con tus redes sociales",
+        "OR_WITH_YOUR_ACCOUNT": "O con tu cuenta",
+        "USERNAME": "Usuario",
+        "PASSWORD": "Contraseña",
+        "SIGN_IN": "Entrar",
+        "OR": "o",
+        "SIGN_UP": "Registrarse",
+        "FORGOT_YOUR_PASSWORD": "¿Olvidaste tu contraseña?"
+    },
+    "signup": {
+        "SIGN_UP_USING_YOUR_SOCIAL_ACCOUNTS": "Regístrate con tus redes sociales",
+        "OR_WITH_YOUR_EMAIL": "O con tu email",
+        "FIRST_NAME": "Nombre",
+        "LAST_NAME": "Apellidos",
+        "EMAIL": "Email",
+        "USERNAME": "Usuario",
+        "PASSWORD": "Contraseña",
+        "SIGN_UP": "Registrarse",
+        "OR": "o",
+        "SIGN_IN": "Entrar"
+    },
+    "forgot_password": {
+        "RESTORE_YOUR_PASSWORD": "Restaura tu contraseña",
+        "ENTER_YOUR_ACCOUNT_USERNAME": "Introduce tu nombre de usuario",
+        "USERNAME": "Usuario",
+        "SUBMIT": "Enviar"
+    },
+    "reset_password": {
+        "RESET_YOUR_PASSWORD": "Reinicia tu contraseña",
+        "NEW_PASSWORD": "Nueva contraseña",
+        "VERIFY_PASSWORD": "Verifica la contraseña",
+        "UPDATE_PASSWORD": "Actualizar contraseña"
+    },
+    "reset_password_invalid": {
+        "PASSWORD_RESET_IS_INVALID": "La restauración de la contraseña es inválida",
+        "ASK_FOR_A_NEW_PASSWORD_RESET": "Volver a restaurar la contraseña"
+    },
+    "reset_password_success": {
+        "PASSWORD_SUCCESSFULLY_RESET": "Contraseña restaurada correctamente",
+        "CONTINUE_TO_HOME_PAGE": "Ir a la página de inicio"
+    },
+    "change_password": {
+        "CHANGE_YOUR_PASSWORD": "Cambia tu contraseña",
+        "CURRENT_PASSWORD": "Contraseña actual",
+        "NEW_PASSWORD": "Nueva contraseña",
+        "VERIFY_PASSWORD": "Verificar contraseña",
+        "SAVE_PASSWORD": "Grabar contraseña",
+        "PASSWORD_CHANGED_SUCCESSFULLY": "Contraseña cambiada correctamente"
+    },
+    "edit_profile": {
+        "EDIT_YOUR_PROFILE": "Editar tu perfil",
+        "FIRST_NAME": "Nombre",
+        "LAST_NAME": "Apellidos",
+        "EMAIL": "Email",
+        "USERNAME": "Usuario",
+        "LANGUAGE": "Idioma",
+        "SAVE_PROFILE": "Grabar perfil",
+        "PROFILE_SAVED_SUCCESSFULLY": "Perfil cambiado correctamente"
+    },
+    "social_accounts": {
+        "CONNECTED_SOCIAL_ACCOUNTS": "Redes sociales conectadas",
+        "CONNECT_OTHER_SOCIAL_ACCOUNTS": "Conectar otras redes sociales"
+    }
+}

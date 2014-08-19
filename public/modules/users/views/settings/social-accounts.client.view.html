@@ -1,5 +1,5 @@
 <section class="row" data-ng-controller="SettingsController">
-	<h3 class="col-md-12 text-center" data-ng-show="hasConnectedAdditionalSocialAccounts()">Connected social accounts:</h3>
+	<h3 class="col-md-12 text-center" data-ng-show="hasConnectedAdditionalSocialAccounts()">{{ "social_accounts.CONNECTED_SOCIAL_ACCOUNTS" | translate }}:</h3>
 	<div class="col-md-12 text-center">
 		<div data-ng-repeat="(providerName, providerData) in user.additionalProvidersData" class="remove-account-container">
 			<img ng-src="/modules/users/img/buttons/{{providerName}}.png">
@@ -8,7 +8,7 @@
 			</a>
 		</div>
 	</div>
-	<h3 class="col-md-12 text-center">Connect other social accounts:</h3>
+	<h3 class="col-md-12 text-center">{{ "social_accounts.CONNECT_OTHER_SOCIAL_ACCOUNTS" | translate }}:</h3>
 	<div class="col-md-12 text-center">
 		<a href="/auth/facebook" data-ng-hide="isConnectedSocialAccount('facebook')" class="undecorated-link">
 			<img src="/modules/users/img/buttons/facebook.png">
