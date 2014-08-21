@@ -44,7 +44,8 @@
 		"grunt-cli": "~0.1.13",
 		"glob": "~4.0.5",
 		"async": "~0.9.0",
-		"nodemailer": "~1.1.1"
+		"nodemailer": "~1.1.1",
+		"load-grunt-tasks": "~0.6.0"
 	},
 	"devDependencies": {
 		"supertest": "~0.13.0",
