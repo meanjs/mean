@@ -1,0 +1,99 @@
+<section data-ng-controller="QasController" data-ng-init="findOne()">
+    <div class="page-header">
+        <h1>Edit Qa</h1>
+    </div>
+    <div class="col-md-12">
+        <form class="form-horizontal" data-ng-submit="update()" novalidate>
+            <div class="form-group">
+                <label class="control-label" for="title">Question</label>
+
+                <div class="controls">
+                    <textarea data-ng-model="qa.question" id="title" class="form-control" placeholder="Question"
+                              required></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Correct______________Answers____________________Delete</label>
+
+                <div class='input-group' ng-repeat="choices in qa.choices">
+				<span class="input-group-addon">
+					<input type='checkbox' data-ng-model='choices.correctAnswer'>
+				</span>
+                    <input type="text" data-ng-model="choices.text" class="form-control"
+                           placeholder="Enter answer {{$index+1}} text"><br>
+					
+				<span class='input-group-addon'>
+					<button type='button' class='btn2' ng-click='deleteChoice($event)'>{{$index+1}}</button>
+				</span>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <button type="button" class="btn btn-default" ng-click="addChoice()">
+                    <span class="glyphicon glyphicon-plus"></span> Add another
+                </button>
+
+            </div>
+
+            <section class='col-md-6'>
+                <div class="form-group">
+                    <label class="control-label" for="content">Image URL</label>
+
+                    <div class="controls">
+                        <textarea data-ng-model="qa.imageURL" id="content" class="form-control" cols="30" rows="3"
+                                  placeholder="Image URL"></textarea>
+                    </div>
+                    <div>
+                        <img ng-src="{{qa.imageURL}}" height="100">
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="title">Hint</label>
+
+                        <div class="controls">
+                            <input type="text" data-ng-model="qa.hint" id="title2" class="form-control"
+                                   placeholder="Hint" required>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <div class='row'>
+                <section class='col-md-6'>
+                </section>
+                <section class='col-md-6'>
+                    <div class='form-group'>
+
+                        <button type="button" class="btn btn-default dropdown-toggle">Type <span
+                                class="caret"></span></button>
+                        <ul class="dropdown-menu">
+                            <li ng-repeat="dp1 in typeDropdown">
+                                <a>{{dp1.label}}</a>
+                            </li>
+                        </ul>
+
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown1">
+                            Difficulty <span class="caret"></span></button>
+                        <ul class="dropdown-menu">
+                            <li ng-repeat="dp2 in difficultyDropdown">
+                                <a>{{dp2.label}}</a>
+                            </li>
+                        </ul>
+                        <br/>
+                        <input type='checkbox' data-ng-model='qa.hintOn'>Allow Hint</input>
+                        <input type='checkbox' data-ng-model='qa.timeOn'>Timed</input>
+                        <input type='checkbox' data-ng-model='qa.fifty50On'>50/50</input>
+                        <input type='checkbox' data-ng-model='qa.randomizeAnswersOn'>Randomize Answers</input>
+                        <input type='checkbox' data-ng-model='qa.randomizeQuestionsOn'>Randomize Questions</input>
+                        <input type="text" data-ng-model="qa.questionNumber" id="title1" class="form-control"
+                               placeholder="Question Number" required>
+
+                        <form class="form-group">
+                            <input type="submit" value="Update" class="btn btn-default">
+                        </form>
+
+                    </div>
+                </section>
+            </div>
+        </form>
+    </div>
+</section>

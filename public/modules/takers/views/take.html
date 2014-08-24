@@ -1,0 +1,63 @@
+﻿<section data-ng-controller="TakersController" data-ng-init="find()">
+    <div class="page-header"data-ng-controller="TakersController">
+        <h1>Take Quiz</h1>
+		<h2 data-ng-model='taker.qa[index].question'></h2>
+    </div>
+	<form class="form-group" >
+	<section class="col-md-6">
+      
+        <div class="form-group">
+			
+			<label class="control-label" for="title">{{taker.qa[questionIndex].questionNumber}}</label>
+			<label class="control-label" for="title">{{taker.qa[questionIndex].question}}</label>
+			
+			<div class="controls">
+				<textarea type="text" data-ng-model="taker.qa[questionIndex].question" id="title" class="form-control" placeholder="Question" required></textarea>
+			</div> 
+          </div>
+                
+		<div class="form-group">
+			<label>Check correct answer(s)</label>
+			<div class='input-group' ng-repeat="choice in taker.qa[questionIndex].choices">
+				<span class="input-group-addon">
+					<input type='checkbox' ng-click="answerToggled()" data-ng-model='choice.selectedAnswer'>
+				</span>
+					<label class="control-label">{{choice.text}}</label><br>
+				</div>
+			</div>
+		</div>
+       </section>
+	  
+	<section class='col-md-6'>
+	  <div class="form-group">
+			<label class="control-label" for="content">Image URL</label>
+			<div>
+				<img ng-src="{{taker.qa[questionIndex].imageURL}}" height="200">
+			</div>
+			<div class="form-group">
+			<label class="control-label" for="title">Hint</label>
+			<div class="controls">
+			<label class="control-label">{{taker.qa[questionIndex].hint}}</label><br>
+				
+			</div>
+			</div>
+		</div>
+	</section>
+	<div class= 'row'>
+	<section class='col-md-6'>
+	</section>
+	<section class='col-md-6'> 
+	<div class='form-group' >
+		
+					
+           <form class="form-group">
+			   <button ng-click="prev()" >Prev</button>
+			   <button ng-click="next()" ng-init=0>Next</button>
+           </form>
+	</section>
+	</div>
+	</div>
+	</section>
+	</form>
+</section>
+   
