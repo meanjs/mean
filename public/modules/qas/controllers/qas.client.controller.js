@@ -2,59 +2,18 @@
 
 // Qas controller...
 angular.module('qas').controller('QasController', ['$scope', '$stateParams', '$location', 'Authentication',
-    'Qas','CalculatorService','MathService',
-    function ($scope, $stateParams, $location, Authentication, Qas, CalculatorService, MathService ) {
+    'Qas','CalculatorService','MathService','qasInitService',
+    function ($scope, $stateParams, $location, Authentication, Qas, CalculatorService, MathService, qasInitService ) {
         $scope.authentication = Authentication;
 
-        $scope.doSquare = CalculatorService.square(16);
-        //$scope.doSquare = MathService.multiply(4,4);
-       // $scope.doit = MathService.multiply(4,4);
-        $scope.doit = CalculatorService.square(4);
-        $scope.doit = CalculatorService.cube(9);
-        $scope.doit = MathService.add(3,4);
         $scope.doit = CalculatorService.cce(77);
 
 
 
         // Create new Qa
-        $scope.typeDropdown = "AAA";
-//        $scope.typeDropdown = [
-//            {
-//                'label': 'FIB',
-//                'value': 1
-//            },
-//            {
-//                'label': 'TF',
-//                'value': 2
-//            },
-//            {
-//                'label': 'MC',
-//                'value': 3
-//            },
-//            {
-//                'label': 'Matching',
-//                'value': 4
-//            }
-//        ];
-        $scope.difficultyDropdown = [
-            {
-                'label': 'Easy',
-                'value': 1
-            },
-            {
-                'label': 'Medium',
-                'value': 2
-            },
-            {
-                'label': 'Hard',
-                'value': 3
-            },
-            {
-                'label': 'Impossible',
-                'value': 4
-            }
-        ];
+        $scope.typeDropdown = qasInitService.typeDropdown();
 
+        $scope.difficultyDropdown = qasInitService.difficultyDropdown();
 
         $scope.qa = new Qas({
             question: '',
