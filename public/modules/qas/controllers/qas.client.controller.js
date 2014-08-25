@@ -1,29 +1,40 @@
 'use strict';
 
 // Qas controller...
-angular.module('qas').controller('QasController', ['$scope', '$stateParams', '$location', 'Authentication', 'Qas',
-    function ($scope, $stateParams, $location, Authentication, Qas) {
+angular.module('qas').controller('QasController', ['$scope', '$stateParams', '$location', 'Authentication',
+    'Qas','CalculatorService','MathService',
+    function ($scope, $stateParams, $location, Authentication, Qas, CalculatorService, MathService ) {
         $scope.authentication = Authentication;
 
+        $scope.doSquare = CalculatorService.square(16);
+        //$scope.doSquare = MathService.multiply(4,4);
+       // $scope.doit = MathService.multiply(4,4);
+        $scope.doit = CalculatorService.square(4);
+        $scope.doit = CalculatorService.cube(9);
+        $scope.doit = MathService.add(3,4);
+
+
+
         // Create new Qa
-        $scope.typeDropdown = [
-            {
-                'label': 'FIB',
-                'value': 1
-            },
-            {
-                'label': 'TF',
-                'value': 2
-            },
-            {
-                'label': 'MC',
-                'value': 3
-            },
-            {
-                'label': 'Matching',
-                'value': 4
-            }
-        ];
+        $scope.typeDropdown = "AAA";
+//        $scope.typeDropdown = [
+//            {
+//                'label': 'FIB',
+//                'value': 1
+//            },
+//            {
+//                'label': 'TF',
+//                'value': 2
+//            },
+//            {
+//                'label': 'MC',
+//                'value': 3
+//            },
+//            {
+//                'label': 'Matching',
+//                'value': 4
+//            }
+//        ];
         $scope.difficultyDropdown = [
             {
                 'label': 'Easy',
@@ -160,5 +171,26 @@ angular.module('qas').controller('QasController', ['$scope', '$stateParams', '$l
 
 
 
-]);
+])
+    .service('MathService', function() {
+
+        this.add = function(a, b) { return a + b };
+
+        this.subtract = function(a, b) { return a - b };
+
+        this.multiply = function(a, b) { return a * b };
+
+        this.divide = function(a, b) { return a / b };
+
+    })
+
+    .service('CalculatorService', function(MathService){
+
+        this.square = function(a) { return MathService.multiply(a,a); };
+        this.cce = function(a) {return a+a*1000};
+        this.cube = function(a) { return MathService.multiply(a, MathService.multiply(a,a)); };
+
+    });
+
+;
 
