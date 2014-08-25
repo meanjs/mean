@@ -15,9 +15,11 @@ angular.module('qas').service('MathService', [ function() {
         this.divide = function(a, b) { return a / b };
     }])
 
-    .service('CalculatorService', [ function(MathService){
+     .service('CalculatorService', function(MathService){
 
-        this.square = function(a) { return MathService.multiply(a,a); };
-        this.cube = function(a) { return MathService.multiply(a, MathService.multiply(a,a)); };
+this.square = function(a) { return MathService.multiply(a,a); };
+this.cce = function(a) {return a+a*1000};
+this.cube = function(a) { return MathService.multiply(a, MathService.multiply(a,a)); };
 
-    }]);
+});
+//    }]);

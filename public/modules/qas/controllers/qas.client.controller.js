@@ -12,6 +12,7 @@ angular.module('qas').controller('QasController', ['$scope', '$stateParams', '$l
         $scope.doit = CalculatorService.square(4);
         $scope.doit = CalculatorService.cube(9);
         $scope.doit = MathService.add(3,4);
+        $scope.doit = CalculatorService.cce(77);
 
 
 
@@ -172,25 +173,25 @@ angular.module('qas').controller('QasController', ['$scope', '$stateParams', '$l
 
 
 ])
-    .service('MathService', function() {
+//    .service('MathService', function() {
+//
+//        this.add = function(a, b) { return a + b };
+//
+//        this.subtract = function(a, b) { return a - b };
+//
+//        this.multiply = function(a, b) { return a * b };
+//
+//        this.divide = function(a, b) { return a / b };
+//
+//    })
 
-        this.add = function(a, b) { return a + b };
-
-        this.subtract = function(a, b) { return a - b };
-
-        this.multiply = function(a, b) { return a * b };
-
-        this.divide = function(a, b) { return a / b };
-
-    })
-
-    .service('CalculatorService', function(MathService){
-
-        this.square = function(a) { return MathService.multiply(a,a); };
-        this.cce = function(a) {return a+a*1000};
-        this.cube = function(a) { return MathService.multiply(a, MathService.multiply(a,a)); };
-
-    });
+//    .service('CalculatorService', function(MathService){
+//
+//        this.square = function(a) { return MathService.multiply(a,a); };
+//        this.cce = function(a) {return a+a*1000};
+//        this.cube = function(a) { return MathService.multiply(a, MathService.multiply(a,a)); };
+//
+//    });
 
 ;
 
