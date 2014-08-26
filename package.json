@@ -64,6 +64,7 @@
     "karma-coverage": "~0.2.0",
     "karma-firefox-launcher": "~0.1.3",
     "karma-jasmine": "~0.2.1",
+    "karma-junit-reporter": "^0.2.2",
     "karma-nyan-reporter": "0.0.46",
     "karma-phantomjs-launcher": "~0.1.2",
     "load-grunt-tasks": "~0.6.0",
