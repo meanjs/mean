@@ -44,5 +44,16 @@ angular.module('qas')
                 'value': 4
             }
         ];
-          }
+          };
+
+        this.init = function(qa){return ({
+            question: 'a',
+            answer: 'b',
+            choices: [
+                { text: '', correctAnswer: false },
+                { text: '', correctAnswer: false}
+            ],
+            content: ''
+        });}
+
     }]);

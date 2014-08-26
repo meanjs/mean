@@ -5,33 +5,24 @@ angular.module('qas').controller('QasController', ['$scope', '$stateParams', '$l
     'Qas','CalculatorService','MathService','qasInitService',
     function ($scope, $stateParams, $location, Authentication, Qas, CalculatorService, MathService, qasInitService ) {
         $scope.authentication = Authentication;
-
+//Test of Calculator and Math Service
         $scope.doit = CalculatorService.cce(77);
 
-
-
-        // Create new Qa
+// Initialize Dropdown labels
         $scope.typeDropdown = qasInitService.typeDropdown();
-
         $scope.difficultyDropdown = qasInitService.difficultyDropdown();
 
-        $scope.qa = new Qas({
-            question: '',
-            answer: '',
-            choices: [
-                { text: '', correctAnswer: false },
-                { text: '', correctAnswer: false}
-            ],
-            content: ''
-        });
+        var qa = new Qas();
+        $scope.qa = qasInitService.init(qa);
         //$scope.taker = new Taker({
         //    quizNumber: '9999'});
-        console.log('From Scope1 taker', $scope.taker);
-        $scope.qa.choices.correctAnswer;
+
+       $scope.qa.choices.correctAnswer;
         // Create and validate qa entries
         $scope.create = function () {
-            console.log("From QA CReate");
-            var qa = $scope.qa;
+ //           console.log("From QA CReate");
+            qa = $scope.qa;
+            console.log('qa', qa);
             // Grab data from input boxes
             qa.question = this.question;
             qa.imageURL = this.imageURL;
@@ -126,31 +117,6 @@ angular.module('qas').controller('QasController', ['$scope', '$stateParams', '$l
             console.log(qa);
             $scope.qa.choices.splice(ss, 1);
         };
-
     }
-
-
-
-])
-//    .service('MathService', function() {
-//
-//        this.add = function(a, b) { return a + b };
-//
-//        this.subtract = function(a, b) { return a - b };
-//
-//        this.multiply = function(a, b) { return a * b };
-//
-//        this.divide = function(a, b) { return a / b };
-//
-//    })
-
-//    .service('CalculatorService', function(MathService){
-//
-//        this.square = function(a) { return MathService.multiply(a,a); };
-//        this.cce = function(a) {return a+a*1000};
-//        this.cube = function(a) { return MathService.multiply(a, MathService.multiply(a,a)); };
-//
-//    });
-
-;
+]);
 
