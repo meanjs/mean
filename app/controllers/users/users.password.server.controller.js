@@ -33,13 +33,8 @@ exports.forgot = function(req, res, next) {
  * Reset password GET from email token
  */
 exports.validateResetToken = function(req, res) {
-	User.findOne({
-		resetPasswordToken: req.params.token,
-		resetPasswordExpires: {
-			$gt: Date.now()
-		}
-	}, function(err, user) {
-		if (!user) {
+    userPassService.validateResetToken(req.params.token, function(err){
+		if (err) {
 			return res.redirect('/#!/password/reset/invalid');
 		}
 

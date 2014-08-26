@@ -69,3 +69,26 @@ exports.forgotPassword = function(username, hostname, callback){
         callback(err, email);
     });
 };
+
+/**
+ * Service validation for a specific token
+ * @param token - {String}
+ * @param callback - {Function} in the form of function(err)
+ */
+exports.validateResetToken = function(token, callback){
+    User.findOne({
+        resetPasswordToken: token,
+        resetPasswordExpires: {
+            $gt: Date.now()
+        }
+    }, function(err, user) {
+        if (err){
+            return callback(err);
+        }
+        if (!user) {
+            return callback(new Error('No user found'));
+        }
+
+        return callback(null);
+    });
+};
