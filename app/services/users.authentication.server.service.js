@@ -15,7 +15,7 @@ exports.signup = function(usr, callback){
     delete usr.roles;
 
     // Init Variables
-    var user = new User(user);
+    var user = new User(usr);
 
     // Add missing user fields
     user.provider = 'local';
