@@ -3,7 +3,7 @@
 module.exports = function(grunt) {
 	// Unified Watch Object
 	var watchFiles = {
-		serverViews: ['app/views/**/*.*'], 
+		serverViews: ['app/views/**/*.*'],
 		serverJS: ['gruntfile.js', 'server.js', 'config/**/*.js', 'app/**/*.js'],
 		clientViews: ['public/modules/**/views/**/*.html'],
 		clientJS: ['public/js/*.js', 'public/modules/**/*.js'],
@@ -138,8 +138,9 @@ module.exports = function(grunt) {
 		}
 	});
 
-	// Load NPM tasks 
+	// Load NPM tasks
 	require('load-grunt-tasks')(grunt);
+	require('time-grunt')(grunt);
 
 	// Making grunt default to force in order not to break the project.
 	grunt.option('force', true);
@@ -166,5 +167,7 @@ module.exports = function(grunt) {
 	grunt.registerTask('build', ['lint', 'loadConfig', 'ngmin', 'uglify', 'cssmin']);
 
 	// Test task.
-	grunt.registerTask('test', ['env:test', 'mochaTest', 'karma:unit']);
+	grunt.registerTask('test', ['env:test', 'lint','mochaTest', 'karma:unit']);
+	grunt.registerTask('test:ui', ['env:test', 'lint', 'karma:unit']);
+	grunt.registerTask('test:server', ['env:test','lint', 'mochaTest']);
 };
