@@ -21,7 +21,7 @@ module.exports = function(config) {
 		// Test results reporter to use
 		// Possible values: 'dots', 'progress', 'junit', 'growl', 'coverage'
 		//reporters: ['progress'],
-		reporters: ['nyan', 'coverage', 'junit'],
+		reporters: ['progress', 'coverage', 'junit'],
 		basePath: './',
     preprocessors: {
 								// source files, that you wanna generate coverage for
