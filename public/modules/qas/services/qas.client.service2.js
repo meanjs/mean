@@ -47,13 +47,23 @@ angular.module('qas')
           };
 
         this.init = function(qa){return ({
-            question: 'a',
-            answer: 'b',
+            question: '',
+            questionNumber: "",
+            imageURL:"",
             choices: [
                 { text: '', correctAnswer: false },
+                { text: '', correctAnswer: false},
                 { text: '', correctAnswer: false}
             ],
-            content: ''
+            content: '',
+            hint:"",
+            difficulty:"",
+            type:"",
+            hintOn:false,
+            timeOn:false,
+            fifty50On:false,
+            randomizeQuestionsOn:false,
+            randomizeAnswersOn:false
         });}
 
     }]);

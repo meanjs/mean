@@ -11,22 +11,22 @@ angular.module('qas').controller('QasController', ['$scope', '$stateParams', '$l
 // Initialize Dropdown labels
         $scope.typeDropdown = qasInitService.typeDropdown();
         $scope.difficultyDropdown = qasInitService.difficultyDropdown();
-
         var qa = new Qas();
         $scope.qa = qasInitService.init(qa);
-        //$scope.taker = new Taker({
-        //    quizNumber: '9999'});
 
-       $scope.qa.choices.correctAnswer;
+     //  $scope.qa.choices.correctAnswer;
         // Create and validate qa entries
         $scope.create = function () {
- //           console.log("From QA CReate");
-            qa = $scope.qa;
+            var qa = new Qas();
+            qa = qasInitService.init(qa);
+            console.log('$scope.qa', $scope.qa);
+            //qa = $scope.qa;
             console.log('qa', qa);
             // Grab data from input boxes
             qa.question = this.question;
             qa.imageURL = this.imageURL;
             qa.choices.text = [
+                { text: this.text },
                 { text: this.text },
                 { text: this.text }
             ];
