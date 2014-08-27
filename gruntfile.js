@@ -189,7 +189,11 @@ module.exports = function(grunt) {
 	});
 
 	grunt.task.registerTask('doxx:shell', 'documentation', function() {
-		var init = shelljs.exec('./node_modules/doxx/bin/doxx --source app --target \'docs/doxx\' --ignore \'tests,views\' -t \'Documentation\'');
+		var result = shelljs.exec('./node_modules/doxx/bin/doxx --source app --target \'docs/doxx\' --ignore \'tests,views\' -t \'Documentation\'');
+		if(result.code == 0){
+			grunt.log.ok('Documentation created successfully');
+		}else{
+			grunt.log.error('ERROR: something went wrong');
 	});
 
 	// Default task(s).
