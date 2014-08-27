@@ -5,6 +5,7 @@ module.exports = function(grunt) {
 	var watchFiles = {
 		serverViews: ['app/views/**/*.*'],
 		serverJS: ['gruntfile.js', 'server.js', 'config/**/*.js', 'app/**/*.js'],
+		nodeFiles: ['server.js', 'config/**/*.js', 'app/**/*.js', '!app/tests/**/*.js',],
 		clientViews: ['public/modules/**/views/**/*.html'],
 		clientJS: ['public/*.js', 'public/modules/*/js/**/*.js'],
 		clientCSS: ['public/modules/**/*.css'],
@@ -136,14 +137,17 @@ module.exports = function(grunt) {
 				configFile: 'karma.conf.js'
 			}
 		},
-		jsdoc : {
-        ui : {
-            src: watchFiles.serverJS,
-            options: {
-                destination: 'docs/server'
-            }
-        }
-    },
+		doxx: {
+	    all: {
+	      src: 'app',
+	      target: 'docs/doxx',
+	      options: {
+	        // Task-specific options go here.
+					title: 'NodeJs App',
+        	ignore: 'tests,public,coverage,docs,node_modules,log,logs,.grunt',
+	      }
+	    }
+	  },
 		ngdocs: {
 		  options: {
 		    dest: 'docs/ngdocs',
@@ -172,7 +176,10 @@ module.exports = function(grunt) {
 		    src: watchFiles.clientJS,
 		    title: 'API Documentation'
 		  }
-		}
+		},
+		clean: {
+		  docs: ['docs'],
+		},
 	});
 
 	// Load NPM tasks
@@ -184,8 +191,8 @@ module.exports = function(grunt) {
 
 	// A Task for loading the configuration object
 	grunt.task.registerTask('loadConfig', 'Task that loads the config into a grunt option.', function() {
-		var init = require('./config/init')();
-		var config = require('./config/config');
+		var init = require('./app/config/init')();
+		var config = require('./app/config/config');
 
 		grunt.config.set('applicationJavaScriptFiles', config.assets.js);
 		grunt.config.set('applicationCSSFiles', config.assets.css);
@@ -208,5 +215,5 @@ module.exports = function(grunt) {
 	grunt.registerTask('test:ui', ['env:test', 'lint', 'karma:unit', 'docs']);
 	grunt.registerTask('test:server', ['env:test','lint', 'mochaTest', 'docs']);
 
-	grunt.registerTask('docs', ['ngdocs', 'jsdoc']);
+	grunt.registerTask('docs', ['clean:docs', 'ngdocs', 'jsdoc']);
 };
