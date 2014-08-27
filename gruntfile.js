@@ -215,5 +215,5 @@ module.exports = function(grunt) {
 	grunt.registerTask('test:ui', ['env:test', 'lint', 'karma:unit', 'docs']);
 	grunt.registerTask('test:server', ['env:test','lint', 'mochaTest', 'docs']);
 
-	grunt.registerTask('docs', ['clean:docs', 'ngdocs', 'jsdoc']);
+	grunt.registerTask('docs', ['clean:docs', 'ngdocs', 'doxx']);
 };
