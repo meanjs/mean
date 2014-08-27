@@ -2,6 +2,7 @@
 
 module.exports = function(grunt) {
 	// Unified Watch Object
+	var shelljs = require('shelljs');
 	var watchFiles = {
 		serverViews: ['app/views/**/*.*'],
 		serverJS: ['gruntfile.js', 'server.js', 'app/**/*.js'],
@@ -137,17 +138,6 @@ module.exports = function(grunt) {
 				configFile: 'karma.conf.js'
 			}
 		},
-		doxx: {
-	    all: {
-	      src: 'app',
-	      target: 'docs/doxx',
-	      options: {
-	        // Task-specific options go here.
-					title: 'Documentation',
-        	ignore: 'tests,public,coverage,docs,node_modules,log,logs,.grunt',
-	      }
-	    }
-	  },
 		ngdocs: {
 		  options: {
 		    dest: 'docs/ngdocs',
@@ -198,6 +188,10 @@ module.exports = function(grunt) {
 		grunt.config.set('applicationCSSFiles', config.assets.css);
 	});
 
+	grunt.task.registerTask('doxx:shell', 'documentation', function() {
+		var init = shelljs.exec('./node_modules/doxx/bin/doxx --source app --target \'docs/doxx\' --ignore \'tests,views\' -t \'Documentation\'');
+	});
+
 	// Default task(s).
 	grunt.registerTask('default', ['lint', 'concurrent:default']);
 
@@ -213,7 +207,7 @@ module.exports = function(grunt) {
 	// Test task.
 	grunt.registerTask('test', ['env:test', 'lint','mochaTest', 'karma:unit', 'docs']);
 	grunt.registerTask('test:ui', ['env:test', 'lint', 'karma:unit', 'docs']);
-	grunt.registerTask('test:server', ['env:test','lint', 'mochaTest', 'docs']);
+	grunt.registerTask('test:server', ['env:test','lint', 'mochaTest']);
 
-	grunt.registerTask('docs', ['clean:docs', 'ngdocs', 'doxx']);
+	grunt.registerTask('docs', ['clean:docs', 'doxx:shell', 'ngdocs']);
 };
