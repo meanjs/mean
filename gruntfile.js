@@ -6,7 +6,7 @@ module.exports = function(grunt) {
 		serverViews: ['app/views/**/*.*'],
 		serverJS: ['gruntfile.js', 'server.js', 'config/**/*.js', 'app/**/*.js'],
 		clientViews: ['public/modules/**/views/**/*.html'],
-		clientJS: ['public/js/*.js', 'public/modules/**/*.js'],
+		clientJS: ['public/*.js', 'public/modules/*/js/**/*.js'],
 		clientCSS: ['public/modules/**/*.css'],
 		mochaTests: ['app/tests/**/*.js']
 	};
@@ -135,6 +135,43 @@ module.exports = function(grunt) {
 			unit: {
 				configFile: 'karma.conf.js'
 			}
+		},
+		jsdoc : {
+        ui : {
+            src: watchFiles.clientJS,
+            options: {
+                destination: 'docs/ui'
+            }
+        }
+    },
+		ngdocs: {
+		  options: {
+		    dest: 'docs/ngdocs',
+		    scripts: [
+					'public/lib/angular/angular.js',
+					'public/lib/angular-animate/angular-animate.js'
+				],
+		    html5Mode: false,
+		    startPage: '/api',
+		    title: 'My Documentation',
+		    // analytics: {
+		    //       account: 'UA-08150815-0',
+		    //       domainName: 'my-domain.com'
+		    // },
+		  //   discussions: {
+		  //         shortName: 'my',
+		  //         url: 'http://my-domain.com',
+		  //         dev: false
+		  //   }
+		  },
+		  // tutorial: {
+		  //   src: ['content/tutorial/*.ngdoc'],
+		  //   title: 'Tutorial'
+		  // },
+		  api: {
+		    src: watchFiles.clientJS,
+		    title: 'API Documentation'
+		  }
 		}
 	});
 
@@ -168,6 +205,6 @@ module.exports = function(grunt) {
 
 	// Test task.
 	grunt.registerTask('test', ['env:test', 'lint','mochaTest', 'karma:unit']);
-	grunt.registerTask('test:ui', ['env:test', 'lint', 'karma:unit']);
+	grunt.registerTask('test:ui', ['env:test', 'lint', 'karma:unit', 'ngdocs']);
 	grunt.registerTask('test:server', ['env:test','lint', 'mochaTest']);
 };
