@@ -138,9 +138,9 @@ module.exports = function(grunt) {
 		},
 		jsdoc : {
         ui : {
-            src: watchFiles.clientJS,
+            src: watchFiles.serverJS,
             options: {
-                destination: 'docs/ui'
+                destination: 'docs/server'
             }
         }
     },
@@ -204,7 +204,9 @@ module.exports = function(grunt) {
 	grunt.registerTask('build', ['lint', 'loadConfig', 'ngmin', 'uglify', 'cssmin']);
 
 	// Test task.
-	grunt.registerTask('test', ['env:test', 'lint','mochaTest', 'karma:unit']);
-	grunt.registerTask('test:ui', ['env:test', 'lint', 'karma:unit', 'ngdocs']);
-	grunt.registerTask('test:server', ['env:test','lint', 'mochaTest']);
+	grunt.registerTask('test', ['env:test', 'lint','mochaTest', 'karma:unit', 'docs']);
+	grunt.registerTask('test:ui', ['env:test', 'lint', 'karma:unit', 'docs']);
+	grunt.registerTask('test:server', ['env:test','lint', 'mochaTest', 'docs']);
+
+	grunt.registerTask('docs', ['ngdocs', 'jsdoc']);
 };

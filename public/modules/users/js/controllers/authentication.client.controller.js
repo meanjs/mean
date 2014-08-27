@@ -5,9 +5,9 @@
 *
 * @description
 * Resize textarea automatically to the size of its text content.
-*
+* @lastModified by: Layton Whiteley
+* 
 * **Note:** ie<9 needs pollyfill for window.getComputedStyle
-*
 * @example
 	<div >
 		<div ng-contoller="AuthenticationController">
