@@ -143,7 +143,7 @@ module.exports = function(grunt) {
 	      target: 'docs/doxx',
 	      options: {
 	        // Task-specific options go here.
-					title: 'NodeJs App',
+					title: 'Application API Documentation',
         	ignore: 'tests,public,coverage,docs,node_modules,log,logs,.grunt',
 	      }
 	    }
