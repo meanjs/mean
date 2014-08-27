@@ -3,7 +3,7 @@
 /**
  * Module dependencies.
  */
-var applicationConfiguration = require('./config/config');
+var applicationConfiguration = require('./app/config/config');
 var browserNormalize = function(browser) {
 	// normalization process to keep a consistent browser name accross different
 	// OS

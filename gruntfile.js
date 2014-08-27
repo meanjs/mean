@@ -4,8 +4,8 @@ module.exports = function(grunt) {
 	// Unified Watch Object
 	var watchFiles = {
 		serverViews: ['app/views/**/*.*'],
-		serverJS: ['gruntfile.js', 'server.js', 'config/**/*.js', 'app/**/*.js'],
-		nodeFiles: ['server.js', 'config/**/*.js', 'app/**/*.js', '!app/tests/**/*.js',],
+		serverJS: ['gruntfile.js', 'server.js', 'app/**/*.js'],
+		nodeFiles: ['server.js', 'app/**/*.js', '!app/tests/**/*.js',],
 		clientViews: ['public/modules/**/views/**/*.html'],
 		clientJS: ['public/*.js', 'public/modules/*/js/**/*.js'],
 		clientCSS: ['public/modules/**/*.css'],
@@ -143,7 +143,7 @@ module.exports = function(grunt) {
 	      target: 'docs/doxx',
 	      options: {
 	        // Task-specific options go here.
-					title: 'Application API Documentation',
+					title: 'Documentation',
         	ignore: 'tests,public,coverage,docs,node_modules,log,logs,.grunt',
 	      }
 	    }
