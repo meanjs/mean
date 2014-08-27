@@ -194,6 +194,7 @@ module.exports = function(grunt) {
 			grunt.log.ok('Documentation created successfully');
 		}else{
 			grunt.log.error('ERROR: something went wrong');
+		}
 	});
 
 	// Default task(s).
