@@ -197,7 +197,7 @@ module.exports = function(grunt) {
 				options:{
 					//generate patterns: http://www.jslab.dk/tools.regex.php
 					// this pattern excludes tests, distributions and public libs
-					exclude: /public\/lib|public\/modules\/\*\/tests|public\/dist/
+					exclude: /public\/lib|public\/modules\/([^/]+)\/tests|public\/dist/
 				},
 				files: {
 					'coverage/plato/ui': [ 'public/**/*.js']
