@@ -58,7 +58,7 @@ exports.forgotPassword = function(username, hostname, callback){
                 },
                 email : {
                     to: user.email,
-                    subject: 'Password Reset',
+                    subject: 'Password Reset'
                 }
             };
             emailService.sendTemplate(options, function(err){
@@ -73,9 +73,11 @@ exports.forgotPassword = function(username, hostname, callback){
 /**
  * Service validation for a specific token
  * @param token - {String}
- * @param callback - {Function} in the form of function(err)
+ * @param callback - {Function} in the form of function(err, user)
+ *          err - {Error}
+ *          user - {User}
  */
-exports.validateResetToken = function(token, callback){
+ function validateResetToken(token, callback){
     User.findOne({
         resetPasswordToken: token,
         resetPasswordExpires: {
@@ -83,12 +85,74 @@ exports.validateResetToken = function(token, callback){
         }
     }, function(err, user) {
         if (err){
-            return callback(err);
+            return callback(err, null);
         }
         if (!user) {
-            return callback(new Error('No user found'));
+            return callback(new Error('No user found'), null);
         }
 
-        return callback(null);
+        return callback(null, user);
+    });
+};
+exports.validateResetToken = validateResetToken;
+
+/**
+ * Service to reset a password according to a specified token
+ * @param token - {String} - the token of the reset request
+ * @param passwordDetails - {Object} in the form of:
+ *          {
+ *              newPassword : {String} the new password
+ *              verifyPassword {String} the password again
+ *          }
+ * @param callback - {Function} in the form of callback(err, user)
+ *          err - {Error}
+ *          user - {User}
+ */
+exports.resetPassword = function(token, passwordDetails, callback){
+    async.waterfall([
+
+        function(done) {
+            validateResetToken(token, function (err, user) {
+                done(err, user);
+            });
+        },
+        function(user, done){
+            if (passwordDetails.newPassword !== passwordDetails.verifyPassword) {
+                return callback(new Error('Passwords do not match'), null);
+            }
+
+            user.password = passwordDetails.newPassword;
+            user.resetPasswordToken = undefined;
+            user.resetPasswordExpires = undefined;
+
+            user.save(function(err) {
+                if (err) {
+                    return callback(err, null);
+                }
+
+                done(err, user);
+            });
+        },
+        // send email
+        function(user, done){
+            var options = {
+                template : {
+                    path : 'app/views/templates/reset-password-confirm-email.server.view.html',
+                    renderOptions : {
+                        name: user.displayName,
+                        appName: config.app.title
+                    }
+                },
+                email : {
+                    to: user.email,
+                    subject: 'Your password has been changed'
+                }
+            };
+            emailService.sendTemplate(options, function(err){
+                done(err, user);
+            });
+        }
+    ], function(err, user) {
+        callback(err, user);
     });
 };
