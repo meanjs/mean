@@ -1,12 +1,15 @@
+# Project custom ignores
 .DS_Store
 .nodemonignore
 .sass-cache/
 npm-debug.log
 node_modules/
-public/lib
+public/lib/bower_components/
 app/tests/coverage/
 .bower-*/
 .idea/
+
+docs
 
 # Created by http://www.gitignore.io
 

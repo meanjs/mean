@@ -10,7 +10,7 @@ module.exports = function(grunt) {
 		clientViews: ['public/modules/**/views/**/*.html'],
 		clientJS: ['public/*.js', 'public/modules/*/js/**/*.js'],
 		clientCSS: ['public/modules/**/*.css'],
-		mochaTests: ['app/tests/**/*.js']
+		mochaTests: ['./tests/globals.js','tests/integration/**/*.js', 'tests/unit/**/*.js']
 	};
 
 	// Project Configuration
@@ -123,15 +123,24 @@ module.exports = function(grunt) {
 		},
 		env: {
 			test: {
-				NODE_ENV: 'test'
+				NODE_ENV: 'test',
+				APP_DIR_FOR_CODE_COVERAGE: 'test/coverage/instrument/app/'
 			}
 		},
-		mochaTest: {
-			src: watchFiles.mochaTests,
+		mochacov: {
+			//
 			options: {
-				reporter: 'spec',
-				require: 'server.js'
-			}
+				files:watchFiles.mochaTests,
+				//reporter: 'spec',
+				//require: [],
+				ui: 'bdd'
+			},
+			test:{
+				options:{
+					instrument: true,
+					reporter: 'spec',
+				}
+			},
 		},
 		karma: {
 			unit: {
@@ -147,7 +156,7 @@ module.exports = function(grunt) {
 				],
 		    html5Mode: false,
 		    startPage: '/api',
-		    title: 'My Documentation',
+		    title: 'NgApp Documentation',
 		    // analytics: {
 		    //       account: 'UA-08150815-0',
 		    //       domainName: 'my-domain.com'
@@ -190,10 +199,19 @@ module.exports = function(grunt) {
 
 	grunt.task.registerTask('doxx:shell', 'documentation', function() {
 		var result = shelljs.exec('./node_modules/doxx/bin/doxx --source app --target \'docs/doxx\' --ignore \'tests,views\' -t \'Documentation\'');
-		if(result.code == 0){
+		if(result.code === 0){
 			grunt.log.ok('Documentation created successfully');
 		}else{
-			grunt.log.error('ERROR: something went wrong');
+			grunt.log.error('ERROR: something went wrong!');
+		}
+	});
+
+	grunt.task.registerTask('covershot', 'nodejs code coverage', function() {
+		var result = shelljs.exec('./node_modules/covershot/bin/covershot covershot/data -f html');
+		if(result.code === 0){
+			grunt.log.ok('Coverage done successfully');
+		}else{
+			grunt.log.error('ERROR: oops. something went wrong!');
 		}
 	});
 
@@ -210,9 +228,9 @@ module.exports = function(grunt) {
 	grunt.registerTask('build', ['lint', 'loadConfig', 'ngmin', 'uglify', 'cssmin']);
 
 	// Test task.
-	grunt.registerTask('test', ['env:test', 'lint','mochaTest', 'karma:unit', 'docs']);
+	grunt.registerTask('test', ['env:test', 'lint','mochacov', 'karma:unit', 'docs']);
 	grunt.registerTask('test:ui', ['env:test', 'lint', 'karma:unit', 'docs']);
-	grunt.registerTask('test:server', ['env:test','lint', 'mochaTest']);
+	grunt.registerTask('test:server', ['env:test','lint', 'mochacov', 'covershot']);
 
 	grunt.registerTask('docs', ['clean:docs', 'doxx:shell', 'ngdocs']);
 };
