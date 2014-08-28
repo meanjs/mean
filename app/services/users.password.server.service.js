@@ -118,7 +118,7 @@ exports.resetPassword = function(token, passwordDetails, callback){
         },
         function(user, done){
             if (passwordDetails.newPassword !== passwordDetails.verifyPassword) {
-                return callback(new Error('Passwords do not match'), null);
+                done(new Error('Passwords do not match'));
             }
 
             user.password = passwordDetails.newPassword;
@@ -150,6 +150,64 @@ exports.resetPassword = function(token, passwordDetails, callback){
             };
             emailService.sendTemplate(options, function(err){
                 done(err, user);
+            });
+        }
+    ], function(err, user) {
+        callback(err, user);
+    });
+};
+
+/**
+ * Service to change a user passowrd
+ * @param user - {User} one to change his password
+ * @param passwordDetails - {Object} in the form of :
+ *          {
+ *              currentPassword : {String} the current password
+ *              newPassword : {String} the new password
+ *              verifyPassword : {String} the password again
+ *          }
+ * @param callback - {Function} in the form of callback(err, user)
+ *          err - {Error}
+ *          user - {User}
+ */
+exports.changePassowrd = function(user, passwordDetails, callback){
+
+    async.waterfall([
+        // Password exact verififcation
+        function(done){
+            if (passwordDetails.newPassword && passwordDetails.newPassword === passwordDetails.verifyPassword){
+                return done(null);
+            }
+
+            return done(new Error('Password do not match or missing'));
+        },
+        // Find the user
+        function(done){
+            User.findById(user.id, function(err, user){
+                if (err){
+                    return done(err);
+                }
+
+                if (!user){
+                    return done(new Error('Could not find a user'));
+                }
+
+                return done(err, user);
+            })
+        },
+        // Try to authenticate
+        function(user, done){
+            if (!user.authenticate(passwordDetails.currentPassword)){
+                return done(new Error('Could not authenticate user'));
+            }
+            return done(null, user);
+        },
+        // Change Password
+        function(user, done){
+            user.password = passwordDetails.newPassword;
+
+            user.save(function(err){
+                return done(err, user);
             });
         }
     ], function(err, user) {

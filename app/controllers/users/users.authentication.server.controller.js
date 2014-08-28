@@ -22,7 +22,9 @@ exports.signup = function(req, res) {
         // login user
         req.login(user, function(err) {
             if (err) {
-                return res.status(400).send(err);
+                return res.status(400).send({
+                    message: errorHandler.getErrorMessage(err)
+                });
             }
 
             return res.jsonp(user);
@@ -43,7 +45,9 @@ exports.signin = function(req, res, next) {
 
                 req.login(user, function (err) {
                     if (err) {
-                        return res.status(400).send(err);
+                        return res.status(400).send({
+                            message: errorHandler.getErrorMessage(err)
+                        });
                     }
 
                     return res.jsonp(user);
@@ -121,7 +125,9 @@ exports.removeOAuthProvider = function(req, res, next) {
 
         req.login(user, function(err) {
             if (err) {
-                return res.status(400).send(err);
+                return res.status(400).send({
+                    message: errorHandler.getErrorMessage(err)
+                });
             }
 
             return res.jsonp(user);

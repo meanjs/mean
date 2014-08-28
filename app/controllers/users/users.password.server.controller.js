@@ -4,14 +4,7 @@
  * Module dependencies.
  */
 var _ = require('lodash'),
-	errorHandler = require('../errors'),
-	mongoose = require('mongoose'),
-	passport = require('passport'),
-	User = mongoose.model('User'),
-	config = require('../../../config/config'),
-	nodemailer = require('nodemailer'),
-	crypto = require('crypto'),
-	async = require('async'),
+    errorHandler = require('../errors'),
     userPassService = require('../../services/users.password.server.service');
 
 /**
@@ -21,7 +14,7 @@ exports.forgot = function(req, res, next) {
     userPassService.forgotPassword(req.body.username, req.headers.host, function(err, email){
         if (err){
             return res.status(400).send({
-                message: err.message
+                message: errorHandler.getErrorMessage(err)
             });
         }
 
@@ -54,14 +47,14 @@ exports.reset = function(req, res, next) {
     userPassService.resetPassword(req.params.token, passwordDetails, function(err, user){
         if (err){
             return res.status(400).send({
-                message: err.message
+                message: errorHandler.getErrorMessage(err)
             });
         }
 
         req.login(user, function(err) {
             if (err) {
                 return res.status(400).send({
-                    message: err.message
+                    message: errorHandler.getErrorMessage(err)
                 });
             }
 
@@ -75,59 +68,24 @@ exports.reset = function(req, res, next) {
  * Change Password
  */
 exports.changePassword = function(req, res, next) {
-	// Init Variables
-	var passwordDetails = req.body;
-	var message = null;
+    userPassService.changePassowrd(req.user, req.body, function(err, user){
+        if (err){
+            return res.status(400).send({
+                message: errorHandler.getErrorMessage(err)
+            });
+        }
 
-	if (req.user) {
-		if (passwordDetails.newPassword) {
-			User.findById(req.user.id, function(err, user) {
-				if (!err && user) {
-					if (user.authenticate(passwordDetails.currentPassword)) {
-						if (passwordDetails.newPassword === passwordDetails.verifyPassword) {
-							user.password = passwordDetails.newPassword;
+        // Try to login
+        req.login(user, function(err) {
+            if (err) {
+                return res.status(400).send({
+                    message: errorHandler.getErrorMessage(err)
+                });
+            }
 
-							user.save(function(err) {
-								if (err) {
-									return res.status(400).send({
-										message: errorHandler.getErrorMessage(err)
-									});
-								} else {
-									req.login(user, function(err) {
-										if (err) {
-											res.status(400).send(err);
-										} else {
-											res.send({
-												message: 'Password changed successfully'
-											});
-										}
-									});
-								}
-							});
-						} else {
-							res.status(400).send({
-								message: 'Passwords do not match'
-							});
-						}
-					} else {
-						res.status(400).send({
-							message: 'Current password is incorrect'
-						});
-					}
-				} else {
-					res.status(400).send({
-						message: 'User is not found'
-					});
-				}
-			});
-		} else {
-			res.status(400).send({
-				message: 'Please provide a new password'
-			});
-		}
-	} else {
-		res.status(400).send({
-			message: 'User is not signed in'
-		});
-	}
+            res.send({
+                message: 'Password changed successfully'
+            });
+        });
+    });
 };

@@ -7,45 +7,28 @@ var _ = require('lodash'),
 	errorHandler = require('../errors'),
 	mongoose = require('mongoose'),
 	passport = require('passport'),
-	User = mongoose.model('User');
+	User = mongoose.model('User'),
+    userProfileService = require('../../services/users.profile.server.service');
 
 /**
  * Update user details
  */
 exports.update = function(req, res) {
-	// Init Variables
-	var user = req.user;
-	var message = null;
+    userProfileService.update(req.user, req.body, function(err, user) {
+        if (err) {
+            return res.status(400).send({
+                message: errorHandler.getErrorMessage(err)
+            });
+        }
 
-	// For security measurement we remove the roles from the req.body object
-	delete req.body.roles;
-
-	if (user) {
-		// Merge existing user
-		user = _.extend(user, req.body);
-		user.updated = Date.now();
-		user.displayName = user.firstName + ' ' + user.lastName;
-
-		user.save(function(err) {
-			if (err) {
-				return res.status(400).send({
-					message: errorHandler.getErrorMessage(err)
-				});
-			} else {
-				req.login(user, function(err) {
-					if (err) {
-						res.status(400).send(err);
-					} else {
-						res.jsonp(user);
-					}
-				});
-			}
-		});
-	} else {
-		res.status(400).send({
-			message: 'User is not signed in'
-		});
-	}
+        req.login(user, function (err) {
+            if (err) {
+                res.status(400).send(err);
+            } else {
+                res.jsonp(user);
+            }
+        });
+    });
 };
 
 /**
