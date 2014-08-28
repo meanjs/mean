@@ -1,4 +1,4 @@
-var csrequire = require('covershot').require.bind(null, require);
+GLOBAL.csrequire = require('covershot').require.bind(null, require);
 
 // coverage will be collected for this file and all files it requires
 //var myLibrary = csrequire('../lib/myLibrary');
