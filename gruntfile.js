@@ -196,6 +196,7 @@ module.exports = function(grunt) {
 			ui: {
 				options:{
 					//generate patterns: http://www.jslab.dk/tools.regex.php
+					// regex's separated by pipe |
 					// this pattern excludes tests, distributions and public libs
 					exclude: /public\/lib|public\/modules\/([^/]+)\/tests|public\/dist/
 				},
