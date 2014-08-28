@@ -20,7 +20,9 @@ var _ = require('lodash'),
 exports.forgot = function(req, res, next) {
     userPassService.forgotPassword(req.body.username, req.headers.host, function(err, email){
         if (err){
-            return next(err);
+            return res.status(400).send({
+                message: err.message
+            });
         }
 
         res.send({
@@ -33,7 +35,7 @@ exports.forgot = function(req, res, next) {
  * Reset password GET from email token
  */
 exports.validateResetToken = function(req, res) {
-    userPassService.validateResetToken(req.params.token, function(err){
+    userPassService.validateResetToken(req.params.token, function(err, user){
 		if (err) {
 			return res.redirect('/#!/password/reset/invalid');
 		}
@@ -48,78 +50,25 @@ exports.validateResetToken = function(req, res) {
 exports.reset = function(req, res, next) {
 	// Init Variables
 	var passwordDetails = req.body;
-	var message = null;
 
-	async.waterfall([
+    userPassService.resetPassword(req.params.token, passwordDetails, function(err, user){
+        if (err){
+            return res.status(400).send({
+                message: err.message
+            });
+        }
 
-		function(done) {
-			User.findOne({
-				resetPasswordToken: req.params.token,
-				resetPasswordExpires: {
-					$gt: Date.now()
-				}
-			}, function(err, user) {
-				if (!err && user) {
-					if (passwordDetails.newPassword === passwordDetails.verifyPassword) {
-						user.password = passwordDetails.newPassword;
-						user.resetPasswordToken = undefined;
-						user.resetPasswordExpires = undefined;
+        req.login(user, function(err) {
+            if (err) {
+                return res.status(400).send({
+                    message: err.message
+                });
+            }
 
-						user.save(function(err) {
-							if (err) {
-								return res.status(400).send({
-									message: errorHandler.getErrorMessage(err)
-								});
-							} else {
-								req.login(user, function(err) {
-									if (err) {
-										res.status(400).send(err);
-									} else {
-										// Return authenticated user 
-										res.jsonp(user);
-
-										done(err, user);
-									}
-								});
-							}
-						});
-					} else {
-						return res.status(400).send({
-							message: 'Passwords do not match'
-						});
-					}
-				} else {
-					return res.status(400).send({
-						message: 'Password reset token is invalid or has expired.'
-					});
-				}
-			});
-		},
-		function(user, done) {
-			res.render('templates/reset-password-confirm-email', {
-				name: user.displayName,
-				appName: config.app.title
-			}, function(err, emailHTML) {
-				done(err, emailHTML, user);
-			});
-		},
-		// If valid email, send reset email using service
-		function(emailHTML, user, done) {
-			var smtpTransport = nodemailer.createTransport(config.mailer.options);
-			var mailOptions = {
-				to: user.email,
-				from: config.mailer.from,
-				subject: 'Your password has been changed',
-				html: emailHTML
-			};
-			
-			smtpTransport.sendMail(mailOptions, function(err) {
-				done(err, 'done');
-			});
-		}
-	], function(err) {
-		if (err) return next(err);
-	});
+            // Return authenticated user
+            res.jsonp(user);
+        });
+    });
 };
 
 /**
