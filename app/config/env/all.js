@@ -13,16 +13,16 @@ module.exports = {
 	assets: {
 		lib: {
 			css: [
-				'public/lib/bootstrap/dist/css/bootstrap.css',
-				'public/lib/bootstrap/dist/css/bootstrap-theme.css',
+				'public/lib/bower_components/bootstrap/dist/css/bootstrap.css',
+				'public/lib/bower_components/bootstrap/dist/css/bootstrap-theme.css',
 			],
 			js: [
-				'public/lib/angular/angular.js',
-				'public/lib/angular-resource/angular-resource.js',
-				'public/lib/angular-animate/angular-animate.js',
-				'public/lib/angular-ui-router/release/angular-ui-router.js',
-				'public/lib/angular-ui-utils/ui-utils.js',
-				'public/lib/angular-bootstrap/ui-bootstrap-tpls.js'
+				'public/lib/bower_components/angular/angular.js',
+				'public/lib/bower_components/angular-resource/angular-resource.js',
+				'public/lib/bower_components/angular-animate/angular-animate.js',
+				'public/lib/bower_components/angular-ui-router/release/angular-ui-router.js',
+				'public/lib/bower_components/angular-ui-utils/ui-utils.js',
+				'public/lib/bower_components/angular-bootstrap/ui-bootstrap-tpls.js'
 			]
 		},
 		css: [
@@ -35,8 +35,8 @@ module.exports = {
 			'public/modules/*/js/**/*.js'
 		],
 		tests: [
-			'public/lib/angular-mocks/angular-mocks.js',
-			'public/modules/*/assets/tests/unit/**/*.js'
+			'public/lib/bower_components/angular-mocks/angular-mocks.js',
+			'public/modules/*/tests/unit/**/*.js'
 		]
 	}
 };

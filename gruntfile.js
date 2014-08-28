@@ -123,8 +123,7 @@ module.exports = function(grunt) {
 		},
 		env: {
 			test: {
-				NODE_ENV: 'test',
-				APP_DIR_FOR_CODE_COVERAGE: 'test/coverage/instrument/app/'
+				NODE_ENV: 'test'
 			}
 		},
 		mochacov: {
@@ -151,8 +150,8 @@ module.exports = function(grunt) {
 		  options: {
 		    dest: 'docs/ngdocs',
 		    scripts: [
-					'public/lib/angular/angular.js',
-					'public/lib/angular-animate/angular-animate.js'
+					'public/lib/bower_components/angular/angular.js',
+					'public/lib/bower_components/angular-animate/angular-animate.js'
 				],
 		    html5Mode: false,
 		    startPage: '/api',
