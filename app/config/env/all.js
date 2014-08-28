@@ -14,7 +14,7 @@ module.exports = {
 		lib: {
 			css: [
 				'public/lib/bower_components/bootstrap/dist/css/bootstrap.css',
-				'public/lib/bower_components/bootstrap/dist/css/bootstrap-theme.css',
+				'public/lib/bower_components/bootstrap/dist/css/bootstrap-theme.css'
 			],
 			js: [
 				'public/lib/bower_components/angular/angular.js',

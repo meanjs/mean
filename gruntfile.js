@@ -126,6 +126,15 @@ module.exports = function(grunt) {
 				NODE_ENV: 'test'
 			}
 		},
+		jsmeter: {
+	    files: {
+	      src: watchFiles.nodeFiles,
+	    },
+	    options: {
+	      dest: 'covershot/jsmeter',
+	      engine: 'LogRender',
+	    },
+	  },
 		mochacov: {
 			//
 			options: {
@@ -178,6 +187,23 @@ module.exports = function(grunt) {
 		clean: {
 		  docs: ['docs'],
 		},
+		 plato: {
+	    server: {
+	      files: {
+	        'coverage/plato/server': ['server.js', 'app/**/*.js']
+	      }
+	    },
+			ui: {
+				options:{
+					//generate patterns: http://www.jslab.dk/tools.regex.php
+					// this pattern excludes tests, distributions and public libs
+					exclude: /public\/lib|public\/modules\/\*\/tests|public\/dist/
+				},
+				files: {
+					'coverage/plato/ui': [ 'public/**/*.js']
+				}
+			}
+	  }
 	});
 
 	// Load NPM tasks
@@ -204,7 +230,6 @@ module.exports = function(grunt) {
 			grunt.log.error('ERROR: something went wrong!');
 		}
 	});
-
 	grunt.task.registerTask('covershot', 'nodejs code coverage', function() {
 		var result = shelljs.exec('./node_modules/covershot/bin/covershot covershot/data -f html');
 		if(result.code === 0){
@@ -228,8 +253,8 @@ module.exports = function(grunt) {
 
 	// Test task.
 	grunt.registerTask('test', ['env:test', 'lint','mochacov', 'karma:unit', 'docs']);
-	grunt.registerTask('test:ui', ['env:test', 'lint', 'karma:unit', 'docs']);
-	grunt.registerTask('test:server', ['env:test','lint', 'mochacov', 'covershot']);
+	grunt.registerTask('test:ui', ['env:test', 'lint', 'karma:unit']);
+	grunt.registerTask('test:server', ['env:test','lint', 'mochacov','covershot']);
 
-	grunt.registerTask('docs', ['clean:docs', 'doxx:shell', 'ngdocs']);
+	grunt.registerTask('docs', ['clean:docs', 'doxx:shell', 'ngdocs', 'plato',]);
 };
