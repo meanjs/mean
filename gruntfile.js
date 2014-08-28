@@ -189,6 +189,9 @@ module.exports = function(grunt) {
 		},
 		 plato: {
 	    server: {
+				options:{
+					jshint : grunt.file.readJSON('.jshintrc')
+				},
 	      files: {
 	        'coverage/plato/server': ['server.js', 'app/**/*.js']
 	      }
@@ -198,7 +201,8 @@ module.exports = function(grunt) {
 					//generate patterns: http://www.jslab.dk/tools.regex.php
 					// regex's separated by pipe |
 					// this pattern excludes tests, distributions and public libs
-					exclude: /public\/lib|public\/modules\/([^/]+)\/tests|public\/dist/
+					exclude: /public\/lib|public\/modules\/([^/]+)\/tests|public\/dist/,
+					jshint : grunt.file.readJSON('.jshintrc')
 				},
 				files: {
 					'coverage/plato/ui': [ 'public/**/*.js']
