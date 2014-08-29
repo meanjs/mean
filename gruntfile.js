@@ -6,7 +6,7 @@ module.exports = function(grunt) {
 	var watchFiles = {
 		serverViews: ['app/views/**/*.*'],
 		serverJS: ['gruntfile.js', 'server.js', 'app/**/*.js'],
-		nodeFiles: ['server.js', 'app/**/*.js', '!app/tests/**/*.js',],
+		nodeFiles: ['server.js', 'app/**/*.js'],
 		clientViews: ['public/modules/**/views/**/*.html'],
 		clientJS: ['public/*.js', 'public/modules/*/js/**/*.js'],
 		clientCSS: ['public/modules/**/*.css'],
@@ -126,30 +126,6 @@ module.exports = function(grunt) {
 				NODE_ENV: 'test'
 			}
 		},
-		jsmeter: {
-	    files: {
-	      src: watchFiles.nodeFiles,
-	    },
-	    options: {
-	      dest: 'covershot/jsmeter',
-	      engine: 'LogRender',
-	    },
-	  },
-		mochacov: {
-			//
-			options: {
-				files:watchFiles.mochaTests,
-				//reporter: 'spec',
-				//require: [],
-				ui: 'bdd'
-			},
-			test:{
-				options:{
-					instrument: true,
-					reporter: 'spec',
-				}
-			},
-		},
 		karma: {
 			unit: {
 				configFile: 'karma.conf.js'
@@ -157,7 +133,7 @@ module.exports = function(grunt) {
 		},
 		ngdocs: {
 		  options: {
-		    dest: 'docs/ngdocs',
+		    dest: 'reports/docs/ngdocs',
 		    scripts: [
 					'public/lib/bower_components/angular/angular.js',
 					'public/lib/bower_components/angular-animate/angular-animate.js'
@@ -185,7 +161,8 @@ module.exports = function(grunt) {
 		  }
 		},
 		clean: {
-		  docs: ['docs'],
+		  docs: ['reports/docs'],
+			istanbul:['reports/coverage/server/app', 'reports/coverage/server/server.js']
 		},
 		 plato: {
 	    server: {
@@ -193,7 +170,7 @@ module.exports = function(grunt) {
 					jshint : grunt.file.readJSON('.jshintrc')
 				},
 	      files: {
-	        'coverage/plato/server': ['server.js', 'app/**/*.js']
+	        'reports/plato/server': ['server.js', 'app/**/*.js']
 	      }
 	    },
 			ui: {
@@ -205,7 +182,7 @@ module.exports = function(grunt) {
 					jshint : grunt.file.readJSON('.jshintrc')
 				},
 				files: {
-					'coverage/plato/ui': [ 'public/**/*.js']
+					'reports/plato/ui': [ 'public/**/*.js']
 				}
 			}
 	  }
@@ -228,22 +205,24 @@ module.exports = function(grunt) {
 	});
 
 	grunt.task.registerTask('doxx:shell', 'documentation', function() {
-		var result = shelljs.exec('./node_modules/doxx/bin/doxx --source app --target \'docs/doxx\' --ignore \'tests,views\' -t \'Documentation\'');
+		var result = shelljs.exec('./node_modules/doxx/bin/doxx --source app --target \'reports/docs/doxx\' --ignore \'tests,views\' -t \'Documentation\'');
 		if(result.code === 0){
 			grunt.log.ok('Documentation created successfully');
 		}else{
 			grunt.log.error('ERROR: something went wrong!');
 		}
 	});
-	grunt.task.registerTask('covershot', 'nodejs code coverage', function() {
-		var result = shelljs.exec('./node_modules/covershot/bin/covershot covershot/data -f html');
+	
+	grunt.task.registerTask('istanbul:mocha:cover', 'nodejs code coverage', function() {
+
+		var command = 'istanbul cover --dir \'reports/coverage/server\' node_modules/.bin/_mocha tests/**/*.js';
+		var result = shelljs.exec(command);
 		if(result.code === 0){
 			grunt.log.ok('Coverage done successfully');
 		}else{
 			grunt.log.error('ERROR: oops. something went wrong!');
 		}
 	});
-
 	// Default task(s).
 	grunt.registerTask('default', ['lint', 'concurrent:default']);
 
@@ -259,7 +238,8 @@ module.exports = function(grunt) {
 	// Test task.
 	grunt.registerTask('test', ['env:test', 'lint','mochacov', 'karma:unit', 'docs']);
 	grunt.registerTask('test:ui', ['env:test', 'lint', 'karma:unit']);
-	grunt.registerTask('test:server', ['env:test','lint', 'mochacov','covershot']);
+	//grunt.registerTask('test:server', ['env:test','lint', 'mochacov','covershot']);
+	grunt.registerTask('test:server', ['env:test','istanbul:mocha:cover', 'clean:istanbul']);
 
 	grunt.registerTask('docs', ['clean:docs', 'doxx:shell', 'ngdocs', 'plato',]);
 };

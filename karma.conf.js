@@ -34,20 +34,20 @@ module.exports = function(config) {
 		coverageReporter: {
 			reporters:[
 						{
-							type : 'html',
-							dir : 'coverage',
+							type : 'lcov',
+							dir : 'reports/coverage/ui',
 							subdir: browserNormalize
 						},
 						{
 							type: 'cobertura',
-							dir : 'coverage',
+							dir : 'reports/coverage/ui',
 							subdir: browserNormalize
 						}
 					]
 
 		},
 		junitReporter: {
-			  outputFile: 'coverage/junit/test-results.xml'
+			  outputFile: 'reports/junit/test-results.xml'
 			},
 
 

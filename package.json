@@ -67,7 +67,6 @@
     "grunt-contrib-watch": "~0.6.1",
     "grunt-env": "~0.4.1",
     "grunt-karma": "~0.8.2",
-    "grunt-mocha-cov": "^0.3.0",
     "grunt-ngdocs": "^0.2.3",
     "grunt-ngmin": "0.0.3",
     "grunt-node-inspector": "~0.1.3",
