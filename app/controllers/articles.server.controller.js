@@ -6,23 +6,21 @@
 var mongoose = require('mongoose'),
 	errorHandler = require('./errors'),
 	Article = mongoose.model('Article'),
-	_ = require('lodash');
+	_ = require('lodash'),
+    articleService = require('../services/articles.server.service');
 
 /**
  * Create a article
  */
 exports.create = function(req, res) {
-	var article = new Article(req.body);
-	article.user = req.user;
+    articleService.create(req.body, req.user, function(err, article){
+        if (err) {
+            return res.status(400).send({
+                message: errorHandler.getErrorMessage(err)
+            });
+        }
 
-	article.save(function(err) {
-		if (err) {
-			return res.status(400).send({
-				message: errorHandler.getErrorMessage(err)
-			});
-		} else {
-			res.jsonp(article);
-		}
+        res.jsonp(article);
 	});
 };
 
@@ -37,18 +35,14 @@ exports.read = function(req, res) {
  * Update a article
  */
 exports.update = function(req, res) {
-	var article = req.article;
-
-	article = _.extend(article, req.body);
-
-	article.save(function(err) {
+    articleService.update(req.article, req.body, function(err, article){
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
-		} else {
-			res.jsonp(article);
 		}
+
+        res.jsonp(article);
 	});
 };
 
@@ -56,16 +50,15 @@ exports.update = function(req, res) {
  * Delete an article
  */
 exports.delete = function(req, res) {
-	var article = req.article;
 
-	article.remove(function(err) {
+    articleService.delete(req.article, function(err, article){
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
-		} else {
-			res.jsonp(article);
 		}
+
+        res.jsonp(article);
 	});
 };
 
@@ -73,14 +66,14 @@ exports.delete = function(req, res) {
  * List of Articles
  */
 exports.list = function(req, res) {
-	Article.find().sort('-created').populate('user', 'displayName').exec(function(err, articles) {
+    articleService.list(req.user, function(err, articles){
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
-		} else {
-			res.jsonp(articles);
 		}
+
+        res.jsonp(articles);
 	});
 };
 
@@ -88,9 +81,11 @@ exports.list = function(req, res) {
  * Article middleware
  */
 exports.articleByID = function(req, res, next, id) {
-	Article.findById(id).populate('user', 'displayName').exec(function(err, article) {
-		if (err) return next(err);
-		if (!article) return next(new Error('Failed to load article ' + id));
+    articleService.articleById(id, function(err, article){
+		if (err) {
+            return next(err);
+        }
+
 		req.article = article;
 		next();
 	});
