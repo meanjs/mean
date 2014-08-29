@@ -133,7 +133,7 @@ module.exports = function(grunt) {
 		},
 		ngdocs: {
 		  options: {
-		    dest: 'reports/docs/ngdocs',
+		    dest: '.reports/docs/ngdocs',
 		    scripts: [
 					'public/lib/bower_components/angular/angular.js',
 					'public/lib/bower_components/angular-animate/angular-animate.js'
@@ -161,8 +161,8 @@ module.exports = function(grunt) {
 		  }
 		},
 		clean: {
-		  docs: ['reports/docs'],
-			istanbul:['.reports/coverage/server/app', 'reports/coverage/server/server.js']
+		  docs: ['.reports/docs'],
+			istanbul:['.reports/coverage/server/app', '.reports/coverage/server/server.js']
 		},
 		 plato: {
 	    server: {
