@@ -35,19 +35,19 @@ module.exports = function(config) {
 			reporters:[
 						{
 							type : 'lcov',
-							dir : 'reports/coverage/ui',
+							dir : '.reports/coverage/ui',
 							subdir: browserNormalize
 						},
 						{
 							type: 'cobertura',
-							dir : 'reports/coverage/ui',
+							dir : '.reports/coverage/ui',
 							subdir: browserNormalize
 						}
 					]
 
 		},
 		junitReporter: {
-			  outputFile: 'reports/junit/test-results.xml'
+			  outputFile: '.reports/junit/test-results.xml'
 			},
 
 

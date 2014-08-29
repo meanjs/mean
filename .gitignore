@@ -11,7 +11,7 @@ app/tests/coverage/
 
 docs
 covershot
-reports
+.reports
 
 # Created by http://www.gitignore.io
 

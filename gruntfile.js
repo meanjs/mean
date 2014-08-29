@@ -162,7 +162,7 @@ module.exports = function(grunt) {
 		},
 		clean: {
 		  docs: ['reports/docs'],
-			istanbul:['reports/coverage/server/app', 'reports/coverage/server/server.js']
+			istanbul:['.reports/coverage/server/app', 'reports/coverage/server/server.js']
 		},
 		 plato: {
 	    server: {
@@ -170,7 +170,7 @@ module.exports = function(grunt) {
 					jshint : grunt.file.readJSON('.jshintrc')
 				},
 	      files: {
-	        'reports/plato/server': ['server.js', 'app/**/*.js']
+	        '.reports/plato/server': ['server.js', 'app/**/*.js']
 	      }
 	    },
 			ui: {
@@ -182,7 +182,7 @@ module.exports = function(grunt) {
 					jshint : grunt.file.readJSON('.jshintrc')
 				},
 				files: {
-					'reports/plato/ui': [ 'public/**/*.js']
+					'.reports/plato/ui': [ 'public/**/*.js']
 				}
 			}
 	  }
@@ -205,17 +205,17 @@ module.exports = function(grunt) {
 	});
 
 	grunt.task.registerTask('doxx:shell', 'documentation', function() {
-		var result = shelljs.exec('./node_modules/doxx/bin/doxx --source app --target \'reports/docs/doxx\' --ignore \'tests,views\' -t \'Documentation\'');
+		var result = shelljs.exec('./node_modules/doxx/bin/doxx --source app --target \'.reports/docs/doxx\' --ignore \'tests,views\' -t \'Documentation\'');
 		if(result.code === 0){
 			grunt.log.ok('Documentation created successfully');
 		}else{
 			grunt.log.error('ERROR: something went wrong!');
 		}
 	});
-	
+
 	grunt.task.registerTask('istanbul:mocha:cover', 'nodejs code coverage', function() {
 
-		var command = 'istanbul cover --dir \'reports/coverage/server\' node_modules/.bin/_mocha tests/**/*.js';
+		var command = 'istanbul cover --dir \'.reports/coverage/server\' node_modules/.bin/_mocha tests/**/*.js';
 		var result = shelljs.exec(command);
 		if(result.code === 0){
 			grunt.log.ok('Coverage done successfully');
