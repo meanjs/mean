@@ -10,7 +10,7 @@ module.exports = function(grunt) {
 		clientViews: ['public/modules/**/views/**/*.html'],
 		clientJS: ['public/*.js', 'public/modules/*/js/**/*.js'],
 		clientCSS: ['public/modules/**/*.css'],
-		mochaTests: ['./tests/globals.js','tests/integration/**/*.js', 'tests/unit/**/*.js']
+		mochaTests: ['./tests/globals.js','app/tests/integration/**/*.js', 'app/tests/unit/**/*.js']
 	};
 
 	// Project Configuration
@@ -215,7 +215,7 @@ module.exports = function(grunt) {
 
 	grunt.task.registerTask('istanbul:mocha:cover', 'nodejs code coverage', function() {
 
-		var command = 'istanbul cover --dir \'.reports/coverage/server\' node_modules/.bin/_mocha tests/**/*.js';
+		var command = 'istanbul cover --config=.istanbul.yml node_modules/.bin/_mocha app/tests/**/*.js';
 		var result = shelljs.exec(command);
 		if(result.code === 0){
 			grunt.log.ok('Coverage done successfully');
