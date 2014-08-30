@@ -3,7 +3,8 @@
 /**
  * Module dependencies.
  */
-var mongoose = require('mongoose'),
+var _ = require('lodash'),
+    mongoose = require('mongoose'),
 	Schema = mongoose.Schema,
 	crypto = require('crypto');
 
@@ -122,6 +123,15 @@ UserSchema.methods.authenticate = function(password) {
 };
 
 /**
+ * checks if user have all specified roles
+ * @param roles - {Array} of roles
+ * @returns {Boolean}
+ */
+UserSchema.methods.hasRoles = function(roles){
+    return _.intersection(this.roles, roles).length > 0;
+};
+
+/**
  * Find possible not used username
  */
 UserSchema.statics.findUniqueUsername = function(username, suffix, callback) {
@@ -141,6 +151,32 @@ UserSchema.statics.findUniqueUsername = function(username, suffix, callback) {
 			callback(null);
 		}
 	});
+};
+
+/**
+ * Find user by username
+ * @param username - {String}
+ * @param callback - {Function} in the form of callback(err, user)
+ *      err - {Error}
+ *      user - {User}
+ */
+UserSchema.statics.findByUsername = function(username, callback){
+    var _this = this;
+
+    _this.findOne({
+        username: username
+    }, function(err, user) {
+        return callback(err, user);
+    });
+};
+
+/**
+ * Transform this object without salt or password values
+ */
+if (!UserSchema.options.toObject) UserSchema.options.toObject = {};
+UserSchema.options.toObject.transform = function (doc, ret, options){
+//    delete ret.salt;
+//    delete ret.password;
 };
 
 mongoose.model('User', UserSchema);
