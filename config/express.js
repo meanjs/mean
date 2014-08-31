@@ -5,10 +5,6 @@
  */
 var fs = require('fs'),
 	http = require('http'),
-	https = require('https'),
-	privateKey  = fs.readFileSync('./config/sslcert/key.pem', 'utf8'),
-	certificate = fs.readFileSync('./config/sslcert/cert.pem', 'utf8'),
-	credentials = {key: privateKey, cert: certificate},
   express = require('express'),
 	morgan = require('morgan'),
 	bodyParser = require('body-parser'),
@@ -149,7 +145,11 @@ module.exports = function(db) {
 
 	if (app.locals.secure) {
 		console.log('Securely using https protocol');
-		var httpsServer = https.createServer(credentials, app);
+		var https = require('https'),
+		privateKey  = fs.readFileSync('./config/sslcert/key.pem', 'utf8'),
+		certificate = fs.readFileSync('./config/sslcert/cert.pem', 'utf8'),
+		credentials = {key: privateKey, cert: certificate},
+		httpsServer = https.createServer(credentials, app);
 		return httpsServer;
 	} else {
 		console.log('Insecurely using http protocol');
