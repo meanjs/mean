@@ -1,0 +1,2 @@
+app/tests/**/*.js
+public/modules/*/tests/**/*.js

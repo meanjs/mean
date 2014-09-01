@@ -10,7 +10,7 @@ module.exports = function(grunt) {
 		clientViews: ['public/modules/**/views/**/*.html'],
 		clientJS: ['public/*.js', 'public/modules/*/js/**/*.js'],
 		clientCSS: ['public/modules/**/*.css'],
-		mochaTests: ['./tests/globals.js','app/tests/integration/**/*.js', 'app/tests/unit/**/*.js']
+		mochaTests: ['./app/tests/_globals.js','app/tests/integration/**/*.js', 'app/tests/unit/**/*.js']
 	};
 
 	// Project Configuration
@@ -107,16 +107,21 @@ module.exports = function(grunt) {
 				}
 			}
 		},
-        ngmin: {
-            production: {
-                files: {
-                    'public/dist/application.js': '<%= applicationJavaScriptFiles %>'
-                }
-            }
+		ngAnnotate: {
+        options: {
+            singleQuotes: true,
         },
+				production: {
+						files: {
+								'public/dist/application.js': ['<%= applicationJavaScriptFiles %>']
+						}
+				}
+		},
 		concurrent: {
 			default: ['nodemon', 'watch'],
 			debug: ['nodemon', 'watch', 'node-inspector'],
+			docs: ['doxx:shell', 'ngdocs', 'plato'],
+			test: ['test:ui', 'test:server'],
 			options: {
 				logConcurrentOutput: true
 			}
@@ -167,7 +172,8 @@ module.exports = function(grunt) {
 		 plato: {
 	    server: {
 				options:{
-					jshint : grunt.file.readJSON('.jshintrc')
+					jshint : grunt.file.readJSON('.jshintrc'),
+					exclude: /app\/tests/,
 				},
 	      files: {
 	        '.reports/plato/server': ['server.js', 'app/**/*.js']
@@ -205,11 +211,12 @@ module.exports = function(grunt) {
 	});
 
 	grunt.task.registerTask('doxx:shell', 'documentation', function() {
-		var result = shelljs.exec('./node_modules/doxx/bin/doxx --source app --target \'.reports/docs/doxx\' --ignore \'tests,views\' -t \'Documentation\'');
+		var command = './node_modules/doxx/bin/doxx --source app --target \'.reports/docs/doxx\' --ignore \'tests,views\' -t \'Documentation\'';
+		var result = shelljs.exec(command);
 		if(result.code === 0){
-			grunt.log.ok('Documentation created successfully');
+			grunt.log.ok('(doxx:shell) Documentation created successfully');
 		}else{
-			grunt.log.error('ERROR: something went wrong!');
+			grunt.log.error('(doxx:shell) ERROR: something went wrong!');
 		}
 	});
 
@@ -218,9 +225,9 @@ module.exports = function(grunt) {
 		var command = 'istanbul cover --config=.istanbul.yml node_modules/.bin/_mocha app/tests/**/*.js';
 		var result = shelljs.exec(command);
 		if(result.code === 0){
-			grunt.log.ok('Coverage done successfully');
+			grunt.log.ok('(istanbul:mocha:cover) Coverage done successfully');
 		}else{
-			grunt.log.error('ERROR: oops. something went wrong!');
+			grunt.log.error('(istanbul:mocha:cover) ERROR: oops. something went wrong!');
 		}
 	});
 	// Default task(s).
@@ -233,13 +240,12 @@ module.exports = function(grunt) {
 	grunt.registerTask('lint', ['jshint', 'csslint']);
 
 	// Build task(s).
-	grunt.registerTask('build', ['lint', 'loadConfig', 'ngmin', 'uglify', 'cssmin']);
+	grunt.registerTask('build', ['lint', 'loadConfig', 'ngAnnotate', 'uglify', 'cssmin']);
 
 	// Test task.
-	grunt.registerTask('test', ['env:test', 'lint','mochacov', 'karma:unit', 'docs']);
-	grunt.registerTask('test:ui', ['env:test', 'lint', 'karma:unit']);
-	//grunt.registerTask('test:server', ['env:test','lint', 'mochacov','covershot']);
-	grunt.registerTask('test:server', ['env:test','istanbul:mocha:cover', 'clean:istanbul']);
+	grunt.registerTask('test', ['lint','concurrent:test', 'docs']);
+	grunt.registerTask('test:ui', ['env:test',  'karma:unit']);
+	grunt.registerTask('test:server', ['istanbul:mocha:cover', 'clean:istanbul']);
 
-	grunt.registerTask('docs', ['clean:docs', 'doxx:shell', 'ngdocs', 'plato',]);
+	grunt.registerTask('docs', ['clean:docs', 'concurrent:docs' ]);
 };

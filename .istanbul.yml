@@ -17,10 +17,10 @@ reporting:
         - cobertura
     dir: .reports/coverage/server
     watermarks:
-        statements: [50, 80]
-        lines: [50, 80]
-        functions: [50, 80]
-        branches: [50, 80]
+        statements: [50, 90]
+        lines: [50, 90]
+        functions: [50, 90]
+        branches: [50, 90]
 hooks:
     hook-run-in-context: false
     post-require-hook: null
