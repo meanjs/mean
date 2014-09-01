@@ -243,8 +243,8 @@ module.exports = function(grunt) {
 	grunt.registerTask('build', ['lint', 'loadConfig', 'ngAnnotate', 'uglify', 'cssmin']);
 
 	// Test task.
-	grunt.registerTask('test', ['lint','concurrent:test', 'docs']);
-	grunt.registerTask('test:ui', ['env:test',  'karma:unit']);
+	grunt.registerTask('test', ['lint','concurrent:test']);
+	grunt.registerTask('test:ui', ['env:test', 'karma:unit']);
 	grunt.registerTask('test:server', ['istanbul:mocha:cover', 'clean:istanbul']);
 
 	grunt.registerTask('docs', ['clean:docs', 'concurrent:docs' ]);
