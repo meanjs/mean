@@ -4,9 +4,13 @@
  * Module dependencies.
  */
 var applicationConfiguration = require('./app/config/config');
+var grunt = require('grunt');
+//get meta data from grunt config
+var metaData = grunt.config.getRaw('meta');
+
 var browserNormalize = function(browser) {
-	// normalization process to keep a consistent browser name accross different
-	// OS
+	// normalization process to keep a consistent
+	// browser name accross different OS
 	return browser.toLowerCase().split(/[ /-]/)[0];
 };
 // Karma configuration
@@ -35,19 +39,19 @@ module.exports = function(config) {
 			reporters:[
 						{
 							type : 'lcov',
-							dir : '.reports/coverage/ui',
+							dir : metaData.reports + '/coverage/ui',
 							subdir: browserNormalize
 						},
 						{
 							type: 'cobertura',
-							dir : '.reports/coverage/ui',
+							dir : metaData.reports + '/coverage/ui',
 							subdir: browserNormalize
 						}
 					]
 
 		},
 		junitReporter: {
-			  outputFile: '.reports/junit/test-results.xml'
+			  outputFile: metaData.reports + '/junit/test-results.xml'
 			},
 
 

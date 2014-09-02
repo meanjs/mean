@@ -18,6 +18,10 @@ module.exports = function(grunt) {
   // Project Configuration
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
+    meta:{
+      reports: '.reports',
+      files: watchFiles
+    },
     watch: {
       serverViews: {
         files: watchFiles.serverViews,
@@ -140,7 +144,7 @@ module.exports = function(grunt) {
     },
     ngdocs: {
       options: {
-        dest: '.reports/docs/ngdocs',
+        dest: '<%= meta.reports %>/docs/ngdocs',
         scripts: [
           'public/lib/bower_components/angular/angular.js',
           'public/lib/bower_components/angular-animate/angular-animate.js'
@@ -148,37 +152,24 @@ module.exports = function(grunt) {
         html5Mode: false,
         startPage: '/api',
         title: 'NgApp Documentation',
-        // analytics: {
-        //       account: 'UA-08150815-0',
-        //       domainName: 'my-domain.com'
-        // },
-      //   discussions: {
-      //         shortName: 'my',
-      //         url: 'http://my-domain.com',
-      //         dev: false
-      //   }
       },
-      // tutorial: {
-      //   src: ['content/tutorial/*.ngdoc'],
-      //   title: 'Tutorial'
-      // },
       api: {
         src: watchFiles.clientJS,
         title: 'API Documentation'
       }
     },
     clean: {
-      docs: ['.reports/docs'],
-      istanbul:['.reports/coverage/server/app', '.reports/coverage/server/server.js']
+      docs: ['<%= meta.reports %>/docs'],
+      istanbul:['<%= meta.reports %>/coverage/server/app', '<%= meta.reports %>/coverage/server/server.js']
     },
-     plato: {
+    plato: {
       server: {
         options:{
           jshint : grunt.file.readJSON('.jshintrc'),
           exclude: /app\/tests/,
         },
         files: {
-          '.reports/plato/server': ['server.js', 'app/**/*.js']
+          '<%= meta.reports %>/plato/server': ['server.js', 'app/**/*.js']
         }
       },
       ui: {
@@ -190,7 +181,7 @@ module.exports = function(grunt) {
           jshint : grunt.file.readJSON('.jshintrc')
         },
         files: {
-          '.reports/plato/ui': [ 'public/**/*.js']
+          '<%= meta.reports %>/plato/ui': [ 'public/**/*.js']
         }
       }
     }
@@ -212,11 +203,12 @@ module.exports = function(grunt) {
     grunt.config.set('applicationCSSFiles', config.assets.css);
   });
 
+  // A task for generating documentation using doxx CLI
   grunt.task.registerTask('doxx:shell', 'documentation', function() {
     var options = {
       ignore: 'tests,views',
       source: 'app',
-      dest: '.reports/docs/doxx',
+      dest: grunt.config.process('<%= meta.reports %>') + '/docs/doxx',
       title: 'Documentation'
     };
 
@@ -231,6 +223,7 @@ module.exports = function(grunt) {
     }
   });
 
+  // A task for running tests with mocha CLI and doing code coverage with istanbul CLI
   grunt.task.registerTask('istanbul:mocha:cover', 'nodejs code coverage', function() {
     var options = {
       configFile: '.istanbul.yml',

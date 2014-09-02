@@ -12,6 +12,7 @@ app/tests/coverage/
 docs
 covershot
 .reports
+nohup.out
 
 # Created by http://www.gitignore.io
 
