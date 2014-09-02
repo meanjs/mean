@@ -3,8 +3,12 @@
 /**
  * Module dependencies.
  */
-var applicationConfiguration = require('./config/config');
-
+var applicationConfiguration = require('./app/config/config');
+var browserNormalize = function(browser) {
+	// normalization process to keep a consistent browser name accross different
+	// OS
+	return browser.toLowerCase().split(/[ /-]/)[0];
+};
 // Karma configuration
 module.exports = function(config) {
 	config.set({
@@ -17,7 +21,35 @@ module.exports = function(config) {
 		// Test results reporter to use
 		// Possible values: 'dots', 'progress', 'junit', 'growl', 'coverage'
 		//reporters: ['progress'],
-		reporters: ['progress'],
+		reporters: ['progress', 'coverage', 'junit'],
+		basePath: './',
+    preprocessors: {
+								// source files, that you wanna generate coverage for
+								// do not include tests or libraries
+								// (these files will be instrumented by Istanbul)
+								'public/*.js': ['coverage'],
+								'public/modules/*/js/**/*.js': ['coverage']
+						},
+
+		coverageReporter: {
+			reporters:[
+						{
+							type : 'lcov',
+							dir : '.reports/coverage/ui',
+							subdir: browserNormalize
+						},
+						{
+							type: 'cobertura',
+							dir : '.reports/coverage/ui',
+							subdir: browserNormalize
+						}
+					]
+
+		},
+		junitReporter: {
+			  outputFile: '.reports/junit/test-results.xml'
+			},
+
 
 		// Web server port
 		port: 9876,

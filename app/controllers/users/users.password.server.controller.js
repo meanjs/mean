@@ -8,7 +8,7 @@ var _ = require('lodash'),
 	mongoose = require('mongoose'),
 	passport = require('passport'),
 	User = mongoose.model('User'),
-	config = require('../../../config/config'),
+	config = require('../../config/config'),
 	nodemailer = require('nodemailer'),
 	crypto = require('crypto'),
 	async = require('async'),
@@ -139,7 +139,7 @@ exports.reset = function(req, res, next) {
 									if (err) {
 										res.status(400).send(err);
 									} else {
-										// Return authenticated user 
+										// Return authenticated user
 										res.jsonp(user);
 
 										done(err, user);
@@ -176,7 +176,7 @@ exports.reset = function(req, res, next) {
 				subject: 'Your password has been changed',
 				html: emailHTML
 			};
-			
+
 			smtpTransport.sendMail(mailOptions, function(err) {
 				done(err, 'done');
 			});

@@ -5,16 +5,18 @@ module.exports = {
 	assets: {
 		lib: {
 			css: [
-				'public/lib/bootstrap/dist/css/bootstrap.min.css',
-				'public/lib/bootstrap/dist/css/bootstrap-theme.min.css',
+				'public/lib/bower_components/bootstrap/dist/css/bootstrap.min.css',
+				'public/lib/bower_components/bootstrap/dist/css/bootstrap-theme.min.css'
 			],
 			js: [
-				'public/lib/angular/angular.min.js',
-				'public/lib/angular-resource/angular-resource.min.js',
-				'public/lib/angular-animate/angular-animate.min.js',
-				'public/lib/angular-ui-router/release/angular-ui-router.min.js',
-				'public/lib/angular-ui-utils/ui-utils.min.js',
-				'public/lib/angular-bootstrap/ui-bootstrap-tpls.min.js'
+				'public/lib/bower_components/angular/angular.min.js',
+				'public/lib/bower_components/angular-resource/angular-resource.min.js',
+				'public/lib/bower_components/angular-animate/angular-animate.min.js',
+				'public/lib/bower_components/angular-ui-router/release/angular-ui-router.min.js',
+				'public/lib/bower_components/angular-ui-utils/ui-utils.min.js',
+				'public/lib/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js',
+				'public/lib/bower_components/angular-logex/dist/log-ex-unobtrusive.min.js',
+				'public/lib/bower_components/angular-utilz/dist/angular-utilz.min.js'
 			]
 		},
 		css: 'public/dist/application.min.css',
