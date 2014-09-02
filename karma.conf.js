@@ -25,7 +25,7 @@ module.exports = function(config) {
 		// Test results reporter to use
 		// Possible values: 'dots', 'progress', 'junit', 'growl', 'coverage'
 		//reporters: ['progress'],
-		reporters: ['progress', 'coverage', 'junit'],
+		reporters: ['progress', 'coverage', 'junit', 'threshold'],
 		basePath: './',
     preprocessors: {
 								// source files, that you wanna generate coverage for
@@ -53,6 +53,13 @@ module.exports = function(config) {
 		junitReporter: {
 			  outputFile: metaData.reports + '/junit/test-results.xml'
 			},
+		// the configure thresholds
+    thresholdReporter: {
+      statements: 90,
+      branches: 90,
+      functions: 90,
+      lines: 90
+    },
 
 
 		// Web server port

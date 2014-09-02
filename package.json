@@ -72,6 +72,7 @@
     "karma-jasmine": "~0.2.1",
     "karma-junit-reporter": "^0.2.2",
     "karma-phantomjs-launcher": "~0.1.2",
+    "karma-threshold-reporter": "^0.1.9",
     "load-grunt-tasks": "~0.6.0",
     "mocha": "^1.21.4",
     "nock": "^0.45.0",
