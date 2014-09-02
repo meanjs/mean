@@ -23,7 +23,7 @@ module.exports = function(config) {
 		files: applicationConfiguration.assets.lib.js.concat(applicationConfiguration.assets.js, applicationConfiguration.assets.tests),
 
 		// Test results reporter to use
-		// Possible values: 'dots', 'progress', 'junit', 'growl', 'coverage'
+		// Possible values: 'dots', 'progress', 'junit', 'growl', 'coverage', 'threshold'
 		//reporters: ['progress'],
 		reporters: ['progress', 'coverage', 'junit', 'threshold'],
 		basePath: './',
@@ -54,11 +54,12 @@ module.exports = function(config) {
 			  outputFile: metaData.reports + '/junit/test-results.xml'
 			},
 		// the configure thresholds
+		// configure desired thresholds
     thresholdReporter: {
-      statements: 90,
-      branches: 90,
-      functions: 90,
-      lines: 90
+      statements: 50,
+      branches: 45,
+      functions: 50,
+      lines: 50
     },
 
 
