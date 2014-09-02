@@ -22,7 +22,10 @@ module.exports = {
 				'public/lib/bower_components/angular-animate/angular-animate.js',
 				'public/lib/bower_components/angular-ui-router/release/angular-ui-router.js',
 				'public/lib/bower_components/angular-ui-utils/ui-utils.js',
-				'public/lib/bower_components/angular-bootstrap/ui-bootstrap-tpls.js'
+				'public/lib/bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
+				'public/lib/bower_components/angular-logex/dist/log-ex-unobtrusive.js',
+				'public/lib/bower_components/angular-utilz/dist/angular-utilz.js'
+
 			]
 		},
 		css: [

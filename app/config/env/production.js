@@ -14,7 +14,9 @@ module.exports = {
 				'public/lib/bower_components/angular-animate/angular-animate.min.js',
 				'public/lib/bower_components/angular-ui-router/release/angular-ui-router.min.js',
 				'public/lib/bower_components/angular-ui-utils/ui-utils.min.js',
-				'public/lib/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js'
+				'public/lib/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js',
+				'public/lib/bower_components/angular-logex/dist/log-ex-unobtrusive.min.js',
+				'public/lib/bower_components/angular-utilz/dist/angular-utilz.min.js'
 			]
 		},
 		css: 'public/dist/application.min.css',
