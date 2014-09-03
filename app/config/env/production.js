@@ -1,8 +1,7 @@
 'use strict';
 
 var server = process.env.SERVER_BASE || 'http://localhost:3000';
-var basePath = '../../';
-var logOutputFile = basePath + 'logs/app.log';
+var logOutputFile = 'app.log';
 
 module.exports = {
 	db: process.env.MONGOHQ_URL || process.env.MONGOLAB_URI || 'mongodb://localhost/mean',

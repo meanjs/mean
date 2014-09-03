@@ -1,7 +1,6 @@
 'use strict';
 var server = process.env.SERVER_BASE || 'http://localhost:3000';
-var basePath = '../../';
-var logOutputFile = basePath + 'logs/app.log';
+var logOutputFile = 'app.log';
 
 module.exports = {
 	db: 'mongodb://localhost/mean-test',
