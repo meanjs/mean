@@ -160,6 +160,7 @@ module.exports = function(grunt) {
     },
     clean: {
       docs: ['<%= meta.reports %>/docs'],
+      coverage: ['<%= meta.reports %>/coverage'],
       istanbul:['<%= meta.reports %>/coverage/server/app', '<%= meta.reports %>/coverage/server/server.js']
     },
     plato: {
@@ -253,7 +254,7 @@ module.exports = function(grunt) {
   grunt.registerTask('build', ['lint', 'loadConfig', 'ngAnnotate', 'uglify', 'cssmin']);
 
   // Test task.
-  grunt.registerTask('test', ['lint','concurrent:test']);
+  grunt.registerTask('test', ['clean:coverage', 'lint','concurrent:test']);
   grunt.registerTask('test:ui', ['env:test', 'karma:unit']);
   grunt.registerTask('test:server', ['istanbul:mocha:cover', 'clean:istanbul']);
 
