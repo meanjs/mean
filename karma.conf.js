@@ -51,10 +51,12 @@ module.exports = function(config) {
 
 		},
 		junitReporter: {
-			  outputFile: metaData.reports + '/junit/test-results.xml'
+			  outputFile: metaData.reports + '/junit/test-results.xml',
+				suite: 'UI'
 			},
 		// the configure thresholds
 		// configure desired thresholds
+		// as coverage increases then icrease threshold
     thresholdReporter: {
       statements: 50,
       branches: 45,
