@@ -20,6 +20,10 @@ var express = require('express'),
 	consolidate = require('consolidate'),
 	path = require('path');
 
+	var log4js = require('log4js');
+	var logger = log4js.getLogger('express');
+
+
 module.exports = function(db) {
 	// Initialize express app
 	var app = express();
@@ -42,7 +46,6 @@ module.exports = function(db) {
 		res.locals.url = req.protocol + '://' + req.headers.host + req.url;
 		next();
 	});
-
 	// Should be placed before express.static
 	app.use(compress({
 		filter: function(req, res) {
@@ -64,12 +67,12 @@ module.exports = function(db) {
 	// Environment dependent middleware
 	if (process.env.NODE_ENV === 'development') {
 		// Enable logger (morgan)
-		app.use(morgan('dev'));
-
+		app.use(log4js.connectLogger(logger, { level: log4js.levels.INFO, format: ':method :status :url ' }));
 		// Disable views cache
 		app.set('view cache', false);
 	} else if (process.env.NODE_ENV === 'production') {
 		app.locals.cache = 'memory';
+		//app.use(log4js.connectLogger(logger, { level: log4js.levels.INFO, format: ':method :status :url ' }));
 	}
 
 	// Request body parsing middleware should be above methodOverride
