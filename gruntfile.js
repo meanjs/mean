@@ -129,7 +129,8 @@ module.exports = function(grunt) {
       docs: ['doxx:shell', 'ngdocs', 'plato'],
       test: ['test:ui', 'test:server'],
       options: {
-        logConcurrentOutput: true
+        logConcurrentOutput: true,
+        limit: 6
       }
     },
     env: {
