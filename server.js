@@ -6,6 +6,12 @@ var init = require('./app/config/init')(),
 	config = require('./app/config/config'),
 	mongoose = require('mongoose');
 
+// config for log4js only needs to happen once
+// any other time it is required in  other files, use:
+// var log4js = require(log4js)
+//can be done
+var log4js = require('./app/config/logging')(config.log4js);
+var logger = log4js.getLogger('server');
 /**
  * Main application entry file.
  * Please note that the order of loading is important.
@@ -32,4 +38,4 @@ app.listen(config.port);
 exports = module.exports = app;
 
 // Logging initialization
-console.log('MEAN.JS application started on port ' + config.port);
+logger.info('MEAN.JS application started on port ' + config.port);

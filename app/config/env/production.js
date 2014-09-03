@@ -1,9 +1,21 @@
 'use strict';
 
 var server = process.env.SERVER_BASE || 'http://localhost:3000';
+var basePath = '../../';
+var logOutputFile = basePath + 'logs/app.log';
 
 module.exports = {
 	db: process.env.MONGOHQ_URL || process.env.MONGOLAB_URI || 'mongodb://localhost/mean',
+	log4js: {
+		logFile: logOutputFile,
+		config: {
+			replaceConsole: true,
+			appenders: [
+				{ type: 'console' },
+				{ type: 'file', filename: logOutputFile }
+			]
+		}
+	},
 	assets: {
 		lib: {
 			css: [

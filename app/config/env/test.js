@@ -1,11 +1,23 @@
 'use strict';
 var server = process.env.SERVER_BASE || 'http://localhost:3000';
+var basePath = '../../';
+var logOutputFile = basePath + 'logs/app.log';
 
 module.exports = {
 	db: 'mongodb://localhost/mean-test',
 	port: 3001,
 	app: {
 		title: 'MEAN.JS - Test Environment'
+	},
+	log4js: {
+		logFile: logOutputFile,
+		config: {
+			replaceConsole: true,
+			appenders: [
+				{ type: 'console' },
+				{ type: 'file', filename: logOutputFile }
+			]
+		}
 	},
 	facebook: {
 		clientID: process.env.FACEBOOK_ID || 'APP_ID',

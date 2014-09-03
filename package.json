@@ -33,6 +33,7 @@
     "grunt-cli": "~0.1.13",
     "helmet": "~0.4.0",
     "lodash": "~2.4.1",
+    "log4js": "^0.6.20",
     "method-override": "~2.1.2",
     "mongoose": "~3.8.8",
     "morgan": "~1.2.2",
