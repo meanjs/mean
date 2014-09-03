@@ -10,7 +10,7 @@ module.exports = {
 		config: {
 			replaceConsole: true,
 			appenders: [
-				//{ type: 'console' },
+				{ type: 'console', category: 'server'},
 				{ type: 'file', filename: logOutputFile }
 			]
 		}
