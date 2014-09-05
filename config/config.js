@@ -9,7 +9,7 @@ var _ = require('lodash'),
 /**
  * Load app configurations
  */
-module.exports = _.extend(
+module.exports =  _.extend(
 	require('./env/all'),
 	require('./env/' + process.env.NODE_ENV) || {}
 );
@@ -61,10 +61,15 @@ module.exports.getJavaScriptAssets = function(includeTests) {
 
 	// To include tests
 	if (includeTests) {
-		output = _.union(output, this.getGlobbedFiles(this.assets.tests));
+		output = _.union(output, this.getTestAssets());
 	}
 
 	return output;
+};
+
+module.exports.getTestAssets = function(removeRoot) {
+  var output = this.getGlobbedFiles(this.assets.tests, removeRoot);
+  return output;
 };
 
 /**
@@ -73,4 +78,36 @@ module.exports.getJavaScriptAssets = function(includeTests) {
 module.exports.getCSSAssets = function() {
 	var output = this.getGlobbedFiles(this.assets.lib.css.concat(this.assets.css), 'public/');
 	return output;
+};
+
+module.exports.configurationChecks = function() {
+  /*
+    Check to determine if there are libraries in the public folder that are not included in the configuration files
+   */
+  if (!process.env.DISABLE_PUBLIC_LIB_CHECK && process.env.NODE_ENV !== 'production') {
+    var configJsAssets = this.getJavaScriptAssets(),
+        configCssAssets = this.getCSSAssets(),
+        configTestsAssets = this.getTestAssets('public/');
+    var allConfigAssets = _.union(configJsAssets, configCssAssets, configTestsAssets);
+    
+    // Get all the assets that have been loaded from NPM
+    var assetPathPresentInProject = this.getGlobbedFiles('./public/lib/*', './public/');
+    
+    console.info('\x1b[30m\x1b[47m');
+    console.info('----------------\n Checking that NPM packages are added to project configuration...\n----------------');
+    assetPathPresentInProject.forEach(function(assetPath) {
+      var curPathRegEx = new RegExp('^' + assetPath + '/[a-zA-Z.]*');
+      var found = _.any(allConfigAssets, function(configAsset) {
+        return curPathRegEx.test(configAsset);
+      });
+      if (found) {
+        console.info('\x1b[34m', '   FOUND - ' + assetPath + ' is in the "all.js" project configuration');
+      } else {
+        console.info('\x1b[31m', '* NOT FOUND - ' + assetPath + ' is NOT in the "all.js" project configuration');
+      }
+    });
+    console.info('\n\x1b[30mAdd missing libs to your configuration to avoid errors');
+    console.info('To disable this check, set env var DISABLE_PUBLIC_LIB_CHECK');
+    console.info('\x1b[0m\n');
+  }
 };
