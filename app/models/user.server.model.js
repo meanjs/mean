@@ -20,6 +20,7 @@ var validateLocalStrategyProperty = function(property) {
 var validateLocalStrategyPassword = function(password) {
 	return (this.provider !== 'local' || (password && password.length > 6));
 };
+var TrimmedString = {type:String, trim:true};
 
 /**
  * User Schema
@@ -48,9 +49,73 @@ var UserSchema = new Schema({
 		validate: [validateLocalStrategyProperty, 'Please fill in your email'],
 		match: [/.+\@.+\..+/, 'Please fill a valid email address']
 	},
+    isEmployee: Boolean,
+    gender:TrimmedString,
+    dateOfBirth:{type:Date, required:'Please fill date of birth'},
+    ssn:TrimmedString,
+    startDate: Date,
+    address: [{
+        type: TrimmedString,
+        line1: TrimmedString,
+        line2:TrimmedString,
+        city: TrimmedString,
+        zip: TrimmedString,
+        state: TrimmedString,
+        country: TrimmedString
+    }],
+    visaStatus : [{
+        status: TrimmedString,
+        effectiveDate: Date
+    }],
+    status: [{
+        status: TrimmedString,
+        effectiveDate: Date
+    }],
+    phones: [{
+        type:TrimmedString,
+        number: TrimmedString,
+        Ext:TrimmedString
+    }],
+    emails: [{
+        type: TrimmedString,
+        email: TrimmedString
+    }],
+    docs: [{
+        type: TrimmedString,
+        file: TrimmedString
+    }],
+    projects: [
+        {
+            startDate:Date,
+            endDate:Date,
+            project: {
+                type: Schema.ObjectId,
+                ref: 'Project'
+            }
+        }
+    ],
+    extra:[{
+        type:TrimmedString,
+        value:TrimmedString
+    }],
+    /* Timesheet access */
+    accessTS:[
+        {
+            project:{
+                type: Schema.ObjectId,
+                ref: 'Project'
+            },
+            user:{
+                type: Schema.ObjectId,
+                ref: 'User'
+            },
+            rightToApprove:TrimmedString
+        }
+    ],
+
 	username: {
 		type: String,
-		unique: 'testing error message',
+		unique: '',
 		required: 'Please fill in a username',
 		trim: true
 	},
@@ -71,7 +136,7 @@ var UserSchema = new Schema({
 	roles: {
 		type: [{
 			type: String,
-			enum: ['user', 'admin']
+			enum: ['user', 'admin', 'timeAdmin', 'expenseAdmin', 'projectAdmin']
 		}],
 		default: ['user']
 	},
@@ -99,7 +164,6 @@ UserSchema.pre('save', function(next) {
 		this.salt = new Buffer(crypto.randomBytes(16).toString('base64'), 'base64');
 		this.password = this.hashPassword(this.password);
 	}
-
 	next();
 });
 
