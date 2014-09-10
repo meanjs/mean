@@ -11,61 +11,62 @@ angular.module('qas').controller('QasController', ['$scope', '$stateParams', '$l
 // Initialize Dropdown labels
         $scope.typeDropdown = qasInitService.typeDropdown();
         $scope.difficultyDropdown = qasInitService.difficultyDropdown();
-        var qa = new Qas();
-        $scope.qa = qasInitService.init(qa);
 
-     //  $scope.qa.choices.correctAnswer;
+        $scope.qa = qasInitService.init();
+        //var qa = $scope.qa;
         // Create and validate qa entries
         $scope.create = function () {
-            var qa = new Qas();
-            qa = qasInitService.init(qa);
-            console.log('$scope.qa', $scope.qa);
-            //qa = $scope.qa;
-            console.log('qa', qa);
-            // Grab data from input boxes
-            qa.question = this.question;
-            qa.imageURL = this.imageURL;
-            qa.choices.text = [
-                { text: this.text },
-                { text: this.text },
-                { text: this.text }
-            ];
-            qa.content = this.content;
-            qa.hint = this.hint;
-            qa.hintOn = this.hintOn;
-            qa.timeOn = this.timeOn;
-            qa.fifty50On = this.fifty50On;
-            qa.randomizeQuestionsOn = this.randomizeQuestionsOn;
-            qa.randomizeAnswersOn = this.randomizeAnswersOn;
+           var qa = new Qas({
+                question: this.question,
+                imageURL: this.imageURL,
+                choices: [{
+                    text: this.text, selectedAnswer: false
+                }, {text: this.text, selectedAnswer: this.correctAnswer
+                }, {text: this.text, selectedAnswer: this.correctAnswer
+                }],
+                hint: this.hint,
 
-            console.log('From qa 1', qa);
+                hintOn: this.hintOn,
+                timeOn: this.timeOn,
+                fifty50On: this.fifty50On,
+                randomizeQuestionsOn: this.randomizeQuestionsOn,
+                randomizeAnswersOn: this.randomizeAnswersOn
+            });
+
+             qa.choices = $scope.qa.choices;
+            console.log('From qa 1',qa);console.log('From $qa 1',$scope.qa);
             // Check that question was entered
             console.log('qa.question.length', qa.question.length);
             if (qa.question.length > 0) {
                 var choiceCount = 0;
                 //Loop through choices to get at least two
+                console.log('qa if', qa);
                 for (var i = 0, ln = qa.choices.length; i < ln; i++) {
-                    var choice = qa.choices[i];
-                    if (choice.text.length > 0) {
+                    var choice = qa.choices[i].text;
+                    console.log('choice', choice, "   i", i);
+                    if (choice.length > 0) {
                         choiceCount++;
                     }
                 }
                 if (choiceCount > 1) {
                     // Call API to save to database
-                    qa.$save(function (response) {
-                        $location.path('qas/' + response._id);
-                    });
+
+
                 } else {
                     alert('You must have at least two choices');
                 }
             } else {
                 alert('You must have a question');
             }
+            console.log('qaFinal',qa);
+            qa.$save(function(response) {
+                $location.path('qas/' + response._id)});
         };
 
         // Method to add an additional choice option
         $scope.addChoice = function () {
-            $scope.qa.choices.push({ text: this.text, correctAnswer: false  });
+            console.log('qa add', $scope.qa);
+            $scope.qa.choices.push({ text: this.text, selectedAnswer: false  });
         };
 
         $scope.remove = function (qa) {

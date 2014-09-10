@@ -3,9 +3,9 @@
  */
 'use strict';
 
-//Qas service used to communicate Qas REST endpoints
-angular.module('qas')
-    .service('qasInitService', [ function() {
+//Qas service used to communicate Was REST endpoints
+angular.module('was')
+    .service('wasInitService', [ function() {
 
         this.typeDropdown = function() { return [
             {
@@ -46,8 +46,8 @@ angular.module('qas')
         ];
           };
 
-        this.init = function(){return ({
-            question: 'dffdfdfdf',
+        this.init = function(wa){return ({
+            question: '',
             questionNumber: "",
             imageURL:"",
             choices: [
