@@ -54,7 +54,7 @@
 		"grunt-contrib-watch": "~0.6.1",
 		"grunt-contrib-jshint": "~0.10.0",
 		"grunt-contrib-csslint": "^0.2.0",
-		"grunt-ngmin": "0.0.3",
+		"grunt-ng-annotate": "~0.3.2",
 		"grunt-contrib-uglify": "~0.5.1",
 		"grunt-contrib-cssmin": "~0.10.0",
 		"grunt-nodemon": "~0.3.0",
