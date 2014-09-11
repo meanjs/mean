@@ -13,8 +13,11 @@ module.exports = {
 	assets: {
 		lib: {
 			css: [
-				'public/lib/bootstrap/dist/css/bootstrap.css',
-				'public/lib/bootstrap/dist/css/bootstrap-theme.css',
+				'public/lib/animate.css/animate.min.css',
+				'public/dist/app.css',
+			],
+			less:[
+				'public/lib/bootstrap/less/boostrap.less'
 			],
 			js: [
 				'public/lib/angular/angular.js',
@@ -25,9 +28,6 @@ module.exports = {
 				'public/lib/angular-bootstrap/ui-bootstrap-tpls.js'
 			]
 		},
-		css: [
-			'public/modules/**/css/*.css'
-		],
 		js: [
 			'public/config.js',
 			'public/application.js',
