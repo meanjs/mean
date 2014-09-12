@@ -2,6 +2,10 @@
     <div class="page-header">
         <h1>New Big QA</h1>
     </div>
+
+    <select ng-model="td" ng-options=" dp1.label for dp1 in typeDropdown" data-style="btn-primary" bs-select>
+    <option value=""> Type
+</select>{{td.label}}
     <form class="form-horizontal" data-ng-submit="create()">
     <div class="col-md-6">
 
@@ -80,7 +84,9 @@
                 </div>
             </div>
                 <!--See http://gurustop.net/blog/2014/01/28/common-problems-and-solutions-when-using-select-elements-with-angular-js-ng-options-initial-selection/ for TODO-->
-                <select class="span2" ng-model="difficultyDropdown" ng-options=" dp3.value as dp3.label for dp3 in difficultyDropdown" data-style="btn-primary" bs-select></select>
+                <select ng-model="dd" ng-options=" dp3.label for dp3 in difficultyDropdown" data-style="btn-primary" bs-select>
+                    <option value=""> Difficulty
+                </select>
                 <br/>
                 <input type='checkbox' data-ng-model='hintOn'>Allow Hint
                 <input type='checkbox' data-ng-model='timeOn'>Timed

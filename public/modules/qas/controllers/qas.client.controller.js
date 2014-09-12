@@ -11,6 +11,8 @@ angular.module('qas').controller('QasController', ['$scope', '$stateParams', '$l
 // Initialize Dropdown labels
         $scope.typeDropdown = qasInitService.typeDropdown();
         $scope.difficultyDropdown = qasInitService.difficultyDropdown();
+        //$scope.dd = difficultyDropdown[i];
+       // $scope.td = typeDropdown[i];
 
         $scope.qa = qasInitService.init();
         //var qa = $scope.qa;
@@ -20,12 +22,13 @@ angular.module('qas').controller('QasController', ['$scope', '$stateParams', '$l
                 question: this.question,
                 imageURL: this.imageURL,
                 choices: [{
-                    text: this.text, selectedAnswer: false
-                }, {text: this.text, selectedAnswer: this.correctAnswer
-                }, {text: this.text, selectedAnswer: this.correctAnswer
+                    text: this.text, selectedAnswer: false      //doesn't work
+                }, {text: this.text, selectedAnswer: this.correctAnswer     //doesn't work
+                }, {text: this.text, selectedAnswer: this.correctAnswer     //doesn't work
                 }],
-                hint: this.hint,
-
+                hint: this.hint,    //doesn't work
+                type: this.td,      //doesn't work
+                difficulty: this.difficulty,
                 hintOn: this.hintOn,
                 timeOn: this.timeOn,
                 fifty50On: this.fifty50On,
@@ -33,7 +36,9 @@ angular.module('qas').controller('QasController', ['$scope', '$stateParams', '$l
                 randomizeAnswersOn: this.randomizeAnswersOn
             });
 
-             qa.choices = $scope.qa.choices;
+            qa.choices = $scope.qa.choices;
+            qa.difficulty = $scope.dd.label;
+            qa.type = $scope.td.label;
             console.log('From qa 1',qa);console.log('From $qa 1',$scope.qa);
             // Check that question was entered
             console.log('qa.question.length', qa.question.length);
