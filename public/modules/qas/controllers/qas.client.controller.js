@@ -1,9 +1,9 @@
 'use strict';
 
 // Qas controller...
-angular.module('qas').controller('QasController', ['$scope', '$stateParams', '$location', 'Authentication',
-    'Qas','CalculatorService','MathService','qasInitService',
-    function ($scope, $stateParams, $location, Authentication, Qas, CalculatorService, MathService, qasInitService ) {
+angular.module('qas').controller('QasController', ['$scope','$modal', '$stateParams', '$location', 'Authentication',
+    'Qas','Quizzes', 'CalculatorService', 'MathService', 'qasInitService',
+    function ($scope, $modal, $stateParams, $location, Authentication, Qas,Quizzes, CalculatorService, MathService, qasInitService) {
         $scope.authentication = Authentication;
 //Test of Calculator and Math Service
         $scope.doit = CalculatorService.cce(77);
@@ -11,21 +11,22 @@ angular.module('qas').controller('QasController', ['$scope', '$stateParams', '$l
 // Initialize Dropdown labels
         $scope.typeDropdown = qasInitService.typeDropdown();
         $scope.difficultyDropdown = qasInitService.difficultyDropdown();
-        //$scope.dd = difficultyDropdown[i];
-       // $scope.td = typeDropdown[i];
 
         $scope.qa = qasInitService.init();
-        //var qa = $scope.qa;
-        // Create and validate qa entries
+       // Create and validate qa entries
         $scope.create = function () {
-           var qa = new Qas({
+            var qa = new Qas({
                 question: this.question,
                 imageURL: this.imageURL,
-                choices: [{
-                    text: this.text, selectedAnswer: false      //doesn't work
-                }, {text: this.text, selectedAnswer: this.correctAnswer     //doesn't work
-                }, {text: this.text, selectedAnswer: this.correctAnswer     //doesn't work
-                }],
+                choices: [
+                    {
+                        text: this.text, selectedAnswer: false      //doesn't work
+                    },
+                    {text: this.text, selectedAnswer: this.correctAnswer     //doesn't work
+                    },
+                    {text: this.text, selectedAnswer: this.correctAnswer     //doesn't work
+                    }
+                ],
                 hint: this.hint,    //doesn't work
                 type: this.td,      //doesn't work
                 difficulty: this.difficulty,
@@ -36,12 +37,12 @@ angular.module('qas').controller('QasController', ['$scope', '$stateParams', '$l
                 randomizeAnswersOn: this.randomizeAnswersOn
             });
 
+//  Hack to load these variables.  Not handled above???
             qa.choices = $scope.qa.choices;
             qa.difficulty = $scope.dd.label;
             qa.type = $scope.td.label;
-            console.log('From qa 1',qa);console.log('From $qa 1',$scope.qa);
+
             // Check that question was entered
-            console.log('qa.question.length', qa.question.length);
             if (qa.question.length > 0) {
                 var choiceCount = 0;
                 //Loop through choices to get at least two
@@ -63,9 +64,10 @@ angular.module('qas').controller('QasController', ['$scope', '$stateParams', '$l
             } else {
                 alert('You must have a question');
             }
-            console.log('qaFinal',qa);
-            qa.$save(function(response) {
-                $location.path('qas/' + response._id)});
+            console.log('qaFinal', qa);
+            qa.$save(function (response) {
+                $location.path('qas/' + response._id)
+            });
         };
 
         // Method to add an additional choice option
@@ -116,12 +118,52 @@ angular.module('qas').controller('QasController', ['$scope', '$stateParams', '$l
                 $scope.qa = qa;
             });
         };
+        $scope.getQuizzes = function() {
+            Quizzes.query(function(quizzes){
+                $scope.quizzes = quizzes;
+            });
+        };
         $scope.deleteChoice = function (ev) {
             var ss = ev.target.innerText.toString() - 1;
             console.log(ss);
             var qa = $scope.qa;
             console.log(qa);
             $scope.qa.choices.splice(ss, 1);
+        };
+        $scope.saveToOtherQuiz = function(){
+            var modalInstance = $modal.open({
+                templateUrl: 'modules/qas/views/modal-qa.client.html',
+                controller: ModalInstanceCtrl,
+                resolve: {
+                    items: function () {
+                        return $scope.items;
+                    }
+                }
+            });
+
+            modalInstance.result.then(function (selectedItem) {
+                $scope.selected = selectedItem;
+
+            }, function () {
+                console.log('Modal dismissed at: ' + new Date());
+            });
+        };
+        var ModalInstanceCtrl = function ($scope, $modalInstance, Quizzes) {
+
+            Quizzes.query(function(quizzes){
+                $scope.quizzes = quizzes;
+            });
+            $scope.selected = {
+               // quizzes: $scope.quizzes[0]
+            };
+
+            $scope.ok = function () {
+                $modalInstance.close($scope.selected.item);
+            };
+
+            $scope.cancel = function () {
+                $modalInstance.dismiss('cancel');
+            };
         };
     }
 ]);

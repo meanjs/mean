@@ -1,6 +1,6 @@
 <section data-ng-controller="QasController" data-ng-init="findOne()">
 	<div class="page-header">
-		 <h1>{{qa.question}}</h1>
+		 <h1>{{quiz.name}}</h1>
     </div>
 
     <div class="pull-right" data-ng-show="authentication.user._id == qa.user._id">
@@ -12,13 +12,19 @@
         </a>
     </div>
     <small>
-        <em class="text-muted">Updated on {{qa.created | date:'mediumDate'}} by {{qa.user.displayName}}</em>
+        <em class="text-muted">Updated on:{{qa.created | date:'mediumDate'}} by {{qa.user.displayName}}</em>
+
+    </small>
+    <small>
+        <em class="text-muted">Quiz name and Id {{quiz.name}}  -   {{quiz.Id}}</em>
     </small>
     <p class="lead">
         {{qa.question}}
 		<br>
         <img ng-src="{{qa.imageURL}}" height="100" >
         <div ng-repeat="choices in qa.choices"> {{choices.text}}<br></div>
+    <div>{{qa.user.displayName}}</div>
+        <div ng-repeat="quiz in quizzes"> {{quiz.name}}<br></div>
     </p>
     
 </section>

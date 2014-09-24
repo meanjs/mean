@@ -6,6 +6,9 @@
     <select ng-model="td" ng-options=" dp1.label for dp1 in typeDropdown" data-style="btn-primary" bs-select>
     <option value=""> Type
 </select>{{td.label}}
+    <select ng-model="quiz" ng-options=" q1.label for q1 in quizzes.name" data-style="btn-primary" bs-select>
+        <option value=""> Quiz
+    </select>{{td.label}}
     <form class="form-horizontal" data-ng-submit="create()">
     <div class="col-md-6">
 

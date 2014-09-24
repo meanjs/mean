@@ -1,0 +1,14 @@
+
+<div class="modal-body">
+    <ul>
+        <li ng-repeat="quiz in quizzes">
+            <a ng-click="selected.quiz = quiz.name">{{ quiz.name }}</a>
+        </li>
+    </ul>
+    Selected: <b>{{ selected.quiz }}</b>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-click="ok()">OK</button>
+    <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+</div>
+

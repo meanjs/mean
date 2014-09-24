@@ -80,37 +80,15 @@ var QaSchema = new Schema({
 		default: false,
 		trim: true
 	
-	}
+	},
+    quizId: {
+        type: Number,
+        default: 0
+    }
 });
 
 //console.log(AnswerSchema);
-var QuizSchema = new Schema({
-	created: {
-		type: Date,
-		default: Date.now
-	},
-	name: {
-	    type: String,
-	    default: '',
-	    trim: true
-	},
-	quizNumber: {
-		type: String,
-		default: '',
-		trim: true
-	},
-	category: {
-		type: String,
-		default: '',
-		trim: true
-	},
-	keyWords: {
-	    type: String,
-	    default: '',
-	    trim: true
-	},
-	qas: [QaSchema]
-	});
+
 /**
  * Validations
  */

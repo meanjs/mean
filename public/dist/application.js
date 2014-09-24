@@ -44,6 +44,10 @@ angular.element(document).ready(function () {
 ApplicationConfiguration.registerModule('articles');'use strict';
 // Use Applicaion configuration module to register a new module
 ApplicationConfiguration.registerModule('core');'use strict';
+// Use application configuration module to register a new module
+ApplicationConfiguration.registerModule('qas');'use strict';
+// Use applicaion configuration module to register a new module
+ApplicationConfiguration.registerModule('takers');'use strict';
 // Use Applicaion configuration module to register a new module
 ApplicationConfiguration.registerModule('users');'use strict';
 // Configuring the Articles module
@@ -89,6 +93,7 @@ angular.module('articles').controller('ArticlesController', [
           title: this.title,
           content: this.content
         });
+      //  console.log(response);
       article.$save(function (response) {
         $location.path('articles/' + response._id);
         $scope.title = '';
@@ -176,16 +181,20 @@ angular.module('core').controller('HomeController', [
 //Menu service used for managing  menus
 angular.module('core').service('Menus', [function () {
     // Define a set of default roles
-    this.defaultRoles = ['user'];
+    this.defaultRoles = ['*'];
     // Define the menus object
     this.menus = {};
     // A private function for rendering decision 
     var shouldRender = function (user) {
       if (user) {
-        for (var userRoleIndex in user.roles) {
-          for (var roleIndex in this.roles) {
-            if (this.roles[roleIndex] === user.roles[userRoleIndex]) {
-              return true;
+        if (!!~this.roles.indexOf('*')) {
+          return true;
+        } else {
+          for (var userRoleIndex in user.roles) {
+            for (var roleIndex in this.roles) {
+              if (this.roles[roleIndex] === user.roles[userRoleIndex]) {
+                return true;
+              }
             }
           }
         }
@@ -245,7 +254,7 @@ angular.module('core').service('Menus', [function () {
         menuItemClass: menuItemType,
         uiRoute: menuItemUIRoute || '/' + menuItemURL,
         isPublic: isPublic === null || typeof isPublic === 'undefined' ? this.menus[menuId].isPublic : isPublic,
-        roles: roles || this.defaultRoles,
+        roles: roles === null || typeof roles === 'undefined' ? this.menus[menuId].roles : roles,
         position: position || 0,
         items: [],
         shouldRender: shouldRender
@@ -266,7 +275,7 @@ angular.module('core').service('Menus', [function () {
             link: menuItemURL,
             uiRoute: menuItemUIRoute || '/' + menuItemURL,
             isPublic: isPublic === null || typeof isPublic === 'undefined' ? this.menus[menuId].items[itemIndex].isPublic : isPublic,
-            roles: roles || this.defaultRoles,
+            roles: roles === null || typeof roles === 'undefined' ? this.menus[menuId].items[itemIndex].roles : roles,
             position: position || 0,
             shouldRender: shouldRender
           });
@@ -306,6 +315,380 @@ angular.module('core').service('Menus', [function () {
     //Adding the topbar menu
     this.addMenu('topbar');
   }]);'use strict';
+// Configuring the Articles module.
+angular.module('qas').run([
+  'Menus',
+  function (Menus) {
+    // Set top bar menu items
+    Menus.addMenuItem('topbar', 'Qas', 'qas', 'dropdown', '/qas(/create)?');
+    Menus.addSubMenuItem('topbar', 'qas', 'List Qas', 'qas');
+    Menus.addSubMenuItem('topbar', 'qas', 'New Qa', 'qas/create');
+  }
+]);'use strict';
+//Setting up route...
+angular.module('qas').config([
+  '$stateProvider',
+  function ($stateProvider) {
+    // Qas state routing
+    $stateProvider.state('listQas', {
+      url: '/qas',
+      templateUrl: 'modules/qas/views/list-qas.client.view.html'
+    }).state('createQa', {
+      url: '/qas/create',
+      templateUrl: 'modules/qas/views/create-qa.client.view.html'
+    }).state('viewQa', {
+      url: '/qas/:qaId',
+      templateUrl: 'modules/qas/views/view-qa.client.view.html'
+    }).state('editQa', {
+      url: '/qas/:qaId/edit',
+      templateUrl: 'modules/qas/views/edit-qa.client.view.html'
+    });
+  }
+]);'use strict';
+// Qas controller...
+angular.module('qas').controller('QasController', [
+  '$scope',
+  '$stateParams',
+  '$location',
+  'Authentication',
+  'Qas',
+  'CalculatorService',
+  'MathService',
+  'qasInitService',
+  function ($scope, $stateParams, $location, Authentication, Qas, CalculatorService, MathService, qasInitService) {
+    $scope.authentication = Authentication;
+    //Test of Calculator and Math Service
+    $scope.doit = CalculatorService.cce(77);
+    // Initialize Dropdown labels
+    $scope.typeDropdown = qasInitService.typeDropdown();
+    $scope.difficultyDropdown = qasInitService.difficultyDropdown();
+    $scope.qa = qasInitService.init();
+    // Create and validate qa entries
+    $scope.create = function () {
+      var qa = new Qas({
+          question: this.question,
+          imageURL: this.imageURL,
+          choices: [
+            {
+              text: this.text,
+              selectedAnswer: false
+            },
+            {
+              text: this.text,
+              selectedAnswer: this.correctAnswer
+            },
+            {
+              text: this.text,
+              selectedAnswer: this.correctAnswer
+            }
+          ],
+          hint: this.hint,
+          type: this.td,
+          difficulty: this.difficulty,
+          hintOn: this.hintOn,
+          timeOn: this.timeOn,
+          fifty50On: this.fifty50On,
+          randomizeQuestionsOn: this.randomizeQuestionsOn,
+          randomizeAnswersOn: this.randomizeAnswersOn
+        });
+      //  Hack to load these variables.  Not handled above???
+      qa.choices = $scope.qa.choices;
+      qa.difficulty = $scope.dd.label;
+      qa.type = $scope.td.label;
+      // Check that question was entered
+      if (qa.question.length > 0) {
+        var choiceCount = 0;
+        //Loop through choices to get at least two
+        console.log('qa if', qa);
+        for (var i = 0, ln = qa.choices.length; i < ln; i++) {
+          var choice = qa.choices[i].text;
+          console.log('choice', choice, '   i', i);
+          if (choice.length > 0) {
+            choiceCount++;
+          }
+        }
+        if (choiceCount > 1) {
+        } else {
+          alert('You must have at least two choices');
+        }
+      } else {
+        alert('You must have a question');
+      }
+      console.log('qaFinal', qa);
+      qa.$save(function (response) {
+        $location.path('qas/' + response._id);
+      });
+    };
+    // Method to add an additional choice option
+    $scope.addChoice = function () {
+      console.log('qa add', $scope.qa);
+      $scope.qa.choices.push({
+        text: this.text,
+        selectedAnswer: false
+      });
+    };
+    $scope.remove = function (qa) {
+      if (qa) {
+        qa.$remove();
+        for (var i in $scope.qas) {
+          if ($scope.qas[i] === qa) {
+            $scope.qas.splice(i, 1);
+          }
+        }
+      } else {
+        $scope.qa.$remove(function () {
+          $location.path('qas');
+        });
+      }
+    };
+    $scope.update = function () {
+      var qa = $scope.qa;
+      console.log('From update', qa);
+      if (!qa.updated) {
+        qa.updated = [];
+      }
+      qa.updated.push(new Date().getTime());
+      qa.$update(function () {
+        $location.path('qas/' + qa._id);
+      });
+    };
+    $scope.find = function () {
+      Qas.query(function (qas) {
+        $scope.qas = qas;
+      });
+    };
+    $scope.findOne = function () {
+      Qas.get({ qaId: $stateParams.qaId }, function (qa) {
+        $scope.qa = qa;
+      });
+    };
+    $scope.deleteChoice = function (ev) {
+      var ss = ev.target.innerText.toString() - 1;
+      console.log(ss);
+      var qa = $scope.qa;
+      console.log(qa);
+      $scope.qa.choices.splice(ss, 1);
+    };
+  }
+]);'use strict';
+//Qas service used to communicate Qas REST endpoints
+angular.module('qas').factory('Qas', [
+  '$resource',
+  function ($resource) {
+    return $resource('qas/:qaId', { qaId: '@_id' }, { update: { method: 'PUT' } });
+  }
+]);/**
+ * Created by EbyC on 8/24/2014.
+ */
+'use strict';
+angular.module('qas').service('MathService', [function () {
+    this.add = function (a, b) {
+      return a + b;
+    };
+    this.subtract = function (a, b) {
+      return a - b;
+    };
+    this.multiply = function (a, b) {
+      return a * b;
+    };
+    this.divide = function (a, b) {
+      return a / b;
+    };
+  }]).service('CalculatorService', function (MathService) {
+  this.square = function (a) {
+    return MathService.multiply(a, a);
+  };
+  this.cce = function (a) {
+    return a + a * 1000;
+  };
+  this.cube = function (a) {
+    return MathService.multiply(a, MathService.multiply(a, a));
+  };
+});/**
+ * Created by EbyC on 8/24/2014.
+ */
+'use strict';
+//Qas service used to communicate Qas REST endpoints
+angular.module('qas').service('qasInitService', [function () {
+    this.typeDropdown = function () {
+      return [
+        {
+          'label': 'FIB',
+          'value': 1
+        },
+        {
+          'label': 'TF',
+          'value': 2
+        },
+        {
+          'label': 'MC',
+          'value': 3
+        },
+        {
+          'label': 'Matching',
+          'value': 4
+        }
+      ];
+    };
+    this.difficultyDropdown = function () {
+      return [
+        {
+          'label': 'Easy',
+          'value': 1
+        },
+        {
+          'label': 'Medium',
+          'value': 2
+        },
+        {
+          'label': 'Hard',
+          'value': 3
+        },
+        {
+          'label': 'Impossible',
+          'value': 4
+        }
+      ];
+    };
+    this.init = function () {
+      return {
+        choices: [
+          {
+            text: '',
+            correctAnswer: false
+          },
+          {
+            text: '',
+            correctAnswer: false
+          },
+          {
+            text: '',
+            correctAnswer: false
+          }
+        ]
+      };
+    };
+  }]);'use strict';
+// Configuring the Takers module
+angular.module('takers').run([
+  'Menus',
+  function (Menus) {
+    // Set top bar menu items
+    Menus.addMenuItem('topbar', 'Takers', 'takers', 'dropdown', '/takers(/create)?');
+    Menus.addSubMenuItem('topbar', 'takers', 'List Takers', 'takers');
+    Menus.addSubMenuItem('topbar', 'takers', 'New Taker', 'takers/create');
+    Menus.addSubMenuItem('topbar', 'takers', 'Take', 'takers/');
+  }
+]);'use strict';
+//Setting up route
+angular.module('takers').config([
+  '$stateProvider',
+  function ($stateProvider) {
+    // Takers state routing
+    $stateProvider.state('listTakers', {
+      url: '/takers',
+      templateUrl: 'modules/takers/views/take.html'
+    }).state('createTaker', {
+      url: '/takers/create',
+      templateUrl: 'modules/takers/views/create-taker.client.view.html'
+    }).state('viewTaker', {
+      url: '/takers/:takerId',
+      templateUrl: 'modules/takers/views/view-taker.client.view.html'
+    }).state('editTaker', {
+      url: '/takers/:takerId/edit',
+      templateUrl: 'modules/takers/views/edit-taker.client.view.html'
+    });
+  }
+]);'use strict';
+angular.module('takers').controller('TakersController', [
+  '$scope',
+  '$stateParams',
+  '$location',
+  'Authentication',
+  'Articles',
+  function ($scope, $stateParams, $location, Authentication, Qas, Takers) {
+    $scope.authentication = Authentication;
+    // Takers controller logic
+    var taker = new Takers();
+    //taker.qa = qas;
+    $scope.taker = new Takers({
+      quizNumber: '0',
+      trialNumber: '0',
+      trialOptions: '',
+      results: [{
+          questionViewed: false,
+          questionAnswered: false,
+          questionNumber: '',
+          answer: [{
+              selection: '0',
+              answer: '0'
+            }]
+        }]
+    });
+    console.log('From ScopeTaker', $scope.taker);
+    $scope.find = function () {
+      Qas.query(function (qas) {
+        $scope.qas = qas;
+      });
+    };
+    console.log('From ScopeTaker', $scope.qas);
+    // Create and validate taker entries
+    $scope.next = function () {
+      $scope.questionIndex++;
+      taker.questionViewed = true;
+      taker.$save(function (response) {
+        $location.path('takers/' + response._id);
+      });
+      console.log('next', $scope.questionIndex);
+    };
+    $scope.prev = function () {
+      $scope.questionIndex--;
+      console.log('prev', $scope.questionIndex);
+    };
+    $scope.answerToggled = function () {
+      //var taker = $scope.taker;
+      // Grab data from input boxes
+      //console.log(taker);
+      //taker.qa.question = qas[questionIndex].question;
+      //taker.questionNumber = $scope.questionNumber;
+      console.log('toggledtaker', taker);
+      for (var i = 0, ln = taker.qa[$scope.questionIndex].choices.length; i < ln; i++) {
+        //taker.results.answer.selection[i] = $scope.results.answer.selection[i];
+        //console.log(taker.results[$scope.questionIndex].answer.isSelected[i],$scope.choice[i].selectedAnswer)
+        taker.results[$scope.questionIndex].answer.isSelected[i] = $scope.choice[i].selectedAnswer;
+        taker.updated.push(new Date().getTime());
+      }
+      ;
+      console.log('From taker 1', taker);
+      // Check that question was entered
+      taker.$save(function (response) {
+        $location.path('takers/' + response._id);
+      });
+      console.log(taker);
+    };
+    $scope.find = function () {
+      Qas.query(function (qas) {
+        // $scope.qas = qas;
+        taker.qa = qas;
+        $scope.taker = taker;
+        console.log('From ScopeTaker1', qas[0].questionNumber, taker.qa[0].question, $scope.qas, taker);
+      });
+      $scope.questionIndex = 0;
+    };
+    $scope.findOne = function () {
+      takers.get({ qasId: $stateParams.qasId }, function (qas) {
+        $scope.taker = qas;
+      });
+    };
+  }
+]);'use strict';
+//Takers service used to communicate Takers REST endpoints
+angular.module('takers').factory('Takers', [
+  '$resource',
+  function ($resource) {
+    return $resource('takers/:takerId', { takerId: '@_id' }, { update: { method: 'PUT' } });
+  }
+]);'use strict';
 // Config HTTP Error Handling
 angular.module('users').config([
   '$httpProvider',
