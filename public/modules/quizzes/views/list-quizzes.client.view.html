@@ -1,0 +1,19 @@
+<section data-ng-controller="QuizzesController" data-ng-init="find()">
+    <div class="page-header">
+        <h1>Quizzes</h1>
+    </div>
+    <div class="list-group">
+        <a data-ng-repeat="quiz in quizzes" data-ng-href="#!/quizzes/{{quiz._id}}" class="list-group-item">
+			<small class="list-group-item-text">
+				Posted on
+				<span data-ng-bind="quiz.created | date:'medium'"></span>
+				by
+				<span data-ng-bind="quiz.user.displayName"></span>
+			</small>
+			<h4 class="list-group-item-heading" data-ng-bind="quiz.name"></h4>
+        </a>
+    </div>
+    <div class="alert alert-warning text-center" data-ng-hide="!quizzes.$resolved || quizzes.length">
+    	No Quizzes yet, why don't you <a href="/#!/quizzes/create">create one</a>?
+    </div>
+</section>
