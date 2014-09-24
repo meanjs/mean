@@ -20,6 +20,10 @@ angular.module('qas').config(['$stateProvider',
 		state('editQa', {
 			url: '/qas/:qaId/edit',
 			templateUrl: 'modules/qas/views/edit-qa.client.view.html'
-		});
+		}).
+        state('listQasQuizzes', {
+            url: '/listQuizzes',
+            templateUrl: 'modules/qas/views/listquizzes-qa.client.view.html'
+        });
 	}
 ]);
