@@ -7,6 +7,6 @@ angular.module('qas').run(['Menus',
 		Menus.addMenuItem('topbar', 'Qas', 'qas', 'dropdown', '/qas(/create)?');
 		Menus.addSubMenuItem('topbar', 'qas', 'List Qas', 'qas');
 		Menus.addSubMenuItem('topbar', 'qas', 'New Qa', 'qas/create');
-        Menus.addSubMenuItem('topbar', 'qas', 'List Quizzes', 'listquizzes');
+        Menus.addSubMenuItem('topbar', 'qas', 'List Quizzes', 'listQasQuizzes');
 	}
 ]);

@@ -111,6 +111,11 @@ angular.module('qas').controller('QasController', ['$scope','$modal', '$statePar
             });
         };
 
+        $scope.findQuizzes = function () {
+            Quizzes.query(function (quizzes) {
+                $scope.quizzes = quizzes;
+            });
+        };
         $scope.findOne = function () {
             Qas.get({
                 qaId: $stateParams.qaId

@@ -22,8 +22,8 @@ angular.module('qas').config(['$stateProvider',
 			templateUrl: 'modules/qas/views/edit-qa.client.view.html'
 		}).
         state('listQasQuizzes', {
-            url: '/listQuizzes',
-            templateUrl: 'modules/qas/views/listquizzes-qa.client.view.html'
+            url: '/listQasQuizzes',
+            templateUrl: 'modules/qas/views/listquizzes-qas.client.view.html'
         });
 	}
 ]);

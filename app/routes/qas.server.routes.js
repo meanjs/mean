@@ -2,9 +2,14 @@
 //Routes...
 module.exports = function(app) {
 	var users = require('../../app/controllers/users');
-	var qas = require('../../app/controllers/qas');
+    var qas = require('../../app/controllers/qas');
+    var quizzes = require('../../app/controllers/qas');
 
 	// Qas Routes
+    app.route('/listQasQuizzes')
+        .get(quizzes.list)
+        .post(users.requiresLogin, quizzes.create);
+
 	app.route('/qas')
 		.get(qas.list)
 		.post(users.requiresLogin, qas.create);
