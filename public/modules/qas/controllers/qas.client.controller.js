@@ -123,11 +123,7 @@ angular.module('qas').controller('QasController', ['$scope','$modal', '$statePar
                 $scope.qa = qa;
             });
         };
-        $scope.getQuizzes = function() {
-            Quizzes.query(function(quizzes){
-                $scope.quizzes = quizzes;
-            });
-        };
+
         $scope.deleteChoice = function (ev) {
             var ss = ev.target.innerText.toString() - 1;
             console.log(ss);
