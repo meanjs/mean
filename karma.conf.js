@@ -3,8 +3,16 @@
 /**
  * Module dependencies.
  */
-var applicationConfiguration = require('./config/config');
+var applicationConfiguration = require('./app/config/config');
+var grunt = require('grunt');
+//get meta data from grunt config
+var metaData = grunt.config.getRaw('meta');
 
+var browserNormalize = function(browser) {
+	// normalization process to keep a consistent
+	// browser name accross different OS
+	return browser.toLowerCase().split(/[ /-]/)[0];
+};
 // Karma configuration
 module.exports = function(config) {
 	config.set({
@@ -15,9 +23,47 @@ module.exports = function(config) {
 		files: applicationConfiguration.assets.lib.js.concat(applicationConfiguration.assets.js, applicationConfiguration.assets.tests),
 
 		// Test results reporter to use
-		// Possible values: 'dots', 'progress', 'junit', 'growl', 'coverage'
+		// Possible values: 'dots', 'progress', 'junit', 'growl', 'coverage', 'threshold'
 		//reporters: ['progress'],
-		reporters: ['progress'],
+		reporters: ['progress', 'coverage', 'junit', 'threshold'],
+		basePath: './',
+    preprocessors: {
+								// source files, that you wanna generate coverage for
+								// do not include tests or libraries
+								// (these files will be instrumented by Istanbul)
+								'public/*.js': ['coverage'],
+								'public/modules/*/js/**/*.js': ['coverage']
+						},
+
+		coverageReporter: {
+			reporters:[
+						{
+							type : 'lcov',
+							dir : metaData.reports + '/coverage/ui',
+							subdir: browserNormalize
+						},
+						{
+							type: 'cobertura',
+							dir : metaData.reports + '/coverage/ui',
+							subdir: browserNormalize
+						}
+					]
+
+		},
+		junitReporter: {
+			  outputFile: metaData.reports + '/junit/test-results.xml',
+				suite: 'UI'
+			},
+		// the configure thresholds
+		// configure desired thresholds
+		// as coverage increases then icrease threshold
+    thresholdReporter: {
+      statements: 50,
+      branches: 45,
+      functions: 50,
+      lines: 50
+    },
+
 
 		// Web server port
 		port: 9876,
