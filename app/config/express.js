@@ -23,8 +23,10 @@ var express = require('express'),
 	var log4js = require('log4js');
 	var logger = log4js.getLogger('express');
 
+var im = require('istanbul-middleware'),
+		isCoverageEnabled = (process.env.COVERAGE === 'true');
 
-module.exports = function(db) {
+module.exports = function(db, meta) {
 	// Initialize express app
 	var app = express();
 
@@ -38,9 +40,27 @@ module.exports = function(db) {
 	app.locals.description = config.app.description;
 	app.locals.keywords = config.app.keywords;
 	app.locals.facebookAppId = config.facebook.clientID;
-	app.locals.jsFiles = config.getJavaScriptAssets();
+	app.locals.jsFiles = config.getJavaScriptAssets(false, meta);
 	app.locals.cssFiles = config.getCSSAssets();
 
+	var rootDir = __dirname.replace('/app/config', '');
+
+	if (meta && meta.isCoverageEnabled) {
+			//enable coverage endpoints under /coverage
+			app.use('/coverage', im.createHandler());
+
+			app.use(im.createClientHandler(meta.rootDir + '/public', {
+				matcher: function(request){
+					if(request.url.indexOf('.js') !== -1 &&
+						(request.url.indexOf('/lib/') === -1) ){
+						return true;
+					}
+					return false;
+				}
+			}));
+			app.use(express.static(__dirname + '/config'));
+
+	}
 	// Passing the request url to environment locals
 	app.use(function(req, res, next) {
 		res.locals.url = req.protocol + '://' + req.headers.host + req.url;
@@ -142,6 +162,5 @@ module.exports = function(db) {
 			error: 'Not Found'
 		});
 	});
-
 	return app;
 };

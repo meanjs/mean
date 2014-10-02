@@ -8,6 +8,7 @@ public/lib/bower_components/
 app/tests/coverage/
 .bower-*/
 .idea/
+download*
 
 docs
 covershot

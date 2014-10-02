@@ -1,6 +1,7 @@
 'use strict';
 
 var shelljs = require('shelljs');
+var http = require('http');
 var format = require('string-template');
 
 module.exports = function(grunt) {
@@ -128,6 +129,7 @@ module.exports = function(grunt) {
       debug: ['nodemon', 'watch', 'node-inspector'],
       docs: ['doxx:shell', 'ngdocs', 'plato'],
       test: ['test:ui', 'test:server'],
+      robot: ['startApp:robot', 'test:robot:cov'],
       options: {
         logConcurrentOutput: true,
         limit: 6
@@ -162,6 +164,8 @@ module.exports = function(grunt) {
     clean: {
       docs: ['<%= meta.reports %>/docs'],
       coverage: ['<%= meta.reports %>/coverage'],
+      robot: ['<%= meta.reports %>/coverage/robot', 'download'],
+      download: ['download'],
       istanbul:['<%= meta.reports %>/coverage/server/app', '<%= meta.reports %>/coverage/server/server.js']
     },
     plato: {
@@ -184,6 +188,18 @@ module.exports = function(grunt) {
         },
         files: {
           '<%= meta.reports %>/plato/ui': [ 'public/**/*.js']
+        }
+      }
+    },
+    waitServer: {
+      server: {
+        options: {
+          url: 'http://localhost:3000',
+          fail: function () {process.exit(6);},
+          timeout: 10 * 10000,
+          isforce: false,
+          interval: 8000,
+          print: true
         }
       }
     }
@@ -219,9 +235,9 @@ module.exports = function(grunt) {
     var result = shelljs.exec(command);
 
     if(result.code === 0){
-      grunt.log.ok('(doxx:shell) Documentation created successfully');
+      grunt.log.ok(this.name + ' - Documentation created successfully');
     }else{
-      grunt.log.error('(doxx:shell) ERROR: something went wrong!');
+      grunt.log.error(this.name + ' - ERROR: something went wrong!');
     }
   });
 
@@ -237,11 +253,67 @@ module.exports = function(grunt) {
     var result = shelljs.exec(command);
 
     if(result.code === 0){
-      grunt.log.ok('(istanbul:mocha:cover) Coverage done successfully');
+      grunt.log.ok(this.name + ' - Coverage done successfully');
     }else{
-      grunt.log.error('(istanbul:mocha:cover) ERROR: oops. something went wrong!');
+      grunt.log.error(this.name + ' - ERROR: oops. something went wrong!');
     }
   });
+
+  grunt.task.registerTask('robot:test', 'add code coverage after functional tests', function() {
+    var options = {
+      output: '.reports/robot',
+      testFiles: 'app/tests/functional/tests',
+    };
+
+    var template = 'pybot -d {output} {testFiles} ';
+    var command = format(template, options);
+    var result = shelljs.exec(command);
+    if(result.code === 0){
+      grunt.log.ok(this.name + ' - done successfully');
+    }else{
+      grunt.log.error(this.name + ' - ERROR: oops. something went wrong!');
+    }
+
+  });
+
+  grunt.task.registerTask('robot:getCoverage', 'add code coverage after functional tests', function() {
+    var options = {
+      output: '.reports/coverage/robot',
+      url: 'http://localhost:3000/coverage/download'
+    };
+
+    var template = 'wget {url} && unzip download -d {output}';
+    var command = format(template, options);
+    var result = shelljs.exec(command);
+    if(result.code === 0){
+      grunt.log.ok(this.name + ' - done successfully');
+    }else{
+      grunt.log.error(this.name + ' - ERROR: oops. something went wrong!');
+    }
+
+  });
+
+  grunt.registerTask('exit', 'Just exits.', function() {
+
+      var result = shelljs.exec('killall grunt && killall node');
+      if(result.code === 0){
+        grunt.log.ok(this.name + ' - done successfully');
+      }else{
+        grunt.log.error(this.name + ' - ERROR: oops. something went wrong!');
+      }
+      process.exit(0);
+  });
+  grunt.registerTask('startApp', 'starts the server.', function() {
+
+      var result = shelljs.exec('node server.js');
+      if(result.code === 0){
+        grunt.log.ok(this.name + ' - done successfully');
+      }else{
+        grunt.log.error(this.name + ' - ERROR: oops. something went wrong!');
+      }
+      process.exit(0);
+  });
+
   // Default task(s).
   grunt.registerTask('default', ['lint', 'concurrent:default']);
 
@@ -258,6 +330,9 @@ module.exports = function(grunt) {
   grunt.registerTask('test', ['clean:coverage', 'lint','concurrent:test']);
   grunt.registerTask('test:ui', ['env:test', 'karma:unit']);
   grunt.registerTask('test:server', ['istanbul:mocha:cover', 'clean:istanbul']);
+  grunt.registerTask('test:robot:cov', [ 'clean:robot', 'waitServer','robot:test', 'robot:getCoverage', 'clean:download', 'exit']);
+  grunt.registerTask('test:robot', ['concurrent:robot']);
+  grunt.registerTask('startApp:robot', ['startApp', 'watch']);
 
   grunt.registerTask('docs', ['clean:docs', 'concurrent:docs' ]);
 };

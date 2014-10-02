@@ -2,9 +2,11 @@
 /**
  * Module dependencies.
  */
-var init = require('./app/config/init')(),
+var meta = require('./app/config/coverage')(), //will not appear in coverage reports for E2E tests
+	init = require('./app/config/init')(),
 	config = require('./app/config/config'),
 	mongoose = require('mongoose');
+
 
 // config for log4js only needs to happen once
 // any other time it is required in  other files, use:
@@ -25,8 +27,12 @@ var db = mongoose.connect(config.db, function(err) {
 	}
 });
 
+
 // Init the express application
-var app = require('./app/config/express')(db);
+var app = require('./app/config/express')(db, meta);
+
+
+
 
 // Bootstrap passport config
 require('./app/config/passport')();
