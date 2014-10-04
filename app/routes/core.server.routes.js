@@ -7,5 +7,5 @@ module.exports = function(app) {
 	var core = require('../../app/controllers/core');
 
 	// Core Routes
-	app.route('*').get(core.index);
+	app.route('/').get(core.index);
 };
