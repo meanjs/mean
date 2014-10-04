@@ -119,8 +119,8 @@ module.exports = function(db) {
 	});
 
 	/**
-     * Module dependencies.
-     */
+	 * Module dependencies.
+	 */
 	var core = require('../app/controllers/core');
 	
 	// Catch-all route
