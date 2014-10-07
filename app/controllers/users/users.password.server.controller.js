@@ -111,7 +111,6 @@ exports.validateResetToken = function(req, res) {
 exports.reset = function(req, res, next) {
 	// Init Variables
 	var passwordDetails = req.body;
-	var message = null;
 
 	async.waterfall([
 
@@ -188,10 +187,9 @@ exports.reset = function(req, res, next) {
 /**
  * Change Password
  */
-exports.changePassword = function(req, res, next) {
+exports.changePassword = function(req, res) {
 	// Init Variables
 	var passwordDetails = req.body;
-	var message = null;
 
 	if (req.user) {
 		if (passwordDetails.newPassword) {
