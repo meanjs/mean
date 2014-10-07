@@ -22,12 +22,12 @@ module.exports = function() {
 				}
 				if (!user) {
 					return done(null, false, {
-						message: 'Unknown user'
+						message: 'Unknown user or invalid password'
 					});
 				}
 				if (!user.authenticate(password)) {
 					return done(null, false, {
-						message: 'Invalid password'
+						message: 'Unknown user or invalid password'
 					});
 				}
 
