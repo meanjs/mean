@@ -3,11 +3,12 @@
 module.exports = function(grunt) {
 	// Unified Watch Object
 	var watchFiles = {
-		serverViews: ['app/views/**/*.*'], 
+		serverViews: ['app/views/**/*.*'],
 		serverJS: ['gruntfile.js', 'server.js', 'config/**/*.js', 'app/**/*.js'],
 		clientViews: ['public/modules/**/views/**/*.html'],
 		clientJS: ['public/js/*.js', 'public/modules/**/*.js'],
 		clientCSS: ['public/modules/**/*.css'],
+		clientLESS: ['public/modules/**/*.less'],
 		mochaTests: ['app/tests/**/*.js']
 	};
 
@@ -46,6 +47,25 @@ module.exports = function(grunt) {
 				tasks: ['csslint'],
 				options: {
 					livereload: true
+				}
+			},
+			clientLESS: {
+				files: watchFiles.clientLESS,
+				tasks: ['less'],
+				options: {
+					livereload: true
+				}
+			},
+		},
+		less: {
+			all: {
+				options: {
+					compress: true,
+			          yuicompress: true,
+			          optimization: 2
+				},
+				files: {
+					'public/dist/app.css': ['<%= applicationLESSFiles %>','public/modules/**/*.less']
 				}
 			}
 		},
@@ -139,7 +159,7 @@ module.exports = function(grunt) {
 		}
 	});
 
-	// Load NPM tasks 
+	// Load NPM tasks
 	require('load-grunt-tasks')(grunt);
 
 	// Making grunt default to force in order not to break the project.
@@ -161,7 +181,7 @@ module.exports = function(grunt) {
 	grunt.registerTask('debug', ['lint', 'concurrent:debug']);
 
 	// Lint task(s).
-	grunt.registerTask('lint', ['jshint', 'csslint']);
+	grunt.registerTask('lint', ['jshint', 'loadConfig','less', 'csslint', 'cssmin']);
 
 	// Build task(s).
 	grunt.registerTask('build', ['lint', 'loadConfig', 'ngmin', 'uglify', 'cssmin']);

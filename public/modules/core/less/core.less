@@ -1,0 +1,42 @@
+@import 'mix.less';
+@import 'theme.less';
+// Color variables (appears count calculates by raw css)
+@nav-bg-color: #fff;
+@nav-bg-alpha: 0.9;
+// Animate.css
+@anim-page-intro: fadeIn 1s;
+@anim-menu-intro: bounceInDown 1s;
+
+@border-error: #FA787E;
+@border-sucess: #78FA89;
+.slide{
+	margin-top: 60px;
+}
+.navbar {
+	.animation(@anim-menu-intro);
+}
+
+[ng-cloak],[data-ng-cloak],[x-ng-cloak], .ng-cloak, .x-ng-cloak  {
+	display: none !important;
+}
+.ng-invalid.ng-dirty {
+	border-color: @border-error;
+}
+.ng-valid.ng-dirty {
+	border-color: @border-sucess;
+}
+.slide.ng-enter {
+	.animation(@anim-page-intro);
+}
+.slide.ng-enter.ng-enter-active {
+	.animation(@anim-page-intro);
+}
+.slide.ng-leave {
+	.animation(@anim-page-intro);
+}
+.slide.ng-leave.ng-leave-active {
+	display: none;
+}
+.place-logo{
+	width: 106px;
+}
