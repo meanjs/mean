@@ -10,7 +10,6 @@ var _ = require('lodash'),
 	User = mongoose.model('User'),
 	config = require('../../../config/config'),
 	nodemailer = require('nodemailer'),
-	crypto = require('crypto'),
 	async = require('async'),
 	crypto = require('crypto');
 
