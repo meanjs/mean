@@ -1,0 +1,75 @@
+{
+    "header": {
+        "TOGGLE_NAVIGATION": "Toggle navigation",
+        "SIGN_UP": "Sign up",
+        "SIGN_IN": "Sign in",
+        "EDIT_PROFILE": "Edit profile",
+        "MANAGE_SOCIAL_ACCOUNTS": "Manage Social Accounts",
+        "CHANGE_PASSWORD": "Change Password",
+        "SIGN_OUT": "Signout"
+    },
+    "signin" : {
+        "SIGN_IN_USING_YOUR_SOCIAL_ACCOUNTS": "Sign in using your social accounts",
+        "OR_WITH_YOUR_ACCOUNT": "Or with your account",
+        "USERNAME": "Username",
+        "PASSWORD": "Password",
+        "SIGN_IN": "Sign in",
+        "OR": "or",
+        "SIGN_UP": "Sign up",
+        "FORGOT_YOUR_PASSWORD": "Forgot your password?"
+    },
+    "signup": {
+        "SIGN_UP_USING_YOUR_SOCIAL_ACCOUNTS": "Sign up using your social accounts",
+        "OR_WITH_YOUR_EMAIL": "Or with your email",
+        "FIRST_NAME": "First Name",
+        "LAST_NAME": "Last Name",
+        "EMAIL": "Email",
+        "USERNAME": "Username",
+        "PASSWORD": "Password",
+        "SIGN_UP": "Sign up",
+        "OR": "or",
+        "SIGN_IN": "Sign in"
+    },
+    "forgot_password": {
+        "RESTORE_YOUR_PASSWORD": "Restore your password",
+        "ENTER_YOUR_ACCOUNT_USERNAME": "Enter your account username",
+        "USERNAME": "Username",
+        "SUBMIT": "Submit"
+    },
+    "reset_password": {
+        "RESET_YOUR_PASSWORD": "Reset your password",
+        "NEW_PASSWORD": "New Password",
+        "VERIFY_PASSWORD": "Verify Password",
+        "UPDATE_PASSWORD": "Update Password"
+    },
+    "reset_password_invalid": {
+        "PASSWORD_RESET_IS_INVALID": "Password reset is invalid",
+        "ASK_FOR_A_NEW_PASSWORD_RESET": "Ask for a new password reset"
+    },
+    "reset_password_success": {
+        "PASSWORD_SUCCESSFULLY_RESET": "Password successfully reset",
+        "CONTINUE_TO_HOME_PAGE": "Continue to home page"
+    },
+    "change_password": {
+        "CHANGE_YOUR_PASSWORD": "Change your password",
+        "CURRENT_PASSWORD": "Current Password",
+        "NEW_PASSWORD": "New Password",
+        "VERIFY_PASSWORD": "Verify Password",
+        "SAVE_PASSWORD": "Save Password",
+        "PASSWORD_CHANGED_SUCCESSFULLY": "Password Changed Successfully"
+    },
+    "edit_profile": {
+        "EDIT_YOUR_PROFILE": "Edit your profile",
+        "FIRST_NAME": "First Name",
+        "LAST_NAME": "Last Name",
+        "EMAIL": "Email",
+        "USERNAME": "Username",
+        "LANGUAGE": "Language",
+        "SAVE_PROFILE": "Save Profile",
+        "PROFILE_SAVED_SUCCESSFULLY": "Profile Saved Successfully"
+    },
+    "social_accounts": {
+        "CONNECTED_SOCIAL_ACCOUNTS": "Connected social accounts",
+        "CONNECT_OTHER_SOCIAL_ACCOUNTS": "Connect other social accounts"
+    }
+}

@@ -14,7 +14,7 @@ module.exports = {
 		lib: {
 			css: [
 				'public/lib/bootstrap/dist/css/bootstrap.css',
-				'public/lib/bootstrap/dist/css/bootstrap-theme.css',
+				'public/lib/bootstrap/dist/css/bootstrap-theme.css'
 			],
 			js: [
 				'public/lib/angular/angular.js',
@@ -22,7 +22,12 @@ module.exports = {
 				'public/lib/angular-animate/angular-animate.js',
 				'public/lib/angular-ui-router/release/angular-ui-router.js',
 				'public/lib/angular-ui-utils/ui-utils.js',
-				'public/lib/angular-bootstrap/ui-bootstrap-tpls.js'
+				'public/lib/angular-bootstrap/ui-bootstrap-tpls.js',
+                'public/lib/angular-cookies/angular-cookies.js',
+                'public/lib/angular-translate/angular-translate.js',
+                'public/lib/angular-translate-storage-local/angular-translate-storage-local.js',
+                'public/lib/angular-translate-storage-cookie/angular-translate-storage-cookie.js',
+                'public/lib/angular-translate-loader-static-files/angular-translate-loader-static-files.js'
 			]
 		},
 		css: [

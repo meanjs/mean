@@ -1,29 +1,33 @@
 <section class="row" data-ng-controller="SettingsController">
-	<h3 class="col-md-12 text-center">Edit your profile</h3>
+	<h3 class="col-md-12 text-center">{{ "edit_profile.EDIT_YOUR_PROFILE" | translate }}</h3>
 	<div class="col-xs-offset-2 col-xs-8 col-md-offset-5 col-md-2">
 		<form name="userForm" data-ng-submit="updateUserProfile(userForm.$valid)" class="signin form-horizontal" autocomplete="off">
 			<fieldset>
 				<div class="form-group">
-					<label for="firstName">First Name</label>
-					<input type="text" id="firstName" name="firstName" class="form-control" data-ng-model="user.firstName" placeholder="First Name">
+					<label for="firstName">{{ "edit_profile.FIRST_NAME" | translate }}</label>
+					<input type="text" id="firstName" name="firstName" class="form-control" data-ng-model="user.firstName" placeholder="{{ 'edit_profile.FIRST_NAME' | translate }}">
 				</div>
 				<div class="form-group">
-					<label for="lastName">Last Name</label>
-					<input type="text" id="lastName" name="lastName" class="form-control" data-ng-model="user.lastName" placeholder="Last Name">
+					<label for="lastName">{{ "edit_profile.LAST_NAME" | translate }}</label>
+					<input type="text" id="lastName" name="lastName" class="form-control" data-ng-model="user.lastName" placeholder="{{ 'edit_profile.LAST_NAME' | translate }}">
 				</div>
 				<div class="form-group">
-					<label for="email">Email</label>
-					<input type="email" id="email" name="email" class="form-control" data-ng-model="user.email" placeholder="Email">
+					<label for="email">{{ "edit_profile.EMAIL" | translate }}</label>
+					<input type="email" id="email" name="email" class="form-control" data-ng-model="user.email" placeholder="{{ 'edit_profile.EMAIL' | translate }}">
 				</div>
 				<div class="form-group">
-					<label for="username">Username</label>
-					<input type="text" id="username" name="username" class="form-control" data-ng-model="user.username" placeholder="Username">
+					<label for="username">{{ "edit_profile.USERNAME" | translate }}</label>
+					<input type="text" id="username" name="username" class="form-control" data-ng-model="user.username" placeholder="{{ 'edit_profile.USERNAME' | translate }}">
 				</div>
+                <div class="form-group">
+                    <label for="language">{{ "edit_profile.LANGUAGE" | translate }}</label>
+                    <select id="language" name="language" class="form-control" data-ng-model="user.language" ng-options="lang.code as lang.name for lang in langs"></select>
+                </div>
 				<div class="text-center form-group">
-					<button type="submit" class="btn btn-large btn-primary">Save Profile</button>
+					<button type="submit" class="btn btn-large btn-primary">{{ "edit_profile.SAVE_PROFILE" | translate }}</button>
 				</div>
 				<div data-ng-show="success" class="text-center text-success">
-					<strong>Profile Saved Successfully</strong>
+					<strong>{{ "edit_profile.PROFILE_SAVED_SUCCESSFULLY" | translate }}</strong>
 				</div>
 				<div data-ng-show="error" class="text-center text-danger">
 					<strong data-ng-bind="error"></strong>

@@ -1,5 +1,5 @@
 <section class="row" data-ng-controller="AuthenticationController">
-	<h3 class="col-md-12 text-center">Sign up using your social accounts</h3>
+	<h3 class="col-md-12 text-center">{{ "signup.SIGN_UP_USING_YOUR_SOCIAL_ACCOUNTS" | translate }}</h3>
 	<div class="col-md-12 text-center">
 		<a href="/auth/facebook" class="undecorated-link">
 			<img src="/modules/users/img/buttons/facebook.png">
@@ -17,33 +17,33 @@
 			<img src="/modules/users/img/buttons/github.png">
 		</a>
 	</div>
-	<h3 class="col-md-12 text-center">Or with your email</h3>
+	<h3 class="col-md-12 text-center">{{ "signup.OR_WITH_YOUR_EMAIL" | translate }}</h3>
 	<div class="col-xs-offset-2 col-xs-8 col-md-offset-5 col-md-2">
 		<form name="userForm" data-ng-submit="signup()" class="signin form-horizontal" novalidate autocomplete="off">
 			<fieldset>
 				<div class="form-group">
-					<label for="firstName">First Name</label>
-					<input type="text" required id="firstName" name="firstName" class="form-control" data-ng-model="credentials.firstName" placeholder="First Name">
+					<label for="firstName">{{ "signup.FIRST_NAME" | translate }}</label>
+					<input type="text" required id="firstName" name="firstName" class="form-control" data-ng-model="credentials.firstName" placeholder="{{ 'signup.FIRST_NAME' | translate }}">
 				</div>
 				<div class="form-group">
-					<label for="lastName">Last Name</label>
-					<input type="text" id="lastName" name="lastName" class="form-control" data-ng-model="credentials.lastName" placeholder="Last Name">
+					<label for="lastName">{{ "signup.LAST_NAME" | translate }}</label>
+					<input type="text" id="lastName" name="lastName" class="form-control" data-ng-model="credentials.lastName" placeholder="{{ 'signup.LAST_NAME' | translate }}">
 				</div>
 				<div class="form-group">
-					<label for="email">Email</label>
-					<input type="email" id="email" name="email" class="form-control" data-ng-model="credentials.email" placeholder="Email">
+					<label for="email">{{ "signup.EMAIL" | translate }}</label>
+					<input type="email" id="email" name="email" class="form-control" data-ng-model="credentials.email" placeholder="{{ 'signup.EMAIL' | translate }}">
 				</div>
 				<div class="form-group">
-					<label for="username">Username</label>
-					<input type="text" id="username" name="username" class="form-control" data-ng-model="credentials.username" placeholder="Username">
+					<label for="username">{{ "signup.USERNAME" | translate }}</label>
+					<input type="text" id="username" name="username" class="form-control" data-ng-model="credentials.username" placeholder="{{ 'signup.USERNAME' | translate }}">
 				</div>
 				<div class="form-group">
-					<label for="password">Password</label>
-					<input type="password" id="password" name="password" class="form-control" data-ng-model="credentials.password" placeholder="Password">
+					<label for="password">{{ "signup.PASSWORD" | translate }}</label>
+					<input type="password" id="password" name="password" class="form-control" data-ng-model="credentials.password" placeholder="{{ 'signup.PASSWORD' | translate }}">
 				</div>
 				<div class="text-center form-group">
-					<button type="submit" class="btn btn-large btn-primary">Sign up</button>&nbsp; or&nbsp;
-					<a href="/#!/signin" class="show-signup">Sign in</a>
+					<button type="submit" class="btn btn-large btn-primary">{{ "signup.SIGN_UP" | translate }}</button>&nbsp; {{ "signup.OR" | translate }}&nbsp;
+					<a href="/#!/signin" class="show-signup">{{ "signup.SIGN_IN" | translate }}</a>
 				</div>
 				<div data-ng-show="error" class="text-center text-danger">
 					<strong data-ng-bind="error"></strong>
