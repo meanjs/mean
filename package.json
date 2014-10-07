@@ -1,7 +1,7 @@
 {
 	"name": "meanjs",
 	"description": "Full-Stack JavaScript with MongoDB, Express, AngularJS, and Node.js.",
-	"version": "0.3.2",
+	"version": "0.3.3",
 	"private": false,
 	"author": "https://github.com/meanjs/mean/graphs/contributors",
 	"repository": {
