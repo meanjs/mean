@@ -116,7 +116,8 @@ module.exports = function(grunt) {
 			default: ['nodemon', 'watch'],
 			debug: ['nodemon', 'watch', 'node-inspector'],
 			options: {
-				logConcurrentOutput: true
+				logConcurrentOutput: true,
+				limit: 10
 			}
 		},
 		env: {
