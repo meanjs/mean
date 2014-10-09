@@ -12,8 +12,8 @@ angular.module('quizzes').controller('QuizzesController', ['$scope', '$statePara
 			var quiz = new Quizzes ({
 				name: this.name,
                 category: this.category,
-                keyword: this.keyword,
-                number: this.number
+                keyWords: this.keyWords,
+                quizNumber: this.quizNumber
 			});
 
 			// Redirect after save
@@ -25,9 +25,9 @@ angular.module('quizzes').controller('QuizzesController', ['$scope', '$statePara
             console.log(quiz);
 			// Clear form fields
             this.name = '';
-            this.keyword = '';
+            this.keyWords = '';
             this.category = '';
-            this.number = 999;
+            this.quizNumber = '';
 		};
 
 		// Remove existing Quiz

@@ -123,6 +123,13 @@ angular.module('qas').controller('QasController', ['$scope','$modal', '$statePar
                 $scope.qa = qa;
             });
         };
+        $scope.findQuizzesOne = function () {
+            Quizzes.get({
+                quizId: $stateParams.quizId
+            }, function (quiz) {
+                $scope.quiz = quiz;
+            });
+        };
 
         $scope.deleteChoice = function (ev) {
             var ss = ev.target.innerText.toString() - 1;
@@ -131,41 +138,41 @@ angular.module('qas').controller('QasController', ['$scope','$modal', '$statePar
             console.log(qa);
             $scope.qa.choices.splice(ss, 1);
         };
-        $scope.saveToOtherQuiz = function(){
-            var modalInstance = $modal.open({
-                templateUrl: 'modules/qas/views/modal-qa.client.html',
-                controller: ModalInstanceCtrl,
-                resolve: {
-                    items: function () {
-                        return $scope.items;
-                    }
-                }
-            });
-
-            modalInstance.result.then(function (selectedItem) {
-                $scope.selected = selectedItem;
-
-            }, function () {
-                console.log('Modal dismissed at: ' + new Date());
-            });
-        };
-        var ModalInstanceCtrl = function ($scope, $modalInstance, Quizzes) {
-
-            Quizzes.query(function(quizzes){
-                $scope.quizzes = quizzes;
-            });
-            $scope.selected = {
-               // quizzes: $scope.quizzes[0]
-            };
-
-            $scope.ok = function () {
-                $modalInstance.close($scope.selected.item);
-            };
-
-            $scope.cancel = function () {
-                $modalInstance.dismiss('cancel');
-            };
-        };
+//        $scope.saveToOtherQuiz = function(){
+//            var modalInstance = $modal.open({
+//                templateUrl: 'modules/qas/views/modal-qa.client.html',
+//                controller: ModalInstanceCtrl,
+//                resolve: {
+//                    items: function () {
+//                        return $scope.items;
+//                    }
+//                }
+//            });
+//
+//            modalInstance.result.then(function (selectedItem) {
+//                $scope.selected = selectedItem;
+//
+//            }, function () {
+//                console.log('Modal dismissed at: ' + new Date());
+//            });
+//        };
+//        var ModalInstanceCtrl = function ($scope, $modalInstance, Quizzes) {
+//
+//            Quizzes.query(function(quizzes){
+//                $scope.quizzes = quizzes;
+//            });
+//            $scope.selected = {
+//               // quizzes: $scope.quizzes[0]
+//            };
+//
+//            $scope.ok = function () {
+//                $modalInstance.close($scope.selected.item);
+//            };
+//
+//            $scope.cancel = function () {
+//                $modalInstance.dismiss('cancel');
+//            };
+//        };
     }
 ]);
 
