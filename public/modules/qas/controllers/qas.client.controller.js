@@ -27,7 +27,7 @@ angular.module('qas').controller('QasController', ['$scope','$modal', '$statePar
                     {text: this.text, selectedAnswer: this.correctAnswer     //doesn't work
                     }
                 ],
-                hint: this.hint,    //doesn't work
+                hint: this.hint,
                 type: this.td,      //doesn't work
                 difficulty: this.difficulty,
                 hintOn: this.hintOn,

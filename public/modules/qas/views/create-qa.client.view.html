@@ -1,15 +1,18 @@
 <section data-ng-controller="QasController">
     <div class="page-header">
         <h1>New Big QA</h1>
-        <p data-ng-model='quizzes.name'> </p>
+        <h2>{{quiz.name}} </h2>
     </div>
 
+    <select ng-model="qd" ng-options=" qp1.name for qp1 in quiz.name" data-style="btn-primary" bs-select>
+        <option value=""> Quiz
+    </select>{{qd.label}}
     <select ng-model="td" ng-options=" dp1.label for dp1 in typeDropdown" data-style="btn-primary" bs-select>
     <option value=""> Type
 </select>{{td.label}}
-    <select ng-model="quiz" ng-options=" q1.label for q1 in quizzes.name" data-style="btn-primary" bs-select>
-        <option value=""> Quiz
-    </select>{{td.label}}
+    <select ng-model="dd" ng-options=" dp2.label for dp2 in difficultyDropdown" data-style="btn-primary" bs-select>
+        <option value=""> Difficulty
+    </select>{{dd.label}}
     <form class="form-horizontal" data-ng-submit="create()">
     <div class="col-md-6">
 

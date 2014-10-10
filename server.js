@@ -12,24 +12,24 @@ var init = require('./config/init')(),
  */
 
 // Bootstrap db connection
-//var db = mongoose.connect('mongodb://cce:cce@ds039860.mongolab.com:39860/meandb', function(err) {
-//    if (err) {
-//        console.error('\x1b[31m', 'Could not connect to MongoLabDB!');
-//        console.log(err);
-//    }
-//});
+var db = mongoose.connect('mongodb://cce:cce@ds039860.mongolab.com:39860/meandb', function(err) {
+    if (err) {
+        console.error('\x1b[31m', 'Could not connect to MongoLabDB!');
+        console.log(err);
+    }
+});
 //var db = mongoose.connect('mongodb://cliffeby:stanx2@ds039860.mongolab.com:39860/meandb', function(err) {
 //    if (err) {
 //        console.error('\x1b[31m', 'Could not connect to MongoLabDB!');
 //        console.log(err);
 //    }
 //});
-var db = mongoose.connect(config.db, function(err) {
-	if (err) {
-		console.error('\x1b[31m', 'Could not connect to MongoDB!');
-		console.log(err);
-	}
-});
+//var db = mongoose.connect(config.db, function(err) {
+//	if (err) {
+//		console.error('\x1b[31m', 'Could not connect to MongoDB!');
+//		console.log(err);
+//	}
+//});
 
 
 // Init the express application

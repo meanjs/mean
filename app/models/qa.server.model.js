@@ -84,6 +84,10 @@ var QaSchema = new Schema({
     quizId: {
         type: Number,
         default: 0
+    },
+    quiz: {
+        type: Schema.ObjectId,
+        ref: 'Quiz'
     }
 });
 
