@@ -12,13 +12,13 @@ Before you begin we recommend you read about the basic building blocks that asse
 * AngularJS - Angular's [Official Website](http://angularjs.org/) is a great starting point. You can also use [Thinkster Popular Guide](http://www.thinkster.io/), and the [Egghead Videos](https://egghead.io/).
 * Node.js - Start by going through [Node.js Official Website](http://nodejs.org/) and this [StackOverflow Thread](http://stackoverflow.com/questions/2353818/how-do-i-get-started-with-node-js), which should get you going with the Node.js platform in no time.
 
-## Use MongoLabs
-// var db = mongoose.connect('mongodb://cliffeby:cce1234@ds039860.mongolab.com:39860/meandb', function(err) {
-//    if (err) {
-//        console.error('\x1b[31m', 'Could not connect to MongoLabsDB!');
-//        console.log(err);
-//    }
-// });
+## Use MongoLabs - insert in server.js
+var db = mongoose.connect('mongodb://cce:cce@ds039860.mongolab.com:39860/meandb', function(err) {
+    if (err) {
+        console.error('\x1b[31m', 'Could not connect to MongoLabDB!');
+        console.log(err);
+    }
+});
 
 ## Prerequisites
 Make sure you have installed all these prerequisites on your development machine.
