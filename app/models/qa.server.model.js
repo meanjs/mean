@@ -81,9 +81,13 @@ var QaSchema = new Schema({
 		trim: true
 	
 	},
-    quizId: {
+    qaQuizId: {
         type: Number,
-        default: 0
+        default: 999
+    },
+    qaQuizName: {
+        type: String,
+        default: 'Quiz'
     },
     quiz: {
         type: Schema.ObjectId,
