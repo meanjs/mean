@@ -1,15 +1,12 @@
 'use strict';
 
 // Authentication service for user variables
-angular.module('users').factory('Authentication', [
+angular.module('users').factory('Authentication', ['$preloadProvider', function($preloadProvider) {
+	var _this = this;
 
-	function() {
-		var _this = this;
+	_this._data = {
+		user: $preloadProvider.user
+	};
 
-		_this._data = {
-			user: window.user
-		};
-
-		return _this._data;
-	}
-]);
+	return _this._data;
+}]);
