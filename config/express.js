@@ -95,7 +95,7 @@ module.exports = function(db) {
 			collection: config.sessionCollection
 		}),
 		cookie: config.sessionCookie,
-        name: config.sessionName
+		name: config.sessionName
 	}));
 
 	// use passport session
