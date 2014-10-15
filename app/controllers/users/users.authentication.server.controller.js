@@ -112,30 +112,30 @@ exports.saveOAuthUserProfile = function(req, providerUserProfile, done) {
 			return done(err);
 		}
 
-        if (req.user) {
-            if (user) {
-                // TODO: update callback handling (message/redirectURL flow);
-                if (req.user.providers && req.user.providers[providerUserProfile.provider] &&
-                    req.user.providers[providerUserProfile.provider][providerUserProfile.providerIdentifierField] == providerUserProfile.providerData[providerUserProfile.providerIdentifierField]) {
-                    return done(null, req.user, { message: 'User is already connected using this provider', redirectURL: '/#!/settings/accounts' });
-                } else {
-                    return done(null, req.user, { message: 'This provider is connected to another account.', redirectURL: '/#!/settings/accounts' });
-                }
-            }
+		if (req.user) {
+			if (user) {
+				// TODO: update callback handling (message/redirectURL flow);
+				if (req.user.providers && req.user.providers[providerUserProfile.provider] &&
+					req.user.providers[providerUserProfile.provider][providerUserProfile.providerIdentifierField] == providerUserProfile.providerData[providerUserProfile.providerIdentifierField]) {
+					return done(null, req.user);
+				} else {
+					return done(null, req.user, { message: 'This provider is connected to another account.', redirectURL: '/#!/settings/accounts' });
+				}
+			}
 
-            user = req.user;
+			user = req.user;
 
-            if (!user.providers) user.providers = {};
+			if (!user.providers) user.providers = {};
 
-            user.providers[providerUserProfile.provider] = providerUserProfile.providerData;
-            user.markModified('providers');
+			user.providers[providerUserProfile.provider] = providerUserProfile.providerData;
+			user.markModified('providers');
 
-            // And save the user
-            user.save(function(err) {
-                return done(err, user, { redirectURL: '/#!/settings/accounts' });
-            });
+			// And save the user
+			user.save(function(err) {
+				return done(err, user, { redirectURL: '/#!/settings/accounts' });
+			});
 		} else if (!user) {
-            var possibleUsername = providerUserProfile.username || ((providerUserProfile.email) ? providerUserProfile.email.split('@')[0] : '');
+			var possibleUsername = providerUserProfile.username || ((providerUserProfile.email) ? providerUserProfile.email.split('@')[0] : '');
 
 			User.findUniqueUsername(possibleUsername, null, function(availableUsername) {
 				user = new User({
@@ -153,7 +153,7 @@ exports.saveOAuthUserProfile = function(req, providerUserProfile, done) {
 				});
 			});
 		} else {
-            return done(err, user);
+			return done(err, user);
 		}
 	});
 };
