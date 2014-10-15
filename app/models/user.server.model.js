@@ -4,7 +4,7 @@
  * Module dependencies.
  */
 var _ = require('lodash'),
-    mongoose = require('mongoose'),
+	mongoose = require('mongoose'),
 	Schema = mongoose.Schema,
 	crypto = require('crypto');
 
@@ -82,9 +82,9 @@ var UserSchema = new Schema({
 	resetPasswordToken: {
 		type: String
 	},
-    resetPasswordExpires: {
-        type: Date
-    }
+	resetPasswordExpires: {
+		type: Date
+	}
 });
 
 /**
