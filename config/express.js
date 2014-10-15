@@ -79,9 +79,6 @@ module.exports = function(db) {
 	app.use(bodyParser.json());
 	app.use(methodOverride());
 
-	// JSONP is disabled by default
-	// app.enable('jsonp callback');
-
 	// CookieParser should be above session
 	app.use(cookieParser());
 
