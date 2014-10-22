@@ -138,7 +138,7 @@ exports.reset = function(req, res, next) {
 										res.status(400).send(err);
 									} else {
 										// Return authenticated user 
-										res.jsonp(user);
+										res.json(user);
 
 										done(err, user);
 									}
