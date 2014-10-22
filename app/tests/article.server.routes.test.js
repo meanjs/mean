@@ -47,12 +47,12 @@ describe('Article CRUD tests', function () {
       .end(function (err, res){
         var userId = res.body._id;
         agent
-          .post('/articles')
+          .post('/api/articles')
           .send(article)
           .expect(200)
           .end(function (err, res) {
             agent
-              .get('/articles')
+              .get('/api/articles')
               .end(function(error, res) {
                 (res.body[0].user._id).should.equal(userId);
                 (res.body[0].title).should.match('Article Title');
@@ -65,7 +65,7 @@ describe('Article CRUD tests', function () {
 
   it('should not be able to save an article if not logged in', function (done) {
     agent
-      .post('/articles')
+      .post('/api/articles')
       .send(article)
       .expect(200)
       .end(function (err, res) {
@@ -83,7 +83,7 @@ describe('Article CRUD tests', function () {
       .send(user)
       .end(function (err, res){
         agent
-          .post('/articles')
+          .post('/api/articles')
           .send(article)
           .expect(200)
           .end(function (err, res) {
@@ -103,19 +103,19 @@ describe('Article CRUD tests', function () {
       .end(function (err, res){
         var userId = res.body._id;
         agent
-          .post('/articles')
+          .post('/api/articles')
           .send(article)
           .expect(200)
           .end(function (err, res) {
             agent
-              .get('/articles')
+              .get('/api/articles')
               .end(function(error, res) {
                 (res.body[0].user._id).should.equal(userId);
                 (res.body[0].title).should.match('Article Title');
                 var article_Id = res.body[0]._id;
                 article.title = 'WHY YOU GOTTA BE SO MEAN?';
                 agent
-                  .put('/articles/' + article_Id)
+                  .put('/api/articles/' + article_Id)
                   .send(article)
                   .end(function (err, res) {
                     (res.body._id).should.equal(article_Id);
@@ -142,7 +142,7 @@ describe('Article CRUD tests', function () {
 
     // note there is no need to use the supertest agent here as we do not need to be signed in
     request(app)
-      .get('/articles')
+      .get('/api/articles')
       .end(function (req, res) {
         (res.body[0].title).should.match('0 Another Article Title');
         done();
@@ -160,7 +160,7 @@ describe('Article CRUD tests', function () {
     article.save();
 
     request(app)
-      .get('/articles/' + article._id)
+      .get('/api/articles/' + article._id)
       .end(function (req, res) {
         (res.body.title).should.match('Another Article Title');
         done();
@@ -183,7 +183,7 @@ describe('Article CRUD tests', function () {
       .end(function (err, res) {
         (err === null).should.equal(true);
         agent
-          .delete('/articles/' + article._id)
+          .delete('/api/articles/' + article._id)
           .end(function (err, res) {
             (res.req.method).should.match('DELETE');
             (res.body.title).should.match('Another Article Title');
@@ -201,7 +201,7 @@ describe('Article CRUD tests', function () {
     article.save();
 
     request(app)
-      .delete('/articles/' + article._id)
+      .delete('/api/articles/' + article._id)
       .end(function (err, res) {
         (res.req.method).should.match('DELETE');
         (res.status).should.equal(401);
