@@ -17,7 +17,6 @@ module.exports = function() {
 	glob('./config/env/' + process.env.NODE_ENV + '.js', {
 		sync: true
 	}, function(err, environmentFiles) {
-		console.log();
 		if (!environmentFiles.length) {
 			if (process.env.NODE_ENV) {
 				console.error(chalk.red('No configuration file found for "' + process.env.NODE_ENV + '" environment using development instead'));
@@ -29,7 +28,6 @@ module.exports = function() {
 		} else {
 			console.log(chalk.black.bgWhite('Application loaded using the "' + process.env.NODE_ENV + '" environment configuration'));
 		}
-		console.log('\x1b[0m');
 	});
 
 	/**
