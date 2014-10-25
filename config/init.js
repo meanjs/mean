@@ -29,11 +29,5 @@ module.exports = function() {
 			console.log(chalk.black.bgWhite('Application loaded using the "' + process.env.NODE_ENV + '" environment configuration'));
 		}
 	});
-
-	/**
-	 * Add our server node extensions
-	 */
-	require.extensions['.server.controller.js'] = require.extensions['.js'];
-	require.extensions['.server.model.js'] = require.extensions['.js'];
-	require.extensions['.server.routes.js'] = require.extensions['.js'];
+	
 };
