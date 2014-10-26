@@ -13,7 +13,9 @@ angular.module('qas').controller('QasController', ['$scope','$modal', '$statePar
         $scope.difficultyDropdown = qasInitService.difficultyDropdown();
 
         $scope.qa = qasInitService.init();
-       // Create and validate qa entries
+
+        var qname;
+// Create and validate qa entries
         $scope.create = function () {
             var qa = new Qas({
                 question: this.question,
@@ -123,12 +125,13 @@ angular.module('qas').controller('QasController', ['$scope','$modal', '$statePar
                 $scope.qa = qa;
             });
         };
-        $scope.findQuizzesOne = function () {
-            Quizzes.get({
-                quizId: $stateParams.quizId
-            }, function (quiz) {
-                $scope.quiz = quiz;
-            });
+        $scope.findQuizzesOne = function (quiz) {
+            $scope.quiz = quiz;
+            $scope.qname = quiz.name;
+            qname = quiz.name;
+
+            console.log(quiz.name);
+            console.log(quiz);
         };
 
         $scope.deleteChoice = function (ev) {

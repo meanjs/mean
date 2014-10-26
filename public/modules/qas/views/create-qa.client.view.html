@@ -1,9 +1,9 @@
-<section data-ng-controller="QasController" data-ng-init="findQuizzesOne">
+<section data-ng-controller="QasController">
     <div class="page-header">
         <h1>New Big QA</h1>
-        <h2>{{qaQuizName}} </h2>
+        <h2>{{qname}} </h2>
     </div>
-
+    <h2>{{quiz.name}}</h2>
     <select ng-model="qd" ng-options=" qp1.name for qp1 in quiz.name" data-style="btn-primary" bs-select>
         <option value=""> Quiz
     </select>{{qd.label}}
