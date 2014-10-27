@@ -1,9 +1,9 @@
 'use strict';
 
 // Qas controller...
-angular.module('qas').controller('QasController', ['$scope','$modal', '$stateParams', '$location', 'Authentication',
+angular.module('qas').controller('QasController', ['$scope','$rootScope','$modal', '$stateParams', '$location', 'Authentication',
     'Qas','Quizzes', 'CalculatorService', 'MathService', 'qasInitService',
-    function ($scope, $modal, $stateParams, $location, Authentication, Qas,Quizzes, CalculatorService, MathService, qasInitService) {
+    function ($scope, $rootScope, $modal, $stateParams, $location, Authentication, Qas,Quizzes, CalculatorService, MathService, qasInitService) {
         $scope.authentication = Authentication;
 //Test of Calculator and Math Service
         $scope.doit = CalculatorService.cce(77);
@@ -123,12 +123,12 @@ angular.module('qas').controller('QasController', ['$scope','$modal', '$statePar
                 $scope.qa = qa;
             });
         };
-        $scope.findQuizzesOne = function () {
-            Quizzes.get({
-                quizId: $stateParams.quizId
-            }, function (quiz) {
-                $scope.quiz = quiz;
-            });
+        $scope.findQuizzesOne = function (quiz) {
+            $scope.quiz = quiz;
+
+
+            $rootScope.qname = quiz.name;
+            console.log($rootScope.qname);
         };
 
         $scope.deleteChoice = function (ev) {
