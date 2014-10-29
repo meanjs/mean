@@ -1,0 +1,8 @@
+applications:
+- name: mean
+  host: mean-${random-word}
+  memory: 128M
+  services:
+  - mean-mongo
+  env:
+    NODE_ENV: production

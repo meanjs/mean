@@ -57,7 +57,8 @@
     "serve-favicon": "^2.3.0",
     "socket.io": "^1.3.5",
     "swig": "^1.4.2",
-    "validator": "^3.41.2"
+    "validator": "^3.41.2",
+    "cfenv": "~1.0.0"
   },
   "devDependencies": {
     "grunt-concurrent": "^2.0.0",
