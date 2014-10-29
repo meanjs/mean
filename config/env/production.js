@@ -1,7 +1,12 @@
 'use strict';
 
+var cfenv = require('cfenv'),
+    appEnv = cfenv.getAppEnv(),
+    cfMongoUrl = appEnv.getService('mean-mongo') ? 
+    appEnv.getService('mean-mongo').credentials.uri : undefined;
+
 module.exports = {
-	db: process.env.MONGOHQ_URL || process.env.MONGOLAB_URI || 'mongodb://' + (process.env.DB_1_PORT_27017_TCP_ADDR || 'localhost') + '/mean',
+	db: cfMongoUrl || process.env.MONGOHQ_URL || process.env.MONGOLAB_URI || 'mongodb://' + (process.env.DB_1_PORT_27017_TCP_ADDR || 'localhost') + '/mean',
 	assets: {
 		lib: {
 			css: [
