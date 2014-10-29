@@ -4,7 +4,8 @@
  */
 var init = require('./config/init')(),
 	config = require('./config/config'),
-	mongoose = require('mongoose');
+	mongoose = require('mongoose'),
+	chalk = require('chalk');
 
 /**
  * Main application entry file.
@@ -14,8 +15,8 @@ var init = require('./config/init')(),
 // Bootstrap db connection
 var db = mongoose.connect(config.db, function(err) {
 	if (err) {
-		console.error('\x1b[31m', 'Could not connect to MongoDB!');
-		console.log(err);
+		console.error(chalk.red('Could not connect to MongoDB!'));
+		console.log(chalk.red(err));
 	}
 });
 

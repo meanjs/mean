@@ -4,7 +4,7 @@
  * Module dependencies.
  */
 var _ = require('lodash'),
-	errorHandler = require('../errors'),
+	errorHandler = require('../errors.server.controller'),
 	mongoose = require('mongoose'),
 	passport = require('passport'),
 	User = mongoose.model('User'),
@@ -138,7 +138,7 @@ exports.reset = function(req, res, next) {
 										res.status(400).send(err);
 									} else {
 										// Return authenticated user 
-										res.jsonp(user);
+										res.json(user);
 
 										done(err, user);
 									}
