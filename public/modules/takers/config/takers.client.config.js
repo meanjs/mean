@@ -8,5 +8,6 @@ angular.module('takers').run(['Menus',
 		Menus.addSubMenuItem('topbar', 'takers', 'List Takers', 'takers');
         Menus.addSubMenuItem('topbar', 'takers', 'New Taker', 'takers/create');
         Menus.addSubMenuItem('topbar', 'takers', 'Take', 'takers/');
+		Menus.addSubMenuItem('topbar', 'takers', 'List Quizzes', 'listTakersQuizzes');
 	}
 ]);

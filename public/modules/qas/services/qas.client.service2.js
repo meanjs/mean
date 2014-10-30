@@ -6,6 +6,15 @@
 //Qas service used to communicate Qas REST endpoints
 angular.module('qas')
     .service('qasInitService', [ function () {
+        var data;
+        this.saveSelectedQuiz = function (item){
+            data = item
+            //console.log("service data",data);
+          return;
+        };
+        this.getSelectedQuiz = function () {
+        return data;
+        };
 
         this.typeDropdown = function () {
             return [

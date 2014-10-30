@@ -22,6 +22,11 @@ angular.module('takers').config(['$stateProvider',
 		state('editTaker', {
 			url: '/takers/:takerId/edit',
 			templateUrl: 'modules/takers/views/edit-taker.client.view.html'
+		}).
+		state('listTakersQuizzes', {
+			url: '/listTakersQuizzes',
+			templateUrl: 'modules/takers/views/listquizzes-takers.client.view.html'
 		});
+
 	}
 ]);

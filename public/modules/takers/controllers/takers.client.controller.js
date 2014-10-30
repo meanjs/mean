@@ -1,20 +1,20 @@
 'use strict';
 
-angular.module('takers').controller('TakersController', ['$scope', '$stateParams', '$location', 'Authentication', 'Articles',
-    function($scope, $stateParams, $location, Authentication, Qas, Takers) {
+angular.module('takers').controller('TakersController', ['$scope', '$stateParams', '$location', 'Authentication', 'Qas', 'Quizzes','Takers',
+    function($scope, $stateParams, $location, Authentication, Qas, Quizzes, Takers) {
         $scope.authentication = Authentication;
 		// Takers controller logic
-        var taker = new Takers();
-        //taker.qa = qas;
-        $scope.taker = new Takers({
-            quizNumber: '0',
-            trialNumber: '0',
-            trialOptions: '',
-            results: [{ questionViewed: false, questionAnswered: false,
-                questionNumber: '', answer:[{selection: '0', answer: '0'}]}]
-
-        });
-        console.log('From ScopeTaker', $scope.taker);
+        //var taker = new Takers();
+        ////taker.qa = qas;
+        //$scope.taker = new Takers({
+         //   quizNumber: '0',
+         //   trialNumber: '0',
+         //   trialOptions: '',
+         //   results: [{ questionViewed: false, questionAnswered: false,
+         //       questionNumber: '', answer:[{selection: '0', answer: '0'}]}]
+        //
+        //});
+        //console.log('From ScopeTaker', $scope.taker);
         $scope.find = function() {
             Qas.query(function(qas) {
                 $scope.qas = qas;

@@ -12,8 +12,11 @@ angular.module('qas').controller('QasController', ['$scope','$rootScope','$modal
         $scope.typeDropdown = qasInitService.typeDropdown();
         $scope.difficultyDropdown = qasInitService.difficultyDropdown();
 
+        var selectedQuiz = qasInitService.getSelectedQuiz();
+        //console.log('call to qasServiceQuiz',fixedQuiz);
+
         $scope.qa = qasInitService.init();
-       // Create and validate qa entries
+// Create and validate qa entries
         $scope.create = function () {
             var qa = new Qas({
                 question: this.question,
@@ -29,19 +32,21 @@ angular.module('qas').controller('QasController', ['$scope','$rootScope','$modal
                 ],
                 hint: this.hint,
                 type: this.td,      //doesn't work
-                difficulty: this.difficulty,
+                difficulty: this.difficulty,  //doesn't work
                 hintOn: this.hintOn,
                 timeOn: this.timeOn,
                 fifty50On: this.fifty50On,
                 randomizeQuestionsOn: this.randomizeQuestionsOn,
-                randomizeAnswersOn: this.randomizeAnswersOn
+                randomizeAnswersOn: this.randomizeAnswersOn,
+                questionNumber: this.questionNumber
             });
 
 //  Hack to load these variables.  Not handled above???
             qa.choices = $scope.qa.choices;
             qa.difficulty = $scope.dd.label;
             qa.type = $scope.td.label;
-
+            qa.qaQuizName = selectedQuiz[0];
+            qa.qaQuizId = selectedQuiz[1];
             // Check that question was entered
             if (qa.question.length > 0) {
                 var choiceCount = 0;
@@ -124,7 +129,9 @@ angular.module('qas').controller('QasController', ['$scope','$rootScope','$modal
             });
         };
         $scope.findQuizzesOne = function (quiz) {
-            $scope.quiz = quiz;
+           // $scope.quiz = quiz;
+            var data = [quiz.name,quiz._id];
+            qasInitService.saveSelectedQuiz(data);
 
 
             $rootScope.qname = quiz.name;

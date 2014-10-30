@@ -82,7 +82,7 @@ var QaSchema = new Schema({
 	
 	},
     qaQuizId: {
-        type: Number,
+        type: String,
         default: 999
     },
     qaQuizName: {

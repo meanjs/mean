@@ -1,7 +1,8 @@
-<section data-ng-controller="QasController" data-ng-init="findQuizzesOne">
+<section data-ng-controller="QasController">
     <div class="page-header">
         <h1>New Big QA</h1>
         <h2>{{qname}} </h2>
+        <h2>{{fixedQuiz}}</h2>
     </div>
 
     <select ng-model="qd" ng-options=" qp1.name for qp1 in quiz.name" data-style="btn-primary" bs-select>
@@ -100,7 +101,7 @@
                 <input type='checkbox' data-ng-model='fifty50On'>50/50
                 <input type='checkbox' data-ng-model='randomizeAnswersOn'>Randomize Answers
                 <input type='checkbox' data-ng-model='randomizeQuestionsOn'>Randomize Questions
-                <input type="text" data-ng-model="qa.questionNumber" id="title" class="form-control"
+                <input type="text" data-ng-model="questionNumber" id="title" class="form-control"
                        placeholder="Question Number" required>
 
                 <div class="form-group">
