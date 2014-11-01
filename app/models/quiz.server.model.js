@@ -38,7 +38,9 @@ var QuizSchema = new Schema({
         type: String,
         default: '',
         trim: true
-    }
+    },
+    qa: [{ type: Schema.ObjectId, ref: 'Qa' }]
+
 });
 
 mongoose.model('Quiz', QuizSchema);

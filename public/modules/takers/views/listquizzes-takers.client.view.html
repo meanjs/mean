@@ -8,7 +8,7 @@
         <div data-ng-repeat="quiz in quizzes" data-ng-click="quizId(qa._Id)" class="list-group-item">
             <small class="list-group-item-text">{{quiz.created | date:'medium'}} / {{quiz.user.displayName}}</small>
             <h4 class="list-group-item-heading">{{quiz.name}}
-                <a href="/#!/qas/create" ng-click ="findQuizzesOne(quiz)"> select</a></h4>
+                <a href="/#!/takers" ng-click =""> select</a></h4>
             <img ng-src="{{quiz.imageURL  }}" height="50" >
 
         </div>

@@ -2,8 +2,8 @@
 
 // Quizzes controller
 angular.module('quizzes').controller('QuizzesController', ['$scope', '$stateParams', '$location',
-    'Authentication', 'Quizzes','qasInitService',
-	function($scope, $stateParams, $location, Authentication, Quizzes, qasInitService ) {
+    'Authentication', 'Quizzes','Qas','qasInitService',
+	function($scope, $stateParams, $location, Authentication, Quizzes,Qas, qasInitService ) {
 		$scope.authentication = Authentication;
 
 		// Create new Quiz
@@ -62,11 +62,17 @@ angular.module('quizzes').controller('QuizzesController', ['$scope', '$statePara
 			$scope.quizzes = Quizzes.query();
 		};
 
+		// Find a list of Questions
+		$scope.findQas = function() {
+			$scope.qas = Qas.query();
+		};
+
 		// Find existing Quiz
 		$scope.findOne = function() {
 			$scope.quiz = Quizzes.get({ 
 				quizId: $stateParams.quizId
 			});
+			console.log("from quuizctrl.findOne",$scope.quiz);
 		};
 	}
 ]);

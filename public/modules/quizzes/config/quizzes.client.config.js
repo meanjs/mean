@@ -6,6 +6,7 @@ angular.module('quizzes').run(['Menus',
 		// Set top bar menu items
 		Menus.addMenuItem('topbar', 'Quizzes', 'quizzes', 'dropdown', '/quizzes(/create)?');
 		Menus.addSubMenuItem('topbar', 'quizzes', 'List Quizzes', 'quizzes');
-		Menus.addSubMenuItem('topbar', 'quizzes', 'New Quiz', 'quizzes/create');
+		Menus.addSubMenuItem('topbar', 'quizzes', 'Create Quiz', 'quizzes/create');
+
 	}
 ]);

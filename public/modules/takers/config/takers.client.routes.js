@@ -5,10 +5,15 @@ angular.module('takers').config(['$stateProvider',
 	function($stateProvider) {
 		// Takers state routing
 		$stateProvider.
-		state('listTakers', {
-			url: '/takers',
-			templateUrl: 'modules/takers/views/take.html'
-		}).
+			state('listTakers', {
+				url: '/takers',
+				templateUrl: 'modules/takers/views/take.html'
+			}).
+
+			state('takers', {
+				url: '/takers',
+				templateUrl: 'modules/takers/views/take.html'
+			}).
 
 		state('createTaker', {
 			url: '/takers/create',
