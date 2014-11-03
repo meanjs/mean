@@ -5,4 +5,4 @@ applications:
   services:
   - mean-mongo
   env:
-    NODE_ENV: production
+    NODE_ENV: cloud-foundry
