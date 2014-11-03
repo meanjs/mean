@@ -152,6 +152,79 @@ $
 $ docker run -p 3000:3000 -p 35729:35729 -v /Users/mdl/workspace/mean-stack/mean/public:/home/mean/public -v /Users/mdl/workspace/mean-stack/mean/app:/home/mean/app --link db:db_1 mean
 ```
 
+## Deploying To Cloud Foundry
+
+Cloud Foundry is an open source platform-as-a-service (PaaS).  The MEANJS project
+can easily be deployed to any Cloud Foundry instance.  The easiest way to deploy the
+MEANJS project to Cloud Foundry is to use a public hosted instance.  The two most popular
+instances are [Pivotal Web Services](https://run.pivotal.io/) and 
+[IBM Bluemix](https://bluemix.net).  Both provide free trials and support pay-as-you-go models
+for hosting applications in the cloud.  After you have an account follow the below steps to 
+deploy MEANJS.
+
+* Install the [Cloud Foundry command line tools](http://docs.cloudfoundry.org/devguide/installcf/install-go-cli.html).
+* Now you need to log into Cloud Foundry from the Cloud Foundry command line.
+  *  If you are using Pivotal Web Services run `$ cf login -a api.run.pivotal.io`.
+  *  If you are using IBM Bluemix run `$ cf login -a api.ng.bluemix.net`.
+* Create a Mongo DB service, IBM Bluemix and Pivotal Web Services offer a free MongoLabs service.
+  *  `$ cf create-service mongolab sandbox mean-mongo`
+* Clone the GitHub repo for MEANJS if you have not already done so
+  * `$ git clone https://github.com/meanjs/mean.git && cd mean`
+* Deploy MEANJS to Cloud Foundry
+  * `$ cf push`
+
+After `cf push` completes you will see the URL to your running MEANJS application 
+(your URL will be different).
+
+    requested state: started
+    instances: 1/1
+    usage: 128M x 1 instances
+    urls: mean-humbler-frappa.mybluemix.net
+
+Open your browser and go to that URL and your should see your MEANJS app running!
+
+### Configuring Social Services
+
+The MEANJS application allows you to login via a number of social services.  In other
+deployments of MEANJS you need to configure environment variables with the various
+keys and secrets to enable these social services.  While this is possible in Cloud
+Foundry, it is not the preferred method.  Credentials like this are usually surfaced
+through services an application can bind to.  For this reason, when you deploy
+MEANJS to Cloud Foundry you must configure and bind services to your application
+in order to login with the various social services.  To do this we will use
+what is called 
+[user provided services](http://docs.cloudfoundry.org/devguide/services/user-provided.html).
+
+Once your application is deployed to Cloud Foundry run the following command for the social
+services you would like to use.  Make sure you insert the correct credentials for the service.
+
+#### Facebook
+`$ cf cups mean-facebook -p '{"id":"facebookId","secret":"facebookSecret"}'`
+`$ cf bind-service mean mean-facebook`
+
+#### Twitter
+`$ cf cups mean-twitter -p '{"key":"twitterKey","secret":"twitterSecret"}'`
+`$ cf bind-service mean mean-twitter`
+
+#### Google
+`$ cf cups mean-google -p '{"id":"googleId","secret":"googleSecret"}'`
+`$ cf bind-service mean mean-google`
+
+#### LinkedIn
+`$ cf cups mean-linkedin -p '{"id":"linkedinId","secret":"linkedinSecret"}'`
+`$ cf bind-service mean mean-linkedin`
+
+#### GitHub
+`$ cf cups mean-github -p '{"id":"githubId","secret":"githubSecret"}'`
+`$ cf bind-service mean mean-github`
+
+#### Email
+`$ cf cups mean-mail -p '{"from":"fromEmail","service":"emailService","username":"emailServiceUsername","password":"emailServicePassword"}'`
+`$ cf bind-service mean mean-mail`
+
+After you have bound the services your want to your MEANJS application run
+`$ cf restage mean` to restage your application and your social services should now work.
+
 ## Getting Started With MEAN.JS
 You have your application running, but there is a lot of stuff to understand. We recommend you go over the [Official Documentation](http://meanjs.org/docs.html).
 In the docs we'll try to explain both general concepts of MEAN components and give you some guidelines to help you improve your development process. We tried covering as many aspects as possible, and will keep it updated by your request. You can also help us develop and improve the documentation by checking out the *gh-pages* branch of this repository.
