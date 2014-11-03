@@ -3,9 +3,9 @@
 		<h1>New Article</h1>
 	</div>
 	<div class="col-md-12">
-		<form name="articleForm" class="form-horizontal" data-ng-submit="create()" novalidate>
+		<form name="articleForm" class="form-horizontal" data-ng-submit="create(articleForm.$valid)" novalidate>
 			<fieldset>
-				<div class="form-group" ng-class="{ 'has-error': articleForm.title.$dirty && articleForm.title.$invalid }">
+				<div class="form-group" ng-class="{ 'has-error': (articleForm.title.$dirty || submitted) && articleForm.title.$invalid }">
 					<label class="control-label" for="title">Title</label>
 					<div class="controls">
 						<input name="title" type="text" data-ng-model="title" id="title" class="form-control" placeholder="Title" required>

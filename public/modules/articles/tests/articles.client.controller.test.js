@@ -114,7 +114,7 @@
 			$httpBackend.expectPOST('articles', sampleArticlePostData).respond(sampleArticleResponse);
 
 			// Run controller functionality
-			scope.create();
+			scope.create(true);
 			$httpBackend.flush();
 
 			// Test form inputs are reset
@@ -140,7 +140,7 @@
 			$httpBackend.expectPUT(/articles\/([0-9a-fA-F]{24})$/).respond();
 
 			// Run controller functionality
-			scope.update();
+			scope.update(true);
 			$httpBackend.flush();
 
 			// Test URL location to new object
