@@ -82,7 +82,7 @@
 			$stateParams.articleId = '525a8422f6d0f87f0e407a33';
 
 			// Set GET response
-			$httpBackend.expectGET(/api/articles\/([0-9a-fA-F]{24})$/).respond(sampleArticle);
+			$httpBackend.expectGET(/api\/articles\/([0-9a-fA-F]{24})$/).respond(sampleArticle);
 
 			// Run controller functionality
 			scope.findOne();
@@ -137,7 +137,7 @@
 			scope.article = sampleArticlePutData;
 
 			// Set PUT response
-			$httpBackend.expectPUT(/api/articles\/([0-9a-fA-F]{24})$/).respond();
+			$httpBackend.expectPUT(/api\/articles\/([0-9a-fA-F]{24})$/).respond();
 
 			// Run controller functionality
 			scope.update();
@@ -157,7 +157,7 @@
 			scope.articles = [sampleArticle];
 
 			// Set expected DELETE response
-			$httpBackend.expectDELETE(/api/articles\/([0-9a-fA-F]{24})$/).respond(204);
+			$httpBackend.expectDELETE(/api\/articles\/([0-9a-fA-F]{24})$/).respond(204);
 
 			// Run controller functionality
 			scope.remove(sampleArticle);
