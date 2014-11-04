@@ -5,31 +5,45 @@
     <div class="col-md-12">
         <form class="form-horizontal" data-ng-submit="update()" novalidate>
             <fieldset>
-                <div class="form-group">
+
+                    <div class="col-md-6 form-group">
                     <label class="control-label" for="name">Name</label>
                     <div class="controls">
                         <input type="text" data-ng-model="quiz.name" id="name" class="form-control" placeholder="Name" required>
-
+                        <label class="control-label" for="name">Category</label>
                         <input type="text" data-ng-model="quiz.category" id="category" class="form-control" placeholder="Category" >
+                        <label class="control-label" for="name">Keywords</label>
                         <input type="text" data-ng-model="quiz.keyWords" id="keyword" class="form-control" placeholder="Keyword" >
+                        <label class="control-label" for="name">Number</label>
                         <input type="text" data-ng-model="quiz.quizNumber" id="number" class="form-control" placeholder="Number" required>
                     </div>
                 </div>
+                <br/>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                    <li ng-repeat="dp2 in difficultyDropdown">
+                        <a>{{dp2.label}}</a>
+                    </li>
+                </ul>
+                <input type='checkbox' data-ng-model='qa.hintOn'>Allow Hint</input>
+                <input type='checkbox' data-ng-model='qa.timeOn'>Timed</input></br>
+                <input type='checkbox' data-ng-model='qa.fifty50On'>50/50</input>
+                <input type='checkbox' data-ng-model='qa.randomizeAnswersOn'>Randomize Answers</input></br>
+                <input type='checkbox' data-ng-model='qa.randomizeQuestionsOn'>Randomize Questions</input>
                 <div class="form-group">
                     <input type="submit" value="Update" class="btn btn-default">
                 </div>
                 <div data-ng-show="error" class="text-danger">
 					<strong data-ng-bind="error"></strong>
 				</div>
-                <div class="list-group">
-                    <a data-ng-repeat="qa in quiz.qa"  class="list-group-item">
+
+
+                    <div class="list-group">
+                    <a data-ng-repeat="qa in qas"  class="list-group-item">
                         <small class="list-group-item-text">
-                            Posted on
+                            <input type='checkbox' data-ng-model='qa.choices.correctAnswer'>
                             <span data-ng-bind="qa.question | date:'medium'"></span>
-                            by
                             <span data-ng-bind="qa.user.displayName"></span>
                         </small>
-                        <h4 class="list-group-item-heading" data-ng-bind="quiz.name"></h4>
                     </a>
                 </div>
             </fieldset>
