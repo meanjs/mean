@@ -19,11 +19,9 @@
                     </div>
                 </div>
                 <br/>
-                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                    <li ng-repeat="dp2 in difficultyDropdown">
-                        <a>{{dp2.label}}</a>
-                    </li>
-                </ul>
+                <select ng-model="dd" ng-options=" dp2.label for dp2 in difficultyDropdown" data-style="btn-primary" bs-select>
+                    <option value=""> Difficulty
+                </select>{{dd.label}}
                 <input type='checkbox' data-ng-model='qa.hintOn'>Allow Hint</input>
                 <input type='checkbox' data-ng-model='qa.timeOn'>Timed</input></br>
                 <input type='checkbox' data-ng-model='qa.fifty50On'>50/50</input>

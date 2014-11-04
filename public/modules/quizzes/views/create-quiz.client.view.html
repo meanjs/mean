@@ -5,7 +5,7 @@
     <div class="col-md-12">
         <form class="form-horizontal" data-ng-submit="create()" novalidate>
             <fieldset>
-                <div class="form-group">
+                <div class="col-md-6 form-group">
                     <label class="control-label" for="name">Name</label>
                     <div class="controls">
                         <input type="text" data-ng-model="name" id="name" class="form-control" placeholder="Name" required>
@@ -17,7 +17,19 @@
                         <input type="text" data-ng-model="quizNumber" id="number" class="form-control" placeholder="Number" required>
 
                     </div>
+                    </div>
+                <div class="col-m-6">
+                    <br/>
+                    <select ng-model="dd" ng-options=" dp2.label for dp2 in difficultyDropdown" data-style="btn-primary" bs-select>
+                        <option value=""> Difficulty
+                    </select>{{dd.label}}
+                    <input type='checkbox' data-ng-model='qa.hintOn'>Allow Hint</input>
+                    <input type='checkbox' data-ng-model='qa.timeOn'>Timed</input></br>
+                    <input type='checkbox' data-ng-model='qa.fifty50On'>50/50</input>
+                    <input type='checkbox' data-ng-model='qa.randomizeAnswersOn'>Randomize Answers</input></br>
+                    <input type='checkbox' data-ng-model='qa.randomizeQuestionsOn'>Randomize Questions</input>
                 </div>
+
                 <div class="form-group">
                     <input type="submit" class="btn btn-default">
                 </div>

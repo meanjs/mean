@@ -39,6 +39,32 @@ var QuizSchema = new Schema({
         default: '',
         trim: true
     },
+    hintOn: {
+        type: Boolean,
+        default: false,
+        trim: true
+    },
+    timeOn: {
+        type: Boolean,
+        default: false,
+        trim: true
+    },
+    fifty50On: {
+        type: Boolean,
+        default: false,
+        trim: true
+    },
+    randomizeQuestionsOn: {
+        type: Boolean,
+        default: false,
+        trim: true
+    },
+    randomizeAnswersOn: {
+        type: Boolean,
+        default: false,
+        trim: true
+
+    },
     qa: [{ type: Schema.ObjectId, ref: 'Qa' }]
 
 });

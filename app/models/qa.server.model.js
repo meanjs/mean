@@ -11,7 +11,10 @@ var mongoose = require('mongoose'),
 //
 var AnswerSchema = new mongoose.Schema({
 	text: String,
-	selectedAnswer: Boolean});
+	selectedAnswer: {
+		type: Boolean,
+		default: false
+	}});
 /**
  * Qa Schema
  */
@@ -20,10 +23,15 @@ var QaSchema = new Schema({
 		type: Date,
 		default: Date.now
 	},
-	question: {
-	    type: String,
-	    default: '',
-	    trim: true
+	selected: {
+		type: Boolean,
+		default: false
+	},
+		question: {
+			type: String,
+			default: '',
+			trim: true
+
 	},
 	questionNumber: {
 		type: String,
