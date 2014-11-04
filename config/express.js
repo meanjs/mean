@@ -5,7 +5,8 @@
  */
 var fs = require('fs'),
 	http = require('http'),
-  express = require('express'),
+	https = require('https'),
+	express = require('express'),
 	morgan = require('morgan'),
 	bodyParser = require('body-parser'),
 	session = require('express-session'),
@@ -38,7 +39,6 @@ module.exports = function(db) {
 	app.locals.facebookAppId = config.facebook.clientID;
 	app.locals.jsFiles = config.getJavaScriptAssets();
 	app.locals.cssFiles = config.getCSSAssets();
-	app.locals.secure = config.secure;
 
 	// Passing the request url to environment locals
 	app.use(function(req, res, next) {
@@ -140,17 +140,24 @@ module.exports = function(db) {
 		});
 	});
 
-	if (app.locals.secure) {
+	if (process.env.NODE_ENV === 'secure') {
+		// Log SSL usage
 		console.log('Securely using https protocol');
-		var https = require('https'),
-		privateKey  = fs.readFileSync('./config/sslcert/key.pem', 'utf8'),
-		certificate = fs.readFileSync('./config/sslcert/cert.pem', 'utf8'),
-		credentials = {key: privateKey, cert: certificate},
-		httpsServer = https.createServer(credentials, app);
+
+		// Load SSL key and certificate
+		var privateKey = fs.readFileSync('./config/sslcerts/key.pem', 'utf8');
+		var certificate = fs.readFileSync('./config/sslcerts/cert.pem', 'utf8');
+
+		// Create HTTPS Server
+		var httpsServer = https.createServer({
+			key: privateKey,
+			cert: certificate
+		}, app);
+
+		// Return HTTPS server instance
 		return httpsServer;
-	} else {
-		console.log('Insecurely using http protocol');
-		var httpServer = http.createServer(app);
-		return httpServer;
 	}
+
+	// Return Express server instance
+	return app;
 };

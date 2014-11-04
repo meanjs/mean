@@ -105,13 +105,13 @@ module.exports = function(grunt) {
 				}
 			}
 		},
-        ngAnnotate: {
-            production: {
-                files: {
-                    'public/dist/application.js': '<%= applicationJavaScriptFiles %>'
-                }
-            }
-        },
+		ngAnnotate: {
+			production: {
+				files: {
+					'public/dist/application.js': '<%= applicationJavaScriptFiles %>'
+				}
+			}
+		},
 		concurrent: {
 			default: ['nodemon', 'watch'],
 			debug: ['nodemon', 'watch', 'node-inspector'],
@@ -123,6 +123,9 @@ module.exports = function(grunt) {
 		env: {
 			test: {
 				NODE_ENV: 'test'
+			},
+			secure: {
+				NODE_ENV: 'secure'
 			}
 		},
 		mochaTest: {
@@ -159,6 +162,9 @@ module.exports = function(grunt) {
 
 	// Debug task.
 	grunt.registerTask('debug', ['lint', 'concurrent:debug']);
+
+	// Secure task(s).
+	grunt.registerTask('secure', ['env:secure', 'lint', 'concurrent:default']);
 
 	// Lint task(s).
 	grunt.registerTask('lint', ['jshint', 'csslint']);
