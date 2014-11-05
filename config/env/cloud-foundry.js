@@ -1,3 +1,5 @@
+'use strict';
+
 var cfenv = require('cfenv'),
     appEnv = cfenv.getAppEnv(),
     cfMongoUrl = appEnv.getService('mean-mongo') ? 
@@ -46,4 +48,4 @@ module.exports = {
 			}
 		}
 	}
-}
+};
