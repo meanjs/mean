@@ -20,10 +20,14 @@ module.exports = {
 	getLogOptions: function() {
 		var options = {};
 
-		if ('stream' in config.log.options) {
-			options = {
-				stream: fs.createWriteStream(process.cwd() + '/' + config.log.options.stream, {flags: 'a'})
-			};
+		try {
+			if ('stream' in config.log.options) {
+				options = {
+					stream: fs.createWriteStream(process.cwd() + '/' + config.log.options.stream, {flags: 'a'})
+				};
+			}
+		} catch (e) {
+			options = {};
 		}
 
 		return options;
