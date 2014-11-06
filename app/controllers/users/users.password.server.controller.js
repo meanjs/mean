@@ -174,7 +174,7 @@ exports.reset = function(req, res, next) {
 				subject: 'Your password has been changed',
 				html: emailHTML
 			};
-			
+
 			smtpTransport.sendMail(mailOptions, function(err) {
 				done(err, 'done');
 			});

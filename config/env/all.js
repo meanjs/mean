@@ -7,7 +7,6 @@ module.exports = {
 		keywords: 'mongodb, express, angularjs, node.js, mongoose, passport'
 	},
 	port: process.env.PORT || 3000,
-	secure: process.env.SECURE || false,
 	templateEngine: 'swig',
 	sessionSecret: 'MEAN',
 	sessionCollection: 'sessions',

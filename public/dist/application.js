@@ -53,7 +53,6 @@ ApplicationConfiguration.registerModule('core');
 
 // Use Applicaion configuration module to register a new module
 ApplicationConfiguration.registerModule('users');
-
 'use strict';
 
 // Configuring the Articles module
@@ -566,10 +565,10 @@ angular.module('users').controller('SettingsController', ['$scope', '$http', '$l
 
 		// Update a user profile
 		$scope.updateUserProfile = function(isValid) {
-			if (isValid){
+			if (isValid) {
 				$scope.success = $scope.error = null;
 				var user = new Users($scope.user);
-	
+
 				user.$update(function(response) {
 					$scope.success = true;
 					Authentication.user = response;
@@ -595,12 +594,10 @@ angular.module('users').controller('SettingsController', ['$scope', '$http', '$l
 		};
 	}
 ]);
-
 'use strict';
 
 // Authentication service for user variables
 angular.module('users').factory('Authentication', [
-
 	function() {
 		var _this = this;
 
