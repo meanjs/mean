@@ -2,6 +2,10 @@
 
 module.exports = {
 	db: 'mongodb://localhost/mean-dev',
+	log: {
+		// Can specify one of 'combined', 'common', 'dev', 'short', 'tiny'
+		format: 'dev'
+	},
 	app: {
 		title: 'MEAN.JS - Development Environment'
 	},
