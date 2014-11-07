@@ -8,6 +8,7 @@ var fs = require('fs'),
 	https = require('https'),
 	express = require('express'),
 	morgan = require('morgan'),
+	logger = require('./logger'),
 	bodyParser = require('body-parser'),
 	session = require('express-session'),
 	compress = require('compression'),
@@ -64,11 +65,11 @@ module.exports = function(db) {
 	app.set('view engine', 'server.view.html');
 	app.set('views', './app/views');
 
+	// Enable logger (morgan)
+	app.use(morgan(logger.getLogFormat(), logger.getLogOptions()));
+
 	// Environment dependent middleware
 	if (process.env.NODE_ENV === 'development') {
-		// Enable logger (morgan)
-		app.use(morgan('dev'));
-
 		// Disable views cache
 		app.set('view cache', false);
 	} else if (process.env.NODE_ENV === 'production') {
