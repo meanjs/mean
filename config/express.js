@@ -94,7 +94,9 @@ module.exports = function(db) {
 		store: new mongoStore({
 			db: db.connection.db,
 			collection: config.sessionCollection
-		})
+		}),
+		cookie: config.sessionCookie,
+		name: config.sessionName
 	}));
 
 	// use passport session
