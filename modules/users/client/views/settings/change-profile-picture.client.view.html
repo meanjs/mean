@@ -1,0 +1,26 @@
+<section class="row" data-ng-controller="ChangeProfilePictureController">
+	<div class="col-xs-offset-1 col-xs-10 col-md-offset-3 col-md-4">
+		<form class="signin form-horizontal">
+			<fieldset>
+				<div class="form-group text-center">
+					<img data-ng-src="{{imageURL}}" alt="{{user.displayName}}" class="img-thumbnail user-profile-picture">
+				</div>
+				<div class="text-center form-group" data-ng-hide="uploader.queue.length">
+					<span class="btn btn-default btn-file">
+    					Select Image <input type="file" nv-file-select uploader="uploader">
+					</span>
+				</div>
+				<div class="text-center form-group" data-ng-show="uploader.queue.length">
+					<button class="btn btn-primary" data-ng-click="uploadProfilePicture();">Upload</button>
+					<button class="btn btn-default" data-ng-click="cancelUpload();">Cancel</button>
+				</div>
+				<div data-ng-show="success" class="text-center text-success">
+					<strong>Profile Picture Changed Successfully</strong>
+				</div>
+				<div data-ng-show="error" class="text-center text-danger">
+					<strong data-ng-bind="error"></strong>
+				</div>
+			</fieldset>
+		</form>
+	</div>
+</section>
