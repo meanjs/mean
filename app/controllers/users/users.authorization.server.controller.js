@@ -35,6 +35,23 @@ exports.requiresLogin = function(req, res, next) {
 };
 
 /**
+ * Forces anonymous users to access routes
+ */
+exports.requiresAnonymous = function(req, res, next) {
+    // If user is authenticated, redirect back to referering URL
+    if (req.isAuthenticated()) {
+        var httpReferrer = req.get('Referrer');
+        if (httpReferrer && httpReferrer.length > 0) {
+            res.redirect(httpReferrer);
+        } else {
+            res.redirect('/');
+        }
+    }
+
+    next();
+};
+
+/**
  * User authorizations routing middleware
  */
 exports.hasAuthorization = function(roles) {
