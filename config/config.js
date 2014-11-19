@@ -41,7 +41,7 @@ module.exports.getGlobbedFiles = function(globPatterns, removeRoot) {
 			}, function(err, files) {
 				if (removeRoot) {
 					files = files.map(function(file) {
-						if (file.indexOf(removeRoot) == 0)
+						if (file.indexOf(removeRoot) === 0)
 							return file.substring(removeRoot.length, file.length);
 						else
 							return file;
