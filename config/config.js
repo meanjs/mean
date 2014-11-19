@@ -41,7 +41,10 @@ module.exports.getGlobbedFiles = function(globPatterns, removeRoot) {
 			}, function(err, files) {
 				if (removeRoot) {
 					files = files.map(function(file) {
-						return file.replace(removeRoot, '');
+						if (file.indexOf(removeRoot) == 0)
+							return file.substring(removeRoot.length, file.length);
+						else
+							return file;
 					});
 				}
 
@@ -57,7 +60,7 @@ module.exports.getGlobbedFiles = function(globPatterns, removeRoot) {
  * Get the modules JavaScript files
  */
 module.exports.getJavaScriptAssets = function(includeTests) {
-	var output = this.getGlobbedFiles(this.assets.lib.js.concat(this.assets.js), 'public/');
+	var output = this.getGlobbedFiles(this.assets.lib.js.concat(this.assets.js), 'public');
 
 	// To include tests
 	if (includeTests) {
@@ -71,6 +74,6 @@ module.exports.getJavaScriptAssets = function(includeTests) {
  * Get the modules CSS files
  */
 module.exports.getCSSAssets = function() {
-	var output = this.getGlobbedFiles(this.assets.lib.css.concat(this.assets.css), 'public/');
+	var output = this.getGlobbedFiles(this.assets.lib.css.concat(this.assets.css), 'public');
 	return output;
 };
