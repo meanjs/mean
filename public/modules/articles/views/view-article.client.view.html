@@ -6,7 +6,7 @@
 		<a class="btn btn-primary" href="/#!/articles/{{article._id}}/edit">
 			<i class="glyphicon glyphicon-edit"></i>
 		</a>
-		<a class="btn btn-danger" data-ng-click="remove();">
+		<a class="btn btn-danger" onclick="return confirm('Are you sure want to remove ?');" data-ng-click="remove();">
 			<i class="glyphicon glyphicon-trash"></i>
 		</a>
 	</div>
