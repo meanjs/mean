@@ -20,6 +20,9 @@ angular.module('articles').controller('ArticlesController', ['$scope', '$statePa
 		};
 
 		$scope.remove = function(article) {
+			if(!confirm('Are you sure want to remove this article ?')){
+                            return false;
+                        }
 			if (article) {
 				article.$remove();
 
