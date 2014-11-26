@@ -31,7 +31,7 @@ module.exports = function(grunt) {
 			clientViews: {
 				files: watchFiles.clientViews,
 				options: {
-					livereload: true,
+					livereload: true
 				}
 			},
 			clientJS: {
@@ -59,7 +59,7 @@ module.exports = function(grunt) {
 		},
 		csslint: {
 			options: {
-				csslintrc: '.csslintrc',
+				csslintrc: '.csslintrc'
 			},
 			all: {
 				src: watchFiles.clientCSS
