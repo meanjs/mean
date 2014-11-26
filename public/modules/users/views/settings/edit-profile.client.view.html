@@ -4,6 +4,9 @@
 		<form name="userForm" data-ng-submit="updateUserProfile(userForm.$valid)" class="signin form-horizontal" autocomplete="off">
 			<fieldset>
 				<div class="form-group">
+					<img gravatar-src="user.email" gravatar-size="195" alt="Gravatar" class="img-responsive center-block">
+				</div>
+				<div class="form-group">
 					<label for="firstName">First Name</label>
 					<input type="text" id="firstName" name="firstName" class="form-control" data-ng-model="user.firstName" placeholder="First Name">
 				</div>

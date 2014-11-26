@@ -11,6 +11,7 @@
 		"angular-bootstrap": "~0.11.2",
 		"angular-bootstrap": "~0.12.0",
 		"angular-ui-utils": "~0.1.1",
-		"angular-ui-router": "~0.2.11" 
+		"angular-ui-router": "~0.2.11",
+		"angular-gravatar": "~0.2.3"
 	}
 }
