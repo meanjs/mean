@@ -25,8 +25,6 @@ module.exports = function() {
 			}
 
 			process.env.NODE_ENV = 'development';
-		} else {
-			console.log(chalk.black.bgWhite('Application loaded using the "' + process.env.NODE_ENV + '" environment configuration'));
 		}
 	});
 
