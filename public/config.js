@@ -15,9 +15,12 @@ var ApplicationConfiguration = (function() {
 		angular.module(applicationModuleName).requires.push(moduleName);
 	};
 
+	var html5Mode = false;
+
 	return {
 		applicationModuleName: applicationModuleName,
 		applicationModuleVendorDependencies: applicationModuleVendorDependencies,
-		registerModule: registerModule
+		registerModule: registerModule,
+		html5Mode: html5Mode
 	};
 })();

@@ -58,7 +58,7 @@ describe('Article CRUD tests', function() {
 				var userId = user.id;
 
 				// Save a new article
-				agent.post('/articles')
+				agent.post('/api/articles')
 					.send(article)
 					.expect(200)
 					.end(function(articleSaveErr, articleSaveRes) {
@@ -66,7 +66,7 @@ describe('Article CRUD tests', function() {
 						if (articleSaveErr) done(articleSaveErr);
 
 						// Get a list of articles
-						agent.get('/articles')
+						agent.get('/api/articles')
 							.end(function(articlesGetErr, articlesGetRes) {
 								// Handle article save error
 								if (articlesGetErr) done(articlesGetErr);
@@ -86,7 +86,7 @@ describe('Article CRUD tests', function() {
 	});
 
 	it('should not be able to save an article if not logged in', function(done) {
-		agent.post('/articles')
+		agent.post('/api/articles')
 			.send(article)
 			.expect(401)
 			.end(function(articleSaveErr, articleSaveRes) {
@@ -110,7 +110,7 @@ describe('Article CRUD tests', function() {
 				var userId = user.id;
 
 				// Save a new article
-				agent.post('/articles')
+				agent.post('/api/articles')
 					.send(article)
 					.expect(400)
 					.end(function(articleSaveErr, articleSaveRes) {
@@ -135,7 +135,7 @@ describe('Article CRUD tests', function() {
 				var userId = user.id;
 
 				// Save a new article
-				agent.post('/articles')
+				agent.post('/api/articles')
 					.send(article)
 					.expect(200)
 					.end(function(articleSaveErr, articleSaveRes) {
@@ -146,7 +146,7 @@ describe('Article CRUD tests', function() {
 						article.title = 'WHY YOU GOTTA BE SO MEAN?';
 
 						// Update an existing article
-						agent.put('/articles/' + articleSaveRes.body._id)
+						agent.put('/api/articles/' + articleSaveRes.body._id)
 							.send(article)
 							.expect(200)
 							.end(function(articleUpdateErr, articleUpdateRes) {
@@ -171,7 +171,7 @@ describe('Article CRUD tests', function() {
 		// Save the article
 		articleObj.save(function() {
 			// Request articles
-			request(app).get('/articles')
+			request(app).get('/api/articles')
 				.end(function(req, res) {
 					// Set assertion
 					res.body.should.be.an.Array.with.lengthOf(1);
@@ -190,7 +190,7 @@ describe('Article CRUD tests', function() {
 
 		// Save the article
 		articleObj.save(function() {
-			request(app).get('/articles/' + articleObj._id)
+			request(app).get('/api/articles/' + articleObj._id)
 				.end(function(req, res) {
 					// Set assertion
 					res.body.should.be.an.Object.with.property('title', article.title);
@@ -213,7 +213,7 @@ describe('Article CRUD tests', function() {
 				var userId = user.id;
 
 				// Save a new article
-				agent.post('/articles')
+				agent.post('/api/articles')
 					.send(article)
 					.expect(200)
 					.end(function(articleSaveErr, articleSaveRes) {
@@ -221,7 +221,7 @@ describe('Article CRUD tests', function() {
 						if (articleSaveErr) done(articleSaveErr);
 
 						// Delete an existing article
-						agent.delete('/articles/' + articleSaveRes.body._id)
+						agent.delete('/api/articles/' + articleSaveRes.body._id)
 							.send(article)
 							.expect(200)
 							.end(function(articleDeleteErr, articleDeleteRes) {
@@ -248,7 +248,7 @@ describe('Article CRUD tests', function() {
 		// Save the article
 		articleObj.save(function() {
 			// Try deleting article
-			request(app).delete('/articles/' + articleObj._id)
+			request(app).delete('/api/articles/' + articleObj._id)
 			.expect(401)
 			.end(function(articleDeleteErr, articleDeleteRes) {
 				// Set message assertion
