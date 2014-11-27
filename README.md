@@ -107,7 +107,7 @@ To run your application in a secure manner you'll need to use OpenSSL and genera
 $ sh generate-ssl-certs.sh
 ```
 Windows users can follow instructions found [here](http://www.websense.com/support/article/kbarticle/How-to-use-OpenSSL-and-Microsoft-Certification-Authority)
-To generate the key and certificate and place them in the *config/sslcert* folder.
+To generate the key and certificate and place them in the *config/sslcerts* folder.
 
 ## Getting Started With MEAN.JS
 You have your application running but there is a lot of stuff to understand, we recommend you'll go over the [Official Documentation](http://meanjs.org/docs.html). 
