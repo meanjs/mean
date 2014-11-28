@@ -104,7 +104,7 @@ $ docker run -p 3000:3000 -p 35729:35729 -v /Users/mdl/workspace/mean-stack/mean
 ## Running in a secure environment
 To run your application in a secure manner you'll need to use OpenSSL and generate a set of self-signed certificates. Unix-based users can use the following commnad: 
 ```
-$ sh generate-ssl-certs.sh
+$ sh ./scripts/generate-ssl-certs.sh
 ```
 Windows users can follow instructions found [here](http://www.websense.com/support/article/kbarticle/How-to-use-OpenSSL-and-Microsoft-Certification-Authority)
 To generate the key and certificate and place them in the *config/sslcerts* folder.
