@@ -1,7 +1,13 @@
 'use strict';
 
 module.exports = {
-	db: 'mongodb://localhost/mean-dev',
+	db: {
+		uri: 'mongodb://localhost/mean-dev',
+		options: {
+			user: '',
+			pass: ''
+		}
+	},
 	log: {
 		// Can specify one of 'combined', 'common', 'dev', 'short', 'tiny'
 		format: 'dev',
