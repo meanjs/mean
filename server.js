@@ -19,6 +19,7 @@ var db = mongoose.connect(config.db.uri, config.db.options, function(err) {
 		console.log(chalk.red(err));
 	}
 });
+mongoose.connection.on('error', console.error.bind(console, chalk.red('MongoDB connection error:')));
 
 // Init the express application
 var app = require('./config/express')(db);
