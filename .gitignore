@@ -8,3 +8,4 @@ app/tests/coverage/
 .bower-*/
 .idea/
 config/sslcert/*.pem
+access.log
