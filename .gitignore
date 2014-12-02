@@ -8,4 +8,11 @@ app/tests/coverage/
 .bower-*/
 .idea/
 config/sslcert/*.pem
+# MEAN app log file for production
 access.log
+# Eclipse project files
+.project
+.settings/
+.*.md.html
+# IntelliJ
+*.iml
