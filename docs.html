@@ -1930,7 +1930,7 @@ ApplicationConfiguration.registerModule('moduleName');
 									</li>
 								</ol>
 							</dd>
-							<dt>Menus.addMenuItem(menuId, menuItemTitle, menuItemURL, [menuItemUIRoute], [isPublic], [roles]);</dt>
+							<dt>Menus.addMenuItem(menuId, menuItemTitle, menuItemType, menuItemURL, [menuItemUIRoute], [isPublic], [roles], [position]);</dt>
 							<dd>
 								Creates a new menu item object. This method also include couple of arguments:
 								<ol>
@@ -1939,6 +1939,9 @@ ApplicationConfiguration.registerModule('moduleName');
 									</li>
 									<li>
 										<b>menuItemTitle</b> (Required) - A String title for the menu item.
+									</li>
+									<li>
+										<b>menuItemType</b> (Required) - This can either be 'item' or 'dropdown'
 									</li>
 									<li>
 										<b>menuItemURL</b> (Required) - The path this menu item will link to.
@@ -1951,6 +1954,9 @@ ApplicationConfiguration.registerModule('moduleName');
 									</li>
 									<li>
 										<b>roles</b> (Optional; Default: ['user']) - An array indicating the roles that are allowed to view this menu item.
+									</li>
+									<li>
+										<b>position</b> (Optional) - Specify the order of appearance
 									</li>
 								</ol>
 							</dd>
@@ -1978,6 +1984,9 @@ ApplicationConfiguration.registerModule('moduleName');
 									</li>
 									<li>
 										<b>roles</b> (Optional; Default: ['user']) - An array indicating the roles that are allowed to view this menu item.
+									</li>
+									<li>
+										<b>position</b> (Optional) - Specify the order of appearance
 									</li>
 								</ol>
 							</dd>
