@@ -10,7 +10,7 @@ var should = require('should'),
 /**
  * Globals
  */
-var user, user2;
+var user, user2, oauthUserData;
 
 /**
  * Unit tests
@@ -35,7 +35,6 @@ describe('User Model Unit Tests:', function() {
 			password: 'password',
 			provider: 'local'
 		});
-
 		done();
 	});
 
@@ -60,13 +59,37 @@ describe('User Model Unit Tests:', function() {
 			});
 		});
 
-		it('should be able to show an error when try to save without first name', function(done) {
-			user.firstName = '';
-			return user.save(function(err) {
-				should.exist(err);
+		it('should allow to add oauth account to existing user', function(done) {
+			User.oAuthHandle(user, 'facebook', '1234567890', 'abcdefghijkl', 'abcdefghijkl9', {}, {}, done);
+		});
+
+		it('should allow to create other user with different oauth id', function(done) {
+			User.oAuthHandle(null, 'facebook', '0987654321', 'abcdefghijkl', 'abcdefghijkl9', {}, {}, function(error, newUser) {
+				if(error) {
+					return done(error);
+				}
+				oauthUserData = newUser;
+				should(oauthUserData._id).not.eql(user._id);
 				done();
 			});
 		});
+
+		it('should allow to update provider data and token', function(done) {
+			User.oAuthHandle(user, 'facebook', '1234567890', '13579', 'abcdefghijkl9', { someData : 222}, {}, function(error, newUser) {
+				var fbdata = newUser.getIdentity('facebook');
+				should(fbdata.accessToken ).eql('13579');
+				should(fbdata.providerData.someData ).eql(222);
+				done();
+			});
+		});
+
+		it('shouldn\'t allow to use one provider/id for two users', function(done) {
+			User.oAuthHandle(user, 'facebook', '0987654321', 'abcdefghijkl', 'abcdefghijkl9', {}, {}, function(error, newUser) {
+				should.exist(error);
+				done();
+			});
+		});
+
 	});
 
 	after(function(done) {

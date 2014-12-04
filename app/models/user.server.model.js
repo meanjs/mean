@@ -5,7 +5,9 @@
  */
 var mongoose = require('mongoose'),
 	Schema = mongoose.Schema,
-	crypto = require('crypto');
+	crypto = require('crypto'),
+	UserModel,
+	eachAsync = require( 'each-async' );
 
 /**
  * A Validation function for local strategy properties
@@ -41,19 +43,13 @@ var UserSchema = new Schema({
 		type: String,
 		trim: true
 	},
-	email: {
-		type: String,
-		trim: true,
-		default: '',
-		validate: [validateLocalStrategyProperty, 'Please fill in your email'],
-		match: [/.+\@.+\..+/, 'Please fill a valid email address']
-	},
-	username: {
-		type: String,
-		unique: 'Username already exists',
-		required: 'Please fill in a username',
-		trim: true
-	},
+	identities : [ {
+		provider     : { type : String },
+		id           : { type : String },
+		accessToken  : { type : String },
+		refreshToken : { type : String },
+		providerData : { type : Object }
+	} ],
 	password: {
 		type: String,
 		default: '',
@@ -62,12 +58,6 @@ var UserSchema = new Schema({
 	salt: {
 		type: String
 	},
-	provider: {
-		type: String,
-		required: 'Provider is required'
-	},
-	providerData: {},
-	additionalProvidersData: {},
 	roles: {
 		type: [{
 			type: String,
@@ -91,17 +81,51 @@ var UserSchema = new Schema({
 	}
 });
 
+UserSchema.virtual('email').get(function () {
+	return this.getIdentity(UserModel.EMAIL);
+} ).set(function(email) {
+	this.setIdentity(UserModel.EMAIL, email);
+});
+
+UserSchema.virtual('username').get(function () {
+	return this.getIdentity(UserModel.USERNAME);
+} ).set(function(username) {
+	this.setIdentity(UserModel.USERNAME, username);
+});
+
 /**
  * Hook a pre save method to hash the password
  */
-UserSchema.pre('save', function(next) {
-	if (this.password && this.password.length > 6) {
-		this.salt = crypto.randomBytes(16).toString('base64');
-		this.password = this.hashPassword(this.password);
-	}
 
-	next();
-});
+UserSchema.pre( 'save', function ( next ) {
+    if ( this.password && this.password.length > 6 ) {
+        this.salt = new Buffer( crypto.randomBytes( 16 ).toString( 'base64' ), 'base64' );
+        this.password = this.hashPassword( this.password );
+    }
+    if ( !this.identities || this.identities.length === 0 ) {
+        return next();
+    }
+    var _this = this;
+    eachAsync( _this.identities, function ( identity, index, done ) {
+        UserModel.findByProvider( identity.provider, identity.id, function ( err, user ) {
+            if ( err ) {
+                return next( err );
+            }
+            if ( user === null ) {
+                return done();
+            }
+            if ( !_this._id || _this._id.toString() !== user._id.toString() ) {
+                return next( new Error( identity.provider + ' : ' + identity.id + ' is assinged to other user' ) );
+            }
+            return done();
+        } );
+    }, function ( error ) {
+        if ( error ) {
+            return next( error );
+        }
+        next();
+    } );
+} );
 
 /**
  * Create instance method for hashing a password
@@ -122,25 +146,141 @@ UserSchema.methods.authenticate = function(password) {
 };
 
 /**
+ * Create instance method for authenticating user
+ */
+UserSchema.methods.setIdentity = function(provider, id, accessToken, refreshToken, providerData) {
+	var found = false;
+	var auth = {
+		provider: provider,
+		id : id
+	};
+	if(!this.identities) {
+		this.identities = [];
+	}
+	this.identities.forEach(function(identity) {
+		if(identity.provider === provider && identity.id === id) {
+			auth = identity;
+			found = true;
+		}
+	});
+	auth.accessToken = accessToken || null;
+	auth.refreshToken = refreshToken || null;
+	auth.providerData = providerData || null;
+	if(!found) {
+		this.identities.push(auth);
+	}
+};
+
+UserSchema.methods.getIdentity = function(provider, id) {
+    var auth = null;
+    if ( this.identities ) {
+        this.identities.forEach( function ( identity ) {
+            if ( identity.provider === provider && (identity.id === id || id === undefined || id === null )) {
+                auth = identity;
+            }
+        } );
+    }
+    return auth;
+};
+
+UserSchema.methods.removeIdentity = function ( provider, id ) {
+    if ( this.identities ) {
+        var c = this.identities.length - 1;
+        while ( c >= 0 ) {
+            if ( this.identities[ c ] && this.identities[ c ].provider === provider && this.identities[ c ] === id ) {
+                this.identities = this.identities.splice( c, 1 );
+            }
+            c--;
+        }
+    }
+};
+
+
+UserSchema.methods.removeOtherIdentity = function ( provider, id ) {
+    if ( this.identities ) {
+        this.identities.forEach(function(auth,idx) {
+            if ( auth.provider === provider && auth.id !== id ) {
+                this.identities.splice( idx, 1 );
+            }
+        });
+    }
+};
+
+
+
+/**
+ * Find possible not used username
+ */
+UserSchema.statics.findByProvider = function ( provider, id, callback ) {
+	var _this = this;
+
+	_this.findOne( {
+		identities : {
+			$elemMatch : {
+				provider : provider,
+				id       : id
+			}
+		}
+	}, function ( err, user ) {
+		if ( !err ) {
+			return callback( null, user );
+		} else {
+			callback( null );
+		}
+	} );
+};
+
+/**
  * Find possible not used username
  */
 UserSchema.statics.findUniqueUsername = function(username, suffix, callback) {
 	var _this = this;
 	var possibleUsername = username + (suffix || '');
 
-	_this.findOne({
-		username: possibleUsername
-	}, function(err, user) {
-		if (!err) {
-			if (!user) {
-				callback(possibleUsername);
+	_this.findByProvider( UserModel.USERNAME, possibleUsername, function ( err, user ) {
+		if ( !err ) {
+			if ( !user ) {
+				callback( possibleUsername );
 			} else {
-				return _this.findUniqueUsername(username, (suffix || 0) + 1, callback);
+				return _this.findUniqueUsername( username, (suffix || 0) + 1, callback );
 			}
 		} else {
-			callback(null);
+			callback( null );
 		}
-	});
+	} );
 };
 
-mongoose.model('User', UserSchema);
+UserSchema.statics.oAuthHandle = function ( currentUser, provider, id, accessToken, refreshToken, providerData, userData, callback ) {
+    if ( !currentUser ) {
+        UserModel.findByProvider( provider, id, function ( err, user ) {
+            if ( err ) {
+                return callback( err );
+            }
+            if ( !user ) {
+                var possibleUsername = userData.username || ((userData.email) ? userData.email.split( '@' )[ 0 ] : '');
+                return UserModel.findUniqueUsername( possibleUsername, null, function ( availableUsername ) {
+                    user = new UserModel( userData );
+                    user.setIdentity( provider, id, accessToken, refreshToken, providerData );
+                    user.save( function ( err ) {
+                        return callback( err, user, true );
+                    } );
+                } );
+            }
+            return callback( new Error( 'You shoun\'t go to that line, ever' ), user, false );
+        } );
+
+    } else {
+        currentUser.setIdentity( provider, id, accessToken, refreshToken, providerData );
+        return currentUser.save( function ( err ) {
+            return callback( err, currentUser, '/#!/settings/accounts' );
+        } );
+    }
+};
+
+
+
+
+UserSchema.statics.USERNAME = 'username';
+UserSchema.statics.EMAIL    = 'email';
+
+UserModel = mongoose.model('User', UserSchema);

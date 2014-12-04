@@ -3,9 +3,44 @@
 angular.module('users').controller('SettingsController', ['$scope', '$http', '$location', 'Users', 'Authentication',
 	function($scope, $http, $location, Users, Authentication) {
 		$scope.user = Authentication.user;
+		$scope.linkedProviders = [];
 
 		// If user is not signed in then redirect back home
 		if (!$scope.user) $location.path('/');
+
+        $scope.user.identities.forEach(function(identity){
+            if(identity.provider === 'username') {
+                $scope.user.username = identity.id;
+            }
+        });
+
+        $scope.identitiesToEmails = function() {
+            $scope.user.emails = [];
+            if($scope.user.identities) {
+                $scope.user.identities.forEach(function(identity,idx){
+                    if(identity.provider === 'email') {
+                        $scope.user.identities.splice(idx, 1);
+                        $scope.user.emails.push( identity );
+                    }
+                });
+            }
+        };
+        $scope.identitiesToEmails();
+
+        $scope.removeEmail = function(emailIndex) {
+            $scope.user.emails.splice(emailIndex, 1);
+            return false;
+        };
+
+        $scope.addEmail = function() {
+            if(!$scope.user.identities) {
+                $scope.user.identities = [];
+            }
+            $scope.user.emails.push({
+                provider: 'email',
+                id : ''
+            });
+        };
 
 		// Check if there are additional accounts 
 		$scope.hasConnectedAdditionalSocialAccounts = function(provider) {
@@ -18,7 +53,14 @@ angular.module('users').controller('SettingsController', ['$scope', '$http', '$l
 
 		// Check if provider is already in use with current user
 		$scope.isConnectedSocialAccount = function(provider) {
-			return $scope.user.provider === provider || ($scope.user.additionalProvidersData && $scope.user.additionalProvidersData[provider]);
+			var connected = false;
+			angular.forEach($scope.user.identities, function(identity) {
+				if(identity.provider === provider ) {
+					connected = true;
+					$scope.linkedProviders.push(provider);
+				}
+			});
+			return connected;
 		};
 
 		// Remove a user social account
@@ -42,11 +84,18 @@ angular.module('users').controller('SettingsController', ['$scope', '$http', '$l
 		$scope.updateUserProfile = function(isValid) {
 			if (isValid) {
 				$scope.success = $scope.error = null;
+
+                $scope.user.emails.forEach(function(email) {
+                    $scope.user.identities.push(email);
+                });
+                delete $scope.user.emails;
+
 				var user = new Users($scope.user);
 
 				user.$update(function(response) {
 					$scope.success = true;
 					Authentication.user = response;
+                    $scope.identitiesToEmails();
 				}, function(response) {
 					$scope.error = response.data.message;
 				});

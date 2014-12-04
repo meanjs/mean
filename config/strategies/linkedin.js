@@ -6,6 +6,7 @@
 var passport = require('passport'),
 	LinkedInStrategy = require('passport-linkedin').Strategy,
 	config = require('../config'),
+	User = require('mongoose').model('User'),
 	users = require('../../app/controllers/users.server.controller');
 
 module.exports = function() {
@@ -20,23 +21,20 @@ module.exports = function() {
 		function(req, accessToken, refreshToken, profile, done) {
 			// Set the provider data and include tokens
 			var providerData = profile._json;
-			providerData.accessToken = accessToken;
-			providerData.refreshToken = refreshToken;
 
 			// Create the user OAuth profile
-			var providerUserProfile = {
+			var userData = {
 				firstName: profile.name.givenName,
 				lastName: profile.name.familyName,
 				displayName: profile.displayName,
 				email: profile.emails[0].value,
-				username: profile.username,
-				provider: 'linkedin',
-				providerIdentifierField: 'id',
-				providerData: providerData
+				username: profile.username
 			};
 
 			// Save the user OAuth profile
-			users.saveOAuthUserProfile(req, providerUserProfile, done);
+			User.oAuthHandle(req.user, 'linkedin', providerData.id, accessToken, refreshToken, providerData, userData, function(err, user, isNew) {
+				users.saveOAuthUserProfile(err, user, isNew, done);
+			});
 		}
 	));
 };
