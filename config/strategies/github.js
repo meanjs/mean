@@ -4,7 +4,6 @@
  * Module dependencies.
  */
 var passport = require('passport'),
-	url = require('url'),
 	GithubStrategy = require('passport-github').Strategy,
 	config = require('../config'),
 	users = require('../../app/controllers/users.server.controller');
