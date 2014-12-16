@@ -17,6 +17,7 @@ var handleError = function(err)
 	// Log the error in the database?
 
 	// Email the developers?
+	var emailBody = formatMessage(err);
 };
 
 module.exports = function()
