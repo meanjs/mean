@@ -20,6 +20,9 @@ var db = mongoose.connect(config.db, function(err) {
 	}
 });
 
+// Set up event listeners
+require('./app/modules/events')();
+
 // Init the express application
 var app = require('./config/express')(db);
 
