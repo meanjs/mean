@@ -26,6 +26,15 @@ module.exports = function() {
 
 			process.env.NODE_ENV = 'development';
 		}
+
+		// Initialize a single instance of Elastic Search if it is configured, accessible through global.es
+		var config = require('./config');
+		if (config.elasticsearch)
+		{
+			// We are only allowed to initialize a single instance of ES so we are doing this here,
+			// see http://www.elasticsearch.org/guide/en/elasticsearch/client/javascript-api/current/configuration.html#_config_options
+			global.es = new require('elasticsearch').elasticsearch.Client(config.elasticsearch);
+		}
 	});
 
 };

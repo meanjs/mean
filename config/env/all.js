@@ -69,4 +69,9 @@ module.exports = {
 			'public/modules/*/tests/*.js'
 		]
 	}
+	// If you have elastic search installed, uncomment this to create an instance on the global.es object
+	// elasticsearch: {
+	// 	host: '127.0.0.1:9200',
+	// 	log: 'warning'
+	// }
 };
