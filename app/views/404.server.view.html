@@ -1,8 +1,12 @@
 {% extends 'layout.server.view.html' %}
 
 {% block content %}
-<h1>Page Not Found</h1>
-<pre>
-	{{url}} is not a valid path.
-</pre>
+<div class="row">
+	<div class="col-xs-12">
+		<div class="container">
+			<h1>Page Not Found</h1>
+			You have entered an invalid URL.
+		</div>
+	</div>
+</div>
 {% endblock %}
