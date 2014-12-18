@@ -27,7 +27,7 @@ $ npm install -g bower
 * Grunt - You're going to use the [Grunt Task Runner](http://gruntjs.com/) to automate your development process, in order to install it make sure you've installed Node.js and npm, then install grunt globally using npm:
 
 ```
-$ sudo npm install -g grunt-cli
+$ npm install -g grunt-cli
 ```
 
 ## Downloading MEAN.JS
