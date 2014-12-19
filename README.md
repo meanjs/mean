@@ -114,7 +114,7 @@ You have your application running but there is a lot of stuff to understand, we 
 In the docs we'll try to explain both general concepts of MEAN components and give you some guidelines to help you improve your development process. We tried covering as many aspects as possible, and will keep update it by your request, you can also help us develop the documentation better by checking out the *gh-pages* branch of this repository.
 
 ## Community
-* Use to [Offical Website](http://meanjs.org) to learn about changes and the roadmap.
+* Use to [Official Website](http://meanjs.org) to learn about changes and the roadmap.
 * Join #meanjs on freenode.
 * Discuss it in the new [Google Group](https://groups.google.com/d/forum/meanjs)
 * Ping us on [Twitter](http://twitter.com/meanjsorg) and [Facebook](http://facebook.com/meanjs)
