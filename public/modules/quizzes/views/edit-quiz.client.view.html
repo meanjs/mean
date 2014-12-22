@@ -35,15 +35,13 @@
 				</div>
 
 
-                    <div class="list-group">
-                    <a data-ng-repeat="qa in qas"  class="list-group-item">
-                        <small class="list-group-item-text">
-                            <input type='checkbox' data-ng-model='qa.choices.correctAnswer'>
-                            <span data-ng-bind="qa.question | date:'medium'"></span>
-                            <span data-ng-bind="qa.user.displayName"></span>
-                        </small>
-                    </a>
+                <div class='input-group' ng-repeat="qa in qas">
+				<span class="input-group-addon">
+					<input type='checkbox' data-ng-model='qa.selected'>
+                </span>
+                    {{qa.question}} {{qa.user.displayName}}
                 </div>
+
             </fieldset>
         </form>
     </div>

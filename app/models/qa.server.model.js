@@ -15,6 +15,14 @@ var AnswerSchema = new mongoose.Schema({
 		type: Boolean,
 		default: false
 	}});
+
+var qaQuizSchema = new mongoose.Schema({
+	name: String,
+	id: Number,
+	selected: {
+		type: Boolean,
+		default: false
+	}});
 /**
  * Qa Schema
  */
@@ -97,6 +105,7 @@ var QaSchema = new Schema({
         type: String,
         default: 'Quiz'
     },
+	qaQuiz: [qaQuizSchema],
     quiz: {
         type: Schema.ObjectId,
         ref: 'Quiz'

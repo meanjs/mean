@@ -16,7 +16,7 @@ angular.module('quizzes').controller('QuizzesController', ['$scope', '$statePara
                 quizNumber: this.quizNumber,
 				hintOn: this.hintOn,
 				timeOn:	this.timeOn,
-				fifty50On:	this.fifty50On,
+
 				randomizeQuestionsOn: this.randomizeQuestionsOn,
 				randomizeAnswersOn: this.randomizeAnswersOn
 			});
@@ -58,7 +58,32 @@ angular.module('quizzes').controller('QuizzesController', ['$scope', '$statePara
 
 		// Update existing Quiz
 		$scope.update = function() {
-			var quiz = $scope.quiz ;
+
+			var qas = $scope.qas ;
+			var quiz= $scope.quiz;
+			var index = 0;
+			angular.forEach(qas, function(qa){
+				if(qa.selected){
+					qa.qaQuizName = 'no go it';
+					quiz.qa[index]=(qa);
+					index++;
+					console.log('from ang.forEach', quiz.qa);
+					}
+			console.log('From update', qa);
+
+			if (!qa.updated) {
+				qa.updated = [];
+			}
+			qa.updated.push(new Date().getTime());
+
+			qa.$update(function () {
+				$location.path('qas/' + qa._id);
+			});
+			});
+
+			//quiz.qa= angular.copy(qas);
+
+			console.log('quiz',quiz,quiz.qa);
 
 			quiz.$update(function() {
 				$location.path('quizzes/' + quiz._id);
@@ -86,7 +111,6 @@ angular.module('quizzes').controller('QuizzesController', ['$scope', '$statePara
 			});
 			$scope.quiz = quiz;
 			$scope.qas = qas;
-			$scope.quiz.qa = [];
 
 			//if (qas.choices[0].selectedAnswer)
 			//{
@@ -107,7 +131,7 @@ angular.module('quizzes').controller('QuizzesController', ['$scope', '$statePara
 				console.log($scope.todos);
 
 
-			console.log("from quuizctrl.findOne",$scope.quiz,$scope.quiz.qa);
+			console.log("from quuizctrl.findOne",$scope.quiz,$scope.qas);
 		};
 	}
 ]);

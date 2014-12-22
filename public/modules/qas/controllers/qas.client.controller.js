@@ -18,12 +18,12 @@ angular.module('qas').controller('QasController', ['$scope','$rootScope','$modal
         $scope.qa = qasInitService.init();
 // Create and validate qa entries
         $scope.create = function () {
-            var qa = new Qas({
+            var quiz = new Quizzes();
+            quiz.qa = new Qas({
                 question: this.question,
                 imageURL: this.imageURL,
                 choices: [
-                    {
-                        text: this.text, selectedAnswer: false      //doesn't work
+                    {text: this.text, selectedAnswer: false      //doesn't work
                     },
                     {text: this.text, selectedAnswer: this.correctAnswer     //doesn't work
                     },
@@ -42,18 +42,18 @@ angular.module('qas').controller('QasController', ['$scope','$rootScope','$modal
             });
 
 //  Hack to load these variables.  Not handled above???
-            qa.choices = $scope.qa.choices;
-            qa.difficulty = $scope.dd.label;
-            qa.type = $scope.td.label;
-            qa.qaQuizName = selectedQuiz[0];
-            qa.qaQuizId = selectedQuiz[1];
+            quiz.qa.choices = $scope.qa.choices;
+         //   quiz.qa.difficulty = $scope.quiz.dd.label;
+          //  quiz.qa.type = $scope.quiz.td.label;
+            quiz.qa.qaQuizName = selectedQuiz[0];
+            quiz.qa.qaQuizId = selectedQuiz[1];
             // Check that question was entered
-            if (qa.question.length > 0) {
+            if (quiz.qa.question.length > 0) {
                 var choiceCount = 0;
                 //Loop through choices to get at least two
-                console.log('qa if', qa);
-                for (var i = 0, ln = qa.choices.length; i < ln; i++) {
-                    var choice = qa.choices[i].text;
+                console.log('qa if', quiz.qa,qa);
+                for (var i = 0, ln = quiz.qa.choices.length; i < ln; i++) {
+                    var choice = quiz.qa.choices[i].text;
                     console.log('choice', choice, "   i", i);
                     if (choice.length > 0) {
                         choiceCount++;
@@ -69,7 +69,7 @@ angular.module('qas').controller('QasController', ['$scope','$rootScope','$modal
             } else {
                 alert('You must have a question');
             }
-            console.log('qaFinal', qa);
+            console.log('qaFinal', quiz,qa);
             qa.$save(function (response) {
                 $location.path('qas/' + response._id)
             });
