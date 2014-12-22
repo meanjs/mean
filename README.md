@@ -110,8 +110,8 @@ Windows users can follow instructions found [here](http://www.websense.com/suppo
 After you've generated the key and certificate, place them in the *config/sslcerts* folder.
 
 ## Getting Started With MEAN.JS
-You have your application running, but there is a lot of stuff to understand. We recommend you'll go over the [Official Documentation](http://meanjs.org/docs.html).
-In the docs we'll try to explain both general concepts of MEAN components and give you some guidelines to help you improve your development process. We tried covering as many aspects as possible, and will keep updated it by your request. You can also help us develop and improve the documentation by checking out the *gh-pages* branch of this repository.
+You have your application running, but there is a lot of stuff to understand. We recommend you go over the [Official Documentation](http://meanjs.org/docs.html).
+In the docs we'll try to explain both general concepts of MEAN components and give you some guidelines to help you improve your development process. We tried covering as many aspects as possible, and will keep it updated by your request. You can also help us develop and improve the documentation by checking out the *gh-pages* branch of this repository.
 
 ## Community
 * Use the [Official Website](http://meanjs.org) to learn about changes and the roadmap.
