@@ -76,6 +76,9 @@ module.exports = function(db) {
 		app.locals.cache = 'memory';
 	}
 
+	// Setting the app router and static folder
+	app.use(express.static(path.resolve('./public')));
+
 	// Request body parsing middleware should be above methodOverride
 	app.use(bodyParser.urlencoded({
 		extended: true
@@ -112,9 +115,6 @@ module.exports = function(db) {
 	app.use(helmet.nosniff());
 	app.use(helmet.ienoopen());
 	app.disable('x-powered-by');
-
-	// Setting the app router and static folder
-	app.use(express.static(path.resolve('./public')));
 
 	// Globbing routing files
 	config.getGlobbedFiles('./app/routes/**/*.js').forEach(function(routePath) {
