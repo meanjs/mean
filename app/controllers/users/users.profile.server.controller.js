@@ -52,5 +52,5 @@ exports.update = function(req, res) {
  * Send User
  */
 exports.me = function(req, res) {
-	res.json(req.user || null);
+	res.json(req.user || {});
 };
