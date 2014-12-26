@@ -83,6 +83,16 @@ module.exports = function(db) {
 	app.use(bodyParser.json());
 	app.use(methodOverride());
 
+	// Use helmet to secure Express headers
+	app.use(helmet.xframe());
+	app.use(helmet.xssFilter());
+	app.use(helmet.nosniff());
+	app.use(helmet.ienoopen());
+	app.disable('x-powered-by');
+
+	// Setting the app router and static folder
+	app.use(express.static(path.resolve('./public')));
+
 	// CookieParser should be above session
 	app.use(cookieParser());
 
@@ -105,16 +115,6 @@ module.exports = function(db) {
 
 	// connect flash for flash messages
 	app.use(flash());
-
-	// Use helmet to secure Express headers
-	app.use(helmet.xframe());
-	app.use(helmet.xssFilter());
-	app.use(helmet.nosniff());
-	app.use(helmet.ienoopen());
-	app.disable('x-powered-by');
-
-	// Setting the app router and static folder
-	app.use(express.static(path.resolve('./public')));
 
 	// Globbing routing files
 	config.getGlobbedFiles('./app/routes/**/*.js').forEach(function(routePath) {
