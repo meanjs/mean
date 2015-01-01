@@ -4,19 +4,21 @@ angular.module('articles').controller('ArticlesController', ['$scope', '$statePa
 	function($scope, $stateParams, $location, Authentication, Articles) {
 		$scope.authentication = Authentication;
 
-		$scope.create = function() {
-			var article = new Articles({
-				title: this.title,
-				content: this.content
-			});
-			article.$save(function(response) {
+		$scope.submit = function() {
+			var success = function(response) {
 				$location.path('articles/' + response._id);
-
-				$scope.title = '';
-				$scope.content = '';
-			}, function(errorResponse) {
+				$scope.article.title = '';
+				$scope.article.content = '';
+			}
+			var error = function(errorResponse) {
 				$scope.error = errorResponse.data.message;
-			});
+			}
+
+			if ($scope.article._id) {
+				$scope.article.$update(success, error);
+			} else {
+				$scope.article.$save(success, error);
+			}
 		};
 
 		$scope.remove = function(article) {
@@ -35,24 +37,18 @@ angular.module('articles').controller('ArticlesController', ['$scope', '$statePa
 			}
 		};
 
-		$scope.update = function() {
-			var article = $scope.article;
-
-			article.$update(function() {
-				$location.path('articles/' + article._id);
-			}, function(errorResponse) {
-				$scope.error = errorResponse.data.message;
-			});
-		};
-
 		$scope.find = function() {
 			$scope.articles = Articles.query();
 		};
 
 		$scope.findOne = function() {
-			$scope.article = Articles.get({
-				articleId: $stateParams.articleId
-			});
+			if($stateParams.articleId) {
+				$scope.article = Articles.get({
+					articleId: $stateParams.articleId
+				});
+			} else {
+				$scope.article = new Articles();
+			}
 		};
 	}
 ]);

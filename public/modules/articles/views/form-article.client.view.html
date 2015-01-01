@@ -1,0 +1,35 @@
+<section data-ng-controller="ArticlesController" data-ng-init="findOne()">
+	<div class="page-header">
+		<h1>{{article._id ? 'Edit Article' : 'New Article'}}</h1>
+	</div>
+	<div class="col-md-12">
+		<form name="articleForm" class="form-horizontal" data-ng-submit="articleForm.$valid ? submit() : ''" novalidate>
+			<fieldset>
+				<div class="form-group" ng-class="{ 'has-error': (articleForm.$submitted || articleForm.title.$dirty) && articleForm.title.$invalid }">
+					<label class="control-label" for="title">Title</label>
+					<div class="controls">
+						<input name="title" type="text" data-ng-model="article.title" id="title" class="form-control" placeholder="Title" required>
+					</div>
+          <div ng-show="(articleForm.$submitted || articleForm.title.$dirty) && articleForm.title.$invalid" class="help-block">
+            <p ng-show="articleForm.title.$error.required" class="text-danger">Title is required</p>
+          </div>
+				</div>
+				<div class="form-group" ng-class="{ 'has-error' : (articleForm.$submitted || articleForm.content.$dirty) && articleForm.content.$invalid }">
+					<label class="control-label" for="content">Content</label>
+					<div class="controls">
+						<textarea name="content" data-ng-model="article.content" id="content" class="form-control" cols="30" rows="10" placeholder="Content" required></textarea>
+					</div>
+          <div ng-show="(articleForm.$submitted || articleForm.content.$dirty) && articleForm.content.$invalid" class="help-block">
+            <p ng-show="articleForm.content.$error.required" class="text-danger">Content is required</p>
+          </div>
+				</div>
+				<div class="form-group">
+					<input type="submit" value="{{article._id ? 'Update' : 'Create'}}" class="btn btn-default">
+				</div>
+				<div data-ng-show="error" class="text-danger">
+					<strong data-ng-bind="error"></strong>
+				</div>
+			</fieldset>
+		</form>
+	</div>
+</section>
