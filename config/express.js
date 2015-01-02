@@ -11,7 +11,7 @@ var fs = require('fs'),
 	logger = require('./logger'),
 	bodyParser = require('body-parser'),
 	session = require('express-session'),
-	compress = require('compression'),
+	compression = require('compression'),
 	methodOverride = require('method-override'),
 	cookieParser = require('cookie-parser'),
 	helmet = require('helmet'),
@@ -48,11 +48,13 @@ module.exports = function(db) {
 	});
 
 	// Should be placed before express.static
-	app.use(compress({
+	app.use(compression({
+		// only compress files for the following content types
 		filter: function(req, res) {
 			return (/json|text|javascript|css/).test(res.getHeader('Content-Type'));
 		},
-		level: 9
+		// zlib option for compression level
+		level: 3
 	}));
 
 	// Showing stack errors
