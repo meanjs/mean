@@ -1,9 +1,10 @@
 'use strict';
 
-angular.module('articles').controller('ArticlesController', ['$scope', '$stateParams', '$location', 'Authentication', 'Articles',
-	function($scope, $stateParams, $location, Authentication, Articles) {
+angular.module('articles').controller('ArticlesController', ['$scope', '$state', '$stateParams', '$location', 'Authentication', 'Articles', 'ReturnUrl',
+	function($scope, $state, $stateParams, $location, Authentication, Articles, ReturnUrl) {
 		$scope.authentication = Authentication;
 
+		ReturnUrl.set({ name: $state.current.name, params: $stateParams });
 		$scope.create = function() {
 			var article = new Articles({
 				title: this.title,

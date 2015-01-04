@@ -4,15 +4,14 @@
 angular.module('core').service('ReturnUrl', ['$state',
 	function($state)
 	{
-		var self = this;
-
 		// i.e. ReturnUrl.return()
 		this.return = function()
 		{
-			if (self.returnState)
+			if (sessionStorage && sessionStorage.returnState)
 			{
-				$state.go(self.returnState.name, self.returnState.params);
-				delete self.returnState;
+				var state = JSON.parse(sessionStorage.returnState);
+				$state.go(state.name, state.params);
+				delete sessionStorage.returnState;
 				return true; // yes we returned somewhere
 			}
 			return false; // no we didn't return anywhere
@@ -21,8 +20,8 @@ angular.module('core').service('ReturnUrl', ['$state',
 		// i.e. ReturnUrl.set({ name: $state.current.name, params: $stateParams });
 		this.set = function(state)
 		{
-			if (!state) return;
-			self.returnState = state;
+			if (!state || !sessionStorage) return;
+			sessionStorage.returnState = JSON.stringify(state);
 		};
 	}
 ]);
