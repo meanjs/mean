@@ -166,6 +166,23 @@ exports.saveOAuthUserProfile = function(req, providerUserProfile, done) {
 				return done(err, user, '/#!/settings/accounts');
 			});
 		} else {
+			// determine which provider field contain conflicting provider
+			var conflictingProviderIsMain = (user.provider === providerUserProfile.provider);
+			var originalData = conflictingProviderIsMain ? user.providerData : user.additionalProvidersData[providerUserProfile.provider];
+
+			if(originalData.id === providerUserProfile.providerData.id) {
+				// update provider data
+				if(conflictingProviderIsMain) {
+					user.providerData = providerUserProfile.providerData;
+				} else {
+					user.additionalProvidersData[providerUserProfile.provider] = providerUserProfile.providerData;
+				}
+				// And save the user
+				return user.save(function(err) {
+					return done(err, user, '/#!/settings/accounts');
+				});
+			}
+			//
 			return done(new Error('User is already connected using this provider'), user);
 		}
 	}
