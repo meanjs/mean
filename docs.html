@@ -295,11 +295,18 @@
 							You may find there is a weird error during install like npm's Error: ENOENT, usually updating those tools to the latest version solves the issue.
 						</p>
 						<dl>
-							<dt>Updating npm</dt>
+							<dt>Updating npm (Unix/Linux)</dt>
 							<dd>
 								To update npm just run this command in the command-line:
 								<pre>$ npm update -g npm</pre>
 							</dd>
+                            <dt>Updating npm (Windows)</dt>
+                            <dd>
+                                <p>
+                                There is a known issue with npm 1.x which is installed by default with the latest version of NodeJS. If you experience file locks during the "npm install" step, please refer 
+                                <a href="https://github.com/npm/npm/wiki/Troubleshooting#upgrading-on-windows">here</a>.
+                                </p>
+                            </dd>
 							<dt>Updating Bower</dt>
 							<dd>
 								To update bower just run this command in the command-line:
