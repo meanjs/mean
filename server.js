@@ -25,6 +25,9 @@ mongoose.connection.on('error', function(err) {
 	}
 );
 
+// Set up event listeners
+require('./app/modules/events')();
+
 // Init the express application
 var app = require('./config/express')(db);
 
