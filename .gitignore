@@ -40,6 +40,12 @@ local.properties
 # ========
 *.iml
 
+# Cloud9 IDE
+# =========
+.c9/
+data/
+mongod
+
 # General
 # =======
 *.log
