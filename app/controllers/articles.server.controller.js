@@ -88,13 +88,20 @@ exports.list = function(req, res) {
  * Article middleware
  */
 exports.articleByID = function(req, res, next, id) {
+
+	if (!mongoose.Types.ObjectId.isValid(id)) {
+		return res.status(500).send({
+			message: 'Article is invalid'
+		});
+	}
+
 	Article.findById(id).populate('user', 'displayName').exec(function(err, article) {
-		if (err) {
-			return res.status(404).send({
+		if (err) return next(err);
+		if (!article) {
+			res.status(404).send({
   				message: 'Article not found'
-  			}); 
+  			});
 		}
-		if (!article) return next(new Error('Failed to load article ' + id));
 		req.article = article;
 		next();
 	});
