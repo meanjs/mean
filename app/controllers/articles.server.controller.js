@@ -90,7 +90,7 @@ exports.list = function(req, res) {
 exports.articleByID = function(req, res, next, id) {
 
 	if (!mongoose.Types.ObjectId.isValid(id)) {
-		return res.status(500).send({
+		return res.status(400).send({
 			message: 'Article is invalid'
 		});
 	}
