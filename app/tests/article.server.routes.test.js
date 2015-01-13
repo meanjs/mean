@@ -201,6 +201,17 @@ describe('Article CRUD tests', function() {
 		});
 	});
 
+	it('should return proper error for single article which doesnt exist, if not signed in', function(done) {
+		request(app).get('/articles/test')
+			.end(function(req, res) {
+				// Set assertion
+				res.body.should.be.an.Object.with.property('message', 'Article is invalid');
+
+				// Call the assertion callback
+				done();
+			});
+	});
+
 	it('should be able to delete an article if signed in', function(done) {
 		agent.post('/auth/signin')
 			.send(credentials)
