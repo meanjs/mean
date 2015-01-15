@@ -8,5 +8,6 @@ web:
    NODE_ENV: development
 db:
   image: mongo
+  command: --smallfiles
   ports: 
    - "27017:27017"
