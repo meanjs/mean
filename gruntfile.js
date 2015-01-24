@@ -4,7 +4,7 @@ module.exports = function(grunt) {
 	// Unified Watch Object
 	var watchFiles = {
 		serverViews: ['app/views/**/*.*'],
-		serverJS: ['gruntfile.js', 'server.js', 'config/**/*.js', 'app/**/*.js'],
+		serverJS: ['gruntfile.js', 'server.js', 'config/**/*.js', 'app/**/*.js', '!app/tests/'],
 		clientViews: ['public/modules/**/views/**/*.html'],
 		clientJS: ['public/js/*.js', 'public/modules/**/*.js'],
 		clientCSS: ['public/modules/**/*.css'],
@@ -47,6 +47,10 @@ module.exports = function(grunt) {
 				options: {
 					livereload: true
 				}
+			},
+			mochaTests: {
+				files: watchFiles.mochaTests,
+				tasks: ['test:server'],
 			}
 		},
 		jshint: {
@@ -173,5 +177,7 @@ module.exports = function(grunt) {
 	grunt.registerTask('build', ['lint', 'loadConfig', 'ngAnnotate', 'uglify', 'cssmin']);
 
 	// Test task.
-	grunt.registerTask('test', ['env:test', 'mochaTest', 'karma:unit']);
+	grunt.registerTask('test', ['test:server', 'test:client']);
+	grunt.registerTask('test:server', ['env:test', 'mochaTest']);
+	grunt.registerTask('test:client', ['env:test', 'karma:unit']);
 };

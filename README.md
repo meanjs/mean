@@ -78,6 +78,27 @@ Your application should run on port 3000, so in your browser just go to [http://
 That's it! Your application should be running. To proceed with your development, check the other sections in this documentation.
 If you encounter any problems, try the Troubleshooting section.
 
+## Testing Your Application
+You can run the full test suite included with MEAN.JS with the test task:
+
+```
+$ grunt test
+```
+
+This will run both the server-side tests (located in the app/tests/ directory) and the client-side tests (located in the public/modules/*/tests/).
+
+To execute only the server tests, run the test:server task:
+
+```
+$ grunt test:server
+```
+
+And to run only the client tests, run the test:client task:
+
+```
+$ grunt test:client
+```
+
 ## Development and deployment With Docker
 
 * Install [Docker](http://www.docker.com/)
