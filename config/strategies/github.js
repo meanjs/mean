@@ -23,8 +23,15 @@ module.exports = function() {
 			providerData.refreshToken = refreshToken;
 
 			// Create the user OAuth profile
+			var displayName = profile.displayName.trim();
+			var iSpace = displayName.indexOf(' '); // index of the whitespace following the firstName
+			var firstName =  iSpace !== -1 ? displayName.substring(0, iSpace) : displayName;
+			var lastName = iSpace !== -1 ? displayName.substring(iSpace + 1) : '';
+
 			var providerUserProfile = {
-				displayName: profile.displayName,
+				firstName: firstName,
+				lastName: lastName,
+				displayName: displayName,
 				email: profile.emails[0].value,
 				username: profile.username,
 				provider: 'github',
