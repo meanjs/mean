@@ -214,13 +214,21 @@ UserSchema.methods.removeOtherIdentity = function ( provider, id ) {
 UserSchema.statics.findByProvider = function ( provider, id, callback ) {
 	var _this = this;
 
-	_this.findOne( {
-		identities : {
-			$elemMatch : {
-				provider : provider,
-				id       : id
-			}
-		}
+    var providerQuery = provider;
+
+    if(Array.isArray(provider)) {
+        providerQuery = {
+            '$in' : provider
+        };
+    }
+
+    _this.findOne( {
+        identities : {
+            $elemMatch : {
+                provider : providerQuery,
+                id       : id
+            }
+        }
 	}, function ( err, user ) {
 		if ( !err ) {
 			return callback( null, user );
