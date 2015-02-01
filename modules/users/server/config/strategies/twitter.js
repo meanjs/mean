@@ -26,7 +26,7 @@ module.exports = function(config) {
 			var providerUserProfile = {
 				displayName: profile.displayName,
 				username: profile.username,
-				profileImageURL: (profile.photos && profile.photos.length) ? profile.photos[0].value : undefined,
+				profileImageURL: profile.photos[0].value.replace('normal', 'bigger'),
 				provider: 'twitter',
 				providerIdentifierField: 'id_str',
 				providerData: providerData

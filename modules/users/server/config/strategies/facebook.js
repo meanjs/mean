@@ -29,7 +29,7 @@ module.exports = function(config) {
 				lastName: profile.name.familyName,
 				displayName: profile.displayName,
 				email: profile.emails[0].value,
-				profileImageURL: (profile.photos && profile.photos.length) ? profile.photos[0].value : undefined,
+				profileImageURL: (profile.id) ? '//graph.facebook.com/' + profile.id + '/picture?type=large' : undefined,
 				provider: 'facebook',
 				providerIdentifierField: 'id',
 				providerData: providerData
