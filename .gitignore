@@ -11,7 +11,7 @@ Thumbs.db
 .sass-cache/
 npm-debug.log
 node_modules/
-public/lib
+public/lib/
 app/tests/coverage/
 .bower-*/
 .idea/
@@ -20,6 +20,7 @@ app/tests/coverage/
 # ======================
 config/sslcerts/*.pem
 access.log
+public/dist/
 
 # Sublime editor
 # ==============
