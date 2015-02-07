@@ -102,11 +102,11 @@ $ grunt test:client
 ## Development and deployment With Docker
 
 * Install [Docker](http://www.docker.com/)
-* Install [Fig](https://github.com/orchardup/fig)
+* Install [Compose](https://github.com/docker/fig)
 
-* Local development and testing with fig:
+* Local development and testing with Compose:
 ```bash
-$ fig up
+$ docker-compose up
 ```
 
 * Local development and testing with just Docker:
