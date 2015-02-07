@@ -12,7 +12,7 @@ var _ = require('lodash'),
 	nodemailer = require('nodemailer'),
 	async = require('async'),
 	crypto = require('crypto');
-	
+
 var smtpTransport = nodemailer.createTransport(config.mailer.options);
 
 /**
@@ -142,7 +142,7 @@ exports.reset = function(req, res, next) {
 									if (err) {
 										res.status(400).send(err);
 									} else {
-										// Return authenticated user 
+										// Return authenticated user
 										res.json(user);
 
 										done(err, user);
