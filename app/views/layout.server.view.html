@@ -58,8 +58,9 @@
 	</script>
 
 	<!--Application JavaScript Files-->
-	{% for jsFile in jsFiles %}
-		<script type="text/javascript" src="{{jsFile}}"></script>{% endfor %} 
+	{%- for jsFile in jsFiles %}
+	<script type="text/javascript" src="{{jsFile}}"></script>
+	{%- endfor %} 
 
 	{% if process.env.NODE_ENV === 'development' %}
 	<!--Livereload script rendered -->
