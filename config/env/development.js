@@ -8,6 +8,10 @@ module.exports = {
 			pass: ''
 		}
 	},
+	rabbit: {
+		hostname: 'localhost',
+		queue: 'meanjs'
+	},
 	log: {
 		// Can specify one of 'combined', 'common', 'dev', 'short', 'tiny'
 		format: 'dev',
