@@ -270,8 +270,10 @@ describe('Article CRUD tests', function() {
 	});
 
 	afterEach(function(done) {
-		User.remove().exec();
-		Article.remove().exec();
-		done();
+		User.remove().exec(function(){
+			Article.remove().exec(function(){
+				done();		
+			});	
+		});
 	});
 });
