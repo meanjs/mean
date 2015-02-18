@@ -57,8 +57,10 @@ describe('Article Model Unit Tests:', function() {
 	});
 
 	afterEach(function(done) {
-		Article.remove().exec();
-		User.remove().exec();
-		done();
+		Article.remove().exec(function(){
+			User.remove().exec(function(){
+				done();	
+			});	
+		});
 	});
 });
