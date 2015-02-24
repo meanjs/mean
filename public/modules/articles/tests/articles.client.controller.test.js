@@ -107,19 +107,21 @@
 			});
 
 			// Fixture mock form input values
-			scope.title = 'An Article about MEAN';
-			scope.content = 'MEAN rocks!';
+			scope.article = new Articles({
+				title: 'An Article about MEAN',
+				content: 'MEAN rocks!'
+			})
 
 			// Set POST response
 			$httpBackend.expectPOST('articles', sampleArticlePostData).respond(sampleArticleResponse);
 
 			// Run controller functionality
-			scope.create();
+			scope.submit();
 			$httpBackend.flush();
 
 			// Test form inputs are reset
-			expect(scope.title).toEqual('');
-			expect(scope.content).toEqual('');
+			expect(scope.article.title).toEqual('');
+			expect(scope.article.content).toEqual('');
 
 			// Test URL redirection after the article was created
 			expect($location.path()).toBe('/articles/' + sampleArticleResponse._id);
@@ -140,7 +142,7 @@
 			$httpBackend.expectPUT(/articles\/([0-9a-fA-F]{24})$/).respond();
 
 			// Run controller functionality
-			scope.update();
+			scope.submit();
 			$httpBackend.flush();
 
 			// Test URL location to new object

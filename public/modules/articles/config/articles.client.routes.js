@@ -11,7 +11,7 @@ angular.module('articles').config(['$stateProvider',
 		}).
 		state('createArticle', {
 			url: '/articles/create',
-			templateUrl: 'modules/articles/views/create-article.client.view.html'
+			templateUrl: 'modules/articles/views/form-article.client.view.html'
 		}).
 		state('viewArticle', {
 			url: '/articles/:articleId',
@@ -19,7 +19,7 @@ angular.module('articles').config(['$stateProvider',
 		}).
 		state('editArticle', {
 			url: '/articles/:articleId/edit',
-			templateUrl: 'modules/articles/views/edit-article.client.view.html'
+			templateUrl: 'modules/articles/views/form-article.client.view.html'
 		});
 	}
 ]);
