@@ -7,6 +7,9 @@ var init = require('./config/init')(),
 	mongoose = require('mongoose'),
 	chalk = require('chalk');
 
+// Enable, or force chalk to format colorful texts
+chalk.enabled = true;
+
 /**
  * Main application entry file.
  * Please note that the order of loading is important.
