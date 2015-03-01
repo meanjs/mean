@@ -12,7 +12,7 @@ var _ = require('lodash'),
 	nodemailer = require('nodemailer'),
 	async = require('async'),
 	crypto = require('crypto');
-	
+
 var smtpTransport = nodemailer.createTransport(config.mailer.options);
 
 /**
