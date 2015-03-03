@@ -116,7 +116,7 @@ describe('Article CRUD tests', function() {
 					.end(function(articleSaveErr, articleSaveRes) {
 						// Set message assertion
 						(articleSaveRes.body.message).should.match('Title cannot be blank');
-						
+
 						// Handle article save error
 						done(articleSaveErr);
 					});
@@ -250,7 +250,7 @@ describe('Article CRUD tests', function() {
 	});
 
 	it('should not be able to delete an article if not signed in', function(done) {
-		// Set article user 
+		// Set article user
 		article.user = user;
 
 		// Create new article model instance
@@ -274,7 +274,7 @@ describe('Article CRUD tests', function() {
 
 	afterEach(function(done) {
 		User.remove().exec(function() {
-			Article.remove().exec(done);	
+			Article.remove().exec(done);
 		});
 	});
 });

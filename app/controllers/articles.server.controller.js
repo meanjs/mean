@@ -99,8 +99,8 @@ exports.articleByID = function(req, res, next, id) {
 		if (err) return next(err);
 		if (!article) {
 			return res.status(404).send({
-  				message: 'Article not found'
-  			});
+				message: 'Article not found'
+			});
 		}
 		req.article = article;
 		next();
