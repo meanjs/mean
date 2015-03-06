@@ -45,7 +45,8 @@
 		"glob": "~4.0.5",
 		"async": "~0.9.0",
 		"nodemailer": "~1.3.0",
-		"chalk": "~0.5"
+		"chalk": "~0.5",
+		"amqp": "^0.2.0"
 	},
 	"devDependencies": {
 		"supertest": "~0.14.0",

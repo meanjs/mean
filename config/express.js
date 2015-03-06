@@ -28,6 +28,22 @@ module.exports = function(db) {
 	// Initialize express app
 	var app = express();
 
+	if (process.env.USE_RABBIT === 'true') {
+		var amqp = require('amqp');
+		var rabbitConn = amqp.createConnection({ host: config.rabbit.hostname });
+		rabbitConn.on('ready', function() {
+			var exchange = rabbitConn.exchange('');
+			global.publishEvent = function(eventMsg) {
+				exchange.publish(config.rabbit.queue, eventMsg);
+			};
+			global.publishEvent({
+				type : 'node started',
+				version : process.versions.v8,
+				filename : __filename
+			});
+		});
+	}
+
 	// Globbing model files
 	config.getGlobbedFiles('./app/models/**/*.js').forEach(function(modelPath) {
 		require(path.resolve(modelPath));
