@@ -111,29 +111,26 @@ gulp.task('less', function () {
 		.pipe(gulp.dest('./modules/'));
 });
 
-// Connect to MongoDB using the mongoose module
-gulp.task('openMongoose', function (done) {
-	var mongoose = require('./config/lib/mongoose.js');
-
-	mongoose.connect(function() {
-		done();
-	});
-});
-
-gulp.task('closeMongoose', function (done) {
-	var mongoose = require('./config/lib/mongoose.js');
-
-	mongoose.disconnect(function(err) {
-		done(err);
-	});
-});
-
 // Mocha tests task
-gulp.task('mocha', function () {
-	return gulp.src(testAssets.tests.server)
-		.pipe(plugins.mocha({
-			reporter: 'spec'
-		}));
+gulp.task('mocha', function (done) {
+	// Open mongoose connections
+	var mongoose = require('./config/lib/mongoose.js');
+
+	var error;
+	mongoose.connect(function() {
+		gulp.src(testAssets.tests.server)
+			.pipe(plugins.mocha({
+				reporter: 'spec'
+			}))
+			.on('error', function (err) {
+				error = new Error('Mocha tests failed');
+			}).on('end', function() {
+				mongoose.disconnect(function(){
+					done(error);
+				});
+			});
+	});
+
 });
 
 // Karma test runner task
@@ -143,11 +140,7 @@ gulp.task('karma', function (done) {
 			configFile: 'karma.conf.js',
 			action: 'run',
 			singleRun: true
-		}))
-		.on('error', function (err) {
-			// Make sure failed tests cause gulp to exit non-zero
-			throw err;
-		});
+		}));
 });
 
 // Selenium standalone WebDriver update task
@@ -176,7 +169,7 @@ gulp.task('build', function(done) {
 
 // Run the project tests
 gulp.task('test', function(done) {
-	runSequence('env:test', 'openMongoose', ['karma', 'mocha'], 'closeMongoose', done);
+	runSequence('env:test', ['karma', 'mocha'], done);
 });
 
 // Run the project in development mode
