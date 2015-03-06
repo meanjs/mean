@@ -115,15 +115,13 @@ gulp.task('less', function () {
 gulp.task('openMongoose', function (done) {
 	var mongoose = require('./config/lib/mongoose.js');
 
-	mongoose.connect(function(db) {
-		done();
-	});
+	mongoose.connect(done);
 });
 
 gulp.task('closeMongoose', function (done) {
 	var mongoose = require('./config/lib/mongoose.js');
 
-	mongoose.disconnect();
+	mongoose.disconnect(done);
 });
 
 // Mocha tests task
