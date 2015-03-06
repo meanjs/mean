@@ -112,12 +112,18 @@ gulp.task('less', function () {
 });
 
 // Connect to MongoDB using the mongoose module
-gulp.task('mongoose', function (done) {
+gulp.task('openMongoose', function (done) {
 	var mongoose = require('./config/lib/mongoose.js');
 
 	mongoose.connect(function(db) {
 		done();
 	});
+});
+
+gulp.task('closeMongoose', function (done) {
+	var mongoose = require('./config/lib/mongoose.js');
+
+	mongoose.disconnect();
 });
 
 // Mocha tests task
@@ -168,7 +174,7 @@ gulp.task('build', function(done) {
 
 // Run the project tests
 gulp.task('test', function(done) {
-	runSequence('env:test', 'mongoose', ['karma', 'mocha'], done);
+	runSequence('env:test', 'openMongoose', ['karma', 'mocha'], 'closeMongoose', done);
 });
 
 // Run the project in development mode
