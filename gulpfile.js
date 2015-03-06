@@ -115,16 +115,21 @@ gulp.task('less', function () {
 gulp.task('mocha', function (done) {
 	// Open mongoose connections
 	var mongoose = require('./config/lib/mongoose.js');
-
 	var error;
+
+	// Connect mongoose
 	mongoose.connect(function() {
+
+		// Run the tests
 		gulp.src(testAssets.tests.server)
 			.pipe(plugins.mocha({
 				reporter: 'spec'
 			}))
 			.on('error', function (err) {
-				error = new Error('Mocha tests failed');
+				// If an error occurs, save it
+				error = err;
 			}).on('end', function() {
+				// When the tests are done, disconnect mongoose and pass the error state back to gulp
 				mongoose.disconnect(function(){
 					done(error);
 				});
