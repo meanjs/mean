@@ -40,6 +40,8 @@ module.exports = {
 			stream: 'access.log'
 		}
 	},
+  // routing glob pattern(s)
+	routings: './app/routes/**/*.js',
 	assets: {
 		lib: {
 			css: [
@@ -68,5 +70,7 @@ module.exports = {
 			'public/lib/angular-mocks/angular-mocks.js',
 			'public/modules/*/tests/*.js'
 		]
-	}
+	},
+	logo: '/modules/core/img/brand/logo.png',
+	favicon: '/modules/core/img/brand/favicon.ico'
 };

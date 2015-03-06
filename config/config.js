@@ -74,3 +74,10 @@ module.exports.getCSSAssets = function() {
 	var output = this.getGlobbedFiles(this.assets.lib.css.concat(this.assets.css), 'public/');
 	return output;
 };
+
+/**
+ * Get the routing js files
+ */
+module.exports.getRoutingFiles = function() {
+	return this.getGlobbedFiles(this.routings);
+};
