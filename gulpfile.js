@@ -119,7 +119,6 @@ gulp.task('mocha', function (done) {
 
 	// Connect mongoose
 	mongoose.connect(function() {
-
 		// Run the tests
 		gulp.src(testAssets.tests.server)
 			.pipe(plugins.mocha({
@@ -128,7 +127,8 @@ gulp.task('mocha', function (done) {
 			.on('error', function (err) {
 				// If an error occurs, save it
 				error = err;
-			}).on('end', function() {
+			})
+			.on('end', function() {
 				// When the tests are done, disconnect mongoose and pass the error state back to gulp
 				mongoose.disconnect(function() {
 					done(error);
