@@ -6,6 +6,9 @@
 var glob = require('glob'),
 	chalk = require('chalk');
 
+// Enable, or force chalk to format colorful texts
+chalk.enabled = true;
+
 /**
  * Module init function.
  */
