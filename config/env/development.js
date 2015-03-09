@@ -1,10 +1,9 @@
 'use strict';
 
 module.exports = {
-    db: {
-        url: 'mongodb://localhost/mean-dev',
-        debug: true
-    },
+	db: {
+		url: 'mongodb://localhost/mean-dev'
+	},
 	app: {
 		title: 'MEAN.JS - Development Environment'
 	},
