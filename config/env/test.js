@@ -1,7 +1,10 @@
 'use strict';
 
 module.exports = {
-	db: 'mongodb://localhost/mean-test',
+    db: {
+        url: 'mongodb://localhost/mean-test',
+        debug: true
+    },
 	port: 3001,
 	app: {
 		title: 'MEAN.JS - Test Environment'
