@@ -27,7 +27,7 @@
 		"method-override": "~2.3.0",
 		"morgan": "~1.4.1",
 		"multer": "0.1.6",
-		"connect-mongo": "~0.4.1",
+		"connect-mongo": "~0.7.0",
 		"connect-flash": "~0.1.1",
 		"helmet": "~0.4.0",
 		"consolidate": "~0.10.0",
