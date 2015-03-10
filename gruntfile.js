@@ -125,6 +125,9 @@ module.exports = function(grunt) {
 			}
 		},
 		env: {
+			dev: {
+				NODE_ENV: 'development'
+			},
 			test: {
 				NODE_ENV: 'test'
 			},
@@ -174,7 +177,7 @@ module.exports = function(grunt) {
 	grunt.registerTask('lint', ['jshint', 'csslint']);
 
 	// Build task(s).
-	grunt.registerTask('build', ['lint', 'loadConfig', 'ngAnnotate', 'uglify', 'cssmin']);
+	grunt.registerTask('build', ['env:dev', 'lint', 'loadConfig', 'ngAnnotate', 'uglify', 'cssmin']);
 
 	// Test task.
 	grunt.registerTask('test', ['test:server', 'test:client']);
