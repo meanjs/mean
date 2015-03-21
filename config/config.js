@@ -81,6 +81,12 @@ var initGlobalConfigFolders = function(config, assets) {
     config.folders.client = getGlobbedPaths(path.join(process.cwd(), 'modules/*/client/'), process.cwd().replace(new RegExp(/\\/g),'/'));
 };
 
+var transformLibPaths = function(paths) {
+  return paths.map(function(p) {
+    return p.replace('node_modules', 'lib');
+  });
+};
+
 /**
  * Initialize global configuration files
  */
@@ -107,10 +113,10 @@ var initGlobalConfigFiles = function(config, assets) {
     config.files.server.policies = getGlobbedPaths(assets.server.policies);
 
     // Setting Globbed js files
-    config.files.client.js = getGlobbedPaths(assets.client.lib.js, 'public/').concat(getGlobbedPaths(assets.client.js, ['client/', 'public/']));
+    config.files.client.js = transformLibPaths(assets.client.lib.js).concat(getGlobbedPaths(assets.client.js, ['client/', 'public/']));
 
     // Setting Globbed css files
-    config.files.client.css = getGlobbedPaths(assets.client.lib.css, 'public/').concat(getGlobbedPaths(assets.client.css, ['client/', 'public/']));
+    config.files.client.css = transformLibPaths(assets.client.lib.css).concat(getGlobbedPaths(assets.client.css, ['client/', 'public/']));
 
     // Setting Globbed test files
     config.files.client.tests = getGlobbedPaths(assets.client.tests);
