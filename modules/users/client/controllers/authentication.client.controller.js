@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('users').controller('AuthenticationController', ['$scope', '$http', '$location', 'Authentication',
-	function($scope, $http, $location, Authentication) {
+angular.module('users').controller('AuthenticationController', ['$scope', '$state', '$http', '$location', '$window', 'Authentication',
+	function($scope, $state, $http, $location, $window, Authentication) {
 		$scope.authentication = Authentication;
 
 		// Get an eventual error defined in the URL query string:
@@ -15,8 +15,8 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$http
 				// If successful we assign the response to the global user model
 				$scope.authentication.user = response;
 
-				// And redirect to the index page
-				$location.path('/');
+				// And redirect to the previous or home page
+				$state.go($state.previous.state.name || 'home', $state.previous.params);
 			}).error(function(response) {
 				$scope.error = response.message;
 			});
@@ -27,11 +27,23 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$http
 				// If successful we assign the response to the global user model
 				$scope.authentication.user = response;
 
-				// And redirect to the index page
-				$location.path('/');
+				// And redirect to the previous or home page
+				$state.go($state.previous.state.name  || 'home', $state.previous.params);
 			}).error(function(response) {
 				$scope.error = response.message;
 			});
+		};
+
+		// OAuth provider request
+		$scope.callOauthProvider = function(url) {
+			var redirect_to;
+
+			if ($state.previous) {
+				redirect_to = $state.previous.href;
+			}
+
+			// Effectively call OAuth authentication route:
+			$window.location.href = url + (redirect_to ? '?redirect_to=' + encodeURIComponent(redirect_to) : '');
 		};
 	}
 ]);

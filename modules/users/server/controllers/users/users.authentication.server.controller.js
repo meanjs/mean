@@ -9,6 +9,12 @@ var path = require('path'),
 	passport = require('passport'),
 	User = mongoose.model('User');
 
+// URLs for which user can't be redirected on signin
+var noReturnUrls = [
+	'/authentication/signin',
+	'/authentication/signup'
+];
+
 /**
  * Signup
  */
@@ -78,10 +84,29 @@ exports.signout = function (req, res) {
 };
 
 /**
+ * OAuth provider call
+ */
+exports.oauthCall = function(strategy, scope) {
+	return function(req, res, next) {
+		// Set redirection path on session.
+		// Do not redirect to a signin or signup page
+		if (noReturnUrls.indexOf(req.query.redirect_to) === -1) {
+			req.session.redirect_to = req.query.redirect_to;
+		}
+		// Authenticate
+		passport.authenticate(strategy, scope)(req, res, next);
+	};
+};
+
+/**
  * OAuth callback
  */
 exports.oauthCallback = function (strategy) {
 	return function (req, res, next) {
+		// Pop redirect URL from session
+		var sessionRedirectURL = req.session.redirect_to;
+		delete req.session.redirect_to;
+
 		passport.authenticate(strategy, function (err, user, redirectURL) {
 			if (err) {
 				return res.redirect('/authentication/signin?err=' + encodeURIComponent(errorHandler.getErrorMessage(err)));
@@ -94,7 +119,7 @@ exports.oauthCallback = function (strategy) {
 					return res.redirect('/authentication/signin');
 				}
 
-				return res.redirect(redirectURL || '/');
+				return res.redirect(redirectURL || sessionRedirectURL || '/');
 			});
 		})(req, res, next);
 	};
