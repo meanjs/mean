@@ -2,7 +2,7 @@
 
 module.exports = {
 	db: {
-		uri: 'mongodb://localhost/mean-dev',
+		uri: process.env.DOCKER_MONG_URL || 'mongodb://localhost/mean-dev',
 		options: {
 			user: '',
 			pass: ''
