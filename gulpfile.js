@@ -63,6 +63,11 @@ gulp.task('csslint', function (done) {
 		}));
 });
 
+gulp.task('copy-client-libs', function() {
+	return gulp.src(_.union(defaultAssets.client.lib.css, defaultAssets.client.lib.js) , {base: 'node_modules'})
+		.pipe(gulp.dest('public/lib'));
+});
+
 // JS linting task
 gulp.task('jshint', function () {
 	return gulp.src(_.union(defaultAssets.server.allJS, defaultAssets.client.js, testAssets.tests.server, testAssets.tests.client, testAssets.tests.e2e))
@@ -179,12 +184,12 @@ gulp.task('test', function(done) {
 
 // Run the project in development mode
 gulp.task('default', function(done) {
-	runSequence('env:dev', 'lint', ['nodemon', 'watch'], done);
+	runSequence('env:dev', 'lint', 'copy-client-libs', ['nodemon', 'watch'], done);
 });
 
 // Run the project in debug mode
 gulp.task('debug', function(done) {
-	runSequence('env:dev', 'lint', ['nodemon', 'watch'], done);
+	runSequence('env:dev', 'lint', 'copy-client-libs', ['nodemon', 'watch'], done);
 });
 
 // Run the project in production mode

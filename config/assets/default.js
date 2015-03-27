@@ -4,19 +4,19 @@ module.exports = {
 	client: {
 		lib: {
 			css: [
-				'public/lib/bootstrap/dist/css/bootstrap.css',
-				'public/lib/bootstrap/dist/css/bootstrap-theme.css'
+				'node_modules/bootstrap/dist/css/bootstrap.css',
+				'node_modules/bootstrap/dist/css/bootstrap-theme.css'
 			],
 			js: [
-				'public/lib/angular/angular.js',
-				'public/lib/angular-resource/angular-resource.js',
-				'public/lib/angular-animate/angular-animate.js',
-				'public/lib/angular-ui-router/release/angular-ui-router.js',
-				'public/lib/angular-ui-utils/ui-utils.js',
-				'public/lib/angular-bootstrap/ui-bootstrap-tpls.js',
-				'public/lib/angular-file-upload/angular-file-upload.js'
+				'node_modules/angular/angular.js',
+				'node_modules/angular-resource/angular-resource.js',
+				'node_modules/angular-animate/angular-animate.js',
+				'node_modules/angular-ui-router/release/angular-ui-router.js',
+				'node_modules/angular-ui-utils/ui-utils.js',
+				'node_modules/angular-bootstrap/dist/ui-bootstrap-tpls.js',
+				'node_modules/angular-file-upload/dist/angular-file-upload.js'
 			],
-			tests: ['public/lib/angular-mocks/angular-mocks.js']
+			tests: ['node_modules/angular-mocks/angular-mocks.js']
 		},
 		css: [
 			'modules/*/client/css/*.css'
