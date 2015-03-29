@@ -6,6 +6,7 @@
 var passport = require('passport'),
 	GithubStrategy = require('passport-github').Strategy,
 	config = require('../config'),
+	User = require('mongoose').model('User'),
 	users = require('../../app/controllers/users.server.controller');
 
 module.exports = function() {
@@ -19,8 +20,6 @@ module.exports = function() {
 		function(req, accessToken, refreshToken, profile, done) {
 			// Set the provider data and include tokens
 			var providerData = profile._json;
-			providerData.accessToken = accessToken;
-			providerData.refreshToken = refreshToken;
 
 			// Create the user OAuth profile
 			var displayName = profile.displayName.trim();
@@ -28,19 +27,18 @@ module.exports = function() {
 			var firstName =  iSpace !== -1 ? displayName.substring(0, iSpace) : displayName;
 			var lastName = iSpace !== -1 ? displayName.substring(iSpace + 1) : '';
 
-			var providerUserProfile = {
+			var userData = {
 				firstName: firstName,
 				lastName: lastName,
 				displayName: displayName,
 				email: profile.emails[0].value,
-				username: profile.username,
-				provider: 'github',
-				providerIdentifierField: 'id',
-				providerData: providerData
+				username: profile.username
 			};
 
 			// Save the user OAuth profile
-			users.saveOAuthUserProfile(req, providerUserProfile, done);
+			User.oAuthHandle(req.user, 'github', providerData.id, accessToken, refreshToken, providerData, userData, function(err, user, isNew) {
+				users.saveOAuthUserProfile(err, user, isNew, done);
+			});
 		}
 	));
 };

@@ -26,7 +26,18 @@ exports.update = function(req, res) {
 		user.updated = Date.now();
 		user.displayName = user.firstName + ' ' + user.lastName;
 
-		user.save(function(err) {
+        user.identities.forEach(function(auth){
+            auth.accessToken = auth.accessToken || null;
+            auth.refreshToken = auth.refreshToken || null;
+            auth.providerData = auth.providerData || null;
+        });
+
+        if(req.body.username) {
+            user.removeOtherIdentity('username', req.body.username);
+            user.setIdentity('username', req.body.username);
+        }
+
+        user.save(function(err) {
 			if (err) {
 				return res.status(400).send({
 					message: errorHandler.getErrorMessage(err)

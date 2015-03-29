@@ -37,6 +37,8 @@ exports.getErrorMessage = function(err) {
 			if (err.errors[errName].message) message = err.errors[errName].message;
 		}
 	}
-
+    if(err.message && message.length === 0) {
+        return err.message;
+    }
 	return message;
 };

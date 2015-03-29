@@ -12,8 +12,23 @@
 					<input type="text" id="lastName" name="lastName" class="form-control" data-ng-model="user.lastName" placeholder="Last Name">
 				</div>
 				<div class="form-group">
-					<label for="email">Email</label>
-					<input type="email" id="email" name="email" class="form-control" data-ng-model="user.email" placeholder="Email">
+                    <btn class="btn btn-xs pull-right btn-default" data-ng-click="addEmail()">
+                        <i class="glyphicon glyphicon-plus"></i> Add Email
+                    </btn>
+					<label for="email">
+
+                        Email
+                    </label>
+                    <div class="row" ng-repeat="(key,identity) in user.emails">
+                        <div class="col-sm-10">
+					        <input type="email" id="email" name="email" class="form-control" data-ng-model="identity.id" placeholder="Email">
+                        </div>
+                        <div class="col-sm-2">
+                            <button class="btn btn-default btn-block" data-ng-click="removeEmail(key)" ng-if="key > 0">
+                                <i class="glyphicon glyphicon-trash"></i>
+                            </button>
+                        </div>
+                    </div>
 				</div>
 				<div class="form-group">
 					<label for="username">Username</label>

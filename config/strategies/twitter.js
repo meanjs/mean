@@ -6,6 +6,7 @@
 var passport = require('passport'),
 	TwitterStrategy = require('passport-twitter').Strategy,
 	config = require('../config'),
+	User = require('mongoose').model('User'),
 	users = require('../../app/controllers/users.server.controller');
 
 module.exports = function() {
@@ -16,11 +17,9 @@ module.exports = function() {
 			callbackURL: config.twitter.callbackURL,
 			passReqToCallback: true
 		},
-		function(req, token, tokenSecret, profile, done) {
+		function(req, accessToken, refreshToken, profile, done) {
 			// Set the provider data and include tokens
 			var providerData = profile._json;
-			providerData.token = token;
-			providerData.tokenSecret = tokenSecret;
 
 			// Create the user OAuth profile
 			var displayName = profile.displayName.trim();
@@ -28,7 +27,7 @@ module.exports = function() {
 			var firstName =  iSpace !== -1 ? displayName.substring(0, iSpace) : displayName;
 			var lastName = iSpace !== -1 ? displayName.substring(iSpace + 1) : '';
 
-			var providerUserProfile = {
+			var userData = {
 				firstName: firstName,
 				lastName: lastName,
 				displayName: displayName,
@@ -39,7 +38,9 @@ module.exports = function() {
 			};
 
 			// Save the user OAuth profile
-			users.saveOAuthUserProfile(req, providerUserProfile, done);
+			User.oAuthHandle(req.user, 'twitter', providerData.id_str, accessToken, refreshToken, providerData, userData, function(err, user, isNew) {
+				users.saveOAuthUserProfile(err, user, isNew, done);
+			});
 		}
 	));
 };

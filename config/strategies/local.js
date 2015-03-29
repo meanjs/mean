@@ -14,9 +14,7 @@ module.exports = function() {
 			passwordField: 'password'
 		},
 		function(username, password, done) {
-			User.findOne({
-				username: username
-			}, function(err, user) {
+			User.findByProvider([User.USERNAME,User.EMAIL], username, function(err, user) {
 				if (err) {
 					return done(err);
 				}
