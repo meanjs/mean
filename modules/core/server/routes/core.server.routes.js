@@ -9,5 +9,5 @@ module.exports = function(app) {
 	app.route('/not-found').get(core.renderNotFound);
 
 	// Define application route
-	app.route('/*').get(core.renderIndex);
+	app.route('/').get(core.renderIndex);
 };
