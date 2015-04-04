@@ -113,7 +113,7 @@ module.exports.initSession = function (app, db) {
 		resave: true,
 		secret: config.sessionSecret,
 		store: new MongoStore({
-			db: db.connection.db,
+			mongooseConnection: db.connection,
 			collection: config.sessionCollection
 		})
 	}));
