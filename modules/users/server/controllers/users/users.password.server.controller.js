@@ -11,7 +11,6 @@ var _ = require('lodash'),
 	passport = require('passport'),
 	User = mongoose.model('User'),
 	nodemailer = require('nodemailer'),
-	crypto = require('crypto'),
 	async = require('async'),
 	crypto = require('crypto');
 
