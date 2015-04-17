@@ -1,7 +1,6 @@
 .DS_Store
 .nodemonignore
 .sass-cache/
-npm-debug.log
 node_modules/
 public/lib/
 public/dist/
@@ -9,3 +8,4 @@ public/dist/
 .idea/
 uploads
 modules/users/client/img/profile/uploads
+*.log
