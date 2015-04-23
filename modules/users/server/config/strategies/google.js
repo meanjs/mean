@@ -4,7 +4,6 @@
  * Module dependencies.
  */
 var passport = require('passport'),
-	url = require('url'),
 	GoogleStrategy = require('passport-google-oauth').OAuth2Strategy,
 	users = require('../../controllers/users.server.controller');
 
