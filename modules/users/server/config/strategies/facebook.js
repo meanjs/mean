@@ -4,7 +4,6 @@
  * Module dependencies.
  */
 var passport = require('passport'),
-	url = require('url'),
 	FacebookStrategy = require('passport-facebook').Strategy,
 	users = require('../../controllers/users.server.controller');
 

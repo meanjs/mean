@@ -3,8 +3,7 @@
 /**
  * Module dependencies.
  */
-var _ = require('lodash'),
-	path = require('path'),
+var path = require('path'),
 	mongoose = require('mongoose'),
 	Article = mongoose.model('Article'),
 	errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller'));

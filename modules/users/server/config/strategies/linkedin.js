@@ -4,7 +4,6 @@
  * Module dependencies.
  */
 var passport = require('passport'),
-	url = require('url'),
 	LinkedInStrategy = require('passport-linkedin').Strategy,
 	users = require('../../controllers/users.server.controller');
 
