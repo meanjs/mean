@@ -42,6 +42,7 @@ module.exports = function(db) {
 	app.locals.cssFiles = config.getCSSAssets();
 	app.locals.logo = config.logo;
 	app.locals.favicon = config.favicon;
+	app.locals.livereload = config.livereload;
 
 	// Passing the request url to environment locals
 	app.use(function(req, res, next) {
