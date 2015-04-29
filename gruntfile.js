@@ -15,9 +15,13 @@ module.exports = function(grunt) {
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
 		watch: {
+			serverJS: {
+				files: watchFiles.serverJS,
+				tasks: ['jshint']
+ 			},
 			server: {
 				files: ['.rebooted'],
-					options: {
+				options: {
 					livereload: true
 				}
 			},
