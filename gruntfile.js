@@ -15,19 +15,12 @@ module.exports = function(grunt) {
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
 		watch: {
-			serverViews: {
-				files: watchFiles.serverViews,
-				options: {
-					livereload: true
-				}
-			},
-			serverJS: {
-				files: watchFiles.serverJS,
-				tasks: ['jshint'],
-				options: {
-					livereload: true
-				}
-			},
+			server: {
+                files: ['.rebooted'],
+                options: {
+                    livereload: true
+                }
+            },
 			clientViews: {
 				files: watchFiles.clientViews,
 				options: {
@@ -92,7 +85,14 @@ module.exports = function(grunt) {
 				options: {
 					nodeArgs: ['--debug'],
 					ext: 'js,html',
-					watch: watchFiles.serverViews.concat(watchFiles.serverJS)
+					watch: watchFiles.serverViews.concat(watchFiles.serverJS),
+					callback: function (nodemon) {
+						nodemon.on('restart', function () {
+				          	setTimeout(function() {
+				            	require('fs').writeFileSync('.rebooted', 'rebooted');
+				          	}, 1000);
+				        });
+					}
 				}
 			}
 		},
