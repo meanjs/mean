@@ -88,10 +88,10 @@ module.exports = function(grunt) {
 					watch: watchFiles.serverViews.concat(watchFiles.serverJS),
 					callback: function (nodemon) {
 						nodemon.on('restart', function () {
-				          	setTimeout(function() {
-				            	require('fs').writeFileSync('.rebooted', 'rebooted');
-				          	}, 1000);
-				        });
+							setTimeout(function() {
+								require('fs').writeFileSync('.rebooted', 'rebooted');
+							}, 1000);
+						});
 					}
 				}
 			}
