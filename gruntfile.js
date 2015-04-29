@@ -16,11 +16,11 @@ module.exports = function(grunt) {
 		pkg: grunt.file.readJSON('package.json'),
 		watch: {
 			server: {
-                files: ['.rebooted'],
-                options: {
-                    livereload: true
-                }
-            },
+				files: ['.rebooted'],
+					options: {
+					livereload: true
+				}
+			},
 			clientViews: {
 				files: watchFiles.clientViews,
 				options: {
