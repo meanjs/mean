@@ -23,18 +23,15 @@ module.exports = function (grunt) {
 			}
 		},
 		watch: {
-			serverViews: {
-				files: defaultAssets.server.views,
+			server: {
+				files: ['.rebooted'],
 				options: {
 					livereload: true
 				}
 			},
 			serverJS: {
 				files: defaultAssets.server.allJS,
-				tasks: ['jshint'],
-				options: {
-					livereload: true
-				}
+				tasks: ['jshint']
 			},
 			clientViews: {
 				files: defaultAssets.client.views,
@@ -77,7 +74,14 @@ module.exports = function (grunt) {
 				options: {
 					nodeArgs: ['--debug'],
 					ext: 'js,html',
-					watch: _.union(defaultAssets.server.views, defaultAssets.server.allJS, defaultAssets.server.config)
+					watch: _.union(defaultAssets.server.views, defaultAssets.server.allJS, defaultAssets.server.config),
+					callback: function (nodemon) {
+						nodemon.on('restart', function () {
+							setTimeout(function() {
+								require('fs').writeFileSync('.rebooted', 'rebooted');
+							}, 1000);
+						});
+					}
 				}
 			}
 		},
