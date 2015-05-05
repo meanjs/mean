@@ -101,12 +101,12 @@ $ grunt test:client
 
 ## Development and deployment With Docker
 
-* Install [Docker](http://www.docker.com/)
-* Install [Fig](https://github.com/orchardup/fig)
+* Install [Docker](https://docs.docker.com/installation/#installation)
+* Install [Compose](https://docs.docker.com/compose/install/)
 
-* Local development and testing with fig:
+* Local development and testing with compose:
 ```bash
-$ fig up
+$ docker-compose up
 ```
 
 * Local development and testing with just Docker:
@@ -114,7 +114,6 @@ $ fig up
 $ docker build -t mean .
 $ docker run -p 27017:27017 -d --name db mongo
 $ docker run -p 3000:3000 --link db:db_1 mean
-$
 ```
 
 * To enable live reload, forward port 35729 and mount /app and /public as volumes:

@@ -9,7 +9,7 @@ Thumbs.db
 # ==========================
 .nodemonignore
 .sass-cache/
-npm-debug.log
+npm-debug.log*
 node_modules/
 public/lib/
 app/tests/coverage/
