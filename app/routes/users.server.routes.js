@@ -52,6 +52,10 @@ module.exports = function(app) {
 	app.route('/auth/github').get(passport.authenticate('github'));
 	app.route('/auth/github/callback').get(users.oauthCallback('github'));
 
+	// Setting the paypal oauth routes
+	app.route('/auth/paypal').get(passport.authenticate('paypal'));
+	app.route('/auth/paypal/callback').get(users.oauthCallback('paypal'));
+
 	// Finish by binding the user middleware
 	app.param('userId', users.userByID);
 };
