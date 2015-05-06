@@ -9,3 +9,4 @@ public/dist/
 .idea/
 uploads
 modules/users/client/img/profile/uploads
+*.pem
