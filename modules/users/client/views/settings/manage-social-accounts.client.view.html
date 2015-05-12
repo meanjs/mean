@@ -1,9 +1,9 @@
 <section class="row" data-ng-controller="SocialAccountsController">
 	<h3 class="col-md-12 text-center" data-ng-show="hasConnectedAdditionalSocialAccounts()">Connected social accounts:</h3>
 	<div class="col-md-12 text-center">
-		<div data-ng-repeat="(providerName, providerData) in user.additionalProvidersData" class="social-account-container">
-			<img ng-src="/modules/users/img/buttons/{{providerName}}.png">
-			<a class="btn btn-danger btn-remove-account" data-ng-click="removeUserSocialAccount(providerName)">
+		<div data-ng-repeat="(id, providerData) in user.identities" class="social-account-container" ng-if="providerData.provider !== 'username' && providerData.provider !== 'email'">
+			<img ng-src="/modules/users/img/buttons/{{providerData.provider}}.png">
+			<a class="btn btn-danger btn-remove-account" data-ng-click="removeUserSocialAccount(providerData.provider,providerData.id)">
 				<i class="glyphicon glyphicon-trash"></i>
 			</a>
 		</div>
