@@ -5,9 +5,10 @@
  */
 var passport = require('passport'),
 	GoogleStrategy = require('passport-google-oauth').OAuth2Strategy,
+	User = require('mongoose').model('User'),
 	users = require('../../controllers/users.server.controller');
 
-module.exports = function(config) {
+module.exports = function (config) {
 	// Use google strategy
 	passport.use(new GoogleStrategy({
 			clientID: config.google.clientID,
@@ -15,14 +16,12 @@ module.exports = function(config) {
 			callbackURL: config.google.callbackURL,
 			passReqToCallback: true
 		},
-		function(req, accessToken, refreshToken, profile, done) {
+		function (req, accessToken, refreshToken, profile, done) {
 			// Set the provider data and include tokens
 			var providerData = profile._json;
-			providerData.accessToken = accessToken;
-			providerData.refreshToken = refreshToken;
 
 			// Create the user OAuth profile
-			var providerUserProfile = {
+			var userData = {
 				firstName: profile.name.givenName,
 				lastName: profile.name.familyName,
 				displayName: profile.displayName,
@@ -35,7 +34,9 @@ module.exports = function(config) {
 			};
 
 			// Save the user OAuth profile
-			users.saveOAuthUserProfile(req, providerUserProfile, done);
+			User.oAuthHandle(req.user, 'google', providerData.id, accessToken, refreshToken, providerData, userData, function (err, user, isNew) {
+				users.saveOAuthUserProfile(err, user, isNew, done);
+			});
 		}
 	));
 };

@@ -3,14 +3,14 @@
 /**
  * Get unique error field name
  */
-var getUniqueErrorMessage = function(err) {
+var getUniqueErrorMessage = function (err) {
 	var output;
 
 	try {
 		var fieldName = err.err.substring(err.err.lastIndexOf('.$') + 2, err.err.lastIndexOf('_1'));
 		output = fieldName.charAt(0).toUpperCase() + fieldName.slice(1) + ' already exist';
 
-	} catch(ex) {
+	} catch (ex) {
 		output = 'Unique field already exist';
 	}
 
@@ -20,9 +20,9 @@ var getUniqueErrorMessage = function(err) {
 /**
  * Get the error message from error object
  */
-exports.getErrorMessage = function(err) {
+exports.getErrorMessage = function (err) {
 	var message = '';
-	
+
 	if (err.code) {
 		switch (err.code) {
 			case 11000:
@@ -33,6 +33,9 @@ exports.getErrorMessage = function(err) {
 				message = 'Something went wrong';
 		}
 	} else {
+		if (!err.errors && err.message) {
+			return err.message;
+		}
 		for (var errName in err.errors) {
 			if (err.errors[errName].message) message = err.errors[errName].message;
 		}

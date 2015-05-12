@@ -137,8 +137,8 @@ module.exports = function (grunt) {
 					expand: true,
 					src: defaultAssets.client.sass,
 					ext: '.css',
-					rename: function(base, src) {
-						return  src.replace('/scss/', '/css/');
+					rename: function (base, src) {
+						return src.replace('/scss/', '/css/');
 					}
 				}]
 			}
@@ -149,8 +149,8 @@ module.exports = function (grunt) {
 					expand: true,
 					src: defaultAssets.client.less,
 					ext: '.css',
-					rename: function(base, src) {
-						return  src.replace('/less/', '/css/');
+					rename: function (base, src) {
+						return src.replace('/less/', '/css/');
 					}
 				}]
 			}
@@ -193,14 +193,14 @@ module.exports = function (grunt) {
 		}
 	});
 
-	// Load NPM tasks 
+	// Load NPM tasks
 	require('load-grunt-tasks')(grunt);
 
 	// Making grunt default to force in order not to break the project.
 	grunt.option('force', true);
 
 	// Connect to the MongoDB instance and load the models
-	grunt.task.registerTask('mongoose', 'Task that connects to the MongoDB instance and loads the application models.', function() {
+	grunt.task.registerTask('mongoose', 'Task that connects to the MongoDB instance and loads the application models.', function () {
 		// Get the callback
 		var done = this.async();
 
@@ -208,7 +208,7 @@ module.exports = function (grunt) {
 		var mongoose = require('./config/lib/mongoose.js');
 
 		// Connect to database
-		mongoose.connect(function(db) {
+		mongoose.connect(function (db) {
 			done();
 		});
 	});

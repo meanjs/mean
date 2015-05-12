@@ -1,12 +1,15 @@
 'use strict';
 
-module.exports = function(app) {
+module.exports = function (app) {
 	// User Routes
+	var usersPolicy = require('../policies/users.server.policy');
 	var users = require('../controllers/users.server.controller');
 
 	// Setting up the users profile api
 	app.route('/api/users/me').get(users.me);
-	app.route('/api/users').put(users.update);
+	app.route('/api/users')
+		.get(usersPolicy.isAllowed, users.users)
+		.put(users.update);
 	app.route('/api/users/accounts').delete(users.removeOAuthProvider);
 	app.route('/api/users/password').post(users.changePassword);
 	app.route('/api/users/picture').post(users.changeProfilePicture);

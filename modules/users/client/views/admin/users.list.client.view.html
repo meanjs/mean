@@ -1,0 +1,34 @@
+<div data-ng-controller="AdminUsersController">
+	<h3 class="col-md-12 text-center">Browse Users</h3>
+
+	<div class="col-md-12">
+		<table class="table table-bordered">
+			<thead>
+			<tr>
+				<th>ID</th>
+				<th>User Name</th>
+				<th>Data</th>
+				<th>Accounts</th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr data-ng-repeat="row in rows">
+				<td class="col-sm-2">{{ row._id | limitTo : 6 }}</td>
+				<td class="col-sm-2">{{ row.displayName }}</td>
+				<td class="col-sm-4">
+					<json-tree object="row"></json-tree>
+				</td>
+				<td class="col-sm-4">
+					<ul class="list-unstyled">
+						<li data-ng-repeat="identity in row.identities">
+							<a ng-href="{{ identityToLink(identity) }}">
+								{{ identity.provider }} - {{ identity.id }}
+							</a>
+						</li>
+					</ul>
+				</td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

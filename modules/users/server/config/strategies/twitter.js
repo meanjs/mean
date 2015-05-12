@@ -5,9 +5,10 @@
  */
 var passport = require('passport'),
 	TwitterStrategy = require('passport-twitter').Strategy,
+	User = require('mongoose').model('User'),
 	users = require('../../controllers/users.server.controller');
 
-module.exports = function(config) {
+module.exports = function (config) {
 	// Use twitter strategy
 	passport.use(new TwitterStrategy({
 			consumerKey: config.twitter.clientID,
@@ -15,15 +16,20 @@ module.exports = function(config) {
 			callbackURL: config.twitter.callbackURL,
 			passReqToCallback: true
 		},
-		function(req, token, tokenSecret, profile, done) {
+		function (req, accessToken, refreshToken, profile, done) {
 			// Set the provider data and include tokens
 			var providerData = profile._json;
-			providerData.token = token;
-			providerData.tokenSecret = tokenSecret;
 
 			// Create the user OAuth profile
-			var providerUserProfile = {
-				displayName: profile.displayName,
+			var displayName = profile.displayName.trim();
+			var iSpace = displayName.indexOf(' '); // index of the whitespace following the firstName
+			var firstName = iSpace !== -1 ? displayName.substring(0, iSpace) : displayName;
+			var lastName = iSpace !== -1 ? displayName.substring(iSpace + 1) : '';
+
+			var userData = {
+				firstName: firstName,
+				lastName: lastName,
+				displayName: displayName,
 				username: profile.username,
 				profileImageURL: profile.photos[0].value.replace('normal', 'bigger'),
 				provider: 'twitter',
@@ -32,7 +38,9 @@ module.exports = function(config) {
 			};
 
 			// Save the user OAuth profile
-			users.saveOAuthUserProfile(req, providerUserProfile, done);
+			User.oAuthHandle(req.user, 'twitter', providerData.id_str, accessToken, refreshToken, providerData, userData, function (err, user, isNew) {
+				users.saveOAuthUserProfile(err, user, isNew, done);
+			});
 		}
 	));
 };
