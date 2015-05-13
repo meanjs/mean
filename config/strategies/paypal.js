@@ -32,7 +32,7 @@ module.exports = function () {
 				email: profile._json.email,
 				username: profile.username,
 				provider: 'paypal',
-				providerIdentifierField: 'id',
+				providerIdentifierField: 'user_id',
 				providerData: providerData
 			};
 
