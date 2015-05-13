@@ -4,7 +4,8 @@
  * Module dependencies.
  */
 var _ = require('lodash'),
-	glob = require('glob');
+	glob = require('glob'),
+	fs = require('fs');
 
 /**
  * Load app configurations
@@ -12,7 +13,7 @@ var _ = require('lodash'),
 module.exports = _.extend(
 	require('./env/all'),
 	require('./env/' + process.env.NODE_ENV),
-	require('./env/local.js') || {}
+	(fs.existsSync('./config/env/local.js') && require('./env/local.js')) || {}
 );
 
 /**
