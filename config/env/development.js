@@ -45,6 +45,12 @@ module.exports = {
 		clientSecret: process.env.GITHUB_SECRET || 'APP_SECRET',
 		callbackURL: '/auth/github/callback'
 	},
+	paypal: {
+		clientID: process.env.PAYPAL_ID || 'APP_ID',
+		clientSecret: process.env.PAYPAL_SECRET || 'APP_SECRET',
+		callbackURL: '/auth/paypal/callback',
+		sandbox: true
+	},
 	mailer: {
 		from: process.env.MAILER_FROM || 'MAILER_FROM',
 		options: {
