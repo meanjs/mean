@@ -4,6 +4,7 @@
 ehthumbs.db
 Icon?
 Thumbs.db
+config/env/local.js
 
 # Node and related ecosystem
 # ==========================
