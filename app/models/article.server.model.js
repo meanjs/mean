@@ -28,6 +28,14 @@ var ArticleSchema = new Schema({
 	user: {
 		type: Schema.ObjectId,
 		ref: 'User'
+	},
+	upVotes: {
+		type: Number,
+		default: 0
+	},
+	downVotes: {
+		type: Number,
+		default: 0
 	}
 });
 
