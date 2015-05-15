@@ -75,7 +75,8 @@ describe('Article CRUD tests', function() {
 								var articles = articlesGetRes.body;
 
 								// Set assertions
-								(articles[0].user._id).should.equal(userId);
+								(articles[0].updatedBy._id).should.equal(userId);
+								(articles[0].createdBy._id).should.equal(userId);
 								(articles[0].title).should.match('Article Title');
 
 								// Call the assertion callback
@@ -165,6 +166,10 @@ describe('Article CRUD tests', function() {
 	});
 
 	it('should be able to get a list of articles if not signed in', function(done) {
+		// Set article user
+		article.updatedBy = user;
+		article.createdBy = user;
+
 		// Create new article model instance
 		var articleObj = new Article(article);
 
@@ -185,6 +190,10 @@ describe('Article CRUD tests', function() {
 
 
 	it('should be able to get a single article if not signed in', function(done) {
+		// Set article user
+		article.updatedBy = user;
+		article.createdBy = user;
+
 		// Create new article model instance
 		var articleObj = new Article(article);
 
@@ -251,7 +260,8 @@ describe('Article CRUD tests', function() {
 
 	it('should not be able to delete an article if not signed in', function(done) {
 		// Set article user
-		article.user = user;
+		article.updatedBy = user;
+		article.createdBy = user;
 
 		// Create new article model instance
 		var articleObj = new Article(article);
