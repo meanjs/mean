@@ -4,9 +4,10 @@ web:
    - db
   ports:
    - "3000:3000"
-  environment: 
+  environment:
    NODE_ENV: development
+   DOCKER_MONG_URL: mongodb://mean_db_1/mean-dev
 db:
   image: mongo
-  ports: 
+  ports:
    - "27017:27017"
