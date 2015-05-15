@@ -1,4 +1,4 @@
-FROM dockerfile/nodejs
+FROM node
 
 MAINTAINER Matthias Luebken, matthias@catalyst-zero.com
 
