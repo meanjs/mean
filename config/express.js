@@ -33,6 +33,14 @@ module.exports = function(db) {
 		require(path.resolve(modelPath));
 	});
 
+	// Globbing controllers files
+	config.getGlobbedFiles('./app/controllers/*.js').forEach(function(controllerPath) {
+		var controller = require(path.resolve(controllerPath));
+		if('init' in controller) {
+			controller.init(app);
+		}
+	});	
+
 	// Setting application local variables
 	app.locals.title = config.app.title;
 	app.locals.description = config.app.description;
