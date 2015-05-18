@@ -20,24 +20,23 @@ exports.renderServerError = function(req, res) {
 
 /**
  * Render the server not found responses
+ * Performs content-negotiation on the Accept HTTP header
  */
 exports.renderNotFound = function(req, res) {
-	res.status(404);
 
-	// Respond with html page
-	if (req.accepts('html')) {
-		res.render('modules/core/server/views/404', {
-			url: req.originalUrl
+	res
+		.status(404)
+		.format({
+			'text/html': function(){
+				res.render('modules/core/server/views/404', {
+					url: req.originalUrl
+				});
+			},
+			'application/json': function(){
+				res.json({ error: 'Path not found' });
+			},
+			'default': function(){
+				res.send('Path not found');
+			}
 		});
-		return;
-	}
-
-	// Respond with json to API calls
-	if (req.accepts('json')) {
-		res.json({ error: 'Path not found' });
-		return;
-	}
-
-	// Default to plain-text
-	res.type('txt').send('Path not found');
 };
