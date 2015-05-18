@@ -24,9 +24,7 @@ exports.renderServerError = function(req, res) {
  */
 exports.renderNotFound = function(req, res) {
 
-	res
-		.status(404)
-		.format({
+	res.status(404).format({
 			'text/html': function(){
 				res.render('modules/core/server/views/404', {
 					url: req.originalUrl
