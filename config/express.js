@@ -40,6 +40,9 @@ module.exports = function(db) {
 	app.locals.facebookAppId = config.facebook.clientID;
 	app.locals.jsFiles = config.getJavaScriptAssets();
 	app.locals.cssFiles = config.getCSSAssets();
+	app.locals.logo = config.logo;
+	app.locals.favicon = config.favicon;
+	app.locals.livereload = config.livereload;
 
 	// Passing the request url to environment locals
 	app.use(function(req, res, next) {
@@ -119,7 +122,7 @@ module.exports = function(db) {
 	app.use(flash());
 
 	// Globbing routing files
-	config.getGlobbedFiles('./app/routes/**/*.js').forEach(function(routePath) {
+	config.getRoutingFiles().forEach(function(routePath) {
 		require(path.resolve(routePath))(app);
 	});
 
