@@ -1,7 +1,7 @@
 .DS_Store
 .nodemonignore
 .sass-cache/
-npm-debug.log
+*.log
 node_modules/
 public/lib/
 public/dist/
