@@ -174,6 +174,26 @@ module.exports = function (grunt) {
 				reporter: 'spec'
 			}
 		},
+        mocha_istanbul: {
+            coverage: {
+                src: testAssets.tests.server,
+                options: {
+                    mask: '*.tests.js',
+                    require: 'server.js'
+                }
+            }
+        },
+        istanbul_check_coverage: {
+            default: {
+                options: {
+                    coverageFolder: 'coverage*', // will check both coverage folders and merge the coverage results
+                    check: {
+                        lines: 80,
+                        statements: 80
+                    }
+                }
+            }
+        },
 		karma: {
 			unit: {
 				configFile: 'karma.conf.js'
@@ -220,7 +240,9 @@ module.exports = function (grunt) {
 	grunt.registerTask('build', ['env:dev', 'lint', 'ngAnnotate', 'uglify', 'cssmin']);
 
 	// Run the project tests
-	grunt.registerTask('test', ['env:test', 'mongoose', 'mochaTest', 'karma:unit']);
+    grunt.registerTask('test', ['test:server', 'test:client']);
+    grunt.registerTask('test:server', ['env:test', 'mongoose', 'mochaTest', 'mocha_istanbul', 'istanbul_check_coverage']);
+    grunt.registerTask('test:client', ['env:test', 'karma:unit']);
 
 	// Run the project in development mode
 	grunt.registerTask('default', ['env:dev', 'lint', 'concurrent:default']);
