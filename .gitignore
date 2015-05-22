@@ -8,4 +8,5 @@ public/dist/
 .bower-*/
 .idea/
 uploads
+coverage/
 modules/users/client/img/profile/uploads
