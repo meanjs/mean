@@ -97,6 +97,9 @@ var initGlobalConfigFiles = function(config, assets) {
     // Setting Globbed route files
     config.files.server.routes = getGlobbedPaths(assets.server.routes);
 
+	// Setting Globbed route files
+	config.files.server.raml = getGlobbedPaths(assets.server.raml);
+
     // Setting Globbed config files
     config.files.server.configs = getGlobbedPaths(assets.server.config);
 

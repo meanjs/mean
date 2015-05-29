@@ -9,7 +9,11 @@ var _ = require('lodash'),
 	gulp = require('gulp'),
 	gulpLoadPlugins = require('gulp-load-plugins'),
 	runSequence = require('run-sequence'),
-	plugins = gulpLoadPlugins();
+	plugins = gulpLoadPlugins(),
+	raml = require('raml-parser'),
+	path = require('path'),
+	async = require('async'),
+	chalk = require('chalk');
 
 // Set NODE_ENV to 'test'
 gulp.task('env:test', function () {
@@ -136,6 +140,113 @@ gulp.task('mocha', function (done) {
 			});
 	});
 
+});
+
+gulp.task('raml', function (done){
+
+	var paths = [];
+	var config = require('./config/config');
+	var express = require('express')();
+	var should = require('should');
+
+	var loadRamlDefinitions = function(callback) {
+		async.eachSeries(config.files.server.raml, function (filePath, callback) {
+			raml.loadFile(path.resolve(filePath)).then(function (data) {
+				paths = paths.concat(data.resources);
+				callback();
+			}, function (error) {
+				console.log('Error parsing: ' + error);
+				callback();
+			});
+		}, callback);
+	};
+
+	var loadRoutes = function(callback) {
+		config.files.server.routes.forEach(function (filePath) {
+			require(path.resolve(filePath))(express);
+		});
+		callback();
+	};
+
+	var ramlToExpress = function(path) {
+		var z = path.replace(/\{(.+?)\}/g, ':$1');
+		return z;
+	};
+
+	var expressToRaml = function(path) {
+		var z = path.replace(/:([a-zA-Z0-9-]+)/g, '{$1}');
+		return z;
+	};
+
+
+	var validateRoutes = function(callback) {
+		// check RAML against express
+		express._router.stack.forEach(function(item) {
+			if(item.route) {
+				var registeredInRaml = false;
+				var expressPath = expressToRaml(item.route.path);
+
+				paths.forEach(function(route) {
+					if(route.relativeUri === expressPath) {
+						Object.keys(item.route.methods).forEach(function(expressMethod) {
+							if(expressMethod !== '_all') {
+								var methodFound = false;
+								route.methods.forEach(function (ramlMethod) {
+									if (ramlMethod.method === expressMethod) {
+										methodFound = true;
+									}
+								});
+								if (!methodFound) {
+									console.log(chalk.yellow('In Path `' + item.route.path + '` method `' +
+									expressMethod + '` is not defined in RAML'));
+								}
+							}
+						});
+						registeredInRaml = true;
+					}
+				});
+				if(!registeredInRaml) {
+					console.log(chalk.yellow('Path `' + item.route.path + '` is not registed in RAML'));
+				}
+			}
+		});
+
+		// check express against RAML
+		paths.forEach(function(route) {
+			var relativeUri = ramlToExpress(route.relativeUri);
+			route.methods.forEach(function(ramlMethod) {
+				var registedInExpress = false
+				express._router.stack.forEach(function(item) {
+					if(item.route) {
+						if(relativeUri === item.route.path && item.route.methods[ramlMethod.method]) {
+							registedInExpress = true;
+						}
+					}
+				});
+				if(!registedInExpress) {
+					console.log(chalk.yellow('In Path `' + route.relativeUri + '` method `' +
+					ramlMethod.method + '` is not defined in Express'));
+				}
+			});
+		});
+		callback();
+	};
+
+	var mongoose = require('./config/lib/mongoose.js');
+	var error;
+
+	// Connect mongoose
+	mongoose.connect(function() {
+		loadRamlDefinitions(function() {
+			loadRoutes(function() {
+				validateRoutes(function() {
+					mongoose.disconnect(function () {
+						done(error);
+					});
+				});
+			});
+		});
+	});
 });
 
 // Karma test runner task
