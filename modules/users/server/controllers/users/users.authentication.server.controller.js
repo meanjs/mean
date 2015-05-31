@@ -80,21 +80,19 @@ exports.signout = function (req, res) {
 /**
  * OAuth callback
  */
-exports.oauthCallback = function (strategy) {
-	return function (req, res, next) {
-		passport.authenticate(strategy, function (err, user, redirectURL) {
-			if (err || !user) {
+exports.oauthCallback = function (req, res, next) {
+	passport.authenticate(req.oauthProvider, function (err, user, redirectURL) {
+		if (err || !user) {
+			return res.redirect('/#!/signin');
+		}
+		req.login(user, function (err) {
+			if (err) {
 				return res.redirect('/#!/signin');
 			}
-			req.login(user, function (err) {
-				if (err) {
-					return res.redirect('/#!/signin');
-				}
 
-				return res.redirect(redirectURL || '/');
-			});
-		})(req, res, next);
-	};
+			return res.redirect(redirectURL || '/');
+		});
+	})(req, res, next);
 };
 
 /**
@@ -145,3 +143,49 @@ exports.removeOAuthProvider = function (req, res) {
 		res.status(400).json('Invalid parameters');
 	}
 };
+
+exports.oauthAccept = function (req, res) {
+	switch (req.oauthProvider) {
+		case 'facebook':
+		{
+			return passport.authenticate('facebook', {
+				scope: ['email']
+			})(req, res);
+		}
+		case 'twitter':
+		{
+			return passport.authenticate('twiter')(req, res);
+		}
+		case 'google':
+		{
+			return passport.authenticate('google', {
+				scope: [
+					'https://www.googleapis.com/auth/userinfo.profile',
+					'https://www.googleapis.com/auth/userinfo.email'
+				]
+			})(req, res);
+		}
+		case 'linkedin':
+		{
+			return passport.authenticate('linkedin', {
+				scope: [
+					'r_basicprofile',
+					'r_emailaddress'
+				]
+			})(req, res);
+		}
+		case 'github':
+		{
+			return passport.authenticate('github')(req, res);
+		}
+
+	}
+	res.status('400').json('Unsupported provider');
+}
+
+
+exports.oauthProviderByName = function (req, res, next, id) {
+	req.oauthProvider = id;
+	next();
+};
+

@@ -19,35 +19,8 @@ module.exports = function(app) {
 	app.route('/api/auth/signin').post(users.signin);
 	app.route('/api/auth/signout').get(users.signout);
 
-	// Setting the facebook oauth routes
-	app.route('/api/auth/facebook').get(passport.authenticate('facebook', {
-		scope: ['email']
-	}));
-	app.route('/api/auth/facebook/callback').get(users.oauthCallback('facebook'));
-
-	// Setting the twitter oauth routes
-	app.route('/api/auth/twitter').get(passport.authenticate('twitter'));
-	app.route('/api/auth/twitter/callback').get(users.oauthCallback('twitter'));
-
-	// Setting the google oauth routes
-	app.route('/api/auth/google').get(passport.authenticate('google', {
-		scope: [
-			'https://www.googleapis.com/auth/userinfo.profile',
-			'https://www.googleapis.com/auth/userinfo.email'
-		]
-	}));
-	app.route('/api/auth/google/callback').get(users.oauthCallback('google'));
-
-	// Setting the linkedin oauth routes
-	app.route('/api/auth/linkedin').get(passport.authenticate('linkedin', {
-		scope: [
-			'r_basicprofile',
-			'r_emailaddress'
-		]
-	}));
-	app.route('/api/auth/linkedin/callback').get(users.oauthCallback('linkedin'));
-
-	// Setting the github oauth routes
-	app.route('/api/auth/github').get(passport.authenticate('github'));
-	app.route('/api/auth/github/callback').get(users.oauthCallback('github'));
+	// Setting the oauth routes
+	app.route('/api/auth/:oauthProvider').get(users.oauthAccept);
+	app.route('/api/auth/:oauthProvider/callback').get(users.oauthCallback);
+	app.param('oauthProvider', users.oauthProviderByName)
 };
