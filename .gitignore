@@ -4,6 +4,7 @@
 *.log
 node_modules/
 public/lib/
+config/env/local.js
 public/dist/
 .bower-*/
 .idea/
