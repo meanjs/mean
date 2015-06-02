@@ -177,7 +177,7 @@ exports.saveOAuthUserProfile = function(req, providerUserProfile, done) {
  */
 exports.removeOAuthProvider = function(req, res, next) {
 	var user = req.user;
-	var provider = req.param('provider');
+	var provider = req.params.provider;
 
 	if (user && provider) {
 		// Delete the additional provider
