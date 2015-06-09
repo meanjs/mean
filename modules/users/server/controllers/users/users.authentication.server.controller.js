@@ -84,11 +84,11 @@ exports.oauthCallback = function(strategy) {
 	return function(req, res, next) {
 		passport.authenticate(strategy, function(err, user, redirectURL) {
 			if (err || !user) {
-				return res.redirect('/#!/signin');
+				return res.redirect('/signin');
 			}
 			req.login(user, function(err) {
 				if (err) {
-					return res.redirect('/#!/signin');
+					return res.redirect('/signin');
 				}
 
 				return res.redirect(redirectURL || '/');
@@ -164,7 +164,7 @@ exports.saveOAuthUserProfile = function(req, providerUserProfile, done) {
 
 			// And save the user
 			user.save(function(err) {
-				return done(err, user, '/#!/settings/accounts');
+				return done(err, user, '/settings/accounts');
 			});
 		} else {
 			return done(new Error('User is already connected using this provider'), user);

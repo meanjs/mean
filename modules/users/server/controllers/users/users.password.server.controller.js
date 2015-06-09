@@ -97,10 +97,10 @@ exports.validateResetToken = function(req, res) {
 		}
 	}, function(err, user) {
 		if (!user) {
-			return res.redirect('/#!/password/reset/invalid');
+			return res.redirect('/password/reset/invalid');
 		}
 
-		res.redirect('/#!/password/reset/' + req.params.token);
+		res.redirect('/password/reset/' + req.params.token);
 	});
 };
 
