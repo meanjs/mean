@@ -50,9 +50,7 @@ module.exports.getGlobbedFiles = function(globPatterns, removeRoot) {
 		if (urlRegex.test(globPatterns)) {
 			output.push(globPatterns);
 		} else {
-			glob(globPatterns, {
-				sync: true
-			}, function(err, files) {
+			glob(globPatterns, function(err, files) {
 				if (removeRoot) {
 					files = files.map(function(file) {
 						return file.replace(removeRoot, '');
