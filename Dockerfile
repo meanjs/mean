@@ -1,4 +1,4 @@
-FROM dockerfile/nodejs
+FROM node:0.10
 
 MAINTAINER Matthias Luebken, matthias@catalyst-zero.com
 
@@ -20,7 +20,7 @@ RUN bower install --config.interactive=false --allow-root
 # Make everything available for start
 ADD . /home/mean
 
-# currently only works for development
+# Set development environment as default
 ENV NODE_ENV development
 
 # Port 3000 for server
