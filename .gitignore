@@ -22,6 +22,9 @@ app/tests/coverage/
 config/sslcerts/*.pem
 access.log
 public/dist/
+uploads
+modules/users/client/img/profile/uploads
+*.pem
 
 # Sublime editor
 # ==============
