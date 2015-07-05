@@ -4,7 +4,7 @@
  * Module dependencies.
  */
 var _ = require('lodash'),
-	errorHandler = require('../errors'),
+	errorHandler = require('../errors.server.controller.js'),
 	mongoose = require('mongoose'),
 	passport = require('passport'),
 	User = mongoose.model('User');
@@ -36,7 +36,7 @@ exports.update = function(req, res) {
 					if (err) {
 						res.status(400).send(err);
 					} else {
-						res.jsonp(user);
+						res.json(user);
 					}
 				});
 			}
@@ -52,5 +52,5 @@ exports.update = function(req, res) {
  * Send User
  */
 exports.me = function(req, res) {
-	res.jsonp(req.user || null);
+	res.json(req.user || null);
 };

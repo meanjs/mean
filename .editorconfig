@@ -1,49 +1,25 @@
 # EditorConfig is awesome: http://EditorConfig.org
 
-# Howto with your editor:
-#   Sublime: https://github.com/sindresorhus/editorconfig-sublime
+# How-to with your editor: http://editorconfig.org/#download
 
 # top-most EditorConfig file
 root = true
 
 # Unix-style newlines with a newline ending every file
-[**]
+[*]
 end_of_line = lf
+indent_style = tab
 insert_final_newline = true
 
-# Standard at: https://github.com/felixge/node-style-guide 
-[**.js, **.json]
+[{Dockerfile,Procfile}]
 trim_trailing_whitespace = true
-indent_style = space
-indent_size = 2
-max_line_length = 80
+
+# Standard at: https://github.com/felixge/node-style-guide
+[{*.js,*.json}]
+trim_trailing_whitespace = true
 quote_type = single
 curly_bracket_next_line = false
 spaces_around_operators = true
 space_after_control_statements = true
 space_after_anonymous_functions = false
 spaces_in_brackets = false
-
-# https://github.com/jedmao/codepainter
-[node_modules/**.js]
-codepaint = false
-
-# No Standard.  Please document a standard if different from .js
-[**.yml, **.html, **.css]
-trim_trailing_whitespace = true
-indent_style = space
-indent_size = 2
-
-# No standard.  Please document a standard if different from .js
-[**.md]
-indent_style = space
-
-# Standard at:
-[**.py]
-indent_style = space
-indent_size = 4
-
-# Standard at: 
-[Makefile]
-indent_style = tab
-indent_size = 8

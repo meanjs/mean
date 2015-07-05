@@ -4,7 +4,7 @@
  * Module dependencies.
  */
 var mongoose = require('mongoose'),
-	errorHandler = require('./errors'),
+	errorHandler = require('./errors.server.controller'),
 	Article = mongoose.model('Article'),
 	_ = require('lodash');
 
@@ -21,7 +21,7 @@ exports.create = function(req, res) {
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
-			res.jsonp(article);
+			res.json(article);
 		}
 	});
 };
@@ -30,7 +30,7 @@ exports.create = function(req, res) {
  * Show the current article
  */
 exports.read = function(req, res) {
-	res.jsonp(req.article);
+	res.json(req.article);
 };
 
 /**
@@ -47,7 +47,7 @@ exports.update = function(req, res) {
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
-			res.jsonp(article);
+			res.json(article);
 		}
 	});
 };
@@ -64,7 +64,7 @@ exports.delete = function(req, res) {
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
-			res.jsonp(article);
+			res.json(article);
 		}
 	});
 };
@@ -79,7 +79,7 @@ exports.list = function(req, res) {
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
-			res.jsonp(articles);
+			res.json(articles);
 		}
 	});
 };
@@ -88,9 +88,20 @@ exports.list = function(req, res) {
  * Article middleware
  */
 exports.articleByID = function(req, res, next, id) {
+
+	if (!mongoose.Types.ObjectId.isValid(id)) {
+		return res.status(400).send({
+			message: 'Article is invalid'
+		});
+	}
+
 	Article.findById(id).populate('user', 'displayName').exec(function(err, article) {
 		if (err) return next(err);
-		if (!article) return next(new Error('Failed to load article ' + id));
+		if (!article) {
+			return res.status(404).send({
+				message: 'Article not found'
+			});
+		}
 		req.article = article;
 		next();
 	});
