@@ -116,7 +116,7 @@ exports.saveOAuthUserProfile = function(req, providerUserProfile, done) {
 			if (user) {
 				// TODO: update callback handling (message/redirectURL flow);
 				if (req.user.providers && req.user.providers[providerUserProfile.provider] &&
-					req.user.providers[providerUserProfile.provider][providerUserProfile.providerIdentifierField] == providerUserProfile.providerData[providerUserProfile.providerIdentifierField]) {
+					req.user.providers[providerUserProfile.provider][providerUserProfile.providerIdentifierField] === providerUserProfile.providerData[providerUserProfile.providerIdentifierField]) {
 					return done(null, req.user);
 				} else {
 					return done(null, req.user, { message: 'This provider is connected to another account.', redirectURL: '/#!/settings/accounts' });
