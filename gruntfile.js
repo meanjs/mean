@@ -1,10 +1,12 @@
 'use strict';
 
+var fs = require('fs');
+
 module.exports = function(grunt) {
 	// Unified Watch Object
 	var watchFiles = {
 		serverViews: ['app/views/**/*.*'],
-		serverJS: ['gruntfile.js', 'server.js', 'config/**/*.js', 'app/**/*.js'],
+		serverJS: ['gruntfile.js', 'server.js', 'config/**/*.js', 'app/**/*.js', '!app/tests/'],
 		clientViews: ['public/modules/**/views/**/*.html'],
 		clientJS: ['public/js/*.js', 'public/modules/**/*.js'],
 		clientCSS: ['public/modules/**/*.css'],
@@ -31,7 +33,7 @@ module.exports = function(grunt) {
 			clientViews: {
 				files: watchFiles.clientViews,
 				options: {
-					livereload: true,
+					livereload: true
 				}
 			},
 			clientJS: {
@@ -47,6 +49,10 @@ module.exports = function(grunt) {
 				options: {
 					livereload: true
 				}
+			},
+			mochaTests: {
+				files: watchFiles.mochaTests,
+				tasks: ['test:server'],
 			}
 		},
 		jshint: {
@@ -59,7 +65,7 @@ module.exports = function(grunt) {
 		},
 		csslint: {
 			options: {
-				csslintrc: '.csslintrc',
+				csslintrc: '.csslintrc'
 			},
 			all: {
 				src: watchFiles.clientCSS
@@ -105,13 +111,13 @@ module.exports = function(grunt) {
 				}
 			}
 		},
-        ngAnnotate: {
-            production: {
-                files: {
-                    'public/dist/application.js': '<%= applicationJavaScriptFiles %>'
-                }
-            }
-        },
+		ngAnnotate: {
+			production: {
+				files: {
+					'public/dist/application.js': '<%= applicationJavaScriptFiles %>'
+				}
+			}
+		},
 		concurrent: {
 			default: ['nodemon', 'watch'],
 			debug: ['nodemon', 'watch', 'node-inspector'],
@@ -123,6 +129,9 @@ module.exports = function(grunt) {
 		env: {
 			test: {
 				NODE_ENV: 'test'
+			},
+			secure: {
+				NODE_ENV: 'secure'
 			}
 		},
 		mochaTest: {
@@ -136,6 +145,15 @@ module.exports = function(grunt) {
 			unit: {
 				configFile: 'karma.conf.js'
 			}
+		},
+		copy: {
+		    localConfig: {
+	            src: 'config/env/local.example.js',
+	            dest: 'config/env/local.js',
+	            filter: function() {
+	            	return !fs.existsSync('config/env/local.js');
+	            }
+		    }
 		}
 	});
 
@@ -155,10 +173,13 @@ module.exports = function(grunt) {
 	});
 
 	// Default task(s).
-	grunt.registerTask('default', ['lint', 'concurrent:default']);
+	grunt.registerTask('default', ['lint', 'copy:localConfig', 'concurrent:default']);
 
 	// Debug task.
-	grunt.registerTask('debug', ['lint', 'concurrent:debug']);
+	grunt.registerTask('debug', ['lint', 'copy:localConfig', 'concurrent:debug']);
+
+	// Secure task(s).
+	grunt.registerTask('secure', ['env:secure', 'lint', 'copy:localConfig', 'concurrent:default']);
 
 	// Lint task(s).
 	grunt.registerTask('lint', ['jshint', 'csslint']);
@@ -167,5 +188,7 @@ module.exports = function(grunt) {
 	grunt.registerTask('build', ['lint', 'loadConfig', 'ngAnnotate', 'uglify', 'cssmin']);
 
 	// Test task.
-	grunt.registerTask('test', ['env:test', 'mochaTest', 'karma:unit']);
+	grunt.registerTask('test', ['copy:localConfig', 'test:server', 'test:client']);
+	grunt.registerTask('test:server', ['env:test', 'mochaTest']);
+	grunt.registerTask('test:client', ['env:test', 'karma:unit']);
 };

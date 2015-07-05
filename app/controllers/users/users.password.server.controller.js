@@ -4,7 +4,7 @@
  * Module dependencies.
  */
 var _ = require('lodash'),
-	errorHandler = require('../errors'),
+	errorHandler = require('../errors.server.controller'),
 	mongoose = require('mongoose'),
 	passport = require('passport'),
 	User = mongoose.model('User'),
@@ -12,6 +12,8 @@ var _ = require('lodash'),
 	nodemailer = require('nodemailer'),
 	async = require('async'),
 	crypto = require('crypto');
+
+var smtpTransport = nodemailer.createTransport(config.mailer.options);
 
 /**
  * Forgot for reset password (forgot POST)
@@ -65,7 +67,6 @@ exports.forgot = function(req, res, next) {
 		},
 		// If valid email, send reset email using service
 		function(emailHTML, user, done) {
-			var smtpTransport = nodemailer.createTransport(config.mailer.options);
 			var mailOptions = {
 				to: user.email,
 				from: config.mailer.from,
@@ -76,6 +77,10 @@ exports.forgot = function(req, res, next) {
 				if (!err) {
 					res.send({
 						message: 'An email has been sent to ' + user.email + ' with further instructions.'
+					});
+				} else {
+					return res.status(400).send({
+						message: 'Failure sending email'
 					});
 				}
 
@@ -137,8 +142,8 @@ exports.reset = function(req, res, next) {
 									if (err) {
 										res.status(400).send(err);
 									} else {
-										// Return authenticated user 
-										res.jsonp(user);
+										// Return authenticated user
+										res.json(user);
 
 										done(err, user);
 									}
@@ -167,14 +172,13 @@ exports.reset = function(req, res, next) {
 		},
 		// If valid email, send reset email using service
 		function(emailHTML, user, done) {
-			var smtpTransport = nodemailer.createTransport(config.mailer.options);
 			var mailOptions = {
 				to: user.email,
 				from: config.mailer.from,
 				subject: 'Your password has been changed',
 				html: emailHTML
 			};
-			
+
 			smtpTransport.sendMail(mailOptions, function(err) {
 				done(err, 'done');
 			});

@@ -4,7 +4,7 @@
  * Module dependencies.
  */
 var _ = require('lodash'),
-	errorHandler = require('../errors'),
+	errorHandler = require('../errors.server.controller'),
 	mongoose = require('mongoose'),
 	passport = require('passport'),
 	User = mongoose.model('User');
@@ -23,7 +23,7 @@ exports.signup = function(req, res) {
 	// Add missing user fields
 	user.displayName = user.firstName + ' ' + user.lastName;
 
-	// Then save the user 
+	// Then save the user
 	user.save(function(err) {
 		if (err) {
 			return res.status(400).send({
@@ -38,7 +38,7 @@ exports.signup = function(req, res) {
 				if (err) {
 					res.status(400).send(err);
 				} else {
-					res.jsonp(user);
+					res.json(user);
 				}
 			});
 		}
@@ -61,7 +61,7 @@ exports.signin = function(req, res, next) {
 				if (err) {
 					res.status(400).send(err);
 				} else {
-					res.jsonp(user);
+					res.json(user);
 				}
 			});
 		}
@@ -183,7 +183,7 @@ exports.removeOAuthProvider = function(req, res, next) {
 					if (err) {
 						res.status(400).send(err);
 					} else {
-						res.jsonp(user);
+						res.json(user);
 					}
 				});
 			}
