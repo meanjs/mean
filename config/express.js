@@ -126,7 +126,7 @@ module.exports = function(db) {
 	/**
 	 * Module dependencies.
 	 */
-	var core = require('../app/controllers/core');
+	var core = require('../app/controllers/core.server.controller');
 	
 	// Catch-all route
 	app.route('*').get(core.index);
