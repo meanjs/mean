@@ -32,15 +32,12 @@
 		<ul class="nav navbar-nav navbar-right" data-ng-show="authentication.user">
 			<li class="dropdown">
 				<a href="#" class="dropdown-toggle user-header-dropdown-toggle" data-toggle="dropdown">
-					<img data-ng-src="{{authentication.user.profileImageURL}}" alt="{{authentication.user.displayName}}" class="header-profile-image"/>
+					<img data-gravatar-src="authentication.user.email" data-gravatar-size="28" alt="{{authentication.user.displayName}}" class="header-profile-image"/>
 					<span data-ng-bind="authentication.user.displayName"></span> <b class="caret"></b>
 				</a>
 				<ul class="dropdown-menu">
 					<li data-ui-sref-active="active">
 						<a data-ui-sref="settings.profile">Edit Profile</a>
-					</li>
-					<li data-ui-sref-active="active">
-						<a data-ui-sref="settings.picture">Change Profile Picture</a>
 					</li>
 					<li data-ui-sref-active="active" data-ng-show="authentication.user.provider === 'local'">
 						<a data-ui-sref="settings.password">Change Password</a>

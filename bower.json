@@ -11,7 +11,7 @@
     "angular-bootstrap": "~0.13",
     "angular-ui-utils": "bower",
     "angular-ui-router": "~0.2",
-    "angular-file-upload": "~1.1.5"
+    "angular-gravatar": "~0.3.2"
   },
   "resolutions": {
     "angular": "~1.3"
