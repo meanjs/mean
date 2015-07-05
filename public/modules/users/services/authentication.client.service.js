@@ -1,9 +1,9 @@
 'use strict';
 
 // Authentication service for user variables
-angular.module('users').factory('Authentication', ['$window', function($window) {
+angular.module('users').factory('Authentication', ['$preloadProvider', function($preloadProvider) {
 	var auth = {
-		user: $window.user
+		user: $preloadProvider.user
 	};
 	
 	return auth;

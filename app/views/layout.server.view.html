@@ -43,6 +43,13 @@
 	<!--[if lt IE 9]>
 		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
+
+	{% if user %}
+	<!--Embedding The User Object-->
+	<script type="text/preloaded" name="user">
+		{{ user | json | safe }};
+	</script>
+	{% endif %}
 </head>
 
 <body class="ng-cloak">
@@ -52,11 +59,6 @@
 			{% block content %}{% endblock %}
 		</section>
 	</section>
-
-	<!--Embedding The User Object-->
-	<script type="text/javascript">
-		var user = {{ user | json | safe }};
-	</script>
 
 	<!--Application JavaScript Files-->
 	{% for jsFile in jsFiles %}
