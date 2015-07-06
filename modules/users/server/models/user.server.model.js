@@ -3,30 +3,23 @@
 /**
  * Module dependencies.
  */
-var mongoose = require('mongoose'),
+var _ = require('lodash'),
+  mongoose = require('mongoose'),
   Schema = mongoose.Schema,
-  crypto = require('crypto'),
-  validator = require('validator');
+  crypto = require('crypto');
 
 /**
  * A Validation function for local strategy properties
  */
-var validateLocalStrategyProperty = function (property) {
-  return ((this.provider !== 'local' && !this.updated) || property.length);
+var validateLocalStrategyProperty = function(property) {
+  return (property.length || (!_.isEmpty(this.providers) && !this.updated));
 };
 
 /**
  * A Validation function for local strategy password
  */
-var validateLocalStrategyPassword = function (password) {
-  return (this.provider !== 'local' || validator.isLength(password, 6));
-};
-
-/**
- * A Validation function for local strategy email
- */
-var validateLocalStrategyEmail = function (email) {
-  return ((this.provider !== 'local' && !this.updated) || validator.isEmail(email));
+var validateLocalStrategyPassword = function(password) {
+  return ((password && password.length > 6) || !_.isEmpty(this.providers));
 };
 
 /**
@@ -49,13 +42,6 @@ var UserSchema = new Schema({
     type: String,
     trim: true
   },
-  email: {
-    type: String,
-    trim: true,
-    unique: true,
-    default: '',
-    validate: [validateLocalStrategyEmail, 'Please fill a valid email address']
-  },
   username: {
     type: String,
     unique: 'Username already exists',
@@ -74,12 +60,7 @@ var UserSchema = new Schema({
     type: String,
     default: 'modules/users/img/profile/default.png'
   },
-  provider: {
-    type: String,
-    required: 'Provider is required'
-  },
-  providerData: {},
-  additionalProvidersData: {},
+  providers: {},
   roles: {
     type: [{
       type: String,
