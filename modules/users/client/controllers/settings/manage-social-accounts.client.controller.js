@@ -4,18 +4,22 @@ angular.module('users').controller('SocialAccountsController', ['$scope', '$http
   function ($scope, $http, Authentication) {
     $scope.user = Authentication.user;
 
-    // Check if there are additional accounts
-    $scope.hasConnectedAdditionalSocialAccounts = function (provider) {
-      for (var i in $scope.user.additionalProvidersData) {
-        return true;
+    // Check if there are social accounts
+    $scope.hasConnectedSocialAccounts = function() {
+      if ($scope.user.providers) {
+        for(var prop in $scope.user.providers) {
+          if ($scope.user.providers.hasOwnProperty(prop)) {
+            return true;
+          }
+        }
       }
 
       return false;
     };
 
     // Check if provider is already in use with current user
-    $scope.isConnectedSocialAccount = function (provider) {
-      return $scope.user.provider === provider || ($scope.user.additionalProvidersData && $scope.user.additionalProvidersData[provider]);
+    $scope.isConnectedSocialAccount = function(provider) {
+      return $scope.user.providers && $scope.user.providers[provider];
     };
 
     // Remove a user social account

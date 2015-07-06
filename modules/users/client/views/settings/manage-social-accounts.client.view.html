@@ -1,14 +1,14 @@
 <section class="row" data-ng-controller="SocialAccountsController">
-  <h3 class="col-md-12 text-center" data-ng-show="hasConnectedAdditionalSocialAccounts()">Connected social accounts:</h3>
+  <h3 class="col-md-12 text-center" data-ng-show="hasConnectedSocialAccounts()">Connected social accounts:</h3>
   <div class="col-md-12 text-center">
-    <div data-ng-repeat="(providerName, providerData) in user.additionalProvidersData" class="social-account-container">
+    <div data-ng-repeat="(providerName, providerData) in user.providers" class="social-account-container">
       <img ng-src="/modules/users/img/buttons/{{providerName}}.png">
       <a class="btn btn-danger btn-remove-account" data-ng-click="removeUserSocialAccount(providerName)">
         <i class="glyphicon glyphicon-trash"></i>
       </a>
     </div>
   </div>
-  <h3 class="col-md-12 text-center" data-ng-show="hasConnectedAdditionalSocialAccounts()">Unconnected social accounts:</h3>
+  <h3 class="col-md-12 text-center" data-ng-show="hasConnectedSocialAccounts()">Unconnected social accounts:</h3>
   <div class="col-md-12 text-center">
     <div class="social-account-container" data-ng-hide="isConnectedSocialAccount('facebook')">
       <img ng-src="/modules/users/img/buttons/facebook.png">
