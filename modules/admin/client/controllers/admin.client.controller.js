@@ -1,44 +1,29 @@
 'use strict';
 
-angular.module('admin').controller('AdminController', ['$scope', '$stateParams', '$state', '$filter', '$location', 'Authentication', 'Admin',
-	function($scope, $stateParams, $state, $filter, $location, Authentication, Admin) {
+angular.module('admin').controller('AdminController', ['$scope', '$stateParams', '$state', '$filter', 'Authentication', 'Admin',
+	function($scope, $stateParams, $state, $filter, Authentication, Admin) {
 		$scope.authentication = Authentication;
-		/*
-		$scope.create = function() {
-			var article = new Articles({
-				title: this.title,
-				content: this.content
-			});
-			article.$save(function(response) {
-				$location.path('articles/' + response._id);
 
-				$scope.title = '';
-				$scope.content = '';
-			}, function(errorResponse) {
-				$scope.error = errorResponse.data.message;
-			});
-		};
-		*/
 		$scope.remove = function(user) {
 			if(confirm('Are you sure you want to delete this user?')) {
 				if (user) {
 					user.$remove();
 
-					$scope.adminusers.splice($scope.adminusers.indexOf(user),1);
+					$scope.users.splice($scope.users.indexOf(user),1);
 
 				} else {
-					$scope.adminuser.$remove(function() {
-						$state.go('admin.list');
+					$scope.user.$remove(function() {
+						$state.go('admin.users');
 					});
 				}
 			}
 		};
 
 		$scope.update = function() {
-			var user = $scope.adminuser;
+			var user = $scope.user;
 
 			user.$update(function() {
-				$location.path('admin/' + user._id);
+				$state.go('admin.user', { userId: user._id });
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
@@ -46,13 +31,13 @@ angular.module('admin').controller('AdminController', ['$scope', '$stateParams',
 
 		$scope.find = function() {
 			 Admin.query(function (data) {
-				 $scope.adminusers = data;
+				 $scope.users = data;
 				$scope.buildPager();
 			});
 		};
 
 		$scope.findOne = function() {
-			$scope.adminuser = Admin.get({
+			$scope.user = Admin.get({
 				userId: $stateParams.userId
 			});
 		};
@@ -65,7 +50,7 @@ angular.module('admin').controller('AdminController', ['$scope', '$stateParams',
 		};
 
 		$scope.figureOutItemsToDisplay = function () {
-			$scope.filteredItems = $filter('filter')($scope.adminusers, { $: $scope.search});
+			$scope.filteredItems = $filter('filter')($scope.users, { $: $scope.search});
 			$scope.filterLength = $scope.filteredItems.length;
 			var begin = (($scope.currentPage - 1) * $scope.itemsPerPage);
 			var end = begin + $scope.itemsPerPage;
