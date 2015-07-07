@@ -5,6 +5,7 @@ module.exports = {
 		lib: {
 			css: [
 				'public/lib/bootstrap/dist/css/bootstrap.css',
+				'public/lib/font-awesome/css/font-awesome.css',
 				'public/lib/animate.css/animate.css'
 			],
 			js: [
