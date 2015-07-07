@@ -1,6 +1,6 @@
 <div class="container" data-ng-controller="HeaderController">
 	<div class="navbar-header">
-		<button class="navbar-toggle" type="button">
+		<button class="navbar-toggle" type="button" data-ng-click="toggleCollapsibleMenu()">
 			<span class="sr-only">Toggle navigation</span>
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>
@@ -8,7 +8,7 @@
 		</button>
 		<a data-ui-sref="home" class="navbar-brand"><img src="modules/core/img/brand/logo.png" alt="MEAN.JS" style="max-height:28px;"></a>
 	</div>
-	<div class="navbar-collapse collapse">
+	<div class="navbar-collapse collapse" collapse="!isCollapsed">
 		<ul class="nav navbar-nav" data-ng-if="menu.shouldRender(authentication.user);">
 			<li data-ng-repeat="item in menu.items | orderBy: 'position'" data-ng-if="item.shouldRender(authentication.user);" ng-switch="item.type" data-ng-class="{ active: $state.includes(item.state), dropdown: item.type === 'dropdown' }" class="{{item.class}}" dropdown="item.type === 'dropdown'">
 				<a ng-switch-when="dropdown" class="dropdown-toggle" dropdown-toggle role="button">{{::item.title}}&nbsp;<span class="caret"></span></a>
