@@ -1,42 +1,68 @@
 <div class="row" data-ng-controller="AuthenticationController">
-	<h3 class="col-md-12 text-center">Or sign up using your email</h3>
-	<div class="col-xs-offset-2 col-xs-8 col-md-offset-5 col-md-2">
-		<form name="userForm" data-ng-submit="signup()" class="signin form-horizontal" novalidate autocomplete="off">
-			<fieldset>
-				<div class="form-group">
-					<label for="firstName">First Name</label>
-					<input type="text" required id="firstName" name="firstName" class="form-control"
-						   data-ng-model="credentials.firstName" placeholder="First Name">
+	<div class="col-md-8 col-md-offset-2 col-sm-12">
+		<div class="panel">
+			<div class="panel-body">
+				<div class="row vertical-divider">
+					<div class="col-md-6 col-cs-12 text-center">
+						<h4>Sign up with your social network</h4>
+						<small>Social sign up is faster. We will never post on your behalf.</small>
+						<div class="social-accounts form-group">
+							<a href="/api/auth/facebook" class="btn btn-facebook form-control" target="_self">
+								<i class="fa fa-facebook"></i>&nbsp;Sign up with Facebook</a>
+							</a>
+							<a href="/api/auth/twitter" class="btn btn-twitter form-control" target="_self">
+								<i class="fa fa-twitter"></i>&nbsp;Sign up with Twitter</a>
+							</a>
+							<a href="/api/auth/google" class="btn btn-google form-control" target="_self">
+								<i class="fa fa-google"></i>&nbsp;Sign up with Google</a>
+							</a>
+							<a href="/api/auth/linkedin" class="btn btn-linkedin form-control" target="_self">
+								<i class="fa fa-linkedin"></i>&nbsp;Sign up with LinkedIn</a>
+							</a>
+							<a href="/api/auth/github" class="btn btn-github form-control" target="_self">
+								<i class="fa fa-github"></i>&nbsp;Sign up with GitHub</a>
+							</a>
+						</div>
+					</div>
+					<div class="visible-xs or-line">OR</div>
+					<div class="col-md-6 col-xs-12">
+						<h4 class="text-center">Sign up with your email address</h4>
+						<form name="userForm" data-ng-submit="signup()" novalidate autocomplete="off">
+							<fieldset>
+								<div class="form-group">
+									<label for="firstName">First Name</label>
+									<input type="text" required id="firstName" name="firstName" class="form-control" data-ng-model="credentials.firstName" placeholder="First Name">
+								</div>
+								<div class="form-group">
+									<label for="lastName">Last Name</label>
+									<input type="text" id="lastName" name="lastName" class="form-control" data-ng-model="credentials.lastName" placeholder="Last Name">
+								</div>
+								<div class="form-group">
+									<label for="email">Email</label>
+									<input type="email" id="email" name="email" class="form-control" data-ng-model="credentials.email" placeholder="Email">
+								</div>
+								<div class="form-group">
+									<label for="username">Username</label>
+									<input type="text" id="username" name="username" class="form-control" data-ng-model="credentials.username" placeholder="Username">
+								</div>
+								<div class="form-group">
+									<label for="password">Password</label>
+									<input type="password" id="password" name="password" class="form-control" data-ng-model="credentials.password" placeholder="Password">
+								</div>
+								<div class="form-group">
+									<button type="submit" class="btn btn-primary form-control">Create Account</button>
+								</div>
+								<div data-ng-show="error" class="text-center text-danger">
+									<strong data-ng-bind="error"></strong>
+								</div>
+							</fieldset>
+						</form>
+					</div>
 				</div>
-				<div class="form-group">
-					<label for="lastName">Last Name</label>
-					<input type="text" id="lastName" name="lastName" class="form-control"
-						   data-ng-model="credentials.lastName" placeholder="Last Name">
-				</div>
-				<div class="form-group">
-					<label for="email">Email</label>
-					<input type="email" id="email" name="email" class="form-control" data-ng-model="credentials.email"
-						   placeholder="Email">
-				</div>
-				<div class="form-group">
-					<label for="username">Username</label>
-					<input type="text" id="username" name="username" class="form-control"
-						   data-ng-model="credentials.username" placeholder="Username">
-				</div>
-				<div class="form-group">
-					<label for="password">Password</label>
-					<input type="password" id="password" name="password" class="form-control"
-						   data-ng-model="credentials.password" placeholder="Password">
-				</div>
-				<div class="text-center form-group">
-					<button type="submit" class="btn btn-large btn-primary">Sign up</button>
-					&nbsp; or&nbsp;
-					<a data-ui-sref="authentication.signin" class="show-signup">Sign in</a>
-				</div>
-				<div data-ng-show="error" class="text-center text-danger">
-					<strong data-ng-bind="error"></strong>
-				</div>
-			</fieldset>
-		</form>
+			</div>
+		</div>
+		<div class="text-center">
+			Already have an account? <a data-ui-sref="authentication.signin">Sign in here</a>
+		</div>
 	</div>
 </div>
