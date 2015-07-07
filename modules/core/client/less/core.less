@@ -1,0 +1,237 @@
+.main-content {
+	padding-top: 70px;
+}
+.undecorated-link:hover {
+	text-decoration: none;
+}
+[ng\:cloak],
+[ng-cloak],
+[data-ng-cloak],
+[x-ng-cloak],
+.ng-cloak,
+.x-ng-cloak {
+	display: none !important;
+}
+.ng-invalid.ng-dirty {
+	border-color: #FA787E;
+}
+.ng-valid.ng-dirty {
+	border-color: #78FA89;
+}
+.bg-gray-lighter {
+	background-color: #eee;
+}
+.header-profile-image {
+	opacity: 0.8;
+	height: 28px;
+	width: 28px;
+	border-radius: 50%;
+	margin-right: 5px;
+}
+.open .header-profile-image,
+a:hover .header-profile-image {
+	opacity: 1;
+}
+.user-header-dropdown-toggle {
+	padding-top: 11px !important;
+	padding-bottom: 11px !important;
+}
+
+/* ======= Animation Delays ======= */
+
+.delayp1 {
+	animation-delay: 100ms;
+	transition-delay: 100ms;
+}
+.delayp2 {
+	animation-delay: 200ms;
+	transition-delay: 200ms;
+}
+.delayp3 {
+	animation-delay: 300ms;
+	transition-delay: 300ms;
+}
+.delayp4 {
+	animation-delay: 400ms;
+	transition-delay: 400ms;
+}
+.delayp5 {
+	animation-delay: 500ms;
+	transition-delay: 500ms;
+}
+.delayp6 {
+	animation-delay: 600ms;
+	transition-delay: 600ms;
+}
+.delayp7 {
+	animation-delay: 700ms;
+	transition-delay: 700ms;
+}
+.delayp8 {
+	animation-delay: 900ms;
+	transition-delay: 900ms;
+}
+.delayp9 {
+	animation-delay: 900ms;
+	transition-delay: 900ms;
+}
+.delay1s {
+	animation-delay: 1s;
+	transition-delay: 1s;
+}
+.delay2s {
+	animation-delay: 2s;
+	transition-delay: 2s;
+}
+
+/* ======= bootstrap navigation default overrides ======= */
+
+.navbar-default {
+	border: none;
+	margin-bottom: 0;
+	min-height: 70px;
+	padding: 10px 0;
+	background-color: #fff;
+	background-color: rgba(255, 255, 255, 0.9);
+	box-shadow: rgba(0, 0, 0, 0.11765) 0 1px 3px;
+	clear: both;
+}
+.nav .open > a,
+.nav .open > a:hover,
+.nav .open > a:focus,
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus,
+.navbar-default .navbar-nav > .open > a,
+.navbar-default .navbar-nav > .open > a:hover,
+.navbar-default .navbar-nav > .open > a:focus {
+	background: none;
+}
+.dropdown-menu {
+	top: 60px;
+}
+
+/* ======= Intro Section ======= */
+
+.intro {
+	background-color: #92c54c;
+	color: #fff;
+}
+.intro .overview {
+	margin: 20px 0;
+	padding-left: 30px;
+	padding-right: 30px;
+}
+.intro .overview h2 {
+	font-size: 30px;
+	margin-bottom: 35px;
+	text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+}
+.intro .overview .summary {
+	margin-left: 0;
+}
+.intro .overview .summary li {
+	text-align: left;
+}
+.intro .overview .summary li {
+	margin-bottom: 15px;
+	list-style: none;
+	font-size: 20px;
+	font-weight: 300;
+	padding-left: 30px;
+	background: url('../img/bullet.png') no-repeat left center;
+}
+.bg-pattern {
+	background-image: url('../img/pattern-bg.png');
+	background-repeat: repeat;
+	background-position: left top;
+}
+
+/* ======= Features Section ======= */
+
+.features {
+	padding: 40px 0;
+}
+.features .icon {
+	position: relative;
+	width: 90px;
+	height: 90px;
+	border: 3px solid;
+	border-radius: 50%;
+	background-clip: padding-box;
+	display: table;
+	margin: 0 auto;
+	transition: transform ease-out 200ms, background 300ms;
+}
+.features .icon span {
+	font-size: 48px;
+	display: table-cell;
+	text-align: center;
+	vertical-align: middle;
+}
+.features .icon.mongo {
+	border-color: #9d8767;
+	color: #9d8767;
+}
+.features .icon.express {
+	border-color: #323232;
+	color: #323232;
+}
+.features .icon.angular {
+	border-color: #a6120d;
+	color: #a6120d;
+}
+.features .icon.node {
+	border-color: #92c54c;
+	color: #92c54c;
+}
+.features p {
+	font-weight: 300;
+}
+.features .center-line {
+	display: inline-block;
+	width: 70px;
+	height: 1px;
+	border-top: 1px solid #bbb;
+	margin: auto;
+}
+.features .flip-container .back img {
+	max-height: 50px;
+	max-width: 100%;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: auto;
+}
+.flip-container {
+	perspective: 1000;
+}
+.flip-container:hover .flipper,
+.flip-container.hover .flipper {
+	transform: rotateY(180deg);
+}
+.flip-container,
+.front,
+.back {
+	height: 146px;
+	width: 100%;
+}
+.flipper {
+	transition: 600ms;
+	transform-style: preserve-3d;
+	position: relative;
+}
+.front,
+.back {
+	backface-visibility: hidden;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+.front {
+	z-index: 2;
+}
+.back {
+	transform: rotateY(180deg);
+}

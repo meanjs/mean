@@ -1,0 +1,134 @@
+/* ======= Bootstrap ======= */
+
+@import "../../../../public/lib/bootstrap/less/variables.less";
+
+/* ======= Mixins ======= */
+
+@import "mixins/users.less";
+
+/* ======= CSS ======= */
+
+.social-account-container {
+	display: inline-block;
+	position: relative;
+}
+.btn-remove-account {
+	top: 10px;
+	right: 10px;
+	position: absolute;
+}
+.btn-file {
+	position: relative;
+	overflow: hidden;
+}
+.btn-file input[type=file] {
+	position: absolute;
+	top: 0;
+	right: 0;
+	min-width: 100%;
+	min-height: 100%;
+	font-size: 100px;
+	text-align: right;
+	filter: alpha(opacity=0);
+	opacity: 0;
+	background: white;
+	cursor: inherit;
+	display: block;
+}
+.user-profile-picture {
+	min-height: 150px;
+	max-height: 150px;
+}
+
+/* ======= Sign Up/In Pages ======= */
+
+.user-auth {
+	padding: 50px 0;
+}
+.user-auth .panel-body {
+	padding-top: 30px;
+}
+.user-auth h4 {
+	margin-top: 0;
+	margin-bottom: 15px;
+}
+.user-auth .form-group {
+	margin-bottom: 5px;
+}
+.user-auth .form-group label {
+	font-size: 10px;
+	margin-bottom: 0;
+}
+.user-auth .form-control {
+	padding: 10px 12px;
+	height: 40px
+}
+.user-auth form .btn {
+	margin-top: 5px;
+}
+.user-auth .social-accounts {
+	margin-top: 5px;
+}
+.user-auth .social-accounts .btn {
+	margin-bottom: 10px;
+}
+.btn-facebook {
+	.btn-social (#fff, #3b5998);
+}
+.btn-twitter {
+	.btn-social (#fff, #3497db);
+}
+.btn-google {
+	.btn-social (#fff, #dd4B39);
+}
+.btn-linkedin {
+	.btn-social (#fff, #007bb6);
+}
+.btn-github {
+	.btn-social (#000, #f5f5f5);
+	box-shadow: inset 0 1px 1px rgba(204, 204, 204, .075);
+}
+.or-line {
+	font-size: 11px;
+	position: relative;
+	margin: 15px 0;
+	text-align: center;
+}
+.or-line:before {
+	left: 31px;
+}
+.or-line:after,
+.or-line:before {
+	content: "";
+	display: inline-block;
+	border-top: 1px solid #cfd5da;
+	position: absolute;
+	top: 7px;
+	width: 37%;
+}
+.or-line:after {
+	right: 31px;
+}
+@media (min-width: @screen-sm) {
+	.row.vertical-divider,
+	.row.vertical-divider-right {
+		overflow: hidden;
+	}
+	.row.vertical-divider > div[class^="col-"] {
+		border-left: 1px solid #cfd5da;
+	}
+	.row.vertical-divider div[class^="col-"]:first-child {
+		border-left: none;
+	}
+	.row.vertical-divider-right > div[class^="col-"] {
+		border-right: 1px solid #cfd5da;
+	}
+	.row.vertical-divider-right div[class^="col-"]:last-child {
+		border-right: none;
+	}
+}
+@media (min-width: @screen-md) {
+	.nav-users {
+		position: fixed;
+	}
+}
