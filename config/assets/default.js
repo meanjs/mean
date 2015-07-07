@@ -8,8 +8,6 @@ module.exports = {
 				'public/lib/animate.css/animate.css'
 			],
 			js: [
-				'public/lib/jquery/dist/jquery.js',
-				'public/lib/bootstrap/dist/js/bootstrap.js',
 				'public/lib/angular/angular.js',
 				'public/lib/angular-resource/angular-resource.js',
 				'public/lib/angular-animate/angular-animate.js',
