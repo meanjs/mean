@@ -13,8 +13,8 @@
     "npm": ">=1.4.28"
   },
   "scripts": {
-    "start": "grunt",
-    "test": "grunt test",
+    "start": "gulp",
+    "test": "gulp test",
     "postinstall": "bower install --config.interactive=false"
   },
   "dependencies": {
@@ -76,7 +76,6 @@
     "karma-firefox-launcher": "~0.1.6",
     "karma-jasmine": "~0.3.6",
     "karma-phantomjs-launcher": "~0.2.0",
-    "load-grunt-tasks": "^3.2.0",
     "run-sequence": "^1.1.1",
     "should": "^7.0.1",
     "supertest": "^1.0.1"
