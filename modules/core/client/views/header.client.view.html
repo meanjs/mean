@@ -1,14 +1,14 @@
 <div class="container" data-ng-controller="HeaderController">
 	<div class="navbar-header">
-		<button class="navbar-toggle" type="button" data-ng-click="toggleCollapsibleMenu()">
+		<button class="navbar-toggle" type="button">
 			<span class="sr-only">Toggle navigation</span>
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>
 		</button>
-		<a data-ui-sref="home" class="navbar-brand">MEAN.JS</a>
+		<a data-ui-sref="home" class="navbar-brand"><img src="modules/core/img/brand/logo.png" alt="MEAN.JS" style="max-height:28px;"></a>
 	</div>
-	<nav class="collapse navbar-collapse" collapse="!isCollapsed" role="navigation">
+	<div class="navbar-collapse collapse">
 		<ul class="nav navbar-nav" data-ng-if="menu.shouldRender(authentication.user);">
 			<li data-ng-repeat="item in menu.items | orderBy: 'position'" data-ng-if="item.shouldRender(authentication.user);" ng-switch="item.type" data-ng-class="{ active: $state.includes(item.state), dropdown: item.type === 'dropdown' }" class="{{item.class}}">
 				<a ng-switch-when="dropdown" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{::item.title}}&nbsp;<span class="caret"></span></a>
@@ -26,7 +26,9 @@
 			</li>
 			<li class="divider-vertical"></li>
 			<li data-ui-sref-active="active">
-				<a data-ui-sref="authentication.signin">Sign In</a>
+				<p class="navbar-btn">
+					<a data-ui-sref="authentication.signin" class="btn btn-default">Sign In</a>
+                </p>
 			</li>
 		</ul>
 		<ul class="nav navbar-nav navbar-right" data-ng-show="authentication.user">
@@ -55,5 +57,5 @@
 				</ul>
 			</li>
 		</ul>
-	</nav>
+	</div>
 </div>

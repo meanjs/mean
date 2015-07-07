@@ -48,11 +48,12 @@
 </head>
 
 <body class="ng-cloak">
-	<header data-ng-include="'/modules/core/views/header.client.view.html'" class="navbar navbar-fixed-top navbar-inverse"></header>
+	<header style="height:70px;">
+		<nav data-ng-include="'/modules/core/views/header.client.view.html'" class="navbar navbar-default navbar-fixed-top"></nav>
+	</header>
+	
 	<section class="content">
-		<section class="container">
-			{% block content %}{% endblock %}
-		</section>
+		{% block content %}{% endblock %}
 	</section>
 
 	<!--Embedding The User Object-->
