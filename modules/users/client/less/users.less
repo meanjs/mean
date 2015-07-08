@@ -8,11 +8,6 @@
 
 /* ======= CSS ======= */
 
-@media (min-width: 992px) {
-	.nav-users {
-		position: fixed;
-	}
-}
 .social-account-container {
 	display: inline-block;
 	position: relative;
@@ -130,5 +125,10 @@
 	}
 	.row.vertical-divider-right div[class^="col-"]:last-child {
 		border-right: none;
+	}
+}
+@media (min-width: @screen-md) {
+	.nav-users {
+		position: fixed;
 	}
 }
