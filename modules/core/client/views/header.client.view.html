@@ -6,7 +6,7 @@
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>
 		</button>
-		<a data-ui-sref="home" class="navbar-brand"><img src="modules/core/img/brand/logo.png" alt="MEAN.JS" style="max-height:28px;"></a>
+		<a data-ui-sref="home" ui-sref-opts="{ reload: true }" class="navbar-brand"><img src="modules/core/img/brand/logo.png" alt="MEAN.JS" style="max-height:28px;"></a>
 	</div>
 	<div class="navbar-collapse collapse" collapse="!isCollapsed">
 		<ul class="nav navbar-nav" data-ng-if="menu.shouldRender(authentication.user);">
