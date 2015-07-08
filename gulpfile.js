@@ -9,7 +9,11 @@ var _ = require('lodash'),
 	gulp = require('gulp'),
 	gulpLoadPlugins = require('gulp-load-plugins'),
 	runSequence = require('run-sequence'),
-	plugins = gulpLoadPlugins(),
+	plugins = gulpLoadPlugins({
+		rename: {
+			'gulp-angular-templatecache': 'templateCache'
+		}
+	}),
 	path = require('path');
 
 // Set NODE_ENV to 'test'
@@ -45,7 +49,7 @@ gulp.task('watch', function () {
 	// Add watch rules
 	gulp.watch(defaultAssets.server.views).on('change', plugins.livereload.changed);
 	gulp.watch(defaultAssets.server.allJS, ['jshint']).on('change', plugins.livereload.changed);
-	gulp.watch(defaultAssets.client.views).on('change', plugins.livereload.changed);
+	gulp.watch(defaultAssets.client.views, ['templatecache']).on('change', plugins.livereload.changed);
 	gulp.watch(defaultAssets.client.js, ['jshint']).on('change', plugins.livereload.changed);
 	gulp.watch(defaultAssets.client.css, ['csslint']).on('change', plugins.livereload.changed);
 	gulp.watch(defaultAssets.client.sass, ['sass', 'csslint']).on('change', plugins.livereload.changed);
@@ -122,6 +126,17 @@ gulp.task('less', function () {
 		.pipe(gulp.dest('./modules/'));
 });
 
+// Angular template cache task
+gulp.task('templatecache', function () {
+	var re = new RegExp('\\' + path.sep + 'client\\' + path.sep, 'g');
+	
+	return gulp.src(defaultAssets.client.views)
+		.pipe(plugins.templateCache('templates.min.js', { root: 'modules/', module: 'core', transformUrl: function(url) {
+    return url.replace(re, path.sep)
+} }))
+		.pipe(gulp.dest('public/dist'));
+});
+
 // Mocha tests task
 gulp.task('mocha', function (done) {
 	// Open mongoose connections
@@ -180,7 +195,7 @@ gulp.task('lint', function (done) {
 
 // Lint project files and minify them into two production files.
 gulp.task('build', function (done) {
-	runSequence('env:dev', 'lint', ['uglify', 'cssmin'], done);
+	runSequence('env:dev', 'lint', ['uglify', 'cssmin', 'templatecache'], done);
 });
 
 // Run the project tests
@@ -208,5 +223,5 @@ gulp.task('debug', function (done) {
 
 // Run the project in production mode
 gulp.task('prod', function (done) {
-	runSequence('build', 'lint', ['nodemon', 'watch'], done);
+	runSequence('build', 'env:prod', ['nodemon', 'watch'], done);
 });
