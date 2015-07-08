@@ -1,10 +1,9 @@
-# iOS / Apple
+# OS
 # ===========
 .DS_Store
 ehthumbs.db
 Icon?
 Thumbs.db
-config/env/local.js
 
 # Node and related ecosystem
 # ==========================
@@ -18,11 +17,10 @@ app/tests/coverage/
 
 # MEAN.js app and assets
 # ======================
-config/sslcerts/*.pem
-access.log
 public/dist/
 uploads
 modules/users/client/img/profile/uploads
+config/env/local.js
 *.pem
 
 # Sublime editor
