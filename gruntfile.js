@@ -231,6 +231,8 @@ module.exports = function (grunt) {
 
 	// Run the project tests
 	grunt.registerTask('test', ['env:test', 'copy:localConfig', 'mongoose', 'mochaTest', 'karma:unit']);
+	grunt.registerTask('test:server', ['env:test', 'mongoose', 'mochaTest']);
+	grunt.registerTask('test:client', ['env:test', 'mongoose', 'karma:unit']);
 
 	// Run the project in development mode
 	grunt.registerTask('default', ['env:dev', 'lint', 'copy:localConfig', 'concurrent:default']);
