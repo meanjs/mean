@@ -1,0 +1,10 @@
+.btn-social(@color; @background) {
+	&, &:hover {
+		color: @color;
+	}
+	background-color: @background;
+	border-color: @background;
+	&:hover {
+		background-color: darken(@background, 5%);
+	}
+}

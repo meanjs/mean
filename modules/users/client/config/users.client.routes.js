@@ -29,7 +29,10 @@ angular.module('users').config(['$stateProvider',
 			state('authentication', {
 				abstract: true,
 				url: '/authentication',
-				templateUrl: 'modules/users/views/authentication/authentication.client.view.html'
+				templateUrl: 'modules/users/views/authentication/authentication.client.view.html',
+				data: {
+					bodyClass: 'bg-gray-lighter'
+				}
 			}).
 			state('authentication.signup', {
 				url: '/signup',
