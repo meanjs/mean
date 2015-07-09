@@ -1,17 +1,23 @@
 'use strict';
 
+// Articles controller
 angular.module('articles').controller('ArticlesController', ['$scope', '$stateParams', '$location', 'Authentication', 'Articles',
 	function($scope, $stateParams, $location, Authentication, Articles) {
 		$scope.authentication = Authentication;
 
+		// Create new Article
 		$scope.create = function() {
+			// Create new Article object
 			var article = new Articles({
 				title: this.title,
 				content: this.content
 			});
+
+			// Redirect after save
 			article.$save(function(response) {
 				$location.path('articles/' + response._id);
 
+				// Clear form fields
 				$scope.title = '';
 				$scope.content = '';
 			}, function(errorResponse) {
@@ -19,6 +25,7 @@ angular.module('articles').controller('ArticlesController', ['$scope', '$statePa
 			});
 		};
 
+		// Remove existing Article
 		$scope.remove = function(article) {
 			if (article) {
 				article.$remove();
@@ -35,6 +42,7 @@ angular.module('articles').controller('ArticlesController', ['$scope', '$statePa
 			}
 		};
 
+		// Update existing Article
 		$scope.update = function() {
 			var article = $scope.article;
 
@@ -45,10 +53,12 @@ angular.module('articles').controller('ArticlesController', ['$scope', '$statePa
 			});
 		};
 
+		// Find a list of Articles
 		$scope.find = function() {
 			$scope.articles = Articles.query();
 		};
 
+		// Find existing Article
 		$scope.findOne = function() {
 			$scope.article = Articles.get({
 				articleId: $stateParams.articleId
