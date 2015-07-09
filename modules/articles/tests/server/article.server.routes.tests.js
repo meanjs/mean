@@ -60,7 +60,9 @@ describe('Article CRUD tests', function () {
 			.expect(200)
 			.end(function (signinErr, signinRes) {
 				// Handle signin error
-				if (signinErr) done(signinErr);
+				if (signinErr) {
+					return done(signinErr);
+				}
 
 				// Get the userId
 				var userId = user.id;
@@ -71,13 +73,17 @@ describe('Article CRUD tests', function () {
 					.expect(200)
 					.end(function (articleSaveErr, articleSaveRes) {
 						// Handle article save error
-						if (articleSaveErr) done(articleSaveErr);
+						if (articleSaveErr) {
+							return done(articleSaveErr);
+						}
 
 						// Get a list of articles
 						agent.get('/api/articles')
 							.end(function (articlesGetErr, articlesGetRes) {
 								// Handle article save error
-								if (articlesGetErr) done(articlesGetErr);
+								if (articlesGetErr) {
+									return done(articlesGetErr);
+								}
 
 								// Get articles list
 								var articles = articlesGetRes.body;
@@ -112,7 +118,9 @@ describe('Article CRUD tests', function () {
 			.expect(200)
 			.end(function (signinErr, signinRes) {
 				// Handle signin error
-				if (signinErr) done(signinErr);
+				if (signinErr) {
+					return done(signinErr);
+				}
 
 				// Get the userId
 				var userId = user.id;
@@ -137,7 +145,9 @@ describe('Article CRUD tests', function () {
 			.expect(200)
 			.end(function (signinErr, signinRes) {
 				// Handle signin error
-				if (signinErr) done(signinErr);
+				if (signinErr) {
+					return done(signinErr);
+				}
 
 				// Get the userId
 				var userId = user.id;
@@ -148,7 +158,9 @@ describe('Article CRUD tests', function () {
 					.expect(200)
 					.end(function (articleSaveErr, articleSaveRes) {
 						// Handle article save error
-						if (articleSaveErr) done(articleSaveErr);
+						if (articleSaveErr) {
+							return done(articleSaveErr);
+						}
 
 						// Update article title
 						article.title = 'WHY YOU GOTTA BE SO MEAN?';
@@ -159,7 +171,9 @@ describe('Article CRUD tests', function () {
 							.expect(200)
 							.end(function (articleUpdateErr, articleUpdateRes) {
 								// Handle article update error
-								if (articleUpdateErr) done(articleUpdateErr);
+								if (articleUpdateErr) {
+									return done(articleUpdateErr);
+								}
 
 								// Set assertions
 								(articleUpdateRes.body._id).should.equal(articleSaveRes.body._id);
@@ -227,7 +241,9 @@ describe('Article CRUD tests', function () {
 			.expect(200)
 			.end(function (signinErr, signinRes) {
 				// Handle signin error
-				if (signinErr) done(signinErr);
+				if (signinErr) {
+					return done(signinErr);
+				}
 
 				// Get the userId
 				var userId = user.id;
@@ -238,7 +254,9 @@ describe('Article CRUD tests', function () {
 					.expect(200)
 					.end(function (articleSaveErr, articleSaveRes) {
 						// Handle article save error
-						if (articleSaveErr) done(articleSaveErr);
+						if (articleSaveErr) {
+							return done(articleSaveErr);
+						}
 
 						// Delete an existing article
 						agent.delete('/api/articles/' + articleSaveRes.body._id)
@@ -246,7 +264,9 @@ describe('Article CRUD tests', function () {
 							.expect(200)
 							.end(function (articleDeleteErr, articleDeleteRes) {
 								// Handle article error error
-								if (articleDeleteErr) done(articleDeleteErr);
+								if (articleDeleteErr) {
+									return done(articleDeleteErr);
+								}
 
 								// Set assertions
 								(articleDeleteRes.body._id).should.equal(articleSaveRes.body._id);
