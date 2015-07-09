@@ -9,7 +9,12 @@ var _ = require('lodash'),
 	gulp = require('gulp'),
 	gulpLoadPlugins = require('gulp-load-plugins'),
 	runSequence = require('run-sequence'),
-	plugins = gulpLoadPlugins();
+	plugins = gulpLoadPlugins({
+		rename: {
+			'gulp-angular-templatecache': 'templateCache'
+		}
+	}),
+	path = require('path');
 
 // Set NODE_ENV to 'test'
 gulp.task('env:test', function () {
@@ -37,14 +42,14 @@ gulp.task('nodemon', function () {
 });
 
 // Watch Files For Changes
-gulp.task('watch', function() {
+gulp.task('watch', function () {
 	// Start livereload
 	plugins.livereload.listen();
 
 	// Add watch rules
 	gulp.watch(defaultAssets.server.views).on('change', plugins.livereload.changed);
 	gulp.watch(defaultAssets.server.allJS, ['jshint']).on('change', plugins.livereload.changed);
-	gulp.watch(defaultAssets.client.views).on('change', plugins.livereload.changed);
+	gulp.watch(defaultAssets.client.views, ['templatecache']).on('change', plugins.livereload.changed);
 	gulp.watch(defaultAssets.client.js, ['jshint']).on('change', plugins.livereload.changed);
 	gulp.watch(defaultAssets.client.css, ['csslint']).on('change', plugins.livereload.changed);
 	gulp.watch(defaultAssets.client.sass, ['sass', 'csslint']).on('change', plugins.livereload.changed);
@@ -65,7 +70,15 @@ gulp.task('csslint', function (done) {
 
 // JS linting task
 gulp.task('jshint', function () {
-	return gulp.src(_.union(defaultAssets.server.allJS, defaultAssets.client.js, testAssets.tests.server, testAssets.tests.client, testAssets.tests.e2e))
+	var assets = _.union(
+		defaultAssets.server.allJS,
+		defaultAssets.client.js,
+		testAssets.tests.server,
+		testAssets.tests.client,
+		testAssets.tests.e2e
+	);
+
+	return gulp.src(assets)
 		.pipe(plugins.jshint())
 		.pipe(plugins.jshint.reporter('default'))
 		.pipe(plugins.jshint.reporter('fail'));
@@ -95,8 +108,9 @@ gulp.task('cssmin', function () {
 gulp.task('sass', function () {
 	return gulp.src(defaultAssets.client.sass)
 		.pipe(plugins.sass())
-		.pipe(plugins.rename(function (path) {
-			path.dirname = path.dirname.replace('/scss', '/css');
+		.pipe(plugins.autoprefixer())
+		.pipe(plugins.rename(function (file) {
+			file.dirname = file.dirname.replace(path.sep + 'scss', path.sep + 'css');
 		}))
 		.pipe(gulp.dest('./modules/'));
 });
@@ -105,10 +119,22 @@ gulp.task('sass', function () {
 gulp.task('less', function () {
 	return gulp.src(defaultAssets.client.less)
 		.pipe(plugins.less())
-		.pipe(plugins.rename(function (path) {
-			path.dirname = path.dirname.replace('/less', '/css');
+		.pipe(plugins.autoprefixer())
+		.pipe(plugins.rename(function (file) {
+			file.dirname = file.dirname.replace(path.sep + 'less', path.sep + 'css');
 		}))
 		.pipe(gulp.dest('./modules/'));
+});
+
+// Angular template cache task
+gulp.task('templatecache', function () {
+	var re = new RegExp('\\' + path.sep + 'client\\' + path.sep, 'g');
+	
+	return gulp.src(defaultAssets.client.views)
+		.pipe(plugins.templateCache('templates.min.js', { root: 'modules/', module: 'core', transformUrl: function(url) {
+    return url.replace(re, path.sep)
+} }))
+		.pipe(gulp.dest('public/dist'));
 });
 
 // Mocha tests task
@@ -118,7 +144,7 @@ gulp.task('mocha', function (done) {
 	var error;
 
 	// Connect mongoose
-	mongoose.connect(function() {
+	mongoose.connect(function () {
 		// Run the tests
 		gulp.src(testAssets.tests.server)
 			.pipe(plugins.mocha({
@@ -128,9 +154,9 @@ gulp.task('mocha', function (done) {
 				// If an error occurs, save it
 				error = err;
 			})
-			.on('end', function() {
+			.on('end', function () {
 				// When the tests are done, disconnect mongoose and pass the error state back to gulp
-				mongoose.disconnect(function() {
+				mongoose.disconnect(function () {
 					done(error);
 				});
 			});
@@ -163,31 +189,39 @@ gulp.task('protractor', function () {
 });
 
 // Lint CSS and JavaScript files.
-gulp.task('lint', function(done) {
+gulp.task('lint', function (done) {
 	runSequence('less', 'sass', ['csslint', 'jshint'], done);
 });
 
 // Lint project files and minify them into two production files.
-gulp.task('build', function(done) {
-	runSequence('env:dev' ,'lint', ['uglify', 'cssmin'], done);
+gulp.task('build', function (done) {
+	runSequence('env:dev', 'lint', ['uglify', 'cssmin', 'templatecache'], done);
 });
 
 // Run the project tests
-gulp.task('test', function(done) {
+gulp.task('test', function (done) {
 	runSequence('env:test', ['karma', 'mocha'], done);
 });
 
+gulp.task('test:server', function (done) {
+	runSequence('env:test', ['mocha'], done);
+});
+
+gulp.task('test:client', function (done) {
+	runSequence('env:test', ['karma'], done);
+});
+
 // Run the project in development mode
-gulp.task('default', function(done) {
+gulp.task('default', function (done) {
 	runSequence('env:dev', 'lint', ['nodemon', 'watch'], done);
 });
 
 // Run the project in debug mode
-gulp.task('debug', function(done) {
+gulp.task('debug', function (done) {
 	runSequence('env:dev', 'lint', ['nodemon', 'watch'], done);
 });
 
 // Run the project in production mode
-gulp.task('prod', function(done) {
-	runSequence('build', 'lint', ['nodemon', 'watch'], done);
+gulp.task('prod', function (done) {
+	runSequence('build', 'env:prod', ['nodemon', 'watch'], done);
 });

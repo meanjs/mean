@@ -1,8 +1,6 @@
 'use strict';
 
 module.exports = {
-	secure: true,
-    port: process.env.PORT || 8443,
 	db: {
 		uri: process.env.MONGOHQ_URL || process.env.MONGOLAB_URI || 'mongodb://' + (process.env.DB_1_PORT_27017_TCP_ADDR || 'localhost') + '/mean',
 		options: {
@@ -35,7 +33,10 @@ module.exports = {
 			]
 		},
 		css: 'public/dist/application.min.css',
-		js: 'public/dist/application.min.js'
+		js: [
+			'public/dist/application.min.js',
+			'public/dist/templates.min.js'
+		]
 	},
 	facebook: {
 		clientID: process.env.FACEBOOK_ID || 'APP_ID',

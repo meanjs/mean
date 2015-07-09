@@ -6,7 +6,9 @@
 var config = require('./config/config'),
 	mongoose = require('./config/lib/mongoose'),
 	express = require('./config/lib/express'),
-	chalk = require('chalk');
+	chalk = require('chalk'),
+	q = require('q'),
+	def = q.defer();
 
 /**
  * Main application entry file.
@@ -32,3 +34,5 @@ mongoose.connect(function (db) {
 	}
 	console.log('--');
 });
+
+module.exports = def.promise;

@@ -24,10 +24,10 @@ Make sure you have installed all of the following prerequisites on your developm
 $ npm install -g bower
 ```
 
-* Grunt - You're going to use the [Grunt Task Runner](http://gruntjs.com/) to automate your development process. Make sure you've installed Node.js and npm first, then install grunt globally using npm:
+* Gulp - You're going to use the [automated task runner](http://gulpjs.com/) to automate your development process. Make sure you've installed Node.js and npm first, then install gulp globally using npm:
 
 ```bash
-$ npm install -g grunt-cli
+$ npm install -g gulp
 ```
 
 ## Downloading MEAN.JS
@@ -67,10 +67,10 @@ This command does a few things:
 * Finally, when the install process is over, npm will initiate a bower install command to install all the front-end modules needed for the application
 
 ## Running Your Application
-After the install process is over, you'll be able to run your application using Grunt, just run grunt default task:
+After the install process is over, you'll be able to run your application using Gulp, just run gulp default task:
 
 ```
-$ grunt
+$ gulp
 ```
 
 Your application should run on port 3000, so in your browser just go to [http://localhost:3000](http://localhost:3000)
@@ -82,7 +82,7 @@ If you encounter any problems, try the Troubleshooting section.
 You can run the full test suite included with MEAN.JS with the test task:
 
 ```
-$ grunt test
+$ gulp test
 ```
 
 This will run both the server-side tests (located in the app/tests/ directory) and the client-side tests (located in the public/modules/*/tests/).
@@ -90,13 +90,13 @@ This will run both the server-side tests (located in the app/tests/ directory) a
 To execute only the server tests, run the test:server task:
 
 ```
-$ grunt test:server
+$ gulp test:server
 ```
 
 And to run only the client tests, run the test:client task:
 
 ```
-$ grunt test:client
+$ gulp test:client
 ```
 
 ## Development and deployment With Docker
