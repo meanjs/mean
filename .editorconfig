@@ -1,6 +1,6 @@
 # EditorConfig is awesome: http://EditorConfig.org
 
-# Howto with your editor:
+# Howto with your editor: http://editorconfig.org/#download
 #   Sublime: https://github.com/sindresorhus/editorconfig-sublime
 
 # top-most EditorConfig file
@@ -34,3 +34,9 @@ indent_style = tab
 # Standard at: 
 [Makefile]
 indent_style = tab
+
+# The indentation in package.json will always need to be 2 spaces
+# https://github.com/npm/npm/issues/4718
+[package.json, bower.json]
+indent_style = space
+indent_size = 2

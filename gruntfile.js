@@ -5,7 +5,8 @@
  */
 var _ = require('lodash'),
 	defaultAssets = require('./config/assets/default'),
-	testAssets = require('./config/assets/test');
+	testAssets = require('./config/assets/test'),
+	fs = require('fs');
 
 module.exports = function (grunt) {
 	// Project Configuration
@@ -190,6 +191,15 @@ module.exports = function (grunt) {
 					args: {} // Target-specific arguments
 				}
 			}
+		},
+		copy: {
+		    localConfig: {
+	            src: 'config/env/local.example.js',
+	            dest: 'config/env/local.js',
+	            filter: function() {
+	            	return !fs.existsSync('config/env/local.js');
+	            }
+	        }
 		}
 	});
 
@@ -220,14 +230,16 @@ module.exports = function (grunt) {
 	grunt.registerTask('build', ['env:dev', 'lint', 'ngAnnotate', 'uglify', 'cssmin']);
 
 	// Run the project tests
-	grunt.registerTask('test', ['env:test', 'mongoose', 'mochaTest', 'karma:unit']);
+	grunt.registerTask('test', ['env:test', 'copy:localConfig', 'mongoose', 'mochaTest', 'karma:unit']);
+	grunt.registerTask('test:server', ['env:test', 'mongoose', 'mochaTest']);
+	grunt.registerTask('test:client', ['env:test', 'mongoose', 'karma:unit']);
 
 	// Run the project in development mode
-	grunt.registerTask('default', ['env:dev', 'lint', 'concurrent:default']);
+	grunt.registerTask('default', ['env:dev', 'lint', 'copy:localConfig', 'concurrent:default']);
 
 	// Run the project in debug mode
-	grunt.registerTask('debug', ['env:dev', 'lint', 'concurrent:debug']);
+	grunt.registerTask('debug', ['env:dev', 'lint', 'copy:localConfig', 'concurrent:debug']);
 
 	// Run the project in production mode
-	grunt.registerTask('prod', ['build', 'env:prod', 'concurrent:default']);
+	grunt.registerTask('prod', ['build', 'env:prod', 'copy:localConfig', 'concurrent:default']);
 };
