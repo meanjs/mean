@@ -24,7 +24,7 @@ exports.signup = function(req, res) {
 	user.provider = 'local';
 	user.displayName = user.firstName + ' ' + user.lastName;
 
-	// Then save the user 
+	// Then save the user
 	user.save(function(err) {
 		if (err) {
 			return res.status(400).send({
@@ -177,7 +177,7 @@ exports.saveOAuthUserProfile = function(req, providerUserProfile, done) {
  */
 exports.removeOAuthProvider = function(req, res, next) {
 	var user = req.user;
-	var provider = req.param('provider');
+	var provider = req.params.provider;
 
 	if (user && provider) {
 		// Delete the additional provider
