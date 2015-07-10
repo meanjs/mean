@@ -61,8 +61,6 @@ var validateEnvironmentVariable = function() {
             console.error(chalk.red('NODE_ENV is not defined! Using default development environment'));
         }
         process.env.NODE_ENV = 'development';
-    } else {
-        console.log(chalk.bold('Application loaded using the "' + process.env.NODE_ENV + '" environment configuration'));
     }
     // Reset console color
     console.log(chalk.white(''));
