@@ -1,68 +1,52 @@
-'use strict';
+/**
+ * Articles Controller
+ */
 
-// Articles controller
-angular.module('articles').controller('ArticlesController', ['$scope', '$stateParams', '$location', 'Authentication', 'Articles',
-	function($scope, $stateParams, $location, Authentication, Articles) {
-		$scope.authentication = Authentication;
+(function () {
+	'use strict';
 
-		// Create new Article
-		$scope.create = function() {
-			// Create new Article object
-			var article = new Articles({
-				title: this.title,
-				content: this.content
-			});
+	angular
+		.module('articles')
+		.controller('ArticlesController', ArticlesController);
 
-			// Redirect after save
-			article.$save(function(response) {
-				$location.path('articles/' + response._id);
+	ArticlesController.$inject = ['$state', 'Authentication', 'articleResolve'];
 
-				// Clear form fields
-				$scope.title = '';
-				$scope.content = '';
-			}, function(errorResponse) {
-				$scope.error = errorResponse.data.message;
-			});
-		};
+	function ArticlesController($state, Authentication, articleResolve) {
+		var vm = this;
+		vm.authentication = Authentication;
+		vm.article = articleResolve;
+		vm.save = save;
+		vm.remove = remove;
 
-		// Remove existing Article
-		$scope.remove = function(article) {
-			if (article) {
-				article.$remove();
+		// Save Article
+		function save() {
+			var article = vm.article;
 
-				for (var i in $scope.articles) {
-					if ($scope.articles[i] === article) {
-						$scope.articles.splice(i, 1);
-					}
-				}
+			if (article._id)
+			{
+				article.$update(successCallback, errorCallback);
 			} else {
-				$scope.article.$remove(function() {
-					$location.path('articles');
+				article.$save(successCallback, errorCallback);
+			}
+
+			function successCallback(response) {
+				$state.go('articles.view', {
+					articleId: response._id
+				}, {
+					reload: true
 				});
 			}
-		};
 
-		// Update existing Article
-		$scope.update = function() {
-			var article = $scope.article;
+			function errorCallback(errorResponse) {
+				vm.error = errorResponse.data.message;
+			}
+		}
 
-			article.$update(function() {
-				$location.path('articles/' + article._id);
-			}, function(errorResponse) {
-				$scope.error = errorResponse.data.message;
+		// Remove existing Article
+		function remove() {
+			vm.article.$remove(function () {
+				$state.go('articles.list');
 			});
-		};
-
-		// Find a list of Articles
-		$scope.find = function() {
-			$scope.articles = Articles.query();
-		};
-
-		// Find existing Article
-		$scope.findOne = function() {
-			$scope.article = Articles.get({
-				articleId: $stateParams.articleId
-			});
-		};
+		}
 	}
-]);
+})();
