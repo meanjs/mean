@@ -78,7 +78,7 @@ module.exports = function (grunt) {
 				options: {
 					nodeArgs: ['--debug'],
 					ext: 'js,html',
-					watch: _.union(defaultAssets.server.views, defaultAssets.server.allJS, defaultAssets.server.config)
+					watch: _.union(defaultAssets.server.gruntConfig, defaultAssets.server.views, defaultAssets.server.allJS, defaultAssets.server.config)
 				}
 			}
 		},
@@ -91,7 +91,7 @@ module.exports = function (grunt) {
 		},
 		jshint: {
 			all: {
-				src: _.union(defaultAssets.server.allJS, defaultAssets.client.js, testAssets.tests.server, testAssets.tests.client, testAssets.tests.e2e),
+				src: _.union(defaultAssets.server.gruntConfig, defaultAssets.server.allJS, defaultAssets.client.js, testAssets.tests.server, testAssets.tests.client, testAssets.tests.e2e),
 				options: {
 					jshintrc: true,
 					node: true,
