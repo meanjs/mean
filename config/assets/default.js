@@ -33,10 +33,13 @@ module.exports = {
 			'modules/*/client/*.js',
 			'modules/*/client/**/*.js'
 		],
-		views: ['modules/*/client/views/**/*.html']
+		views: ['modules/*/client/views/**/*.html'],
+		templates: ['build/templates.js']
 	},
 	server: {
-		allJS: ['gruntfile.js', 'server.js', 'config/**/*.js', 'modules/*/server/**/*.js'],
+		gruntConfig: 'gruntfile.js',
+		gulpConfig: 'gulpfile.js',
+		allJS: ['server.js', 'config/**/*.js', 'modules/*/server/**/*.js'],
 		models: 'modules/*/server/models/**/*.js',
 		routes: ['modules/!(core)/server/routes/**/*.js', 'modules/core/server/routes/**/*.js'],
 		sockets: 'modules/*/server/sockets/**/*.js',
