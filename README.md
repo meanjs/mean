@@ -73,15 +73,37 @@ After the install process is over, you'll be able to run your application using 
 $ grunt
 ```
 
-Your application should run on port 3000, so in your browser just go to [http://localhost:3000](http://localhost:3000)
+Your application should run on port 3000 with the *development* environment configuration, so in your browser just go to [http://localhost:3000](http://localhost:3000)
 
 That's it! Your application should be running. To proceed with your development, check the other sections in this documentation.
 If you encounter any problems, try the Troubleshooting section.
 
+* explore ```config/env/development.js``` for development environment configuration options
+
+### Running in Production mode
+To run your application with *production* environment configuration, execute grunt as follows:
+```bash
+$ grunt prod
+```
+* explore ```config/env/production.js``` for production environment configuration options
+
+### Running with TLS (SSL)
+Application will start by default with secure configuration (SSL mode) turned on and listen on port 8443.
+To run your application in a secure manner you'll need to use OpenSSL and generate a set of self-signed certificates. Unix-based users can use the following command:
+```bash
+$ sh ./scripts/generate-ssl-certs.sh
+```
+Windows users can follow instructions found [here](http://www.websense.com/support/article/kbarticle/How-to-use-OpenSSL-and-Microsoft-Certification-Authority).
+After you've generated the key and certificate, place them in the *config/sslcerts* folder.
+
+Finally, execute grunt's prod task ```grunt prod```
+* enable/disable SSL mode in production environment change the ```secure``` option in ```config/env/production.js```
+
+
 ## Testing Your Application
 You can run the full test suite included with MEAN.JS with the test task:
 
-```
+```bash
 $ grunt test
 ```
 
@@ -89,13 +111,13 @@ This will run both the server-side tests (located in the app/tests/ directory) a
 
 To execute only the server tests, run the test:server task:
 
-```
+```bash
 $ grunt test:server
 ```
 
 And to run only the client tests, run the test:client task:
 
-```
+```bash
 $ grunt test:client
 ```
 
@@ -121,14 +143,6 @@ $
 ```bash
 $ docker run -p 3000:3000 -p 35729:35729 -v /Users/mdl/workspace/mean-stack/mean/public:/home/mean/public -v /Users/mdl/workspace/mean-stack/mean/app:/home/mean/app --link db:db_1 mean
 ```
-
-## Running in a secure environment
-To run your application in a secure manner you'll need to use OpenSSL and generate a set of self-signed certificates. Unix-based users can use the following command:
-```bash
-$ sh ./scripts/generate-ssl-certs.sh
-```
-Windows users can follow instructions found [here](http://www.websense.com/support/article/kbarticle/How-to-use-OpenSSL-and-Microsoft-Certification-Authority).
-After you've generated the key and certificate, place them in the *config/sslcerts* folder.
 
 ## Getting Started With MEAN.JS
 You have your application running, but there is a lot of stuff to understand. We recommend you go over the [Official Documentation](http://meanjs.org/docs.html).
