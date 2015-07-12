@@ -72,7 +72,7 @@ describe('User Model Unit Tests:', function() {
 			user.firstName = 'test';
 			var passwordBefore = user.password;
 			return user.save(function(err) {
-				var passwordAfter = user.password
+				var passwordAfter = user.password;
 				passwordBefore.should.equal(passwordAfter);
 				done();
 			});
