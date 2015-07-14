@@ -6,6 +6,7 @@
 var _ = require('lodash'),
     chalk = require('chalk'),
     glob = require('glob'),
+    fs = require('fs'),
     path = require('path');
 
 /**
@@ -60,8 +61,6 @@ var validateEnvironmentVariable = function() {
             console.error(chalk.red('NODE_ENV is not defined! Using default development environment'));
         }
         process.env.NODE_ENV = 'development';
-    } else {
-        console.log(chalk.bold('Application loaded using the "' + process.env.NODE_ENV + '" environment configuration'));
     }
     // Reset console color
     console.log(chalk.white(''));
@@ -139,7 +138,9 @@ var initGlobalConfig = function() {
     var environmentConfig = require(path.join(process.cwd(), 'config/env/', process.env.NODE_ENV)) || {};
 
     // Merge config files
-    var config = _.extend(defaultConfig, environmentConfig);
+    var envConf = _.extend(defaultConfig, environmentConfig);
+
+   var config = _.merge(envConf, (fs.existsSync(path.join(process.cwd(), 'config/env/local.js')) && require(path.join(process.cwd(), 'config/env/local.js'))) || {});
 
     // Initialize global globbed files
     initGlobalConfigFiles(config, assets);

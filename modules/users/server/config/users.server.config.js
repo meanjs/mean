@@ -8,6 +8,9 @@ var passport = require('passport'),
 	path = require('path'),
 	config = require(path.resolve('./config/config'));
 
+/**
+ * Module init function.
+ */
 module.exports = function(app, db) {
 	// Serialize sessions
 	passport.serializeUser(function(user, done) {

@@ -27,6 +27,7 @@ module.exports.initLocalVariables = function (app) {
 	// Setting application local variables
 	app.locals.title = config.app.title;
 	app.locals.description = config.app.description;
+	app.locals.secure = config.secure;
 	app.locals.keywords = config.app.keywords;
 	app.locals.googleAnalyticsTrackingID = config.app.googleAnalyticsTrackingID;
 	app.locals.facebookAppId = config.facebook.clientID;
@@ -54,7 +55,7 @@ module.exports.initMiddleware = function (app) {
 	// Should be placed before express.static
 	app.use(compress({
 		filter: function (req, res) {
-			return (/json|text|javascript|css/).test(res.getHeader('Content-Type'));
+			return (/json|text|javascript|css|font|svg/).test(res.getHeader('Content-Type'));
 		},
 		level: 9
 	}));
