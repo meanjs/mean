@@ -1,9 +1,9 @@
 # Site settings
 title: MEAN.JS
-email: your-email@domain.com
+email: support@meanjs.org
 description: > # Full-Stack JavaScript Using MongoDB, Express, AngularJS, and Node.js
-baseurl: "/mean/" # the subpath of your site, e.g. /blog/
-url: "http://codydaig.github.io/" # the base hostname & protocol for your site
+baseurl: "" # the subpath of your site, e.g. /blog/
+url: "http://meanjs.org/" # the base hostname & protocol for your site
 twitter_username: Meanjsorg
 github_username:  meanjs
 
