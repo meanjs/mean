@@ -1,14 +1,11 @@
 # Site settings
-title: Your awesome title
+title: MEAN.JS
 email: your-email@domain.com
-description: > # this means to ignore newlines until "baseurl:"
-  Write an awesome description for your new site here. You can edit this
-  line in _config.yml. It will appear in your document head meta (for
-  Google search results) and in your feed.xml site description.
+description: > # Full-Stack JavaScript Using MongoDB, Express, AngularJS, and Node.js
 baseurl: "" # the subpath of your site, e.g. /blog/
-url: "http://yourdomain.com" # the base hostname & protocol for your site
-twitter_username: jekyllrb
-github_username:  jekyll
+url: "http://meanjs.org/" # the base hostname & protocol for your site
+twitter_username: Meanjsorg
+github_username:  meanjs
 
 # Build settings
 markdown: kramdown
