@@ -1,279 +1,159 @@
-<!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!-->
-<html class="no-js">
-<!--<![endif]-->
+---
+layout: default
+title: Changelog
+---
 
-<head>
-    <title>MEAN.JS Changelog</title>
+<section class="page-header">
+  <h1>MEAN.JS Changelog</h1>
+</section>
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="MEAN.JS Changelog">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:site" content="@meanjsorg">
-    <meta name="twitter:title" content="MEAN.JS Changelog">
-    <meta name="twitter:description" content="MEAN.JS - Full-Stack JavaScript Using MongoDB, Express, AngularJS, and Node.js.">
-    <meta name="twitter:image:src" content="http://meanjs.org/img/icon.png">
-
-    <meta property="og:title" content="MEAN.JS Changelog" />
-    <meta property="og:description" content="MEAN.JS - Full-Stack JavaScript Using MongoDB, Express, AngularJS, and Node.js." />
-    <meta property="og:image" content="http://meanjs.org/img/icon.png" />
-    <meta property="og:url" content="http://meanjs.org/changelog.html" />
-
-    <link rel="shortcut icon" href="img/favicon.ico" />
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
-
-    <link rel="stylesheet" href="css/bootstrap-journal.min.css">
-    <link rel="stylesheet" href="css/common.css">
-</head>
-
-<body>
-    <header class="navbar navbar-default navbar-fixed-top" role="banner">
-        <div class="container">
-            <div class="navbar-header">
-                <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a href="http://meanjs.org" class="logo-container">
-                    <img src="img/logo.png" alt="MEAN.JS" height="40">
-                </a>
-            </div>
-            <nav id="navbar" class="collapse navbar-collapse" role="navigation">
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="docs.html">Docs</a>
-                    </li>
-					<li>
-						<a href="generator.html">Yo Generator</a>
-					</li>
-                    <li>
-                        <a href="modules.html">Modules</a>
-                    </li>
-                    <li class="active">
-                        <a href="changelog.html">Changelog</a>
-                    </li>
-                    <li>
-                        <a href="community.html">Community</a>
-                    </li>
-                    <li>
-                        <a href="http://blog.meanjs.org">Blog</a>
-                    </li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-    <section class="content">
-        <section class="container">
-        	<section class="page-header">
-        		<h1>MEAN.JS Changelog</h1>
-        	</section>
-			<h1>Version 0.3.3 (07/10/2014)</h1>
-			<h2>Small Bug Fixes & General Update</h2>
-			<p>
-				We made some minor changes, fixed some bugs, and updated the project dependencies
-			</p>
-        	<h1>Version 0.3.2 (03/08/2014)</h1>
-			<h2>Reset Password &amp; Several Updates</h2>
-			<p>
-				We made some major changes, fixed some bugs, and more:
-			</p>
-			<ul>
-				<li>Updated dependencies.</li>
-				<li>Updated deprecated methods.</li>
-				<li>Added position value for menu service.</li>
-				<li>Fixed menu service defaults.</li>
-				<li>Added Password reset feature.</li>
-				<li>Refactored users module.</li>
-				<li>Added initial Docker support.</li>
-				<li>Updated the Yo Generator to support new features.</li>
-			</ul>
-			<p>
-				Kudos to this version contributors: <a href="https://github.com/cpacker">@cpacker</a>, <a href="https://github.com/MichaelJCole">@MichaelJCole</a>, <a href="https://github.com/luebken">@luebken</a>, <a href="https://github.com/enkodellc">@enkodellc</a>, <a href="https://github.com/tbenade">@tbenade</a>, <a href="https://github.com/keshavos">@keshavos</a>.
-				<br>
-				<br>
-				Special thanks to <a href="https://alexsuttmiller.com/">Alex Suttmiller</a> who's been doing excellent job with helping the community.
-			</p>
-        	<h1>Version 0.3.1 (24/05/2014)</h1>
-			<h2>Bug Fixes &amp; Minor Features</h2>
-			<p>
-				We made some minor changes, fixing some bugs, adding submenu feature, and more:
-			</p>
-			<ul>
-				<li>Updated dependencies.</li>
-				<li>Added submenus feature.</li>
-				<li>Simplified Grunt tasks configuration.</li>
-				<li>Added <b>Debug</b> Grunt task for node-inspector.</li>
-				<li>Added <b>NGMin</b> Grunt task for better angular-js minification.</li>
-				<li>Clean up code indentation.</li>
-				<li>Added Users AngularJS tests.</li>
-				<li>Revamped Home view.</li>
-				<li>Converted binding to ng-bind directive.</li>
-				<li>Fixed user additional providers issue.</li>
-				<li>Fixed grunt watch issues.</li>
-				<li>Updated the Yo Generator to support new features.</li>
-			</ul>
-			<p>
-				Kudos to this version contributors: <a href="https://github.com/MichaelJCole">@MichaelJCole</a>, <a href="https://github.com/samof76">@samof76</a>, <a href="https://github.com/cpacker">@cpacker</a>, and <a href="https://github.com/arve0">@arve0</a>.
-			</p>
-        	<h1>Version 0.3.0 (04/05/2014)</h1>
-			<h2>Major Release Changes</h2>
-			<p>
-				We made some major changes to the stack and generator:
-			</p>
-			<ul>
-				<li>Moved to Express 4.1.0.</li>
-				<li>Simplified file structure.</li>
-				<li>Changed file signatures to assist with project management.</li>
-				<li>Replaced walk functions with more readable glob patterns.</li>
-				<li>Added CSS Linting and created grunt lint task.</li>
-				<li>Added <b>CSSMin</b> and <b>Uglify</b> tasks wrapped in a grunt build task for production support.</li>
-				<li>Created environmental assets management.</li>
-				<li>Introduced new <b>Menus</b> service that offers better menus managment.</li>
-				<li>Added roles to the User model.</li>
-				<li>Updated the Yo Generator to support new structure and features.</li>
-			</ul>
-        	<h1>Version 0.2.3 (16/04/2014)</h1>
-			<h2>Bug Fixes &amp; Users Module</h2>
-			<p>
-				We made some minor bug fixes and added a social account management section.
-			</p>
-			<ul>
-				<li>Fixed OAuth issues.</li>
-				<li>Fixed strategies structure.</li>
-				<li>Added the ability for users to connect more social accounts.</li>
-			</ul>
-        	<h1>Version 0.2.2 (26/03/2014)</h1>
-			<h2>Users Module Revamp</h2>
-			<p>
-				We completely revamped the users module.
-			</p>
-			<ul>
-				<li>Fixed OAuth issues.</li>
-				<li>Fixed username issues.</li>
-				<li>Improved validation.</li>
-				<li>Better error handling.</li>
-				<li>Added Edit profile view.</li>
-				<li>Added Change password view.</li>
-			</ul>
-        	<h1>Version 0.2.1 (04/03/2014)</h1>
-			<h2>Bug Fixes</h2>
-			<p>
-				Several bug fixes including performance and other issues.
-			</p>
-			<ul>
-				<li>Fixed tests issues.</li>
-				<li>Locked dependencies versions.</li>
-				<li>Fixed flickering issue.</li>
-			</ul>
-        	<h1>Version 0.2 (12/02/2014)</h1>
-			<h2>Bug Fixes</h2>
-			<p>
-				Several bug fixes including performance and other issues.
-			</p>
-			<ul>
-				<li>Fixed tests issues.</li>
-				<li>Fixed heroku deployment issues.</li>
-				<li>Fixed user model issues.</li>
-			</ul>
-			<h2>Folder Restructure</h2>
-			<ul>
-				<li>
-					<b>Routes.js</b> file removed from <b>config</b> folder and split into modular .JS files in the <b>app/routes</b> folder.
-				</li>
-				<li>
-					<b>app/config/authorization.js</b> was removed, middlewares moved to controllers.
-				</li>
-				<li>
-					<b>tests</b> folder moved to <b>app</b> folder for <b>Mocha tests</b>,<b> AngularJS Karma tests</b> moved to module folder.
-				</li>
-				<li>
-					<b>passport.js</b> file was split into the different strategies files placed under <b>config/strategies</b> folder.
-				</li>
-				<li>
-					AngularJS <b>authentication views</b> and <b>JS folders</b> were removed.
-					<br>
-					Each module now supports its own folder structure to ensure better project development. To learn more about this change please visit the <a href="docs.html#angularjs-modules">AngularJS Modules</a> section in the documentation.
-				</li>
-			</ul>
-			<h2>Templates Changes</h2>
-			<ul>
-				<li>
-					<b>JADE</b> was replaced with <b>Swig</b>.
-				</li>
-				<li>
-					Server side authentication views moved to AngularJS views.
-				</li>
-			</ul>
-			<h2>Design Changes</h2>
-			<ul>
-				<li>
-					<b>Bootstrap 3.0.3</b> support.
-				</li>
-				<li>
-					Views redesigned to support reponsive behaviour.
-				</li>
-			</ul>
-			<h2>AngularJS Module Changes</h2>
-			<p>
-				AngularJS files were moved to ensure a better module system. To learn more about this change, please visit the <a href="docs.html#angularjs-modules">AngularJS Modules</a> section in the documentation.
-			</p>
-        </section>
-    </section>
-    <footer class="container text-center small">
-        Licensed under MIT. Documentation licensed under CC BY 3.0. Copyright 2014.
-    </footer>
-    <!-- Twitter -->
-    <script>
-    ! function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (!d.getElementById(id)) {
-            js = d.createElement(s);
-            js.id = id;
-            js.src = "//platform.twitter.com/widgets.js";
-            fjs.parentNode.insertBefore(js, fjs);
-        }
-    }(document, "script", "twitter-wjs");
-    </script>
-
-    <!-- Facebook -->
-    <div id="fb-root"></div>
-    <script>
-    (function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s);
-        js.id = id;
-        js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=588647347851720";
-        fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
-    </script>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
-    <!-- Google Analytics-->
-    <script>
-    (function(i, s, o, g, r, a, m) {
-        i['GoogleAnalyticsObject'] = r;
-        i[r] = i[r] || function() {
-            (i[r].q = i[r].q || []).push(arguments)
-        }, i[r].l = 1 * new Date();
-        a = s.createElement(o),
-        m = s.getElementsByTagName(o)[0];
-        a.async = 1;
-        a.src = g;
-        m.parentNode.insertBefore(a, m)
-    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
-
-    ga('create', 'UA-46755880-1', 'meanjs.org');
-    ga('send', 'pageview');
-    </script>
-</body>
-
-</html>
+<h1>Version 0.3.3 (07/10/2014)</h1>
+<h2>Small Bug Fixes & General Update</h2>
+<p>
+  We made some minor changes, fixed some bugs, and updated the project dependencies
+</p>
+    <h1>Version 0.3.2 (03/08/2014)</h1>
+<h2>Reset Password &amp; Several Updates</h2>
+<p>
+  We made some major changes, fixed some bugs, and more:
+</p>
+<ul>
+  <li>Updated dependencies.</li>
+  <li>Updated deprecated methods.</li>
+  <li>Added position value for menu service.</li>
+  <li>Fixed menu service defaults.</li>
+  <li>Added Password reset feature.</li>
+  <li>Refactored users module.</li>
+  <li>Added initial Docker support.</li>
+  <li>Updated the Yo Generator to support new features.</li>
+</ul>
+<p>
+  Kudos to this version contributors: <a href="https://github.com/cpacker">@cpacker</a>, <a href="https://github.com/MichaelJCole">@MichaelJCole</a>, <a href="https://github.com/luebken">@luebken</a>, <a href="https://github.com/enkodellc">@enkodellc</a>, <a href="https://github.com/tbenade">@tbenade</a>, <a href="https://github.com/keshavos">@keshavos</a>.
+  <br>
+  <br>
+  Special thanks to <a href="https://alexsuttmiller.com/">Alex Suttmiller</a> who's been doing excellent job with helping the community.
+</p>
+    <h1>Version 0.3.1 (24/05/2014)</h1>
+<h2>Bug Fixes &amp; Minor Features</h2>
+<p>
+  We made some minor changes, fixing some bugs, adding submenu feature, and more:
+</p>
+<ul>
+  <li>Updated dependencies.</li>
+  <li>Added submenus feature.</li>
+  <li>Simplified Grunt tasks configuration.</li>
+  <li>Added <b>Debug</b> Grunt task for node-inspector.</li>
+  <li>Added <b>NGMin</b> Grunt task for better angular-js minification.</li>
+  <li>Clean up code indentation.</li>
+  <li>Added Users AngularJS tests.</li>
+  <li>Revamped Home view.</li>
+  <li>Converted binding to ng-bind directive.</li>
+  <li>Fixed user additional providers issue.</li>
+  <li>Fixed grunt watch issues.</li>
+  <li>Updated the Yo Generator to support new features.</li>
+</ul>
+<p>
+  Kudos to this version contributors: <a href="https://github.com/MichaelJCole">@MichaelJCole</a>, <a href="https://github.com/samof76">@samof76</a>, <a href="https://github.com/cpacker">@cpacker</a>, and <a href="https://github.com/arve0">@arve0</a>.
+</p>
+    <h1>Version 0.3.0 (04/05/2014)</h1>
+<h2>Major Release Changes</h2>
+<p>
+  We made some major changes to the stack and generator:
+</p>
+<ul>
+  <li>Moved to Express 4.1.0.</li>
+  <li>Simplified file structure.</li>
+  <li>Changed file signatures to assist with project management.</li>
+  <li>Replaced walk functions with more readable glob patterns.</li>
+  <li>Added CSS Linting and created grunt lint task.</li>
+  <li>Added <b>CSSMin</b> and <b>Uglify</b> tasks wrapped in a grunt build task for production support.</li>
+  <li>Created environmental assets management.</li>
+  <li>Introduced new <b>Menus</b> service that offers better menus managment.</li>
+  <li>Added roles to the User model.</li>
+  <li>Updated the Yo Generator to support new structure and features.</li>
+</ul>
+    <h1>Version 0.2.3 (16/04/2014)</h1>
+<h2>Bug Fixes &amp; Users Module</h2>
+<p>
+  We made some minor bug fixes and added a social account management section.
+</p>
+<ul>
+  <li>Fixed OAuth issues.</li>
+  <li>Fixed strategies structure.</li>
+  <li>Added the ability for users to connect more social accounts.</li>
+</ul>
+    <h1>Version 0.2.2 (26/03/2014)</h1>
+<h2>Users Module Revamp</h2>
+<p>
+  We completely revamped the users module.
+</p>
+<ul>
+  <li>Fixed OAuth issues.</li>
+  <li>Fixed username issues.</li>
+  <li>Improved validation.</li>
+  <li>Better error handling.</li>
+  <li>Added Edit profile view.</li>
+  <li>Added Change password view.</li>
+</ul>
+    <h1>Version 0.2.1 (04/03/2014)</h1>
+<h2>Bug Fixes</h2>
+<p>
+  Several bug fixes including performance and other issues.
+</p>
+<ul>
+  <li>Fixed tests issues.</li>
+  <li>Locked dependencies versions.</li>
+  <li>Fixed flickering issue.</li>
+</ul>
+    <h1>Version 0.2 (12/02/2014)</h1>
+<h2>Bug Fixes</h2>
+<p>
+  Several bug fixes including performance and other issues.
+</p>
+<ul>
+  <li>Fixed tests issues.</li>
+  <li>Fixed heroku deployment issues.</li>
+  <li>Fixed user model issues.</li>
+</ul>
+<h2>Folder Restructure</h2>
+<ul>
+  <li>
+    <b>Routes.js</b> file removed from <b>config</b> folder and split into modular .JS files in the <b>app/routes</b> folder.
+  </li>
+  <li>
+    <b>app/config/authorization.js</b> was removed, middlewares moved to controllers.
+  </li>
+  <li>
+    <b>tests</b> folder moved to <b>app</b> folder for <b>Mocha tests</b>,<b> AngularJS Karma tests</b> moved to module folder.
+  </li>
+  <li>
+    <b>passport.js</b> file was split into the different strategies files placed under <b>config/strategies</b> folder.
+  </li>
+  <li>
+    AngularJS <b>authentication views</b> and <b>JS folders</b> were removed.
+    <br>
+    Each module now supports its own folder structure to ensure better project development. To learn more about this change please visit the <a href="docs.html#angularjs-modules">AngularJS Modules</a> section in the documentation.
+  </li>
+</ul>
+<h2>Templates Changes</h2>
+<ul>
+  <li>
+    <b>JADE</b> was replaced with <b>Swig</b>.
+  </li>
+  <li>
+    Server side authentication views moved to AngularJS views.
+  </li>
+</ul>
+<h2>Design Changes</h2>
+<ul>
+  <li>
+    <b>Bootstrap 3.0.3</b> support.
+  </li>
+  <li>
+    Views redesigned to support reponsive behaviour.
+  </li>
+</ul>
+<h2>AngularJS Module Changes</h2>
+<p>
+  AngularJS files were moved to ensure a better module system. To learn more about this change, please visit the <a href="docs.html#angularjs-modules">AngularJS Modules</a> section in the documentation.
+</p>
