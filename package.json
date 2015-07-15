@@ -43,6 +43,7 @@
     "passport": "~0.2.2",
     "passport-facebook": "^2.0.0",
     "passport-github": "~0.1.5",
+	"passport-paypal-openidconnect": "^0.1.1",
     "passport-google-oauth": "~0.2.0",
     "passport-linkedin": "~0.1.3",
     "passport-local": "^1.0.0",
