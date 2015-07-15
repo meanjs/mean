@@ -1,7 +1,2 @@
-.DS_Store
-.nodemonignore
-.sass-cache/
-npm-debug.log
-node_modules/
-public/lib
-server/test/coverage/
+_site
+.sass-cache
