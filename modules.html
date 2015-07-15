@@ -1,0 +1,87 @@
+---
+layout: default
+title: Modules
+---
+
+<section class="row">
+  <div class="col-md-2">
+    <nav class="nav-docs" role="complementary">
+      <ul class="nav nav-pills nav-stacked">
+        <li>
+          <a href="#overview">Overview</a>
+        </li>
+        <li>
+          <a href="#seo">MEAN-SEO</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+  <section class="col-md-10 col-md-offset-2">
+    <i class="small text-muted">
+      Last updated: 03 Aug 2014.
+    </i>
+    <div class="inner-link-anchor" id="overview"></div>
+    <section class="page-header">
+      <h1>Overview</h1>
+    </section>
+    <section>
+      <p>
+        When we approached the development of the MEAN.JS, we set a goal to make it as production ready as possible. Since we're already working in the Node.js eco-system (and have a strong opinion toward modular architecture) we decided that it would be best to enrich the stack with useful modules.
+      </p>
+      <p>
+        In this page you will find MEAN modules that will help you make your project better. We will try to solve common issues with the MEAN stack as well as finding new ways to extend its functionality without harming the core stack.
+      </p>
+      <p>
+        <br>Enjoy &amp; keep us updated,
+        <br>The MEAN.JS Team.
+      </p>
+    </section>
+    <div class="inner-link-anchor" id="seo"></div>
+    <section class="page-header">
+      <h1 class="pull-left">MEAN-SEO</h1>
+      <div class="pull-right hidden-xs hidden-sm">
+        <ul class="list-inline modules-social-links">
+          <li>
+            <a href="http://github.com/meanjs/mean-seo" class="btn btn-sm btn-success"> View On Github </a>
+          </li>
+        </ul>
+      </div>
+      <div class="clearfix"></div>
+    </section>
+    
+    <section>
+      <h3>Overview</h3>
+      <p><b>MEAN-SEO</b> is an Express middleware, which intercepts requests that include the <a href="https://developers.google.com/webmasters/ajax-crawling/docs/specification">_escaped_fragment_</a> parameter in the URL. It then launches the <a href="http://phantomjs.org/">PhantomJS</a> headless-browser, which creates a copy of the page and stores it in cache for future requests.</p>
+
+      <p>This allows the crawler to get your page content after the AngularJS application is fully loaded, thus providing it with your real content.</p>
+
+      <h3>Caching</h3>
+      <p>The MEAN-SEO module caches the page for the duration you define, either by saving the pages to the disk or to a Redis instance (requires installing Redis).</p>
+
+      <h3>Quick Install</h3>
+      <p>
+        First you'll need to install the MEAN-SEO module using npm:
+      </p>
+      <pre>npm install mean-seo --save</pre>
+      <p>
+      Then include in you express application:
+      </p>
+      <pre>var seo = require('mean-seo');</pre>
+      <p>
+        And finally, just before you require the app.router middleware add the following:
+      </p>
+<pre>
+app.use(seo({
+cacheClient: 'disk', // Can be 'disk' or 'redis'
+cacheDuration: 2 * 60 * 60 * 24 * 1000, // In milliseconds for disk cache
+}));
+
+// app.use(app.router) will be below this line 
+</pre>
+    <p>
+      If you use HTML5 URL scheme then you should let the crawler know you're serving an AJAX application by adding the following to the HEAD tag of your page:
+    </p>
+    <pre>&lt;meta name=&quot;fragment&quot; content=&quot;!&quot;&gt;</pre>
+    </section>
+  </section>
+</section>
