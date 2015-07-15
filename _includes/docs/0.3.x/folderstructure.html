@@ -1,0 +1,274 @@
+    <div class="inner-link-anchor" id="folder-structure"></div>
+    <section class="page-header">
+      <h1>Folder Structure</h1>
+    </section>
+    <section>
+      <p>
+        The folder structure is quite self-explanatory, but here's an explanation on what goes where and why.
+      </p>
+      <h2>App</h2>
+      <p>
+        The server folder contains all the server files you use in your application, this is where you store your MVC server files.
+      </p>
+      <ul>
+        <li>
+          <h3>controllers</h3>
+          The controllers folder is where you store your Express application controllers, this is where you write your backend business logic.
+          <p class="alert alert-info">
+            <b>When to use:</b>
+            Whenever you want to add, change, or remove Express application controllers.
+          </p>
+        </li>
+        <li>
+          <h3>models</h3>
+          <a href="#autoload" class="label label-danger">Autoloaded</a> 
+          <br>The models folder is where you store your <a target="_blank" href="http://mongoosejs.com/">Mongoose</a> models, this is where you define your backend models.
+          <p class="alert alert-info">
+            <b>When to use:</b>
+            Whenever you want to add, change, or remove Mongoose models.
+          </p>
+        </li>
+        <li>
+          <h3>routes</h3>
+          <a href="#autoload" class="label label-danger">Autoloaded</a> 
+          <br>The routes folder contains the <b>Server routing</b> configuration files, this is where you define your Express routes, in order to add routes to your module just add a .js file similar to the <b>app/routes/articles.js</b> file and MEAN will automatically load that these routes.
+          <p class="alert alert-info">
+            <b>When to use:</b>
+            Whenever you want to add, change, or remove a server route.
+          </p>
+        </li>
+        <li>
+          <h3>tests</h3>
+          The tests folder is where you store your <a target="_blank" href="http://mochajs.org/">Mocha</a> tests, this is how you test your backend business logic.
+          <p class="alert alert-info">
+            <b>When to use:</b>
+            Whenever you want to add, change, or remove Mocha tests.
+          </p>
+        </li>
+        <li>
+          <h3>views</h3>
+          The views folder is where define your backend views. Since you'll use AngularJS, server templates are almost meaningless, but you still have to use a template engine to render the main pages, like the index and error pages. For more information visit the <a href="#backend-views">Backend Views</a> section.
+          <p class="alert alert-info">
+            <b>When to use:</b>
+            Whenever you want to add, change, or remove backend views.
+          </p>
+          <ul>
+            <li>
+              <h3>templates</h3>
+              A backend templates folder, currently used for emails templates.
+              <p class="alert alert-info">
+                <b>When to use:</b>
+                Whenever you want to add, change, or remove backend templates.
+              </p>
+            </li>
+          </ul>
+        </li>
+      </ul>
+      <h2>Config</h2>
+      <p>
+        The config folder contains the files you need to configure your application.
+      </p>
+      <ul>
+        <li>
+          <h3>env</h3>
+          The <b>env</b> folder contains the configuration files loaded by the <b>config.js</b> file according to the current environment, for more information, please visit the <a href="#configuration">Configuration</a> section.
+          <p class="alert alert-info">
+            <b>When to use:</b>
+            Whenever you want to add, change, or remove your configuration properties.
+          </p>
+        </li>
+        <li>
+          <h3>strategies</h3>
+          <a href="#autoload" class="label label-danger">Autoloaded</a> 
+          <br>The <b>strategies</b> folder contains the startegies configuration files loaded by the <b>passport.js</b> file.
+          <p class="alert alert-info">
+            <b>When to use:</b>
+            Whenever you want to add, change, or remove a <a target="_blank" href="http://passportjs.org/guide/providers/">Passport Strategy</a>.
+          </p>
+        </li>
+        <li>
+          <h3>config.js</h3>
+          The configuration loader that loads the right configuration from the <b>env</b> folder, for more information, please visit the <a href="#configuration">Configuration</a> section.
+        </li>
+        <li>
+          <h3>express.js</h3>
+          Express configuration file, it initializes &amp; configures the Express application.
+          <p class="alert alert-info">
+            <b>When to use:</b>
+            Whenever you want to change the way Express is being initialized and configured.
+          </p>
+        </li>
+        <li>
+          <h3>init.js</h3>
+          The initialization file that set up a few project related configuraiton.
+        </li>
+        <li>
+          <h3>passport.js</h3>
+          Passport configuration file that initializes &amp; configures the Passport's authentication strategies and middlewares from the <b>strategies</b> folder.
+        </li>
+      </ul>
+      <h2>Public</h2>
+      <p>
+        The public folder contains all the static files you use in your application, this is where you store your front-end files.
+      </p>
+      <ul>
+        <li>
+          <h3>dist</h3>
+          The distribution folder is where you store your application compressed CSS and JavaScript assets. The <b>uglify</b> and <b>cssmin</b> grunt tasks are using this as their build target folder.
+        </li>
+        <li>
+          <h3>modules</h3>
+          <a href="#autoload" class="label label-danger">Autoloaded</a> 
+          <br>The modules folder is where you store AngularJS application modules, to learn more about it visit the <a href="#angularjs-modules">AngularJS Modules</a> section.
+          <p class="alert alert-info">
+            <b>When to use:</b>
+            Whenever you want to add, change, or remove AngularJS modules.
+          </p>
+        </li>
+        <li>
+          <h3>config.js</h3>
+          AngularJS configuration module, it starts with two global properties and one method:
+          <dl>
+            <dt>applicationModuleName</dt>
+            <dd>
+              AngularJS is using a module system to bootstrap and application, in this case it will use this property as the main module name.
+            </dd>
+            <dt>applicationModuleVendorDependencies</dt>
+            <dd>
+              AngularJS allows to add dependencies to the main module forcing the application not to start if those dependencies aren't met. In this case we start with the basic AngularJS &amp; Angular-UI dependencies, each third-party module you add to your application should be added to the <i>applicationModuleVendorDependencies</i> global property and AngularJS will load it automatically.
+            </dd>
+            <dt>registerModule</dt>
+            <dd>
+              This method is used to register a module as a new module and add it to the main module dependencies.
+              <p class="alert alert-danger">
+                Although you don't have to, it is highly recommended that you use <b>registerModule</b> method to reigster your module as a dependency for the main application module. To understand this better please visit the <a href="#angularjs-modules">AngularJS Modules</a> section.
+              </p>
+            </dd>
+          </dl>
+          <p class="alert alert-info">
+            <b>When to use:</b>
+            Whenever you want to add, change, or remove an AngularJS global configuration property.
+          </p>
+        </li>
+        <li>
+          <h3>application.js</h3>
+          AngularJS main application file, it takes care of bootstrapping the application and attaching the right modules.
+          <p class="alert alert-info">
+            <b>When to use:</b>
+            Whenever you want to add, change, or remove a module in your AngularJS application.
+          </p>
+        </li>
+      </ul>
+      <h2>Application Files</h2>
+      <p>
+        There are a few application files stored in root folder.
+      </p>
+      <ul>
+        <li>
+          <h3>server.js</h3>
+          Our main application file, where you initialize your Node.js application.
+        </li>
+        <li>
+          <h3>bower.json</h3>
+          Bower <a target="_blank" href="http://bower.io/#defining-a-package">definition file</a>, where you configure the front-end components you want to use, for more information visit the <a href="#bower">Bower</a> section.
+          <p class="alert alert-info">
+            <b>When to use:</b>
+            Whenever you want to add, change, or remove front-end components.
+          </p>
+        </li>
+        <li>
+          <h3>Dockerfile</h3>
+          <a target="_blank" href="https://www.docker.com/">Docker</a> <a target="_blank" href="https://docs.docker.com/reference/builder/">configuration file</a>, where you configure all the commands you would normally execute manually in order to build a Docker image.
+          <p class="alert alert-info">
+            <b>When to use:</b>
+            Whenever you want to configure your Docker images.
+          </p>
+        </li>
+        <li>
+          <h3>fig.yml</h3>
+          <a target="_blank" href="https://www.docker.com/">Docker</a> development environment <a target="_blank" href="http://www.fig.sh/yml.html">configuration file</a>, where you configure your application environment with Docker .
+        </li>
+        <li>
+          <h3>gruntfile.js</h3>
+          Grunt <a target="_blank" href="http://gruntjs.com/sample-gruntfile">definition file</a> is where you define your grant tasks, for more information visit the <a href="#grunt">Grunt</a> section.
+          <p class="alert alert-info">
+            <b>When to use:</b>
+            Whenever you want to add, change, or remove grunt tasks.
+          </p>
+        </li>
+        <li>
+          <h3>karma.conf.js</h3>
+          Karma <a target="_blank" href="http://karma-runner.github.io/0.8/config/configuration-file.html">configuration file</a> is where you configure your karma tests.
+          <p class="alert alert-info">
+            <b>When to use:</b>
+            Whenever you want to add, change, or remove front-end tests.
+          </p>
+        </li>
+        <li>
+          <h3>package.json</h3>
+          npm <a target="_blank" href="https://npmjs.org/doc/json.html">definition file</a>, where you configure the backend modules you want to use, for more information visit the <a href="#npm">NPM</a> section.
+          <p class="alert alert-info">
+            <b>When to use:</b>
+            Whenever you want to add, change, or remove backend modules.
+          </p>
+        </li>
+        <li>
+          <h3>Procfile</h3>
+          Heroku <a target="_blank" href="https://devcenter.heroku.com/articles/procfile">process file</a>, where you configure process you want to run on Heroku application Dyno.
+        </li>
+      </ul>
+      <h2>Hidden Configuration Files</h2>
+      <p class="alert alert-danger">
+        Notice that sometimes you copy your application folder's content and forget to copy the hidden files, this will cause issues and might break the application.
+      </p>
+      <ul>
+        <li>
+          <h3>.bowerrc</h3>
+          Bower configuration file, you use it to tell bower where to install your application components.
+        </li>
+        <li>
+          <h3>.csslintrc</h3>
+          <a target="_blank" href="http://csslint.net/">CSSLint</a> configuration file, you use it to configure CSSLint special properties.
+          <p class="alert alert-info">
+            <b>When to use:</b>
+            Whenever you want to add, change, or remove CSSLint properties.
+          </p>
+        </li>
+        <li>
+          <h3>.editconfig</h3>
+          <a target="_blank" href="http://editorconfig.org/">EditorConfig</a> configuration file, you use it to configure consistent coding styles between different editors and IDEs.
+        </li>
+        <li>
+          <h3>.gitignore</h3>
+          Git <a target="_blank" href="https://help.github.com/articles/ignoring-files">ignore file</a>, you use it to tell git what <b>ignore</b> in next commits. After installation the application generates a lot of code that you don't want to include in your repository, so this is where you tell git to ignore those files.
+          <p class="alert alert-info">
+            <b>When to use:</b>
+            Whenever you want to add, change, or remove files that are ignored by Git.
+          </p>
+        </li>
+        <li>
+          <h3>.jshintrc</h3>
+          <a target="_blank" href="http://www.jshint.com/">JSHint</a> configuration file, you use it to configure JSHint special properties.
+          <p class="alert alert-info">
+            <b>When to use:</b>
+            Whenever you want to add, change, or remove JSHint properties.
+          </p>
+        </li>
+        <li>
+          <h3>.slugignore</h3>
+          Heroku <a target="_blank" href="https://devcenter.heroku.com/articles/slug-compiler#ignoring-files-with-slugignore">ignore file</a>, you use it to tell Heroku slug compiler what <b>ignore</b> in next commits, which will prevent oversizing your final slug.
+          <p class="alert alert-info">
+            <b>When to use:</b>
+            Whenever you want to add, change, or remove files that are ignored by Heroku slug compiler.
+          </p>
+        </li>
+        <li>
+          <h3>.travis.yml</h3>
+          Travis <a target="_blank" href="http://about.travis-ci.org/docs/user/build-configuration/">configuration file</a>, you use it to tell Travis how you want your builds to be executed.
+          <p class="alert alert-info">
+            <b>When to use:</b>
+            Whenever you want to add, change, or remove TravisCI configuration options.
+          </p>
+        </li>
+      </ul>
+    </section>

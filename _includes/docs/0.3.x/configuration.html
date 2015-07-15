@@ -1,0 +1,162 @@
+    <div class="inner-link-anchor" id="configuration"></div>
+    <section class="page-header">
+      <h1>Configuration</h1>
+    </section>
+    <section>
+      <p>
+        So, you have your application running, but how do you configure it?
+      </p>
+      <h2>Environmental Configuration</h2>
+      <p>
+        The config folder is where you have all the files are organized in a specific structure, which starts with the <b>config.js</b> file.
+      </p>
+      <p>
+        The config file functions as loader for the configurations files placed in the <b>config/env</b> folder, it will load the right configuration file based on the NODE_ENV variable.
+      </p>
+      <br>
+      <p>
+        There are five default configuration files based on common development pattern:
+      </p>
+      <dl>
+        <dt>config/env/all.js</dt>
+        <dd>
+          This file will be loaded in <i>all the environments</i>, and contains the default properties that will be overwritten by any environment specified configuration.
+        </dd>
+        <dt>config/env/development.js</dt>
+        <dd>
+          This file will be loaded in a <i>development environment</i>, a property defined here will overwrite the one defined in the all.js file.
+        </dd>
+        <dt>config/env/production.js</dt>
+        <dd>
+          This file will be loaded in a <i>production environment</i>, a property defined here will overwrite the one defined in the all.js file.
+        </dd>
+        <dt>config/env/test.js</dt>
+        <dd>
+          This file will be loaded in a <i>test environment</i>, a property defined here will overwrite the one defined in the all.js file.
+        </dd>
+        <dt>config/env/travis.js</dt>
+        <dd>
+          This file will be loaded in the Travis CI testing environment, a property defined here will overwrite the one defined in the all.js file.
+        </dd>
+      </dl>
+      <p>
+        To run your application with a different environment configuration run the application like this:
+        <pre>$ NODE_ENV={The Environment Name} grunt</pre>
+      </p>
+      <h2>Configuration Properties</h2>
+      <p>
+        MEAN.JS comes with a default set of configuration properties you will most likely expand with your properties. Here's the review of all the required properties used in the configuration files:
+      </p>
+      <dl>
+        <dt>config.db</dt>
+        <dd>
+          This is the MongoDB connection string URI, when bootstrapped, the application will try to connect to the database using this URI, so make sure its the correct one in each environment.
+        </dd>
+        <dt>config.port</dt>
+        <dd>
+          The port used by the application, default is 3000, but as you can notice in the test.js config file, this can be changed.
+        </dd>
+        <dt>config.app.title</dt>
+        <dd>
+          This is title used as the HTML page title. Notice that it appears both in the all.js file and in all the non-production configuration files.
+        </dd>
+        <dt>config.app.description</dt>
+        <dd>
+          This is used in the HTML description META tag. Notice that it only appears in the all.js file and can be overwritten by an environment specific property.
+        </dd>
+        <dt>config.app.keywords</dt>
+        <dd>
+          This is used in the HTML keywords META tag. Notice that it only appears in the all.js file and can be overwritten by an environment specific property.
+        </dd>
+      </dl>
+      <h2>Assets Configuration</h2>
+      <p>
+        One of the major issues dealing with applications development is assets management. While <b>bower</b> helps you download and update the project front-end dependencies, you would still need to include the packages JavaScript files in several places including your main application page, <b>Karma</b> configuration file and the <b>uglify</b> grunt task. Furthermore, you may want to use different assets for different environments.
+      </p>
+      <p>
+        For this purpose we included the <b>config.assets</b> field in the environments configuration files. Using this configuration option allows you to organize all your assets inclusion in a single place. The <b>config.assets</b> field has a few properties:
+      </p>
+      <dl>
+        <dt>config.assets.css</dt>
+        <dd>
+          A list of glob patterns indicating the project css files.
+        </dd>
+        <dt>config.assets.js</dt>
+        <dd>
+          A list of glob patterns idicating the project JavaScript project files.
+        </dd>
+        <dt>config.assets.tests</dt>
+        <dd>
+          A list of glob patterns idicating the project <b>Jasmine</b> test files.
+        </dd>
+        <dt>config.assets.lib</dt>
+        <dd>
+          <p>A list of glob patterns idicating the project packages files. We seperate those from other files so you could use CDN assets in your production configuration.</p>
+          <dl>
+            <dt>config.assets.lib.css</dt>
+            <dd>
+              A list of glob patterns idicating the project packages CSS files.
+            </dd>
+            <dt>config.assets.lib.js</dt>
+            <dd>
+              A list of glob patterns idicating the project packages JavaScript files.
+            </dd>
+          </dl>
+        </dd>
+      </dl>
+      <p class="alert alert-info">
+        <b>Note:</b> You can also include CDN paths to load packages files directly from their official CDN.
+      </p>
+      <h2>Social Configuration Properties</h2>
+      <p>
+        The application will use the <a target="_blank" href="http://passportjs.org">Passport</a> module to offer users various login options.
+      </p>
+      <p>
+        MEAN.JS currently supports five social platforms: Facebook, Twitter, Google, Linkedin, and Github. You can also add other platforms using a passport-provider package and duplicating the samples logic.
+      </p>
+      <p>
+        To configure your social application oauth keys there's a property object for each platform:
+      </p>
+      <dl>
+        <dt>config.app.{OAuth Provider}.clientID</dt>
+        <dd>
+          Your application oauth id.
+        </dd>
+        <dt>config.app.{OAuth Provider}.clientSecret</dt>
+        <dd>
+          Your application oauth secret.
+        </dd>
+        <dt>config.app.{OAuth Provider}.callbackURL</dt>
+        <dd>
+          Your application oauth callback URL.
+        </dd>
+      </dl>
+      <p class="alert alert-info">
+        Remember to use different configuration for each environment especially your MongoDB URI and social platform OAuth Keys.
+      </p>
+      <h2>Nodemailer Configuration Properties</h2>
+      <p>
+        The application will use the <a target="_blank" href="http://www.nodemailer.com/">Nodemailer</a> module to send email notifications.
+      </p>
+      <p>
+        To configure nodemailer there are several properties:
+      </p>
+      <dl>
+        <dt>config.mailer.from</dt>
+        <dd>
+          The sender address you want to use. (Example: John Doe &lt;johndoe@example.com&gt;)
+        </dd>
+        <dt>config.mailer.options.service</dt>
+        <dd>
+          The Email service you would like to use. (Example: gmail)
+        </dd>
+        <dt>config.mailer.options.auth.user</dt>
+        <dd>
+          The Email service username.
+        </dd>
+        <dt>config.mailer.options.auth.password</dt>
+        <dd>
+          The Email service password.
+        </dd>
+      </dl>
+    </section>

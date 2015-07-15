@@ -1,0 +1,103 @@
+    <div class="inner-link-anchor" id="express"></div>
+    <section class="page-header">
+      <h1>Express &amp; Routing</h1>
+    </section>
+    <section>
+      <p>
+        <a target="_blank" href="http://expressjs.com/">Express</a> is web framework for the Node.js platform. Its robustness and minimalism made it very popular among Node.js developers.
+      </p>
+      <p>
+        Express configuration is done in the <b>config/express.js</b> In the <b>express.js</b> file the application is initialized and configured, automatically loading the routes files in the <b>app/routes</b> folder, which contains the set of routes the application will serve.
+      </p>
+      <p>
+        There are a few pre-bundled routes:
+      </p>
+      <h2>Authentication Routes</h2>
+      <p>
+        Authentication routes are located in the <b>app/routes/users.server.routes.js</b> file.
+      </p>
+      <dl>
+        <dt>GET http://localhost:3000/users/me</dt>
+        <dd>Returns the current authenticated user.</dd>
+      </dl>
+      <dl>
+        <dt>POST http://localhost:3000/auth/signup</dt>
+        <dd>This is used to sign up a user using username and password.</dd>
+        <dt>POST http://localhost:3000/auth/signin</dt>
+        <dd>This is used to sign in a user using username and password.</dd>
+        <dt>GET http://localhost:3000/auth/signout</dt>
+        <dd>This is used to sign out the current user.</dd>
+      </dl>
+      <dl>
+        <dt>GET http://localhost:3000/auth/facebook</dt>
+        <dd>This is used to initialize the Facebook OAuth process.</dd>
+        <dt>GET http://localhost:3000/auth/facebook/callback</dt>
+        <dd>This is used as the callback URI for Facebook OAuth process.</dd>
+      </dl>
+      <dl>
+        <dt>GET http://localhost:3000/auth/twitter</dt>
+        <dd>This is used to initialize the Twitter OAuth process.</dd>
+        <dt>GET http://localhost:3000/auth/twitter/callback</dt>
+        <dd>This is used as the callback URI for Twitter OAuth process.</dd>
+      </dl>
+      <dl>
+        <dt>GET http://localhost:3000/auth/linkedin</dt>
+        <dd>This is used to initialize the Linkedin OAuth process.</dd>
+        <dt>GET http://localhost:3000/auth/linkedin/callback</dt>
+        <dd>This is used as the callback URI for Linkedin OAuth process.</dd>
+      </dl>
+      <dl>
+        <dt>GET http://localhost:3000/auth/google</dt>
+        <dd>This is used to initialize the Google OAuth process.</dd>
+        <dt>GET http://localhost:3000/auth/google/callback</dt>
+        <dd>This is used as the callback URI for Google OAuth process.</dd>
+      </dl>
+      <dl>
+        <dt>GET http://localhost:3000/auth/github</dt>
+        <dd>This is used to initialize the Github OAuth process.</dd>
+        <dt>GET http://localhost:3000/auth/github/callback</dt>
+        <dd>This is used as the callback URI for Github OAuth process.</dd>
+      </dl>
+      <p>Please notice that you can add more authentication options using a <a href="#passport">Passport Strategy</a> and this pattern.</p>
+      <h2>Application Routes</h2>
+      <p>
+        Application core routes are located in the <b>app/routes/core.server.routes.js</b> file.
+      </p>
+      <dl>
+        <dt>GET http://localhost:3000/</dt>
+        <dd>
+          The main application page. Using AngularJS helps reduce the use of server side templating, and only serve a single application page.
+          <br>
+          <br>To learn more about this visit the <a href="#backend-views">Backend Views</a> section.
+        </dd>
+      </dl>
+      <h2>Example Routes</h2>
+      <p>
+        An 'Article' example is included with the boilerplate to help you understand how to properly build your RESTful API, the routes for this module are located in the <b>app/routes/articles.server.routes.js</b> file.
+      </p>
+      <dl>
+        <dt>GET http://localhost:3000/articles</dt>
+        <dd>
+          Returns the list of articles.
+        </dd>
+        <dt>POST http://localhost:3000/articles</dt>
+        <dd>
+          Creates a new article.
+        </dd>
+        <dt>GET http://localhost:3000/articles/:articleId</dt>
+        <dd>
+          Returns an article by articleId.
+        </dd>
+        <dt>PUT http://localhost:3000/articles/:articleId</dt>
+        <dd>
+          Updates an article by ID.
+        </dd>
+        <dt>DEL http://localhost:3000/articles/:articleId</dt>
+        <dd>
+          Deletes an article by ID.
+        </dd>
+      </dl>
+      <p class="alert alert-info">
+        To learn more about Express you should visit the <a target="_blank" href="http://expressjs.com/guide.html">Guide Section</a> in the official website.
+      </p>
+    </section>

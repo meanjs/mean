@@ -1,0 +1,143 @@
+    <div class="inner-link-anchor" id="grunt"></div>
+    <section class="page-header">
+      <h1>Grunt</h1>
+    </section>
+    <section>
+      <p>
+        <a target="_blank" href="http://gruntjs.com/">Grunt</a> is a great tool for automating your JavaScript tasks. The ecosystem is huge, containing many common tasks you can use in your daily development process.
+      </p>
+      <p>
+        To configure grunt you start with the gruntfile.js file, where you define the tasks you want to run.
+        <br>We start with two basic tasks:
+      </p>
+      <ul class="list-unstyled">
+        <li>
+          <h4>Default</h4>
+          <p>
+            The default task is the task that runs when you type 'grunt' in your command-line, the default task consists of three sub-tasks:
+          </p>
+          <ul>
+            <li>
+              <h5>JSHint</h5>
+              <p>Linter task that keep your JavaScript code free of common mistakes and syntax errors.</p>
+            </li>
+            <li>
+              <h5>CSSLint</h5>
+              <p>Linter task that keep your CSS code free of common mistakes and syntax errors.</p>
+            </li>
+            <li>
+              <h5>Watch</h5>
+              <p>This watches your file system for changes and automatically reloads the application whenever you change certain files.</p>
+            </li>
+            <li>
+              <h5>Nodemon</h5>
+              <p>This runs your Node.js application using nodemon.</p>
+            </li>
+          </ul>
+          <p>Please notice that the last two tasks are wrapped with another task called <b>Concurrent</b> to keep the application continuously running.</p>
+        </li>
+        <li>
+          <h4>Debug</h4>
+          <p>
+            Same as default but will also start node-inspector for debugging.
+          </p>
+          <ul>
+            <li>
+              <h5>JSHint</h5>
+              <p>Linter task that keep your JavaScript code free of common mistakes and syntax errors.</p>
+            </li>
+            <li>
+              <h5>CSSLint</h5>
+              <p>Linter task that keep your CSS code free of common mistakes and syntax errors.</p>
+            </li>
+            <li>
+              <h5>Watch</h5>
+              <p>This watches your file system for changes and automatically reloads the application whenever you change certain files.</p>
+            </li>
+            <li>
+              <h5>Nodemon</h5>
+              <p>This runs your Node.js application using nodemon.</p>
+            </li>
+            <li>
+              <h5>Node-Inspector</h5>
+              <p>This runs the <a href="https://github.com/node-inspector/node-inspector">node-inspector</a> debugging module.</p>
+            </li>
+          </ul>
+          <p>Please notice that the last two tasks are wrapped with another task called <b>Concurrent</b> to keep the application continuously running.</p>
+        </li>
+        <li>
+          <h4>Lint</h4>
+          <p>
+            This task runs when you type 'grunt lint' in your command-line, the test task consists of two sub-tasks:
+          </p>
+          <ul>
+            <li>
+              <h5>JSHint</h5>
+              <p>Linter task that keep your JavaScript code free of common mistakes and syntax errors.</p>
+            </li>
+            <li>
+              <h5>CSSLint</h5>
+              <p>Linter task that keep your CSS code free of common mistakes and syntax errors.</p>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <h4>Build</h4>
+          <p>
+            This task runs when you type 'grunt build' in your command-line, the test task consists of two sub-tasks:
+          </p>
+          <ul>
+            <li>
+              <h5>JSHint</h5>
+              <p>Linter task that keep your JavaScript code free of common mistakes and syntax errors.</p>
+            </li>
+            <li>
+              <h5>CSSLint</h5>
+              <p>Linter task that keep your CSS code free of common mistakes and syntax errors.</p>
+            </li>
+            <li>
+              <h5>LoadConfig</h5>
+              <p>A task that loads the environmental configuration file for the uglify and cssmin tasks.</p>
+            </li>
+            <li>
+              <h5>NGMin</h5>
+              <p>A task that pre-minifies AngularJS files.</p>
+            </li>
+            <li>
+              <h5>Uglify</h5>
+              <p>A task that concat and minifies JavaScript files.</p>
+            </li>
+            <li>
+              <h5>CSSMin</h5>
+              <p>A task that concat and minifies CSS files.</p>
+            </li>
+          </ul>
+          <p class="alert alert-info">
+            <b>Remember</b> to use the build task before deploying your application to a production environment.
+          </p>
+        </li>
+        <li>
+          <h4>Test</h4>
+          <p>
+            This task runs when you type 'grunt test' in your command-line, the test task consists of three sub-tasks:
+          </p>
+          <ul>
+            <li>
+              <h5>Env:test</h5>
+              <p>This is a simple task that changes the NODE_ENV global environment variable to 'test'.</p>
+            </li>
+            <li>
+              <h5>MochaTest</h5>
+              <p>This runs the mocha server tests that are located in the <b>app/tests</b> folder.</p>
+            </li>
+            <li>
+              <h5>Karma:unit</h5>
+              <p>This uses the karma test runner to run the AngularJS unit tests.</p>
+            </li>
+          </ul>
+        </li>
+      </ul>
+      <p class="alert alert-info">
+        We recommend that you visit Grunt's <a target="_blank" href="http://gruntjs.com/getting-started">Documentation Section</a> to learn more about writing your own tasks, and mainly to <b>explore the tasks already written by the community</b>.
+      </p>
+    </section>

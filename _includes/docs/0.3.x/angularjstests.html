@@ -1,0 +1,87 @@
+    <div class="inner-link-anchor" id="angularjs-tests"></div>
+    <section class="page-header">
+      <h1>AngularJS Tests</h1>
+    </section>
+    <section>
+      <p>
+        Testing is an important feature of the AngularJS framework. It is so well established that the team has create a very cool to automate tests, the <a target="_blank" href="http://karma-runner.github.io/0.10/index.html">Karma Test Runner</a>.
+      </p>
+      <p>
+        The Karma Test Runner is a unique testing tool that enables you to automatically test your code on multiple real browsers using Node.js and Socket.io.
+      </p>
+      <p>
+        Karma is not a testing library, it utilizes other testing frameworks to test your code and comes with different framework adapters, supporting the common testing frameworks.
+      </p>
+      <p>
+        In the AngularJS documentation the team uses <a target="_blank" href="http://pivotal.github.io/jasmine/">Jasmine Testing Framework</a> to unit test the application. So, in the boilerplate we use Jasmine as well.
+      </p>
+      <p>
+        Now AngularJS supports two kind of tests:
+      </p>
+      <dl>
+        <dt>E2E</dt>
+        <dd>
+          End-To-End testing enables to test several parts of the application together, so instead of just testing your controller's methods, you can actually test different scenarios in your application. To understand it better visit the <a target="_blank" href="http://docs.angularjs.org/guide/dev_guide.e2e-testing">AngularJS E2E Testing Section</a>.
+        </dd>
+        <dt>Unit</dt>
+        <dd>
+          Unit testing is the more common testing method, which enables you to test different units of the application, it's a more detailed kind of testing, which neglects the bigger picture and focuses on the single unit functionality. To understand it better visit the <a target="_blank" href="http://docs.angularjs.org/guide/dev_guide.unit-testing">AngularJS Unit Testing Section</a>.
+        </dd>
+      </dl>
+      <p class="alert alert-info">
+        In the example provided there are only unit tests, E2E should come out in the next version.
+      </p>
+      <h2>Karma Configuration</h2>
+      <p>
+        Karma configuration file, <b>karma.conf.js</b>, is the located at the root folder. You can learn more about the different configuration properties in the <a target="_blank" href="http://karma-runner.github.io/0.8/config/configuration-file.html">Configuration Section</a> on the official website.
+        <br>But here is a quick review of the properties used in the boilerplate:
+      </p>
+      <dl>
+        <dt>Frameworks</dt>
+        <dd>The testing framework you want to karma to use, in this case we'll use Jasmine.</dd>
+        <dt>Files</dt>
+        <dd>
+          This is really important! This is the list of files that karma should load before starting the tests.
+          <p class="alert alert-info">
+            Notice that we load the angular module tests automatically, so whenever you add a new module, Karma will run your tests without you having to change anything at all.
+          </p>
+        </dd>
+        <dt>LogLevel</dt>
+        <dd>Determines the logging level of karma console output.</dd>
+        <dt>Browsers</dt>
+        <dd>Determines which browsers to launch when testing, the boilerplate comes pre-bundled with 3 launchers: Chrome, Firefox, and PhantomJS.</dd>
+        <dt>SingleRun</dt>
+        <dd>Determines if karma will run one time and return the results, or stay connected to watch for changes.</dd>
+      </dl>
+      <p>
+        Notice that karma is executed as a grunt task that looks for the configuration file.
+      </p>
+      <h2>Unit Testing</h2>
+      <p>
+        In the Article examples attached, there's a unit test example in the <b>tests/article.spec.js</b> file. Notice that we use <a target="_blank" href="http://docs.angularjs.org/api/ngMock">angular-mocks</a> to simulate the HTTP requests. The tests are defined to cover all the CRUD operations, and will test the $resource service as well.
+      </p>
+
+      <p>
+        There are a few common steps we use to unit test the application:
+      </p>
+      <ol>
+        <li>
+          In the <b>beforeEach</b> function take care of prerequisites and create the objects you are about to use in your tests.
+        </li>
+        <li>
+          For each test start with a <b>describe</b> function to indicate which method is being tested.
+        </li>
+        <li>
+          Next, add your scenario tests using the <b>it</b> function.
+        </li>
+        <li>
+          In the <b>it</b> function run the tests functionality.
+        </li>
+        <li>
+          Finally use <a target="_blank" href="https://github.com/pivotal/jasmine/wiki/Matchers">Jasmine matchers</a> to test the result.
+        </li>
+      </ol>
+      <p class="alert alert-info">
+        To learn more about how to write your tests visit <a href="#article-example">The Article Example Section</a>.
+      </p>
+    </section>

@@ -1,0 +1,102 @@
+    <div class="inner-link-anchor" id="menus"></div>
+    <section class="page-header">
+      <h1>AngularJS Menus Service</h1>
+    </section>
+    <section>
+      <p>
+        In the 0.3.x version, MEAN.JS has introduced a new AngularJS service that helps you manage your application menus. The menu service has several methods:
+      </p>
+      <dl>
+        <dt>Menus.getMenu(menuId)</dt>
+        <dd>
+          Returns a menu object identified by the menuId argument.
+        </dd>
+        <dt>Menus.addMenu(menuId, [isPublic], [roles])</dt>
+        <dd>
+          Creates a new menu object, which will be identified by the menuId argument. This method also include three arguments:
+          <ol>
+            <li>
+              <b>menuId</b> (Required) - Indicates the menu identifier for future reference.
+            </li>
+            <li>
+              <b>isPublic</b> (Optional; Default: false) - Indicates whether a menu should be displayed only to authenticated users.
+            </li>
+            <li>
+              <b>roles</b> (Default: ['user']) - An array indicating the roles that are allowed to view this menu.
+            </li>
+          </ol>
+        </dd>
+        <dt>Menus.addMenuItem(menuId, menuItemTitle, menuItemURL, menuItemType, [menuItemUIRoute], [isPublic], [roles], [position]);</dt>
+        <dd>
+          Creates a new menu item object. This method also include couple of arguments:
+          <ol>
+            <li>
+              <b>menuId</b> (Required) - Indicates the menu identifier.
+            </li>
+            <li>
+              <b>menuItemTitle</b> (Required) - A String title for the menu item.
+            </li>
+            <li>
+              <b>menuItemType</b> (Required) - This can either be 'item' or 'dropdown'
+            </li>
+            <li>
+              <b>menuItemURL</b> (Required) - The path this menu item will link to.
+            </li>
+            <li>
+              <b>menuItemUIRoute</b> (Optional; Default: menuItemURL) - The UIRoute value, which is used to define the URL scheme where this menu item is marked as active.
+            </li>
+            <li>
+              <b>isPublic</b> (Optional; Default: menu.isPublic) - Indicates whether a menu item should be displayed only to authenticated users.
+            </li>
+            <li>
+              <b>roles</b> (Optional; Default: ['user']) - An array indicating the roles that are allowed to view this menu item.
+            </li>
+            <li>
+              <b>position</b> (Optional) - Specify the order of appearance
+            </li>
+          </ol>
+        </dd>
+        <dt>Menus.addSubMenuItem(menuId, rootMenuItemURL, menuItemTitle, menuItemURL, [menuItemUIRoute], [isPublic], [roles]);</dt>
+        <dd>
+          Adds a submenu item to an existing item object. This method also include couple of arguments:
+          <ol>
+            <li>
+              <b>menuId</b> (Required) - Indicates the menu identifier.
+            </li>
+            <li>
+              <b>rootMenuItemURL</b> (Required) - Indicates the root menu item identifier.
+            </li>
+            <li>
+              <b>menuItemTitle</b> (Required) - A String title for the menu item.
+            </li>
+            <li>
+              <b>menuItemURL</b> (Required) - The path this menu item will link to.
+            </li>
+            <li>
+              <b>menuItemUIRoute</b> (Optional; Default: menuItemURL) - The UIRoute value, which is used to define the URL scheme where this menu item is marked as active.
+            </li>
+            <li>
+              <b>isPublic</b> (Optional; Default: menu.isPublic) - Indicates whether a menu item should be displayed only to authenticated users.
+            </li>
+            <li>
+              <b>roles</b> (Optional; Default: ['user']) - An array indicating the roles that are allowed to view this menu item.
+            </li>
+            <li>
+              <b>position</b> (Optional) - Specify the order of appearance
+            </li>
+          </ol>
+        </dd>
+      </dl>
+      <p>
+        Using the Menus service is usually done in a configuration sections of your application modules. A simple configuration would look like this:
+      </p>
+      <pre>angular.module('example').run(['Menus',
+function(Menus) {
+// Set top bar menu items
+Menus.addMenuItem('topbar', 'Example', 'example');
+}
+]);</pre>
+      <p class="alert alert-info">
+        To learn more about the Menus service, visit <a href="#article-example">The Article Example Section</a>.
+      </p>
+    </section>

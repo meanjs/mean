@@ -1,0 +1,265 @@
+
+    <div class="inner-link-anchor" id="article-example"></div>
+    <section class="page-header">
+      <h1>The Article Example</h1>
+    </section>
+    <section>
+      <p>
+        The Article example is an end-to-end example that includes the basic CRUD operations, which are most commonly used in content websites. It is divided into two parts: The Express backend module, and The AngularJS front-end module.
+      </p>
+      <h2>Express Backend Module</h2>
+      <p>
+        We mostly use the Express application as a RESTful API for the AngularJS application. This means the common <a target="_blank" href="http://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller">MVC architecture</a> can be reduced to an MC architecture, where the Model represent the data entities in the system, while the Controller is in charge of the business logic, leaving the View part only in the AngularJS application.
+      </p>
+      <h4>Mongoose Model</h4>
+      <p>
+        <a target="_blank" href="http://mongoosejs.com/">Mongoose</a> is a Node.js schema-based object-modeling module. Mongoose models are defined using a Schema object that allows you to model and validate your data.
+        <h5>The Mongoose Schema</h5>
+        <p>The Mongoose schema is used to define the structure of your application's data. Entries are called Documents in the MongoDB context, and schemas describe what types of properties they have, and what references and relations exist between them.</p>
+        <p>In our article example, we define the type of each property, as well as a possible default value. When necessary, we can also use properties like "trim" to make sure our data is properly transformed before it is saved.</p>
+        <h5>Using Validations and Middleware</h5>
+        <p>We can make sure the data we save complies with specific validation tests, and reject entries, which do not comply. In our example, we validate the title returns a true result for "title.length", to ensure it isn't blank. Similarly, we could run any function on the data being saved, and enforce whatever policy we want.</p>
+        <p><b>Middleware</b> is used whenever we want to execute code before or after we run any kind of operation on an entry. This gives us the opportunity to carry out validation, authorization, monitoring and other operations, before (or after) the entry is operated upon.</p>
+        <h5>How statics are defined</h5>
+        <p>We can extend the methods we build into the schema. In our example, we added a "load" method to the article schema, which allows us to automatically load an article, and populate a reference to the document describing the article's author.</p>
+      </p>
+      <p class="alert alert-info">
+        To learn more about Mongoose you should visit the <a target="_blank" href="http://mongoosejs.com/">Official Website</a>.
+      </p>
+      <h4>Express Controller</h4>
+      <p>
+        In MEAN, the controllers are where you'd query your database, and preform any server-side calculations before relaying the data to the client. In the example articles controller example we define the basic CRUD operations and other required methods:
+      </p>
+      <dl>
+        <dt>create</dt>
+        <dd>The create method creates a new Article document.
+          <dt>read</dt>
+          <dd>The read method returns a single article.</dd>
+          <dt>update</dt>
+          <dd>The update method updates a single article.</dd>
+          <dt>delete</dt>
+          <dd>The delete method removes a single article.</dd>
+          <dt>list</dt>
+          <dd>The list method returns a list of articles.</dd>
+          <dt>articleByID</dt>
+          <dd>The articleByID method sets the current article object by its ID.</dd>
+          <dt>hasAuthorization</dt>
+          <dd>The hasAuthorization method checks if the current user created the current article.</dd>
+      </dl>
+      <h4>Express Routes</h4>
+      <p>
+        In order to expose the controller methods as REST endpoints, we assign the controller methods to Express endpoints. This is done in the <b>app/routes/articles.js</b> file. Here we also hook up the middleware used to make sure a request for updating or removing the article is only allowed by an authorized user.
+      </p>
+      <p>
+        Here are the routes we defined for the article example:
+      </p>
+      <dl>
+        <dt>GET http://localhost:3000/articles</dt>
+        <dd>
+          Returns the list of articles.
+        </dd>
+        <dt>POST http://localhost:3000/articles</dt>
+        <dd>
+          Creates a new article.
+        </dd>
+        <dt>GET http://localhost:3000/articles/:articleId</dt>
+        <dd>
+          Returns an article by articleId.
+        </dd>
+        <dt>PUT http://localhost:3000/articles/:articleId</dt>
+        <dd>
+          Updates an article by ID.
+        </dd>
+        <dt>DEL http://localhost:3000/articles/:articleId</dt>
+        <dd>
+          Deletes an article by ID.
+        </dd>
+      </dl>
+      <h4>Express Mocha Tests</h4>
+      <p>
+        We use <a target="_blank" href="http://visionmedia.github.io/mocha/">Mocha</a> tests to verify our model. In this case the we added a test example that cover the article save method. The test is self is broken into three parts:
+      </p>
+      <ul class="list-unstyled">
+        <li>
+          <h5>Before Testing</h5>
+          <p>
+            Before we test the article save method, we'll create the user object, then save it, and in the callback create a new article object.
+          </p>
+        </li>
+        <li>
+          <h5>The Tests</h5>
+          <p>
+            Now we're ready to perform our tests. In the first test we'll try to save the article, then use the <a target="_blank" href="https://github.com/visionmedia/should.js">should assertion library</a> to verify it was saved without an error.
+          </p>
+          <p>
+            In the second test, we'll check the article model validation. We'll set the title property to an invalid value, then try to the save the document, we'll use should again to verify that an error has occurred.
+          </p>
+        </li>
+        <li>
+          <h5>After The Test</h5>
+          <p>
+            Once our testing is over, we can now do cleanup and remove the documents from our test database.
+          </p>
+        </li>
+      </ul>
+
+      <p class="alert alert-info">
+        To understand BDD better please visit the <a target="_blank" href="http://visionmedia.github.io/mocha/">Official Mocha Website</a>.
+      </p>
+      <h2>AngularJS Front-End Module</h2>
+      <h4>Folder Structure</h4>
+      <p>
+        Each AngularJS module is organized in an isolated folder containing the logical structure of the module functionality. In the Article example case, that folder is located at <b>public/modules/articles</b>. This is the folder structure of the Article module:
+      </p>
+      <dl>
+        <dt>config</dt>
+        <dd>
+          The config folder contains any AngularJS configuration related to the articles module, for instance this folder contains the routes.js file, which defines the AngularJS routing for the articles module.
+        </dd>
+        <dt>controllers</dt>
+        <dd>
+          The controllers folder contains any AngularJS controllers related to the articles module.
+        </dd>
+        <dt>services</dt>
+        <dd>
+          The services folder contains any AngularJS services related to the articles module.
+        </dd>
+        <dt>tests</dt>
+        <dd>
+          The tests folder contains any Jasmine tests related to the articles module.
+        </dd>
+        <dt>views</dt>
+        <dd>
+          The views folder contains any AngularJS partial views related to the articles module.
+        </dd>
+      </dl>
+      <p class="alert alert-warning">
+        The module folder structure is dynamic and may contain any components related to that module. While the article example is simple, modules can become much more complex, and may contain several services, controller, directives, etc.
+      </p>
+      <h4>AngularJS Service</h4>
+      <p>
+        The client-side of the article entities is connected to the Express route through an AngularJS Service. In this case, we use <a target="_blank" href="http://docs.angularjs.org/api/ngResource">ngResource</a> to easily connect our RESTful endpoints to Express.
+      </p>
+      <p class="alert alert-warning">
+        The <a target="_blank" href="http://docs.angularjs.org/api/ngResource.$resource">$resource</a> service supports RESTful CRUD endpoints out of the box, <b>except for the update method which requires specifically defining it to use the PUT verb</b>.
+      </p>
+
+      <h4>AngularJS Controller</h4>
+      <p>
+        The AngularJS controller is where you'll write your logic, in this case the controller is simply corresponding to the RESTful service CRUD operations:
+      </p>
+      <dl>
+        <dt>create</dt>
+        <dd>The create method is used to create new articles.</dd>
+        <dt>remove</dt>
+        <dd>The remove method is used to delete an article.</dd>
+        <dt>update</dt>
+        <dd>The update method is used to update an article.</dd>
+        <dt>findOne</dt>
+        <dd>The findOne method is used to fetch a single article.</dd>
+        <dt>find</dt>
+        <dd>The find method is used to fetch a list of articles.</dd>
+      </dl>
+      <h4>AngularJS Views</h4>
+      <p>
+        The AngularJS views render the data passed through the controller, in this case each view is a visual representation of a CRUD operation:
+      </p>
+      <dl>
+        <dt>create-article.client.view.html</dt>
+        <dd>The create.html view is used to create an article.</dd>
+        <dt>view-article.client.view.html</dt>
+        <dd>The view.html view is used to present a single article.</dd>
+        <dt>edit-article.client.view.html</dt>
+        <dd>The edit view is used to update an article.</dd>
+        <dt>list-articles.client.view.html</dt>
+        <dd>The list view is used to view a list of articles.</dd>
+      </dl>
+      <h4>AngularJS Routes</h4>
+      <p>
+        AngularJS use the <a target="_blank" href="http://angular-ui.github.io/ui-router/">UI-Router</a> module to define the various routes of the module. Each route is defined using the <b>$stateProvider</b> service, and defines a path to the template, which will be rendered when navigating to a specific URL.
+      </p>
+      <p>
+        In this example we configured 4 routes:
+      </p>
+      <dl>
+        <dt>/#!/articles</dt>
+        <dd>When navigating to this URL, UI-Router will render the <b>list-articles.client.view.html</b> view.</dd>
+        <dt>/#!/articles/create</dt>
+        <dd>When navigating to this URL, UI-Router will render the <b>create-article.client.view.html</b> view.</dd>
+        <dt>/#!/articles/:articleId</dt>
+        <dd>When navigating to this URL, UI-Router will render the <b>view-article.client.view.html</b> view.</dd>
+        <dt>/#!/articles/:articleId/edit</dt>
+        <dd>When navigating to this URL, UI-Router will render the <b>edit-article.client.view.html</b> view.</dd>
+      </dl>
+      <p class="alert alert-info">
+        Notice that we define a routing parameter called articleId, to grab it later in the controller and fetch the correct article.
+      </p>
+
+      <h4>AngularJS Menu Items</h4>
+      <p>
+        Your stack is bundled with an <a href="#menus">AngularJS Menus Service</a> that enables to add menu items directly from the module configuration file. In the article example you can see how the two menu items are added to the top bar menu in the <b>articles.client.config.js</b> file:
+        <pre>angular.module('articles').run(['Menus',
+function(Menus) {
+// Set top bar menu items
+Menus.addMenuItem('topbar', 'Articles', 'articles', 'dropdown', '/articles(/create)?');
+Menus.addSubMenuItem('topbar', 'articles', 'List Articles', 'articles');
+Menus.addSubMenuItem('topbar', 'articles', 'New Article', 'articles/create');
+}
+]);</pre>
+      </p>
+
+      <h4>AngularJS Unit Tests</h4>
+      <p>
+        AngularJS Jasmine tests are a bit trickier, but are mostly done in the same way as Mocha.
+      </p>
+      <ul class="list-unstyled">
+        <li>
+          <h5>Before Testing</h5>
+          <p>
+            Before testing the article controller, there a few prerequisites we need to take care of:
+          </p>
+          <ul>
+            <li>Initialize the global variables.</li>
+            <li>Add a Jasmine Matcher that <b>compares objects while ignoring the object methods</b>.</li>
+            <li>Load the main application module.</li>
+            <li>
+              Use the inject function to:
+              <ol>
+                <li>
+                  Point the global variables to the AngularJS services we are about to use.
+                </li>
+                <li>
+                  Create a new ArticleController instance.
+                </li>
+              </ol>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <h5>The Test</h5>
+          <p>
+            Most of your tests will look quite the same and will include similar steps:
+          </p>
+          <ul>
+            <li>
+              First you'll have to create your sample data.
+            </li>
+            <li>
+              Then, use <a target="_blank" href="http://docs.angularjs.org/api/ngMock">Angular-Mocks</a> to set the <b>httpBackend</b> expected response.
+            </li>
+            <li>
+              Call the controller method you would like to test.
+            </li>
+            <li>
+              Then, use <b>httpBackend.flush()</b> to emulate server response.
+            </li>
+            <li>
+              Finally, use a Jasmine matcher to verify the test result.
+            </li>
+          </ul>
+        </li>
+      </ul>
+      <p class="alert alert-info">
+        To understand AngularJS unit testing better, please visit the <a target="_blank" href="http://docs.angularjs.org/guide/dev_guide.unit-testing">Unit Testing Section</a> in the official website.
+      </p>
+    </section>
