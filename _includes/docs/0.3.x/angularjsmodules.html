@@ -1,0 +1,324 @@
+    <div class="inner-link-anchor" id="angularjs-modules"></div>
+    <section class="page-header">
+      <h1>AngularJS Modules</h1>
+    </section>
+    <section>
+      <p>
+        When we started with MEAN one of our major concerns was how to structure our AngularJS application, and on the first few AngularJS applications, we used the great <a href="https://github.com/angular/angular-seed">AngularJS Seed Project</a> provided by the AngularJS team.
+        <br>The basic structure for this project is quite simple:
+      </p>
+      <pre>
+|-css
+|---app.css
+|-img
+|-js
+|---app.js
+|---controllers.js
+|---directives.js
+|---filters.js
+|---services.js
+|-partials
+|---partial1.html
+|---partial2.html
+index.html
+</pre>
+      <p>
+        Notice that in the JS folder there are a few pre-bundled files. Basically you just place all your controllers in the controllers.js file, all your services in the services.js file, and so on. This is nice for a single developer working on a small project, but when working on production web application, pretty soon you get bloated JS files, which create real issues when trying to work in a team.
+      </p>
+      <p>
+        Then we changed the structure a bit to look something like this:
+      </p>
+      <pre>
+|-css 
+|---app.css 
+|-img 
+|-js 
+|---app.js
+|---controllers
+|-----controller1.js
+|-----controller2.js
+|---directives
+|-----directive1.js
+|----- directive2.js
+|---filters
+|-----filter1.js
+|-----filter2.js
+|---services
+|-----service1.js
+|-----service2.js
+|-partials
+|---partial1.html
+|---partial2.html
+index.html
+</pre>
+      <p>
+        Reorganizing the project this way helped us create bigger projects that are more maintainable in the long term. For a while we had fun using this but lately we found out that wasn’t enough. Now instead of bloating a single JavaScript file, we had pretty big folders containing ~20 controllers, and even more views in the partials folder.
+      </p>
+      <p>
+        Luckily, when the original MEAN.IO boilerplate gained some traction, we got a chance to talk to some great AngularJS developers writing blogs and working on some popular libraries. One of the greatest topics in our conversations was Angular’s modularity.
+      </p>
+      <h4>AngularJS Module System</h4>
+      <p>
+        AngularJS module system is a core feature when developing AngularJS applications; actually every AngularJS application is basically an AngularJS module. The other thing about AngularJS modules is that when defining a module you can also include sub-modules as dependencies. It usually looks something like this:
+      </p>
+      <pre>
+angular.module(‘FirstDependency’, []);
+angular.module(‘SecondDependency’, []); 
+angular.module(‘MainModule’, [‘FirstDependency’, ‘SecondDependency’]);
+</pre>
+      <p>
+        In this example we define the first and second modules and then we define the main module with the two sub-modules as dependencies. Later when you want to define an AngularJS entity you can simply use the sub modules as way to separate your application logic. For example defining a controller will look something like this:
+      </p>
+      <pre>
+angular.module(‘FirstDependency’).controller(…);
+</pre>
+      <h4>AngularJS Horizontal Modules</h4>
+      <p>
+        In their seed project, the AngularJS team recommends using modules in a horizontal way that ends up looking like this:
+      </p>
+
+      <pre>
+angular.module(‘application.controllers’, []);
+angular.module(‘application.services’, []);
+angular.module(‘application’, [‘application.controllers’, ‘application.services’]);
+</pre>
+
+      <p>
+        With this approach you arrange your AngularJS entities in horizontal modules that represents their role:
+      </p>
+      <table class="table table-bordered text-center">
+        <tr>
+          <th class="text-center" colspan="4">Application</th>
+        </tr>
+        <tr>
+          <th class="text-center">Controllers</th>
+          <th class="text-center">Directives</th>
+          <th class="text-center">Filters</th>
+          <th class="text-center">Services</th>
+        </tr>
+        <tr>
+          <td>Controller1</td>
+          <td>Directive1</td>
+          <td>Filter1</td>
+          <td>Service1</td>
+        </tr>
+        <tr>
+          <td>Controller2</td>
+          <td>Directive2</td>
+          <td>Filter2</td>
+          <td>Service2</td>
+        </tr>
+        <tr>
+          <td>Controller3</td>
+          <td>Directive3</td>
+          <td>Filter3</td>
+          <td>Service3</td>
+        </tr>
+      </table>
+      <p>
+        Although this helps create fewer modules those modules wont represent the higher functionality of each entity, for example all the controllers are defined under the same module regardless of their actual purpose. While this is suitable for small projects, using horizontal modules doesn't scale well for bigger projects.
+      </p>
+
+      <h4>Vertical Modules Are Better</h4>
+      <p>
+        During our conversation with some of the main contributors to the popular <a target="_blank" href="http://angular-ui.github.io">Angular-UI</a>, they pointed this issue to us. When we observed our AngularJS applications we discovered it would be better to restructure our applications in a vertical manner:
+      </p>
+      <table class="table table-bordered text-center">
+        <tr>
+          <th class="text-center" colspan="3">Application</th>
+        </tr>
+        <tr>
+          <th class="text-center">Core Module</th>
+          <th class="text-center">Users Module</th>
+          <th class="text-center">Articles Module</th>
+        </tr>
+        <tr>
+          <td>CoreController1</td>
+          <td>UsersController1</td>
+          <td>ArticlesController1</td>
+        </tr>
+        <tr>
+          <td>CoreController2</td>
+          <td>UsersController1</td>
+          <td>ArticlesController2</td>
+        </tr>
+        <tr>
+          <td>CoreService1</td>
+          <td>UsersService1</td>
+          <td>ArticlesService1</td>
+        </tr>
+        <tr>
+          <td>CoreFilter1</td>
+          <td>UsersFilter1</td>
+          <td>ArticlesFilter1</td>
+        </tr>
+        <tr>
+          <td>CoreDirective1</td>
+          <td>UsersDirective1</td>
+          <td>ArticlesDirective2</td>
+        </tr>
+      </table>
+
+      <p>
+        This helped us divide the project logic into modules that represent individual logical units, and it didn't surprised us to find out the Angular-UI projects uses the same approach.
+      </p>
+
+      <h4>New Folder Structure</h4>
+      <p>
+        Using vertical modules only solves half the problem because we still use horizontal approach in our folder structure. This means that all your application controllers will reside in the same folder, as are all the services, directives, filters, and views. In this case you wouldn’t be able to associate a file with its module until you open it.
+      </p>
+      <p>
+        So we converted our application structure to a vertical structure to fit the vertical modular approach:
+      </p>
+      <pre>           
+|-css 
+|-img 
+|-js 
+|-modules 
+|---articles 
+|-----config 
+|-----controllers 
+|-----services 
+|-----tests 
+|-----views
+|---core
+|-----config
+|-----controllers
+|-----tests
+|-----views
+|---users
+|-----config
+|-----controllers
+|-----services
+|-----views
+</pre>
+      <p>
+        In this case we have 3 modules:
+      </p>
+      <dl>
+        <dt>Core</dt>
+        <dd>Containing the application core configuration, controllers, test, and views.</dd>
+        <dt>Users</dt>
+        <dd>Containing the application authentication configuration, controllers, services, and views.</dd>
+        <dt>Articles</dt>
+        <dd>The example module we added, that contains article related configuration, routing, controllers, services, tests, and views.</dd>
+      </dl>
+      <p>
+        This structure allow clear separation of functionality and concerns, so just by looking at the folder structure you can start asking questions about your modules, for example why does the users module have no tests? (hint: Its our fault and we plan to add those :)).
+      </p>
+      <p>
+        But we didn’t want to stop at this point!
+      </p>
+      <p>
+        Because we are building a full-stack solution, won’t it be great if module files could be automatically included in the backend view HTML, eliminating common import mistakes? We do two things to help with this issue:
+      </p>
+      <ol>
+        <li>
+          In the <b>config/express.js</b> file, we iterate over the modules folder to automatically add the .JS and .CSS files to the layout HTML.
+        </li>
+        <li>
+          <p>
+            There two kind of modules you'll add to your application: third-party modules and custom modules.
+          </p>
+          <p>
+            To add third-party modules use the <b>public/config.js</b> file where we added an array property called <b>applicationModuleVendorDependencies</b>. When you add a new third-party module you should add it to this array so the main module can load it as a depenedency.
+          </p>
+          <p>
+            To register your own module, we created the <b>ApplicationConfiguration.registerModule</b> method. To add your custom module and your module and it will automatically be loaded as a dependency to the AngularJS main application module.
+          </p>
+        </li>
+      </ol>
+      <p>
+        This method has a few advantages:
+      </p>
+      <ol>
+        <li>
+          Team members have a method of organizing their code, so every module will look the same.
+        </li>
+        <li>
+          Everyone has a clearer and broader view of the project.
+        </li>
+        <li>
+          Working together becomes faster, especially in merging the different development branches.
+        </li>
+        <li>
+          Because this is very structured you can start automating some common tasks, like creating a new module, verifying an existing module, etc.(Hmmm... Future Generator)
+        </li>
+        <li>
+          You can avoid common mistakes by not including all the JS files, or forget to add your module as a dependency to the main module.
+        </li>
+        <li>
+          Reusage of modules is now easier because you can just seamlessly copy your module folder to another project.
+        </li>
+        <li>
+          Third party modules can now be easily shared and implemented.
+        </li>
+      </ol>
+      <h4>ApplicationConfiguration</h4>
+      <p>
+        While the angular module system is quite robust it lacks a few options, mainly the abiliy to add dependencies to the main module after it was already created. Because of that we use the <b>ApplicationConfiguration</b> object to maintain a list of modules, which the main module will use as depenedencies. If it weren't for the <b>ApplicationConfiguration</b>, you would have to register your module in two place:
+      </p>
+      <ol>
+        <li>
+          When you create your module using the
+          <code>angular.module(...)</code>method.
+        </li>
+        <li>
+          When you create your main application module you'll have to register your module as a dependency in the dependencies list.
+        </li>
+      </ol>
+      <p>
+        This can become an annoying pitfull, so we added the <b>ApplicationConfiguration</b> that is loaded before all the modules file. The <b>ApplicationConfiguration</b> global object expose a method named <b>registerModule</b>, this method will create the new angular module and add it to list of dependencies of the main application module.
+      </p>
+      <p>
+        We recommend that you take a look at the code that is placed inside the <b>/public/config.js</b> file.
+      </p>
+      <h4>Module Structure</h4>
+      <p>
+        So how should you add a new module?
+      </p>
+      <p>
+
+        To add a new module, you’ll have to create a new folder in the <b>public/modules</b> folder. The directory structure should look something like this:
+      </p>
+      <pre>
+|-module 
+|---config 
+|---controllers 
+|---css 
+|---directives 
+|---filters 
+|---img 
+|---services 
+|---tests 
+|---views 
+|---module.js
+</pre>
+      <p>
+        In each folder you'll include the appropriate module entities, you can also delete the empty folders to keep it clean.
+      </p>
+      <p>
+        Finally you have to add your module.js file, which should look something like this:
+      </p>
+      <pre>
+'use strict';
+
+// Use Applicaion configuration module to register a new module
+ApplicationConfiguration.registerModule('moduleName');
+</pre>
+
+      <p>
+        Thats it! This way the <b>registerModule</b> method will create your module and push it to the dependencies list of your AngularJS main application module.
+        <br>MEAN will take care of everything else, like including those files in the layout HTML and bootstrap the AngularJS application using your module as a dependency.
+      </p>
+      <h4>Module Tests</h4>
+      <p>
+        Adding Karma tests is a simple task, and you can follow the <a href="#article-example">Article Example</a> to learn all about it.
+      </p>
+      <p>
+        But here is another neat feature: loading your module tests is also done automatically! Karam config file will iterate through the module folder and add your new module tests as well. Don't worry! if you haven't written any tests karma will skip your module and just run the tests you already have.
+      </p>
+      <p class="alert alert-danger">
+        <b>Notice:</b> Your test files should be placed in the <b>module/tests</b> folder or else MEAN won't ignore them and add them in the HTML as script files.
+      </p>
+    </section>

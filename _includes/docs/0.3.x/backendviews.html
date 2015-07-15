@@ -1,0 +1,92 @@
+    <div class="inner-link-anchor" id="backend-views"></div>
+    <section class="page-header">
+      <h1>Backend Views</h1>
+    </section>
+    <section>
+      <p>
+        AngularJS reduces the need for server side templating. What once was a web application served by server as HTML pages can now be implemented using Angular's template system.
+      </p>
+      <h4>So why do you still keep a views folder in your <b>app</b> folder?</h4>
+      <p>
+        There are few answers to this question:
+      </p>
+      <ol>
+        <li>
+          You still need to render the index and error page.
+        </li>
+        <li>
+          You might need to render HTML templates for your email notifications.
+        </li>
+        <li>
+          You want to render local configuration properties in the template. For instance, the title property from the configuration file can be used in the title element of the HTML page.
+        </li>
+        <li>
+          <a href="#angularjs-modules">AngularJS module system</a> is implemented in a way that allows you to automatically load the modules .js files in template.
+        </li>
+      </ol>
+      <p>
+        So we can't use static templates, and we have to use some kind of template engine, but which one?
+      </p>
+      <h2>Swig Template Engine</h2>
+      <p>
+        <a target="_blank" href="http://paularmstrong.github.io/swig/">Swig</a> is a template engine, written by <a target="_blank" href="https://github.com/paularmstrong">Paul Armstrong</a>.
+      </p>
+      <p>
+        While <a target="_blank" href="http://jade-lang.com/">JADE</a> is the default template engine used by Express, and is by far the most popular template engine, it doesn't suit this boilerplate for several reasons:
+      </p>
+      <ol>
+        <li>It's slower.</li>
+        <li>It uses its own language, steeping the learning curve.</li>
+        <li>You don't need it! JADE's greatest advantage is to facilitate the task of writing a lot of HTML that is being served by the server. You're going to use AngularJS client templating engine, thus relieving the need for server templating.</li>
+      </ol>
+      <p>
+        On the other hand, using Swig has a few advantages:
+      </p>
+      <ol>
+        <li>It's faster, as in <a href="http://paularmstrong.github.io/node-templates/benchmarks.html">way faster</a>.</li>
+        <li>It uses HTML.</li>
+        <li>It has all the features we need to render our index and error pages!</li>
+      </ol>
+      <p>
+        To summarize, when coding a Node.js website, you might want to use other template engines, but approaching web application development using AngularJS, we think Swig is the best choice.
+      </p>
+      <p class="alert alert-info">
+        To understand Swig better we recommend that you visit the <a target="_blank" href="http://paularmstrong.github.io/swig/">Official Website</a>.
+      </p>
+      <h2>The Views</h2>
+      <p>
+        There are 4 files in the views folder:
+      </p>
+      <dl>
+        <dt>Layout</dt>
+        <dd>
+          This is most important file, which sets the layout used to render all the other templates.
+        </dd>
+        <dt>Index</dt>
+        <dd>
+          The index template is served as the main application page.
+        </dd>
+        <dt>404</dt>
+        <dd>
+          The 404 error template is served whenever express cant find a routing scheme for the current path.
+        </dd>
+        <dt>500</dt>
+        <dd>
+          The 500 error template is served whenever there's a server error.
+        </dd>
+      </dl>
+      <h2>The Templates</h2>
+      <p>
+        The templates folder is placed inside the views folder and currently contains 2 files:
+      </p>
+      <dl>
+        <dt>Reset Password Email</dt>
+        <dd>
+          An email template sent to users after they've request to reset their password.
+        </dd>
+        <dt>Reset Password Confirmation Email</dt>
+        <dd>
+          An email template sent to users after they've reset their password.
+        </dd>
+      </dl>
+    </section>

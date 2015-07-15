@@ -1,0 +1,11 @@
+# Site settings
+title: MEAN.JS
+email: support@meanjs.org
+description: > # Full-Stack JavaScript Using MongoDB, Express, AngularJS, and Node.js
+baseurl: "" # the subpath of your site, e.g. /blog/
+url: "http://meanjs.org/" # the base hostname & protocol for your site
+twitter_username: Meanjsorg
+github_username:  meanjs
+
+# Build settings
+markdown: kramdown

@@ -1,0 +1,19 @@
+    <div class="inner-link-anchor" id="autoload"></div>
+    <section class="page-header">
+      <h1>Automatically Loaded Files</h1>
+    </section>
+    <section>
+      <p>
+        Through the system we have several object automatically loaded during the application bootstrap. This was done to ease the development process and to help avoid the common mistake of not including your newly created files. The objects that are loaded automatically are:
+      </p>
+      <dl>
+        <dt>app/models</dt>
+        <dd>Mongoose models are registered automatically during the application bootstrap process. So you can just call the <i>mongoose.model('modelName')</i> whenever you need.</dd>
+        <dt>app/routes</dt>
+        <dd>Routing files placed in this folder will be registered automatically with the Express application. So whenever you add a new routing configuration, the new routes will be immediately available.</dd>
+        <dt>config/strategies</dt>
+        <dd>Passport strategies placed in this folder will automatically be loaded by the <i>config/passport.js</i> file. So whenever you add a new strategy, it will be available instantly.</dd>
+        <dt>public/modules</dt>
+        <dd>The new vertical modules scheme allows us to automatically include the module files in your application HTML file, this includes both <b>JavaScript</b> and <b>CSS</b> files. So have fun creating your modules, and don't worry about including your files.</dd>
+      </dl>
+    </section>
