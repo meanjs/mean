@@ -4,6 +4,7 @@
   "version": "0.4.0",
   "private": false,
   "author": "https://github.com/meanjs/mean/graphs/contributors",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/meanjs/mean.git"
