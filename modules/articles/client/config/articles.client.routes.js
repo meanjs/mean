@@ -16,7 +16,10 @@ angular.module('articles').config(['$stateProvider',
 		}).
 		state('articles.create', {
 			url: '/create',
-			templateUrl: 'modules/articles/views/create-article.client.view.html'
+			templateUrl: 'modules/articles/views/create-article.client.view.html',
+			data: {
+				requiresLogin: true
+			}
 		}).
 		state('articles.view', {
 			url: '/:articleId',
@@ -24,7 +27,10 @@ angular.module('articles').config(['$stateProvider',
 		}).
 		state('articles.edit', {
 			url: '/:articleId/edit',
-			templateUrl: 'modules/articles/views/edit-article.client.view.html'
+			templateUrl: 'modules/articles/views/edit-article.client.view.html',
+			data: {
+				requiresLogin: true
+			}
 		});
 	}
 ]);
