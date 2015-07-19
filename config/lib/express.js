@@ -27,12 +27,15 @@ module.exports.initLocalVariables = function (app) {
 	// Setting application local variables
 	app.locals.title = config.app.title;
 	app.locals.description = config.app.description;
+	app.locals.livereload = config.livereload;
 	app.locals.secure = config.secure;
 	app.locals.keywords = config.app.keywords;
 	app.locals.googleAnalyticsTrackingID = config.app.googleAnalyticsTrackingID;
 	app.locals.facebookAppId = config.facebook.clientID;
 	app.locals.jsFiles = config.files.client.js;
 	app.locals.cssFiles = config.files.client.css;
+	app.locals.logo = config.logo;
+	app.locals.favicon = config.favicon;
 
 	// Passing the request url to environment locals
 	app.use(function (req, res, next) {
