@@ -147,7 +147,7 @@ var initGlobalConfig = function() {
 	var environmentAssets = require(path.join(process.cwd(), 'config/assets/', process.env.NODE_ENV)) || {};
 
 	// Merge assets
-	var assets = _.extend(defaultAssets, environmentAssets);
+	var assets = _.merge(defaultAssets, environmentAssets);
 
     // Get the default config
     var defaultConfig = require(path.join(process.cwd(), 'config/env/default'));
@@ -156,7 +156,7 @@ var initGlobalConfig = function() {
     var environmentConfig = require(path.join(process.cwd(), 'config/env/', process.env.NODE_ENV)) || {};
 
     // Merge config files
-    var envConf = _.extend(defaultConfig, environmentConfig);
+    var envConf = _.merge(defaultConfig, environmentConfig);
 
    var config = _.merge(envConf, (fs.existsSync(path.join(process.cwd(), 'config/env/local.js')) && require(path.join(process.cwd(), 'config/env/local.js'))) || {});
 
