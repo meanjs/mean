@@ -42,6 +42,7 @@ gulp.task('watch', function() {
 	plugins.livereload.listen();
 
 	// Add watch rules
+	gulp.watch(defaultAssets.server.gulpConfig, ['jshint']);
 	gulp.watch(defaultAssets.server.views).on('change', plugins.livereload.changed);
 	gulp.watch(defaultAssets.server.allJS, ['jshint']).on('change', plugins.livereload.changed);
 	gulp.watch(defaultAssets.client.views).on('change', plugins.livereload.changed);
@@ -65,7 +66,7 @@ gulp.task('csslint', function (done) {
 
 // JS linting task
 gulp.task('jshint', function () {
-	return gulp.src(_.union(defaultAssets.server.allJS, defaultAssets.client.js, testAssets.tests.server, testAssets.tests.client, testAssets.tests.e2e))
+	return gulp.src(_.union(defaultAssets.server.gulpConfig, defaultAssets.server.allJS, defaultAssets.client.js, testAssets.tests.server, testAssets.tests.client, testAssets.tests.e2e))
 		.pipe(plugins.jshint())
 		.pipe(plugins.jshint.reporter('default'))
 		.pipe(plugins.jshint.reporter('fail'));
