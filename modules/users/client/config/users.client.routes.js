@@ -36,7 +36,7 @@ angular.module('users').config(['$stateProvider',
 				templateUrl: 'modules/users/views/authentication/signup.client.view.html'
 			}).
 			state('authentication.signin', {
-				url: '/signin',
+				url: '/signin?err',
 				templateUrl: 'modules/users/views/authentication/signin.client.view.html'
 			}).
 			state('password', {
