@@ -226,7 +226,6 @@ describe('Article CRUD tests', function () {
 	it('should return proper error for single article which doesnt exist, if not signed in', function (done) {
 		request(app).get('/api/articles/test')
 			.end(function (req, res) {
-				console.log(res.body);
 				// Set assertion
 				res.body.should.be.instanceof(Object).and.have.property('message', 'Article is invalid');
 
