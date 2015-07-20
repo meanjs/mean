@@ -9,7 +9,8 @@ var _ = require('lodash'),
 	gulp = require('gulp'),
 	gulpLoadPlugins = require('gulp-load-plugins'),
 	runSequence = require('run-sequence'),
-	plugins = gulpLoadPlugins();
+	plugins = gulpLoadPlugins(),
+	path = require('path');
 
 // Set NODE_ENV to 'test'
 gulp.task('env:test', function () {
@@ -96,8 +97,8 @@ gulp.task('cssmin', function () {
 gulp.task('sass', function () {
 	return gulp.src(defaultAssets.client.sass)
 		.pipe(plugins.sass())
-		.pipe(plugins.rename(function (path) {
-			path.dirname = path.dirname.replace('/scss', '/css');
+		.pipe(plugins.rename(function (file) {
+			file.dirname = file.dirname.replace(path.sep + 'scss', path.sep + 'css');
 		}))
 		.pipe(gulp.dest('./modules/'));
 });
@@ -106,8 +107,8 @@ gulp.task('sass', function () {
 gulp.task('less', function () {
 	return gulp.src(defaultAssets.client.less)
 		.pipe(plugins.less())
-		.pipe(plugins.rename(function (path) {
-			path.dirname = path.dirname.replace('/less', '/css');
+		.pipe(plugins.rename(function (file) {
+			file.dirname = file.dirname.replace(path.sep + 'less', path.sep + 'css');
 		}))
 		.pipe(gulp.dest('./modules/'));
 });
