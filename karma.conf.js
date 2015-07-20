@@ -3,16 +3,18 @@
 /**
  * Module dependencies.
  */
-var applicationConfiguration = require('./config/config');
+var _ = require('lodash'),
+	defaultAssets = require('./config/assets/default'),
+	testAssets = require('./config/assets/test');
 
 // Karma configuration
-module.exports = function(config) {
-	config.set({
+module.exports = function(karmaConfig) {
+	karmaConfig.set({
 		// Frameworks to use
 		frameworks: ['jasmine'],
 
 		// List of files / patterns to load in the browser
-		files: applicationConfiguration.assets.lib.js.concat(applicationConfiguration.assets.js, applicationConfiguration.assets.tests),
+		files: _.union(defaultAssets.client.lib.js, defaultAssets.client.lib.tests, defaultAssets.client.js, testAssets.tests.client),
 
 		// Test results reporter to use
 		// Possible values: 'dots', 'progress', 'junit', 'growl', 'coverage'
@@ -25,8 +27,8 @@ module.exports = function(config) {
 		colors: true,
 
 		// Level of logging
-		// Possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
-		logLevel: config.LOG_INFO,
+		// Possible values: karmaConfig.LOG_DISABLE || karmaConfig.LOG_ERROR || karmaConfig.LOG_WARN || karmaConfig.LOG_INFO || karmaConfig.LOG_DEBUG
+		logLevel: karmaConfig.LOG_INFO,
 
 		// Enable / disable watching file and executing tests whenever any file changes
 		autoWatch: true,
