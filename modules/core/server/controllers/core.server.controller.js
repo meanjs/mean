@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * Render the main applicaion page
+ * Render the main application page
  */
 exports.renderIndex = function(req, res) {
 	res.render('modules/core/server/views/index', {
@@ -19,10 +19,22 @@ exports.renderServerError = function(req, res) {
 };
 
 /**
- * Render the server not found page
+ * Render the server not found responses
+ * Performs content-negotiation on the Accept HTTP header
  */
 exports.renderNotFound = function(req, res) {
-	res.status(404).render('modules/core/server/views/404', {
-		url: req.originalUrl
-	});
+
+	res.status(404).format({
+			'text/html': function(){
+				res.render('modules/core/server/views/404', {
+					url: req.originalUrl
+				});
+			},
+			'application/json': function(){
+				res.json({ error: 'Path not found' });
+			},
+			'default': function(){
+				res.send('Path not found');
+			}
+		});
 };

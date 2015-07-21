@@ -40,5 +40,11 @@
 				<i class="glyphicon glyphicon-plus"></i>
 			</a>
 		</div>
+		<div class="social-account-container" data-ng-hide="isConnectedSocialAccount('paypal')">
+			<img ng-src="/modules/users/img/buttons/paypal.png">
+			<a class="btn btn-success btn-remove-account" href="/api/auth/paypal" target="_self">
+				<i class="glyphicon glyphicon-plus"></i>
+			</a>
+		</div>
 	</div>
 </section>

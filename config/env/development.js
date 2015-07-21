@@ -2,7 +2,7 @@
 
 module.exports = {
 	db: {
-		uri: 'mongodb://localhost/mean-test',
+		uri: process.env.MONGOHQ_URL || process.env.MONGOLAB_URI || 'mongodb://' + (process.env.DB_1_PORT_27017_TCP_ADDR || 'localhost') + '/mean-dev',
 		options: {
 			user: '',
 			pass: ''
@@ -44,6 +44,12 @@ module.exports = {
         clientID: process.env.GITHUB_ID || 'APP_ID',
         clientSecret: process.env.GITHUB_SECRET || 'APP_SECRET',
         callbackURL: '/api/auth/github/callback'
+    },
+    paypal: {
+        clientID: process.env.PAYPAL_ID || 'CLIENT_ID',
+        clientSecret: process.env.PAYPAL_SECRET || 'CLIENT_SECRET',
+        callbackURL: '/api/auth/paypal/callback',
+        sandbox: true
     },
 	mailer: {
 		from: process.env.MAILER_FROM || 'MAILER_FROM',

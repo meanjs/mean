@@ -2,7 +2,7 @@
 
 module.exports = {
 	secure: true,
-    port: process.env.PORT || 8443,
+	port: process.env.PORT || 8443,
 	db: {
 		uri: process.env.MONGOHQ_URL || process.env.MONGOLAB_URI || 'mongodb://' + (process.env.DB_1_PORT_27017_TCP_ADDR || 'localhost') + '/mean',
 		options: {
@@ -43,6 +43,12 @@ module.exports = {
 		clientID: process.env.GITHUB_ID || 'APP_ID',
 		clientSecret: process.env.GITHUB_SECRET || 'APP_SECRET',
 		callbackURL: '/api/auth/github/callback'
+	},
+	paypal: {
+		clientID: process.env.PAYPAL_ID || 'CLIENT_ID',
+		clientSecret: process.env.PAYPAL_SECRET || 'CLIENT_SECRET',
+		callbackURL: '/api/auth/paypal/callback',
+		sandbox: false
 	},
 	mailer: {
 		from: process.env.MAILER_FROM || 'MAILER_FROM',
