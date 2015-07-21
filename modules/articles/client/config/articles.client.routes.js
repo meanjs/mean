@@ -10,7 +10,7 @@ angular.module('articles').config(['$stateProvider',
 			url: '/articles',
 			template: '<ui-view/>',
 			data: {
-				roles: ['user']
+				roles: ['user', 'admin']
 			}
 		}).
 		state('articles.list', {
