@@ -48,6 +48,13 @@ local.properties
 data/
 mongod
 
+# Visual Studio
+# =========
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
 # General
 # =======
 *.log
