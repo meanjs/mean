@@ -170,6 +170,8 @@ deploy MEANJS.
   *  `$ cf create-service mongolab sandbox mean-mongo`
 * Clone the GitHub repo for MEANJS if you have not already done so
   * `$ git clone https://github.com/meanjs/mean.git && cd mean`
+* Run the Grunt Build task to build the optimized JavaScript and CSS files
+  * `$ grunt build`
 * Deploy MEANJS to Cloud Foundry
   * `$ cf push`
 
@@ -221,6 +223,10 @@ services you would like to use.  Make sure you insert the correct credentials fo
 #### Email
 `$ cf cups mean-mail -p '{"from":"fromEmail","service":"emailService","username":"emailServiceUsername","password":"emailServicePassword"}'`
 `$ cf bind-service mean mean-mail`
+
+#### Paypal
+`$ cf cups mean-paypal -p '{"id":"paypalId","secret":"paypalSecret"}'`
+`$ cf bind-service mean mean-paypal`
 
 After you have bound the services your want to your MEANJS application run
 `$ cf restage mean` to restage your application and your social services should now work.

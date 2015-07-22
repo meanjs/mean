@@ -12,31 +12,51 @@ var getCred = function(serviceName, credProp) {
 
 module.exports = {
 	port:  appEnv.port,
-	db: cfMongoUrl,
+	db: {
+		uri: cfMongoUrl,
+		options: {
+			user: '',
+			pass: ''
+		}
+	},
+	log: {
+		// Can specify one of 'combined', 'common', 'dev', 'short', 'tiny'
+		format: 'combined',
+		// Stream defaults to process.stdout
+		// By default we want logs to go to process.out so the Cloud Foundry Loggregator will collect them
+		options: {
+		}
+	},
 	facebook: {
 		clientID: getCred('mean-facebook', 'id') || 'APP_ID',
 		clientSecret: getCred('mean-facebook', 'secret') || 'APP_SECRET',
-		callbackURL: '/auth/facebook/callback'
+		callbackURL: '/api/auth/facebook/callback'
 	},
 	twitter: {
 		clientID: getCred('mean-twitter', 'key') || 'CONSUMER_KEY',
 		clientSecret: getCred('mean-twitter', 'secret') || 'CONSUMER_SECRET',
-		callbackURL: '/auth/twitter/callback'
+		callbackURL: '/api/auth/twitter/callback'
 	},
 	google: {
 		clientID: getCred('mean-google', 'id') || 'APP_ID',
 		clientSecret: getCred('mean-google', 'secret') || 'APP_SECRET',
-		callbackURL: '/auth/google/callback'
+		callbackURL: '/api/auth/google/callback'
 	},
 	linkedin: {
 		clientID: getCred('mean-linkedin', 'id') || 'APP_ID',
 		clientSecret: getCred('mean-linkedin', 'secret') || 'APP_SECRET',
-		callbackURL: '/auth/linkedin/callback'
+		callbackURL: '/api/auth/linkedin/callback'
 	},
 	github: {
 		clientID: getCred('mean-github', 'id') || 'APP_ID',
 		clientSecret: getCred('mean-github', 'secret') || 'APP_SECRET',
-		callbackURL: '/auth/github/callback'
+		callbackURL: '/api/auth/github/callback'
+	},
+	paypal: {
+		clientID: getCred('mean-paypal', 'id') || 'CLIENT_ID',
+		clientSecret: getCred('mean-paypal', 'secret') || 'CLIENT_SECRET',
+		callbackURL: '/api/auth/paypal/callback',
+		sandbox: true
 	},
 	mailer: {
 		from: getCred('mean-mail', 'from') || 'MAILER_FROM',
