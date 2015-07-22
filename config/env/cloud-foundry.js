@@ -56,7 +56,7 @@ module.exports = {
 		clientID: getCred('mean-paypal', 'id') || 'CLIENT_ID',
 		clientSecret: getCred('mean-paypal', 'secret') || 'CLIENT_SECRET',
 		callbackURL: '/api/auth/paypal/callback',
-		sandbox: true
+		sandbox: false
 	},
 	mailer: {
 		from: getCred('mean-mail', 'from') || 'MAILER_FROM',
