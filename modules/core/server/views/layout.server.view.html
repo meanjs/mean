@@ -26,17 +26,21 @@
 	<meta property="og:title" content="{{title}}">
 	<meta property="og:description" content="{{description}}">
 	<meta property="og:url" content="{{url}}">
-	<meta property="og:image" content="{{url}}modules/core/img/brand/logo.png">
+	<meta property="og:image" content="{{url}}{{logo}}">
 	<meta property="og:type" content="website">
 
 	<!-- Twitter META -->
 	<meta name="twitter:title" content="{{title}}">
 	<meta name="twitter:description" content="{{description}}">
 	<meta name="twitter:url" content="{{url}}">
-	<meta name="twitter:image" content="{{url}}modules/core/img/brand/logo.png">
+	<meta name="twitter:image" content="{{url}}{{logo}}">
 
 	<!-- Fav Icon -->
-	<link href="/modules/core/img/brand/favicon.ico" rel="shortcut icon" type="image/x-icon">
+<<<<<<< HEAD
+	<link href="{{url}}{{favicon}}" rel="shortcut icon" type="image/x-icon">
+=======
+	<link href="{{favicon}}" rel="shortcut icon" type="image/x-icon">
+>>>>>>> 5f31d95... Config for Logo, Favicon, and Livereload
 
 	<!--Application CSS Files-->
 	{% for cssFile in cssFiles %}<link rel="stylesheet" href="{{cssFile}}">{% endfor %}
@@ -66,7 +70,7 @@
 	<!--Application JavaScript Files-->
 	{% for jsFile in jsFiles %}<script type="text/javascript" src="{{jsFile}}"></script>{% endfor %} 
 
-	{% if process.env.NODE_ENV === 'development' %}
+	{% if livereload %}
 	<!--Livereload script rendered -->
 	<script type="text/javascript" src="{{host}}:35729/livereload.js"></script>
 	{% endif %}
