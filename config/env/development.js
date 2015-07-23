@@ -60,5 +60,6 @@ module.exports = {
 				pass: process.env.MAILER_PASSWORD || 'MAILER_PASSWORD'
 			}
 		}
-	}
+	},
+    livereload: true
 };
