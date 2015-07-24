@@ -223,11 +223,24 @@ describe('Article CRUD tests', function () {
 		});
 	});
 
-	it('should return proper error for single article which doesnt exist, if not signed in', function (done) {
+	it('should return proper error for single article with an invalid Id, if not signed in', function (done) {
+		// test is not a valid mongoose Id
 		request(app).get('/api/articles/test')
 			.end(function (req, res) {
 				// Set assertion
 				res.body.should.be.instanceof(Object).and.have.property('message', 'Article is invalid');
+
+				// Call the assertion callback
+				done();
+			});
+	});
+
+	it('should return proper error for single article which doesnt exist, if not signed in', function (done) {
+		// This is a valid mongoose Id but a non-existent article
+		request(app).get('/api/articles/559e9cd815f80b4c256a8f41')
+			.end(function (req, res) {
+				// Set assertion
+				res.body.should.be.instanceof(Object).and.have.property('message', 'No article with that identifier has been found');
 
 				// Call the assertion callback
 				done();
