@@ -13,9 +13,15 @@ angular.module(ApplicationConfiguration.applicationModuleName).config(['$locatio
 angular.module(ApplicationConfiguration.applicationModuleName).run(function($rootScope, $state, Authentication) {
     // Check authentication before changing state
     $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
-        if (toState.data && toState.data.forbiddenRoles) {
-            // If access of guest user is forbidden:
-            if (toState.data.forbiddenRoles.indexOf('guest') !== -1 && Authentication.user === '') {
+        if (toState.data && toState.data.roles && toState.data.roles.length > 0) {
+            var allowed = false;
+            toState.data.roles.forEach(function (role) {
+               if (Authentication.user.roles.indexOf(role) !== -1) {
+                   allowed = true;
+               }
+            });
+
+            if (!allowed) {
                 event.preventDefault();
                 $state.go('authentication.signin', {}, {
                     notify: false
