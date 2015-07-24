@@ -1,0 +1,7 @@
+<div class="list-group">
+    <div data-ng-repeat="item in pagedItems">
+        <ng-include src="meanPaginationUrl"></ng-include>
+    </div>
+</div>
+<input data-ng-show="meanPaginationSearch === 'true'" class="form-control col-md-4" type="text" data-ng-model="search" placeholder="Search" data-ng-change="figureOutItemsToDisplay()" />
+<pagination boundary-links="true" max-size="8" items-per-page="itemsPerPage" total-items="filterLength" data-ng-model="currentPage" data-ng-change="pageChanged()"></pagination>
