@@ -8,18 +8,19 @@ angular.module('articles').config(['$stateProvider',
 		state('articles', {
 			abstract: true,
 			url: '/articles',
-			template: '<ui-view/>'
+			template: '<ui-view/>',
+			data: {
+				roles: ['user']
+			}
 		}).
 		state('articles.list', {
 			url: '',
 			templateUrl: 'modules/articles/views/list-articles.client.view.html'
+
 		}).
 		state('articles.create', {
 			url: '/create',
-			templateUrl: 'modules/articles/views/create-article.client.view.html',
-			data: {
-				roles: ['admin']
-			}
+			templateUrl: 'modules/articles/views/create-article.client.view.html'
 		}).
 		state('articles.view', {
 			url: '/:articleId',
@@ -27,10 +28,7 @@ angular.module('articles').config(['$stateProvider',
 		}).
 		state('articles.edit', {
 			url: '/:articleId/edit',
-			templateUrl: 'modules/articles/views/edit-article.client.view.html',
-			data: {
-				roles: ['user']
-			}
+			templateUrl: 'modules/articles/views/edit-article.client.view.html'
 		});
 	}
 ]);
