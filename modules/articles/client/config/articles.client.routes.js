@@ -18,7 +18,7 @@ angular.module('articles').config(['$stateProvider',
 			url: '/create',
 			templateUrl: 'modules/articles/views/create-article.client.view.html',
 			data: {
-				requiresLogin: true
+				forbiddenRoles: ['guest']
 			}
 		}).
 		state('articles.view', {
@@ -29,7 +29,7 @@ angular.module('articles').config(['$stateProvider',
 			url: '/:articleId/edit',
 			templateUrl: 'modules/articles/views/edit-article.client.view.html',
 			data: {
-				requiresLogin: true
+				forbiddenRoles: ['guest']
 			}
 		});
 	}

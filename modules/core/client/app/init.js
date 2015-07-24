@@ -13,13 +13,16 @@ angular.module(ApplicationConfiguration.applicationModuleName).config(['$locatio
 angular.module(ApplicationConfiguration.applicationModuleName).run(function($rootScope, $state, Authentication) {
     // Check authentication before changing state
     $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
-        if (toState.data && toState.data.requiresLogin && Authentication.user === '') {
-            event.preventDefault();
-            $state.go('authentication.signin', {}, {
-                notify: false
-            }).then(function() {
-                $rootScope.$broadcast('$stateChangeSuccess', 'authentication.signin', {}, toState, toParams);
-            });
+        if (toState.data && toState.data.forbiddenRoles) {
+            // If access of guest user is forbidden:
+            if (toState.data.forbiddenRoles.indexOf('guest') !== -1 && Authentication.user === '') {
+                event.preventDefault();
+                $state.go('authentication.signin', {}, {
+                    notify: false
+                }).then(function() {
+                    $rootScope.$broadcast('$stateChangeSuccess', 'authentication.signin', {}, toState, toParams);
+                });
+            }
         }
     });
 });
