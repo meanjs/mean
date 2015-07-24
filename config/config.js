@@ -80,6 +80,8 @@ var validateSecureMode = function(config) {
 
     if (!privateKey || !certificate) {
         chalk.red(console.log('+ Error: Certificate file or key file is missing, falling back to non-SSL mode'));
+        chalk.red(console.log('  To create them, simply run the following from your shell: sh ./scripts/generate-ssl-certs.sh'));
+        console.log();
         config.secure = false;
     }
 };
