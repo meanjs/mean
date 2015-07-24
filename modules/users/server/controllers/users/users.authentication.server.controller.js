@@ -136,7 +136,7 @@ exports.saveOAuthUserProfile = function (req, providerUserProfile, done) {
   var providerSearchQuery = {};
   providerSearchQuery[searchProviderIdentifierField] = providerUserProfile.providerData[providerUserProfile.providerIdentifierField];
 
-  User.findOne(providerSearchQuery, function(err, user) {
+  User.findOne(providerSearchQuery, function (err, user) {
     if (err) {
       return done(err);
     }
@@ -164,15 +164,15 @@ exports.saveOAuthUserProfile = function (req, providerUserProfile, done) {
         return done(err, user, '/settings/accounts');
       });
     } else if (!user) {
-      var possibleUsername = providerUserProfile.username || ((providerUserProfile.email) ? providerUserProfile.email.split('@')[0] : '');
+      var possibleUsername = providerUserProfile.username || ((providerUserProfile.emails && providerUserProfile.emails[0]) ? providerUserProfile.emails[0].address.split('@')[0] : '');
 
-      User.findUniqueUsername(possibleUsername, null, function(availableUsername) {
+      User.findUniqueUsername(possibleUsername, null, function (availableUsername) {
         user = new User({
           firstName: providerUserProfile.firstName,
           lastName: providerUserProfile.lastName,
           username: availableUsername,
           displayName: providerUserProfile.displayName,
-          email: providerUserProfile.email,
+          emails: providerUserProfile.emails,
           profileImageURL: providerUserProfile.profileImageURL,
           providers: {}
         });
@@ -180,7 +180,7 @@ exports.saveOAuthUserProfile = function (req, providerUserProfile, done) {
         user.providers[providerUserProfile.provider] = providerUserProfile.providerData;
 
         // And save the user
-        user.save(function(err) {
+        user.save(function (err) {
           return done(err, user);
         });
       });
@@ -203,6 +203,8 @@ exports.removeOAuthProvider = function (req, res, next) {
     });
   } else if (!provider) {
     return res.status(400).send();
+  } else if (!user.providers || !user.providers[provider]) {
+    return res.json(user);
   }
 
   // Delete the provider

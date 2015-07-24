@@ -5,28 +5,23 @@
       <fieldset>
         <div class="form-group">
           <label for="firstName">First Name</label>
-          <input type="text" required id="firstName" name="firstName" class="form-control"
-               data-ng-model="credentials.firstName" placeholder="First Name">
+          <input type="text" required id="firstName" name="firstName" class="form-control" data-ng-model="credentials.firstName" placeholder="First Name">
         </div>
         <div class="form-group">
           <label for="lastName">Last Name</label>
-          <input type="text" id="lastName" name="lastName" class="form-control"
-               data-ng-model="credentials.lastName" placeholder="Last Name">
+          <input type="text" id="lastName" name="lastName" class="form-control" data-ng-model="credentials.lastName" placeholder="Last Name">
         </div>
         <div class="form-group">
           <label for="email">Email</label>
-          <input type="email" id="email" name="email" class="form-control" data-ng-model="credentials.email"
-               placeholder="Email">
+          <input type="email" id="email" name="email" class="form-control" data-ng-model="credentials.emails[0].address" placeholder="Email">
         </div>
         <div class="form-group">
           <label for="username">Username</label>
-          <input type="text" id="username" name="username" class="form-control"
-               data-ng-model="credentials.username" placeholder="Username">
+          <input type="text" id="username" name="username" class="form-control" data-ng-model="credentials.username" placeholder="Username">
         </div>
         <div class="form-group">
           <label for="password">Password</label>
-          <input type="password" id="password" name="password" class="form-control"
-               data-ng-model="credentials.password" placeholder="Password">
+          <input type="password" id="password" name="password" class="form-control" data-ng-model="credentials.password" placeholder="Password">
         </div>
         <div class="text-center form-group">
           <button type="submit" class="btn btn-large btn-primary">Sign up</button>
