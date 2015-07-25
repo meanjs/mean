@@ -1,18 +1,15 @@
 .chat-message {
-	margin-top: 10px;
-	padding-top: 10px;
+  margin-top: 10px;
+  padding-top: 10px;
 }
-
 .chat-message:not(:first-child) {
-	border-top: 1px solid  #e7e7e7;
+  border-top: 1px solid #e7e7e7;
 }
-
 .chat-message-details {
-	margin-left: 10px;
+  margin-left: 10px;
 }
-
 .chat-profile-image {
-	height: 28px;
-	width: 28px;
-	border-radius: 50%;
+  height: 28px;
+  width: 28px;
+  border-radius: 50%;
 }
