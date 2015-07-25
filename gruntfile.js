@@ -200,7 +200,15 @@ module.exports = function (grunt) {
 	            	return !fs.existsSync('config/env/local.js');
 	            }
 	        }
-		}
+		},
+		purifycss: {
+      options: {},
+      target: {
+        src: _.extend(defaultAssets.client.views, defaultAssets.client.js),
+        css: ['public/dist/application.min.css'],
+        dest: 'public/dist/application.min.css'
+      },
+    }
 	});
 
 	// Load NPM tasks 
@@ -228,6 +236,7 @@ module.exports = function (grunt) {
 
 	// Lint project files and minify them into two production files.
 	grunt.registerTask('build', ['env:dev', 'lint', 'ngAnnotate', 'uglify', 'cssmin']);
+	grunt.registerTask('build:pure', ['build', 'purifycss']);
 
 	// Run the project tests
 	grunt.registerTask('test', ['env:test', 'lint', 'copy:localConfig', 'mongoose', 'mochaTest', 'karma:unit']);
@@ -242,4 +251,5 @@ module.exports = function (grunt) {
 
 	// Run the project in production mode
 	grunt.registerTask('prod', ['build', 'env:prod', 'copy:localConfig', 'concurrent:default']);
+	grunt.registerTask('prod:pure', ['build:pure', 'env:prod', 'copy:localConfig', 'concurrent:default']);
 };
