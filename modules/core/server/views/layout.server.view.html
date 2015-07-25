@@ -1,24 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-	<title>{{title}}</title>
-
-	<!-- General META -->
 	<meta charset="utf-8">
-	<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<meta name="fragment" content="!">
-	<base href="/">
-
-	<!-- Responsive META -->
 	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+	<base href="/">
+	<title>{{title}}</title>
+	<meta name="description" content="{{description}}">
+	<meta name="fragment" content="!">
+
+	<!-- Apple META -->
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black">
-
-	<!-- Semantic META -->
-	<meta name="keywords" content="{{keywords}}">
-	<meta name="description" content="{{description}}">
 
 	<!-- Facebook META -->
 	<meta property="fb:app_id" content="{{facebookAppId}}">
@@ -38,13 +31,8 @@
 	<!-- Fav Icon -->
 	<link href="/modules/core/img/brand/favicon.ico" rel="shortcut icon" type="image/x-icon">
 
-	<!--Application CSS Files-->
+	<!-- Application CSS Files -->
 	{% for cssFile in cssFiles %}<link rel="stylesheet" href="{{cssFile}}">{% endfor %}
-
-	<!-- HTML5 Shim -->
-	<!--[if lt IE 9]>
-		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-	<![endif]-->
 </head>
 
 <body class="ng-cloak">
@@ -59,12 +47,12 @@
 	<script type="text/javascript">
 		var user = {{ user | json | safe }};
 	</script>
-	
+
 	<!--Load The Socket.io File-->
 	<script type="text/javascript" src="/socket.io/socket.io.js"></script>
 
 	<!--Application JavaScript Files-->
-	{% for jsFile in jsFiles %}<script type="text/javascript" src="{{jsFile}}"></script>{% endfor %} 
+	{% for jsFile in jsFiles %}<script type="text/javascript" src="{{jsFile}}"></script>{% endfor %}
 
 	{% if process.env.NODE_ENV === 'development' %}
 	<!--Livereload script rendered -->
