@@ -6,6 +6,14 @@ angular.module('chat').controller('ChatController', ['$scope', 'Socket',
     	// Create a messages array
         $scope.messages = [];
         
+        // If user is not signed in then redirect back home
+        if (!Authentication.user) $location.path('/');
+        
+        // Make sure the Socket is connected
+        if (!Socket.socket) {
+            Socket.connect();
+        }
+
         // Add an event listener to the 'chatMessage' event
         Socket.on('chatMessage', function(message) {
             $scope.messages.unshift(message);
