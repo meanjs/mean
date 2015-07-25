@@ -9,15 +9,15 @@ var config = require('../config'),
 	mongoose = require('mongoose');
 
 // Load the mongoose models
-module.exports.loadModels = function() {
+module.exports.loadModels = function () {
 	// Globbing model files
-	config.files.server.models.forEach(function(modelPath) {
+	config.files.server.models.forEach(function (modelPath) {
 		require(path.resolve(modelPath));
 	});
 };
 
 // Initialize Mongoose
-module.exports.connect = function(cb) {
+module.exports.connect = function (cb) {
 	var _this = this;
 
 	var db = mongoose.connect(config.db.uri, config.db.options, function (err) {
@@ -35,9 +35,9 @@ module.exports.connect = function(cb) {
 	});
 };
 
-module.exports.disconnect = function(cb) {
-  mongoose.disconnect(function(err) {
-  	console.info(chalk.yellow('Disconnected from MongoDB.'));
-  	cb(err);
-  });
+module.exports.disconnect = function (cb) {
+	mongoose.disconnect(function (err) {
+		console.info(chalk.yellow('Disconnected from MongoDB.'));
+		cb(err);
+	});
 };

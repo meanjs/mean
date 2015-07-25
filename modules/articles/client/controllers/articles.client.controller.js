@@ -2,11 +2,11 @@
 
 // Articles controller
 angular.module('articles').controller('ArticlesController', ['$scope', '$stateParams', '$location', 'Authentication', 'Articles',
-	function($scope, $stateParams, $location, Authentication, Articles) {
+	function ($scope, $stateParams, $location, Authentication, Articles) {
 		$scope.authentication = Authentication;
 
 		// Create new Article
-		$scope.create = function() {
+		$scope.create = function () {
 			// Create new Article object
 			var article = new Articles({
 				title: this.title,
@@ -14,19 +14,19 @@ angular.module('articles').controller('ArticlesController', ['$scope', '$statePa
 			});
 
 			// Redirect after save
-			article.$save(function(response) {
+			article.$save(function (response) {
 				$location.path('articles/' + response._id);
 
 				// Clear form fields
 				$scope.title = '';
 				$scope.content = '';
-			}, function(errorResponse) {
+			}, function (errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
 		};
 
 		// Remove existing Article
-		$scope.remove = function(article) {
+		$scope.remove = function (article) {
 			if (article) {
 				article.$remove();
 
@@ -36,30 +36,30 @@ angular.module('articles').controller('ArticlesController', ['$scope', '$statePa
 					}
 				}
 			} else {
-				$scope.article.$remove(function() {
+				$scope.article.$remove(function () {
 					$location.path('articles');
 				});
 			}
 		};
 
 		// Update existing Article
-		$scope.update = function() {
+		$scope.update = function () {
 			var article = $scope.article;
 
-			article.$update(function() {
+			article.$update(function () {
 				$location.path('articles/' + article._id);
-			}, function(errorResponse) {
+			}, function (errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
 		};
 
 		// Find a list of Articles
-		$scope.find = function() {
+		$scope.find = function () {
 			$scope.articles = Articles.query();
 		};
 
 		// Find existing Article
-		$scope.findOne = function() {
+		$scope.findOne = function () {
 			$scope.article = Articles.get({
 				articleId: $stateParams.articleId
 			});

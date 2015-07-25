@@ -1,8 +1,8 @@
 'use strict';
 
-(function() {
+(function () {
 	// Authentication controller Spec
-	describe('AuthenticationController', function() {
+	describe('AuthenticationController', function () {
 		// Initialize global variables
 		var AuthenticationController,
 			scope,
@@ -10,11 +10,11 @@
 			$stateParams,
 			$location;
 
-		beforeEach(function() {
+		beforeEach(function () {
 			jasmine.addMatchers({
-				toEqualData: function(util, customEqualityTesters) {
+				toEqualData: function (util, customEqualityTesters) {
 					return {
-						compare: function(actual, expected) {
+						compare: function (actual, expected) {
 							return {
 								pass: angular.equals(actual, expected)
 							};
@@ -30,7 +30,7 @@
 		// The injector ignores leading and trailing underscores here (i.e. _$httpBackend_).
 		// This allows us to inject a service but then attach it to a variable
 		// with the same name as the service.
-		beforeEach(inject(function($controller, $rootScope, _$location_, _$stateParams_, _$httpBackend_) {
+		beforeEach(inject(function ($controller, $rootScope, _$location_, _$stateParams_, _$httpBackend_) {
 			// Set a new global scope
 			scope = $rootScope.$new();
 
@@ -46,7 +46,7 @@
 		}));
 
 
-		it('$scope.signin() should login with a correct user and password', function() {
+		it('$scope.signin() should login with a correct user and password', function () {
 			// Test expected GET request
 			$httpBackend.when('POST', '/api/auth/signin').respond(200, 'Fred');
 
@@ -58,7 +58,7 @@
 			expect($location.url()).toEqual('/');
 		});
 
-		it('$scope.signin() should fail to log in with nothing', function() {
+		it('$scope.signin() should fail to log in with nothing', function () {
 			// Test expected POST request
 			$httpBackend.expectPOST('/api/auth/signin').respond(400, {
 				'message': 'Missing credentials'
@@ -71,7 +71,7 @@
 			expect(scope.error).toEqual('Missing credentials');
 		});
 
-		it('$scope.signin() should fail to log in with wrong credentials', function() {
+		it('$scope.signin() should fail to log in with wrong credentials', function () {
 			// Foo/Bar combo assumed to not exist
 			scope.authentication.user = 'Foo';
 			scope.credentials = 'Bar';
@@ -88,7 +88,7 @@
 			expect(scope.error).toEqual('Unknown user');
 		});
 
-		it('$scope.signup() should register with correct data', function() {
+		it('$scope.signup() should register with correct data', function () {
 			// Test expected GET request
 			scope.authentication.user = 'Fred';
 			$httpBackend.when('POST', '/api/auth/signup').respond(200, 'Fred');
@@ -102,7 +102,7 @@
 			expect($location.url()).toBe('/');
 		});
 
-		it('$scope.signup() should fail to register with duplicate Username', function() {
+		it('$scope.signup() should fail to register with duplicate Username', function () {
 			// Test expected POST request
 			$httpBackend.when('POST', '/api/auth/signup').respond(400, {
 				'message': 'Username already exists'

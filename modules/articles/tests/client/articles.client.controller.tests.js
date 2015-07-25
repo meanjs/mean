@@ -1,8 +1,8 @@
 'use strict';
 
-(function() {
+(function () {
 	// Articles Controller Spec
-	describe('Articles Controller Tests', function() {
+	describe('Articles Controller Tests', function () {
 		// Initialize global variables
 		var ArticlesController,
 			scope,
@@ -15,11 +15,11 @@
 		// the responses exactly. To solve the problem, we define a new toEqualData Jasmine matcher.
 		// When the toEqualData matcher compares two objects, it takes only object properties into
 		// account and ignores methods.
-		beforeEach(function() {
+		beforeEach(function () {
 			jasmine.addMatchers({
-				toEqualData: function(util, customEqualityTesters) {
+				toEqualData: function (util, customEqualityTesters) {
 					return {
-						compare: function(actual, expected) {
+						compare: function (actual, expected) {
 							return {
 								pass: angular.equals(actual, expected)
 							};
@@ -35,7 +35,7 @@
 		// The injector ignores leading and trailing underscores here (i.e. _$httpBackend_).
 		// This allows us to inject a service but then attach it to a variable
 		// with the same name as the service.
-		beforeEach(inject(function($controller, $rootScope, _$location_, _$stateParams_, _$httpBackend_) {
+		beforeEach(inject(function ($controller, $rootScope, _$location_, _$stateParams_, _$httpBackend_) {
 			// Set a new global scope
 			scope = $rootScope.$new();
 
@@ -50,7 +50,7 @@
 			});
 		}));
 
-		it('$scope.find() should create an array with at least one article object fetched from XHR', inject(function(Articles) {
+		it('$scope.find() should create an array with at least one article object fetched from XHR', inject(function (Articles) {
 			// Create sample article using the Articles service
 			var sampleArticle = new Articles({
 				title: 'An Article about MEAN',
@@ -71,7 +71,7 @@
 			expect(scope.articles).toEqualData(sampleArticles);
 		}));
 
-		it('$scope.findOne() should create an array with one article object fetched from XHR using a articleId URL parameter', inject(function(Articles) {
+		it('$scope.findOne() should create an array with one article object fetched from XHR using a articleId URL parameter', inject(function (Articles) {
 			// Define a sample article object
 			var sampleArticle = new Articles({
 				title: 'An Article about MEAN',
@@ -92,7 +92,7 @@
 			expect(scope.article).toEqualData(sampleArticle);
 		}));
 
-		it('$scope.create() with valid form data should send a POST request with the form input values and then locate to new object URL', inject(function(Articles) {
+		it('$scope.create() with valid form data should send a POST request with the form input values and then locate to new object URL', inject(function (Articles) {
 			// Create a sample article object
 			var sampleArticlePostData = new Articles({
 				title: 'An Article about MEAN',
@@ -125,7 +125,7 @@
 			expect($location.path()).toBe('/articles/' + sampleArticleResponse._id);
 		}));
 
-		it('$scope.update() should update a valid article', inject(function(Articles) {
+		it('$scope.update() should update a valid article', inject(function (Articles) {
 			// Define a sample article put data
 			var sampleArticlePutData = new Articles({
 				_id: '525cf20451979dea2c000001',
@@ -147,7 +147,7 @@
 			expect($location.path()).toBe('/articles/' + sampleArticlePutData._id);
 		}));
 
-		it('$scope.remove() should send a DELETE request with a valid articleId and remove the article from the scope', inject(function(Articles) {
+		it('$scope.remove() should send a DELETE request with a valid articleId and remove the article from the scope', inject(function (Articles) {
 			// Create new article object
 			var sampleArticle = new Articles({
 				_id: '525a8422f6d0f87f0e407a33'
