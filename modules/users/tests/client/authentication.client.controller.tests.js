@@ -39,6 +39,9 @@
 			$httpBackend = _$httpBackend_;
 			$location = _$location_;
 
+			// Ignoring GET requests for template files
+			$httpBackend.whenGET(/.*\.html/).respond();
+
 			// Initialize the Authentication controller
 			AuthenticationController = $controller('AuthenticationController', {
 				$scope: scope
