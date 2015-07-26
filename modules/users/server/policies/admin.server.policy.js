@@ -9,7 +9,7 @@ var acl = require('acl');
 acl = new acl(new acl.memoryBackend());
 
 /**
- * Invoke Articles Permissions
+ * Invoke Admin Permissions
  */
 exports.invokeRolesPolicies = function () {
 	acl.allow([{
