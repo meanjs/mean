@@ -11,6 +11,9 @@ module.exports = function(app) {
 	app.route('/api/users/password').post(users.changePassword);
 	app.route('/api/users/picture').post(users.changeProfilePicture);
 
+	// up/down voting on Articles
+	app.route('/api/users/vote/:direction/:articleId').put(users.requiresLogin, users.vote);
+
 	// Finish by binding the user middleware
 	app.param('userId', users.userByID);
 };

@@ -94,6 +94,17 @@ var UserSchema = new Schema({
 		type: Date,
 		default: Date.now
 	},
+	votes: [{
+		_id: {
+			type: Schema.ObjectId,
+			ref: 'Article',
+			index: true
+		},
+		direction: {
+			type: String,
+			enum: ['up', 'down', 'none']
+		}
+	}],
 	/* For reset password */
 	resetPasswordToken: {
 		type: String
