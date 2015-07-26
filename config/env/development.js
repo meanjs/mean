@@ -6,7 +6,9 @@ module.exports = {
 		options: {
 			user: '',
 			pass: ''
-		}
+		},
+		// Enable mongoose debug mode
+		debug: process.env.MONGODB_DEBUG || false
 	},
 	log: {
 		// Can specify one of 'combined', 'common', 'dev', 'short', 'tiny'
