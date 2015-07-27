@@ -34,7 +34,12 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$stat
       });
     };
 
-    $scope.signin = function () {
+    $scope.signin = function (isValid) {
+      if (!isValid) {
+        $scope.$broadcast('show-errors-check-validity');
+        return false;
+      }
+
       $http.post('/api/auth/signin', $scope.credentials).success(function (response) {
         // If successful we assign the response to the global user model
         $scope.authentication.user = response;
