@@ -204,52 +204,6 @@ After `cf push` completes you will see the URL to your running MEANJS applicatio
 
 Open your browser and go to that URL and your should see your MEANJS app running!
 
-### Configuring Social Services
-
-The MEANJS application allows you to login via a number of social services.  In other
-deployments of MEANJS you need to configure environment variables with the various
-keys and secrets to enable these social services.  While this is possible in Cloud
-Foundry, it is not the preferred method.  Credentials like this are usually surfaced
-through services an application can bind to.  For this reason, when you deploy
-MEANJS to Cloud Foundry you must configure and bind services to your application
-in order to login with the various social services.  To do this we will use
-what is called 
-[user provided services](http://docs.cloudfoundry.org/devguide/services/user-provided.html).
-
-Once your application is deployed to Cloud Foundry run the following command for the social
-services you would like to use.  Make sure you insert the correct credentials for the service.
-
-#### Facebook
-`$ cf cups mean-facebook -p '{"id":"facebookId","secret":"facebookSecret"}'`
-`$ cf bind-service mean mean-facebook`
-
-#### Twitter
-`$ cf cups mean-twitter -p '{"key":"twitterKey","secret":"twitterSecret"}'`
-`$ cf bind-service mean mean-twitter`
-
-#### Google
-`$ cf cups mean-google -p '{"id":"googleId","secret":"googleSecret"}'`
-`$ cf bind-service mean mean-google`
-
-#### LinkedIn
-`$ cf cups mean-linkedin -p '{"id":"linkedinId","secret":"linkedinSecret"}'`
-`$ cf bind-service mean mean-linkedin`
-
-#### GitHub
-`$ cf cups mean-github -p '{"id":"githubId","secret":"githubSecret"}'`
-`$ cf bind-service mean mean-github`
-
-#### Email
-`$ cf cups mean-mail -p '{"from":"fromEmail","service":"emailService","username":"emailServiceUsername","password":"emailServicePassword"}'`
-`$ cf bind-service mean mean-mail`
-
-#### Paypal
-`$ cf cups mean-paypal -p '{"id":"paypalId","secret":"paypalSecret"}'`
-`$ cf bind-service mean mean-paypal`
-
-After you have bound the services your want to your MEANJS application run
-`$ cf restage mean` to restage your application and your social services should now work.
-
 ## Credits
 Inspired by the great work of [Madhusudhan Srinivasa](https://github.com/madhums/)
 The MEAN name was coined by [Valeri Karpov](http://blog.mongodb.org/post/49262866911/the-mean-stack-mongodb-expressjs-angularjs-and)
