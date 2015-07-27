@@ -10,7 +10,7 @@ var should = require('should'),
 /**
  * Globals
  */
-var user, user2;
+var user, user2, user3;
 
 /**
  * Unit tests
@@ -33,6 +33,15 @@ describe('User Model Unit Tests:', function() {
 			email: 'test@test.com',
 			username: 'username',
 			password: 'password',
+			provider: 'local'
+		});
+		user3 = new User({
+			firstName: 'Different',
+			lastName: 'User',
+			displayName: 'Full Different Name',
+			email: 'test3@test.com',
+			username: 'different_username',
+			password: 'different_password',
 			provider: 'local'
 		});
 
@@ -77,6 +86,37 @@ describe('User Model Unit Tests:', function() {
 				done();
 			});
 		});
+
+		it('should be able to save 2 different users', function(done) {
+			user.remove(function(err) {
+				should.not.exist(err);
+				user.save(function(err) {
+					user3.save(function(err) {
+						should.not.exist(err);
+						user3.remove(function(err) {
+							should.not.exist(err);
+							done();
+						});
+						
+					});	
+				});
+			});
+		});
+
+		it('should not be able to save different user with the same email address', function(done) {
+			user.remove(function(err) {
+				should.not.exist(err);
+				user.save(function(err) {
+					user3.email = user.email;
+					user3.save(function(err) {
+						should.exist(err);
+						done();
+					});	
+				});
+			});
+
+		});
+
 	});
 
 	after(function(done) {

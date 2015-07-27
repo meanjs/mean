@@ -23,6 +23,20 @@ modules/users/client/img/profile/uploads
 config/env/local.js
 *.pem
 
+# General
+# =======
+*.log
+*.csv
+*.dat
+*.out
+*.pid
+*.gz
+*.tmp
+*.bak
+*.swp
+logs/
+build/
+
 # Sublime editor
 # ==============
 .sublime-project
@@ -48,16 +62,10 @@ local.properties
 data/
 mongod
 
-# General
-# =======
-*.log
-*.csv
-*.dat
-*.out
-*.pid
-*.gz
-*.tmp
-*.bak
-*.swp
-logs/
-build/
+# Visual Studio
+# =========
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
