@@ -3,12 +3,15 @@
 // Create the Socket.io wrapper service
 angular.module('core').service('Socket', ['Authentication', '$state', '$timeout',
     function(Authentication, $state, $timeout) {
-    	// Connect to the Socket.io server only when authenticated
-        if (Authentication.user) {
-            this.socket = io();
-        } else {
-            $state.go('home');
-        }
+        
+        // Connect to Socket.io server
+        this.connect = function () {
+            // Connect only when authenticated
+            if (Authentication.user) {
+                this.socket = io();
+            }
+        };
+        this.connect();
 
         // Wrap the Socket.io 'on' method
         this.on = function(eventName, callback) {

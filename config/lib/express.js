@@ -15,7 +15,6 @@ var config = require('../config'),
 	methodOverride = require('method-override'),
 	cookieParser = require('cookie-parser'),
 	helmet = require('helmet'),
-	passport = require('passport'),
 	flash = require('connect-flash'),
 	consolidate = require('consolidate'),
 	path = require('path');
@@ -33,6 +32,9 @@ module.exports.initLocalVariables = function (app) {
 	app.locals.facebookAppId = config.facebook.clientID;
 	app.locals.jsFiles = config.files.client.js;
 	app.locals.cssFiles = config.files.client.css;
+	app.locals.livereload = config.livereload;
+	app.locals.logo = config.logo;
+	app.locals.favicon = config.favicon;
 
 	// Passing the request url to environment locals
 	app.use(function (req, res, next) {
