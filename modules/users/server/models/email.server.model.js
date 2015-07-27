@@ -15,7 +15,7 @@ var EmailSchema = new Schema({
 	address: {
 		type: String,
 		trim: true,
-		required: true,
+		required: 'Email address is required.',
 		unique: true,
 		validate: [validator.isEmail, 'Please provide a valid email address']
 	},

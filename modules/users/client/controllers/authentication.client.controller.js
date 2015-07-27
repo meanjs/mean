@@ -4,7 +4,9 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$stat
   function ($scope, $state, $http, $location, $window, Authentication) {
     $scope.authentication = Authentication;
     $scope.credentials = {
-      emails: []
+      emails: [{
+        isPrimary: true
+      }]
     };
 
     // Get an eventual error defined in the URL query string:
@@ -15,7 +17,12 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$stat
       $location.path('/');
     }
 
-    $scope.signup = function () {
+    $scope.signup = function (isValid) {
+      if (!isValid) {
+        $scope.$broadcast('show-errors-check-validity');
+        return false;
+      }
+
       $http.post('/api/auth/signup', $scope.credentials).success(function (response) {
         // If successful we assign the response to the global user model
         $scope.authentication.user = response;
