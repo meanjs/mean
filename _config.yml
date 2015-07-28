@@ -9,3 +9,6 @@ github_username:  meanjs
 
 # Build settings
 markdown: kramdown
+
+excludes: 
+  - node_modules
