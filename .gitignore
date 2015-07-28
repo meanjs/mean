@@ -1,16 +1,14 @@
-# iOS / Apple
+# OS
 # ===========
 .DS_Store
 ehthumbs.db
 Icon?
 Thumbs.db
-config/env/local.js
 
 # Node and related ecosystem
 # ==========================
 .nodemonignore
 .sass-cache/
-npm-debug.log
 node_modules/
 public/lib/
 app/tests/coverage/
@@ -19,9 +17,25 @@ app/tests/coverage/
 
 # MEAN.js app and assets
 # ======================
-config/sslcerts/*.pem
-access.log
 public/dist/
+uploads
+modules/users/client/img/profile/uploads
+config/env/local.js
+*.pem
+
+# General
+# =======
+*.log
+*.csv
+*.dat
+*.out
+*.pid
+*.gz
+*.tmp
+*.bak
+*.swp
+logs/
+build/
 
 # Sublime editor
 # ==============
@@ -48,16 +62,10 @@ local.properties
 data/
 mongod
 
-# General
-# =======
-*.log
-*.csv
-*.dat
-*.out
-*.pid
-*.gz
-*.tmp
-*.bak
-*.swp
-logs/
-build/
+# Visual Studio
+# =========
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
