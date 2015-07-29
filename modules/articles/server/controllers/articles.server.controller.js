@@ -100,7 +100,7 @@ exports.articleByID = function(req, res, next, id) {
 		if (err) return next(err);
 		if (!article) {
 			return res.status(404).send({
-				message: errorHandler.getErrorMessage(err)
+				message: 'No article with that identifier has been found'
 			});
 		}
 		req.article = article;
