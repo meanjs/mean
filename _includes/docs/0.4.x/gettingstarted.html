@@ -1,0 +1,94 @@
+<div class="inner-link-anchor" id="getting-started"></div>
+<section class="page-header">
+  <h1>Getting Started</h1>
+</section>
+<section>
+  <p>
+    In this section you'll learn how to get started with a MEAN.JS application, install all the prerequisites, and initialize your application.
+  </p>
+  <h2>Prerequisites</h2>
+  <p>
+    Before you begin, you should make sure you have installed all these prerequisites on your development machine.
+  </p>
+  <br>
+  <dl class="dl-horizontal">
+    <dt>Node.js &amp; npm</dt>
+    <dd>
+      <a target="_blank" href="http://www.nodejs.org/download">Download &amp; Install</a> Node.js and the npm package manager, if you encounter any problems, you can also use this <a target="_blank" href="https://gist.github.com/isaacs/579814">Github Gist</a> to install Node.js.
+    </dd>
+    <dt>MongoDB</dt>
+    <dd>
+      <a target="_blank" href="http://www.mongodb.org/downloads">Download &amp; Install</a> MongoDB, and make sure it's running on the default port (27017).
+    </dd>
+    <dt>Bower</dt>
+    <dd>
+      You're going to use the <a target="_blank" href="http://bower.io">Bower Package Manager</a> to manage your front-end packages, in order to install it make sure you've installed Node.js and npm, then install bower globally using npm:
+      <pre>$ npm install -g bower</pre>
+    </dd>
+    <dt>Grunt</dt>
+    <dd>
+      You're going to use the <a target="_blank" href="http://gruntjs.com/">Grunt Task Runner</a> to automate your development process, in order to install it make sure you've installed Node.js and npm, then install grunt globally using npm:
+      <pre>$ npm install -g grunt-cli</pre>
+    </dd>
+  </dl>
+  <p class="alert alert-info">
+    <b>Note:</b> Your user might not have the permissions to install package globally, so use a super user or <b>sudo</b>.
+  </p>
+  <h2>Downloading MEAN.JS</h2>
+  <p>
+    There are several ways you can get the MEAN.JS boilerplate:
+  </p>
+  <h3>Yo Generator</h3>
+  <p>The generator is still in development. See the <a href="https://github.com/meanjs/generator-meanjs/tree/0.4-dev">Generator Repo</a> for information on how to use the development version.
+  </p>
+  <p class="alert alert-info">
+    <b>Note:</b> If you want to support
+    <em>git merge</em>updates it would be better to use
+    <em>git clone</em>for your initial project creation, don't worry you'd still be able use the generator.
+  </p>
+  <h3>Cloning The GitHub Repository</h3>
+  <p>
+    You can also use Git to directly clone the MEAN.JS repository and switching to the 0.4.0 branch:
+  </p>
+  <pre>$ git clone https://github.com/meanjs/mean.git meanjs</pre>
+  <pre>$ git checkout 0.4.0</pre>
+  <p>
+    This will clone the latest version of the MEAN.JS repository to a meanjs folder.
+  </p>
+  <h3>Downloading The Repository Zip File</h3>
+  <p>
+    Another way to use the MEAN.JS boilerplate is to download a zip copy from the master branch on github. You can also do this using wget command:
+  </p>
+  <pre>$ wget https://github.com/meanjs/mean/archive/0.4.0.zip -O meanjs.zip; unzip meanjs.zip; rm meanjs.zip</pre>
+  <p>
+    Don't forget to rename mean-0.4.0 after your project name.
+  </p>
+  <h2>Quick Install</h2>
+  <p>
+    Once you've installed all the prerequisites, you're just a few steps away from starting to develop you MEAN application.
+  </p>
+  <p>
+    The first thing you should do is install the Node.js dependencies. The boilerplate comes pre-bundled with a <b>package.json</b> file that contains the list of modules you need to start your application, to learn more about the modules installed visit the <a href="#npm">NPM &amp; Package.json</a> section.
+  </p>
+  <p>
+    To install Node.js dependencies you're going to use npm again, just run this in the command-line:
+    <pre>$ npm install</pre>
+    <br>This command does a few things:
+    <ul>
+      <li>First it will install the dependencies needed for the application to run.</li>
+      <li>If you're running in a development environment, it will then also install development dependencies needed for testing and running your application.</li>
+      <li>Finally, when the install process is over, npm will initiate a
+        <code>bower install</code>command to install all the front-end modules needed for the application.</li>
+    </ul>
+  </p>
+  <h2>Running Your Application</h2>
+  <p>
+    After the install process is over, you'll be able to run your application using Grunt, just run grunt default task:
+    <pre>$ grunt</pre>
+    Your application should run on the 3000 port so in your browser just go to <a target="_blank" href="http://localhost:3000">http://localhost:3000</a>.
+  </p>
+  <p>
+    That's it! your application should be running by now, to proceed with your development check the other sections in this documentation.
+    <br>If you encounter any problem try the <a href="#troubleshooting">Troubleshooting</a> section.
+  </p>
+</section>

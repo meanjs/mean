@@ -1,0 +1,91 @@
+<div class="inner-link-anchor" id="troubleshooting"></div>
+<section class="page-header">
+  <h1>Troubleshooting</h1>
+</section>
+<section>
+  During the installation process you may encounter some problems, so what can you do?
+
+  <h2>Check Node.js and npm Versions</h2>
+  <p>
+    The rapid advancements in JavaScript modules can sometimes cause version issues with the MEAN's dependencies. We try to keep up with the stable versions, and make sure the modules versions are compatible with those versions. We can't control the pre-installed platforms versions, so make sure you didn't install unsupported versions of Node.js and MongoDB.
+  </p>
+  <dl>
+    <dt>MongoDB</dt>
+    <dd>
+      MongoDB version 2.4.x is supported.
+    </dd>
+    <dt>Node.js</dt>
+    <dd>
+      Node version 0.10.x is supported.
+    </dd>
+    <dt>npm</dt>
+    <dd>
+      npm version 1.3.x is supported.
+    </dd>
+  </dl>
+  <h2>Update npm, Bower or Grunt</h2>
+  <p>
+    You may find there is a weird error during install like npm's Error: ENOENT, usually updating those tools to the latest version solves the issue.
+  </p>
+  <dl>
+    <dt>Updating npm (Unix/Linux)</dt>
+    <dd>
+      To update npm just run this command in the command-line:
+      <pre>$ npm update -g npm</pre>
+    </dd>
+                  <dt>Updating npm (Windows)</dt>
+                  <dd>
+                      <p>
+                      There is a known issue with npm 1.x which is installed by default with the latest version of NodeJS. If you experience file locks during the "npm install" step, please refer 
+                      <a href="https://github.com/npm/npm/wiki/Troubleshooting#upgrading-on-windows">here</a>.
+                      </p>
+                  </dd>
+    <dt>Updating Bower</dt>
+    <dd>
+      To update bower just run this command in the command-line:
+      <pre>$ npm update -g bower</pre>
+    </dd>
+    <dt>Updating Grunt</dt>
+    <dd>
+      To update grunt just run this command in the command-line:
+      <pre>$ npm update -g grunt-cli</pre>
+    </dd>
+  </dl>
+  <h2>Cleaning npm and Bower cache</h2>
+  <p>
+    Both npm and Bower uses a caching system that caches the packages you already installed. Often cleaning npm &amp; Bower's cache can solve some of the issues you encounter during the installation process.
+  </p>
+  <dl>
+    <dt>Cleaning npm's cache</dt>
+    <dd>
+      To clean npm's cache just run this command in the command-line:
+      <pre>$ npm cache clean</pre>
+    </dd>
+    <dt>Cleaning Bower's cache</dt>
+    <dd>
+      To clean bower's cache just run this command in the command-line:
+      <pre>$ bower cache clean</pre>
+    </dd>
+  </dl>
+  <h2>Common Issues</h2>
+  <p>
+    There are some common errors while installing mean:
+  </p>
+  <dl>
+    <dt>Node is running but AgnularJS application won't load</dt>
+    <dd>
+      Check to see all your front-end packages were installed.
+      <a target="_blank" href="https://bower.io/">Bower</a> package manager is used to install the front-end package and it will need a <a target="_blank" href="http://bower.io/#configuration">.bowerrc</a> file to install the packages in the right location.
+      <br>Bower should install the packages in the <b>public/lib</b> folder, so if this folder or some of its sub-folders doesn't exist, run:
+      <pre>$ bower update</pre>
+      This will install the missing packages.
+    </dd>
+    <dt>Error: failed to connect to [localhost:27017]</dt>
+    <dd>
+      If you use a local MongoDB check to see if its running. In case you use an external service verify the URI in the <a href="#configuration">configuration files</a>.
+    </dd>
+  </dl>
+  <p class="alert alert-warning">
+    Sometimes it can be a local issue or something that we didn't cover, in case you have any further questions please contact us via the community page.
+  </p>
+</section>
