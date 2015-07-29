@@ -6,7 +6,8 @@
 var _ = require('lodash'),
 	defaultAssets = require('./config/assets/default'),
 	testAssets = require('./config/assets/test'),
-	fs = require('fs');
+	fs = require('fs'),
+	path = require('path');
 
 module.exports = function (grunt) {
 	// Project Configuration
@@ -203,11 +204,21 @@ module.exports = function (grunt) {
 		}
 	});
 
-	// Load NPM tasks 
+	// Load NPM tasks
 	require('load-grunt-tasks')(grunt);
 
 	// Making grunt default to force in order not to break the project.
 	grunt.option('force', true);
+
+	// Make sure upload directory exists
+	grunt.task.registerTask('mkdir:upload', 'Task that makes sure upload directory exists.', function() {
+		// Get the callback
+		var done = this.async();
+
+		grunt.file.mkdir(path.normalize(__dirname + '/modules/users/client/img/profile/uploads'));
+
+		done();
+	});
 
 	// Connect to the MongoDB instance and load the models
 	grunt.task.registerTask('mongoose', 'Task that connects to the MongoDB instance and loads the application models.', function() {
@@ -230,16 +241,16 @@ module.exports = function (grunt) {
 	grunt.registerTask('build', ['env:dev', 'lint', 'ngAnnotate', 'uglify', 'cssmin']);
 
 	// Run the project tests
-	grunt.registerTask('test', ['env:test', 'lint', 'copy:localConfig', 'mongoose', 'mochaTest', 'karma:unit']);
+	grunt.registerTask('test', ['env:test', 'lint', 'mkdir:upload', 'copy:localConfig', 'mongoose', 'mochaTest', 'karma:unit']);
 	grunt.registerTask('test:server', ['env:test', 'lint', 'mongoose', 'mochaTest']);
 	grunt.registerTask('test:client', ['env:test', 'lint', 'mongoose', 'karma:unit']);
 
 	// Run the project in development mode
-	grunt.registerTask('default', ['env:dev', 'lint', 'copy:localConfig', 'concurrent:default']);
+	grunt.registerTask('default', ['env:dev', 'lint', 'mkdir:upload', 'copy:localConfig', 'concurrent:default']);
 
 	// Run the project in debug mode
-	grunt.registerTask('debug', ['env:dev', 'lint', 'copy:localConfig', 'concurrent:debug']);
+	grunt.registerTask('debug', ['env:dev', 'lint', 'mkdir:upload', 'copy:localConfig', 'concurrent:debug']);
 
 	// Run the project in production mode
-	grunt.registerTask('prod', ['build', 'env:prod', 'copy:localConfig', 'concurrent:default']);
+	grunt.registerTask('prod', ['build', 'env:prod', 'mkdir:upload', 'copy:localConfig', 'concurrent:default']);
 };
