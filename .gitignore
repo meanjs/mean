@@ -14,6 +14,7 @@ public/lib/
 app/tests/coverage/
 .bower-*/
 .idea/
+coverage/
 
 # MEAN.js app and assets
 # ======================
@@ -68,4 +69,3 @@ mongod
 *.ntvs*
 *.njsproj
 *.sln
-
