@@ -74,6 +74,12 @@ exports.list = function (req, res) {
  * User middleware
  */
 exports.userByID = function (req, res, next, id) {
+	if (!mongoose.Types.ObjectId.isValid(id)) {
+		return res.status(400).send({
+			message: 'User is invalid'
+		});
+	}
+
 	User.findById(id, '-salt -password').exec(function (err, user) {
 		if (err) return next(err);
 		if (!user) return next(new Error('Failed to load user ' + id));
