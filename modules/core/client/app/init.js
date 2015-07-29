@@ -32,6 +32,14 @@ angular.module(ApplicationConfiguration.applicationModuleName).run(function($roo
             }
         }
     });
+    // Record previous state
+    $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
+        $state.previous = {
+            state: fromState,
+            params: fromParams,
+            href: $state.href(fromState, fromParams)
+        };
+    });
 });
 
 //Then define the init function for starting up the application
