@@ -234,6 +234,20 @@ module.exports = function (grunt) {
 		});
 	});
 
+	grunt.task.registerTask('server', 'Starting the server', function() {
+		// Get the callback
+		var done = this.async();
+
+		var path = require('path');
+		var app = require(path.resolve('./config/lib/app'));
+		var server = app.start(function() {
+			done();
+		});
+
+	});
+
+
+
 	// Lint CSS and JavaScript files.
 	grunt.registerTask('lint', ['sass', 'less', 'jshint', 'csslint']);
 
@@ -241,10 +255,9 @@ module.exports = function (grunt) {
 	grunt.registerTask('build', ['env:dev', 'lint', 'ngAnnotate', 'uglify', 'cssmin']);
 
 	// Run the project tests
-	grunt.registerTask('test', ['env:test', 'lint', 'mkdir:upload', 'copy:localConfig', 'mongoose', 'mochaTest', 'karma:unit']);
-	grunt.registerTask('test:server', ['env:test', 'lint', 'mongoose', 'mochaTest']);
-	grunt.registerTask('test:client', ['env:test', 'lint', 'mongoose', 'karma:unit']);
-
+	grunt.registerTask('test', ['env:test', 'lint', 'mkdir:upload', 'copy:localConfig', 'server', 'mochaTest', 'karma:unit']);
+	grunt.registerTask('test:server', ['env:test', 'lint', 'server', 'mochaTest']);
+	grunt.registerTask('test:client', ['env:test', 'lint', 'server', 'karma:unit']);
 	// Run the project in development mode
 	grunt.registerTask('default', ['env:dev', 'lint', 'mkdir:upload', 'copy:localConfig', 'concurrent:default']);
 
