@@ -30,9 +30,6 @@ module.exports.connect = function(cb) {
 			// Enabling mongoose debug mode if required
 			mongoose.set('debug', config.db.debug);
 
-			// Load modules
-			_this.loadModels();
-
 			// Call callback FN
 			if (cb) cb(db);
 		}
