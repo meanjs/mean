@@ -7,8 +7,8 @@ Master Branch:
 [![Dependencies Status](https://david-dm.org/meanjs/mean.svg)](https://david-dm.org/meanjs/mean)
 
 Dev Branch:
-[![Build Status](https://travis-ci.org/meanjs/mean.svg?branch=0.4.0)](https://travis-ci.org/meanjs/mean)
-[![Dependencies Status](https://david-dm.org/meanjs/mean/0.4.0.svg)](https://david-dm.org/meanjs/mean/0.4.0)
+[![Build Status](https://travis-ci.org/meanjs/mean.svg?branch=0.4.1)](https://travis-ci.org/meanjs/mean)
+[![Dependencies Status](https://david-dm.org/meanjs/mean/0.4.1.svg)](https://david-dm.org/meanjs/mean/0.4.1)
 
 MEAN.JS is a full-stack JavaScript open-source solution, which provides a solid starting point for [MongoDB](http://www.mongodb.org/), [Node.js](http://www.nodejs.org/), [Express](http://expressjs.com/), and [AngularJS](http://angularjs.org/) based applications. The idea is to solve the common issues with connecting those frameworks, build a robust framework to support daily development needs, and help developers use better practices while working with popular JavaScript components.
 
