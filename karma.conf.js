@@ -8,7 +8,7 @@ var _ = require('lodash'),
   testAssets = require('./config/assets/test');
 
 // Karma configuration
-module.exports = function(karmaConfig) {
+module.exports = function (karmaConfig) {
   karmaConfig.set({
     // Frameworks to use
     frameworks: ['jasmine'],
@@ -20,7 +20,7 @@ module.exports = function(karmaConfig) {
     ngHtml2JsPreprocessor: {
       moduleName: 'mean',
 
-      cacheIdFromPath: function(filepath) {
+      cacheIdFromPath: function (filepath) {
         return filepath.replace('/client', '');
       },
     },

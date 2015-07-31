@@ -3,8 +3,8 @@
 /**
  * Chat client controller tests
  */
-(function() {
-  describe('ChatController', function() {
+(function () {
+  describe('ChatController', function () {
     //Initialize global variables
     var scope,
       Socket,
@@ -16,7 +16,7 @@
     // Load the main application module
     beforeEach(module(ApplicationConfiguration.applicationModuleName));
 
-    beforeEach(inject(function($controller, $rootScope, _Socket_, _Authentication_, _$timeout_, _$location_) {
+    beforeEach(inject(function ($controller, $rootScope, _Socket_, _Authentication_, _$timeout_, _$location_) {
       scope = $rootScope.$new();
       Socket = _Socket_;
       $timeout = _$timeout_;
@@ -24,8 +24,8 @@
       Authentication = _Authentication_;
     }));
 
-    describe('when user logged out', function() {
-      beforeEach(inject(function($controller, $rootScope, _Socket_, _Authentication_, _$timeout_, _$location_) {
+    describe('when user logged out', function () {
+      beforeEach(inject(function ($controller, $rootScope, _Socket_, _Authentication_, _$timeout_, _$location_) {
         Authentication.user = undefined;
         spyOn($location, 'path');
         ChatController = $controller('ChatController', {
@@ -33,13 +33,13 @@
         });
       }));
 
-      it('should redirect logged out user to /', function() {
+      it('should redirect logged out user to /', function () {
         expect($location.path).toHaveBeenCalledWith('/');
       });
     });
 
-    describe('when user logged in', function() {
-      beforeEach(inject(function($controller, $rootScope, _Socket_, _Authentication_, _$timeout_, _$location_) {
+    describe('when user logged in', function () {
+      beforeEach(inject(function ($controller, $rootScope, _Socket_, _Authentication_, _$timeout_, _$location_) {
         Authentication.user = {
           name: 'user',
           roles: ['user']
@@ -50,42 +50,42 @@
         });
       }));
 
-      it('should make sure socket is connected', function() {
+      it('should make sure socket is connected', function () {
         expect(Socket.socket).toBeTruthy();
       });
 
-      it('should define messages array', function() {
+      it('should define messages array', function () {
         expect(scope.messages).toBeDefined();
         expect(scope.messages.length).toBe(0);
       });
 
-      describe('sendMessage', function() {
+      describe('sendMessage', function () {
         var text = 'hello world!';
-        beforeEach(function() {
+        beforeEach(function () {
           scope.messageText = text;
           scope.sendMessage();
           $timeout.flush();
         });
 
-        it('should add message to messages', function() {
+        it('should add message to messages', function () {
           expect(scope.messages.length).toBe(1);
         });
 
-        it('should add message with proper text attribute set', function() {
+        it('should add message with proper text attribute set', function () {
           expect(scope.messages[0].text).toBe(text);
         });
 
-        it('should clear messageText', function() {
+        it('should clear messageText', function () {
           expect(scope.messageText).toBe('');
         });
       });
 
-      describe('$destroy()', function() {
-        beforeEach(function() {
+      describe('$destroy()', function () {
+        beforeEach(function () {
           scope.$destroy();
         });
 
-        it('should remove chatMessage listener', function() {
+        it('should remove chatMessage listener', function () {
           expect(Socket.socket.cbs.chatMessage).toBeUndefined();
         });
       });

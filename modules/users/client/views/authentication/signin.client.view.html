@@ -1,30 +1,30 @@
 <div data-ng-controller="AuthenticationController">
-	<h3 class="col-md-12 text-center">Or with your account</h3>
-	<div class="col-xs-offset-2 col-xs-8 col-md-offset-5 col-md-2">
-		<form data-ng-submit="signin()" class="signin form-horizontal" autocomplete="off">
-			<fieldset>
-				<div class="form-group">
-					<label for="username">Username</label>
-					<input type="text" id="username" name="username" class="form-control"
-						   data-ng-model="credentials.username" placeholder="Username">
-				</div>
-				<div class="form-group">
-					<label for="password">Password</label>
-					<input type="password" id="password" name="password" class="form-control"
-						   data-ng-model="credentials.password" placeholder="Password">
-				</div>
-				<div class="text-center form-group">
-					<button type="submit" class="btn btn-primary">Sign in</button>
-					&nbsp; or&nbsp;
-					<a data-ui-sref="authentication.signup">Sign up</a>
-				</div>
-				<div class="text-center forgot-password">
-					<a data-ui-sref="password.forgot">Forgot your password?</a>
-				</div>
-				<alert type="danger" data-ng-show="error" class="text-center text-danger">
-					<span data-ng-bind="error"></span>
-				</alert>
-			</fieldset>
-		</form>
-	</div>
+  <h3 class="col-md-12 text-center">Or with your account</h3>
+  <div class="col-xs-offset-2 col-xs-8 col-md-offset-5 col-md-2">
+    <form data-ng-submit="signin()" class="signin form-horizontal" autocomplete="off">
+      <fieldset>
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text" id="username" name="username" class="form-control"
+               data-ng-model="credentials.username" placeholder="Username">
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" class="form-control"
+               data-ng-model="credentials.password" placeholder="Password">
+        </div>
+        <div class="text-center form-group">
+          <button type="submit" class="btn btn-primary">Sign in</button>
+          &nbsp; or&nbsp;
+          <a data-ui-sref="authentication.signup">Sign up</a>
+        </div>
+        <div class="text-center forgot-password">
+          <a data-ui-sref="password.forgot">Forgot your password?</a>
+        </div>
+        <alert type="danger" data-ng-show="error" class="text-center text-danger">
+          <span data-ng-bind="error"></span>
+        </alert>
+      </fieldset>
+    </form>
+  </div>
 </div>
