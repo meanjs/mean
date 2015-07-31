@@ -16,6 +16,10 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
 			state('not-found', {
 				url: '/not-found',
 				templateUrl: 'modules/core/views/404.client.view.html'
+			}).
+			state('unauthorized', {
+				url: '/unauthorized',
+				templateUrl: 'modules/core/views/401.client.view.html'
 			});
 	}
 ]);
