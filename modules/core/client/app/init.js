@@ -50,6 +50,6 @@ angular.element(document).ready(function () {
     window.location.hash = '#!';
   }
 
-  //Then init the app
-  angular.bootstrap(document, [ApplicationConfiguration.applicationModuleName]);
+	//Then init the app
+	angular.bootstrap(document, [ApplicationConfiguration.applicationModuleName]);
 });
