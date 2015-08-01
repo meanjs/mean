@@ -7,17 +7,17 @@
 /* For example:
 
 module.exports = {
-	db: {
-		uri: 'mongodb://localhost/local-dev',
-		options: {
-			user: '',
-			pass: ''
-		}
-	},
-	facebook: {
-		clientID: process.env.FACEBOOK_ID || 'APP_ID',
-		clientSecret: process.env.FACEBOOK_SECRET || 'APP_SECRET',
-		callbackURL: '/auth/facebook/callback'
-	}
+  db: {
+    uri: 'mongodb://localhost/local-dev',
+    options: {
+      user: '',
+      pass: ''
+    }
+  },
+  facebook: {
+    clientID: process.env.FACEBOOK_ID || 'APP_ID',
+    clientSecret: process.env.FACEBOOK_SECRET || 'APP_SECRET',
+    callbackURL: '/auth/facebook/callback'
+  }
 };
 */
