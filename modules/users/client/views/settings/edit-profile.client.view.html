@@ -12,11 +12,11 @@
         </div>
         <div class="form-group">
           <label for="email">Email</label>
-          <input type="email" id="email" name="email" class="form-control" data-ng-model="user.email" placeholder="Email">
+          <input type="email" id="email" name="email" class="form-control" data-ng-model="user.email" data-ng-change="user.email=user.email.toLowerCase();" placeholder="Email">
         </div>
         <div class="form-group">
           <label for="username">Username</label>
-          <input type="text" id="username" name="username" class="form-control" data-ng-model="user.username" placeholder="Username">
+          <input type="text" id="username" name="username" class="form-control" data-ng-model="user.username" data-ng-change="user.username=user.username.toLowerCase();" placeholder="Username">
         </div>
         <div class="text-center form-group">
           <button type="submit" class="btn btn-lg btn-primary">Save Profile</button>

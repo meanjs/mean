@@ -30,7 +30,7 @@ exports.forgot = function (req, res, next) {
     function (token, done) {
       if (req.body.username) {
         User.findOne({
-          username: req.body.username
+          username: req.body.username.toLowerCase()
         }, '-salt -password', function (err, user) {
           if (!user) {
             return res.status(400).send({
@@ -144,7 +144,10 @@ exports.reset = function (req, res, next) {
                   if (err) {
                     res.status(400).send(err);
                   } else {
-                    // Return authenticated user
+                    // Remove sensitive data before return authenticated user
+                    user.password = undefined;
+                    user.salt = undefined;
+
                     res.json(user);
 
                     done(err, user);

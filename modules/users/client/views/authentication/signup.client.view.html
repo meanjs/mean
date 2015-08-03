@@ -15,13 +15,12 @@
         </div>
         <div class="form-group">
           <label for="email">Email</label>
-          <input type="email" id="email" name="email" class="form-control" data-ng-model="credentials.email"
-               placeholder="Email">
+          <input type="email" id="email" name="email" class="form-control" data-ng-model="credentials.email" data-ng-change="credentials.email=credentials.email.toLowerCase();" placeholder="Email">
         </div>
         <div class="form-group">
           <label for="username">Username</label>
           <input type="text" id="username" name="username" class="form-control"
-               data-ng-model="credentials.username" placeholder="Username">
+               data-ng-model="credentials.username" data-ng-change="credentials.username=credentials.username.toLowerCase();" placeholder="Username">
         </div>
         <div class="form-group">
           <label for="password">Password</label>
