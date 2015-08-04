@@ -47,7 +47,7 @@ angular.module('core')
       });
 
       scope.$on('show-errors-check-validity', function (event, name) {
-        if (angular.isUndefined(name) || formCtrl['$name'] === name) {
+        if (angular.isUndefined(name) || formCtrl.$name === name) {
           initCheck = true;
           showValidationMessages = true;
 
@@ -56,7 +56,7 @@ angular.module('core')
       });
 
       scope.$on('show-errors-reset', function (event, name) {
-        if (angular.isUndefined(name) || formCtrl['$name'] === name) {
+        if (angular.isUndefined(name) || formCtrl.$name === name) {
           return reset();
         }
       });
