@@ -9,7 +9,7 @@
   "curly": false, // Require {} for every new block or scope.
   "eqeqeq": true, // Require triple equals i.e. `===`.
   "immed": true, // Require immediate invocations to be wrapped in parens e.g. `( function(){}() );`
-  "latedef": true, // Prohibit variable use before definition.
+  "latedef": "nofunc", // Allow variable use before definition.
   "newcap": true, // Require capitalization of all constructor functions e.g. `new F()`.
   "noarg": true, // Prohibit use of `arguments.caller` and `arguments.callee`.
   "quotmark": "single", // Define quotes to string values.
