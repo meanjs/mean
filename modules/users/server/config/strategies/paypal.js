@@ -28,7 +28,10 @@ module.exports = function (config) {
         firstName: profile.name.givenName,
         lastName: profile.name.familyName,
         displayName: profile.displayName,
-        email: profile._json.email,
+        emails: [{
+          address: profile._json.email,
+          isPrimary: true
+        }],
         username: profile.username,
         provider: 'paypal',
         providerIdentifierField: 'user_id',
