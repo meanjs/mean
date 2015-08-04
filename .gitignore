@@ -6,6 +6,7 @@ node_modules/
 public/
 config/
 server/test/coverage/
+modules/
 
 _site/
 .sass-cache/
