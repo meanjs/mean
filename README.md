@@ -5,6 +5,7 @@
 Master Branch: 
 [![Build Status](https://travis-ci.org/meanjs/mean.svg?branch=master)](https://travis-ci.org/meanjs/mean)
 [![Dependencies Status](https://david-dm.org/meanjs/mean.svg)](https://david-dm.org/meanjs/mean)
+[![Coverage Status](https://coveralls.io/repos/meanjs/mean/badge.svg?branch=master&service=github)](https://coveralls.io/github/meanjs/mean?branch=master)
 
 Dev Branch:
 [![Build Status](https://travis-ci.org/meanjs/mean.svg?branch=0.4.1)](https://travis-ci.org/meanjs/mean)
