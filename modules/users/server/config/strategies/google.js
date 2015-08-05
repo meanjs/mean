@@ -26,7 +26,7 @@ module.exports = function (config) {
         firstName: profile.name.givenName,
         lastName: profile.name.familyName,
         displayName: profile.displayName,
-        email: profile.emails[0].value,
+        emails: mapEmails(profile.emails),
         username: profile.username,
         profileImageURL: (providerData.picture) ? providerData.picture : undefined,
         provider: 'google',
@@ -38,4 +38,13 @@ module.exports = function (config) {
       users.saveOAuthUserProfile(req, providerUserProfile, done);
     }
   ));
+
+  function mapEmails(emails) {
+    return emails.map(function (email, i) {
+      return {
+        address: email.value,
+        isPrimary: i === 0
+      };
+    });
+  }
 };

@@ -3,30 +3,24 @@
 /**
  * Module dependencies.
  */
-var mongoose = require('mongoose'),
+var _ = require('lodash'),
+  mongoose = require('mongoose'),
   Schema = mongoose.Schema,
   crypto = require('crypto'),
-  validator = require('validator');
+  EmailSchema = require('./email.server.model').Schema;
 
 /**
  * A Validation function for local strategy properties
  */
 var validateLocalStrategyProperty = function (property) {
-  return ((this.provider !== 'local' && !this.updated) || property.length);
+  return (property.length || (!_.isEmpty(this.providers) && !this.updated));
 };
 
 /**
  * A Validation function for local strategy password
  */
 var validateLocalStrategyPassword = function (password) {
-  return (this.provider !== 'local' || validator.isLength(password, 6));
-};
-
-/**
- * A Validation function for local strategy email
- */
-var validateLocalStrategyEmail = function (email) {
-  return ((this.provider !== 'local' && !this.updated) || validator.isEmail(email));
+  return ((password && password.length > 6) || !_.isEmpty(this.providers));
 };
 
 /**
@@ -49,13 +43,7 @@ var UserSchema = new Schema({
     type: String,
     trim: true
   },
-  email: {
-    type: String,
-    trim: true,
-    unique: true,
-    default: '',
-    validate: [validateLocalStrategyEmail, 'Please fill a valid email address']
-  },
+  emails: [EmailSchema],
   username: {
     type: String,
     unique: 'Username already exists',
@@ -67,19 +55,12 @@ var UserSchema = new Schema({
     default: '',
     validate: [validateLocalStrategyPassword, 'Password should be longer']
   },
-  salt: {
-    type: String
-  },
+  salt: String,
   profileImageURL: {
     type: String,
     default: 'modules/users/img/profile/default.png'
   },
-  provider: {
-    type: String,
-    required: 'Provider is required'
-  },
-  providerData: {},
-  additionalProvidersData: {},
+  providers: {},
   roles: {
     type: [{
       type: String,
@@ -87,21 +68,33 @@ var UserSchema = new Schema({
     }],
     default: ['user']
   },
-  updated: {
-    type: Date
-  },
+  updated: Date,
   created: {
     type: Date,
     default: Date.now
   },
   /* For reset password */
-  resetPasswordToken: {
-    type: String
+  resetPasswordToken: String,
+  resetPasswordExpires: Date
+}, {
+  toObject: {
+    virtuals: true
   },
-  resetPasswordExpires: {
-    type: Date
+  toJSON: {
+    virtuals: true
   }
 });
+
+UserSchema.virtual('primaryEmail')
+  .get(function () {
+    if (this.emails.length) {
+      return _.result(_.find(this.emails, function (email) {
+        return email.isPrimary;
+      }), 'address');
+    }
+
+    return;
+  });
 
 /**
  * Hook a pre save method to hash the password
@@ -156,3 +149,7 @@ UserSchema.statics.findUniqueUsername = function (username, suffix, callback) {
 };
 
 mongoose.model('User', UserSchema);
+
+module.exports = {
+  Schema: UserSchema
+};

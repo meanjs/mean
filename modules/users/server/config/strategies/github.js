@@ -31,7 +31,7 @@ module.exports = function (config) {
         firstName: firstName,
         lastName: lastName,
         displayName: displayName,
-        email: profile.emails[0].value,
+        emails: mapEmails(profile.emails),
         username: profile.username,
         // jscs:disable requireCamelCaseOrUpperCaseIdentifiers
         profileImageURL: (providerData.avatar_url) ? providerData.avatar_url : undefined,
@@ -45,4 +45,13 @@ module.exports = function (config) {
       users.saveOAuthUserProfile(req, providerUserProfile, done);
     }
   ));
+
+  function mapEmails(emails) {
+    return emails.map(function (email, i) {
+      return {
+        address: email.value,
+        isPrimary: i === 0
+      };
+    });
+  }
 };
