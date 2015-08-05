@@ -60,6 +60,7 @@
     "validator": "^3.41.2"
   },
   "devDependencies": {
+    "coveralls": "~2.11.3",
     "grunt-concurrent": "^2.0.0",
     "grunt-contrib-copy": "~0.8.0",
     "grunt-contrib-csslint": "~0.4.0",
