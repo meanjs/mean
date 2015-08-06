@@ -16,7 +16,7 @@ var user, user2, user3;
  * Unit tests
  */
 describe('User Model Unit Tests:', function () {
-  before(function (done) {
+  before(function () {
     user = {
       firstName: 'Full',
       lastName: 'Name',
@@ -45,7 +45,6 @@ describe('User Model Unit Tests:', function () {
       provider: 'local'
     };
 
-    done();
   });
 
   describe('Method Save', function () {
@@ -71,7 +70,7 @@ describe('User Model Unit Tests:', function () {
     it('should fail to save an existing user again', function (done) {
       var _user = new User(user);
       var _user2 = new User(user2);
-
+      
       _user.save(function () {
         _user2.save(function (err) {
           should.exist(err);
@@ -130,7 +129,7 @@ describe('User Model Unit Tests:', function () {
       });
     });
 
-    it('should not be able to save different user with the same email address', function (done) {
+    it('should not be able to save different user with the same email address', function () {
       var _user = new User(user);
       var _user3 = new User(user3);
 
@@ -143,7 +142,6 @@ describe('User Model Unit Tests:', function () {
             should.exist(err);
             // Restoring the original email for test3 so it can be used in later tests
             _user3.email = user3_email;
-            done();
           });
         });
       });
