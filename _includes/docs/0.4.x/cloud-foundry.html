@@ -1,0 +1,127 @@
+<div class="inner-link-anchor" id="cloud-foundry"></div>
+<section class="page-header">
+  <h1>Deploying To Cloud Foundry</h1>
+  <p>
+    <a href="http://docs.cloudfoundry.org/" target="_blank">Cloud Foundry</a> is an open source platform-as-a-service (PaaS).
+    The MEAN.JS boilerplate can easily be deployed to any Cloud Foundry instance.
+    The easiest way to deploy MEAN.JS to Cloud Foundry is to use a public hosted Cloud Foundry instance.
+    The two most popular instances are <a href="https://run.pivotal.io/" target="_blank">Pivotal Web Services</a>
+    and <a href="http://bluemix.net" target="_blank">IBM Bluemix</a>. Both provide free trials
+    and support pay-as-you-go models for hosting applications in the cloud. After you have an account
+    on either Pivotal Web Services or IBM Bluemix follow the below steps to deploy MEAN.JS
+  </p>
+
+  <ul>
+    <li>Install the
+    <a href="http://docs.cloudfoundry.org/devguide/installcf/install-go-cli.html" target="_blank">Cloud Foundry</a>command line tools.</li>
+    <li>You need to log into Cloud Foundry from the Cloud Foundry command line.
+      <ul>
+        <li>If you are using Pivotal Web Services run <pre>$ cf login -a api.run.pivotal.io</pre></li>
+        <li>If you are using IBM Bluemix run <pre>$ cf login -a api.ng.bluemix.net</pre></li>
+      </ul>
+    </li>
+    <li>Create a Mongo DB service, IBM Bluemix and Pivotal Web Services offer a free MongoLabs service.
+      <ul>
+        <li><pre>$ cf create-service mongolab sandbox mean-mongo</pre></li>
+      </ul>
+    </li>
+    <li>Clone the GitHub repo for MEAN.JS if you have not already done so
+      <ul>
+        <li><pre>$ git clone https://github.com/meanjs/mean.git &amp;&amp; cd mean</pre></li>
+      </ul>
+    </li>
+    <li>Run NPM install
+      <ul>
+        <li><pre>$ npm install</pre></li>
+      </ul>
+    </li>
+    <li>Run the Grunt Build task to build the optimized JavaScript and CSS files
+      <ul>
+        <li><pre>$ grunt build</pre></li>
+      </ul>
+    </li>
+    <li>Once within the root directory of the MEAN.js project, deploy MEAN.JS to Cloud Foundry
+      <ul>
+        <li><pre>$ cf push</pre></li>
+      </ul>
+    </li>
+  </ul>
+  <p>
+    After `cf push` completes you will see the URL to your running MEANJS application (your URL will be different).
+  </p>
+  <pre>
+    requested state: started
+    instances: 1/1
+    usage: 128M x 1 instances
+    urls: mean-humbler-frappa.mybluemix.net
+  </pre>
+  <p>Open your browser and go to that URL and your should see your MEAN.JS app running!</p>
+</section>
+<section>
+  <h2>Configuring Social Services</h2>
+  <p>
+    MEAN.JS allows you to login via a number of social services. In other deployments of MEAN.JS
+    you need to configure environment variables with the various keys and secrets to enable these
+    social services. While this is possible in Cloud Foundry, it is not the preferred method. Credentials
+    like this are usually surfaced through services an application can bind to. For this reason, when you
+    deploy MEAN.JS to Cloud Foundry you must configure and bind services to your application in order to
+    login with the various social services. To do this we will use what is called user provided services.
+  </p>
+  <p>
+    Once your application is deployed to Cloud Foundry run the following command for the social services
+    you would like to use. Make sure you insert the correct credentials for the service.
+  </p>
+  <h3>Facebook</h3>
+  <pre>
+    $ cf cups mean-facebook -p '{"id":"facebookId","secret":"facebookSecret"}'
+    $ cf bind-service mean mean-facebook
+  </pre>
+  <h3>Twitter</h3>
+  <pre>
+    $ cf cups mean-twitter -p '{"key":"twitterKey","secret":"twitterSecret"}'
+    $ cf bind-service mean mean-twitter
+  </pre>
+  <h3>Google</h3>
+  <pre>
+    $ cf cups mean-google -p '{"id":"googleId","secret":"googleSecret"}'
+    $ cf bind-service mean mean-google
+  </pre>
+  <h3>LinkedIn</h3>
+  <pre>
+    $ cf cups mean-linkedin -p '{"id":"linkedinId","secret":"linkedinSecret"}'
+    $ cf bind-service mean mean-linkedin
+  </pre>
+  <h3>GitHub</h3>
+  <pre>
+    $ cf cups mean-github -p '{"id":"githubId","secret":"githubSecret"}'
+    $ cf bind-service mean mean-github
+  </pre>
+  <h3>Email</h3>
+  <pre>
+    $ cf cups mean-mail -p '{"from":"fromEmail","service":"emailService","username":"emailServiceUsername",
+    "password":"emailServicePassword"}'
+    $ cf bind-service mean mean-mail
+  </pre>
+  <p>
+    After you have bound the services your want to your MEAN.JS application run
+    <pre>$ cf restage mean</pre> to restage your application and your social services should now work.
+  </p>
+</section>
+<section>
+  <h2>Cloud Foundry Troubleshooting</h2>
+  <h3>Every time I deploy my application to Cloud Foundry a new route gets added, why?
+      How do I fix this?</h3>
+  <p>
+    No two apps deployed to a Cloud Foundry instance can have the same URL or route bound to it.
+    To avoid failures during deployment where two people try to deploy MEANJS to the same Cloud Foundry instance
+    using the same URL, the `manifest.yml` file in the root directory of MEANJS
+    contains a host property specifying that Cloud Foundry assign a random URL to your application.
+    This URL will begin with the prefix 'mean-' and end with a random word.  If you perform multiple
+    `cf push` commands Cloud Foundry will bind a new random URL or route to your application each time.
+    This means you end up with multiple URLs pointing to the same application instance.  While this does not hurt
+    your application it is generally not necessary.  You can fix this by changing the host property in
+    your `manifest.yml` file to remove the `${random-word}` string from it.  However note that if your
+    host name is not unique, your deployment will fail.  If it does fail try changing the host property to
+    something else.
+  </p>
+</section>
