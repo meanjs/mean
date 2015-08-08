@@ -14,20 +14,19 @@ Before you begin making changes:
 
 ## Making Changes
 
-* Create a topic branch from where you want to base your work. 
-	* Please note that branches of older versions are for critical bugs only.
+* Create a topic branch from the master branch.
 * Check for unnecessary whitespace / changes with `git diff --check` before committing.
-	* Also check that your code is formatted properly with tabs (hint: Use .editorconfig)
+	* Also check that your code is formatted properly with spaces (hint: Use .editorconfig)
 * Keep git commit messages clear and appropriate
 	* If possible, please "squash" your commits to as few commits as possible/reasonable.
 * Make Sure you have added any tests necessary to test your code.
 	* Run __all__ the tests to ensure nothing else was acciddently broken.
 	* Don't rely on the existing tests to see if you've broken code elsewhere, test the changes you made in a browser to!
-* Update the Documentation too go along with any changes in functionality / improvements in a seperate pull request.
+* Update the Documentation too go along with any changes in functionality / improvements in a seperate pull request against the gh-pages branch.
 
 ## Submitting the Pull Request
 * Push your changes to your topic branch on your fork of the repo.
-* Submit a pull request from your topic branch to the necessary branch on the MEANJS repository.
+* Submit a pull request from your topic branch to the master branch on the MEANJS repository.
 * Be sure to tag any issues your pull request is taking care of / contributing to.
 * Small changes are usually accepted and merged in within a week (provided that 2 collaborators give the okay)
 * Larger changes usually spark further discussion and possible changes prior to being merged in.
