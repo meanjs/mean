@@ -1,7 +1,7 @@
 [![MEAN.JS Logo](http://meanjs.org/img/logo-small.png)](http://meanjs.org/)
 
 # The Website
-This branch of the repository is for the http://meanjs.org/ website which inludes the documentation for the [MEAN.JS Project](https://github.com/meanjs/mean). 
+This branch of the repository is for the http://meanjs.org/ website which includes the documentation for the [MEAN.JS Project](https://github.com/meanjs/mean). 
 
 # Testing / Contributing
 This website uses [Jekyll!](http://jekyllrb.com/) to serve web pages, which means you need to install jekyll on your computer to test it! 
