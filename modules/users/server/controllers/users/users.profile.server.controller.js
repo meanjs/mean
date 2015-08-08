@@ -62,7 +62,7 @@ exports.changeProfilePicture = function (req, res) {
           message: 'Error occurred while uploading profile picture'
         });
       } else {
-        user.profileImageURL = 'modules/users/img/profile/uploads/' + req.files.file.name;
+        user.profileImageURL = 'modules/users/client/img/profile/uploads/' + req.files.file.name;
 
         user.save(function (saveError) {
           if (saveError) {
