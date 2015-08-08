@@ -1,26 +1,26 @@
-<section data-ng-controller="SettingsController">
+<section ng-controller="SettingsController">
   <div class="page-header">
     <h1>Settings</h1>
   </div>
   <div class="row">
     <nav class="col-sm-3 col-md-3">
       <ul class="nav nav-pills nav-stacked">
-        <li data-ui-sref-active="active">
-          <a data-ui-sref="settings.profile">Edit Profile</a>
+        <li ui-sref-active="active">
+          <a ui-sref="settings.profile">Edit Profile</a>
         </li>
-        <li data-ui-sref-active="active">
-          <a data-ui-sref="settings.picture">Change Profile Picture</a>
+        <li ui-sref-active="active">
+          <a ui-sref="settings.picture">Change Profile Picture</a>
         </li>
-        <li data-ui-sref-active="active" data-ng-show="user.provider === 'local'">
-          <a data-ui-sref="settings.password">Change Password</a>
+        <li ui-sref-active="active" ng-show="user.provider === 'local'">
+          <a ui-sref="settings.password">Change Password</a>
         </li>
-        <li data-ui-sref-active="active">
-          <a data-ui-sref="settings.accounts">Manage Social Accounts</a>
+        <li ui-sref-active="active">
+          <a ui-sref="settings.accounts">Manage Social Accounts</a>
         </li>
       </ul>
     </nav>
     <div class="col-sm-9 col-md-8 settings-view">
-      <div data-ui-view></div>
+      <div ui-view></div>
     </div>
   </div>
 </section>
