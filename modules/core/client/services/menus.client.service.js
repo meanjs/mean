@@ -137,13 +137,13 @@ angular.module('core').service('Menus', [
     };
 
     // Remove existing menu object by menu id
-    this.removeMenuItem = function (menuId, menuItemURL) {
+    this.removeMenuItem = function (menuId, state) {
       // Validate that the menu exists
       this.validateMenuExistance(menuId);
 
       // Search for menu item to remove
       for (var itemIndex in this.menus[menuId].items) {
-        if (this.menus[menuId].items[itemIndex].link === menuItemURL) {
+        if (this.menus[menuId].items[itemIndex].state === state) {
           this.menus[menuId].items.splice(itemIndex, 1);
         }
       }
@@ -153,14 +153,14 @@ angular.module('core').service('Menus', [
     };
 
     // Remove existing menu object by menu id
-    this.removeSubMenuItem = function (menuId, submenuItemURL) {
+    this.removeSubMenuItem = function (menuId, state) {
       // Validate that the menu exists
       this.validateMenuExistance(menuId);
 
       // Search for menu item to remove
       for (var itemIndex in this.menus[menuId].items) {
         for (var subitemIndex in this.menus[menuId].items[itemIndex].items) {
-          if (this.menus[menuId].items[itemIndex].items[subitemIndex].link === submenuItemURL) {
+          if (this.menus[menuId].items[itemIndex].items[subitemIndex].state === state) {
             this.menus[menuId].items[itemIndex].items.splice(subitemIndex, 1);
           }
         }
