@@ -119,7 +119,7 @@ title: Generator
       <p>The CRUD module sub-generator will help you create a new CRUD module, similar to the article sample provided with the project. To create a new CRUD module you will need to use <i>yo</i> again:</p><br>
       <pre>$ yo meanjs:crud-module &lt;module-name&gt;</pre><br>
       <p>This will create both AngularJS and Express files supporting full CRUD functionality, and add the Karma and Mocha tests.</p>
-      <p class="alert alert-info"><b>Note:</b> Don’t forget to use your module name as an argument when calling the CRUD module sub-generator.</p>
+      <p class="alert alert-info"><b>Note:</b> don't forget to use your module name as an argument when calling the CRUD module sub-generator.</p>
     </section>
     <div class="inner-link-anchor" id="angular-module"></div>
     <section class="page-header">
@@ -135,7 +135,7 @@ title: Generator
       <h1>AngularJS Route Sub-Generator</h1>
     </section>
     <section>
-      <p>To construct your module you will often need to create a new route. The AngularJS route sub-generator will help you create a view, controller and a proper route in your module <b>routes.js</b> file. If it can’t find the module routes file the sub-generator will create one for you. Creating a new AngularJS route will involve executing this command:</p> <br>
+      <p>To construct your module you will often need to create a new route. The AngularJS route sub-generator will help you create a view, controller and a proper route in your module <b>routes.js</b> file. If it can't find the module routes file the sub-generator will create one for you. Creating a new AngularJS route will involve executing this command:</p> <br>
       <pre>$ yo meanjs:angular-route &lt;route-name&gt;</pre><br>
       <p>The sub-generator will ask for more information about your controller, view and routing URL, and will generate the appropriate files for you.</p>
     </section>
@@ -147,16 +147,16 @@ title: Generator
       <p>The AngularJS Controller sub-generator will create a new AngularJS controller in the specified module's <b>controllers</b> folder. To create a new AngularJS controller run <i>yo</i> again by using this command:</p><br>
       <pre>$ yo meanjs:angular-controller &lt;controller-name&gt;</pre><br>
       <p>The sub-generator will ask you for the module name under which you would like to create your new controller, and will create a new AngularJS controller file in that module <b>controllers</b> folder and a controller test in the module <b>tests</b> folder.</p>
-      <p class="alert alert-info"><b>Don’t forget!</b> This time you pass the controller name as an argument. </p>
+      <p class="alert alert-info"><b>Don't forget!</b> This time you pass the controller name as an argument. </p>
     </section>
     <div class="inner-link-anchor" id="angular-view"></div>
     <section class="page-header">
       <h1>AngularJS View Sub-Generator</h1>
     </section>
     <section>
-      <p>Once you have your controller file ready, you may want to add a view that makes use of this controller. The AngularJS view sub-generator will create a new AngularJS view in thr specified module's <b>views</b> folder, and will allow you to add a route definition for it. To create a new AngularJS view you will need to execute this command:</p><br>
+      <p>Once you have your controller file ready, you may want to add a view that makes use of this controller. The AngularJS view sub-generator will create a new AngularJS view in the specified module's <b>views</b> folder, and will allow you to add a route definition for it. To create a new AngularJS view you will need to execute this command:</p><br>
       <pre>$ yo meanjs:angular-view &lt;view-name&gt;</pre><br>
-      <p>The sub-generator will ask you for the module name under which you would like to create your new view, and some additional routing information. It will then create a new view file in that module's <b>views</b> folder and add a routing state to the module <b>routes.js</b> file. If it can’t find the module routes file it will create one for you.</p>
+      <p>The sub-generator will ask you for the module name under which you would like to create your new view, and some additional routing information. It will then create a new view file in that module's <b>views</b> folder and add a routing state to the module <b>routes.js</b> file. If it can't find the module routes file it will create one for you.</p>
     </section>
     <div class="inner-link-anchor" id="angular-service"></div>
     <section class="page-header">
@@ -199,10 +199,10 @@ title: Generator
       <h1>AngularJS Test Sub-Generator</h1>
     </section>
     <section>
-      <p>Your MEAN application comes pre-bundled with the Karma test runner and Jasmine testing framework. To test your AngularJS controllers you’ll need to create a test file, which Karma will later use to run the tests. For this purpose we provided you with the AngularJS test sub-generator. Creating a new AngularJS test is effortless, just execute this command:</p><br>
+      <p>Your MEAN application comes pre-bundled with the Karma test runner and Jasmine testing framework. To test your AngularJS controllers you'll need to create a test file, which Karma will later use to run the tests. For this purpose we provided you with the AngularJS test sub-generator. Creating a new AngularJS test is effortless, just execute this command:</p><br>
       <pre>$ yo meanjs:angular-test &lt;controller-name&gt;</pre><br>
-      <p>This will create a test file for your controller, and if the sub-generator doesn’t find the specified controller file, it will create one for you.</p>
-      <p class="alert alert-info"><b>Don’t forget!</b> You're suppose to pass the controller name as an argument. </p>
+      <p>This will create a test file for your controller, and if the sub-generator doesn't find the specified controller file, it will create one for you.</p>
+      <p class="alert alert-info"><b>Don't forget!</b> You're suppose to pass the controller name as an argument. </p>
     </section>
     <div class="inner-link-anchor" id="express-model"></div>
     <section class="page-header">
@@ -237,10 +237,10 @@ title: Generator
       <h1>Express Test Sub-Generator</h1>
     </section>
     <section>
-      <p>Your MEAN application comes pre-bundled with the Mocha testing framework. To test your Express models you’ll need to create a new test file, which Mocha will use while running tests. For this purpose we provided you with the Express test sub-generator. Creating a new Express test is easy, just execute this command:</p><br>
+      <p>Your MEAN application comes pre-bundled with the Mocha testing framework. To test your Express models you'll need to create a new test file, which Mocha will use while running tests. For this purpose we provided you with the Express test sub-generator. Creating a new Express test is easy, just execute this command:</p><br>
       <pre>$ yo meanjs:express-test &lt;model-name&gt;</pre><br>
-      <p>This will create a test file for your Express model, and if the sub-generator doesn’t find the specified model, it will create one for you.</p>
-      <p class="alert alert-info"><b>Don’t forget!</b> You're suppose to pass the model name as an argument. </p>
+      <p>This will create a test file for your Express model, and if the sub-generator doesn't find the specified model, it will create one for you.</p>
+      <p class="alert alert-info"><b>Don't forget!</b> You're suppose to pass the model name as an argument. </p>
     </section>
   </section>
 </section>
