@@ -19,7 +19,8 @@ angular.module('articles').run(['Menus',
     // Add the dropdown create item
     Menus.addSubMenuItem('topbar', 'articles', {
       title: 'Create Articles',
-      state: 'articles.create'
+      state: 'articles.create',
+      roles: ['user']
     });
   }
 ]);
