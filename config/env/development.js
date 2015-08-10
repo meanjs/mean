@@ -65,5 +65,6 @@ module.exports = {
       }
     }
   },
-  livereload: true
+  livereload: true,
+  seedDB: true
 };
