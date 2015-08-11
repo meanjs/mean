@@ -26,13 +26,11 @@ if (process.env.NODE_ENV === 'production') {
                     console.log('Local admin added');
                 }
             });
-        }
-        else {
+        } else {
             console.log('Admin user exists');
         }
     });
-}
-else {
+} else {
     //Add Local User
     User.find({username: 'user'}).remove(function () {
         var user = new User({
@@ -78,5 +76,3 @@ else {
         });
     });
 }
-
-

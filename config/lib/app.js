@@ -12,7 +12,9 @@ var config = require('../config'),
 mongoose.loadModels();
 
 // Populate DB with sample data
-if(config.seedDB) { require('./seed'); }
+if (config.seedDB) {
+	require('./seed');
+}
 
 module.exports.loadModels = function loadModels() {
 	mongoose.loadModels();
