@@ -57,5 +57,5 @@ module.exports = {
       }
     }
   },
-  seedDB: false
+  seedDB: process.env.MONGO_SEED || false
 };
