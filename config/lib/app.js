@@ -1,8 +1,8 @@
 'use strict';
 
 /**
- * Module dependencies.
- */
+* Module dependencies.
+*/
 var config = require('../config'),
 	mongoose = require('./mongoose'),
 	express = require('./express'),
