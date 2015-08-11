@@ -142,9 +142,9 @@ module.exports.initHelmetHeaders = function (app) {
   app.use(helmet.nosniff());
   app.use(helmet.ienoopen());
   app.use(helmet.hsts({
-      maxAge: SIX_MONTHS,
-      includeSubdomains: true,
-      force: true
+    maxAge: SIX_MONTHS,
+    includeSubdomains: true,
+    force: true
   }));
   app.disable('x-powered-by');
 };
