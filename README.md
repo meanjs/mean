@@ -199,6 +199,17 @@ After `cf push` completes you will see the URL to your running MEANJS applicatio
 
 Open your browser and go to that URL and your should see your MEANJS app running!
 
+###  Deploying MEANJS To IBM Bluemix
+IBM Bluemix is a Cloud Foundry based PaaS.  By clicking the button below you can signup for Bluemix and deploy
+a working copy of MEANJS to the cloud without having to do the steps above.
+
+[![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https%3A%2F%2Fgithub.com%2Fmeanjs%2Fmean)
+
+After the deployment is finished you will be left with a copy of the MEANJS code in your own private Git repo
+in Bluemix complete with a pre-configured build and deploy pipeline.  Just clone the Git repo, make your changes, and
+commit them back.  Once your changes are committed, the build and deploy pipeline will run automatically deploying
+your changes to Bluemix.
+
 ## Credits
 Inspired by the great work of [Madhusudhan Srinivasa](https://github.com/madhums/)
 The MEAN name was coined by [Valeri Karpov](http://blog.mongodb.org/post/49262866911/the-mean-stack-mongodb-expressjs-angularjs-and)
