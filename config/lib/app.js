@@ -1,8 +1,8 @@
 'use strict';
 
 /**
-* Module dependencies.
-*/
+ * Module dependencies.
+ */
 var config = require('../config'),
   mongoose = require('./mongoose'),
   express = require('./express'),
@@ -11,9 +11,9 @@ var config = require('../config'),
 // Initialize Models
 mongoose.loadModels();
 
-// Populate DB with sample data
+//SeedDB
 if (config.seedDB) {
-	require('./seed');
+  require('./seed')
 }
 
 module.exports.loadModels = function loadModels() {
