@@ -94,6 +94,21 @@ $ grunt prod
 
 * explore `config/env/production.js` for production environment configuration options
 
+### Running with User Seed
+To have default account(s) seeded at runtime:
+
+In Development:
+```bash
+MONGO_SEED=true grunt
+```
+It will try to seed the users 'user' and 'admin'. If one of the user already exists, it will display an error message on the console. Just grab the passwords from the console.
+
+In Production:
+```bash
+MONGO_SEED=true grunt prod
+```
+This will seed the admin user one time if the user does not already exist. You have to copy the password from the console and save it.
+
 ### Running with TLS (SSL)
 Application will start by default with secure configuration (SSL mode) turned on and listen on port 8443.
 To run your application in a secure manner you'll need to use OpenSSL and generate a set of self-signed certificates. Unix-based users can use the following command:
