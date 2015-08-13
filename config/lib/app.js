@@ -11,6 +11,11 @@ var config = require('../config'),
 // Initialize Models
 mongoose.loadModels();
 
+//SeedDB
+if (config.seedDB) {
+  require('./seed');
+}
+
 module.exports.loadModels = function loadModels() {
   mongoose.loadModels();
 };
