@@ -129,19 +129,24 @@ describe('User Model Unit Tests:', function () {
       });
     });
 
-    it('should not be able to save different user with the same email address', function () {
+    it('should not be able to save another user with the same email address', function (done) {
+      // Test may take some time to complete due to db operations
+      this.timeout(10000);
+
       var _user = new User(user);
       var _user3 = new User(user3);
 
       _user.remove(function (err) {
         should.not.exist(err);
         _user.save(function (err) {
-          var user3_email = _user3.email;
+          should.not.exist(err);
           _user3.email = _user.email;
           _user3.save(function (err) {
             should.exist(err);
-            // Restoring the original email for test3 so it can be used in later tests
-            _user3.email = user3_email;
+            _user.remove(function(err) {
+              should.not.exist(err);
+              done();
+            });
           });
         });
       });
