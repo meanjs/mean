@@ -23,6 +23,5 @@
     "browser",
     "element"
   ],
-  "devel": true, // Allow development statements e.g. `console.log();`.
-  "esnext": true
+  "devel": true // Allow development statements e.g. `console.log();`.
 }
