@@ -98,7 +98,7 @@ var initGlobalConfigFolders = function (config, assets) {
   };
 
   // Setting globbed client paths
-  config.folders.client = getGlobbedPaths(path.join(process.cwd(), 'modules/*/client/'), process.cwd().replace(new RegExp(/\\/g), '/'));
+  config.folders.client = getGlobbedPaths(path.join(__dirname, 'modules/*/client/'), __dirname.replace(new RegExp(/\\/g), '/'));
 };
 
 /**
@@ -144,24 +144,24 @@ var initGlobalConfig = function () {
   validateEnvironmentVariable();
 
   // Get the default assets
-  var defaultAssets = require(path.join(process.cwd(), 'config/assets/default'));
+  var defaultAssets = require(path.join(__dirname, 'assets/default'));
 
   // Get the current assets
-  var environmentAssets = require(path.join(process.cwd(), 'config/assets/', process.env.NODE_ENV)) || {};
+  var environmentAssets = require(path.join(__dirname, 'assets/', process.env.NODE_ENV)) || {};
 
   // Merge assets
   var assets = _.merge(defaultAssets, environmentAssets);
 
   // Get the default config
-  var defaultConfig = require(path.join(process.cwd(), 'config/env/default'));
+  var defaultConfig = require(path.join(__dirname, 'env/default'));
 
   // Get the current config
-  var environmentConfig = require(path.join(process.cwd(), 'config/env/', process.env.NODE_ENV)) || {};
+  var environmentConfig = require(path.join(__dirname, 'env/', process.env.NODE_ENV)) || {};
 
   // Merge config files
   var envConf = _.merge(defaultConfig, environmentConfig);
 
-  var config = _.merge(envConf, (fs.existsSync(path.join(process.cwd(), 'config/env/local.js')) && require(path.join(process.cwd(), 'config/env/local.js'))) || {});
+  var config = _.merge(envConf, (fs.existsSync(path.join(__dirname, 'env/local.js')) && require(path.join(__dirname, 'env/local.js'))) || {});
 
   // Initialize global globbed files
   initGlobalConfigFiles(config, assets);
