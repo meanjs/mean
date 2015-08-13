@@ -4,17 +4,8 @@
       <div class="col-md-4">
         <h1>Users</h1>
       </div>
-      <div class="col-md-4" style="margin-top: 2em">
-        <input class="form-control col-md-4" type="text" data-ng-model="search" placeholder="Search" ng-change="figureOutItemsToDisplay()" />
-      </div>
     </div>
   </div>
-  <div class="list-group">
-    <a data-ng-repeat="user in pagedItems" data-ui-sref="admin.user({userId: user._id})" class="list-group-item">
-      <h4 class="list-group-item-heading" data-ng-bind="user.username"></h4>
-      <p class="list-group-item-text" data-ng-bind="user.email"></p>
-    </a>
-  </div>
 
-  <pagination boundary-links="true" max-size="8" items-per-page="itemsPerPage" total-items="filterLength" ng-model="currentPage" ng-change="pageChanged()"></pagination>
+  <mean-pagination mean-pagination-data="users" mean-pagination-item-count="10" mean-pagination-url="/modules/users/views/admin/user.client.pagination.html" mean-pagination-search="true"></mean-pagination>
 </section>
