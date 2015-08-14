@@ -115,6 +115,7 @@ module.exports.initSession = function (app, db) {
     saveUninitialized: true,
     resave: true,
     secret: config.sessionSecret,
+    key: config.sessionKey,
     store: new MongoStore({
       mongooseConnection: db.connection,
       collection: config.sessionCollection
