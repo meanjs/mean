@@ -114,6 +114,9 @@ module.exports.initSession = function (app, db) {
   app.use(session({
     saveUninitialized: true,
     resave: true,
+    cookie: {
+      maxAge: config.sessionExpiration
+    },
     secret: config.sessionSecret,
     key: config.sessionKey,
     store: new MongoStore({
