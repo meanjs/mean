@@ -4,7 +4,7 @@
 angular.module('core').service('Menus', [
   function () {
     // Define a set of default roles
-    this.defaultRoles = ['*'];
+    this.defaultRoles = ['user', 'admin'];
 
     // Define the menus object
     this.menus = {};
@@ -87,7 +87,7 @@ angular.module('core').service('Menus', [
         state: options.state || '',
         type: options.type || 'item',
         class: options.class,
-        roles: ((options.roles === null || typeof options.roles === 'undefined') ? this.menus[menuId].roles : options.roles),
+        roles: ((options.roles === null || typeof options.roles === 'undefined') ? this.defaultRoles : options.roles),
         position: options.position || 0,
         items: [],
         shouldRender: shouldRender
@@ -164,6 +164,8 @@ angular.module('core').service('Menus', [
     };
 
     //Adding the topbar menu
-    this.addMenu('topbar');
+    this.addMenu('topbar', {
+      roles: ['*']
+    });
   }
 ]);

@@ -7,7 +7,8 @@ angular.module('articles').run(['Menus',
     Menus.addMenuItem('topbar', {
       title: 'Articles',
       state: 'articles',
-      type: 'dropdown'
+      type: 'dropdown',
+      roles: ['*']
     });
 
     // Add the dropdown list item
