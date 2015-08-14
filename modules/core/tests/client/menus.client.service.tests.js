@@ -17,8 +17,8 @@
       expect(Menus.menus.topbar).toBeDefined();
     });
 
-    it('should have default roles to *', function() {
-      expect(Menus.defaultRoles).toEqual(['*']);
+    it('should have default roles to user and admin', function() {
+      expect(Menus.defaultRoles).toEqual(['user', 'admin']);
     });
 
     describe('addMenu', function() {
@@ -42,7 +42,7 @@
         });
 
         it('should set shouldRender to shouldRender function handle', function() {
-          expect(menu.shouldRender()).toBeTruthy();
+          expect(menu.shouldRender()).toBeFalsy();
         });
       });
 
@@ -79,13 +79,6 @@
         it('should render if menu is public', function() {
           expect(menu.shouldRender()).toBeTruthy();
         });
-
-        // it('should not render if menu is private', function() {
-        //   menu = Menus.addMenu('menu1', {
-        //     isPublic: false
-        //   });
-        //   expect(menu.shouldRender()).toBeFalsy();
-        // });
       });
 
       describe('when logged in', function() {
@@ -259,8 +252,8 @@
           expect(menuItem.isPublic).toBeFalsy();
         });
 
-        it('should set menu item roles to menu roles', function() {
-          expect(menuItem.roles).toEqual(menu.roles);
+        it('should set menu item roles to default roles', function() {
+          expect(menuItem.roles).toEqual(Menus.defaultRoles);
         });
 
         it('should set menu item position to 0', function() {
