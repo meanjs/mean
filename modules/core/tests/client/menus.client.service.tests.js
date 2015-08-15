@@ -17,12 +17,8 @@
       expect(Menus.menus.topbar).toBeDefined();
     });
 
-    it('should have private topbar', function() {
-      expect(Menus.menus.topbar.isPublic).toBeFalsy();
-    });
-
-    it('should have default roles to *', function() {
-      expect(Menus.defaultRoles).toEqual(['*']);
+    it('should have default roles to user and admin', function() {
+      expect(Menus.defaultRoles).toEqual(['user', 'admin']);
     });
 
     describe('addMenu', function() {
@@ -45,12 +41,8 @@
           expect(menu.items).toEqual([]);
         });
 
-        it('should be public by default', function() {
-          expect(menu.isPublic).toBeTruthy();
-        });
-
         it('should set shouldRender to shouldRender function handle', function() {
-          expect(menu.shouldRender()).toBeTruthy();
+          expect(menu.shouldRender()).toBeFalsy();
         });
       });
 
@@ -62,17 +54,6 @@
           };
         beforeEach(function() {
           menu = Menus.addMenu('menu1', options);
-        });
-
-        it('should set isPublic to true if options.isPublic equal to null', function() {
-          var menu = Menus.addMenu('menu1', {
-            isPublic: null
-          });
-          expect(menu.isPublic).toBeTruthy();
-        });
-
-        it('should set isPublic to true if options.isPublic equal to undefined', function() {
-          expect(menu.isPublic).toBeTruthy();
         });
 
         it('should set items to options.items list', function() {
@@ -97,13 +78,6 @@
       describe('when logged out', function() {
         it('should render if menu is public', function() {
           expect(menu.shouldRender()).toBeTruthy();
-        });
-
-        it('should not render if menu is private', function() {
-          menu = Menus.addMenu('menu1', {
-            isPublic: false
-          });
-          expect(menu.shouldRender()).toBeFalsy();
         });
       });
 
@@ -250,10 +224,6 @@
           expect(menuItem.class).toBe(menuItemOptions.class);
         });
 
-        it('should set menu item isPublic to options isPublic', function() {
-          expect(menuItem.isPublic).toBe(menuItemOptions.isPublic);
-        });
-
         it('should set menu item position to options position', function() {
           expect(menuItem.position).toBe(menuItemOptions.position);
         });
@@ -278,12 +248,12 @@
           expect(menuItem.title).toBe('');
         });
 
-        it('should set menu item isPublic to menu.isPublic', function() {
-          expect(menuItem.isPublic).toBe(menu.isPublic);
+        it('should set menu item isPublic to false', function() {
+          expect(menuItem.isPublic).toBeFalsy();
         });
 
-        it('should set menu item roles to menu roles', function() {
-          expect(menuItem.roles).toEqual(menu.roles);
+        it('should set menu item roles to default roles', function() {
+          expect(menuItem.roles).toEqual(Menus.defaultRoles);
         });
 
         it('should set menu item position to 0', function() {
@@ -393,10 +363,6 @@
           expect(menuItem1.items.length).toBe(1);
         });
 
-        it('should set isPublic to options isPublic', function() {
-          expect(subMenuItem.isPublic).toBe(subItemOptions.isPublic);
-        });
-
         it('should set title to options title', function() {
           expect(subMenuItem.title).toBe(subItemOptions.title);
         });
@@ -422,10 +388,6 @@
 
         it('should add sub menu item to menu item', function() {
           expect(menuItem2.items.length).toBe(1);
-        });
-
-        it('should set isPublic to parent isPublic', function() {
-          expect(subMenuItem.isPublic).toBe(menuItem2.isPublic);
         });
 
         it('should set title to blank', function() {
