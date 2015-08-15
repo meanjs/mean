@@ -34,9 +34,12 @@
  	height: 25px;
  	vertical-align: top;
  }
- .nav-docs>.nav>li>a {
+ .nav-docs>.nav li>a {
  	font-size: 0.9em;
  	padding: 5px 10px;
+ }
+ .nav-docs>.nav ul>li {
+   margin-left:15px;
  }
  .inner-link-anchor {
  	position: absolute;

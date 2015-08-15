@@ -1,0 +1,153 @@
+<div class="inner-link-anchor" id="menus"></div>
+<section class="page-header">
+  <h1>AngularJS Menus Service</h1>
+</section>
+<section>
+  <p>
+    MEAN.JS has an AngularJS service that helps you manage your application menus. The menu service has several methods:
+  </p>
+  <dl>
+    <dt>Menus.getMenu(menuId)</dt>
+    <dd>
+      Returns a menu object identified by the menuId argument.
+      <pre>var menu = Menus.getMenu('myMenu');</pre>
+    </dd>
+    <dt>Menus.addMenu(menuId, [options])</dt>
+    <dd>
+      Creates a new menu object, which will be identified by the menuId argument.  Includes the following arguments:
+      <ul>
+        <li>
+          <b>menuId</b> (Required) - Indicates the menu identifier for future reference.
+        </li>
+        <li>
+          <b>options</b> (Optional; Default: {}) - Indicates the options object to initialize the menu with.  Possible options include:
+          <ul>
+            <li>
+              <b>items</b> (Default: []) - An array of menu items to initialize the menu with.
+            </li>
+            <li>
+              <b>roles</b> (Default: ['user, admin']) - An array indicating the roles that are allowed to view this menu.
+            </li>
+          </ul>
+        </li>
+      </ul>
+      <pre>Menus.addMenu('myMenu', {roles:'*'});</pre>
+    </dd>
+    <dt>Menus.removeMenu(menuId)</dt>
+    <dd>
+      Removes a menu identified by the menuId argument.
+      <pre>Menus.removeMenu('myMenu');</pre>
+    </dd>
+    <dt>Menus.addMenuItem(menuId, [options])</dt>
+    <dd>
+      Creates a new menu item object. This method also include couple of arguments:
+      <ul>
+        <li>
+          <b>menuId</b> (Required) - Indicates the menu identifier.
+        </li>
+        <li>
+          <b>options</b> (Optional; Default: {}) - Indicates the options object to initialize the menu item with.  Possible options include:
+          <ul>
+            <li>
+              <b>title</b> (Optional; Default: '') - A String title for the menu item.
+            </li>
+            <li>
+              <b>state</b> (Optional; Default: '') - The UIRoute value, which is used to define the URL scheme where this menu item is marked as active.
+            </li>
+            <li>
+              <b>type</b> (Optional; Default: 'item') - This can either be 'item' or 'dropdown'.
+            </li>
+            <li>
+              <b>class</b> (Optional; Default: undefined) - CSS class(es) to apply to the menu list item (li) that is created.
+            </li>
+            <li>
+              <b>isPublic</b> (Optional; Default: menu.isPublic) - Indicates whether a menu item should be displayed only to authenticated users.
+            </li>
+            <li>
+              <b>roles</b> (Optional; Default: menu.roles) - An array indicating the roles that are allowed to view this menu item.
+            </li>
+            <li>
+              <b>position</b> (Optional; Default: 0) - Specify the order of appearance.
+            </li>
+          </ul>
+        </li>
+      </ul>
+<pre>Menus.addMenuItem('topbar', {title: 'Menu Item', state: 'menuitemstate'});</pre>
+    </dd>
+    <dt>Menus.removeMenuItem(menuId, menuItemState)</dt>
+    <dd>
+      Removes an existing menu with the provided menu identifier. This method also include couple of arguments:
+      <ul>
+        <li>
+          <b>menuId</b> (Required) - Indicates the menu identifier.
+        </li>
+        <li>
+          <b>menuItemState</b> (Required) - Indicates the menu item state that should be removed.
+        </li>
+      </ul>
+      <pre>Menus.removeMenuItem('topbar', 'menuitemstate');</pre>
+    </dd>
+    <dt>Menus.addSubMenuItem(menuId, parentItemState, [options])</dt>
+    <dd>
+      Adds a submenu item to an existing item object. This method also include couple of arguments:
+      <ul>
+        <li>
+          <b>menuId</b> (Required) - Indicates the menu identifier.
+        </li>
+        <li>
+          <b>parentItemState</b> (Required) - Indicates the parent menu item state.
+        </li>
+        <li>
+          <b>options</b> (Optional; Default: {}) - Indicates the options object to initialize the sub menu item with.  Possible options include:
+          <ul>
+            <li>
+              <b>title</b> (Optional; Default: '') - A String title for the menu item.
+            </li>
+            <li>
+              <b>state</b> (Optional; Default: '') - The UIRoute value, which is used to define the URL scheme where this menu item is marked as active.
+            </li>
+            <li>
+              <b>isPublic</b> (Optional; Default: parent.isPublic) - Indicates whether a menu item should be displayed only to authenticated users.
+            </li>
+            <li>
+              <b>roles</b> (Optional; Default: parent.roles) - An array indicating the roles that are allowed to view this menu item.
+            </li>
+            <li>
+              <b>position</b> (Optional; Default: 0) - Specify the order of appearance.
+            </li>
+          </ul>
+        </li>
+      </ul>
+      <pre>Menus.addSubMenuItem('topbar', 'dropdown1state', {title: 'Sub Menu Item', state: 'submenuitemstate'});</pre>
+    </dd>
+    <dt>Menus.removeSubMenuItem(menuId, submenuItemState)</dt>
+    <dd>
+      Removes an existing menu with the provided menu identifier. This method also include couple of arguments:
+      <ul>
+        <li>
+          <b>menuId</b> (Required) - Indicates the menu identifier.
+        </li>
+        <li>
+          <b>submenuItemState</b> (Required) - Indicates the sub menu item state that should be removed.
+        </li>
+      </ul>
+      <pre>Menus.removeSubMenuItem('topbar', 'submenuitemstate');</pre>
+    </dd>
+  </dl>
+  <p>
+    Using the Menus service is usually done in a configuration sections of your application modules. A simple configuration would look like this:
+  </p>
+  <pre>
+angular.module('example').run(['Menus',
+  function(Menus) {
+    Menus.addMenuItem('topbar', {title: 'Example', state: 'example'});
+    
+    Menus.addMenuItem('topbar', {title: 'Example Dropdown', state: 'exampledropdown', type: 'dropdown'});
+    Menus.addSubMenuItem('topbar', 'exampledropdown', {title: 'Example Sub Item', state: 'examplesubitem'});
+  }
+]);
+</pre>
+  <p class="alert alert-info">
+    To learn more about the Menus service, visit <a href="#article-example">The Article Example Section</a>.
+  </p>
+</section>
