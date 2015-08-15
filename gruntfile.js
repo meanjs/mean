@@ -201,6 +201,20 @@ module.exports = function (grunt) {
           return !fs.existsSync('config/env/local.js');
         }
       }
+    },
+    mocha_istanbul: {
+      coveralls: {
+        src: [
+          'modules/articles/client', 'modules/articles/server',
+          'modules/chat/client', 'modules/chat/server',
+          'modules/core/client', 'modules/core/server',
+          'modules/users/client', 'modules/users/server'
+        ], // multiple folders also works
+        options: {
+          coverage:true, // this will make the grunt.event.on('coverage') event listener to be triggered
+          // root: 'public/lib' // define where the cover task should consider the root of libraries that are covered by tests
+        }
+      }
     }
   });
 
@@ -241,6 +255,15 @@ module.exports = function (grunt) {
       done();
     });
   });
+  
+  grunt.event.on('coverage', function(lcovFileContents, done) {
+    require('coveralls').handleInput(lcov, function(error) {
+      if (err) {
+        return done(err);
+      }
+      done();
+    });
+  });
 
   // Lint CSS and JavaScript files.
   grunt.registerTask('lint', ['sass', 'less', 'jshint', 'csslint']);
@@ -250,7 +273,7 @@ module.exports = function (grunt) {
 
   // Run the project tests
   grunt.registerTask('test', ['env:test', 'lint', 'mkdir:upload', 'copy:localConfig', 'server', 'mochaTest', 'karma:unit']);
-  grunt.registerTask('test:server', ['env:test', 'lint', 'server', 'mochaTest']);
+  grunt.registerTask('test:server', ['env:test', 'lint', 'server', 'mocha_istanbul:coveralls', 'mochaTest']);
   grunt.registerTask('test:client', ['env:test', 'lint', 'server', 'karma:unit']);
   // Run the project in development mode
   grunt.registerTask('default', ['env:dev', 'lint', 'mkdir:upload', 'copy:localConfig', 'concurrent:default']);

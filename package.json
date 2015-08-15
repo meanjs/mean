@@ -62,6 +62,7 @@
     "validator": "^3.41.2"
   },
   "devDependencies": {
+    "coveralls": "~2.11.3",
     "grunt-concurrent": "^2.0.0",
     "grunt-contrib-copy": "~0.8.0",
     "grunt-contrib-csslint": "~0.4.0",
@@ -73,6 +74,7 @@
     "grunt-contrib-watch": "~0.6.1",
     "grunt-env": "~0.4.4",
     "grunt-karma": "~0.11.2",
+    "grunt-mocha-istanbul": "~2.4.0",
     "grunt-mocha-test": "~0.12.7",
     "grunt-ng-annotate": "^1.0.1",
     "grunt-node-inspector": "~0.2.0",
