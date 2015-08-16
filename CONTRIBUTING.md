@@ -26,7 +26,7 @@ Before you begin making changes:
 
 ## Submitting the Pull Request
 * Push your changes to your topic branch on your fork of the repo.
-* Submit a pull request from your topic branch to the master branch on the MEANJS repository.
+* Submit a pull request from your topic branch to the master branch on the MEAN.JS repository.
 * Be sure to tag any issues your pull request is taking care of / contributing to.
 	* By adding "Fixes #xyz" to a commit message will auto close the issue once the pull request is merged in.
 * Small changes are usually accepted and merged in within a week (provided that 2 collaborators give the okay)
