@@ -15,10 +15,10 @@ var config = require('../config'),
 // Define the Socket.io configuration method
 module.exports = function (app, db) {
   var server;
-  if (config.secure === true) {
+  if (config.secure && config.secure.ssl === true) {
     // Load SSL key and certificate
-    var privateKey = fs.readFileSync('./config/sslcerts/key.pem', 'utf8');
-    var certificate = fs.readFileSync('./config/sslcerts/cert.pem', 'utf8');
+    var privateKey = fs.readFileSync(path.resolve(config.secure.privateKey), 'utf8');
+    var certificate = fs.readFileSync(path.resolve(config.secure.certificate), 'utf8');
     var options = {
       key: privateKey,
       cert: certificate,

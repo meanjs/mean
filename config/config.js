@@ -72,18 +72,18 @@ var validateEnvironmentVariable = function () {
  */
 var validateSecureMode = function (config) {
 
-  if (config.secure !== true) {
+  if (!config.secure || config.secure.ssl !== true) {
     return true;
   }
 
-  var privateKey = fs.existsSync('./config/sslcerts/key.pem');
-  var certificate = fs.existsSync('./config/sslcerts/cert.pem');
+  var privateKey = fs.existsSync(path.resolve(config.secure.privateKey));
+  var certificate = fs.existsSync(path.resolve(config.secure.certificate));
 
   if (!privateKey || !certificate) {
     console.log(chalk.red('+ Error: Certificate file or key file is missing, falling back to non-SSL mode'));
     console.log(chalk.red('  To create them, simply run the following from your shell: sh ./scripts/generate-ssl-certs.sh'));
     console.log();
-    config.secure = false;
+    config.secure.ssl = false;
   }
 };
 
