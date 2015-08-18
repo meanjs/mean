@@ -21,7 +21,7 @@ module.exports = function (karmaConfig) {
       moduleName: 'mean',
 
       cacheIdFromPath: function (filepath) {
-        return filepath.replace('/client', '');
+        return filepath;
       },
     },
 

@@ -115,6 +115,10 @@ module.exports.initSession = function (app, db) {
     saveUninitialized: true,
     resave: true,
     secret: config.sessionSecret,
+    cookie: {
+      maxAge: config.sessionExpiration
+    },
+    key: config.sessionKey,
     store: new MongoStore({
       mongooseConnection: db.connection,
       collection: config.sessionCollection
@@ -158,7 +162,7 @@ module.exports.initModulesClientRoutes = function (app) {
 
   // Globbing static routing
   config.folders.client.forEach(function (staticPath) {
-    app.use(staticPath.replace('/client', ''), express.static(path.resolve('./' + staticPath)));
+    app.use(staticPath, express.static(path.resolve('./' + staticPath)));
   });
 };
 

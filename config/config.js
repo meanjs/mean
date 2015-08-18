@@ -19,7 +19,7 @@ var getGlobbedPaths = function (globPatterns, excludes) {
   // The output array
   var output = [];
 
-  // If glob pattern is array so we use each pattern in a recursive way, otherwise we use glob
+  // If glob pattern is array then we use each pattern in a recursive way, otherwise we use glob
   if (_.isArray(globPatterns)) {
     globPatterns.forEach(function (globPattern) {
       output = _.union(output, getGlobbedPaths(globPattern, excludes));
@@ -49,7 +49,7 @@ var getGlobbedPaths = function (globPatterns, excludes) {
 };
 
 /**
- * Validate NODE_ENV existance
+ * Validate NODE_ENV existence
  */
 var validateEnvironmentVariable = function () {
   var environmentFiles = glob.sync('./config/env/' + process.env.NODE_ENV + '.js');
@@ -127,10 +127,10 @@ var initGlobalConfigFiles = function (config, assets) {
   config.files.server.policies = getGlobbedPaths(assets.server.policies);
 
   // Setting Globbed js files
-  config.files.client.js = getGlobbedPaths(assets.client.lib.js, 'public/').concat(getGlobbedPaths(assets.client.js, ['client/', 'public/']));
+  config.files.client.js = getGlobbedPaths(assets.client.lib.js, 'public/').concat(getGlobbedPaths(assets.client.js, ['public/']));
 
   // Setting Globbed css files
-  config.files.client.css = getGlobbedPaths(assets.client.lib.css, 'public/').concat(getGlobbedPaths(assets.client.css, ['client/', 'public/']));
+  config.files.client.css = getGlobbedPaths(assets.client.lib.css, 'public/').concat(getGlobbedPaths(assets.client.css, ['public/']));
 
   // Setting Globbed test files
   config.files.client.tests = getGlobbedPaths(assets.client.tests);
@@ -140,7 +140,7 @@ var initGlobalConfigFiles = function (config, assets) {
  * Initialize global configuration
  */
 var initGlobalConfig = function () {
-  // Validate NDOE_ENV existance
+  // Validate NODE_ENV existence
   validateEnvironmentVariable();
 
   // Get the default assets
