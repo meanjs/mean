@@ -16,16 +16,7 @@ angular.module('articles').config(['$stateProvider',
         controller: 'ArticlesListController',
         resolve:{
           articles: function (Articles, $stateParams, $state) {
-            return Articles.query().$promise.then(
-              function (articles) {
-                //success
-                return articles;
-              },
-              function () {
-                //fail
-                $state.go('not-found');
-              }
-            );
+            return Articles.query().$promise;
           }
         }
       })
@@ -38,7 +29,7 @@ angular.module('articles').config(['$stateProvider',
         },
         resolve: {
           article: function () {
-            return { mock: 'mock' };
+            return { };
           }
         }
       })
@@ -50,16 +41,7 @@ angular.module('articles').config(['$stateProvider',
           article: function (Articles, $stateParams, $state) {
             return Articles.get({
               articleId: $stateParams.articleId
-            }).$promise.then(
-              function (article) {
-                //success
-                return article;
-              },
-              function () {
-                //fail
-                $state.go('not-found');
-              }
-            );
+            }).$promise;
           }
         }
       })
@@ -71,20 +53,14 @@ angular.module('articles').config(['$stateProvider',
           article: function (Articles, Authentication, $stateParams, $state) {
             return Articles.get({
               articleId: $stateParams.articleId
-            }).$promise.then(
-              function (article) {
+            }).$promise.then(function (article) {
                 //Auth Check
-                if (article.user._id !== Authentication.user._id) {
+                if (article.user._id !== Authentication.user._id && Authentication.user.roles.indexOf('admin') === -1) {
                   //TODO  Change to unauthorized when that PR is merged
-                  $state.go('articles.list');
+                  $state.go('unauthorized');
                 }
                 return article;
-              },
-              function () {
-                //fail
-                $state.go('not-found');
-              }
-            );
+              });
           }
         },
         data: {
