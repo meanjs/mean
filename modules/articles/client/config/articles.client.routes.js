@@ -68,14 +68,15 @@ angular.module('articles').config(['$stateProvider',
         templateUrl: 'modules/articles/client/views/edit-article.client.view.html',
         controller: 'ArticlesController',
         resolve: {
-          article: function (Articles, $stateParams, $state) {
+          article: function (Articles, Authentication, $stateParams, $state) {
             return Articles.get({
               articleId: $stateParams.articleId
             }).$promise.then(
               function (article) {
                 //Auth Check
-                if (article === undefined || typeof article !== 'object' || article._id === undefined) {
-                  $state.go('unauthorized');
+                if (article.user._id !== Authentication.user._id) {
+                  //TODO  Change to unauthorized when that PR is merged
+                  $state.go('articles.list');
                 }
                 return article;
               },
