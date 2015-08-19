@@ -105,6 +105,7 @@
     "load-grunt-tasks": "^3.2.0",
     "run-sequence": "^1.1.1",
     "should": "^7.0.1",
-    "supertest": "^1.0.1"
+    "supertest": "^1.0.1",
+    "coveralls": "^2.11.4"
   }
 }
