@@ -23,32 +23,6 @@
           pageTitle: 'Articles List'
         }
       })
-      .state('articles.create', {
-        url: '/create',
-        templateUrl: 'modules/articles/client/views/form-article.client.view.html',
-        controller: 'ArticlesController',
-        controllerAs: 'vm',
-        resolve: {
-          articleResolve: newArticle
-        },
-        data: {
-          roles: ['user', 'admin'],
-          pageTitle: 'Articles Create'
-        }
-      })
-      .state('articles.edit', {
-        url: '/:articleId/edit',
-        templateUrl: 'modules/articles/client/views/form-article.client.view.html',
-        controller: 'ArticlesController',
-        controllerAs: 'vm',
-        resolve: {
-          articleResolve: getArticle
-        },
-        data: {
-          roles: ['user', 'admin'],
-          pageTitle: 'Edit Article {{ articleResolve.title }}'
-        }
-      })
       .state('articles.view', {
         url: '/:articleId',
         templateUrl: 'modules/articles/client/views/view-article.client.view.html',
@@ -69,11 +43,5 @@
     return ArticlesService.get({
       articleId: $stateParams.articleId
     }).$promise;
-  }
-
-  newArticle.$inject = ['ArticlesService'];
-
-  function newArticle(ArticlesService) {
-    return new ArticlesService();
   }
 }());
