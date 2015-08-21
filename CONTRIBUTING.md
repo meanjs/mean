@@ -16,7 +16,7 @@ Before you create a new Issue:
 
 * Create a topic branch from the master branch.
 * Check for unnecessary whitespace / changes with `git diff --check` before committing.
-	* Also check that your code is formatted properly with spaces (hint: Use .editorconfig)
+	* Also check that your code is formatted properly with spaces (hint: Use [.editorconfig](http://editorconfig.org/))
 * Keep git commit messages clear and appropriate
 	* If possible, please "squash" your commits to as few commits as possible/reasonable such as one commit for implementation, one for tests, and one for documentation before finally squashing to one commit when getting the LGTM from a collaborator.
 * Make Sure you have added any tests necessary to test your code.
