@@ -155,6 +155,33 @@ describe('User Model Unit Tests:', function () {
 
   });
 
+  it('should not save the password in plain text', function (done) {
+    var _user = new User(user);
+    var passwordBeforeSave = _user.password;
+    _user.save(function (err) {
+      should.not.exist(err);
+      _user.password.should.not.equal(passwordBeforeSave);
+      _user.remove(function(err) {
+        should.not.exist(err);
+        done();
+      });
+    });
+  });
+
+  it('should not save the password in plain text (6 char password)', function (done) {
+    var _user = new User(user);
+    _user.password = '123456';
+    var passwordBeforeSave = _user.password;
+    _user.save(function (err) {
+      should.not.exist(err);
+      _user.password.should.not.equal(passwordBeforeSave);
+      _user.remove(function(err) {
+        should.not.exist(err);
+        done();
+      });
+    });
+  });
+
   describe("User E-mail Validation Tests", function() {
     it('should not allow invalid email address - "123"', function (done) {
       var _user = new User(user);
