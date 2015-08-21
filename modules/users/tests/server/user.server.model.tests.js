@@ -390,6 +390,24 @@ describe('User Model Unit Tests:', function () {
       
     });
 
+    it('should allow valid email address - "abc.def@abc.def.com"', function (done) {
+      var _user = new User(user);
+
+      _user.email = 'abc.def@abc.def.com';
+      _user.save(function (err) {
+        if (!err) {
+          _user.remove(function (err_remove) {
+            should.not.exist(err_remove);
+            done();
+          });
+        } else {
+          should.exist(err);
+          done();
+        }
+      });
+      
+    });
+
     it('should allow valid email address - "abc-def@abc.com"', function (done) {
       var _user = new User(user);
 

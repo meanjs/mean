@@ -26,7 +26,9 @@ module.exports.initLocalVariables = function (app) {
   // Setting application local variables
   app.locals.title = config.app.title;
   app.locals.description = config.app.description;
-  app.locals.secure = config.secure;
+  if (config.secure && config.secure.ssl === true) {
+    app.locals.secure = config.secure.ssl;
+  }
   app.locals.keywords = config.app.keywords;
   app.locals.googleAnalyticsTrackingID = config.app.googleAnalyticsTrackingID;
   app.locals.facebookAppId = config.facebook.clientID;

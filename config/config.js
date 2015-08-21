@@ -72,18 +72,18 @@ var validateEnvironmentVariable = function () {
  */
 var validateSecureMode = function (config) {
 
-  if (config.secure !== true) {
+  if (!config.secure || config.secure.ssl !== true) {
     return true;
   }
 
-  var privateKey = fs.existsSync('./config/sslcerts/key.pem');
-  var certificate = fs.existsSync('./config/sslcerts/cert.pem');
+  var privateKey = fs.existsSync(path.resolve(config.secure.privateKey));
+  var certificate = fs.existsSync(path.resolve(config.secure.certificate));
 
   if (!privateKey || !certificate) {
     console.log(chalk.red('+ Error: Certificate file or key file is missing, falling back to non-SSL mode'));
     console.log(chalk.red('  To create them, simply run the following from your shell: sh ./scripts/generate-ssl-certs.sh'));
     console.log();
-    config.secure = false;
+    config.secure.ssl = false;
   }
 };
 
@@ -159,9 +159,14 @@ var initGlobalConfig = function () {
   var environmentConfig = require(path.join(process.cwd(), 'config/env/', process.env.NODE_ENV)) || {};
 
   // Merge config files
-  var envConf = _.merge(defaultConfig, environmentConfig);
+  var config = _.merge(defaultConfig, environmentConfig);
 
-  var config = _.merge(envConf, (fs.existsSync(path.join(process.cwd(), 'config/env/local.js')) && require(path.join(process.cwd(), 'config/env/local.js'))) || {});
+  // We only extend the config object with the local.js custom/local environment if we are on
+  // production or development environment. If test environment is used we don't merge it with local.js
+  // to avoid running test suites on a prod/dev environment (which delete records and make modifications)
+  if (process.env.NODE_ENV !== 'test') {
+    config = _.merge(config, (fs.existsSync(path.join(process.cwd(), 'config/env/local.js')) && require(path.join(process.cwd(), 'config/env/local.js'))) || {});  
+  }
 
   // Initialize global globbed files
   initGlobalConfigFiles(config, assets);
