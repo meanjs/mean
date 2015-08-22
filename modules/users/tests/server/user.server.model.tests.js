@@ -10,14 +10,14 @@ var should = require('should'),
 /**
  * Globals
  */
-var user, user2, user3;
+var user1, user2, user3;
 
 /**
  * Unit tests
  */
 describe('User Model Unit Tests:', function () {
   before(function () {
-    user = {
+    user1 = {
       firstName: 'Full',
       lastName: 'Name',
       displayName: 'Full Name',
@@ -26,15 +26,8 @@ describe('User Model Unit Tests:', function () {
       password: 'password',
       provider: 'local'
     };
-    user2 = {
-      firstName: 'Full',
-      lastName: 'Name',
-      displayName: 'Full Name',
-      email: 'test@test.com',
-      username: 'username',
-      password: 'password',
-      provider: 'local'
-    };
+    // user2 is a clone of user1
+    user2 = user1;
     user3 = {
       firstName: 'Different',
       lastName: 'User',
@@ -56,11 +49,11 @@ describe('User Model Unit Tests:', function () {
     });
 
     it('should be able to save without problems', function (done) {
-      var _user = new User(user);
+      var _user1 = new User(user1);
       
-      _user.save(function (err) {
+      _user1.save(function (err) {
         should.not.exist(err);
-        _user.remove(function (err) {
+        _user1.remove(function (err) {
           should.not.exist(err);
           done();
         });
@@ -68,13 +61,13 @@ describe('User Model Unit Tests:', function () {
     });
 
     it('should fail to save an existing user again', function (done) {
-      var _user = new User(user);
+      var _user1 = new User(user1);
       var _user2 = new User(user2);
       
-      _user.save(function () {
+      _user1.save(function () {
         _user2.save(function (err) {
           should.exist(err);
-          _user.remove(function (err) {
+          _user1.remove(function (err) {
             should.not.exist(err);
             done();
           });
@@ -83,26 +76,26 @@ describe('User Model Unit Tests:', function () {
     });
 
     it('should be able to show an error when try to save without first name', function (done) {
-      var _user = new User(user);
+      var _user1 = new User(user1);
 
-      _user.firstName = '';
-      _user.save(function (err) {
+      _user1.firstName = '';
+      _user1.save(function (err) {
         should.exist(err);
         done();
       });
     });
 
     it('should confirm that saving user model doesnt change the password', function (done) {
-      var _user = new User(user);
+      var _user1 = new User(user1);
 
-      _user.save(function (err) {
+      _user1.save(function (err) {
         should.not.exist(err);
-        var passwordBefore = _user.password;
-        _user.firstName = 'test';
-        _user.save(function (err) {
-          var passwordAfter = _user.password;
+        var passwordBefore = _user1.password;
+        _user1.firstName = 'test';
+        _user1.save(function (err) {
+          var passwordAfter = _user1.password;
           passwordBefore.should.equal(passwordAfter);
-          _user.remove(function (err) {
+          _user1.remove(function (err) {
             should.not.exist(err);
             done();
           });
@@ -111,16 +104,16 @@ describe('User Model Unit Tests:', function () {
     });
 
     it('should be able to save 2 different users', function (done) {
-      var _user = new User(user);
+      var _user1 = new User(user1);
       var _user3 = new User(user3);
 
-      _user.save(function (err) {
+      _user1.save(function (err) {
         should.not.exist(err);
         _user3.save(function (err) {
           should.not.exist(err);
           _user3.remove(function (err) {
             should.not.exist(err);
-            _user.remove(function (err) {
+            _user1.remove(function (err) {
               should.not.exist(err);
               done();
             });
@@ -133,63 +126,62 @@ describe('User Model Unit Tests:', function () {
       // Test may take some time to complete due to db operations
       this.timeout(10000);
 
-      var _user = new User(user);
+      var _user1 = new User(user1);
       var _user3 = new User(user3);
 
-      _user.remove(function (err) {
+      _user1.save(function (err) {
         should.not.exist(err);
-        _user.save(function (err) {
-          should.not.exist(err);
-          _user3.email = _user.email;
-          _user3.save(function (err) {
-            should.exist(err);
-            _user.remove(function(err) {
-              should.not.exist(err);
-              done();
-            });
+        _user3.email = _user1.email;
+        _user3.save(function (err) {
+          should.exist(err);
+          _user1.remove(function(err) {
+            should.not.exist(err);
+            done();
           });
         });
       });
 
     });
 
-  });
-
-  it('should not save the password in plain text', function (done) {
-    var _user = new User(user);
-    var passwordBeforeSave = _user.password;
-    _user.save(function (err) {
-      should.not.exist(err);
-      _user.password.should.not.equal(passwordBeforeSave);
-      _user.remove(function(err) {
+    it('should not save the password in plain text', function (done) {
+      var _user1 = new User(user1);
+      var passwordBeforeSave = _user1.password;
+      _user1.save(function (err) {
         should.not.exist(err);
-        done();
+        _user1.password.should.not.equal(passwordBeforeSave);
+        _user1.remove(function(err) {
+          should.not.exist(err);
+          done();
+        });
       });
     });
-  });
 
-  it('should not save the password in plain text (6 char password)', function (done) {
-    var _user = new User(user);
-    _user.password = '123456';
-    var passwordBeforeSave = _user.password;
-    _user.save(function (err) {
-      should.not.exist(err);
-      _user.password.should.not.equal(passwordBeforeSave);
-      _user.remove(function(err) {
+    it('should not save the password in plain text (6 char password)', function (done) {
+      var _user1 = new User(user1);
+      _user1.password = '123456';
+      var passwordBeforeSave = _user1.password;
+      _user1.save(function (err) {
         should.not.exist(err);
-        done();
+        _user1.password.should.not.equal(passwordBeforeSave);
+        _user1.remove(function(err) {
+          should.not.exist(err);
+          done();
+        });
       });
     });
+
   });
+
 
   describe("User E-mail Validation Tests", function() {
     it('should not allow invalid email address - "123"', function (done) {
-      var _user = new User(user);
+      var _user1 = new User(user1);
 
-      _user.email = '123';
-      _user.save(function (err) {
+      _user1.email = '123';
+      _user1.save(function (err) {
         if (!err) {
-          _user.remove(function (err_remove) {
+          _user1.remove(function (err_remove) {
+            should.exist(err);
             should.not.exist(err_remove);
             done();
           });
@@ -202,12 +194,13 @@ describe('User Model Unit Tests:', function () {
     });
 
     it('should not allow invalid email address - "123@123"', function (done) {
-      var _user = new User(user);
+      var _user1 = new User(user1);
 
-      _user.email = '123@123';
-      _user.save(function (err) {
+      _user1.email = '123@123';
+      _user1.save(function (err) {
         if (!err) {
-          _user.remove(function (err_remove) {
+          _user1.remove(function (err_remove) {
+            should.exist(err);
             should.not.exist(err_remove);
             done();
           });
@@ -220,12 +213,13 @@ describe('User Model Unit Tests:', function () {
     });
 
     it('should not allow invalid email address - "123.com"', function (done) {
-      var _user = new User(user);
+      var _user1 = new User(user1);
 
-      _user.email = '123.com';
-      _user.save(function (err) {
+      _user1.email = '123.com';
+      _user1.save(function (err) {
         if (!err) {
-          _user.remove(function (err_remove) {
+          _user1.remove(function (err_remove) {
+            should.exist(err);
             should.not.exist(err_remove);
             done();
           });
@@ -238,12 +232,13 @@ describe('User Model Unit Tests:', function () {
     });
 
     it('should not allow invalid email address - "@123.com"', function (done) {
-      var _user = new User(user);
+      var _user1 = new User(user1);
 
-      _user.email = '@123.com';
-      _user.save(function (err) {
+      _user1.email = '@123.com';
+      _user1.save(function (err) {
         if (!err) {
-          _user.remove(function (err_remove) {
+          _user1.remove(function (err_remove) {
+            should.exist(err);
             should.not.exist(err_remove);
             done();
           });
@@ -256,12 +251,13 @@ describe('User Model Unit Tests:', function () {
     });
 
     it('should not allow invalid email address - "abc@abc@abc.com"', function (done) {
-      var _user = new User(user);
+      var _user1 = new User(user1);
 
-      _user.email = 'abc@abc@abc.com';
-      _user.save(function (err) {
+      _user1.email = 'abc@abc@abc.com';
+      _user1.save(function (err) {
         if (!err) {
-          _user.remove(function (err_remove) {
+          _user1.remove(function (err_remove) {
+            should.exist(err);
             should.not.exist(err_remove);
             done();
           });
@@ -274,12 +270,13 @@ describe('User Model Unit Tests:', function () {
     });
 
     it('should not allow invalid characters in email address - "abc~@#$%^&*()ef=@abc.com"', function (done) {
-      var _user = new User(user);
+      var _user1 = new User(user1);
 
-      _user.email = 'abc~@#$%^&*()ef=@abc.com';
-      _user.save(function (err) {
+      _user1.email = 'abc~@#$%^&*()ef=@abc.com';
+      _user1.save(function (err) {
         if (!err) {
-          _user.remove(function (err_remove) {
+          _user1.remove(function (err_remove) {
+            should.exist(err);
             should.not.exist(err_remove);
             done();
           });
@@ -292,30 +289,13 @@ describe('User Model Unit Tests:', function () {
     });
 
     it('should not allow space characters in email address - "abc def@abc.com"', function (done) {
-      var _user = new User(user);
+      var _user1 = new User(user1);
 
-      _user.email = 'abc def@abc.com';
-      _user.save(function (err) {
+      _user1.email = 'abc def@abc.com';
+      _user1.save(function (err) {
         if (!err) {
-          _user.remove(function (err_remove) {
-            should.not.exist(err_remove);
-            done();
-          });
-        } else {
-          should.exist(err);
-          done();
-        }
-      });
-      
-    });
-
-    it('should not allow single quote characters in email address - "abc\'def@abc.com"', function (done) {
-      var _user = new User(user);
-
-      _user.email = 'abc\'def@abc.com';
-      _user.save(function (err) {
-        if (!err) {
-          _user.remove(function (err_remove) {
+          _user1.remove(function (err_remove) {
+            should.exist(err);
             should.not.exist(err_remove);
             done();
           });
@@ -328,12 +308,13 @@ describe('User Model Unit Tests:', function () {
     });
 
     it('should not allow doudble quote characters in email address - "abc\"def@abc.com"', function (done) {
-      var _user = new User(user);
+      var _user1 = new User(user1);
 
-      _user.email = 'abc\"def@abc.com';
-      _user.save(function (err) {
-        if (!err) {
-          _user.remove(function (err_remove) {
+      _user1.email = 'abc\"def@abc.com';
+      _user1.save(function (err) {
+        if (err) {
+          _user1.remove(function (err_remove) {
+            should.exist(err);
             should.not.exist(err_remove);
             done();
           });
@@ -346,12 +327,13 @@ describe('User Model Unit Tests:', function () {
     });
 
     it('should not allow double dotted characters in email address - "abcdef@abc..com"', function (done) {
-      var _user = new User(user);
+      var _user1 = new User(user1);
 
-      _user.email = 'abcdef@abc..com';
-      _user.save(function (err) {
-        if (!err) {
-          _user.remove(function (err_remove) {
+      _user1.email = 'abcdef@abc..com';
+      _user1.save(function (err) {
+        if (err) {
+          _user1.remove(function (err_remove) {
+            should.exist(err);
             should.not.exist(err_remove);
             done();
           });
@@ -363,18 +345,37 @@ describe('User Model Unit Tests:', function () {
       
     });
 
-    it('should allow valid email address - "abc@abc.com"', function (done) {
-      var _user = new User(user);
+    it('should allow single quote characters in email address - "abc\'def@abc.com"', function (done) {
+      var _user1 = new User(user1);
 
-      _user.email = 'abc@abc.com';
-      _user.save(function (err) {
+      _user1.email = "abc\'def@abc.com";
+      _user1.save(function (err) {
         if (!err) {
-          _user.remove(function (err_remove) {
+          _user1.remove(function (err_remove) {
+            should.not.exist(err);
             should.not.exist(err_remove);
             done();
           });
         } else {
-          should.exist(err);
+          should.not.exist(err);
+          done();
+        }
+      });
+    });
+
+    it('should allow valid email address - "abc@abc.com"', function (done) {
+      var _user1 = new User(user1);
+
+      _user1.email = 'abc@abc.com';
+      _user1.save(function (err) {
+        if (!err) {
+          _user1.remove(function (err_remove) {
+            should.not.exist(err);
+            should.not.exist(err_remove);
+            done();
+          });
+        } else {
+          should.not.exist(err);
           done();
         }
       });
@@ -382,17 +383,18 @@ describe('User Model Unit Tests:', function () {
     });
 
     it('should allow valid email address - "abc+def@abc.com"', function (done) {
-      var _user = new User(user);
+      var _user1 = new User(user1);
 
-      _user.email = 'abc+def@abc.com';
-      _user.save(function (err) {
+      _user1.email = 'abc+def@abc.com';
+      _user1.save(function (err) {
         if (!err) {
-          _user.remove(function (err_remove) {
+          _user1.remove(function (err_remove) {
+            should.not.exist(err);
             should.not.exist(err_remove);
             done();
           });
         } else {
-          should.exist(err);
+          should.not.exist(err);
           done();
         }
       });
@@ -400,17 +402,18 @@ describe('User Model Unit Tests:', function () {
     });
 
     it('should allow valid email address - "abc.def@abc.com"', function (done) {
-      var _user = new User(user);
+      var _user1 = new User(user1);
 
-      _user.email = 'abc.def@abc.com';
-      _user.save(function (err) {
+      _user1.email = 'abc.def@abc.com';
+      _user1.save(function (err) {
         if (!err) {
-          _user.remove(function (err_remove) {
+          _user1.remove(function (err_remove) {
+            should.not.exist(err);
             should.not.exist(err_remove);
             done();
           });
         } else {
-          should.exist(err);
+          should.not.exist(err);
           done();
         }
       });
@@ -418,17 +421,18 @@ describe('User Model Unit Tests:', function () {
     });
 
     it('should allow valid email address - "abc.def@abc.def.com"', function (done) {
-      var _user = new User(user);
+      var _user1 = new User(user1);
 
-      _user.email = 'abc.def@abc.def.com';
-      _user.save(function (err) {
+      _user1.email = 'abc.def@abc.def.com';
+      _user1.save(function (err) {
         if (!err) {
-          _user.remove(function (err_remove) {
+          _user1.remove(function (err_remove) {
+            should.not.exist(err);
             should.not.exist(err_remove);
             done();
           });
         } else {
-          should.exist(err);
+          should.not.exist(err);
           done();
         }
       });
@@ -436,17 +440,17 @@ describe('User Model Unit Tests:', function () {
     });
 
     it('should allow valid email address - "abc-def@abc.com"', function (done) {
-      var _user = new User(user);
+      var _user1 = new User(user1);
 
-      _user.email = 'abc-def@abc.com';
-      _user.save(function (err) {
+      _user1.email = 'abc-def@abc.com';
+      _user1.save(function (err) {
+        should.not.exist(err);
         if (!err) {
-          _user.remove(function (err_remove) {
+          _user1.remove(function (err_remove) {
             should.not.exist(err_remove);
             done();
           });
         } else {
-          should.exist(err);
           done();
         }
       });
