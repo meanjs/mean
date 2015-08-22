@@ -15,7 +15,7 @@ module.exports = function () {
     },
     function (username, password, done) {
       User.findOne({
-        username: username
+        username: username.toLowerCase()
       }, function (err, user) {
         if (err) {
           return done(err);
