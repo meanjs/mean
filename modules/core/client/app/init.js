@@ -35,11 +35,13 @@ angular.module(ApplicationConfiguration.applicationModuleName).run(function ($ro
 
   // Record previous state
   $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
-    $state.previous = {
-      state: fromState,
-      params: fromParams,
-      href: $state.href(fromState, fromParams)
-    };
+    if (!fromState.data || !fromState.data.ignoreState) {
+      $state.previous = {
+        state: fromState,
+        params: fromParams,
+        href: $state.href(fromState, fromParams)
+      };
+    }
   });
 });
 
