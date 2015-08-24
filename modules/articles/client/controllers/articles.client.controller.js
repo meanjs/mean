@@ -15,7 +15,7 @@ angular.module('articles')
 
       // Redirect after save
       article.$save(function (response) {
-        $state.go('articles.list', {articleId: response._id});
+        $state.go('articles.view', {articleId: response._id});
 
         // Clear form fields
         $scope.title = '';
