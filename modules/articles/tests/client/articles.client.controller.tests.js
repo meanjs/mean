@@ -6,9 +6,11 @@
     // Initialize global variables
     var ArticlesController,
       scope,
+      rootScope,
       $httpBackend,
       $stateParams,
       $location,
+      templateCache,
       $state,
       Authentication,
       Articles,
@@ -39,9 +41,14 @@
     // The injector ignores leading and trailing underscores here (i.e. _$httpBackend_).
     // This allows us to inject a service but then attach it to a variable
     // with the same name as the service.
-    beforeEach(inject(function ($controller, $rootScope, _$location_, _$state_, _$stateParams_, _$httpBackend_, _Authentication_, _Articles_) {
+    beforeEach(inject(function ($controller, $rootScope, _$location_, _$state_, _$stateParams_, _$templateCache_, _$httpBackend_, _Authentication_, _Articles_) {
       // Set a new global scope
       scope = $rootScope.$new();
+      rootScope = $rootScope;
+
+      rootScope.$on('$stateChangeError', function (err) {
+        console.log(err);
+      });
 
       // Point global variables to injected services
       $stateParams = _$stateParams_;
@@ -50,6 +57,8 @@
       $state = _$state_;
       Authentication = _Authentication_;
       Articles = _Articles_;
+      templateCache = _$templateCache_;
+
 
       // create mock article
       mockArticle = new Articles({
@@ -72,7 +81,67 @@
       //Spy on state go
       spyOn($state, 'go');
 
+
+
     }));
+
+    describe('Route Config', function () {
+      var state;
+      describe('Main Route', function () {
+
+        beforeEach(function () {
+          state = $state.get('articles');
+        });
+
+        it('Should have the correct URL', function () {
+          expect(state.url).toEqual('/articles');
+        });
+
+        it('Should be abstract', function () {
+          expect(state.abstract).toBe(true);
+        });
+
+        it('Should have template', function () {
+          expect(state.template).toBe('<ui-view/>');
+        });
+      });
+
+      describe('View Route', function () {
+
+        beforeEach(function () {
+          state = $state.get('articles.view');
+          templateCache.put('template.html', 'modules/articles/client/views/view-article.client.view.html');
+        });
+
+        it('Should have the correct URL', function () {
+          expect(state.url).toEqual('/:articleId');
+        });
+
+        it('Should go to route with article id', function () {
+          //State change listener
+
+          $httpBackend.expectGET('api/articles/' + mockArticle._id).respond(mockArticle);
+          $httpBackend.when('GET', 'modules/articles/client/views/view-article.client.view.html').respond(200);
+          $state.transitionTo(state, {articleId: mockArticle._id});
+          rootScope.$apply();
+          scope.$apply();
+          $httpBackend.flush();
+
+          expect($state.href()).toEqual('/articles/' + mockArticle._id);
+          expect($state.current.name).toEqual('articles.view');
+        });
+
+        it('Should not be abstract', function () {
+          expect(state.abstract).toBe(undefined);
+        });
+
+        it('Should have templateUrl', function () {
+          expect(state.templateUrl).toBe('modules/articles/client/views/view-article.client.view.html');
+        });
+      });
+    });
+
+
 
     describe('$scope.create()', function () {
       var sampleArticlePostData;
