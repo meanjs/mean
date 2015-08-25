@@ -6,19 +6,24 @@ angular.module('users').controller('EditProfileController', ['$scope', '$http', 
 
     // Update a user profile
     $scope.updateUserProfile = function (isValid) {
-      if (isValid) {
-        $scope.success = $scope.error = null;
-        var user = new Users($scope.user);
+      $scope.success = $scope.error = null;
 
-        user.$update(function (response) {
-          $scope.success = true;
-          Authentication.user = response;
-        }, function (response) {
-          $scope.error = response.data.message;
-        });
-      } else {
-        $scope.submitted = true;
+      if (!isValid) {
+        $scope.$broadcast('show-errors-check-validity', 'userForm');
+
+        return false;
       }
+
+      var user = new Users($scope.user);
+
+      user.$update(function (response) {
+        $scope.$broadcast('show-errors-reset', 'userForm');
+
+        $scope.success = true;
+        Authentication.user = response;
+      }, function (response) {
+        $scope.error = response.data.message;
+      });
     };
   }
 ]);
