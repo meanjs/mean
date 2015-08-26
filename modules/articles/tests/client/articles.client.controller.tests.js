@@ -14,7 +14,8 @@
       $state,
       Authentication,
       Articles,
-      mockArticle;
+      mockArticle,
+      injector;
 
     // The $resource service augments the response object with methods for updating and deleting the resource.
     // If we were to use the standard toEqual matcher, our tests would fail because the test values would not match
@@ -41,7 +42,7 @@
     // The injector ignores leading and trailing underscores here (i.e. _$httpBackend_).
     // This allows us to inject a service but then attach it to a variable
     // with the same name as the service.
-    beforeEach(inject(function ($controller, $rootScope, _$location_, _$state_, _$stateParams_, _$templateCache_, _$httpBackend_, _Authentication_, _Articles_) {
+    beforeEach(inject(function ($controller, $rootScope, _$injector_, _$location_, _$state_, _$stateParams_, _$templateCache_, _$httpBackend_, _Authentication_, _Articles_) {
       // Set a new global scope
       scope = $rootScope.$new();
       rootScope = $rootScope;
@@ -58,6 +59,7 @@
       Authentication = _Authentication_;
       Articles = _Articles_;
       templateCache = _$templateCache_;
+      injector = _$injector_;
 
 
       // create mock article
@@ -85,61 +87,7 @@
 
     }));
 
-    describe('Route Config', function () {
-      var state;
-      describe('Main Route', function () {
 
-        beforeEach(function () {
-          state = $state.get('articles');
-        });
-
-        it('Should have the correct URL', function () {
-          expect(state.url).toEqual('/articles');
-        });
-
-        it('Should be abstract', function () {
-          expect(state.abstract).toBe(true);
-        });
-
-        it('Should have template', function () {
-          expect(state.template).toBe('<ui-view/>');
-        });
-      });
-
-      describe('View Route', function () {
-
-        beforeEach(function () {
-          state = $state.get('articles.view');
-          templateCache.put('template.html', 'modules/articles/client/views/view-article.client.view.html');
-        });
-
-        it('Should have the correct URL', function () {
-          expect(state.url).toEqual('/:articleId');
-        });
-
-        it('Should go to route with article id', function () {
-          //State change listener
-
-          $httpBackend.expectGET('api/articles/' + mockArticle._id).respond(mockArticle);
-          $httpBackend.when('GET', 'modules/articles/client/views/view-article.client.view.html').respond(200);
-          $state.transitionTo(state, {articleId: mockArticle._id});
-          rootScope.$apply();
-          scope.$apply();
-          $httpBackend.flush();
-
-          expect($state.href()).toEqual('/articles/' + mockArticle._id);
-          expect($state.current.name).toEqual('articles.view');
-        });
-
-        it('Should not be abstract', function () {
-          expect(state.abstract).toBe(undefined);
-        });
-
-        it('Should have templateUrl', function () {
-          expect(state.templateUrl).toBe('modules/articles/client/views/view-article.client.view.html');
-        });
-      });
-    });
 
 
 
