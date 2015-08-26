@@ -1,4 +1,4 @@
-<section data-ng-controller="ArticlesController" data-ng-init="findOne()">
+<section ng-controller="ArticlesController" ng-init="findOne()">
   <div class="page-header">
     <h1>Edit Article</h1>
   </div>
@@ -19,8 +19,8 @@
         <div class="form-group">
           <input type="submit" value="Update" class="btn btn-default">
         </div>
-        <div data-ng-show="error" class="text-danger">
-          <strong data-ng-bind="error"></strong>
+        <div ng-show="error" class="text-danger">
+          <strong ng-bind="error"></strong>
         </div>
       </fieldset>
     </form>
