@@ -8,14 +8,10 @@
       scope,
       rootScope,
       $httpBackend,
-      $stateParams,
-      $location,
-      templateCache,
       $state,
       Authentication,
       Articles,
-      mockArticle,
-      injector;
+      mockArticle;
 
     // The $resource service augments the response object with methods for updating and deleting the resource.
     // If we were to use the standard toEqual matcher, our tests would fail because the test values would not match
@@ -42,25 +38,16 @@
     // The injector ignores leading and trailing underscores here (i.e. _$httpBackend_).
     // This allows us to inject a service but then attach it to a variable
     // with the same name as the service.
-    beforeEach(inject(function ($controller, $rootScope, _$injector_, _$location_, _$state_, _$stateParams_, _$templateCache_, _$httpBackend_, _Authentication_, _Articles_) {
+    beforeEach(inject(function ($controller, $rootScope, _$state_, _$httpBackend_, _Authentication_, _Articles_) {
       // Set a new global scope
       scope = $rootScope.$new();
       rootScope = $rootScope;
 
-      rootScope.$on('$stateChangeError', function (err) {
-        console.log(err);
-      });
-
       // Point global variables to injected services
-      $stateParams = _$stateParams_;
       $httpBackend = _$httpBackend_;
-      $location = _$location_;
       $state = _$state_;
       Authentication = _Authentication_;
       Articles = _Articles_;
-      templateCache = _$templateCache_;
-      injector = _$injector_;
-
 
       // create mock article
       mockArticle = new Articles({
@@ -82,14 +69,7 @@
 
       //Spy on state go
       spyOn($state, 'go');
-
-
-
     }));
-
-
-
-
 
     describe('$scope.create()', function () {
       var sampleArticlePostData;

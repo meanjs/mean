@@ -92,7 +92,7 @@
         });
 
         it('Should have templateUrl', function () {
-          expect(viewstate.templateUrl).toBe('modules/articles/client/views/view.article.client.view.html');
+          expect(viewstate.templateUrl).toBe('modules/articles/client/views/view-article.client.view.html');
         });
       });
 
@@ -100,7 +100,7 @@
         var createstate;
         beforeEach(inject(function ($state, $templateCache) {
           createstate = $state.get('articles.create');
-          $templateCache.put('modules/articles/client/views/create.article.client.view.html', '');
+          $templateCache.put('modules/articles/client/views/create-article.client.view.html', '');
         }));
 
         it('Should have the correct URL', function () {
@@ -132,7 +132,7 @@
         });
 
         it('Should have templateUrl', function () {
-          expect(createstate.templateUrl).toBe('modules/articles/client/views/create.article.client.view.html');
+          expect(createstate.templateUrl).toBe('modules/articles/client/views/create-article.client.view.html');
         });
       });
 
@@ -140,7 +140,7 @@
         var editstate;
         beforeEach(inject(function ($state, $templateCache) {
           editstate = $state.get('articles.edit');
-          $templateCache.put('modules/articles/client/views/edit.article.client.view.html', '');
+          $templateCache.put('modules/articles/client/views/edit-article.client.view.html', '');
         }));
 
         it('Should have the correct URL', function () {
@@ -172,7 +172,7 @@
         });
 
         it('Should have templateUrl', function () {
-          expect(editstate.templateUrl).toBe('modules/articles/client/views/edit.article.client.view.html');
+          expect(editstate.templateUrl).toBe('modules/articles/client/views/edit-article.client.view.html');
         });
 
         //TODO:  Would like to see a test that checks fails authentiaction and makes sure it goes to unauthorized route
