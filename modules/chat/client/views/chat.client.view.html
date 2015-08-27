@@ -9,7 +9,7 @@
       <div class="input-group">
         <input type="text" id="messageText" name="messageText" class="form-control" ng-model="messageText" placeholder="Enter new message">
         <span class="input-group-btn">
-          <button type="submit" class="btn btn-primary">Submit</button>
+          <button type="submit" class="btn btn-primary" ng-disabled="!messageText.length">Submit</button>
         </span>
       </div>
     </fieldset>
