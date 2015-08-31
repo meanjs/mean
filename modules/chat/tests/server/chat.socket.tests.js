@@ -11,9 +11,7 @@ var should = require('should'),
   sinon = require('sinon'),
   User = mongoose.model('User'),
   express = require(path.resolve('./config/lib/express')),
-  io = require('socket.io/node_modules/socket.io-client'),
-  querystring = require('querystring'),
-  http = require('http');
+  io = require('socket.io/node_modules/socket.io-client');
 
 /**
  * Globals
@@ -70,7 +68,7 @@ describe('Socket Chat tests:', function() {
       .send(credentials)
       .expect(200)
       .end(function (signinErr, res) {
-        console.log('---agent: ',agent);
+        // console.log('---agent: ',agent);
 
         // Handle signin error
         if (signinErr) {
@@ -104,7 +102,7 @@ describe('Socket Chat tests:', function() {
           // console.log('connected');
 
           socket.on('chatMessage', function (data) {
-            console.log(data);
+            console.log('test-result from chatMessage (chat.socket.tests.js:105) -->',data);
             data.should.eql(testMessage);
             done();
           });
