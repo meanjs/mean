@@ -86,14 +86,14 @@ describe('User Model Unit Tests:', function () {
     });
 
     it('should be able to update an existing user with valid roles without problems', function (done) {
-      var _user = new User(user);
+      var _user1 = new User(user1);
 
-      _user.save(function (err) {
+      _user1.save(function (err) {
         should.not.exist(err);
-        _user.roles = ['user', 'admin'];
-        _user.save(function (err) {
+        _user1.roles = ['user', 'admin'];
+        _user1.save(function (err) {
           should.not.exist(err);
-          _user.remove(function (err) {
+          _user1.remove(function (err) {
             should.not.exist(err);
             done();
           });
@@ -102,14 +102,14 @@ describe('User Model Unit Tests:', function () {
     });
 
     it('should be able to show an error when trying to update an existing user without a role', function (done) {
-      var _user = new User(user);
+      var _user1 = new User(user1);
 
-      _user.save(function (err) {
+      _user1.save(function (err) {
         should.not.exist(err);
-        _user.roles = [];
-        _user.save(function (err) {
+        _user1.roles = [];
+        _user1.save(function (err) {
           should.exist(err);
-          _user.remove(function (err) {
+          _user1.remove(function (err) {
             should.not.exist(err);
             done();
           });
@@ -118,14 +118,14 @@ describe('User Model Unit Tests:', function () {
     });
 
     it('should be able to show an error when trying to update an existing user with a invalid role', function (done) {
-      var _user = new User(user);
+      var _user1 = new User(user1);
 
-      _user.save(function (err) {
+      _user1.save(function (err) {
         should.not.exist(err);
-        _user.roles = ['invalid-user-role-enum'];
-        _user.save(function (err) {
+        _user1.roles = ['invalid-user-role-enum'];
+        _user1.save(function (err) {
           should.exist(err);
-          _user.remove(function (err) {
+          _user1.remove(function (err) {
             should.not.exist(err);
             done();
           });
