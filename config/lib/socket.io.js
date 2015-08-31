@@ -73,6 +73,8 @@ module.exports = function (app, db) {
       // Get the session id from the request cookies
       var sessionId = socket.request.signedCookies ? socket.request.signedCookies[config.sessionKey] : undefined;
 
+      console.log('sessionId:',sessionId);
+      
       if (!sessionId) return next(new Error('sessionId was not found in socket.request'), false);
 
       // Use the mongoStorage instance to get the Express session information
