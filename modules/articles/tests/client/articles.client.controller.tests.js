@@ -2,9 +2,9 @@
 
 (function () {
   // Articles Controller Spec
-  describe('Articles Controller Tests', function () {
+  describe('Articles List Controller Tests', function () {
     // Initialize global variables
-    var ArticlesController,
+    var ArticlesListController,
       scope,
       rootScope,
       $httpBackend,
@@ -62,7 +62,7 @@
       };
 
       // Initialize the Articles controller.
-      ArticlesController = $controller('ArticlesController', {
+      ArticlesListController = $controller('ArticlesListController', {
         $scope: scope,
         article: {}
       });
@@ -71,110 +71,35 @@
       spyOn($state, 'go');
     }));
 
-    describe('$scope.create()', function () {
-      var sampleArticlePostData;
+    describe('Instantiate', function () {
+      var mockArticles,
+          sampleArticleData;
 
       beforeEach(function () {
         // Create a sample article object
-        sampleArticlePostData = new Articles({
+        sampleArticleData = new Articles({
           title: 'An Article about MEAN',
           content: 'MEAN rocks!'
         });
 
-        // Fixture mock form input values
-        scope.title = 'An Article about MEAN';
-        scope.content = 'MEAN rocks!';
+        mockArticles = [mockArticle, sampleArticleData];
       });
 
-      it('should send a POST request with the form input values and then locate to new object URL', inject(function (Articles) {
+      it('should send a GET request and return all articles', inject(function (Articles) {
         // Set POST response
-        $httpBackend.expectPOST('api/articles', sampleArticlePostData).respond(mockArticle);
+        $httpBackend.expectGET('api/articles').respond(mockArticles);
 
-        // Run controller functionality
-        scope.create(true);
+
         $httpBackend.flush();
 
         // Test form inputs are reset
-        expect(scope.title).toEqual('');
-        expect(scope.content).toEqual('');
+        expect(scope.articles.length).toEqual(2);
+        expect(scope.articles[0]).toEqual(mockArticle);
+        expect(scope.articles[1]).toEqual(sampleArticleData);
 
         // Test URL redirection after the article was created
-        expect($state.go).toHaveBeenCalledWith('articles.view', {articleId: mockArticle._id});
+        //expect($state.go).toHaveBeenCalledWith('articles.view', {articleId: mockArticle._id});
       }));
-
-      it('should set scope.error if save error', function () {
-        var errorMessage = 'this is an error message';
-        $httpBackend.expectPOST('api/articles', sampleArticlePostData).respond(400, {
-          message: errorMessage
-        });
-
-        scope.create(true);
-        $httpBackend.flush();
-
-        expect(scope.error).toBe(errorMessage);
-      });
-    });
-
-    describe('$scope.update()', function () {
-      beforeEach(function () {
-        // Mock article in scope
-        scope.article = mockArticle;
-      });
-
-      it('should update a valid article', inject(function (Articles) {
-        // Set PUT response
-        $httpBackend.expectPUT(/api\/articles\/([0-9a-fA-F]{24})$/).respond();
-
-        // Run controller functionality
-        scope.update(true);
-        $httpBackend.flush();
-
-        // Test URL location to new object
-        expect($state.go).toHaveBeenCalledWith('articles.view', {articleId: mockArticle._id});
-      }));
-
-      it('should set scope.error to error response message', inject(function (Articles) {
-        var errorMessage = 'error';
-        $httpBackend.expectPUT(/api\/articles\/([0-9a-fA-F]{24})$/).respond(400, {
-          message: errorMessage
-        });
-
-        scope.update(true);
-        $httpBackend.flush();
-
-        expect(scope.error).toBe(errorMessage);
-      }));
-    });
-
-    describe('scope.remove()', function () {
-      beforeEach(function () {
-        //Setup articles
-        scope.article = mockArticle;
-        scope.articles = [mockArticle, {}, {}];
-      });
-
-      it('should delete the article and redirect to articles', function () {
-        //Return true on confirm message
-        spyOn(window, 'confirm').and.returnValue(true);
-
-        $httpBackend.expectDELETE(/api\/articles\/([0-9a-fA-F]{24})$/).respond(204);
-
-        scope.remove();
-        $httpBackend.flush();
-
-        expect($state.go).toHaveBeenCalledWith('articles.list');
-        expect(scope.articles.length).toBe(2);
-      });
-
-      it('should should not delete the article and not redirect', function () {
-        //Return false on confirm message
-        spyOn(window, 'confirm').and.returnValue(false);
-
-        scope.remove();
-
-        expect($state.go).not.toHaveBeenCalled();
-        expect(scope.articles.length).toBe(3);
-      });
     });
   });
 }());

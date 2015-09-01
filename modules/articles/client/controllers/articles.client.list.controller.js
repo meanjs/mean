@@ -2,9 +2,11 @@
 
 // Articles List controller
 angular.module('articles')
-.controller('ArticlesListController', ['$scope', 'articles',
-  function ($scope, articles) {
+.controller('ArticlesListController', ['$scope', 'Articles',
+  function ($scope, Articles) {
     //Query Articles
-    $scope.articles = articles;
+    Articles.query().$promise.then(function (data) {
+      $scope.articles = data;
+    });
   }
 ]);

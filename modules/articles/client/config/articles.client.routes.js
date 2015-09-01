@@ -13,12 +13,7 @@ angular.module('articles').config(['$stateProvider',
       .state('articles.list', {
         url: '',
         templateUrl: 'modules/articles/client/views/list-articles.client.view.html',
-        controller: 'ArticlesListController',
-        resolve:{
-          articles: function (Articles, $stateParams, $state) {
-            return Articles.query().$promise;
-          }
-        }
+        controller: 'ArticlesListController'
       })
       .state('articles.create', {
         url: '/create',
