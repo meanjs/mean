@@ -63,8 +63,7 @@
 
       // Initialize the Articles controller.
       ArticlesListController = $controller('ArticlesListController', {
-        $scope: scope,
-        article: {}
+        $scope: scope
       });
 
       //Spy on state go
