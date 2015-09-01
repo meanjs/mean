@@ -9,3 +9,6 @@ services:
 before_install:
   - gem update --system
   - gem install sass --version "=3.3.7"
+  - npm i nsp -g
+after_script:
+  - nsp audit-package
