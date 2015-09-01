@@ -74,6 +74,7 @@
     "grunt-env": "~0.4.4",
     "grunt-karma": "~0.11.2",
     "grunt-mocha-test": "~0.12.7",
+    "grunt-mocha-istanbul": "^2.4.0",
     "grunt-ng-annotate": "^1.0.1",
     "grunt-node-inspector": "~0.2.0",
     "grunt-nodemon": "~0.4.0",
@@ -107,6 +108,7 @@
     "load-grunt-tasks": "^3.2.0",
     "run-sequence": "^1.1.1",
     "should": "^7.0.1",
-    "supertest": "^1.0.1"
+    "supertest": "^1.0.1",
+    "coveralls": "^2.11.4"
   }
 }
