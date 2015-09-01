@@ -40,14 +40,14 @@
         <li><pre>$ grunt build</pre></li>
       </ul>
     </li>
-    <li>Once within the root directory of the MEAN.js project, deploy MEAN.JS to Cloud Foundry
+    <li>Once within the root directory of the MEAN.JS project, deploy MEAN.JS to Cloud Foundry
       <ul>
         <li><pre>$ cf push</pre></li>
       </ul>
     </li>
   </ul>
   <p>
-    After `cf push` completes you will see the URL to your running MEANJS application (your URL will be different).
+    After `cf push` completes you will see the URL to your running MEANJ.S application (your URL will be different).
   </p>
   <pre>
     requested state: started
@@ -56,6 +56,22 @@
     urls: mean-humbler-frappa.mybluemix.net
   </pre>
   <p>Open your browser and go to that URL and your should see your MEAN.JS app running!</p>
+
+  <h2>Deploying To IBM Bluemix</h2>
+  <p>
+    IBM Bluemix is a Cloud Foundry based PaaS. By clicking the button below you can signup for Bluemix and
+    deploy a working copy of MEAN.JS to the cloud without having to do the steps above.
+  </p>
+
+  <p>
+    <a href="https://bluemix.net/deploy?repository=https%3A%2F%2Fgithub.com%2Fmeanjs%2Fmean"><img src="https://camo.githubusercontent.com/46f2f9aa54a26e36a277d9706cf9432297817d65/68747470733a2f2f626c75656d69782e6e65742f6465706c6f792f627574746f6e2e706e67" alt="Deploy to Bluemix" data-canonical-src="https://bluemix.net/deploy/button.png" style="max-width:100%;"></a>
+  </p>
+  <p>
+    After the deployment is finished you will be left with a copy of the MEAN.JS code in your own private Git
+    repo in Bluemix complete with a pre-configured build and deploy pipeline. Just clone the Git repo, make
+    your changes, and commit them back. Once your changes are committed, the build and deploy pipeline
+    will run automatically deploying your changes to Bluemix.
+  </p>
 </section>
 <section>
   <h2>Configuring Social Services</h2>
