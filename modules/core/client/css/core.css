@@ -6,17 +6,10 @@
 }
 [ng\:cloak],
 [ng-cloak],
-[data-ng-cloak],
 [x-ng-cloak],
 .ng-cloak,
 .x-ng-cloak {
   display: none !important;
-}
-.ng-invalid.ng-dirty {
-  border-color: #FA787E;
-}
-.ng-valid.ng-dirty {
-  border-color: #78FA89;
 }
 .header-profile-image {
   opacity: 0.8;
@@ -32,4 +25,13 @@ a:hover .header-profile-image {
 .user-header-dropdown-toggle {
   padding-top: 11px !important;
   padding-bottom: 11px !important;
+}
+.error-text {
+  display: none;
+}
+.has-error .help-block.error-text {
+  display: block;
+}
+.has-error .help-inline.error-text {
+  display: inline;
 }

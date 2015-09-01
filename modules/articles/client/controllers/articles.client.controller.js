@@ -6,7 +6,16 @@ angular.module('articles')
   function ($scope, article, $stateParams, $state, Authentication, Articles) {
     $scope.article = article;
 
-    $scope.create = function () {
+    // Create new Article
+    $scope.create = function (isValid) {
+      $scope.error = null;
+
+      if (!isValid) {
+        $scope.$broadcast('show-errors-check-validity', 'articleForm');
+
+        return false;
+      }
+
       // Create new Article object
       var article = new Articles({
         title: this.title,
@@ -25,7 +34,17 @@ angular.module('articles')
       });
     };
 
-    $scope.update = function () {
+
+    // Update existing Article
+    $scope.update = function (isValid) {
+      $scope.error = null;
+
+      if (!isValid) {
+        $scope.$broadcast('show-errors-check-validity', 'articleForm');
+
+        return false;
+      }
+
       var article = $scope.article;
 
       article.$update(function () {

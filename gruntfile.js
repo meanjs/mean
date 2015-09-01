@@ -176,6 +176,22 @@ module.exports = function (grunt) {
         reporter: 'spec'
       }
     },
+    mocha_istanbul: {
+      coverage: {
+        src: testAssets.tests.server,
+        options: {
+          print: 'detail',
+          coverage: true,
+          require: 'test.js',
+          coverageFolder: 'coverage',
+          reportFormats: ['cobertura','lcovonly'],
+          check: {
+            lines: 40,
+            statements: 40
+          }
+        }
+      }
+    },
     karma: {
       unit: {
         configFile: 'karma.conf.js'
@@ -202,6 +218,15 @@ module.exports = function (grunt) {
         }
       }
     }
+  });
+
+  grunt.event.on('coverage', function(lcovFileContents, done) {
+    require('coveralls').handleInput(lcovFileContents, function(err) {
+      if (err) {
+        return done(err);
+      }
+      done();
+    });
   });
 
   // Load NPM tasks
@@ -252,6 +277,9 @@ module.exports = function (grunt) {
   grunt.registerTask('test', ['env:test', 'lint', 'mkdir:upload', 'copy:localConfig', 'server', 'mochaTest', 'karma:unit']);
   grunt.registerTask('test:server', ['env:test', 'lint', 'server', 'mochaTest']);
   grunt.registerTask('test:client', ['env:test', 'lint', 'server', 'karma:unit']);
+  // Run project coverage
+  grunt.registerTask('coverage', ['env:test', 'lint', 'mocha_istanbul:coverage']);
+
   // Run the project in development mode
   grunt.registerTask('default', ['env:dev', 'lint', 'mkdir:upload', 'copy:localConfig', 'concurrent:default']);
 

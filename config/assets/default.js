@@ -11,6 +11,7 @@ module.exports = {
         'public/lib/angular/angular.js',
         'public/lib/angular-resource/angular-resource.js',
         'public/lib/angular-animate/angular-animate.js',
+        'public/lib/angular-messages/angular-messages.js',
         'public/lib/angular-ui-router/release/angular-ui-router.js',
         'public/lib/angular-ui-utils/ui-utils.js',
         'public/lib/angular-bootstrap/ui-bootstrap-tpls.js',
@@ -33,7 +34,8 @@ module.exports = {
       'modules/*/client/*.js',
       'modules/*/client/**/*.js'
     ],
-    views: ['modules/*/client/views/**/*.html']
+    views: ['modules/*/client/views/**/*.html'],
+    templates: ['build/templates.js']
   },
   server: {
     gruntConfig: 'gruntfile.js',
