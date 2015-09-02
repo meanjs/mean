@@ -2,12 +2,12 @@
   'use strict';
 
   angular
-    .module('articles')
-    .factory('Articles', Articles);
+    .module('articles.models')
+    .factory('Article', Article);
 
-  Articles.$inject = ['$resource'];
+  Article.$inject = ['$resource'];
 
-  function Articles($resource) {
+  function Article($resource) {
     return $resource('api/articles/:articleId', {
       articleId: '@_id'
     }, {
