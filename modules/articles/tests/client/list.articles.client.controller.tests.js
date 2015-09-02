@@ -96,8 +96,6 @@
         expect(scope.articles[0]).toEqual(mockArticle);
         expect(scope.articles[1]).toEqual(sampleArticleData);
 
-        // Test URL redirection after the article was created
-        //expect($state.go).toHaveBeenCalledWith('articles.view', {articleId: mockArticle._id});
       }));
     });
   });
