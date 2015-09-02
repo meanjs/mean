@@ -12,3 +12,10 @@ before_install:
   - npm i nsp -g
 after_script:
   - nsp audit-package
+notifications:
+  webhooks:
+    urls:
+      - https://webhooks.gitter.im/e/249daf9851ea4776f34e
+    on_success: change  # options: [always|never|change] default: always
+    on_failure: always  # options: [always|never|change] default: always
+    on_start: never     # options: [always|never|change] default: always
