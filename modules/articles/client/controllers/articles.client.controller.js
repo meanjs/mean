@@ -1,9 +1,10 @@
 'use strict';
 
 // Articles controller
-angular.module('articles').controller('ArticlesController', ['$scope', '$stateParams', '$location', 'Authentication', 'Articles',
-  function ($scope, $stateParams, $location, Authentication, Articles) {
-    $scope.authentication = Authentication;
+angular.module('articles')
+.controller('ArticlesController', ['$scope', 'article', '$stateParams', '$state', 'Authentication', 'Articles',
+  function ($scope, article, $stateParams, $state, Authentication, Articles) {
+    $scope.article = article;
 
     // Create new Article
     $scope.create = function (isValid) {
@@ -23,7 +24,7 @@ angular.module('articles').controller('ArticlesController', ['$scope', '$statePa
 
       // Redirect after save
       article.$save(function (response) {
-        $location.path('articles/' + response._id);
+        $state.go('articles.view', {articleId: response._id});
 
         // Clear form fields
         $scope.title = '';
@@ -33,22 +34,6 @@ angular.module('articles').controller('ArticlesController', ['$scope', '$statePa
       });
     };
 
-    // Remove existing Article
-    $scope.remove = function (article) {
-      if (article) {
-        article.$remove();
-
-        for (var i in $scope.articles) {
-          if ($scope.articles[i] === article) {
-            $scope.articles.splice(i, 1);
-          }
-        }
-      } else {
-        $scope.article.$remove(function () {
-          $location.path('articles');
-        });
-      }
-    };
 
     // Update existing Article
     $scope.update = function (isValid) {
@@ -63,22 +48,25 @@ angular.module('articles').controller('ArticlesController', ['$scope', '$statePa
       var article = $scope.article;
 
       article.$update(function () {
-        $location.path('articles/' + article._id);
+        $state.go('articles.view', {articleId: article._id});
       }, function (errorResponse) {
         $scope.error = errorResponse.data.message;
       });
     };
 
-    // Find a list of Articles
-    $scope.find = function () {
-      $scope.articles = Articles.query();
+    // Remove existing Article
+    $scope.remove = function () {
+      if (confirm('Are you sure you want to delete?')) {
+        $scope.article.$remove(function (article) {
+          if ($scope.articles !== undefined && $scope.articles.length > 0) {
+            $scope.articles.splice($scope.articles.indexOf($scope.article), 1);
+          }
+          $state.go('articles.list');
+        });
+      }
     };
 
-    // Find existing Article
-    $scope.findOne = function () {
-      $scope.article = Articles.get({
-        articleId: $stateParams.articleId
-      });
-    };
+    //Not sure if this is needed anymore?
+    $scope.authentication = Authentication;
   }
 ]);
