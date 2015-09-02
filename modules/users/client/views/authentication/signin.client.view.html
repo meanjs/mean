@@ -5,7 +5,7 @@
       <fieldset>
         <div class="form-group" show-errors>
           <label for="username">Username</label>
-          <input type="text" id="username" name="username" class="form-control" ng-model="credentials.username" placeholder="Username" required>
+          <input type="text" id="username" name="username" class="form-control" ng-model="credentials.username" placeholder="Username" lowercase required>
           <div ng-messages="userForm.username.$error" role="alert">
             <p class="help-block error-text" ng-message="required">Username is required.</p>
           </div>
