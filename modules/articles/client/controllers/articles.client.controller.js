@@ -48,7 +48,7 @@ angular.module('articles')
       var article = $scope.article;
 
       article.$update(function () {
-        $state.go('articles.view',{articleId: article._id});
+        $state.go('articles.view', {articleId: article._id});
       }, function (errorResponse) {
         $scope.error = errorResponse.data.message;
       });

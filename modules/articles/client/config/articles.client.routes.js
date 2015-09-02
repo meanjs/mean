@@ -51,7 +51,6 @@ angular.module('articles').config(['$stateProvider',
             }).$promise.then(function (article) {
                 //Auth Check
                 if (article.user._id !== Authentication.user._id && Authentication.user.roles.indexOf('admin') === -1) {
-                  //TODO  Change to unauthorized when that PR is merged
                   $state.go('unauthorized');
                 }
                 return article;
