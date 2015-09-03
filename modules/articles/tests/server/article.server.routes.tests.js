@@ -29,7 +29,7 @@ describe('Article CRUD tests', function () {
     // Create user credentials
     credentials = {
       username: 'username',
-      password: 'password'
+      password: 'M3@n.jsI$Aw3$0m3'
     };
 
     // Create a new user

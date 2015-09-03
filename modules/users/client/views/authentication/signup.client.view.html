@@ -34,14 +34,20 @@
         </div>
         <div class="form-group" show-errors>
           <label for="password">Password</label>
-          <input type="password" id="password" name="password" class="form-control" ng-model="credentials.password" placeholder="Password" required ng-minlength="6">
+            <input type="password" id="password" name="password" class="form-control" ng-model="credentials.password" placeholder="Password" popover="{{popoverMsg}}" popover-trigger="focus" password-validator required>
           <div ng-messages="userForm.password.$error" role="alert">
             <p class="help-block error-text" ng-message="required">Password is required.</p>
-            <p class="help-block error-text" ng-message="minlength">Password is too short.</p>
+            <div ng-repeat="passwordError in passwordErrors">
+              <p class="help-block error-text" ng-show="userForm.password.$error.strength">{{passwordError}}</p>
+            </div>
           </div>
         </div>
+        <div class="form-group" ng-show="!userForm.password.$pristine">
+          <label>Password Strength</label>
+          <progressbar value="strengthProgress" type="{{strengthColor}}"><span style="color:white; white-space:nowrap;">{{strengthProgress}}%</span></progressbar>
+        </div>
         <div class="text-center form-group">
-          <button type="submit" class="btn btn-large btn-primary">Sign up</button>
+          <button type="submit" class="btn btn-primary">Sign up</button>
           &nbsp; or&nbsp;
           <a ui-sref="authentication.signin" class="show-signup">Sign in</a>
         </div>

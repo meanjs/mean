@@ -1,8 +1,9 @@
 'use strict';
 
-angular.module('users').controller('PasswordController', ['$scope', '$stateParams', '$http', '$location', 'Authentication',
-  function ($scope, $stateParams, $http, $location, Authentication) {
+angular.module('users').controller('PasswordController', ['$scope', '$stateParams', '$http', '$location', 'Authentication', 'PasswordValidator',
+  function ($scope, $stateParams, $http, $location, Authentication, PasswordValidator) {
     $scope.authentication = Authentication;
+    $scope.popoverMsg = PasswordValidator.getPopoverMsg();
 
     //If user is signed in then redirect back home
     if ($scope.authentication.user) {
@@ -10,8 +11,14 @@ angular.module('users').controller('PasswordController', ['$scope', '$stateParam
     }
 
     // Submit forgotten password account id
-    $scope.askForPasswordReset = function () {
+    $scope.askForPasswordReset = function (isValid) {
       $scope.success = $scope.error = null;
+
+      if (!isValid) {
+        $scope.$broadcast('show-errors-check-validity', 'forgotPasswordForm');
+
+        return false;
+      }
 
       $http.post('/api/auth/forgot', $scope.credentials).success(function (response) {
         // Show user success message and clear form
@@ -26,8 +33,14 @@ angular.module('users').controller('PasswordController', ['$scope', '$stateParam
     };
 
     // Change user password
-    $scope.resetUserPassword = function () {
+    $scope.resetUserPassword = function (isValid) {
       $scope.success = $scope.error = null;
+
+      if (!isValid) {
+        $scope.$broadcast('show-errors-check-validity', 'resetPasswordForm');
+
+        return false;
+      }
 
       $http.post('/api/auth/reset/' + $stateParams.token, $scope.passwordDetails).success(function (response) {
         // If successful show success message and clear form
