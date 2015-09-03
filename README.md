@@ -31,6 +31,8 @@ $ npm install -g bower
 $ npm install -g grunt-cli
 ```
 
+* Sass - We have also included [Sass](http://sass-lang.com/install) to compile your css files more efficiently. Make sure that it is installed on your machine by following the simple steps here: [Sass Install](http://sass-lang.com/install)
+
 ## Downloading MEAN.JS
 There are several ways you can get the MEAN.JS boilerplate:
 
