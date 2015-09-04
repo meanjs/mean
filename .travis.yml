@@ -12,6 +12,7 @@ before_install:
   - npm i nsp -g
 after_script:
   - nsp audit-package
+  - grunt coverage
 notifications:
   webhooks:
     urls:
