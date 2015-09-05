@@ -161,6 +161,10 @@ var initGlobalConfig = function () {
   // Merge config files
   var config = _.merge(defaultConfig, environmentConfig);
 
+  // read package.json for MEAN.JS project information
+  var pkg = require(path.resolve('./package.json'));
+  config.meanjs = pkg;
+
   // We only extend the config object with the local.js custom/local environment if we are on
   // production or development environment. If test environment is used we don't merge it with local.js
   // to avoid running test suites on a prod/dev environment (which delete records and make modifications)

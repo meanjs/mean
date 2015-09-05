@@ -46,6 +46,7 @@ module.exports.start = function start(callback) {
       if (process.env.NODE_ENV === 'secure') {
         console.log(chalk.green('HTTPs:\t\t\t\ton'));
       }
+      console.log(chalk.green('MEAN.JS version:\t\t\t' + config.meanjs.version));
       console.log('--');
 
       if (callback) callback(app, db, config);
