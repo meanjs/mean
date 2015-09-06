@@ -165,6 +165,7 @@ gulp.task('mocha', function (done) {
 
   // Connect mongoose
   mongoose.connect(function () {
+    mongoose.loadModels();
     // Run the tests
     gulp.src(testAssets.tests.server)
       .pipe(plugins.mocha({
@@ -220,15 +221,15 @@ gulp.task('build', function (done) {
 
 // Run the project tests
 gulp.task('test', function (done) {
-  runSequence('env:test', ['karma', 'mocha'], done);
+  runSequence('env:test', 'karma', 'mocha', done);
 });
 
 gulp.task('test:server', function (done) {
-  runSequence('env:test', ['mocha'], done);
+  runSequence('env:test', 'mocha', done);
 });
 
 gulp.task('test:client', function (done) {
-  runSequence('env:test', ['karma'], done);
+  runSequence('env:test', 'karma', done);
 });
 
 // Run the project in development mode
