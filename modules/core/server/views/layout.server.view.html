@@ -43,6 +43,11 @@
     </section>
   </section>
 
+  <!--Embedding views, load in ui-router using their ID instead of the file path. ID = (fileName removing .client.view.html)-->
+  {% for html in htmlFiles %}
+    <script type="text/ng-template" id="{{html.name}}">{{html.file | safe}}</script>
+  {% endfor %}
+
   <!--Embedding The User Object-->
   <script type="text/javascript">
     var user = {{ user | json | safe }};
