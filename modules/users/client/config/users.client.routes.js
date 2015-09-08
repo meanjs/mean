@@ -8,39 +8,39 @@ angular.module('users').config(['$stateProvider',
       .state('settings', {
         abstract: true,
         url: '/settings',
-        templateUrl: 'modules/users/client/views/settings/settings.client.view.html',
+        templateUrl: 'settings',
         data: {
           roles: ['user', 'admin']
         }
       })
       .state('settings.profile', {
         url: '/profile',
-        templateUrl: 'modules/users/client/views/settings/edit-profile.client.view.html'
+        templateUrl: 'edit-profile'
       })
       .state('settings.password', {
         url: '/password',
-        templateUrl: 'modules/users/client/views/settings/change-password.client.view.html'
+        templateUrl: 'change-password'
       })
       .state('settings.accounts', {
         url: '/accounts',
-        templateUrl: 'modules/users/client/views/settings/manage-social-accounts.client.view.html'
+        templateUrl: 'manage-social-accounts'
       })
       .state('settings.picture', {
         url: '/picture',
-        templateUrl: 'modules/users/client/views/settings/change-profile-picture.client.view.html'
+        templateUrl: 'change-profile-picture'
       })
       .state('authentication', {
         abstract: true,
         url: '/authentication',
-        templateUrl: 'modules/users/client/views/authentication/authentication.client.view.html'
+        templateUrl: 'authentication'
       })
       .state('authentication.signup', {
         url: '/signup',
-        templateUrl: 'modules/users/client/views/authentication/signup.client.view.html'
+        templateUrl: 'signup'
       })
       .state('authentication.signin', {
         url: '/signin?err',
-        templateUrl: 'modules/users/client/views/authentication/signin.client.view.html'
+        templateUrl: 'signin'
       })
       .state('password', {
         abstract: true,
@@ -49,7 +49,7 @@ angular.module('users').config(['$stateProvider',
       })
       .state('password.forgot', {
         url: '/forgot',
-        templateUrl: 'modules/users/client/views/password/forgot-password.client.view.html'
+        templateUrl: 'forgot-password'
       })
       .state('password.reset', {
         abstract: true,
@@ -58,15 +58,15 @@ angular.module('users').config(['$stateProvider',
       })
       .state('password.reset.invalid', {
         url: '/invalid',
-        templateUrl: 'modules/users/client/views/password/reset-password-invalid.client.view.html'
+        templateUrl: 'reset-password-invalid'
       })
       .state('password.reset.success', {
         url: '/success',
-        templateUrl: 'modules/users/client/views/password/reset-password-success.client.view.html'
+        templateUrl: 'reset-password-success'
       })
       .state('password.reset.form', {
         url: '/:token',
-        templateUrl: 'modules/users/client/views/password/reset-password.client.view.html'
+        templateUrl: 'reset-password'
       });
   }
 ]);

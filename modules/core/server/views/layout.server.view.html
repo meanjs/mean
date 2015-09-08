@@ -36,12 +36,15 @@
 </head>
 
 <body class="ng-cloak">
-  <header ng-include="'/modules/core/client/views/header.client.view.html'" class="navbar navbar-fixed-top navbar-inverse"></header>
+  <header ng-include="'header'" class="navbar navbar-fixed-top navbar-inverse"></header>
   <section class="content">
     <section class="container">
       {% block content %}{% endblock %}
     </section>
   </section>
+
+  <!-- embedded views to be used with templateCache -->
+  {% for htmlFile in htmlFiles %}<script type="text/ng-template" id="{{htmlFile.name}}">{{htmlFile.file | safe}}</script>{% endfor %}
 
   <!--Embedding The User Object-->
   <script type="text/javascript">
@@ -52,10 +55,7 @@
   <script type="text/javascript" src="/socket.io/socket.io.js"></script>
 
   <!--Application JavaScript Files-->
-  {% for jsFile in jsFiles %}<script type="text/javascript" src="{{jsFile}}"></script>{% endfor %} 
-
-  <!-- embedded views to be used with templateCache -->
-  {% for html in htmlFiles %}<script type="text/ng-template" id="{{html.name}}">{{html.file | safe}}</script>{% endfor %}
+  {% for jsFile in jsFiles %}<script type="text/javascript" src="{{jsFile}}"></script>{% endfor %}
 
   {% if livereload %}
   <!--Livereload script rendered -->

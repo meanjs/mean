@@ -1,20 +1,33 @@
 'use strict';
 
+var fs = require('fs'),
+  path = require('path'),
+  async = require('async');
+
+function readViewFromDisk (viewPath, callback) {
+  var splittedPath = viewPath.split('/');
+  var viewName = splittedPath[splittedPath.length-1].split('.')[0];
+  fs.readFile(path.resolve(viewPath), 'utf8', function (err, file) {
+    if(err) {
+      callback(err);
+    } else {
+      callback(null, {
+        name: viewName,
+        file: file
+      });
+    }
+  });
+}
+
 /**
  * Render the main application page
  */
 exports.renderIndex = function (req, res) {
-  res.locals.htmlFiles = []
-  res.app.locals.htmlFiles.forEach(function (html) {
-    var splitted = html.split('/')
-    var name = splitted[splitted.length-1].split('.')[0]
-    res.locals.htmlFiles.push({
-      name: name,
-      file: fs.readFileSync(path.resolve(html), 'utf8')
-    })
-  })
-  res.render('modules/core/server/views/index', {
-    user: req.user || null
+  async.concat(res.app.locals.htmlFiles, readViewFromDisk, function (err, embeddableViews) {
+    res.locals.htmlFiles = embeddableViews;
+    res.render('modules/core/server/views/index', {
+      user: req.user || null
+    });
   });
 };
 
