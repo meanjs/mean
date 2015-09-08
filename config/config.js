@@ -132,6 +132,9 @@ var initGlobalConfigFiles = function (config, assets) {
   // Setting Globbed css files
   config.files.client.css = getGlobbedPaths(assets.client.lib.css, 'public/').concat(getGlobbedPaths(assets.client.css, ['public/']));
 
+  // Setting Globbed html files
+  config.files.client.html = getGlobbedPaths(assets.client.views, 'public/');
+
   // Setting Globbed test files
   config.files.client.tests = getGlobbedPaths(assets.client.tests);
 };
