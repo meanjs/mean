@@ -34,6 +34,7 @@ module.exports.initLocalVariables = function (app) {
   app.locals.facebookAppId = config.facebook.clientID;
   app.locals.jsFiles = config.files.client.js;
   app.locals.cssFiles = config.files.client.css;
+  app.locals.htmlFiles = config.files.client.html;
   app.locals.livereload = config.livereload;
   app.locals.logo = config.logo;
   app.locals.favicon = config.favicon;

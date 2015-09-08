@@ -15,25 +15,25 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
     $stateProvider
     .state('home', {
       url: '/',
-      templateUrl: 'modules/core/client/views/home.client.view.html'
+      templateUrl: 'home'
     })
     .state('not-found', {
       url: '/not-found',
-      templateUrl: 'modules/core/client/views/404.client.view.html',
+      templateUrl: '404',
       data: {
         ignoreState: true
       }
     })
     .state('bad-request', {
       url: '/bad-request',
-      templateUrl: 'modules/core/client/views/400.client.view.html',
+      templateUrl: '400',
       data: {
         ignoreState: true
       }
     })
     .state('forbidden', {
       url: '/forbidden',
-      templateUrl: 'modules/core/client/views/403.client.view.html',
+      templateUrl: '403',
       data: {
         ignoreState: true
       }

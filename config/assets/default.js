@@ -34,7 +34,7 @@ module.exports = {
       'modules/*/client/*.js',
       'modules/*/client/**/*.js'
     ],
-    views: ['modules/*/client/views/**/*.html'],
+    views: ['modules/*/client/**/*client.view.html'],
     templates: ['build/templates.js']
   },
   server: {
