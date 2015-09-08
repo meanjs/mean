@@ -1,11 +1,34 @@
 'use strict';
 
+var fs = require('fs'),
+  path = require('path'),
+  async = require('async');
+
+function readViewFromDisk (viewPath, callback) {
+  var splittedPath = viewPath.split('/');
+  var viewName = splittedPath[splittedPath.length-1].split('.')[0];
+  fs.readFile(path.resolve(viewPath), 'utf8', function (err, file) {
+    if(err) {
+      callback(err);
+    } else {
+      callback(null, {
+        name: viewName,
+        file: file
+      });
+    }
+  });
+}
 /**
  * Render the main application page
  */
 exports.renderIndex = function (req, res) {
-  res.render('modules/core/server/views/index', {
-    user: req.user || null
+  async.concat(res.app.locals.htmlFiles, readViewFromDisk, function (err, embeddableViews) {
+    if(err)
+      return res.status(500).send(err);
+    res.locals.htmlFiles = embeddableViews;
+    res.render('modules/core/server/views/index', {
+      user: req.user || null
+    });
   });
 };
 
