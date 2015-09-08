@@ -24,6 +24,9 @@ function readViewFromDisk (viewPath, callback) {
  */
 exports.renderIndex = function (req, res) {
   async.concat(res.app.locals.htmlFiles, readViewFromDisk, function (err, embeddableViews) {
+    if(err)
+      return res.status(500).send(err);
+    
     res.locals.htmlFiles = embeddableViews;
     res.render('modules/core/server/views/index', {
       user: req.user || null
