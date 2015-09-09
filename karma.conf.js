@@ -14,14 +14,17 @@ module.exports = function (karmaConfig) {
     frameworks: ['jasmine'],
 
     preprocessors: {
-      'modules/*/client/views/**/*.html': ['ng-html2js']
+      'modules/*/client/**/*client.view.html': ['ng-html2js']
     },
 
     ngHtml2JsPreprocessor: {
       moduleName: 'mean',
 
       cacheIdFromPath: function (filepath) {
-        return filepath;
+        //the returned value must match the IDs used in templateUrl inside the angular app
+        var splittedPath = filepath.split('/');
+        var viewName = splittedPath[splittedPath.length-1].split('.')[0];
+        return viewName;
       },
     },
 
