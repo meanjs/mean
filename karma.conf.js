@@ -14,7 +14,7 @@ module.exports = function (karmaConfig) {
     frameworks: ['jasmine'],
 
     preprocessors: {
-      'modules/*/client/**/*client.view.html': ['ng-html2js']
+      'modules/*/client/views/**/*.html': ['ng-html2js']
     },
 
     ngHtml2JsPreprocessor: {
