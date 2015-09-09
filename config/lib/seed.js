@@ -7,22 +7,37 @@ var mongoose = require('mongoose'),
 
 console.log(chalk.bold.red('Warning:  Database seeding is turned on'));
 
+var seedUser = {
+  username: 'user',
+  password: '1234',
+  provider: 'local',
+  email: 'user@localhost.com',
+  firstName: 'User',
+  lastName: 'Local',
+  displayName: 'User Local',
+  roles: ['user']
+};
+
+var seedAdmin = {
+  username: 'admin',
+  password: '1234',
+  provider: 'local',
+  email: 'admin@localhost.com',
+  firstName: 'Admin',
+  lastName: 'Local',
+  displayName: 'Admin Local',
+  roles: ['user', 'admin']
+};
+
+
 //If production only seed admin if it does not exist
 if (process.env.NODE_ENV === 'production') {
   //Add Local Admin
   User.find({username: 'admin'}, function (err, users) {
     if (users.length === 0) {
       var password = crypto.randomBytes(64).toString('hex').slice(1, 20);
-      var user = new User({
-        username: 'admin',
-        password: password,
-        provider: 'local',
-        email: 'admin@localhost.com',
-        firstName: 'Admin',
-        lastName: 'Local',
-        displayName: 'Admin Local',
-        roles: ['user', 'admin']
-      });
+      seedAdmin.password = password;
+      var user = new User(seedAdmin);
       // Then save the user
       user.save(function (err) {
         if (err) {
@@ -39,16 +54,8 @@ if (process.env.NODE_ENV === 'production') {
   //Add Local User
   User.find({username: 'user'}).remove(function () {
     var password = crypto.randomBytes(64).toString('hex').slice(1, 20);
-    var user = new User({
-      username: 'user',
-      password: password,
-      provider: 'local',
-      email: 'user@localhost.com',
-      firstName: 'User',
-      lastName: 'Local',
-      displayName: 'User Local',
-      roles: ['user']
-    });
+    seedUser.password = password;
+    var user = new User(seedUser);
     // Then save the user
     user.save(function (err) {
       if (err) {
@@ -63,16 +70,8 @@ if (process.env.NODE_ENV === 'production') {
   //Add Local Admin
   User.find({username: 'admin'}).remove(function () {
     var password = crypto.randomBytes(64).toString('hex').slice(1, 20);
-    var user = new User({
-      username: 'admin',
-      password: password,
-      provider: 'local',
-      email: 'admin@localhost.com',
-      firstName: 'Admin',
-      lastName: 'Local',
-      displayName: 'Admin Local',
-      roles: ['user', 'admin']
-    });
+    seedAdmin.password = password;
+    var user = new User(seedAdmin);
     // Then save the user
     user.save(function (err) {
       if (err) {
