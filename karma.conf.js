@@ -21,7 +21,10 @@ module.exports = function (karmaConfig) {
       moduleName: 'mean',
 
       cacheIdFromPath: function (filepath) {
-        return filepath;
+        //the returned value must match the IDs used in templateUrl inside the angular app
+        var splittedPath = filepath.split('/');
+        var viewName = splittedPath[splittedPath.length-1].split('.')[0];
+        return viewName;
       },
     },
 

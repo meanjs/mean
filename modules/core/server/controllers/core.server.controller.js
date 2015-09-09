@@ -1,11 +1,36 @@
 'use strict';
 
+var fs = require('fs'),
+  path = require('path'),
+  async = require('async');
+
 /**
  * Render the main application page
  */
 exports.renderIndex = function (req, res) {
-  res.render('modules/core/server/views/index', {
-    user: req.user || null
+  function readViewFromDisk (viewPath, callback) {
+    var splittedPath = viewPath.split('/');
+    var viewId = splittedPath[splittedPath.length-1].split('.')[0];
+    fs.readFile(path.resolve(viewPath), 'utf8', function (err, file) {
+      if(err) {
+        callback(err);
+      } else {
+        callback(null, {
+          id: viewId,
+          content: file
+        });
+      }
+    });
+  }
+  async.map(res.app.locals.htmlFiles, readViewFromDisk, function (err, embeddableViews) {
+    if(err) {
+      res.status(500).send(err);
+    } else {
+      res.locals.htmlFiles = embeddableViews;
+      res.render('modules/core/server/views/index', {
+        user: req.user || null
+      });
+    }
   });
 };
 
