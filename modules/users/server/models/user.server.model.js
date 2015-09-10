@@ -6,20 +6,14 @@
 var mongoose = require('mongoose'),
   Schema = mongoose.Schema,
   crypto = require('crypto'),
-  validator = require('validator');
+  validator = require('validator'),
+  owasp = require('owasp-password-strength-test');
 
 /**
  * A Validation function for local strategy properties
  */
 var validateLocalStrategyProperty = function (property) {
   return ((this.provider !== 'local' && !this.updated) || property.length);
-};
-
-/**
- * A Validation function for local strategy password
- */
-var validateLocalStrategyPassword = function (password) {
-  return (this.provider !== 'local' || validator.isLength(password, 6));
 };
 
 /**
@@ -66,8 +60,7 @@ var UserSchema = new Schema({
   },
   password: {
     type: String,
-    default: '',
-    validate: [validateLocalStrategyPassword, 'Password should be longer']
+    default: ''
   },
   salt: {
     type: String
@@ -110,9 +103,24 @@ var UserSchema = new Schema({
  * Hook a pre save method to hash the password
  */
 UserSchema.pre('save', function (next) {
-  if (this.password && this.isModified('password') && this.password.length >= 6) {
+  if (this.password && this.isModified('password')) {
     this.salt = crypto.randomBytes(16).toString('base64');
     this.password = this.hashPassword(this.password);
+  }
+
+  next();
+});
+
+/**
+ * Hook a pre validate method to test the local password
+ */
+UserSchema.pre('validate', function (next) {
+  if (this.provider === 'local' && this.password) {
+    var result = owasp.test(this.password);
+    if (result.errors.length) {
+      var error = result.errors.join(' ');
+      this.invalidate('password', error);
+    }
   }
 
   next();

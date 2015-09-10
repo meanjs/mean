@@ -12,7 +12,8 @@
     "angular-ui-utils": "bower",
     "angular-ui-router": "~0.2",
     "angular-file-upload": "1.1.5",
-    "angular-messages": "1.3.17"
+    "angular-messages": "1.3.17",
+    "owasp-password-strength-test": "~1.3.0"
   },
   "resolutions": {
     "angular": "~1.3"

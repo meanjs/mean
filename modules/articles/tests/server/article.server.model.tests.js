@@ -24,7 +24,7 @@ describe('Article Model Unit Tests:', function () {
       displayName: 'Full Name',
       email: 'test@test.com',
       username: 'username',
-      password: 'password'
+      password: 'M3@n.jsI$Aw3$0m3'
     });
 
     user.save(function () {

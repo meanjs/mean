@@ -23,7 +23,7 @@ describe('User Model Unit Tests:', function () {
       displayName: 'Full Name',
       email: 'test@test.com',
       username: 'username',
-      password: 'password',
+      password: 'M3@n.jsI$Aw3$0m3',
       provider: 'local'
     };
     // user2 is a clone of user1
@@ -34,10 +34,9 @@ describe('User Model Unit Tests:', function () {
       displayName: 'Full Different Name',
       email: 'test3@test.com',
       username: 'different_username',
-      password: 'different_password',
+      password: 'Different_Password1!',
       provider: 'local'
     };
-
   });
 
   describe('Method Save', function () {
@@ -50,7 +49,7 @@ describe('User Model Unit Tests:', function () {
 
     it('should be able to save without problems', function (done) {
       var _user1 = new User(user1);
-      
+
       _user1.save(function (err) {
         should.not.exist(err);
         _user1.remove(function (err) {
@@ -63,7 +62,7 @@ describe('User Model Unit Tests:', function () {
     it('should fail to save an existing user again', function (done) {
       var _user1 = new User(user1);
       var _user2 = new User(user2);
-      
+
       _user1.save(function () {
         _user2.save(function (err) {
           should.exist(err);
@@ -75,7 +74,7 @@ describe('User Model Unit Tests:', function () {
       });
     });
 
-    it('should be able to show an error when try to save without first name', function (done) {
+    it('should be able to show an error when trying to save without first name', function (done) {
       var _user1 = new User(user1);
 
       _user1.firstName = '';
@@ -204,9 +203,9 @@ describe('User Model Unit Tests:', function () {
       });
     });
 
-    it('should not save the password in plain text (6 char password)', function (done) {
+    it('should not save the passphrase in plain text', function (done) {
       var _user1 = new User(user1);
-      _user1.password = '123456';
+      _user1.password = 'Open-Source Full-Stack Solution for MEAN';
       var passwordBeforeSave = _user1.password;
       _user1.save(function (err) {
         should.not.exist(err);
@@ -217,9 +216,96 @@ describe('User Model Unit Tests:', function () {
         });
       });
     });
-
   });
 
+  describe("User Password Validation Tests", function() {
+    it('should validate when the password strength passes - "P@$$w0rd!!"', function () {
+      var _user1 = new User(user1);
+      _user1.password = 'P@$$w0rd!!';
+
+      _user1.validate(function (err) {
+        should.not.exist(err);
+      });
+    });
+
+    it('should validate when the password is undefined', function () {
+      var _user1 = new User(user1);
+      _user1.password = undefined;
+
+      _user1.validate(function (err) {
+        should.not.exist(err);
+      });
+    });
+
+    it('should validate when the passphrase strength passes - "Open-Source Full-Stack Solution For MEAN Applications"', function () {
+      var _user1 = new User(user1);
+      _user1.password = 'Open-Source Full-Stack Solution For MEAN Applications';
+
+      _user1.validate(function (err) {
+        should.not.exist(err);
+      });
+    });
+
+    it('should not allow a less than 10 characters long - "P@$$w0rd!"', function (done) {
+      var _user1 = new User(user1);
+      _user1.password = 'P@$$w0rd!';
+
+      _user1.validate(function (err) {
+        err.errors.password.message.should.equal("The password must be at least 10 characters long.");
+        done();
+      });
+    });
+
+    it('should not allow a greater than 128 characters long.', function (done) {
+      var _user1 = new User(user1);
+      _user1.password = ')!/uLT="lh&:`6X!]|15o!$!TJf,.13l?vG].-j],lFPe/QhwN#{Z<[*1nX@n1^?WW-%_.*D)m$toB+N7z}kcN#B_d(f41h%w@0F!]igtSQ1gl~6sEV&r~}~1ub>If1c+';
+
+      _user1.validate(function (err) {
+        err.errors.password.message.should.equal("The password must be fewer than 128 characters.");
+        done();
+      });
+    });
+
+    it('should not allow more than 3 or more repeating characters - "P@$$w0rd!!!"', function (done) {
+      var _user1 = new User(user1);
+      _user1.password = 'P@$$w0rd!!!';
+
+      _user1.validate(function (err) {
+        err.errors.password.message.should.equal("The password may not contain sequences of three or more repeated characters.");
+        done();
+      });
+    });
+
+    it('should not allow a password with no uppercase letters - "p@$$w0rd!!"', function (done) {
+      var _user1 = new User(user1);
+      _user1.password = 'p@$$w0rd!!';
+
+      _user1.validate(function (err) {
+        err.errors.password.message.should.equal("The password must contain at least one uppercase letter.");
+        done();
+      });
+    });
+
+    it('should not allow a password with less than one number - "P@$$word!!"', function (done) {
+      var _user1 = new User(user1);
+      _user1.password = 'P@$$word!!';
+
+      _user1.validate(function (err) {
+        err.errors.password.message.should.equal("The password must contain at least one number.");
+        done();
+      });
+    });
+
+    it('should not allow a password with less than one special character - "Passw0rdss"', function (done) {
+      var _user1 = new User(user1);
+      _user1.password = 'Passw0rdss';
+
+      _user1.validate(function (err) {
+        err.errors.password.message.should.equal("The password must contain at least one special character.");
+        done();
+      });
+    });
+  });
 
   describe("User E-mail Validation Tests", function() {
     it('should not allow invalid email address - "123"', function (done) {
@@ -257,7 +343,7 @@ describe('User Model Unit Tests:', function () {
           done();
         }
       });
-      
+
     });
 
     it('should not allow invalid email address - "123.com"', function (done) {
@@ -276,7 +362,7 @@ describe('User Model Unit Tests:', function () {
           done();
         }
       });
-      
+
     });
 
     it('should not allow invalid email address - "@123.com"', function (done) {
@@ -295,7 +381,6 @@ describe('User Model Unit Tests:', function () {
           done();
         }
       });
-      
     });
 
     it('should not allow invalid email address - "abc@abc@abc.com"', function (done) {
@@ -314,7 +399,6 @@ describe('User Model Unit Tests:', function () {
           done();
         }
       });
-      
     });
 
     it('should not allow invalid characters in email address - "abc~@#$%^&*()ef=@abc.com"', function (done) {
@@ -333,7 +417,6 @@ describe('User Model Unit Tests:', function () {
           done();
         }
       });
-      
     });
 
     it('should not allow space characters in email address - "abc def@abc.com"', function (done) {
@@ -352,7 +435,6 @@ describe('User Model Unit Tests:', function () {
           done();
         }
       });
-      
     });
 
     it('should not allow doudble quote characters in email address - "abc\"def@abc.com"', function (done) {
@@ -371,7 +453,6 @@ describe('User Model Unit Tests:', function () {
           done();
         }
       });
-      
     });
 
     it('should not allow double dotted characters in email address - "abcdef@abc..com"', function (done) {
@@ -390,7 +471,6 @@ describe('User Model Unit Tests:', function () {
           done();
         }
       });
-      
     });
 
     it('should allow single quote characters in email address - "abc\'def@abc.com"', function (done) {
@@ -427,7 +507,6 @@ describe('User Model Unit Tests:', function () {
           done();
         }
       });
-      
     });
 
     it('should allow valid email address - "abc+def@abc.com"', function (done) {
@@ -446,7 +525,6 @@ describe('User Model Unit Tests:', function () {
           done();
         }
       });
-      
     });
 
     it('should allow valid email address - "abc.def@abc.com"', function (done) {
@@ -465,7 +543,6 @@ describe('User Model Unit Tests:', function () {
           done();
         }
       });
-      
     });
 
     it('should allow valid email address - "abc.def@abc.def.com"', function (done) {
@@ -484,7 +561,6 @@ describe('User Model Unit Tests:', function () {
           done();
         }
       });
-      
     });
 
     it('should allow valid email address - "abc-def@abc.com"', function (done) {
@@ -502,7 +578,6 @@ describe('User Model Unit Tests:', function () {
           done();
         }
       });
-      
     });
 
   });
