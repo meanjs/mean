@@ -1,9 +1,9 @@
 'use strict';
 
 angular.module('users')
-  .directive("passwordVerify", function() {
+  .directive('passwordVerify', function() {
     return {
-      require: "ngModel",
+      require: 'ngModel',
       scope: {
         passwordVerify: '='
       },
@@ -19,10 +19,10 @@ angular.module('users')
             modelCtrl.$parsers.unshift(function(viewValue) {
               var origin = scope.passwordVerify;
               if (origin !== viewValue) {
-                modelCtrl.$setValidity("passwordVerify", false);
+                modelCtrl.$setValidity('passwordVerify', false);
                 return undefined;
               } else {
-                modelCtrl.$setValidity("passwordVerify", true);
+                modelCtrl.$setValidity('passwordVerify', true);
                 return viewValue;
               }
             });
