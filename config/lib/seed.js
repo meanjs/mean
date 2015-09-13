@@ -9,7 +9,7 @@ console.log(chalk.bold.red('Warning:  Database seeding is turned on'));
 
 var seedUser = {
   username: 'user',
-  password: '1234',
+  password: 'User_Password1!',
   provider: 'local',
   email: 'user@localhost.com',
   firstName: 'User',
@@ -20,7 +20,7 @@ var seedUser = {
 
 var seedAdmin = {
   username: 'admin',
-  password: '1234',
+  password: 'Admin_Password1!',
   provider: 'local',
   email: 'admin@localhost.com',
   firstName: 'Admin',
