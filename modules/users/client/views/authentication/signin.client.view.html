@@ -12,7 +12,14 @@
         </div>
         <div class="form-group" show-errors>
           <label for="password">Password</label>
-          <input type="password" id="password" name="password" class="form-control" ng-model="credentials.password" placeholder="Password" required>
+          <div class="input-group">
+            <input type="{{ showPassword ? 'text' : 'password' }}" id="password" name="password" class="form-control" ng-model="credentials.password" placeholder="Password" required>
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="button" ng-click="showPassword=!showPassword" aria-label="Toggle password visibility">
+                <i class="glyphicon" ng-class="{'glyphicon-eye-open': !showPassword, 'glyphicon-eye-close': showPassword}"></i>
+              </button>
+            </span>
+          </div>
           <div ng-messages="userForm.password.$error" role="alert">
             <p class="help-block error-text" ng-message="required">Password is required.</p>
           </div>
