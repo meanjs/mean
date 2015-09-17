@@ -4,7 +4,7 @@
     </section>
     <section>
       <p>
-        Testing is an important feature of the AngularJS framework. It is so well established that the team has create a very cool to automate tests, the <a target="_blank" href="http://karma-runner.github.io/0.10/index.html">Karma Test Runner</a>.
+        Testing is an important feature of the AngularJS framework. It is so well established that the team has created a very cool tool to automate tests, the <a target="_blank" href="http://karma-runner.github.io/">Karma Test Runner</a>.
       </p>
       <p>
         The Karma Test Runner is a unique testing tool that enables you to automatically test your code on multiple real browsers using Node.js and Socket.io.
@@ -21,11 +21,11 @@
       <dl>
         <dt>E2E</dt>
         <dd>
-          End-To-End testing enables to test several parts of the application together, so instead of just testing your controller's methods, you can actually test different scenarios in your application. To understand it better visit the <a target="_blank" href="http://docs.angularjs.org/guide/dev_guide.e2e-testing">AngularJS E2E Testing Section</a>.
+          End-To-End testing enables to test several parts of the application together, so instead of just testing your controller's methods, you can actually test different scenarios in your application. To understand it better visit the <a target="_blank" href="https://docs.angularjs.org/guide/e2e-testing">AngularJS E2E Testing Section</a>.
         </dd>
         <dt>Unit</dt>
         <dd>
-          Unit testing is the more common testing method, which enables you to test different units of the application, it's a more detailed kind of testing, which neglects the bigger picture and focuses on the single unit functionality. To understand it better visit the <a target="_blank" href="http://docs.angularjs.org/guide/dev_guide.unit-testing">AngularJS Unit Testing Section</a>.
+          Unit testing is the more common testing method, which enables you to test different units of the application, it's a more detailed kind of testing, which neglects the bigger picture and focuses on the single unit functionality. To understand it better visit the <a target="_blank" href="https://docs.angularjs.org/guide/unit-testing">AngularJS Unit Testing Section</a>.
         </dd>
       </dl>
       <p class="alert alert-info">
@@ -41,20 +41,20 @@
         <dd>The testing framework you want to karma to use, in this case we'll use Jasmine.</dd>
         <dt>Files</dt>
         <dd>
-          This is really important! This is the list of files that karma should load before starting the tests.
+          This is really important! This is the list of files that Karma should load before starting the tests.
           <p class="alert alert-info">
             Notice that we load the angular module tests automatically, so whenever you add a new module, Karma will run your tests without you having to change anything at all.
           </p>
         </dd>
         <dt>LogLevel</dt>
-        <dd>Determines the logging level of karma console output.</dd>
+        <dd>Determines the logging level of Karma console output.</dd>
         <dt>Browsers</dt>
         <dd>Determines which browsers to launch when testing, the boilerplate comes pre-bundled with 3 launchers: Chrome, Firefox, and PhantomJS.</dd>
         <dt>SingleRun</dt>
-        <dd>Determines if karma will run one time and return the results, or stay connected to watch for changes.</dd>
+        <dd>Determines if Karma will run one time and return the results, or stay connected to watch for changes.</dd>
       </dl>
       <p>
-        Notice that karma is executed as a grunt task that looks for the configuration file.
+        Notice that Karma is executed as a grunt task that looks for the configuration file.
       </p>
       <h2>Unit Testing</h2>
       <p>
