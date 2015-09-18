@@ -29,56 +29,66 @@ var seedAdmin = {
   roles: ['user', 'admin']
 };
 
-
 //If production only seed admin if it does not exist
 if (process.env.NODE_ENV === 'production') {
   //Add Local Admin
-  User.find({username: 'admin'}, function (err, users) {
+  User.find({username: seedAdmin.username}, function (err, users) {
     if (users.length === 0) {
-      var password = crypto.randomBytes(64).toString('hex').slice(1, 20);
-      seedAdmin.password = password;
       var user = new User(seedAdmin);
-      // Then save the user
-      user.save(function (err) {
-        if (err) {
-          console.log('Failed to add local admin');
-        } else {
-          console.log(chalk.bold.red('Local admin added with password set to ' + password));
-        }
-      });
+
+      // generate a random password and save 
+      User.generateRandomPassphrase()
+      .then(saveUser(user))
+      .catch(reportError);
+
     } else {
-      console.log('Admin user exists');
+      console.log(seedAdmin.username + ' user exists');
     }
   });
 } else {
-  //Add Local User
-  User.find({username: 'user'}).remove(function () {
-    var password = crypto.randomBytes(64).toString('hex').slice(1, 20);
-    seedUser.password = password;
-    var user = new User(seedUser);
-    // Then save the user
-    user.save(function (err) {
-      if (err) {
-        console.log('Failed to add local user');
-      } else {
-        console.log(chalk.bold.red('Local user added with password set to ' + password));
-      }
-    });
-  });
 
+  //Add Local User
+  User.find({username: seedUser.username}).remove(function () {
+    var user = new User(seedUser);
+
+    // generate a random password and save
+    User.generateRandomPassphrase()
+    .then(saveUser(user))
+    .catch(reportError);
+  });
 
   //Add Local Admin
-  User.find({username: 'admin'}).remove(function () {
-    var password = crypto.randomBytes(64).toString('hex').slice(1, 20);
-    seedAdmin.password = password;
+  User.find({username: seedAdmin.username}).remove(function () {
     var user = new User(seedAdmin);
+
+    // generate a random password and save
+    User.generateRandomPassphrase()
+    .then(saveUser(user))
+    .catch(reportError);
+  });
+}
+
+// save the specified user with the password provided from the resolved promise
+function saveUser(user) {
+  return function (password) {
+    // set the new password
+    user.password = password;
+
     // Then save the user
     user.save(function (err) {
       if (err) {
-        console.log('Failed to add local admin');
+        console.log('Database Seeding:\t\t\tFailed to add local ' + user.username);        
       } else {
-        console.log(chalk.bold.red('Local admin added with password set to ' + password));
+        console.log(chalk.bold.red('Database Seeding:\t\t\tLocal ' + user.username + ' added with password set to ' + password));
       }
     });
-  });
+  };
+}
+
+// report the error
+function reportError(err) {
+  console.log();
+  console.log('Database Seeding:\t\t\t Failed to generate random password');
+  console.log(err);
+  console.log();
 }

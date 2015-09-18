@@ -228,6 +228,22 @@ describe('User Model Unit Tests:', function () {
       });
     });
 
+    it('should validate a randomly generated passphrase from the static schema method', function () {
+      var _user1 = new User(user1);
+
+      User.generateRandomPassphrase()
+      .then(function (password) {
+        _user1.password = password;
+        _user1.validate(function (err) {
+          should.not.exist(err);
+        });
+      })
+      .catch(function (err) { 
+        should.not.exist(err);
+      });
+
+    });
+
     it('should validate when the password is undefined', function () {
       var _user1 = new User(user1);
       _user1.password = undefined;
