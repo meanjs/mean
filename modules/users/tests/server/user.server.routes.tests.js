@@ -97,7 +97,15 @@ describe('User CRUD tests', function () {
             }
 
             signoutRes.redirect.should.equal(true);
-            signoutRes.text.should.equal('Moved Temporarily. Redirecting to /');
+
+            // NodeJS v4 changed the status code representation so we must check
+            // before asserting, to be comptabile with all node versions.
+            if (process.version.indexOf('v4') === 0) {
+              signoutRes.text.should.equal('Found. Redirecting to /');
+            } else {
+              signoutRes.text.should.equal('Moved Temporarily. Redirecting to /');
+            }
+
             return done();
           });
       });
