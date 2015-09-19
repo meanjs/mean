@@ -56,10 +56,15 @@ exports.forgot = function (req, res, next) {
       }
     },
     function (token, user, done) {
+
+      var httpTransport = 'http://';
+      if (config.secure && config.secure.ssl === true) {
+        httpTransport = 'https://';
+      }
       res.render(path.resolve('modules/users/server/templates/reset-password-email'), {
         name: user.displayName,
         appName: config.app.title,
-        url: 'http://' + req.headers.host + '/api/auth/reset/' + token
+        url: httpTransport + req.headers.host + '/api/auth/reset/' + token
       }, function (err, emailHTML) {
         done(err, emailHTML, user);
       });
