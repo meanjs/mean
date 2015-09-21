@@ -88,6 +88,28 @@ var validateSecureMode = function (config) {
 };
 
 /**
+ * Validate Session Secret parameter is not set to default in production
+ */
+var validateSessionSecret = function (config, testing) {
+
+  if (process.env.NODE_ENV !== 'production') {
+    return true;
+  }
+
+  if (config.sessionSecret === 'MEAN') {
+    if (!testing) {
+      console.log(chalk.red('+ WARNING: It is strongly recommended that you change sessionSecret config while running in production!'));
+      console.log(chalk.red('  Please add `sessionSecret: process.env.SESSION_SECRET || \'super amazing secret\'` to '));
+      console.log(chalk.red('  `config/env/production.js` or `config/env/local.js`'));
+      console.log();
+    }
+    return false;
+  } else {
+    return true;
+  }
+};
+
+/**
  * Initialize global configuration files
  */
 var initGlobalConfigFolders = function (config, assets) {
@@ -169,7 +191,7 @@ var initGlobalConfig = function () {
   // production or development environment. If test environment is used we don't merge it with local.js
   // to avoid running test suites on a prod/dev environment (which delete records and make modifications)
   if (process.env.NODE_ENV !== 'test') {
-    config = _.merge(config, (fs.existsSync(path.join(process.cwd(), 'config/env/local.js')) && require(path.join(process.cwd(), 'config/env/local.js'))) || {});  
+    config = _.merge(config, (fs.existsSync(path.join(process.cwd(), 'config/env/local.js')) && require(path.join(process.cwd(), 'config/env/local.js'))) || {});
   }
 
   // Initialize global globbed files
@@ -181,9 +203,13 @@ var initGlobalConfig = function () {
   // Validate Secure SSL mode can be used
   validateSecureMode(config);
 
+  // Validate session secret
+  validateSessionSecret(config);
+
   // Expose configuration utilities
   config.utils = {
-    getGlobbedPaths: getGlobbedPaths
+    getGlobbedPaths: getGlobbedPaths,
+    validateSessionSecret: validateSessionSecret
   };
 
   return config;

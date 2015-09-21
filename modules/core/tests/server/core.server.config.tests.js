@@ -10,10 +10,10 @@ var should = require('should'),
   config = require(path.resolve('./config/config')),
   seed = require(path.resolve('./config/lib/seed'));
 
-describe('Configuration tests', function () {
+describe('Configuration Tests:', function () {
   this.timeout(10000);
 
-  describe('Testing default seedDB:', function () {
+  describe('Testing default seedDB', function () {
     before(function(done) {
       User.remove(function(err) {
         should.not.exist(err);
@@ -118,7 +118,43 @@ describe('Configuration tests', function () {
         });
       });
     });
-
   });
 
+  describe('Testing Session Secret Configuration', function () {
+    it('should warn if using default session secret when running in production', function (done) {
+      var conf = { sessionSecret: 'MEAN' };
+      // set env to production for this test
+      process.env.NODE_ENV = 'production';
+      config.utils.validateSessionSecret(conf, true).should.equal(false);
+      // set env back to test
+      process.env.NODE_ENV = 'test';
+      done();
+    });
+
+    it('should accept non-default session secret when running in production', function (done) {
+      var conf = { sessionSecret: 'super amazing secret' };
+      // set env to production for this test
+      process.env.NODE_ENV = 'production';
+      config.utils.validateSessionSecret(conf, true).should.equal(true);
+      // set env back to test
+      process.env.NODE_ENV = 'test';
+      done();
+    });
+
+    it('should accept default session secret when running in development', function (done) {
+      var conf = { sessionSecret: 'MEAN' };
+      // set env to development for this test
+      process.env.NODE_ENV = 'development';
+      config.utils.validateSessionSecret(conf, true).should.equal(true);
+      // set env back to test
+      process.env.NODE_ENV = 'test';
+      done();
+    });
+
+    it('should accept default session secret when running in test', function (done) {
+      var conf = { sessionSecret: 'MEAN' };
+      config.utils.validateSessionSecret(conf, true).should.equal(true);
+      done();
+    });
+  });
 });
