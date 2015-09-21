@@ -58,7 +58,7 @@ describe('User CRUD tests', function () {
           return done(signinErr);
         }
 
-        // Save a new article
+        // Request list of users
         agent.get('/api/users')
           .expect(403)
           .end(function (usersGetErr, usersGetRes) {
@@ -84,7 +84,7 @@ describe('User CRUD tests', function () {
             return done(signinErr);
           }
 
-          // Save a new article
+          // Request list of users
           agent.get('/api/users')
             .expect(200)
             .end(function (usersGetErr, usersGetRes) {
