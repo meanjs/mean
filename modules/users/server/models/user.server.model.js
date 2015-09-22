@@ -175,10 +175,11 @@ UserSchema.statics.findUniqueUsername = function (username, suffix, callback) {
 UserSchema.statics.generateRandomPassphrase = function () {
   return new Promise(function (resolve, reject) {
     var password = '';
+    var repeatingCharacters = new RegExp('(.)\\1{2,}', 'g');
 
     // iterate until the we have a valid passphrase. 
     // NOTE: Should rarely iterate more than once, but we need this to ensure no repeating characters are present.
-    while (password.length < 20) {
+    while (password.length < 20 || repeatingCharacters.test(password)) {
       // build the random password
       password = generatePassword.generate({
         length: Math.floor(Math.random() * (20)) + 20, // randomize length between 20 and 40 characters
@@ -188,8 +189,8 @@ UserSchema.statics.generateRandomPassphrase = function () {
         excludeSimilarCharacters: true,
       });
 
-      // check if we need to remove any repeating characters. 
-      password = password.replace(/(.)\1{2,}/g, '');
+      // check if we need to remove any repeating characters.
+      password = password.replace(repeatingCharacters, '');
     }
 
     // Send the rejection back if the passphrase fails to pass the strength test
