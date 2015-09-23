@@ -35,6 +35,7 @@
     "express": "^4.13.1",
     "express-session": "^1.11.3",
     "forever": "~0.14.2",
+    "generate-password": "^1.1.1",
     "glob": "^5.0.13",
     "grunt": "0.4.5",
     "grunt-cli": "~0.1.13",
