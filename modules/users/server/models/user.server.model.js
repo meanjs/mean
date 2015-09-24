@@ -7,6 +7,7 @@ var mongoose = require('mongoose'),
   Schema = mongoose.Schema,
   crypto = require('crypto'),
   validator = require('validator'),
+  generatePassword = require('generate-password'),
   owasp = require('owasp-password-strength-test');
 
 /**
@@ -164,6 +165,39 @@ UserSchema.statics.findUniqueUsername = function (username, suffix, callback) {
       callback(null);
     }
   });
+};
+
+/**
+* Generates a random passphrase that passes the owasp test.
+* Returns a promise that resolves with the generated passphrase, or rejects with an error if something goes wrong.
+* NOTE: Passphrases are only tested against the required owasp strength tests, and not the optional tests.
+*/
+UserSchema.statics.generateRandomPassphrase = function () {
+  var password = '';
+  var repeatingCharacters = new RegExp('(.)\\1{2,}', 'g');
+
+  // iterate until the we have a valid passphrase. 
+  // NOTE: Should rarely iterate more than once, but we need this to ensure no repeating characters are present.
+  while (password.length < 20 || repeatingCharacters.test(password)) {
+    // build the random password
+    password = generatePassword.generate({
+      length: Math.floor(Math.random() * (20)) + 20, // randomize length between 20 and 40 characters
+      numbers: true,
+      symbols: false,
+      uppercase: true,
+      excludeSimilarCharacters: true,
+    });
+
+    // check if we need to remove any repeating characters.
+    password = password.replace(repeatingCharacters, '');
+  }
+
+  // Send the passphrase back unless it fails to pass the strength test
+  if (owasp.test(password).errors.length) {
+    return null;
+  } else {
+    return password;
+  }
 };
 
 mongoose.model('User', UserSchema);

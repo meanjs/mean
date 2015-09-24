@@ -35,7 +35,7 @@ if (process.env.NODE_ENV === 'production') {
   //Add Local Admin
   User.find({username: 'admin'}, function (err, users) {
     if (users.length === 0) {
-      var password = crypto.randomBytes(64).toString('hex').slice(1, 20);
+      var password = User.generateRandomPassphrase();
       seedAdmin.password = password;
       var user = new User(seedAdmin);
       // Then save the user
@@ -53,7 +53,7 @@ if (process.env.NODE_ENV === 'production') {
 } else {
   //Add Local User
   User.find({username: 'user'}).remove(function () {
-    var password = crypto.randomBytes(64).toString('hex').slice(1, 20);
+    var password = User.generateRandomPassphrase();
     seedUser.password = password;
     var user = new User(seedUser);
     // Then save the user
@@ -69,7 +69,7 @@ if (process.env.NODE_ENV === 'production') {
 
   //Add Local Admin
   User.find({username: 'admin'}).remove(function () {
-    var password = crypto.randomBytes(64).toString('hex').slice(1, 20);
+    var password = User.generateRandomPassphrase();
     seedAdmin.password = password;
     var user = new User(seedAdmin);
     // Then save the user
