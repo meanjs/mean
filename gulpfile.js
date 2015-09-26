@@ -195,6 +195,23 @@ gulp.task('karma', function (done) {
     }));
 });
 
+// Drops the MongoDB database, used in e2e testing
+gulp.task('dropdb', function (done) {
+  // Use mongoose configuration
+  var mongoose = require('./config/lib/mongoose.js');
+
+  mongoose.connect(function (db) {
+    db.connection.db.dropDatabase(function (err) {
+      if(err) {
+        console.log(err);
+      } else {
+        console.log('Successfully dropped db: ', db.connection.db.databaseName);
+      }
+      db.connection.db.close(done);
+    });
+  });
+});
+
 // Selenium standalone WebDriver update task
 gulp.task('webdriver-update', plugins.protractor.webdriver_update);
 
@@ -230,6 +247,10 @@ gulp.task('test:server', function (done) {
 
 gulp.task('test:client', function (done) {
   runSequence('env:test', 'karma', done);
+});
+
+gulp.task('test:e2e', function (done) {
+  runSequence('env:test', 'lint', ['dropdb', 'nodemon'], 'protractor', done);
 });
 
 // Run the project in development mode
