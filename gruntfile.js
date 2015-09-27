@@ -201,7 +201,8 @@ module.exports = function (grunt) {
       options: {
         configFile: 'protractor.conf.js',
         keepAlive: true,
-        noColor: false
+        noColor: false,
+        webdriverManagerUpdate: true
       },
       e2e: {
         options: {
@@ -274,9 +275,11 @@ module.exports = function (grunt) {
   grunt.registerTask('build', ['env:dev', 'lint', 'ngAnnotate', 'uglify', 'cssmin']);
 
   // Run the project tests
-  grunt.registerTask('test', ['env:test', 'lint', 'mkdir:upload', 'copy:localConfig', 'server', 'mochaTest', 'karma:unit']);
+  grunt.registerTask('test', ['env:test', 'lint', 'mkdir:upload', 'copy:localConfig', 'server', 'mochaTest', 'karma:unit', 'protractor']);
   grunt.registerTask('test:server', ['env:test', 'lint', 'server', 'mochaTest']);
   grunt.registerTask('test:client', ['env:test', 'lint', 'server', 'karma:unit']);
+  grunt.registerTask('test:e2e', ['env:test', 'lint', 'server', 'protractor']);
+
   // Run project coverage
   grunt.registerTask('coverage', ['env:test', 'lint', 'mocha_istanbul:coverage']);
 

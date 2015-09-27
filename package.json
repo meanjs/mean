@@ -65,6 +65,7 @@
     "validator": "^3.41.2"
   },
   "devDependencies": {
+    "coveralls": "^2.11.4",
     "grunt-concurrent": "^2.0.0",
     "grunt-contrib-copy": "~0.8.0",
     "grunt-contrib-csslint": "~0.4.0",
@@ -76,12 +77,12 @@
     "grunt-contrib-watch": "~0.6.1",
     "grunt-env": "~0.4.4",
     "grunt-karma": "~0.11.2",
-    "grunt-mocha-test": "~0.12.7",
     "grunt-mocha-istanbul": "^2.4.0",
+    "grunt-mocha-test": "~0.12.7",
     "grunt-ng-annotate": "^1.0.1",
     "grunt-node-inspector": "~0.2.0",
     "grunt-nodemon": "~0.4.0",
-    "grunt-protractor-runner": "^2.0.0",
+    "grunt-protractor-runner": "^2.1.0",
     "gulp": "^3.9.0",
     "gulp-angular-templatecache": "^1.7.0",
     "gulp-autoprefixer": "^2.3.1",
@@ -111,7 +112,6 @@
     "load-grunt-tasks": "^3.2.0",
     "run-sequence": "^1.1.1",
     "should": "^7.0.1",
-    "supertest": "^1.0.1",
-    "coveralls": "^2.11.4"
+    "supertest": "^1.0.1"
   }
 }
