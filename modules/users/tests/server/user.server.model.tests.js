@@ -218,7 +218,7 @@ describe('User Model Unit Tests:', function () {
     });
   });
 
-  describe("User Password Validation Tests", function() {
+  describe('User Password Validation Tests', function() {
     it('should validate when the password strength passes - "P@$$w0rd!!"', function () {
       var _user1 = new User(user1);
       _user1.password = 'P@$$w0rd!!';
@@ -267,7 +267,7 @@ describe('User Model Unit Tests:', function () {
       _user1.password = 'P@$$w0rd!';
 
       _user1.validate(function (err) {
-        err.errors.password.message.should.equal("The password must be at least 10 characters long.");
+        err.errors.password.message.should.equal('The password must be at least 10 characters long.');
         done();
       });
     });
@@ -277,7 +277,7 @@ describe('User Model Unit Tests:', function () {
       _user1.password = ')!/uLT="lh&:`6X!]|15o!$!TJf,.13l?vG].-j],lFPe/QhwN#{Z<[*1nX@n1^?WW-%_.*D)m$toB+N7z}kcN#B_d(f41h%w@0F!]igtSQ1gl~6sEV&r~}~1ub>If1c+';
 
       _user1.validate(function (err) {
-        err.errors.password.message.should.equal("The password must be fewer than 128 characters.");
+        err.errors.password.message.should.equal('The password must be fewer than 128 characters.');
         done();
       });
     });
@@ -287,7 +287,7 @@ describe('User Model Unit Tests:', function () {
       _user1.password = 'P@$$w0rd!!!';
 
       _user1.validate(function (err) {
-        err.errors.password.message.should.equal("The password may not contain sequences of three or more repeated characters.");
+        err.errors.password.message.should.equal('The password may not contain sequences of three or more repeated characters.');
         done();
       });
     });
@@ -297,7 +297,7 @@ describe('User Model Unit Tests:', function () {
       _user1.password = 'p@$$w0rd!!';
 
       _user1.validate(function (err) {
-        err.errors.password.message.should.equal("The password must contain at least one uppercase letter.");
+        err.errors.password.message.should.equal('The password must contain at least one uppercase letter.');
         done();
       });
     });
@@ -307,7 +307,7 @@ describe('User Model Unit Tests:', function () {
       _user1.password = 'P@$$word!!';
 
       _user1.validate(function (err) {
-        err.errors.password.message.should.equal("The password must contain at least one number.");
+        err.errors.password.message.should.equal('The password must contain at least one number.');
         done();
       });
     });
@@ -317,13 +317,13 @@ describe('User Model Unit Tests:', function () {
       _user1.password = 'Passw0rdss';
 
       _user1.validate(function (err) {
-        err.errors.password.message.should.equal("The password must contain at least one special character.");
+        err.errors.password.message.should.equal('The password must contain at least one special character.');
         done();
       });
     });
   });
 
-  describe("User E-mail Validation Tests", function() {
+  describe('User E-mail Validation Tests', function() {
     it('should not allow invalid email address - "123"', function (done) {
       var _user1 = new User(user1);
 
@@ -492,7 +492,7 @@ describe('User Model Unit Tests:', function () {
     it('should allow single quote characters in email address - "abc\'def@abc.com"', function (done) {
       var _user1 = new User(user1);
 
-      _user1.email = "abc\'def@abc.com";
+      _user1.email = 'abc\'def@abc.com';
       _user1.save(function (err) {
         if (!err) {
           _user1.remove(function (err_remove) {
