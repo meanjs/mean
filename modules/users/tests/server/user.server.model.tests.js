@@ -238,7 +238,7 @@ describe('User Model Unit Tests:', function () {
           should.not.exist(err);
         });
       })
-      .catch(function (err) { 
+      .catch(function (err) {
         should.not.exist(err);
       });
 
