@@ -17,6 +17,8 @@ var user, article;
  * Unit tests
  */
 describe('Article Model Unit Tests:', function () {
+  this.timeout(10000);
+
   beforeEach(function (done) {
     user = new User({
       firstName: 'Full',
