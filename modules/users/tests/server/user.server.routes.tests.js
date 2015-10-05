@@ -351,7 +351,7 @@ describe('User CRUD tests', function () {
         .send({
           username: user.username
         })
-        .expect(200)
+        .expect(400)
         .end(function (err, res) {
           // Handle error
           if (err) {
@@ -361,7 +361,7 @@ describe('User CRUD tests', function () {
           User.findOne({username: user.username.toLowerCase()}, function(err, userRes) {
             userRes.resetPasswordToken.should.not.be.empty();
             should.exist(userRes.resetPasswordExpires);
-            res.body.message.should.be.equal('An email has been sent to the provided email with further instructions.');
+            res.body.message.should.be.equal('Failure sending email');
             return done();
           });
         });
@@ -377,7 +377,7 @@ describe('User CRUD tests', function () {
         .send({
           username: user.username
         })
-        .expect(200)
+        .expect(400)
         .end(function (err, res) {
           // Handle error
           if (err) {
@@ -414,7 +414,7 @@ describe('User CRUD tests', function () {
         .send({
           username: user.username
         })
-        .expect(200)
+        .expect(400)
         .end(function (err, res) {
           // Handle error
           if (err) {
