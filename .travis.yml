@@ -15,6 +15,17 @@ before_install:
   - gem update --system
   - gem install sass --version "=3.3.7"
   - npm i nsp -g
+  - npm install protractor
+  - "export DISPLAY=:99.0"
+  - "sh -e /etc/init.d/xvfb start"
+  - 'node_modules/protractor/bin/webdriver-manager update --standalone --firefox'
+  - 'node_modules/protractor/bin/webdriver-manager start 2>&1 &'
+  - sleep 3
+  - 'npm install grunt'
+  - 'npm install grunt-cli'
+  - 'npm install grunt-protractor-webdriver'
+  - 'npm install grunt-protractor-runner'
+  - 'npm install grunt-express-server'
 after_script:
   - nsp audit-package
   - grunt coverage
