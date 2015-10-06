@@ -21,7 +21,6 @@ before_install:
   - 'node_modules/protractor/bin/webdriver-manager update --standalone --firefox'
   - 'node_modules/protractor/bin/webdriver-manager start 2>&1 &'
   - sleep 3
-  - 'bower install'
   - 'npm install grunt'
   - 'npm install grunt-cli'
   - 'npm install grunt-protractor-webdriver'
