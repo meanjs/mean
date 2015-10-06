@@ -2,7 +2,8 @@
 
 // Protractor configuration
 exports.config = {
-  chromeOnly: true,
-  directConnect: true,
+  capabilities: {
+    'browserName': 'firefox'
+  },
   specs: ['modules/*/tests/e2e/*.js']
 };
