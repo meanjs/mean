@@ -11,7 +11,7 @@ angular.module('users')
             var result = PasswordValidator.getResult(password);
             var requirementsIdx = 0;
 
-            // requirements Meter - visual indicator for users
+            // Requirements Meter - visual indicator for users
             var requirementsMeter = [
               { color: 'danger', progress: '20' },
               { color: 'warning', progress: '40' },
@@ -33,6 +33,7 @@ angular.module('users')
               status = false;
             } else {
               scope.popoverMsg = '';
+              scope.passwordErrors = [];
               status = true;
             }
           }
