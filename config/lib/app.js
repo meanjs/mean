@@ -10,7 +10,7 @@ var config = require('../config'),
   seed = require('./seed');
 
 function seedDB() {
-  if (config.seedDB) {
+  if (config.seedDB.seed) {
     console.log(chalk.bold.red('Warning:  Database seeding is turned on'));
     seed.start();
   }
