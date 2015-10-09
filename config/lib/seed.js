@@ -56,7 +56,9 @@ function checkUserNotExists (user) {
 function reportSuccess (password) {
   return function (user) {
     return new Promise(function (resolve, reject) {
-      if (seedOptions.logResults) console.log(chalk.bold.red('Database Seeding:\t\t\tLocal ' + user.username + ' added with password set to ' + password));
+      if (seedOptions.logResults) {
+        console.log(chalk.bold.red('Database Seeding:\t\t\tLocal ' + user.username + ' added with password set to ' + password));
+      }
       resolve();
     });
   };
@@ -73,24 +75,24 @@ function seedTheUser (user) {
 
       if (user.username === seedOptions.seedAdmin.username && process.env.NODE_ENV === 'production') {
         checkUserNotExists(user)
-        .then(saveUser(user))
-        .then(reportSuccess(password))
-        .then(function () {
-          resolve();
-        })
-        .catch(function (err) {
-          reject(err);
-        });
+          .then(saveUser(user))
+          .then(reportSuccess(password))
+          .then(function () {
+            resolve();
+          })
+          .catch(function (err) {
+            reject(err);
+          });
       } else {
         removeUser(user)
-        .then(saveUser(user))
-        .then(reportSuccess(password))
-        .then(function () {
-          resolve();
-        })
-        .catch(function (err) {
-          reject(err);
-        });
+          .then(saveUser(user))
+          .then(reportSuccess(password))
+          .then(function () {
+            resolve();
+          })
+          .catch(function (err) {
+            reject(err);
+          });
       }
     });
   };
@@ -135,22 +137,22 @@ module.exports.start = function start(options) {
     //If production only seed admin if it does not exist
     if (process.env.NODE_ENV === 'production') {
       User.generateRandomPassphrase()
-      .then(seedTheUser(adminAccount))
-      .then(function () {
+        .then(seedTheUser(adminAccount))
+        .then(function () {
           resolve();
         })
-      .catch(reportError(reject));
+        .catch(reportError(reject));
     } else {
       // Add both Admin and User account
 
       User.generateRandomPassphrase()
-      .then(seedTheUser(userAccount))
-      .then(User.generateRandomPassphrase)
-      .then(seedTheUser(adminAccount))
-      .then(function () {
+        .then(seedTheUser(userAccount))
+        .then(User.generateRandomPassphrase)
+        .then(seedTheUser(adminAccount))
+        .then(function () {
           resolve();
         })
-      .catch(reportError(reject));
+        .catch(reportError(reject));
     }
   });
 };
