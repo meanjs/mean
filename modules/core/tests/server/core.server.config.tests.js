@@ -103,23 +103,25 @@ describe('Configuration Tests:', function () {
         should.not.exist(err);
         users.should.be.instanceof(Array).and.have.lengthOf(0);
 
-        seed.start({ logResults: false }).then(function() {
-          User.find({username: adminFromSeedConfig.username}, function(err, users) {
-            should.not.exist(err);
-            users.should.be.instanceof(Array).and.have.lengthOf(1);
-
-            var _admin = users.pop();
-            _admin.username.should.equal(adminFromSeedConfig.username);
-
-            // Restore original NODE_ENV environment variable
-            process.env.NODE_ENV = nodeEnv;
-
-            User.remove(function(err) {
+        seed
+          .start({ logResults: false })
+          .then(function() {
+            User.find({username: adminFromSeedConfig.username}, function(err, users) {
               should.not.exist(err);
-              return done();
+              users.should.be.instanceof(Array).and.have.lengthOf(1);
+
+              var _admin = users.pop();
+              _admin.username.should.equal(adminFromSeedConfig.username);
+
+              // Restore original NODE_ENV environment variable
+              process.env.NODE_ENV = nodeEnv;
+
+              User.remove(function(err) {
+                should.not.exist(err);
+                return done();
+              });
             });
           });
-        });
       });
     });
 
@@ -136,32 +138,34 @@ describe('Configuration Tests:', function () {
         should.not.exist(err);
         users.should.be.instanceof(Array).and.have.lengthOf(0);
 
-        seed.start({ logResults: false }).then(function() {
-          User.find({username: adminFromSeedConfig.username}, function(err, users) {
-            should.not.exist(err);
-            users.should.be.instanceof(Array).and.have.lengthOf(1);
-
-            var _admin = users.pop();
-            _admin.username.should.equal(adminFromSeedConfig.username);
-
-            User.find({username: userFromSeedConfig.username}, function(err, users) {
-
+        seed
+          .start({ logResults: false })
+          .then(function() {
+            User.find({username: adminFromSeedConfig.username}, function(err, users) {
               should.not.exist(err);
               users.should.be.instanceof(Array).and.have.lengthOf(1);
 
-              var _user = users.pop();
-              _user.username.should.equal(userFromSeedConfig.username);
+              var _admin = users.pop();
+              _admin.username.should.equal(adminFromSeedConfig.username);
 
-              // Restore original NODE_ENV environment variable
-              process.env.NODE_ENV = nodeEnv;
+              User.find({username: userFromSeedConfig.username}, function(err, users) {
 
-              User.remove(function(err) {
                 should.not.exist(err);
-                return done();
+                users.should.be.instanceof(Array).and.have.lengthOf(1);
+
+                var _user = users.pop();
+                _user.username.should.equal(userFromSeedConfig.username);
+
+                // Restore original NODE_ENV environment variable
+                process.env.NODE_ENV = nodeEnv;
+
+                User.remove(function(err) {
+                  should.not.exist(err);
+                  return done();
+                });
               });
             });
           });
-        });
       });
     });
 
@@ -188,21 +192,22 @@ describe('Configuration Tests:', function () {
             should.not.exist(err);
             users.should.be.instanceof(Array).and.have.lengthOf(2);
 
-            seed.start({ logResults: false })
-            .then(function () {
-              User.find({ username: { $in: [adminFromSeedConfig.username, userFromSeedConfig.username] } }, function (err, users) {
-                should.not.exist(err);
-                users.should.be.instanceof(Array).and.have.lengthOf(2);
-
-                // Restore original NODE_ENV environment variable
-                process.env.NODE_ENV = nodeEnv;
-
-                User.remove(function (err) {
+            seed
+              .start({ logResults: false })
+              .then(function () {
+                User.find({ username: { $in: [adminFromSeedConfig.username, userFromSeedConfig.username] } }, function (err, users) {
                   should.not.exist(err);
-                  return done();
+                  users.should.be.instanceof(Array).and.have.lengthOf(2);
+
+                  // Restore original NODE_ENV environment variable
+                  process.env.NODE_ENV = nodeEnv;
+
+                  User.remove(function (err) {
+                    should.not.exist(err);
+                    return done();
+                  });
                 });
               });
-            });
           });
         });
       });
@@ -221,23 +226,25 @@ describe('Configuration Tests:', function () {
         should.not.exist(err);
         users.should.be.instanceof(Array).and.have.lengthOf(0);
 
-        seed.start({ logResults: false, seedAdmin: admin1 }).then(function() {
-          User.find({username: admin1.username}, function(err, users) {
-            should.not.exist(err);
-            users.should.be.instanceof(Array).and.have.lengthOf(1);
-
-            var _admin = users.pop();
-            _admin.username.should.equal(admin1.username);
-
-            // Restore original NODE_ENV environment variable
-            process.env.NODE_ENV = nodeEnv;
-
-            User.remove(function(err) {
+        seed
+          .start({ logResults: false, seedAdmin: admin1 })
+          .then(function() {
+            User.find({username: admin1.username}, function(err, users) {
               should.not.exist(err);
-              return done();
+              users.should.be.instanceof(Array).and.have.lengthOf(1);
+
+              var _admin = users.pop();
+              _admin.username.should.equal(admin1.username);
+
+              // Restore original NODE_ENV environment variable
+              process.env.NODE_ENV = nodeEnv;
+
+              User.remove(function(err) {
+                should.not.exist(err);
+                return done();
+              });
             });
           });
-        });
       });
     });
 
@@ -254,32 +261,34 @@ describe('Configuration Tests:', function () {
         should.not.exist(err);
         users.should.be.instanceof(Array).and.have.lengthOf(0);
 
-        seed.start({ logResults: false, seedAdmin: admin1, seedUser: user1 }).then(function() {
-          User.find({username: admin1.username}, function(err, users) {
-            should.not.exist(err);
-            users.should.be.instanceof(Array).and.have.lengthOf(1);
-
-            var _admin = users.pop();
-            _admin.username.should.equal(admin1.username);
-
-            User.find({username: user1.username}, function(err, users) {
-
+        seed
+          .start({ logResults: false, seedAdmin: admin1, seedUser: user1 })
+          .then(function() {
+            User.find({username: admin1.username}, function(err, users) {
               should.not.exist(err);
               users.should.be.instanceof(Array).and.have.lengthOf(1);
 
-              var _user = users.pop();
-              _user.username.should.equal(user1.username);
+              var _admin = users.pop();
+              _admin.username.should.equal(admin1.username);
 
-              // Restore original NODE_ENV environment variable
-              process.env.NODE_ENV = nodeEnv;
+              User.find({username: user1.username}, function(err, users) {
 
-              User.remove(function(err) {
                 should.not.exist(err);
-                return done();
+                users.should.be.instanceof(Array).and.have.lengthOf(1);
+
+                var _user = users.pop();
+                _user.username.should.equal(user1.username);
+
+                // Restore original NODE_ENV environment variable
+                process.env.NODE_ENV = nodeEnv;
+
+                User.remove(function(err) {
+                  should.not.exist(err);
+                  return done();
+                });
               });
             });
           });
-        });
       });
     });
 
@@ -297,32 +306,33 @@ describe('Configuration Tests:', function () {
         should.not.exist(err);
         user.username.should.equal(adminFromSeedConfig.username);
 
-        seed.start({ logResults: false })
-        .then(function () {
-          // we don't ever expect to make it here but we don't want to timeout          
-          User.remove(function(err) {
-            should.not.exist(err);
-            // force this test to fail since we should never be here
-            should.exist(undefined);
+        seed
+          .start({ logResults: false })
+          .then(function () {
+            // we don't ever expect to make it here but we don't want to timeout          
+            User.remove(function(err) {
+              should.not.exist(err);
+              // force this test to fail since we should never be here
+              should.exist(undefined);
+              // Restore original NODE_ENV environment variable
+              process.env.NODE_ENV = nodeEnv;
+
+              return done();
+            });
+          })
+          .catch(function (err) {
+            should.exist(err);
+            err.message.should.equal('Failed due to local account already exists: ' + adminFromSeedConfig.username);
+
             // Restore original NODE_ENV environment variable
             process.env.NODE_ENV = nodeEnv;
 
-            return done();
+            User.remove(function(removeErr) {
+              should.not.exist(removeErr);
+
+              return done();
+            });
           });
-        })
-        .catch(function (err) {
-          should.exist(err);
-          err.message.should.equal('Failed due to local account already exists: ' + adminFromSeedConfig.username);
-
-          // Restore original NODE_ENV environment variable
-          process.env.NODE_ENV = nodeEnv;
-
-          User.remove(function(removeErr) {
-            should.not.exist(removeErr);
-
-            return done();
-          });
-        });
       });
     });
 
@@ -336,31 +346,32 @@ describe('Configuration Tests:', function () {
       var _user = new User(user1);
       _user.email = '';
 
-      seed.start({ logResults: false, seedUser: _user })
-      .then(function () {
-        // we don't ever expect to make it here but we don't want to timeout
-        User.remove(function(err) {
-          // force this test to fail since we should never be here
-          should.exist(undefined);
+      seed
+        .start({ logResults: false, seedUser: _user })
+        .then(function () {
+          // we don't ever expect to make it here but we don't want to timeout
+          User.remove(function(err) {
+            // force this test to fail since we should never be here
+            should.exist(undefined);
+            // Restore original NODE_ENV environment variable
+            process.env.NODE_ENV = nodeEnv;
+
+            return done();
+          });
+        })
+        .catch(function (err) {
+          should.exist(err);
+          err.message.should.equal('Failed to add local ' + user1.username);
+
           // Restore original NODE_ENV environment variable
           process.env.NODE_ENV = nodeEnv;
 
-          return done();
+          User.remove(function(removeErr) {
+            should.not.exist(removeErr);
+
+            return done();
+          });
         });
-      })
-      .catch(function (err) {
-        should.exist(err);
-        err.message.should.equal('Failed to add local ' + user1.username);
-
-        // Restore original NODE_ENV environment variable
-        process.env.NODE_ENV = nodeEnv;
-
-        User.remove(function(removeErr) {
-          should.not.exist(removeErr);
-
-          return done();
-        });
-      });
     });
   });
 
