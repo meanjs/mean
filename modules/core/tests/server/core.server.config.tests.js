@@ -17,14 +17,14 @@ describe('Configuration Tests:', function () {
     before(function(done) {
       User.remove(function(err) {
         should.not.exist(err);
-        done();
+        return done();
       });
     });
 
     after(function(done) {
       User.remove(function(err) {
         should.not.exist(err);
-        done();
+        return done();
       });
     });
 
@@ -128,7 +128,7 @@ describe('Configuration Tests:', function () {
       config.utils.validateSessionSecret(conf, true).should.equal(false);
       // set env back to test
       process.env.NODE_ENV = 'test';
-      done();
+      return done();
     });
 
     it('should accept non-default session secret when running in production', function (done) {
@@ -138,7 +138,7 @@ describe('Configuration Tests:', function () {
       config.utils.validateSessionSecret(conf, true).should.equal(true);
       // set env back to test
       process.env.NODE_ENV = 'test';
-      done();
+      return done();
     });
 
     it('should accept default session secret when running in development', function (done) {
@@ -148,13 +148,13 @@ describe('Configuration Tests:', function () {
       config.utils.validateSessionSecret(conf, true).should.equal(true);
       // set env back to test
       process.env.NODE_ENV = 'test';
-      done();
+      return done();
     });
 
     it('should accept default session secret when running in test', function (done) {
       var conf = { sessionSecret: 'MEAN' };
       config.utils.validateSessionSecret(conf, true).should.equal(true);
-      done();
+      return done();
     });
   });
 });
