@@ -57,20 +57,16 @@ describe('Configuration Tests:', function () {
       });
     });
 
-    it('should have seedDB configuration set for "regular" user', function(done) {
+    it('should have seedDB configuration set for "regular" user', function() {
       (typeof userFromSeedConfig).should.not.equal('undefined');
       should.exist(userFromSeedConfig.username);
       should.exist(userFromSeedConfig.email);
-
-      return done();
     });
 
-    it('should have seedDB configuration set for admin user', function(done) {
+    it('should have seedDB configuration set for admin user', function() {
       (typeof adminFromSeedConfig).should.not.equal('undefined');
       should.exist(adminFromSeedConfig.username);
       should.exist(adminFromSeedConfig.email);
-
-      return done();
     });
 
     it('should not be an admin user to begin with', function(done) {
@@ -385,30 +381,27 @@ describe('Configuration Tests:', function () {
       return done();
     });
 
-    it('should accept non-default session secret when running in production', function (done) {
+    it('should accept non-default session secret when running in production', function () {
       var conf = { sessionSecret: 'super amazing secret' };
       // set env to production for this test
       process.env.NODE_ENV = 'production';
       config.utils.validateSessionSecret(conf, true).should.equal(true);
       // set env back to test
       process.env.NODE_ENV = 'test';
-      return done();
     });
 
-    it('should accept default session secret when running in development', function (done) {
+    it('should accept default session secret when running in development', function () {
       var conf = { sessionSecret: 'MEAN' };
       // set env to development for this test
       process.env.NODE_ENV = 'development';
       config.utils.validateSessionSecret(conf, true).should.equal(true);
       // set env back to test
       process.env.NODE_ENV = 'test';
-      return done();
     });
 
-    it('should accept default session secret when running in test', function (done) {
+    it('should accept default session secret when running in test', function () {
       var conf = { sessionSecret: 'MEAN' };
       config.utils.validateSessionSecret(conf, true).should.equal(true);
-      return done();
     });
   });
 });
