@@ -172,7 +172,8 @@ gulp.task('mocha', function (done) {
     // Run the tests
     gulp.src(testAssets.tests.server)
       .pipe(plugins.mocha({
-        reporter: 'spec'
+        reporter: 'spec',
+        timeout: 10000
       }))
       .on('error', function (err) {
         // If an error occurs, save it

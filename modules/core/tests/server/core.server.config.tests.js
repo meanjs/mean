@@ -11,7 +11,6 @@ var should = require('should'),
   seed = require(path.resolve('./config/lib/seed'));
 
 describe('Configuration Tests:', function () {
-  this.timeout(10000);
 
   describe('Testing default seedDB', function () {
     before(function(done) {
