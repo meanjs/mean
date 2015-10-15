@@ -357,7 +357,7 @@ describe('User CRUD tests', function () {
             return done(err);
           }
 
-          User.findOne({username: user.username.toLowerCase()}, function(err, userRes) {
+          User.findOne({ username: user.username.toLowerCase() }, function(err, userRes) {
             userRes.resetPasswordToken.should.not.be.empty();
             should.exist(userRes.resetPasswordExpires);
             res.body.message.should.be.equal('Failure sending email');
@@ -383,7 +383,7 @@ describe('User CRUD tests', function () {
             return done(err);
           }
 
-          User.findOne({username: user.username.toLowerCase()}, function(err, userRes) {
+          User.findOne({ username: user.username.toLowerCase() }, function(err, userRes) {
             userRes.resetPasswordToken.should.not.be.empty();
             should.exist(userRes.resetPasswordExpires);
 
@@ -398,9 +398,9 @@ describe('User CRUD tests', function () {
               res.headers.location.should.be.equal('/password/reset/' + userRes.resetPasswordToken);
 
               return done();
+            });
           });
         });
-      });
     });
   });
 
@@ -432,8 +432,8 @@ describe('User CRUD tests', function () {
             res.headers.location.should.be.equal('/password/reset/invalid');
 
             return done();
+          });
         });
-      });
     });
   });
 

@@ -328,7 +328,7 @@
         Menus.addMenu(menuId);
         Menus.addMenuItem(menuId, menuItem1Options);
         Menus.addMenuItem(menuId, menuItem2Options);
-        Menus.addMenuItem(menuId, {state:'something.else'});
+        Menus.addMenuItem(menuId, { state: 'something.else' });
         Menus.addSubMenuItem(menuId, menuItem1Options.state, subItemOptions);
         menu = Menus.addSubMenuItem(menuId, menuItem1Options.state);
         menuItem1 = menu.items[0];
