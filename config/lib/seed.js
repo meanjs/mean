@@ -1,15 +1,20 @@
 'use strict';
 
-var mongoose = require('mongoose'),
+var _ = require('lodash'),
+  config = require('../config'),
+  mongoose = require('mongoose'),
   chalk = require('chalk'),
   crypto = require('crypto');
+
+// global seed options object
+var seedOptions = {};
 
 function removeUser (user) {
   return new Promise(function (resolve, reject) {
     var User = mongoose.model('User');
     User.find({username: user.username}).remove(function (err) {
         if (err) {
-          reject(new Error('Database Seeding:\t\t\tFailed to remove local ' + user.username));
+          reject(new Error('Failed to remove local ' + user.username));
         }
         resolve();
     });
@@ -22,7 +27,7 @@ function saveUser (user) {
       // Then save the user
       user.save(function (err, theuser) {
         if (err) {
-          reject(new Error('Database Seeding:\t\t\tFailed to add local ' + user.username));
+          reject(new Error('Failed to add local ' + user.username));
         } else {
           resolve(theuser);
         }
@@ -36,13 +41,13 @@ function checkUserNotExists (user) {
     var User = mongoose.model('User');
     User.find({username: user.username}, function (err, users) {
         if (err) {
-          reject(new Error('Database Seeding:\t\t\tFailed to find local account ' + user.username));
+          reject(new Error('Failed to find local account ' + user.username));
         }
 
         if (users.length === 0) {
           resolve();
         } else {
-          reject(new Error('Database Seeding:\t\t\tFailed due to local account already exists: ' + user.username));
+          reject(new Error('Failed due to local account already exists: ' + user.username));
         }
     });
   });
@@ -51,7 +56,9 @@ function checkUserNotExists (user) {
 function reportSuccess (password) {
   return function (user) {
     return new Promise(function (resolve, reject) {
-      console.log(chalk.bold.red('Database Seeding:\t\t\tLocal ' + user.username + ' added with password set to ' + password));
+      if (seedOptions.logResults) {
+        console.log(chalk.bold.red('Database Seeding:\t\t\tLocal ' + user.username + ' added with password set to ' + password));
+      }
       resolve();
     });
   };
@@ -66,82 +73,86 @@ function seedTheUser (user) {
       // set the new password
       user.password = password;
 
-      if (user.username === 'admin' && process.env.NODE_ENV === 'production') {
+      if (user.username === seedOptions.seedAdmin.username && process.env.NODE_ENV === 'production') {
         checkUserNotExists(user)
-        .then(saveUser(user))
-        .then(reportSuccess(password))
-        .then(function () {
-          resolve();
-        })
-        .catch(reportError);
+          .then(saveUser(user))
+          .then(reportSuccess(password))
+          .then(function () {
+            resolve();
+          })
+          .catch(function (err) {
+            reject(err);
+          });
       } else {
         removeUser(user)
-        .then(saveUser(user))
-        .then(reportSuccess(password))
-        .then(function () {
-          resolve();
-        })
-        .catch(reportError);
+          .then(saveUser(user))
+          .then(reportSuccess(password))
+          .then(function () {
+            resolve();
+          })
+          .catch(function (err) {
+            reject(err);
+          });
       }
     });
   };
 }
 
 // report the error
-function reportError (err) {
-  console.log();
-  console.log(err);
-  console.log();
+function reportError (reject) {
+  return function (err) {
+    if (seedOptions.logResults) {
+      console.log();
+      console.log('Database Seeding:\t\t\t' + err);
+      console.log();
+    }
+    reject(err);
+  };
 }
 
-module.exports.start = function start() {
+module.exports.start = function start(options) {
+  // Initialize the default seed options
+  seedOptions = _.clone(config.seedDB.options, true);
+
+  // Check for provided options
+
+  if (_.has(options, 'logResults')) {
+    seedOptions.logResults = options.logResults;
+  }
+
+  if (_.has(options, 'seedUser')) { 
+    seedOptions.seedUser = options.seedUser; 
+  }
+
+  if (_.has(options, 'seedAdmin')) {
+    seedOptions.seedAdmin = options.seedAdmin;
+  }
+
   var User = mongoose.model('User');
   return new Promise(function (resolve, reject) {
-    var seedUser = {
-      username: 'user',
-      password: 'User_Password1!',
-      provider: 'local',
-      email: 'user@localhost.com',
-      firstName: 'User',
-      lastName: 'Local',
-      displayName: 'User Local',
-      roles: ['user']
-    };
 
-    var seedAdmin = {
-      username: 'admin',
-      password: 'Admin_Password1!',
-      provider: 'local',
-      email: 'admin@localhost.com',
-      firstName: 'Admin',
-      lastName: 'Local',
-      displayName: 'Admin Local',
-      roles: ['user', 'admin']
-    };
-
-    var user = null;
-    var adminAccount = new User(seedAdmin);
-    var userAccount = new User(seedUser);
+    var adminAccount = new User(seedOptions.seedAdmin);
+    var userAccount = new User(seedOptions.seedUser);
 
     //If production only seed admin if it does not exist
     if (process.env.NODE_ENV === 'production') {
       User.generateRandomPassphrase()
-      .then(seedTheUser(adminAccount))
-      .then(function () {
+        .then(seedTheUser(adminAccount))
+        .then(function () {
           resolve();
         })
-      .catch(reportError);
+        .catch(reportError(reject));
     } else {
       // Add both Admin and User account
 
       User.generateRandomPassphrase()
-      .then(seedTheUser(userAccount))
-      .then(User.generateRandomPassphrase)
-      .then(seedTheUser(adminAccount))
-      .then(function () {
+        .then(seedTheUser(userAccount))
+        .then(User.generateRandomPassphrase)
+        .then(seedTheUser(adminAccount))
+        .then(function () {
           resolve();
         })
-      .catch(reportError);
+        .catch(reportError(reject));
     }
   });
 };
