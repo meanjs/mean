@@ -1,0 +1,37 @@
+{
+  rules: {
+    indent: [2, 2, {"SwitchCase": 1}],
+    no-multi-spaces: 2,
+    no-underscore-dangle: 0,
+    no-use-before-define: [1, "nofunc"],
+    no-unused-expressions: 0,
+    no-empty-class: 0,
+    object-curly-spacing: [2, "always"],
+    quotes: [1, "single"],
+    space-in-parens: [2, "never"]
+  },
+  env: {
+    node: true
+  },
+  globals: {
+    angular: true,
+    $: true,
+    jQuery: true,
+    moment: true,
+    window: true,
+    document: true,
+    Modernizr: true,
+    __TESTING__: true,
+    beforeEach: true,
+    expect: true,
+    describe: true,
+    it: true,
+    element: true,
+    by: true,
+    browser: true,
+    inject: true,
+    register: true,
+    sinon: true,
+    _: false
+  }
+}
