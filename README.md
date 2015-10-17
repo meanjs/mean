@@ -181,6 +181,9 @@ In the docs we'll try to explain both general concepts of MEAN components and gi
 ## Live Example
 Browse the live MEAN.JS example on [http://meanjs.herokuapp.com](http://meanjs.herokuapp.com).
 
+## Contributing
+We welcome pull requests from the community! Just be sure to read the [contributing](https://github.com/meanjs/mean/blob/master/CONTRIBUTING.md) doc to get started.
+
 ## Deploying To Cloud Foundry
 
 Cloud Foundry is an open source platform-as-a-service (PaaS).  The MEANJS project

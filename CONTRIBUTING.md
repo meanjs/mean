@@ -32,3 +32,7 @@ Before you create a new Issue:
 	* By adding "Closes #xyz" to a commit message will auto close the issue once the pull request is merged in.
 * Small changes are usually accepted and merged in within a week (provided that 2 collaborators give the okay)
 * Larger changes usually spark further discussion and possible changes prior to being merged in.
+
+## Documentation (meanjs.org)
+
+The code for the documentation and the website are located in the meanjs/mean repo on the gh-pages branch. The website is hosted by github pages and generated using jekyll. See the README in the gh-pages branch for more information on how to get your dev enviorment set-up.
