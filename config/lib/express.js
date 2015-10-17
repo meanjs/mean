@@ -6,6 +6,7 @@
 var config = require('../config'),
   express = require('express'),
   morgan = require('morgan'),
+  logger = require('./logger'),
   bodyParser = require('body-parser'),
   session = require('express-session'),
   MongoStore = require('connect-mongo')(session),
@@ -67,11 +68,11 @@ module.exports.initMiddleware = function (app) {
   // Initialize favicon middleware
   app.use(favicon('./modules/core/client/img/brand/favicon.ico'));
 
+  // Enable logger (morgan)
+  app.use(morgan(logger.getFormat(), logger.getOptions()));
+
   // Environment dependent middleware
   if (process.env.NODE_ENV === 'development') {
-    // Enable logger (morgan)
-    app.use(morgan('dev'));
-
     // Disable views cache
     app.set('view cache', false);
   } else if (process.env.NODE_ENV === 'production') {
