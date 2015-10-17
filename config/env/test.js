@@ -80,5 +80,7 @@ module.exports = {
         roles: ['user', 'admin']
       }
     }
-  }
+  },
+  // This config is set to true during grunt coverage
+  coverage: process.env.COVERAGE || false
 };

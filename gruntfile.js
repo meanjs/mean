@@ -6,6 +6,7 @@
 var _ = require('lodash'),
   defaultAssets = require('./config/assets/default'),
   testAssets = require('./config/assets/test'),
+  testConfig = require('./config/env/test'),
   fs = require('fs'),
   path = require('path');
 
@@ -184,7 +185,7 @@ module.exports = function (grunt) {
           print: 'detail',
           coverage: true,
           require: 'test.js',
-          coverageFolder: 'coverage',
+          coverageFolder: 'coverage/server',
           reportFormats: ['cobertura','lcovonly'],
           check: {
             lines: 40,
@@ -222,6 +223,8 @@ module.exports = function (grunt) {
   });
 
   grunt.event.on('coverage', function(lcovFileContents, done) {
+    // Set coverage config so karma-coverage knows to run coverage
+    testConfig.coverage = true;
     require('coveralls').handleInput(lcovFileContents, function(err) {
       if (err) {
         return done(err);
@@ -232,6 +235,7 @@ module.exports = function (grunt) {
 
   // Load NPM tasks
   require('load-grunt-tasks')(grunt);
+  grunt.loadNpmTasks('grunt-protractor-coverage');
 
   // Make sure upload directory exists
   grunt.task.registerTask('mkdir:upload', 'Task that makes sure upload directory exists.', function () {
@@ -297,11 +301,10 @@ module.exports = function (grunt) {
   // Run the project tests
   grunt.registerTask('test', ['env:test', 'lint', 'mkdir:upload', 'copy:localConfig', 'server', 'mochaTest', 'karma:unit', 'protractor']);
   grunt.registerTask('test:server', ['env:test', 'lint', 'server', 'mochaTest']);
-  grunt.registerTask('test:client', ['env:test', 'lint', 'server', 'karma:unit']);
+  grunt.registerTask('test:client', ['env:test', 'lint', 'karma:unit']);
   grunt.registerTask('test:e2e', ['env:test', 'lint', 'dropdb', 'server', 'protractor']);
-
   // Run project coverage
-  grunt.registerTask('coverage', ['env:test', 'lint', 'mocha_istanbul:coverage']);
+  grunt.registerTask('coverage', ['env:test', 'lint', 'mocha_istanbul:coverage', 'karma:unit']);
 
   // Run the project in development mode
   grunt.registerTask('default', ['env:dev', 'lint', 'mkdir:upload', 'copy:localConfig', 'concurrent:default']);
