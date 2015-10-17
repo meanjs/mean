@@ -70,7 +70,7 @@ module.exports.initMiddleware = function (app) {
   // Environment dependent middleware
   if (process.env.NODE_ENV === 'development') {
     // Enable logger (morgan)
-    app.use(morgan('dev'));
+    app.use(morgan(config.log.format, config.log.options));
 
     // Disable views cache
     app.set('view cache', false);
