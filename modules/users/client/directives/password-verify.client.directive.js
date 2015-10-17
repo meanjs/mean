@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('users')
-  .directive('passwordVerify', function() {
+  .directive('passwordVerify', [function() {
     return {
       require: 'ngModel',
       scope: {
@@ -28,6 +28,6 @@ angular.module('users')
             });
           }
         });
-     }
+      }
     };
-});
+  }]);

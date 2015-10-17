@@ -71,4 +71,4 @@ angular.module('core')
         return linkFn;
       }
     };
-}]);
+  }]);

@@ -12,11 +12,11 @@ var seedOptions = {};
 function removeUser (user) {
   return new Promise(function (resolve, reject) {
     var User = mongoose.model('User');
-    User.find({username: user.username}).remove(function (err) {
-        if (err) {
-          reject(new Error('Failed to remove local ' + user.username));
-        }
-        resolve();
+    User.find({ username: user.username }).remove(function (err) {
+      if (err) {
+        reject(new Error('Failed to remove local ' + user.username));
+      }
+      resolve();
     });
   });
 }
@@ -39,16 +39,16 @@ function saveUser (user) {
 function checkUserNotExists (user) {
   return new Promise(function (resolve, reject) {
     var User = mongoose.model('User');
-    User.find({username: user.username}, function (err, users) {
-        if (err) {
-          reject(new Error('Failed to find local account ' + user.username));
-        }
+    User.find({ username: user.username }, function (err, users) {
+      if (err) {
+        reject(new Error('Failed to find local account ' + user.username));
+      }
 
-        if (users.length === 0) {
-          resolve();
-        } else {
-          reject(new Error('Failed due to local account already exists: ' + user.username));
-        }
+      if (users.length === 0) {
+        resolve();
+      } else {
+        reject(new Error('Failed due to local account already exists: ' + user.username));
+      }
     });
   });
 }
