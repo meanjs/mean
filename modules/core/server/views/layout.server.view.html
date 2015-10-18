@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -19,17 +19,17 @@
   <meta property="og:title" content="{{title}}">
   <meta property="og:description" content="{{description}}">
   <meta property="og:url" content="{{url}}">
-  <meta property="og:image" content="{{url}}{{logo}}">
+  <meta property="og:image" content="{{logo}}">
   <meta property="og:type" content="website">
 
   <!-- Twitter META -->
   <meta name="twitter:title" content="{{title}}">
   <meta name="twitter:description" content="{{description}}">
   <meta name="twitter:url" content="{{url}}">
-  <meta name="twitter:image" content="{{url}}modules/core/img/brand/logo.png">
+  <meta name="twitter:image" content="{{logo}}">
 
   <!-- Fav Icon -->
-  <link href="{{url}}{{favicon}}" rel="shortcut icon" type="image/x-icon">
+  <link href="{{favicon}}" rel="shortcut icon" type="image/x-icon">
 
   <!-- Application CSS Files -->
   {% for cssFile in cssFiles %}<link rel="stylesheet" href="{{cssFile}}">{% endfor %}
@@ -47,12 +47,12 @@
   <script type="text/javascript">
     var user = {{ user | json | safe }};
   </script>
-  
+
   <!--Load The Socket.io File-->
   <script type="text/javascript" src="/socket.io/socket.io.js"></script>
 
   <!--Application JavaScript Files-->
-  {% for jsFile in jsFiles %}<script type="text/javascript" src="{{jsFile}}"></script>{% endfor %} 
+  {% for jsFile in jsFiles %}<script type="text/javascript" src="{{jsFile}}"></script>{% endfor %}
 
   {% if livereload %}
   <!--Livereload script rendered -->
