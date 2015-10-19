@@ -38,6 +38,16 @@ $ npm install -g grunt-cli
 $ gem install sass
 ```
 
+```bash
+$ npm install -g grunt-cli
+```
+
+* Gulp - (Optional) You may use Gulp for Live Reload, Linting, and SASS or LESS.
+
+```bash
+$ npm install gulp -g
+```
+
 ## Downloading MEAN.JS
 There are several ways you can get the MEAN.JS boilerplate:
 
@@ -150,6 +160,59 @@ And to run only the client tests, run the test:client task:
 
 ```bash
 $ grunt test:client
+```
+
+## Running your application with Gulp
+
+After the install process, you can easily run your project with:
+
+```bash
+$ gulp
+```
+or
+
+```bash
+$ gulp default
+```
+
+The server is now running on http://localhost:3000 if you are using the default settings. 
+
+### Running Gulp Development Environment
+
+Start the development environment with:
+
+```bash
+$ gulp dev
+```
+
+### Running in Production mode
+To run your application with *production* environment configuration, execute gulp as follows:
+
+```bash
+$ gulp prod
+```
+
+### Testing Your Application with Gulp
+Using the full test suite included with MEAN.JS with the test task:
+
+### Run all tests
+```bash
+$ gulp test
+```
+
+### Run server tests
+```bash
+gulp test:server
+```
+
+### Run client tests
+```bash
+gulp test:client
+```
+
+### Run e2e tests
+```bash
+gulp test:e2e
 ```
 
 ## Development and deployment With Docker
