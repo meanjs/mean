@@ -15,8 +15,11 @@ module.exports = {
   db: {
     uri: cfMongoUrl,
     options: {
-      user: '',
-      pass: ''
+      auth: {
+        authMechanism: ''
+      },
+      // user: '',
+      // pass: ''
     }
   },
   log: {

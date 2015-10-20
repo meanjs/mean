@@ -44,7 +44,7 @@
     "lodash": "^3.10.0",
     "method-override": "^2.3.3",
     "mocha": "~1.20.0",
-    "mongoose": "4.1.11",
+    "mongoose": "~4.1.12",
     "morgan": "^1.6.1",
     "multer": "0.1.8",
     "nodemailer": "^1.4.0",
