@@ -56,7 +56,12 @@
 
   {% if livereload %}
   <!--Livereload script rendered -->
-  <script type="text/javascript" src="{{host}}:35729/livereload.js"></script>
+  <script type="text/javascript">
+    var scriptTag = document.createElement('script');
+    scriptTag.setAttribute('type', 'text/javascript');
+    scriptTag.setAttribute('src', '//' + window.location.hostname + ':35729/livereload.js');
+    document.head.appendChild(scriptTag);
+  </script>
   {% endif %}
 </body>
 

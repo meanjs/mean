@@ -32,7 +32,8 @@ module.exports = {
     }
   },
   app: {
-    title: defaultEnvConfig.app.title + ' - Development Environment'
+    title: defaultEnvConfig.app.title + ' - Development Environment',
+    domain: process.env.DOMAIN || 'localhost:' + defaultEnvConfig.port
   },
   facebook: {
     clientID: process.env.FACEBOOK_ID || 'APP_ID',
