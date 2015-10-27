@@ -1,0 +1,12 @@
+<section class="row" ng-controller="AuthenticationController">
+  <h3 class="col-md-12 text-center">Sign in using your social accounts</h3>
+  <div class="col-md-12 text-center">
+    <img ng-click="callOauthProvider('/api/auth/facebook')" ng-src="/modules/users/client/img/buttons/facebook.png">
+    <img ng-click="callOauthProvider('/api/auth/twitter')" ng-src="/modules/users/client/img/buttons/twitter.png">
+    <img ng-click="callOauthProvider('/api/auth/google')" ng-src="/modules/users/client/img/buttons/google.png">
+    <img ng-click="callOauthProvider('/api/auth/linkedin')" ng-src="/modules/users/client/img/buttons/linkedin.png">
+    <img ng-click="callOauthProvider('/api/auth/github')" ng-src="/modules/users/client/img/buttons/github.png">
+    <img ng-click="callOauthProvider('/api/auth/paypal')"  ng-src="/modules/users/client/img/buttons/paypal.png">
+  </div>
+  <div ui-view></div>
+</section>
