@@ -13,3 +13,6 @@ access.log
 _site/
 .sass-cache/
 .jekyll-metadata
+
+*.log
+logs/
