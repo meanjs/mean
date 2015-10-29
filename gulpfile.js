@@ -16,9 +16,9 @@ var _ = require('lodash'),
   }),
   path = require('path'),
   endOfLine = require('os').EOL,
-  protractor = require("gulp-protractor").protractor,
-  webdriver_update = require("gulp-protractor").webdriver_update,
-  webdriver_standalone = require("gulp-protractor").webdriver_standalone;
+  protractor = require('gulp-protractor').protractor,
+  webdriver_update = require('gulp-protractor').webdriver_update,
+  webdriver_standalone = require('gulp-protractor').webdriver_standalone;
 
 // Set NODE_ENV to 'test'
 gulp.task('env:test', function () {

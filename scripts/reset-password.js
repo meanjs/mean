@@ -1,3 +1,5 @@
+'use strict';
+
 var nodemailer = require('nodemailer'),
   mongoose = require('mongoose'),
   chalk = require('chalk'),
@@ -47,7 +49,7 @@ mg.connect(function (db) {
       email.text = email.html = text.replace('{{name}}', user.displayName);
 
       transporter.sendMail(email, emailCallback(user));
-    };
+    }
 
     function emailCallback(user) {
       return function (err, info) {
@@ -68,7 +70,7 @@ mg.connect(function (db) {
           return reportAndExit(processedCount, errorCount);
         }
       };
-    };
+    }
 
     // report the processing results and exit
     function reportAndExit(processedCount, errorCount) {
@@ -79,7 +81,7 @@ mg.connect(function (db) {
       if (processedCount === 0) {
         console.log(chalk.yellow('No users were found.'));
       } else {
-        var alert = (!errorCount) ? chalk.green : ((successCount / processedCount) < .8) ? chalk.red : chalk.yellow;
+        var alert = (!errorCount) ? chalk.green : ((successCount / processedCount) < 0.8) ? chalk.red : chalk.yellow;
 
         console.log(alert('Sent ' + successCount + ' of ' + processedCount + ' emails successfully.'));
       }
