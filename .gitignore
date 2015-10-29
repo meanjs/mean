@@ -8,6 +8,7 @@ config/
 server/test/coverage/
 modules/
 coverage/
+access.log
 
 _site/
 .sass-cache/
