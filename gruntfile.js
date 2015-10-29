@@ -147,7 +147,7 @@ module.exports = function (grunt) {
           rename: function (base, src) {
             return src.replace('/scss/', '/css/');
           }
-				}]
+        }]
       }
     },
     less: {
@@ -159,7 +159,7 @@ module.exports = function (grunt) {
           rename: function (base, src) {
             return src.replace('/less/', '/css/');
           }
-				}]
+        }]
       }
     },
     'node-inspector': {
