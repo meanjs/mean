@@ -65,7 +65,7 @@ module.exports.initMiddleware = function (app) {
   }));
 
   // Initialize favicon middleware
-  app.use(favicon('./modules/core/client/img/brand/favicon.ico'));
+  app.use(favicon(app.locals.favicon));
 
   // Enable logger (morgan)
   app.use(morgan(logger.getFormat(), logger.getOptions()));
