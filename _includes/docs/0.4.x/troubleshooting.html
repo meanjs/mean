@@ -23,7 +23,7 @@
       npm version 1.3.x is supported.
     </dd>
   </dl>
-  <h2>Update npm, Bower or Grunt</h2>
+  <h2>Update npm, Bower, Grunt, or Gulp</h2>
   <p>
     You may find there is a weird error during install like npm's Error: ENOENT, usually updating those tools to the latest version solves the issue.
   </p>
@@ -50,6 +50,11 @@
       To update grunt just run this command in the command-line:
       <pre>$ npm update -g grunt-cli</pre>
     </dd>
+    <dt>Updating Gulp</dt>
+    <dd>
+      To update gulp just run this command in the command-line:
+      <pre>$ npm update -g gulp</pre>
+    </dd>
   </dl>
   <h2>Cleaning npm and Bower cache</h2>
   <p>
@@ -72,7 +77,7 @@
     There are some common errors while installing mean:
   </p>
   <dl>
-    <dt>Node is running but AgnularJS application won't load</dt>
+    <dt>Node is running but AngularJS application won't load</dt>
     <dd>
       Check to see all your front-end packages were installed.
       <a target="_blank" href="https://bower.io/">Bower</a> package manager is used to install the front-end package and it will need a <a target="_blank" href="http://bower.io/#configuration">.bowerrc</a> file to install the packages in the right location.
@@ -88,4 +93,29 @@
   <p class="alert alert-warning">
     Sometimes it can be a local issue or something that we didn't cover, in case you have any further questions please contact us via the community page.
   </p>
+  <h2>Common node-sass, grunt-sass, gulp-sass Issue</h2>
+  <p>
+    Another common error for applications using SASS revolves around node-sass and grunt-sass or gulp-sass depending on your choice. The error may occur during npm install or when starting the server.
+  </p>
+  <dl>
+    <dt>Error during install about node-sass, grunt-sass, or gulp-sass</dt>
+    <dd>
+      First uninstall the project and global gulp-sass and grunt-sass modules.
+      <pre>$ npm uninstall grunt-sass
+$ npm uninstall gulp-sass
+$ npm uninstall -g grunt-sass
+$ npm uninstall -g gulp-sass</pre>
+      Next uninstall the global node-sass module.
+      <pre>$ npm uninstall -g node-sass</pre>
+      Install the global node-sass first.  Then install the grunt-sass and/or gulp-sass modules.
+      <pre>$ npm install grunt-sass
+$ npm install gulp-sass</pre>
+      Now try the npm install again from the project folder.
+      <pre>$ npm install</pre>
+      If your npm install still fails at this point.  Repeat the above steps but use npm rebuild -g after the global node-sass install, but before installing the project grunt/gulp sass modules.
+      <pre>$ npm rebuild -g</pre>
+      As suggested above, you can also try npm update.
+      <pre>$ npm update -g</pre>
+    </dd>
+  </dl>
 </section>

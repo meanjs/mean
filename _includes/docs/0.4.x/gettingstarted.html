@@ -30,6 +30,11 @@
       You're going to use the <a target="_blank" href="http://gruntjs.com/">Grunt Task Runner</a> to automate your development process, in order to install it make sure you've installed Node.js and npm, then install grunt globally using npm:
       <pre>$ npm install -g grunt-cli</pre>
     </dd>
+    <dt>Gulp (Optional)</dt>
+    <dd>
+      You may use the <a target="_blank" href="http://gulpjs.com/">Gulp Task Runner</a> instead of Grunt.  You may use Gulp for Live Reload, Linting, and SASS or LESS compilation.
+      <pre>$ npm install -g gulp</pre>
+    </dd>
   </dl>
   <p class="alert alert-info">
     <b>Note:</b> Your user might not have the permissions to install package globally, so use a super user or <b>sudo</b>.
@@ -81,10 +86,16 @@
         <code>bower install</code>command to install all the front-end modules needed for the application.</li>
     </ul>
   </p>
-  <h2>Running Your Application</h2>
+  <h2>Running Your Application with Grunt</h2>
   <p>
     After the install process is over, you'll be able to run your application using Grunt, just run grunt default task:
     <pre>$ grunt</pre>
+    Your application should run on the 3000 port so in your browser just go to <a target="_blank" href="http://localhost:3000">http://localhost:3000</a>.
+  </p>
+  <h2>Running Your Application with Gulp (Optional)</h2>
+  <p>
+    After the install process is over, you'll be able to run your application using Gulp, just run gulp default task:
+    <pre>$ gulp</pre>
     Your application should run on the 3000 port so in your browser just go to <a target="_blank" href="http://localhost:3000">http://localhost:3000</a>.
   </p>
   <p>
