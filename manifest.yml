@@ -1,8 +1,8 @@
 ---
-declared-services: 
-  mean-mongo: 
-    label: mongolab 
-    plan: sandbox 
+declared-services:
+  mean-mongo:
+    label: mongodb
+    plan: 100
 applications:
 - name: mean
   host: mean-${random-word}

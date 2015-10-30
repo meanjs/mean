@@ -59,7 +59,7 @@ $ wget https://github.com/meanjs/mean/archive/master.zip -O meanjs.zip; unzip me
 
 Don't forget to rename **mean-master** after your project name.
 
-### Yo Generator		
+### Yo Generator
 -Another way would be to use the [Official Yo Generator](http://meanjs.org/generator.html), which generates a copy of the MEAN.JS 0.3.x boilerplate and supplies multiple sub-generators to ease your daily development cycles. 
 
 ## Quick Install
@@ -196,17 +196,17 @@ We welcome pull requests from the community! Just be sure to read the [contribut
 Cloud Foundry is an open source platform-as-a-service (PaaS).  The MEANJS project
 can easily be deployed to any Cloud Foundry instance.  The easiest way to deploy the
 MEANJS project to Cloud Foundry is to use a public hosted instance.  The two most popular
-instances are [Pivotal Web Services](https://run.pivotal.io/) and 
+instances are [Pivotal Web Services](https://run.pivotal.io/) and
 [IBM Bluemix](https://bluemix.net).  Both provide free trials and support pay-as-you-go models
-for hosting applications in the cloud.  After you have an account follow the below steps to 
-deploy MEANJS.
+for hosting applications in the cloud.  After you have an account follow the below steps to deploy MEANJS.
 
 * Install the [Cloud Foundry command line tools](http://docs.cloudfoundry.org/devguide/installcf/install-go-cli.html).
 * Now you need to log into Cloud Foundry from the Cloud Foundry command line.
   *  If you are using Pivotal Web Services run `$ cf login -a api.run.pivotal.io`.
   *  If you are using IBM Bluemix run `$ cf login -a api.ng.bluemix.net`.
-* Create a Mongo DB service, IBM Bluemix and Pivotal Web Services offer a free MongoLabs service.
-  *  `$ cf create-service mongolab sandbox mean-mongo`
+* Create a Mongo DB service.
++  *  If you are using Pivotal Web Services run `$ cf create-service mongolab sandbox mean-mongo`
++  *  If you are using IBM Bluemix run `$ cf create-service mongodb 100 mean-mongo`
 * Clone the GitHub repo for MEANJS if you have not already done so
   * `$ git clone https://github.com/meanjs/mean.git && cd mean`
 * Run `$ npm install`
