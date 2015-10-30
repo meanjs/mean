@@ -54,6 +54,13 @@
   <!--Application JavaScript Files-->
   {% for jsFile in jsFiles %}<script type="text/javascript" src="{{jsFile}}"></script>{% endfor %}
 
+  <!--Embedding The User Object and REST END POINT-->
+  <script type="text/javascript">
+    var user = {{ user | json | safe }};
+    angular.module(ApplicationConfiguration.applicationModuleName).constant("CORE_CONST", {% autoescape false %}{{CORE_CONST}}{% endautoescape %} );
+  </script>
+
+
   {% if livereload %}
   <!--Livereload script rendered -->
   <script type="text/javascript" src="{{host}}:35729/livereload.js"></script>

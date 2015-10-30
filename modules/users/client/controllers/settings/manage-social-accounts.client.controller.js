@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('users').controller('SocialAccountsController', ['$scope', '$http', 'Authentication',
-  function ($scope, $http, Authentication) {
+angular.module('users').controller('SocialAccountsController', ['CORE_CONST', '$scope', '$http', 'Authentication',
+  function (CORE_CONST, $scope, $http, Authentication) {
     $scope.user = Authentication.user;
 
     // Check if there are additional accounts
@@ -22,7 +22,7 @@ angular.module('users').controller('SocialAccountsController', ['$scope', '$http
     $scope.removeUserSocialAccount = function (provider) {
       $scope.success = $scope.error = null;
 
-      $http.delete('/api/users/accounts', {
+      $http.delete(CORE_CONST.REST_URL + 'users/accounts', {
         params: {
           provider: provider
         }

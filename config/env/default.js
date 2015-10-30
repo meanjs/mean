@@ -36,5 +36,9 @@ module.exports = {
         fileSize: 1*1024*1024 // Max file size in bytes (1 MB)
       }
     }
+  },
+  CORE_CONST: {
+    SERVER_URL: process.env.SERVER_URL || 'http://127.0.0.1:3000/',
+    REST_URL: process.env.REST_URL || 'http://127.0.0.1:3000/api/'
   }
 };

@@ -115,6 +115,7 @@ angular.module('core').service('Menus', [
       this.validateMenuExistance(menuId);
 
       // Search for menu item
+      var pushed = false;
       for (var itemIndex in this.menus[menuId].items) {
         if (this.menus[menuId].items[itemIndex].state === parentItemState) {
           // Push new submenu item
@@ -125,8 +126,11 @@ angular.module('core').service('Menus', [
             position: options.position || 0,
             shouldRender: shouldRender
           });
+          pushed = true;
         }
       }
+      if (!pushed)
+        throw new Error('Could not find parentItemState "' + parentItemState + '" in menuId "' + menuId + '" to add "' + options.state +'" to.');
 
       // Return the menu object
       return this.menus[menuId];

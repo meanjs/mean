@@ -18,6 +18,13 @@ var validateLocalStrategyProperty = function (property) {
 };
 
 /**
+ * A Validation function for local strategy password
+ */
+var validateLocalStrategyPassword = function (password) {
+  return (this.provider !== 'local' || validator.isLength(password, 6));
+};
+
+/**
  * A Validation function for local strategy email
  */
 var validateLocalStrategyEmail = function (email) {
@@ -61,7 +68,8 @@ var UserSchema = new Schema({
   },
   password: {
     type: String,
-    default: ''
+    default: '',
+    validate: [validateLocalStrategyPassword, 'Password should be longer']
   },
   salt: {
     type: String
@@ -97,6 +105,16 @@ var UserSchema = new Schema({
   },
   resetPasswordExpires: {
     type: Date
+  },
+  is_current_user: {
+    type: Boolean
+  },
+  /* For user login */
+  loginToken: {
+    type: String
+  },
+  loginExpires: {
+    type: Date
   }
 });
 
@@ -104,12 +122,17 @@ var UserSchema = new Schema({
  * Hook a pre save method to hash the password
  */
 UserSchema.pre('save', function (next) {
-  if (this.password && this.isModified('password')) {
-    this.salt = crypto.randomBytes(16).toString('base64');
-    this.password = this.hashPassword(this.password);
-  }
+  if (this.salt && this.salt.length) {
+    //if salt exists, don't touch it, as it creates new salt every time on model save
+    next();
+  } else {
+    if (this.password && this.password.length > 6) {
+      this.salt = new Buffer(crypto.randomBytes(16).toString('base64'), 'base64');
+      this.password = this.hashPassword(this.password);
+    }
 
-  next();
+    next();
+  }
 });
 
 /**
@@ -132,7 +155,7 @@ UserSchema.pre('validate', function (next) {
  */
 UserSchema.methods.hashPassword = function (password) {
   if (this.salt && password) {
-    return crypto.pbkdf2Sync(password, new Buffer(this.salt, 'base64'), 10000, 64).toString('base64');
+    return crypto.pbkdf2Sync(password, this.salt, 10000, 64).toString('base64');
   } else {
     return password;
   }
@@ -168,10 +191,10 @@ UserSchema.statics.findUniqueUsername = function (username, suffix, callback) {
 };
 
 /**
-* Generates a random passphrase that passes the owasp test.
-* Returns a promise that resolves with the generated passphrase, or rejects with an error if something goes wrong.
-* NOTE: Passphrases are only tested against the required owasp strength tests, and not the optional tests.
-*/
+ * Generates a random passphrase that passes the owasp test.
+ * Returns a promise that resolves with the generated passphrase, or rejects with an error if something goes wrong.
+ * NOTE: Passphrases are only tested against the required owasp strength tests, and not the optional tests.
+ */
 UserSchema.statics.generateRandomPassphrase = function () {
   return new Promise(function (resolve, reject) {
     var password = '';

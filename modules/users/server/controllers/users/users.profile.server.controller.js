@@ -10,6 +10,7 @@ var _ = require('lodash'),
   mongoose = require('mongoose'),
   multer = require('multer'),
   config = require(path.resolve('./config/config')),
+  users = require('./users.authorization.server.controller'),
   User = mongoose.model('User');
 
 /**
@@ -96,8 +97,16 @@ exports.changeProfilePicture = function (req, res) {
 };
 
 /**
- * Send User
+ * Send User, null if not logged in
  */
-exports.me = function (req, res) {
-  res.json(req.user || null);
+exports.me = function(req, res){
+  users.requiresLoginTokenCheck(req, function(err, user) {
+    if (user && !err) {
+      user.salt = undefined;
+      user.password = undefined;
+    } else {
+      user = null;
+    }
+    res.json(user);
+  });
 };
