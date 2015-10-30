@@ -1,0 +1,41 @@
+<div class="inner-link-anchor" id="server-tests"></div>
+<section class="page-header">
+  <h1>Server Tests</h1>
+</section>
+<section>
+  <p>
+    We use <a target="_blank" href="http://visionmedia.github.io/mocha/">Mocha</a> to test the server side logic. Mocha tests are asynchronous, easy to maintain, and uses a readable <a target="_blank" href="http://en.wikipedia.org/wiki/Behavior-driven_development">BDD</a> syntax.
+  </p>
+  <h4>Assertions</h4>
+  <p>
+    Mocha needs an external assertion library to predicate the result of each test, in this case <a target="_blank" href="https://github.com/visionmedia/should.js">Should.js</a> is being used. Should is an expressive library aiming to simplify tests and be readable. It extends the Object.prototype with a single non-enumerable getter that allows you to express how that object should behave.
+  </p>
+  <h4>Test Files</h4>
+  <p>
+    Each entity have its own test file located inside their respective module server tests folder. Ex.: <b>modules/core/tests/server</b>
+  </p>
+  <h4>Writing Tests</h4>
+  <p>
+    There are a few common steps we use to test an entity:
+  </p>
+  <ol>
+    <li>
+      In the <b>beforeEach</b> or <b>before</b> functions take care of prerequisites and create the objects you are about to use in your tests.
+    </li>
+    <li>
+      For each test start with a <b>describe</b> function to indicate which method is being tested.
+    </li>
+    <li>
+      Next, add your scenario tests using the <b>it</b> function.
+    </li>
+    <li>
+      In the <b>it</b> function run the tests functionality and use should to assert what the end result should be.
+    </li>
+    <li>
+      Finally use <b>after</b> or <b>afterEach</b> functions to finalize your tests and clear the test database.
+    </li>
+  </ol>
+<!--   <p class="alert alert-info">
+    To learn more about how to write your tests visit <a href="#article-example">The Article Example Section</a>.
+  </p> -->
+</section>
