@@ -4,9 +4,13 @@ node_js:
   - 0.10
   - 0.12
   - 4
+  - 5
 # NodeJS v4 requires gcc 4.8
 env:
   - NODE_ENV=travis CXX="g++-4.8" CC="gcc-4.8"
+matrix:
+  allow_failures:
+    - node_js: 5
 services:
   - mongodb
 # gcc 4.8 requires ubuntu-toolchain-r-test
