@@ -18,7 +18,8 @@ var _ = require('lodash'),
   endOfLine = require('os').EOL,
   protractor = require('gulp-protractor').protractor,
   webdriver_update = require('gulp-protractor').webdriver_update,
-  webdriver_standalone = require('gulp-protractor').webdriver_standalone;
+  webdriver_standalone = require('gulp-protractor').webdriver_standalone,
+  KarmaServer = require('karma').Server;
 
 // Set NODE_ENV to 'test'
 gulp.task('env:test', function () {
@@ -207,6 +208,11 @@ gulp.task('mocha', function (done) {
 
 // Karma test runner task
 gulp.task('karma', function (done) {
+  new KarmaServer({
+    configFile: __dirname + '/karma.conf.js',
+    singleRun: true
+  }, done).start();
+  
   return gulp.src([])
     .pipe(plugins.karma({
       configFile: 'karma.conf.js',
