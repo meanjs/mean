@@ -248,9 +248,6 @@ In the docs we'll try to explain both general concepts of MEAN components and gi
 * Discuss it in the new [Google Group](https://groups.google.com/d/forum/meanjs)
 * Ping us on [Twitter](http://twitter.com/meanjsorg) and [Facebook](http://facebook.com/meanjs)
 
-## Live Example
-Browse the live MEAN.JS example on [http://meanjs.herokuapp.com](http://meanjs.herokuapp.com).
-
 ## Contributing
 We welcome pull requests from the community! Just be sure to read the [contributing](https://github.com/meanjs/mean/blob/master/CONTRIBUTING.md) doc to get started.
 
