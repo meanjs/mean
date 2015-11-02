@@ -7,6 +7,7 @@ var config = require('../config'),
   express = require('express'),
   morgan = require('morgan'),
   logger = require('./logger'),
+  authorization = require('./authorization'),
   bodyParser = require('body-parser'),
   session = require('express-session'),
   MongoStore = require('connect-mongo')(session),
@@ -44,6 +45,9 @@ module.exports.initLocalVariables = function (app) {
     res.locals.url = req.protocol + '://' + req.headers.host + req.originalUrl;
     next();
   });
+
+  // middleware for authorization request with JSON Web Token
+  app.use(authorization.authorize);
 };
 
 /**
