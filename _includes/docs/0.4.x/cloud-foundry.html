@@ -20,9 +20,10 @@
         <li>If you are using IBM Bluemix run <pre>$ cf login -a api.ng.bluemix.net</pre></li>
       </ul>
     </li>
-    <li>Create a Mongo DB service, IBM Bluemix and Pivotal Web Services offer a free MongoLabs service.
+    <li>Create a Mongo DB service. IBM Bluemix and Pivotal Web Services offer a free MongoLabs service.
       <ul>
-        <li><pre>$ cf create-service mongolab sandbox mean-mongo</pre></li>
+        <li>If you are using IBM Bluemix run <pre>$ cf create-service mongodb 100 mean-mongo</pre></li>
+        <li>If you are using Pivotal Web Services run <pre>$ cf create-service mongolab sandbox mean-mongo</pre></li>
       </ul>
     </li>
     <li>Clone the GitHub repo for MEAN.JS if you have not already done so
