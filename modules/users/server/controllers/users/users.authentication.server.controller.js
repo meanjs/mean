@@ -175,23 +175,23 @@ exports.saveOAuthUserProfile = function (req, providerUserProfile, done) {
         } else {
           // set the new data from the provider
           if (user.providerData) {
-              user.providerData = providerUserProfile.providerData;
-              // Then tell mongoose that we've updated the providerData field
-              user.markModified('providerData');
-               // And save the user
-              user.save(function(err) {
-                  return done(err, user);
-              });
+            user.providerData = providerUserProfile.providerData;
+            // Then tell mongoose that we've updated the providerData field
+            user.markModified('providerData');
+             // And save the user
+            user.save(function(err) {
+                return done(err, user);
+            });
           } else if (user.additionalProvidersData) {
-              user.additionalProvidersData[providerUserProfile.provider] = providerUserProfile.providerData;
-              // Then tell mongoose that we've updated the providerData field
-              user.markModified('additionalProvidersData');
-              // Then tell mongoose that we've updated the image field
-              user.save(function(err) {
-                  return done(err, user);
-              });
+            user.additionalProvidersData[providerUserProfile.provider] = providerUserProfile.providerData;
+            // Then tell mongoose that we've updated the providerData field
+            user.markModified('additionalProvidersData');
+            // Then tell mongoose that we've updated the image field
+            user.save(function(err) {
+                return done(err, user);
+            });
           } else {
-              return done(err, user);
+            return done(err, user);
           }
         }
       }
