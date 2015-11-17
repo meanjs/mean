@@ -71,7 +71,7 @@ $ wget https://github.com/meanjs/mean/archive/master.zip -O meanjs.zip; unzip me
 Don't forget to rename **mean-master** after your project name.
 
 ### Yo Generator
--Another way would be to use the [Official Yo Generator](http://meanjs.org/generator.html), which generates a copy of the MEAN.JS 0.3.x boilerplate and supplies multiple sub-generators to ease your daily development cycles. 
+Another way would be to use the [Official Yo Generator](http://meanjs.org/generator.html), which generates a copy of the MEAN.JS 0.4.x boilerplate and supplies an application generator to ease your daily development cycles.
 
 ## Quick Install
 Once you've downloaded the boilerplate and installed all the prerequisites, you're just a few steps away from starting to develop your MEAN application.
