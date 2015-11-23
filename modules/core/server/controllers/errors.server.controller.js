@@ -30,7 +30,7 @@ exports.getErrorMessage = function (err) {
         message = getUniqueErrorMessage(err);
         break;
       default:
-        message = 'Something went wrong';
+        message = 'Something went wrong. (err == ' + err + ')';
     }
   } else {
     for (var errName in err.errors) {
@@ -39,6 +39,6 @@ exports.getErrorMessage = function (err) {
       }
     }
   }
-
+  console.error(message);
   return message;
 };

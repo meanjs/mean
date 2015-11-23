@@ -14,6 +14,8 @@ var noReturnUrls = [
   '/authentication/signin',
   '/authentication/signup'
 ];
+var jwt = require('jwt-simple');
+var secret = 'keepitquiet';
 
 /**
  * Signup
@@ -30,8 +32,21 @@ exports.signup = function (req, res) {
   user.provider = 'local';
   user.displayName = user.firstName + ' ' + user.lastName;
 
+  //tokenize
+  var expireTime = Date.now() + (200 * 60 * 60 * 1000); // 200 hours from now
+
+  // generate login token
+  var tokenPayload = {
+    username: user.username,
+    loginExpires: expireTime
+  };
+  // add token and exp date to user object
+  user.loginToken = jwt.encode(tokenPayload, secret);
+  user.loginExpires = expireTime;
+
   // Then save the user
   user.save(function (err) {
+    console.log(err);
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
@@ -41,13 +56,7 @@ exports.signup = function (req, res) {
       user.password = undefined;
       user.salt = undefined;
 
-      req.login(user, function (err) {
-        if (err) {
-          res.status(400).send(err);
-        } else {
-          res.json(user);
-        }
-      });
+      res.json(user);
     }
   });
 };
@@ -56,21 +65,20 @@ exports.signup = function (req, res) {
  * Signin after passport authentication
  */
 exports.signin = function (req, res, next) {
-  passport.authenticate('local', function (err, user, info) {
+
+  // authenticate using the local-token strategy
+  passport.authenticate('local-token', { session: false }, function (err, user, info) {
     if (err || !user) {
       res.status(400).send(info);
     } else {
-      // Remove sensitive data before login
+
+      // Remove sensitive data before returning
       user.password = undefined;
       user.salt = undefined;
 
-      req.login(user, function (err) {
-        if (err) {
-          res.status(400).send(err);
-        } else {
-          res.json(user);
-        }
-      });
+      // return the user object (contains loginToken)
+      res.json(user);
+
     }
   })(req, res, next);
 };
@@ -79,9 +87,36 @@ exports.signin = function (req, res, next) {
  * Signout
  */
 exports.signout = function (req, res) {
-  req.logout();
-  res.redirect('/');
+  //req.logout();
+
+  // get login token
+  var loginToken = req.headers.authentication || req.body.loginToken;
+
+  // decode the token to find out which user it came from
+  var decodedPayload = jwt.decode(loginToken, secret);
+  var username = decodedPayload.username;
+
+  // remove login token information from user object
+  User.findOne({ username: username }, function (err, user) {
+    if (err) {
+      res.status(400).send(err);
+    } else {
+      user.loginToken = undefined;
+      user.loginExpires = undefined;
+
+      // update the user object in the database
+      user.save(function (err) {
+        if (err) {
+          res.status(400).send(err);
+        } else {
+          res.status(200).send();
+        }
+      });
+    }
+  });
+
 };
+
 
 /**
  * OAuth provider call

@@ -12,7 +12,23 @@ angular.module(ApplicationConfiguration.applicationModuleName).config(['$locatio
   }
 ]);
 
-angular.module(ApplicationConfiguration.applicationModuleName).run(function ($rootScope, $state, Authentication) {
+angular.module(ApplicationConfiguration.applicationModuleName).run(function ($rootScope, $state, $http, Authentication, CORE_CONST) {
+
+  //set token header
+  var auth_token = localStorage.getItem('auth_token');
+  $http({
+    method: 'GET',
+    url: CORE_CONST.REST_URL + 'users/me',
+    headers: {
+      Authentication: auth_token
+    }
+  })
+  .success(function(successResponse){
+    //set auth-token and user
+    if (successResponse)
+      Authentication.user = successResponse;
+  });
+
 
   // Check authentication before changing state
   $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
@@ -38,6 +54,11 @@ angular.module(ApplicationConfiguration.applicationModuleName).run(function ($ro
     }
   });
 
+  // Go to login in page when auth-login-required event received
+  $rootScope.$on('event:auth-login_required', function(e, rejection) {
+    $state.go('authentication.signin');
+  });
+
   // Record previous state
   $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
     storePreviousState(fromState, fromParams);
@@ -45,7 +66,7 @@ angular.module(ApplicationConfiguration.applicationModuleName).run(function ($ro
 
   // Store previous state
   function storePreviousState(state, params) {
-    // only store this state if it shouldn't be ignored 
+    // only store this state if it shouldn't be ignored
     if (!state.data || !state.data.ignoreState) {
       $state.previous = {
         state: state,

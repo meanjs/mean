@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('users').controller('ChangePasswordController', ['$scope', '$http', 'Authentication', 'PasswordValidator',
-  function ($scope, $http, Authentication, PasswordValidator) {
+angular.module('users').controller('ChangePasswordController', ['$scope', '$http', 'Authentication', 'PasswordValidator', 'CORE_CONST',
+  function ($scope, $http, Authentication, PasswordValidator, CORE_CONST) {
     $scope.user = Authentication.user;
     $scope.popoverMsg = PasswordValidator.getPopoverMsg();
 
@@ -15,7 +15,7 @@ angular.module('users').controller('ChangePasswordController', ['$scope', '$http
         return false;
       }
 
-      $http.post('/api/users/password', $scope.passwordDetails).success(function (response) {
+      $http.post(CORE_CONST.REST_URL + 'users/password', $scope.passwordDetails).success(function (response) {
         // If successful show success message and clear form
         $scope.$broadcast('show-errors-reset', 'passwordForm');
         $scope.success = true;

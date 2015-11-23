@@ -214,6 +214,7 @@ exports.changePassword = function (req, res, next) {
         if (!err && user) {
           if (user.authenticate(passwordDetails.currentPassword)) {
             if (passwordDetails.newPassword === passwordDetails.verifyPassword) {
+              user.salt = null; // Force creation of new salt
               user.password = passwordDetails.newPassword;
 
               user.save(function (err) {

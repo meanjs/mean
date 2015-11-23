@@ -13,11 +13,11 @@ var config = require('../config'),
   favicon = require('serve-favicon'),
   compress = require('compression'),
   methodOverride = require('method-override'),
-  cookieParser = require('cookie-parser'),
   helmet = require('helmet'),
   flash = require('connect-flash'),
   consolidate = require('consolidate'),
-  path = require('path');
+  path = require('path'),
+  cors = require('cors');
 
 /**
  * Initialize local variables
@@ -37,6 +37,7 @@ module.exports.initLocalVariables = function (app) {
   app.locals.livereload = config.livereload;
   app.locals.logo = config.logo;
   app.locals.favicon = config.favicon;
+  app.locals.CORE_CONST = JSON.stringify(config.CORE_CONST);
 
   // Passing the request url to environment locals
   app.use(function (req, res, next) {
@@ -85,9 +86,10 @@ module.exports.initMiddleware = function (app) {
   app.use(bodyParser.json());
   app.use(methodOverride());
 
-  // Add the cookie parser and flash middleware
-  app.use(cookieParser());
   app.use(flash());
+
+  // Enable CORS
+  app.use(cors());
 };
 
 /**

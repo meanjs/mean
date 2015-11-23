@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('users').controller('PasswordController', ['$scope', '$stateParams', '$http', '$location', 'Authentication', 'PasswordValidator',
-  function ($scope, $stateParams, $http, $location, Authentication, PasswordValidator) {
+angular.module('users').controller('PasswordController', ['$scope', '$stateParams', '$http', '$location', 'Authentication', 'PasswordValidator', 'CORE_CONST',
+  function ($scope, $stateParams, $http, $location, Authentication, PasswordValidator, CORE_CONST) {
     $scope.authentication = Authentication;
     $scope.popoverMsg = PasswordValidator.getPopoverMsg();
 
@@ -20,12 +20,12 @@ angular.module('users').controller('PasswordController', ['$scope', '$stateParam
         return false;
       }
 
-      $http.post('/api/auth/forgot', $scope.credentials).success(function (response) {
+      $http.post('CORE_CONST.REST_URL + /auth/forgot', $scope.credentials).success(function(response) {
         // Show user success message and clear form
         $scope.credentials = null;
         $scope.success = response.message;
 
-      }).error(function (response) {
+      }).error(function(response) {
         // Show user error message and clear form
         $scope.credentials = null;
         $scope.error = response.message;
@@ -42,7 +42,7 @@ angular.module('users').controller('PasswordController', ['$scope', '$stateParam
         return false;
       }
 
-      $http.post('/api/auth/reset/' + $stateParams.token, $scope.passwordDetails).success(function (response) {
+      $http.post('CORE_CONST.REST_URL + /auth/reset/' + $stateParams.token, $scope.passwordDetails).success(function(response) {
         // If successful show success message and clear form
         $scope.passwordDetails = null;
 
