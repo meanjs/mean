@@ -82,4 +82,4 @@ The code for the documentation and the website are located in the meanjs/mean re
 
 For those who will be generating releases:
 * Don't forget to update the changelog!
-  * `conventional-changelog -r 1`
+  * `conventional-changelog -r 1 | cat - CHANGELOG.md | tee CHANGELOG.md`
