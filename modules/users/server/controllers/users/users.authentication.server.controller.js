@@ -180,7 +180,7 @@ exports.saveOAuthUserProfile = function (req, providerUserProfile, done) {
             user.markModified('providerData');
              // And save the user
             user.save(function(err) {
-                return done(err, user);
+              return done(err, user);
             });
           } else if (user.additionalProvidersData) {
             user.additionalProvidersData[providerUserProfile.provider] = providerUserProfile.providerData;
@@ -188,7 +188,7 @@ exports.saveOAuthUserProfile = function (req, providerUserProfile, done) {
             user.markModified('additionalProvidersData');
             // Then tell mongoose that we've updated the image field
             user.save(function(err) {
-                return done(err, user);
+              return done(err, user);
             });
           } else {
             return done(err, user);
