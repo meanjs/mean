@@ -1,8 +1,8 @@
 'use strict';
 
 //Menu service used for managing  menus
-angular.module('core').service('Menus', [
-  function () {
+angular.module('core').service('Menus', ['$log',
+  function ($log) {
     // Define a set of default roles
     this.defaultRoles = ['user', 'admin'];
 
@@ -35,10 +35,10 @@ angular.module('core').service('Menus', [
         if (this.menus[menuId]) {
           return true;
         } else {
-          throw new Error('Menu does not exist');
+          $log.error('Menu "' + menuId +'" does not exist');
         }
       } else {
-        throw new Error('MenuId was not provided');
+        $log.error('MenuId was not provided');
       }
 
       return false;
@@ -130,7 +130,7 @@ angular.module('core').service('Menus', [
         }
       }
       if (!pushed)
-        throw new Error('Could not find parentItemState "' + parentItemState + '" in menuId "' + menuId + '" to add "' + options.state +'" to.');
+        $log.error('Could not find parentItemState "' + parentItemState + '" in menuId "' + menuId + '" to add "' + options.state +'" to.');
 
       // Return the menu object
       return this.menus[menuId];
