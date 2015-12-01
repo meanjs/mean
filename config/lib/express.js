@@ -40,8 +40,9 @@ module.exports.initLocalVariables = function (app) {
 
   // Passing the request url to environment locals
   app.use(function (req, res, next) {
-    res.locals.host = req.protocol + '://' + req.hostname;
-    res.locals.url = req.protocol + '://' + req.headers.host + req.originalUrl;
+    var domain = config.app.domain || req.headers.host;
+    res.locals.host = req.protocol + '://' + domain;
+    res.locals.url = req.protocol + '://' + domain + req.originalUrl;
     next();
   });
 };
