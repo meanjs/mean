@@ -232,7 +232,7 @@ module.exports.init = function (db) {
   // Initialize Helmet security headers
   this.initHelmetHeaders(app);
 
-  // Initialize modules static client routes, BEFORE session!
+  // Initialize modules static client routes, BEFORE session.
   this.initModulesClientRoutes(app);
 
   // Initialize Express session
