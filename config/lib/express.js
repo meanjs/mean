@@ -228,18 +228,18 @@ module.exports.init = function (db) {
 
   // Initialize Express view engine
   this.initViewEngine(app);
+  
+  // Initialize Helmet security headers
+  this.initHelmetHeaders(app);
+
+  // Initialize modules static client routes, before session!
+  this.initModulesClientRoutes(app);
 
   // Initialize Express session
   this.initSession(app, db);
 
   // Initialize Modules configuration
   this.initModulesConfiguration(app);
-
-  // Initialize Helmet security headers
-  this.initHelmetHeaders(app);
-
-  // Initialize modules static client routes
-  this.initModulesClientRoutes(app);
 
   // Initialize modules server authorization policies
   this.initModulesServerPolicies(app);
