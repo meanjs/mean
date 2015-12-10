@@ -33,7 +33,7 @@
         },
         data: {
           roles: ['user', 'admin'],
-          pageTitle : 'Articles Create'
+          pageTitle: 'Articles Create'
         }
       })
       .state('articles.edit', {
@@ -57,7 +57,7 @@
         resolve: {
           articleResolve: getArticle
         },
-        data:{
+        data: {
           pageTitle: 'Article {{ articleResolve.title }}'
         }
       });
@@ -76,4 +76,4 @@
   function newArticle(ArticlesService) {
     return new ArticlesService();
   }
-})();
+}());

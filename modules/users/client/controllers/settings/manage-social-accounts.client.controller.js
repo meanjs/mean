@@ -16,12 +16,8 @@
     vm.removeUserSocialAccount = removeUserSocialAccount;
 
     // Check if there are additional accounts
-    function hasConnectedAdditionalSocialAccounts(provider) {
-      for (var i in vm.user.additionalProvidersData) {
-        return true;
-      }
-
-      return false;
+    function hasConnectedAdditionalSocialAccounts() {
+      return ($scope.user.additionalProvidersData && Object.keys($scope.user.additionalProvidersData).length);
     }
 
     // Check if provider is already in use with current user
@@ -46,4 +42,4 @@
       });
     }
   }
-})();
+}());

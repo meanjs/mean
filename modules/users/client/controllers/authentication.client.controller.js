@@ -74,4 +74,4 @@
       $window.location.href = url;
     }
   }
-})();
+}());

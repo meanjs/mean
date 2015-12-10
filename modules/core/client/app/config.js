@@ -20,4 +20,4 @@ var ApplicationConfiguration = (function () {
     applicationModuleVendorDependencies: applicationModuleVendorDependencies,
     registerModule: registerModule
   };
-})();
+}());

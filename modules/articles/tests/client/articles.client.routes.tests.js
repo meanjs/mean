@@ -6,7 +6,7 @@
     var $scope,
       ArticlesService;
 
-    //We can start by loading the main application module
+    // We can start by loading the main application module
     beforeEach(module(ApplicationConfiguration.applicationModuleName));
 
     // The injector ignores leading and trailing underscores here (i.e. _$httpBackend_).
@@ -73,7 +73,7 @@
             content: 'MEAN rocks!'
           });
 
-          //Initialize Controller
+          // Initialize Controller
           ArticlesController = $controller('ArticlesController as vm', {
             $scope: $scope,
             articleResolve: mockArticle
@@ -120,7 +120,7 @@
           // create mock article
           mockArticle = new ArticlesService();
 
-          //Initialize Controller
+          // Initialize Controller
           ArticlesController = $controller('ArticlesController as vm', {
             $scope: $scope,
             articleResolve: mockArticle
@@ -170,7 +170,7 @@
             content: 'MEAN rocks!'
           });
 
-          //Initialize Controller
+          // Initialize Controller
           ArticlesController = $controller('ArticlesController as vm', {
             $scope: $scope,
             articleResolve: mockArticle
@@ -226,4 +226,4 @@
 
     });
   });
-})();
+}());

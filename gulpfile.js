@@ -69,24 +69,24 @@ gulp.task('watch', function () {
 
   // Add watch rules
   gulp.watch(defaultAssets.server.views).on('change', plugins.livereload.changed);
-  gulp.watch(defaultAssets.server.allJS, ['jshint']).on('change', plugins.livereload.changed);
-  gulp.watch(defaultAssets.client.js, ['jshint']).on('change', plugins.livereload.changed);
+  gulp.watch(defaultAssets.server.allJS, ['eslint']).on('change', plugins.livereload.changed);
+  gulp.watch(defaultAssets.client.js, ['eslint']).on('change', plugins.livereload.changed);
   gulp.watch(defaultAssets.client.css, ['csslint']).on('change', plugins.livereload.changed);
   gulp.watch(defaultAssets.client.sass, ['sass', 'csslint']).on('change', plugins.livereload.changed);
   gulp.watch(defaultAssets.client.less, ['less', 'csslint']).on('change', plugins.livereload.changed);
 
   if (process.env.NODE_ENV === 'production') {
-    gulp.watch(defaultAssets.server.gulpConfig, ['templatecache', 'jshint']);
-    gulp.watch(defaultAssets.client.views, ['templatecache', 'jshint']).on('change', plugins.livereload.changed);
+    gulp.watch(defaultAssets.server.gulpConfig, ['templatecache', 'eslint']);
+    gulp.watch(defaultAssets.client.views, ['templatecache']).on('change', plugins.livereload.changed);
   } else {
-    gulp.watch(defaultAssets.server.gulpConfig, ['jshint']);
+    gulp.watch(defaultAssets.server.gulpConfig, ['eslint']);
     gulp.watch(defaultAssets.client.views).on('change', plugins.livereload.changed);
   }
 
   if (process.env.NODE_ENV === 'test') {
     // Add Server Test file rules
     gulp.watch([testAssets.tests.server, defaultAssets.server.allJS], ['test:server']).on('change', function (file) {
-      var runOnlyChangedTestFile = argv.onlyChanged ? true : false;
+      var runOnlyChangedTestFile = !!argv.onlyChanged;
 
       // check if we should only run a changed test file
       if (runOnlyChangedTestFile) {
@@ -123,23 +123,6 @@ gulp.task('csslint', function (done) {
         done();
       }
     }));
-});
-
-// JS linting task
-gulp.task('jshint', function () {
-  var assets = _.union(
-    defaultAssets.server.gulpConfig,
-    defaultAssets.server.allJS,
-    defaultAssets.client.js,
-    testAssets.tests.server,
-    testAssets.tests.client,
-    testAssets.tests.e2e
-  );
-
-  return gulp.src(assets)
-    .pipe(plugins.jshint())
-    .pipe(plugins.jshint.reporter('default'))
-    .pipe(plugins.jshint.reporter('fail'));
 });
 
 // ESLint JS linting task
@@ -339,7 +322,7 @@ gulp.task('dropdb', function (done) {
 
   mongoose.connect(function (db) {
     db.connection.db.dropDatabase(function (err) {
-      if(err) {
+      if (err) {
         console.log(err);
       } else {
         console.log('Successfully dropped db: ', db.connection.db.databaseName);
@@ -376,7 +359,7 @@ gulp.task('protractor', ['webdriver_update'], function () {
 
 // Lint CSS and JavaScript files.
 gulp.task('lint', function (done) {
-  runSequence('less', 'sass', ['csslint', 'eslint', 'jshint'], done);
+  runSequence('less', 'sass', ['csslint', 'eslint'], done);
 });
 
 // Lint project files and minify them into two production files.
@@ -394,7 +377,7 @@ gulp.task('test:server', function (done) {
 });
 
 // Watch all server files for changes & run server tests (test:server) task on changes
-// optional arguments: 
+// optional arguments:
 //    --onlyChanged - optional argument for specifying that only the tests in a changed Server Test file will be run
 // example usage: gulp test:server:watch --onlyChanged
 gulp.task('test:server:watch', function (done) {

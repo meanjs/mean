@@ -3,4 +3,4 @@
 
   app.registerModule('chat', ['core']);
   app.registerModule('chat.routes', ['ui.router']);
-})(ApplicationConfiguration);
+}(ApplicationConfiguration));

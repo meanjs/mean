@@ -33,7 +33,9 @@ var getGlobbedPaths = function (globPatterns, excludes) {
         files = files.map(function (file) {
           if (_.isArray(excludes)) {
             for (var i in excludes) {
-              file = file.replace(excludes[i], '');
+              if (excludes.hasOwnProperty(i)) {
+                file = file.replace(excludes[i], '');
+              }
             }
           } else {
             file = file.replace(excludes, '');

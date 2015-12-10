@@ -83,4 +83,4 @@
       vm.imageURL = vm.user.profileImageURL;
     }
   }
-})();
+}());

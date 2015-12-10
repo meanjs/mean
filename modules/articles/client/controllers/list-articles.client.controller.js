@@ -12,4 +12,4 @@
 
     vm.articles = ArticlesService.query();
   }
-})();
+}());

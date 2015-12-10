@@ -7,7 +7,12 @@
 angular.module('core')
   .directive('showErrors', ['$timeout', '$interpolate', function ($timeout, $interpolate) {
     var linkFn = function (scope, el, attrs, formCtrl) {
-      var inputEl, inputName, inputNgEl, options, showSuccess, toggleClasses,
+      var inputEl,
+        inputName,
+        inputNgEl,
+        options,
+        showSuccess,
+        toggleClasses,
         initCheck = false,
         showValidationMessages = false,
         blurred = false;
@@ -19,7 +24,7 @@ angular.module('core')
       inputName = $interpolate(inputNgEl.attr('name') || '')(scope);
 
       if (!inputName) {
-        throw 'show-errors element has no child input elements with a \'name\' attribute class';
+        throw new Error('show-errors element has no child input elements with a \'name\' attribute class');
       }
 
       var reset = function () {
@@ -65,7 +70,7 @@ angular.module('core')
       compile: function (elem, attrs) {
         if (attrs.showErrors.indexOf('skipFormGroupCheck') === -1) {
           if (!(elem.hasClass('form-group') || elem.hasClass('input-group'))) {
-            throw 'show-errors element does not have the \'form-group\' or \'input-group\' class';
+            throw new Error('show-errors element does not have the \'form-group\' or \'input-group\' class');
           }
         }
         return linkFn;
