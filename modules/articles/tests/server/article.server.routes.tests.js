@@ -313,6 +313,93 @@ describe('Article CRUD tests', function () {
     });
   });
 
+  it('should be able to get a single article that has an orphaned user reference', function (done) {
+    // Create orphan user creds
+    var _creds = {
+      username: 'orphan',
+      password: 'M3@n.jsI$Aw3$0m3'
+    };
+
+    // Create orphan user
+    var _orphan = new User({
+      firstName: 'Full',
+      lastName: 'Name',
+      displayName: 'Full Name',
+      email: 'orphan@test.com',
+      username: _creds.username,
+      password: _creds.password,
+      provider: 'local'
+    });
+
+    _orphan.save(function (err, orphan) {
+      // Handle save error
+      if (err) {
+        return done(err);
+      }
+
+      agent.post('/api/auth/signin')
+        .send(_creds)
+        .expect(200)
+        .end(function (signinErr, signinRes) {
+          // Handle signin error
+          if (signinErr) {
+            return done(signinErr);
+          }
+
+          // Get the userId
+          var orphanId = orphan._id;
+
+          // Save a new article
+          agent.post('/api/articles')
+            .send(article)
+            .expect(200)
+            .end(function (articleSaveErr, articleSaveRes) {
+              // Handle article save error
+              if (articleSaveErr) {
+                return done(articleSaveErr);
+              }
+
+              // Set assertions on new article
+              (articleSaveRes.body.title).should.equal(article.title);
+              should.exist(articleSaveRes.body.user);
+              should.equal(articleSaveRes.body.user._id, orphanId);
+
+              // force the article to have an orphaned user reference
+              orphan.remove(function () {
+                // now signin with valid user
+                agent.post('/api/auth/signin')
+                  .send(credentials)
+                  .expect(200)
+                  .end(function (err, res) {
+                    // Handle signin error
+                    if (err) {
+                      return done(err);
+                    }
+
+                    // Get the article
+                    agent.get('/api/articles/' + articleSaveRes.body._id)
+                      .expect(200)
+                      .end(function (articleInfoErr, articleInfoRes) {
+                        // Handle article error
+                        if (articleInfoErr) {
+                          return done(articleInfoErr);
+                        }
+
+                        // Set assertions
+                        (articleInfoRes.body._id).should.equal(articleSaveRes.body._id);
+                        (articleInfoRes.body.title).should.equal(article.title);
+                        should.equal(articleInfoRes.body.user, undefined);
+
+                        // Call the assertion callback
+                        done();
+                      });
+                  });
+              });
+            });
+        });
+    });
+  });
+
   afterEach(function (done) {
     User.remove().exec(function () {
       Article.remove().exec(done);

@@ -15,7 +15,8 @@
       Posted on
       <span ng-bind="article.created | date:'mediumDate'"></span>
       by
-      <span ng-bind="article.user.displayName"></span>
+      <span ng-if="article.user" ng-bind="article.user.displayName"></span>
+      <span ng-if="!article.user">Deleted User</span>
     </em>
   </small>
   <p class="lead" ng-bind="article.content"></p>
