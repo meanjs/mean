@@ -116,6 +116,7 @@
     "mock-fs": "~3.4.0",
     "run-sequence": "^1.1.1",
     "should": "^7.0.1",
-    "supertest": "^1.0.1"
+    "supertest": "^1.0.1",
+    "yargs": "~3.30.0"
   }
 }
