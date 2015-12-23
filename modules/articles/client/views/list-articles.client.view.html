@@ -8,7 +8,8 @@
         Posted on
         <span ng-bind="article.created | date:'mediumDate'"></span>
         by
-        <span ng-bind="article.user.displayName"></span>
+        <span ng-if="article.user" ng-bind="article.user.displayName"></span>
+        <span ng-if="!article.user">Deleted User</span>
       </small>
       <h4 class="list-group-item-heading" ng-bind="article.title"></h4>
       <p class="list-group-item-text" ng-bind="article.content"></p>
