@@ -1,12 +1,14 @@
 'use strict';
 
-angular.module('core').factory('authInterceptor', ['$q', '$injector',
-  function ($q, $injector) {
+angular.module('core').factory('authInterceptor', ['$q', '$injector', 'Authentication',
+  function ($q, $injector, Authentication) {
     return {
       responseError: function(rejection) {
         if (!rejection.config.ignoreAuthModule) {
           switch (rejection.status) {
             case 401:
+              // Deauthenticate the global user
+              Authentication.user = null;
               $injector.get('$state').transitionTo('authentication.signin');
               break;
             case 403:
