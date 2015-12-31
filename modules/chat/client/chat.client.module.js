@@ -1,4 +1,6 @@
-'use strict';
+(function (app) {
+  'use strict';
 
-// Use Applicaion configuration module to register a new module
-ApplicationConfiguration.registerModule('chat');
+  app.registerModule('chat');
+  app.registerModule('chat.routes', ['ui.router']);
+})(ApplicationConfiguration);
