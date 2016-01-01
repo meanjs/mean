@@ -1,23 +1,23 @@
-<section ng-controller="ArticlesController" ng-init="findOne()">
+<section>
   <div class="page-header">
-    <h1 ng-bind="article.title"></h1>
+    <h1 ng-bind="vm.article.title"></h1>
   </div>
-  <div class="pull-right" ng-show="authentication.user._id == article.user._id">
-    <a class="btn btn-primary" ui-sref="articles.edit({articleId: article._id})">
+  <div class="pull-right" ng-show="vm.authentication.user._id == vm.article.user._id">
+    <a class="btn btn-primary" ui-sref="articles.edit({ articleId: vm.article._id })">
       <i class="glyphicon glyphicon-edit"></i>
     </a>
-    <a class="btn btn-primary" ng-click="remove();">
+    <a class="btn btn-primary" ng-click="vm.remove()">
       <i class="glyphicon glyphicon-trash"></i>
     </a>
   </div>
   <small>
     <em class="text-muted">
       Posted on
-      <span ng-bind="article.created | date:'mediumDate'"></span>
+      <span ng-bind="vm.article.created | date:'mediumDate'"></span>
       by
-      <span ng-if="article.user" ng-bind="article.user.displayName"></span>
-      <span ng-if="!article.user">Deleted User</span>
+      <span ng-if="vm.article.user" ng-bind="vm.article.user.displayName"></span>
+      <span ng-if="!vm.article.user">Deleted User</span>
     </em>
   </small>
-  <p class="lead" ng-bind="article.content"></p>
+  <p class="lead" ng-bind="vm.article.content"></p>
 </section>
