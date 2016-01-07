@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * Module dependencies.
+ * Module dependencies
  */
 var passport = require('passport'),
   User = require('mongoose').model('User'),
@@ -9,7 +9,7 @@ var passport = require('passport'),
   config = require(path.resolve('./config/config'));
 
 /**
- * Module init function.
+ * Module init function
  */
 module.exports = function (app, db) {
   // Serialize sessions

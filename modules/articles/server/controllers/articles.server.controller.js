@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * Module dependencies.
+ * Module dependencies
  */
 var path = require('path'),
   mongoose = require('mongoose'),
@@ -9,7 +9,7 @@ var path = require('path'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller'));
 
 /**
- * Create a article
+ * Create an article
  */
 exports.create = function (req, res) {
   var article = new Article(req.body);
@@ -34,7 +34,7 @@ exports.read = function (req, res) {
 };
 
 /**
- * Update a article
+ * Update an article
  */
 exports.update = function (req, res) {
   var article = req.article;
