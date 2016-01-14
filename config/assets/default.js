@@ -35,6 +35,12 @@ module.exports = {
       'modules/*/client/*.js',
       'modules/*/client/**/*.js'
     ],
+    img: [
+      'modules/**/*/img/**/*.jpg',
+      'modules/**/*/img/**/*.png',
+      'modules/**/*/img/**/*.gif',
+      'modules/**/*/img/**/*.svg'
+    ],
     views: ['modules/*/client/views/**/*.html'],
     templates: ['build/templates.js']
   },
