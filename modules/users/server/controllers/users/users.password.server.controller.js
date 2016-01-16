@@ -122,7 +122,6 @@ exports.validateResetToken = function (req, res) {
 exports.reset = function (req, res, next) {
   // Init Variables
   var passwordDetails = req.body;
-  var message = null;
 
   async.waterfall([
 
