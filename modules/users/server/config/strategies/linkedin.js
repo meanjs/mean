@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * Module dependencies.
+ * Module dependencies
  */
 var passport = require('passport'),
   LinkedInStrategy = require('passport-linkedin').Strategy,
