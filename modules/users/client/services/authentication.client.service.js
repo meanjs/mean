@@ -1,12 +1,35 @@
-'use strict';
+(function() {
+  'use strict';
 
-// Authentication service for user variables
-angular.module('users').factory('Authentication', ['$window',
-  function ($window) {
-    var auth = {
-      user: $window.user
+  angular
+    .module('users')
+    .service('Authentication', Authentication);
+
+  Authentication.$inject = ['$resource', '$q'];
+  function Authentication($resource, $q) {
+
+
+    var service = {
+      ready: init(),
+      user: null,
+      refresh: init
     };
 
-    return auth;
+    function init() {
+      return $q(function(resolve, reject) {
+        $resource('api/users/me')
+          .get().$promise
+          .then(function (user) {
+            console.log(user);
+            service.user = user;
+            resolve(service);
+          })
+          .catch(function () {
+            reject();
+          });
+      });
+    }
+
+    return service;
   }
-]);
+})();
