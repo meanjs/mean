@@ -21,8 +21,8 @@
           .get().$promise
           .then(function (user) {
             console.log(user);
-            service.user = user
-            resolve(service)
+            service.user = user;
+            resolve(service);
           })
           .catch(function () {
             reject();

@@ -38,7 +38,7 @@ angular.module(ApplicationConfiguration.applicationModuleName).run(function ($ro
             }
           }
         }
-    });
+      });
   });
 
   // Record previous state
