@@ -1,12 +1,76 @@
-'use strict';
+(function() {
+  'use strict';
 
-// Authentication service for user variables
-angular.module('users').factory('Authentication', ['$window',
-  function ($window) {
-    var auth = {
-      user: $window.user
+  angular
+    .module('users')
+    .service('Authentication', Authentication);
+
+  Authentication.$inject = ['$q', 'localStorageService', '$resource', '$http'];
+  function Authentication($q, localStorageService, $resource, $http) {
+
+    var readyPromise = $q.defer();
+
+    var service = {
+      ready: readyPromise.promise,
+      user: null,
+      token: null,
+      login: login,
+      signout: signout,
+      refresh: refresh
     };
 
-    return auth;
+    function login(user, token) {
+      setUser(user);
+      setToken(token);
+      setHeader();
+      readyPromise.resolve(service);
+    }
+
+    function setUser(user) {
+      service.user = user;
+    }
+
+    function setToken(token) {
+      service.token = token;
+      localStorageService.set('token', token);
+    }
+
+    function signout() {
+      localStorageService.remove('token');
+      service.user = null;
+      service.token = null;
+    }
+
+    function refresh() {
+      return $q(function(resolve, reject) {
+        readyPromise = $q.defer();
+        $resource('api/users/me').get().$promise
+          .then(function (user) {
+            setUser(user);
+            readyPromise.resolve(service);
+            resolve(service);
+          });
+      });
+
+    }
+
+    function setHeader() {
+      $http.defaults.headers.common.Authorization = 'JWT ' + service.token;
+    }
+
+    function init() {
+      service.token = localStorageService.get('token') || null;
+      if (service.token) {
+        setHeader();
+        refresh();
+      } else {
+        readyPromise.resolve(service);
+      }
+    }
+
+    //Run init
+    init();
+
+    return service;
   }
-]);
+})();

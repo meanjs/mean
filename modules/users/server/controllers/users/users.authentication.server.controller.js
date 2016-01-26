@@ -7,7 +7,9 @@ var path = require('path'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
   mongoose = require('mongoose'),
   passport = require('passport'),
-  User = mongoose.model('User');
+  User = mongoose.model('User'),
+  jwt = require('jsonwebtoken'),
+  authorization = require(path.resolve('./config/lib/authorization'));
 
 // URLs for which user can't be redirected on signin
 var noReturnUrls = [
@@ -38,13 +40,15 @@ exports.signup = function (req, res) {
       user.password = undefined;
       user.salt = undefined;
 
-      req.login(user, function (err) {
-        if (err) {
-          res.status(400).send(err);
-        } else {
-          res.json(user);
-        }
-      });
+      authorization.signToken(user)
+        .then(function (token) {
+          res.json({ user: user, token: token });
+        })
+        .catch(function (err) {
+          return res.status(400).send({
+            message: errorHandler.getErrorMessage(err)
+          });
+        });
     }
   });
 };
@@ -55,19 +59,22 @@ exports.signup = function (req, res) {
 exports.signin = function (req, res, next) {
   passport.authenticate('local', function (err, user, info) {
     if (err || !user) {
-      res.status(400).send(info);
+      res.status(400).send(user);
     } else {
       // Remove sensitive data before login
       user.password = undefined;
       user.salt = undefined;
 
-      req.login(user, function (err) {
-        if (err) {
-          res.status(400).send(err);
-        } else {
-          res.json(user);
-        }
-      });
+      authorization.signToken(user)
+        .then(function (token) {
+          res.json({ user: user, token: token });
+        })
+        .catch(function (err) {
+          return res.status(400).send({
+            message: errorHandler.getErrorMessage(err)
+          });
+        });
+
     }
   })(req, res, next);
 };

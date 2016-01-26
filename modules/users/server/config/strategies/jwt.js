@@ -4,17 +4,36 @@
  * Module dependencies
  */
 var passport = require('passport'),
-  LocalStrategy = require('passport-local').Strategy,
+  JwtStrategy = require('passport-jwt').Strategy,
   User = require('mongoose').model('User');
 
-module.exports = function () {
+module.exports = function (config) {
+
+  var opts = {};
+  opts.secretOrKey = config.jwt.secret;
+  //opts.issuer = "accounts.examplesoft.com";
+  //opts.audience = "yoursite.net";
+  passport.use(new JwtStrategy(opts, function(jwt_payload, done) {
+    console.log(jwt_payload);
+    User.findOne({ _id: jwt_payload.user }, function(err, user) {
+      if (err) {
+        return done(err, false);
+      }
+      if (user) {
+        done(null, user);
+      } else {
+        done(null, false);
+      }
+    });
+  }));
+
+  /*
   // Use local strategy
   passport.use(new LocalStrategy({
     usernameField: 'username',
     passwordField: 'password'
   },
   function (username, password, done) {
-    console.log('Authenticating::' + username);
     User.findOne({
       username: username.toLowerCase()
     }, function (err, user) {
@@ -26,8 +45,9 @@ module.exports = function () {
           message: 'Invalid username or password'
         });
       }
-      console.log('User Found::' + user);
+
       return done(null, user);
     });
   }));
+  */
 };
