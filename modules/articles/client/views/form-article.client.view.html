@@ -13,8 +13,8 @@
           </div>
         </div>
         <div class="form-group">
-          <label class="control-label" for="content">Content</label>
-          <textarea name="content" data-ng-model="vm.article.content" id="content" class="form-control" cols="30" rows="10" placeholder="Content"></textarea>
+          <label for="content">Content</label>
+          <summernote name="content" config="summeroptions" ng-model="vm.article.content" id="content"></summernote>
         </div>
         <div class="form-group">
           <button type="submit" class="btn btn-default">{{vm.article._id ? 'Update' : 'Create'}}</button>
