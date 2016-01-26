@@ -5,6 +5,22 @@ angular.module('users.admin').controller('UserController', ['$scope', '$state', 
     $scope.authentication = Authentication;
     $scope.user = userResolve;
 
+    // added for ui.bootstrap.datetimepicker
+    $scope.isOpen = false;
+
+    $scope.dateOptions = {
+      showWeeks: false,
+      startingDay: 1
+    };
+
+    $scope.openCalendar = function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      $scope.isOpen = true;
+    };
+
+
     $scope.remove = function (user) {
       if (confirm('Are you sure you want to delete this user?')) {
         if (user) {
