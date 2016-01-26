@@ -12,6 +12,21 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$stat
     if ($scope.authentication.user) {
       $location.path('/');
     }
+    
+    // added for ui.bootstrap.datetimepicker
+    $scope.isOpen = false;
+
+    $scope.dateOptions = {
+      showWeeks: false,
+      startingDay: 1
+    };
+
+    $scope.openCalendar = function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      $scope.isOpen = true;
+    };
 
     $scope.signup = function (isValid) {
       $scope.error = null;
