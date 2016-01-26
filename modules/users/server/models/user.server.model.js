@@ -40,24 +40,61 @@ var UserSchema = new Schema({
     default: '',
     validate: [validateLocalStrategyProperty, 'Please fill in your last name']
   },
+  address: {
+    type: String,
+    trim: true,
+    default: ''
+  },
+  city: {
+    type: String,
+    trim: true,
+    default: '',
+    validate: [validateLocalStrategyProperty, 'Please fill in your city']
+  },
+  state: {
+    type: String,
+    trim: true,
+    default: '',
+    validate: [validateLocalStrategyProperty, 'Please select your state']
+  },
+  zip: {
+    type: String,
+    trim: true,
+    default: '',
+    validate: [validateLocalStrategyProperty, 'Please fill in your zip code']
+  },
+  country: {
+    type: String,
+    trim: true,
+    default: '',
+    validate: [validateLocalStrategyProperty, 'Please select your country']
+  },
+  gender: {
+    type: String,
+    trim: true,
+    default: '',
+    validate: [validateLocalStrategyProperty, 'Please choose your gender']
+  },
+  dob: {
+    type: Date,
+    trim: true,
+    default: ''
+  },
   displayName: {
     type: String,
     trim: true
   },
   email: {
     type: String,
-    unique: true,
-    lowercase: true,
-    trim: true,
-    default: '',
-    validate: [validateLocalStrategyEmail, 'Please fill a valid email address']
+    trim: true
   },
   username: {
     type: String,
-    unique: 'Username already exists',
-    required: 'Please fill in a username',
+    unique: 'Email already exists',
+    required: 'Please fill in your email',
     lowercase: true,
-    trim: true
+    trim: true,
+    validate: [validateLocalStrategyEmail, 'Please fill a valid email address']
   },
   password: {
     type: String,
