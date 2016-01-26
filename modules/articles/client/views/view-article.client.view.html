@@ -19,5 +19,5 @@
       <span ng-if="!vm.article.user">Deleted User</span>
     </em>
   </small>
-  <p class="lead" ng-bind="vm.article.content"></p>
+  <div ng-bind-html="vm.article.content"></div>
 </section>
