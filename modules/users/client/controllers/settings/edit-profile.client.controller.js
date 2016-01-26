@@ -4,6 +4,22 @@ angular.module('users').controller('EditProfileController', ['$scope', '$http', 
   function ($scope, $http, $location, Users, Authentication) {
     $scope.user = Authentication.user;
 
+    // added for ui.bootstrap.datetimepicker
+    $scope.isOpen = false;
+
+    $scope.dateOptions = {
+      showWeeks: false,
+      startingDay: 1
+    };
+
+    $scope.openCalendar = function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      $scope.isOpen = true;
+    };
+
+
     // Update a user profile
     $scope.updateUserProfile = function (isValid) {
       $scope.success = $scope.error = null;
