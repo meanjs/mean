@@ -1,32 +1,94 @@
 <div ng-controller="AuthenticationController">
-  <h3 class="col-md-12 text-center">Or sign up using your email</h3>
-  <div class="col-xs-offset-2 col-xs-8 col-md-offset-4 col-md-4">
+  <h2 class="col-md-12 text-grey">or Sign Up</h2>
+  <div class="col-md-12">
     <form name="userForm" ng-submit="signup(userForm.$valid)" class="signin" novalidate autocomplete="off">
       <fieldset>
-        <div class="form-group" show-errors>
-          <label for="firstName">First Name</label>
-          <input type="text" id="firstName" name="firstName" class="form-control" ng-model="credentials.firstName" placeholder="First Name" required>
-          <div ng-messages="userForm.firstName.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">First name is required.</p>
+        <h4>Personal Information</h4>
+        <div class="row">
+          <div class="col-xs-6">
+            <div class="form-group" show-errors>
+              <input type="text" id="firstName" name="firstName" class="form-control" ng-model="credentials.firstName" placeholder="First Name" required>
+              <div ng-messages="userForm.firstName.$error" role="alert">
+                <p class="help-block error-text" ng-message="required">First name is required.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-6">
+            <div class="form-group" show-errors>
+              <input type="text" id="lastName" name="lastName" class="form-control" ng-model="credentials.lastName" placeholder="Last Name" required>
+              <div ng-messages="userForm.lastName.$error" role="alert">
+                <p class="help-block error-text" ng-message="required">Last name is required.</p>
+              </div>
+            </div>
           </div>
         </div>
         <div class="form-group" show-errors>
-          <label for="lastName">Last Name</label>
-          <input type="text" id="lastName" name="lastName" class="form-control" ng-model="credentials.lastName" placeholder="Last Name" required>
-          <div ng-messages="userForm.lastName.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">Last name is required.</p>
+          <input type="text" id="address" name="address" class="form-control" ng-model="credentials.address" placeholder="Address (optional)">
+          <div ng-messages="userForm.address.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Address is required.</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-5">
+            <div class="form-group" show-errors>
+              <input type="text" id="city" name="city" class="form-control" ng-model="credentials.city" placeholder="City" required>
+              <div ng-messages="userForm.city.$error" role="alert">
+                <p class="help-block error-text" ng-message="required">City is required.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-4">
+            <div class="form-group" show-errors>
+              <input type="text" id="state" name="state" class="form-control" ng-model="credentials.state" placeholder="State" required>
+              <div ng-messages="userForm.state.$error" role="alert">
+                <p class="help-block error-text" ng-message="required">State is required.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-3">
+            <div class="form-group" show-errors>
+              <input type="text" id="zip" name="zip" class="form-control" ng-model="credentials.zip" placeholder="Zip Code" required>
+              <div ng-messages="userForm.zip.$error" role="alert">
+                <p class="help-block error-text" ng-message="required">Zip Code is required.</p>
+              </div>
+            </div>
           </div>
         </div>
         <div class="form-group" show-errors>
-          <label for="username">Email</label>
+          <input type="text" id="country" name="country" class="form-control ng-model="credentials.country" placeholder="Country" required>
+          <div ng-messages="userForm.country.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Country is required.</p>
+          </div>
+        </div>
+        <div class="form-group" show-errors>
+          <div class="input-group">
+            <span class="input-group-btn" id="dob"><button type="button" class="btn btn-default" ng-click="openCalendar($event, prop)"><i class="icon-append fa fa-calendar fa-fw"></i></button></span>
+            <input type="text" aria-describedby="dob" name="dob" class="form-control" datetime-picker="MMMM dd, yyyy" enable-time="false" ng-model="credentials.dob" placeholder="Click on the icon to select your Birthdate" datepicker-options="dateOptions" is-open="isOpen" disabled required>
+          </div>
+          <div ng-messages="userForm.dob.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Date of birth is required.</p>
+          </div>
+        </div>
+        <div class="form-group" show-errors>
+          <select class="form-control" id="gender" name="gender" ng-model="credentials.gender" required>
+            <option value="">Gender</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </select>
+          <div ng-messages="userForm.gender.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Gender is required.</p>
+          </div>
+        </div>
+        <h4>Account Signin Information</h4>
+        <div class="form-group" show-errors>
           <input type="email" id="username" name="username" class="form-control" ng-model="credentials.username" placeholder="Email Address" lowercase required>
           <div ng-messages="userForm.username.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">Username is required.</p>
+            <p class="help-block error-text" ng-message="required">Email address is required.</p>
+            <p class="help-block error-text" ng-message="email">Email address is invalid.</p>
           </div>
         </div>
         <div class="form-group" show-errors>
-          <label for="password">Password</label>
-            <input type="password" id="password" name="password" class="form-control" ng-model="credentials.password" placeholder="Password" uib-popover="{{popoverMsg}}" uib-popover-trigger="focus" password-validator required>
+          <input type="password" id="password" name="password" class="form-control" ng-model="credentials.password" placeholder="Password" uib-popover="{{popoverMsg}}" uib-popover-trigger="focus" password-validator required>
           <div ng-messages="userForm.password.$error" role="alert">
             <p class="help-block error-text" ng-message="required">Password is required.</p>
             <div ng-repeat="passwordError in passwordErrors">
@@ -39,7 +101,7 @@
           <uib-progressbar value="requirementsProgress" type="{{requirementsColor}}"><span style="color:white; white-space:nowrap;">{{requirementsProgress}}%</span></uib-progressbar>
         </div>
         <div class="text-center form-group">
-          <button type="submit" class="btn btn-primary">Sign up</button>
+          <button type="submit" class="btn btn-primary"><i class="fa fa-check fa-fw"></i> Sign Up</button>
           &nbsp; or&nbsp;
           <a ui-sref="authentication.signin" class="show-signup">Sign in</a>
         </div>
