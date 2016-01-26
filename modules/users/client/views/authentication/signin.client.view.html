@@ -4,10 +4,10 @@
     <form name="userForm" ng-submit="signin(userForm.$valid)" class="signin" novalidate autocomplete="off">
       <fieldset>
         <div class="form-group" show-errors>
-          <label for="username">Username</label>
-          <input type="text" id="username" name="username" class="form-control" ng-model="credentials.username" placeholder="Username" lowercase required>
+          <label for="username">Email</label>
+          <input type="email" id="username" name="username" class="form-control" ng-model="credentials.username" placeholder="Email Address" lowercase required>
           <div ng-messages="userForm.username.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">Username is required.</p>
+            <p class="help-block error-text" ng-message="required">Email address is required.</p>
           </div>
         </div>
         <div class="form-group" show-errors>
@@ -25,9 +25,9 @@
         <div class="text-center forgot-password">
           <a ui-sref="password.forgot">Forgot your password?</a>
         </div>
-        <alert type="danger" ng-show="error" class="text-center text-danger">
+        <uib-alert type="danger" ng-show="error" class="text-center text-danger">
           <span ng-bind="error"></span>
-        </alert>
+        </uib-alert>
       </fieldset>
     </form>
   </div>
