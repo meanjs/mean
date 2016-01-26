@@ -1,3 +1,16 @@
+<a name="0.4.3"></a>
+## 0.4.3 (2016-01-25)
+
+
+* Fixed: updated all node dependencies.
+* Added: ui-datetimepicker, summernote, moment, OpenSans and Font-Awesome to bower
+* Updated: bower components using AngularJS v1.4.x, ui-bootstrap v1.0.x
+* Added: new signup form and signin(to use email for username)
+* Added: new fields to edit-profile page
+* Added: pagination to articles module
+* Added: summernote to articles module, changed ng-bind to ng-bind-html
+* Updated: user model to reflect new changes to signup form and edit-profile
+
 <a name="0.4.2"></a>
 ## 0.4.2 (2015-11-11)
 
