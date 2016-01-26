@@ -5,18 +5,28 @@
   "license": "MIT",
   "dependencies": {
     "bootstrap": "~3",
-    "angular": "~1.3",
-    "angular-resource": "~1.3",
-    "angular-animate": "~1.3",
-    "angular-mocks": "~1.3",
-    "angular-bootstrap": "~0.13",
+    "angular": "~1.4",
+    "angular-resource": "~1.4",
+    "angular-animate": "~1.4",
+    "angular-mocks": "~1.4",
+    "angular-sanitize": "~1.4",
+    "angular-bootstrap": "~1.0",
     "angular-ui-utils": "bower",
     "angular-ui-router": "~0.2",
     "angular-file-upload": "1.1.5",
-    "angular-messages": "~1.3.17",
-    "owasp-password-strength-test": "~1.3.0"
+    "angular-messages": "~1.4",
+    "owasp-password-strength-test": "~1.3.0",
+    "font-awesome": "~4.5.0",
+    "WebFont-OpenSans": "webfont-opensans#~0.0.2",
+    "bootstrap-ui-datetime-picker": "~2.0.5",
+    "angular-summernote": "~0.7.0",
+    "angular-moment": "~0.10.3",
+    "moment": "~2.11.1",
+    "angular-bootstrap-calendar": "~0.18.2"
   },
   "resolutions": {
-    "angular": "~1.3"
+    "angular": "~1.4",
+    "angular-bootstrap": "~1.0",
+    "moment": "~2.11.1"
   }
 }
