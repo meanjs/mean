@@ -121,6 +121,7 @@ angular.module('core').service('Menus', [
           this.menus[menuId].items[itemIndex].items.push({
             title: options.title || '',
             state: options.state || '',
+            icon: options.icon || '',
             roles: ((options.roles === null || typeof options.roles === 'undefined') ? this.menus[menuId].items[itemIndex].roles : options.roles),
             position: options.position || 0,
             shouldRender: shouldRender
