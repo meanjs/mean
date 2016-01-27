@@ -8,6 +8,9 @@ angular.module('core').controller('HeaderController', ['$scope', '$state', 'Auth
 
     // Get the topbar menu
     $scope.menu = Menus.getMenu('topbar');
+    
+    // Get the account menu
+    $scope.accountMenu = Menus.getMenu('account').items[0];
 
     // Toggle the menu items
     $scope.isCollapsed = false;
