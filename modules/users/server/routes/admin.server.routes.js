@@ -8,6 +8,7 @@ var adminPolicy = require('../policies/admin.server.policy'),
 
 module.exports = function (app) {
   // User route registration first. Ref: #713
+  /*
   require('./users.server.routes.js')(app);
 
   // Users collection routes
@@ -22,4 +23,5 @@ module.exports = function (app) {
 
   // Finish by binding the user middleware
   app.param('userId', admin.userByID);
+  */
 };
