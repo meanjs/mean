@@ -8,7 +8,10 @@ angular.module('users').controller('ChangeProfilePictureController', ['$scope', 
     // Create file uploader instance
     $scope.uploader = new FileUploader({
       url: 'api/users/picture',
-      alias: 'newProfilePicture'
+      alias: 'newProfilePicture',
+      headers: {
+        Authorization: 'JWT ' + Authentication.token
+      }
     });
 
     // Set file uploader image filter

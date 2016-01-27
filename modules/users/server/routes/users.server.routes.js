@@ -1,11 +1,12 @@
 'use strict';
 
+var users = require('../controllers/users.server.controller'),
+  passport = require('passport'),
+  express = require('express');
+
 module.exports = function (app) {
-  // User Routes
-  var users = require('../controllers/users.server.controller'),
-    passport = require('passport'),
-    express = require('express'),
-    router = express.Router();
+  // Create Router
+  var router = express.Router();
 
   //Set JWT Auth for all user Routes
   router.all('*', passport.authenticate('jwt', { session: false }));
