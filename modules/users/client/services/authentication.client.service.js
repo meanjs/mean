@@ -61,7 +61,7 @@
 
     function init() {
       service.token = localStorageService.get('token') || $location.search().token || null;
-      
+
       //Remove token from URL
       $location.search('token', null);
 
