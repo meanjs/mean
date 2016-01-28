@@ -19,6 +19,10 @@ module.exports = function (config) {
         return done(err, false);
       }
       if (user) {
+        //Protect salt/password
+        user.salt = null;
+        user.password = null;
+        //console.log(user);
         done(null, user);
       } else {
         done(null, false);

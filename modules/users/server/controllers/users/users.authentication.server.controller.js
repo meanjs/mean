@@ -8,7 +8,6 @@ var path = require('path'),
   mongoose = require('mongoose'),
   passport = require('passport'),
   User = mongoose.model('User'),
-  jwt = require('jsonwebtoken'),
   authentication = require(path.resolve('./config/lib/jwtAuthentication'));
 
 // URLs for which user can't be redirected on signin
@@ -40,15 +39,8 @@ exports.signup = function (req, res) {
       user.password = undefined;
       user.salt = undefined;
 
-      authentication.signToken(user)
-        .then(function (token) {
-          res.json({ user: user, token: token });
-        })
-        .catch(function (err) {
-          return res.status(400).send({
-            message: errorHandler.getErrorMessage(err)
-          });
-        });
+      var jwtToken = authentication.signToken(user);
+      res.json({ user: user, token: jwtToken });
     }
   });
 };
@@ -65,16 +57,8 @@ exports.signin = function (req, res, next) {
       user.password = undefined;
       user.salt = undefined;
 
-      authentication.signToken(user)
-        .then(function (token) {
-          res.json({ user: user, token: token });
-        })
-        .catch(function (err) {
-          return res.status(400).send({
-            message: errorHandler.getErrorMessage(err)
-          });
-        });
-
+      var jwtToken = authentication.signToken(user);
+      res.json({ user: user, token: jwtToken });
     }
   })(req, res, next);
 };
@@ -119,15 +103,9 @@ exports.oauthCallback = function (strategy) {
         return res.redirect('/authentication/signin');
       }
 
-      authentication.signToken(user)
-        .then(function (token) {
-          return res.redirect((redirectURL || sessionRedirectURL || '/') + '?token=' + token);
-        })
-        .catch(function (err) {
-          return res.status(400).send({
-            message: errorHandler.getErrorMessage(err)
-          });
-        });
+      var jwtToken = authentication.signToken(user);
+      return res.redirect((redirectURL || sessionRedirectURL || '/') + '?token=' + jwtToken);
+
     })(req, res, next);
   };
 };

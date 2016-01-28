@@ -52,9 +52,7 @@ exports.isAllowed = function (req, res, next) {
   if (req.article && req.user && req.article.user && req.article.user.id === req.user.id) {
     return next();
   }
-  console.log(roles);
-  console.log(req.route.path);
-  console.log(req.method.toLowerCase());
+  
   // Check for user roles
   acl.areAnyRolesAllowed(roles, req.route.path, req.method.toLowerCase(), function (err, isAllowed) {
     if (err) {

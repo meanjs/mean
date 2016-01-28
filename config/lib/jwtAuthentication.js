@@ -3,34 +3,20 @@
 var config = require('../config'),
   jwt = require('jsonwebtoken');
 
-// build token auth service
-var tokenAuth = {
-  signToken: signAuthToken
-};
+
 
 // export the token auth service
-module.exports = tokenAuth;
+exports.signToken = function (user) {
+  var payload = {
+    user: user._id,
+    expiration: Date.now() + (config.jwt.expiresInSeconds * 1000)
+  };
 
-// Sign a token
-function signAuthToken (user) {
-  return new Promise(function (resolve, reject) {
-    try {
+  var options = {
+    expiresIn: config.jwt.expiresInSeconds
+  };
 
-      var payload = {
-        user: user._id,
-        expiration: Date.now() + (config.jwt.expiresInSeconds * 1000)
-      };
+  var token = jwt.sign(payload, config.jwt.secret, options);
 
-      var options = {
-        expiresIn: config.jwt.expiresInSeconds
-      };
-
-      var token = jwt.sign(payload, config.jwt.secret, options);
-
-      resolve(token);
-
-    } catch (err) {
-      reject(err);
-    }
-  });
-}
+  return token;
+};
