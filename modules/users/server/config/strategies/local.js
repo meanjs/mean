@@ -14,7 +14,6 @@ module.exports = function () {
     passwordField: 'password'
   },
   function (username, password, done) {
-    console.log('Authenticating::' + username);
     User.findOne({
       username: username.toLowerCase()
     }, function (err, user) {
@@ -26,7 +25,6 @@ module.exports = function () {
           message: 'Invalid username or password'
         });
       }
-      console.log('User Found::' + user);
       return done(null, user);
     });
   }));

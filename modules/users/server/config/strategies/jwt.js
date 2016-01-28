@@ -14,14 +14,10 @@ module.exports = function (config) {
   //opts.issuer = "accounts.examplesoft.com";
   //opts.audience = "yoursite.net";
   passport.use(new JwtStrategy(opts, function(jwt_payload, done) {
-    console.log(jwt_payload);
-    console.log('JWT Strategy');
     User.findOne({ _id: jwt_payload.user }, function(err, user) {
       if (err) {
         return done(err, false);
       }
-
-      console.log(user);
       if (user) {
         done(null, user);
       } else {
