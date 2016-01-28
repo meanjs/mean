@@ -15,7 +15,6 @@ angular.module(ApplicationConfiguration.applicationModuleName).config(['$locatio
 angular.module(ApplicationConfiguration.applicationModuleName).run(function ($rootScope, $state, Authentication) {
   Authentication.ready
     .then(function (auth) {
-      console.log(Authentication);
       // Check authentication before changing state
       $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
         if (toState.data && toState.data.roles && toState.data.roles.length > 0) {
