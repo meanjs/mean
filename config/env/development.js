@@ -23,7 +23,7 @@ module.exports = {
       //  directoryPath: process.cwd(),
       //  fileName: 'access.log',
       //  rotatingLogs: { // for more info on rotating logs - https://github.com/holidayextras/file-stream-rotator#usage
-      //    active: false, // activate to use rotating logs 
+      //    active: false, // activate to use rotating logs
       //    fileName: 'access-%DATE%.log', // if rotating logs are active, this fileName setting will be used
       //    frequency: 'daily',
       //    verbose: false
@@ -60,8 +60,8 @@ module.exports = {
     callbackURL: '/api/auth/github/callback'
   },
   paypal: {
-    clientID: process.env.PAYPAL_ID || 'CLIENT_ID',
-    clientSecret: process.env.PAYPAL_SECRET || 'CLIENT_SECRET',
+    clientID: process.env.PAYPAL_ID || 'AVWxUS4uQVfXAzKdCQKrIkczdPxixgKQ-SA7Ewodn9UmLOjHSCkftB6D9Wj_lVjRZpF9VCanp7thMCeG',
+    clientSecret: process.env.PAYPAL_SECRET || 'ECnmWTPaxHtb2KWLKLDsqh7sjVx3myxa7JvqFrJtrg1ETi8aGPNQOHSuSZN3KmLUMfQOZppdHocvEW6L',
     callbackURL: '/api/auth/paypal/callback',
     sandbox: true
   },

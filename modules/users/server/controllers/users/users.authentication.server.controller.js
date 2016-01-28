@@ -118,13 +118,16 @@ exports.oauthCallback = function (strategy) {
       if (!user) {
         return res.redirect('/authentication/signin');
       }
-      req.login(user, function (err) {
-        if (err) {
-          return res.redirect('/authentication/signin');
-        }
 
-        return res.redirect(redirectURL || sessionRedirectURL || '/');
-      });
+      authentication.signToken(user)
+        .then(function (token) {
+          return res.redirect((redirectURL || sessionRedirectURL || '/') + '?token=' + token);
+        })
+        .catch(function (err) {
+          return res.status(400).send({
+            message: errorHandler.getErrorMessage(err)
+          });
+        });
     })(req, res, next);
   };
 };
