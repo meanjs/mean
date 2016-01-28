@@ -239,13 +239,7 @@ exports.removeOAuthProvider = function (req, res, next) {
         message: errorHandler.getErrorMessage(err)
       });
     } else {
-      req.login(user, function (err) {
-        if (err) {
-          return res.status(400).send(err);
-        } else {
-          return res.json(user);
-        }
-      });
+      return res.json(user);
     }
   });
 };
