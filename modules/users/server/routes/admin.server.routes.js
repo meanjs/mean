@@ -10,7 +10,10 @@ var adminPolicy = require('../policies/admin.server.policy'),
 
 module.exports = function (app) {
   var router = express.Router();
-  
+
+  //Set JWT Auth for all Admin Routes
+  router.all('*', passport.authenticate('jwt', { session: false }));
+
   router.route('/')
     .get(adminPolicy.isAllowed, admin.list);
 

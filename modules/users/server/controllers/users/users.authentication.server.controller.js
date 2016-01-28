@@ -9,7 +9,7 @@ var path = require('path'),
   passport = require('passport'),
   User = mongoose.model('User'),
   jwt = require('jsonwebtoken'),
-  authorization = require(path.resolve('./config/lib/authorization'));
+  authentication = require(path.resolve('./config/lib/jwtAuthentication'));
 
 // URLs for which user can't be redirected on signin
 var noReturnUrls = [
@@ -40,7 +40,7 @@ exports.signup = function (req, res) {
       user.password = undefined;
       user.salt = undefined;
 
-      authorization.signToken(user)
+      authentication.signToken(user)
         .then(function (token) {
           res.json({ user: user, token: token });
         })
@@ -65,7 +65,7 @@ exports.signin = function (req, res, next) {
       user.password = undefined;
       user.salt = undefined;
 
-      authorization.signToken(user)
+      authentication.signToken(user)
         .then(function (token) {
           res.json({ user: user, token: token });
         })
