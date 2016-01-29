@@ -1,3 +1,4 @@
+
 .content {
   margin-top: 50px;
 }
@@ -35,3 +36,6 @@ a:hover .header-profile-image {
 .has-error .help-inline.error-text {
   display: inline;
 }
+
+
+.toolbardemoBasicUsage md-toolbar md-icon.md-default-theme {color: white; }
