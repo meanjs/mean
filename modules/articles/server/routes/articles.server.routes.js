@@ -3,10 +3,11 @@
 /**
  * Module dependencies
  */
-var articlesPolicy = require('../policies/articles.server.policy'),
-  articles = require('../controllers/articles.server.controller'),
-  passport = require('passport'),
-  express = require('express');
+var passport = require('passport'),
+  express = require('express'),
+  articlesPolicy = require('../policies/articles.server.policy'),
+  articles = require('../controllers/articles.server.controller');
+
 
 module.exports = function (app) {
   var router = express.Router();

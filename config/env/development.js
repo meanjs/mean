@@ -60,8 +60,8 @@ module.exports = {
     callbackURL: '/api/auth/github/callback'
   },
   paypal: {
-    clientID: process.env.PAYPAL_ID || 'AVWxUS4uQVfXAzKdCQKrIkczdPxixgKQ-SA7Ewodn9UmLOjHSCkftB6D9Wj_lVjRZpF9VCanp7thMCeG',
-    clientSecret: process.env.PAYPAL_SECRET || 'ECnmWTPaxHtb2KWLKLDsqh7sjVx3myxa7JvqFrJtrg1ETi8aGPNQOHSuSZN3KmLUMfQOZppdHocvEW6L',
+    clientID: process.env.PAYPAL_ID || 'CLIENT_ID',
+    clientSecret: process.env.PAYPAL_SECRET || 'CLIENT_SECRET',
     callbackURL: '/api/auth/paypal/callback',
     sandbox: true
   },
