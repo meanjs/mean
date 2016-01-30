@@ -1,6 +1,13 @@
 # mean-replies
 Comments system for MEANJS
 
+
+This is a nested comment system for Mean JS that can work with any object but in this case has been integrated in with the Article object on the default MeanJS project setup. I called it "replies" because "comment" is a javascript reserved word.
+
+This is by no means complete, but it seems to work reasonably well. I welcome all feedback and improvements.
+
+## Installation
+
 cd (your-project)/modules
 git clone https://github.com/tutley/mean-replies.git replies
 
