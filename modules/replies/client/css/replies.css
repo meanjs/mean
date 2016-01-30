@@ -1,0 +1,33 @@
+.post-replies {
+  padding-bottom: 9px;
+  margin: 5px 0 5px;
+}
+
+.replies-nav {
+  border-bottom: 1px solid #eee;
+  margin-bottom: 5px;
+}
+
+.post-replies .reply-meta {
+  border-bottom: 1px solid #eee;
+  margin-bottom: 5px;
+}
+
+.post-replies .media {
+  border-left: 1px dotted #000;
+  border-bottom: 1px dotted #000;
+  margin-bottom: 5px;
+  padding-left: 10px;
+}
+
+.post-replies .media-heading {
+  font-size: 12px;
+  color: grey;
+}
+
+.post-replies .reply-meta a {
+  font-size: 12px;
+  color: grey;
+  font-weight: bolder;
+  margin-right: 5px;
+}
