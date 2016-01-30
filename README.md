@@ -1,3 +1,10 @@
+### Mean.JS plus Comments
+
+In this fork of the MeanJS project I have simply added a comments module (called mean-replies) and integrated it with the already-present articles module. I called it "replies" because "comment" is a reserved word in javascript.
+
+This is by no means complete, but it seems to work reasonably well. I welcome all feedback and improvements.
+
+
 [![MEAN.JS Logo](http://meanjs.org/img/logo-small.png)](http://meanjs.org/)
 
 [![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/meanjs/mean?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
