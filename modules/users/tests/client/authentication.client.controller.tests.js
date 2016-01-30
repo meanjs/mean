@@ -48,6 +48,10 @@
         });
       }));
 
+      afterEach(inject(function (Authentication) {
+        Authentication.signout();
+      }));
+
       describe('$scope.signin()', function () {
         it('should login with a correct user and password', function () {
           // Test expected GET request

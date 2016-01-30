@@ -5,8 +5,8 @@
     .module('users')
     .service('Authentication', Authentication);
 
-  Authentication.$inject = ['$q', 'localStorageService', '$resource', '$http', '$location', '$state'];
-  function Authentication($q, localStorageService, $resource, $http, $location, $state) {
+  Authentication.$inject = ['$q', '$resource', '$http', '$location', '$state'];
+  function Authentication($q, $resource, $http, $location, $state) {
 
     var readyPromise = $q.defer();
 
@@ -32,11 +32,11 @@
 
     function setToken(token) {
       service.token = token;
-      localStorageService.set('token', token);
+      localStorage.setItem('token', token);
     }
 
     function signout() {
-      localStorageService.remove('token');
+      localStorage.removeItem('token');
       service.user = null;
       service.token = null;
       $state.reload();
@@ -60,7 +60,7 @@
     }
 
     function init() {
-      service.token = localStorageService.get('token') || $location.search().token || null;
+      service.token = localStorage.getItem('token') || $location.search().token || null;
 
       //Remove token from URL
       $location.search('token', null);
