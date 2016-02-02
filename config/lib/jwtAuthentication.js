@@ -19,7 +19,7 @@ exports.signToken = function (user, options) {
   options = options || {};
 
   payload = {
-    user: user._id
+    user: user._id.toString()
   };
 
   jwtOptions = lodash.merge(config.jwt.options, options);
