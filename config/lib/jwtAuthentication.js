@@ -9,23 +9,20 @@ var config = require('../config'),
 // export the token auth service
 exports.signToken = function (user, options) {
   var payload,
-    defaults,
     token,
     jwtOptions;
+
+  if (!user || !user._id) {
+    return null;
+  }
+
+  options = options || {};
 
   payload = {
     user: user._id
   };
 
-  defaults = {
-    expiresIn: config.jwt.expiresInSeconds
-  };
-
-  if(options) {
-    jwtOptions = lodash.merge(defaults, options);
-  } else {
-    jwtOptions = defaults;
-  }
+  jwtOptions = lodash.merge(config.jwt.options, options);
 
   token = jwt.sign(payload, config.jwt.secret, jwtOptions);
 

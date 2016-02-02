@@ -5,7 +5,8 @@ var should = require('should'),
   path = require('path'),
   mongoose = require('mongoose'),
   User = mongoose.model('User'),
-  express = require(path.resolve('./config/lib/express'));
+  express = require(path.resolve('./config/lib/express')),
+  config = require(path.resolve('./config/config'));
 
 /**
  * Globals
@@ -623,6 +624,40 @@ describe('User CRUD tests', function () {
         return done();
       });
   });
+
+  it('should not be able to get any user details token is expired', function (done) {
+    var jwtExpire = config.jwt.options.expiresIn;
+    config.jwt.options.expiresIn = 1;
+
+    agent.post('/api/auth/signin')
+      .send(credentials)
+      .expect(200)
+      .end(function (signinErr, signinRes) {
+        // Handle signin error
+        if (signinErr) {
+          return done(signinErr);
+        }
+        setTimeout(function (){
+          // Get own user details
+          agent.get('/api/users/me')
+            .set('Authorization', 'JWT ' + signinRes.body.token)
+            .expect(401)
+            .end(function (err, res) {
+              config.jwt.options.expiresIn = jwtExpire;
+              if (err) {
+                return done(err);
+              }
+
+
+
+              return done();
+            });
+        }, 1001);
+
+      });
+  });
+
+
 
   it('should be able to update own user details', function (done) {
     user.roles = ['user'];

@@ -174,7 +174,7 @@
             username: 'test'
           };
           beforeEach(function() {
-            $httpBackend.when('POST', '/api/auth/reset/' + token, passwordDetails).respond(user);
+            $httpBackend.when('POST', '/api/auth/reset/' + token, passwordDetails).respond({ user: user });
 
             scope.resetUserPassword(true);
             $httpBackend.flush();
@@ -191,6 +191,10 @@
           it('should redirect to password reset success view', function() {
             expect($location.path).toHaveBeenCalledWith('/password/reset/success');
           });
+
+          afterEach(inject(function (_Authentication_) {
+            _Authentication_.signout();
+          }));
         });
       });
     });

@@ -40,6 +40,9 @@ module.exports = {
   },
   jwt: {
     secret: process.env.TOKEN_AUTH_SECRET || 'M3@N_R0CK5!',
-    expiresInSeconds: process.env.TOKEN_AUTH_EXPIRES_SECONDS || 200 * 60 * 60 // 200 hours
+    options: {  //Anything From https://www.npmjs.com/package/jsonwebtoken
+      expiresIn: process.env.TOKEN_EXPIRES || '1d'
+    }
+
   }
 };
