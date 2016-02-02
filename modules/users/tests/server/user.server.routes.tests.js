@@ -114,6 +114,22 @@ describe('User CRUD tests', function () {
       });
   });
 
+  it('should not be able to sign in with invalid credentials', function (done) {
+    agent.post('/api/auth/signin')
+      .send({ username: 'sure', password: 'thing' })
+      .expect(400)
+      .end(function (signinErr, signinRes) {
+        // Handle signin error
+        if (signinErr) {
+          return done(signinErr);
+        }
+
+        signinRes.body.message.should.be.equal('Invalid username or password');
+
+        return done();
+      });
+  });
+
   it('should not be able to retrieve a list of users if not admin', function (done) {
     agent.post('/api/auth/signin')
       .send(credentials)
