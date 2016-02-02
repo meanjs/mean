@@ -1,9 +1,13 @@
-'use strict';
+(function () {
+  'use strict';
 
-// Setting up route
-angular.module('core').config(['$stateProvider', '$urlRouterProvider',
-  function ($stateProvider, $urlRouterProvider) {
+  angular
+    .module('core')
+    .config(routeConfig);
 
+  routeConfig.$inject = ['$stateProvider', '$urlRouterProvider'];
+
+  function routeConfig($stateProvider, $urlRouterProvider) {
     // Redirect to 404 when route not found
     $urlRouterProvider.otherwise(function ($injector, $location) {
       $injector.get('$state').transitionTo('not-found', null, {
@@ -15,28 +19,52 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
     $stateProvider
     .state('home', {
       url: '/',
-      templateUrl: 'modules/core/client/views/home.client.view.html'
+      views: {
+        'hero': {
+          templateUrl: 'modules/core/client/views/hero.client.view.html'
+        },
+        'main': {
+          controller: 'HomeController',
+          templateUrl: 'modules/core/client/views/home.client.view.html'
+        },
+        'subnav': {
+          templateUrl: 'modules/core/client/views/subnav.client.view.html'
+        }
+      }
+
     })
     .state('not-found', {
       url: '/not-found',
-      templateUrl: 'modules/core/client/views/404.client.view.html',
       data: {
         ignoreState: true
+      },
+      views: {
+        'main': {
+          templateUrl: 'modules/core/client/views/404.client.view.html'
+        }
       }
     })
     .state('bad-request', {
       url: '/bad-request',
-      templateUrl: 'modules/core/client/views/400.client.view.html',
       data: {
         ignoreState: true
+      },
+      views: {
+        'main': {
+          templateUrl: 'modules/core/client/views/400.client.view.html'
+        }
       }
     })
     .state('forbidden', {
       url: '/forbidden',
-      templateUrl: 'modules/core/client/views/403.client.view.html',
       data: {
         ignoreState: true
+      },
+      views: {
+        'main': {
+          templateUrl: 'modules/core/client/views/403.client.view.html'
+        }
       }
     });
   }
-]);
+})();
