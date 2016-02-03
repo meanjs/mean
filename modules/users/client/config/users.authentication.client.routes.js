@@ -14,7 +14,7 @@
         url: '/authentication',
         views: {
           'main@': {
-            templateUrl: 'modules/core/client/views/layouts/fixed.one.column.client.view.html',
+            templateUrl: 'modules/core/client/views/layouts/one.column.container.client.view.html',
             controller: 'AuthenticationController'
           }
         }
