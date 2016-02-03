@@ -5,8 +5,7 @@ node_js:
   - 4
   - 5
 os:
-  - windows
-  - ubuntu
+  - linux
   - centos
 # NodeJS v4 requires gcc 4.8
 env:
