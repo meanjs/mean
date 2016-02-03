@@ -3,6 +3,7 @@
 angular.module('users').controller('AuthenticationController', ['$scope', '$state', '$http', '$location', '$window', 'Authentication', 'PasswordValidator',
   function ($scope, $state, $http, $location, $window, Authentication, PasswordValidator) {
     $scope.authentication = Authentication;
+    $scope.credentials = {};
     $scope.popoverMsg = PasswordValidator.getPopoverMsg();
 
     // Get an eventual error defined in the URL query string:
@@ -41,6 +42,8 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$stat
 
         return false;
       }
+
+      console.log($scope);
 
       $http.post('/api/auth/signin', $scope.credentials).success(function (response) {
         // If successful we assign the response to the global user model
