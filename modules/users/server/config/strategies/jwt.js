@@ -19,13 +19,11 @@ module.exports = function (config) {
         return done(err, false);
       }
 
-      if (user) {
-        
-
-        return done(null, user);
+      if (!user) {
+        return done('User not found');
       }
 
-      return done('User not found');
+      return done(null, user);
     });
   }));
 };
