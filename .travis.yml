@@ -4,6 +4,10 @@ node_js:
   - 0.12
   - 4
   - 5
+os:
+  - osx
+  - linux
+  - centos
 # NodeJS v4 requires gcc 4.8
 env:
   - NODE_ENV=travis CXX="g++-4.8" CC="gcc-4.8"
