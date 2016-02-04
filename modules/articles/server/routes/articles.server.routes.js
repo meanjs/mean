@@ -15,12 +15,12 @@ module.exports = function (app) {
 
   // Articles collection routes
   router.route('/')
-    .get(articles.list)
+    .get(articlesPolicy.isAllowed, articles.list)
     .post(passport.authenticate('jwt', { session: false }), articlesPolicy.isAllowed, articles.create);
 
   // Single article routes
   router.route('/:articleId')
-    .get(articles.read)
+    .get(articlesPolicy.isAllowed, articles.read)
     .put(passport.authenticate('jwt', { session: false }), articlesPolicy.isAllowed, articles.update)
     .delete(passport.authenticate('jwt', { session: false }), articlesPolicy.isAllowed, articles.delete);
 
