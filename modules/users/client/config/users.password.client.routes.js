@@ -12,29 +12,45 @@
     $stateProvider
       .state('password', {
         abstract: true,
-        url: '/password',
-        template: '<ui-view/>'
+        url: '/password'
       })
       .state('password.forgot', {
         url: '/forgot',
-        templateUrl: 'modules/users/client/views/password/forgot-password.client.view.html'
+        views: {
+          'main@': {
+            templateUrl: 'modules/users/client/views/password/forgot-password.client.view.html',
+            controller: 'PasswordController'
+          }
+        }
       })
       .state('password.reset', {
         abstract: true,
-        url: '/reset',
-        template: '<ui-view/>'
+        url: '/reset'
       })
       .state('password.reset.invalid', {
         url: '/invalid',
-        templateUrl: 'modules/users/client/views/password/reset-password-invalid.client.view.html'
+        views: {
+          'main@': {
+            templateUrl: 'modules/users/client/views/password/reset-password-invalid.client.view.html'
+          }
+        }
       })
       .state('password.reset.success', {
         url: '/success',
-        templateUrl: 'modules/users/client/views/password/reset-password-success.client.view.html'
+        views: {
+          'main@': {
+            templateUrl: 'modules/users/client/views/password/reset-password-success.client.view.html'
+          }
+        }
       })
       .state('password.reset.form', {
         url: '/:token',
-        templateUrl: 'modules/users/client/views/password/reset-password.client.view.html'
+        views: {
+          'main@': {
+            templateUrl: 'modules/users/client/views/password/reset-password.client.view.html',
+            controller: 'PasswordController'
+          }
+        }
       });
   }
 })();
