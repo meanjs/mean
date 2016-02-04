@@ -39,7 +39,7 @@
       localStorage.removeItem('token');
       service.user = null;
       service.token = null;
-      $state.reload();
+      $state.go('home', { reload: true });
     }
 
     function refresh() {
