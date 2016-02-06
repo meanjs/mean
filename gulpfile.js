@@ -4,6 +4,7 @@
  * Module dependencies.
  */
 var _ = require('lodash'),
+  fs = require('fs'),
   defaultAssets = require('./config/assets/default'),
   testAssets = require('./config/assets/test'),
   glob = require('glob'),
@@ -202,6 +203,21 @@ gulp.task('imagemin', function () {
     .pipe(gulp.dest('public/dist/img'));
 });
 
+// Copy local development environment config example
+gulp.task('copyLocalEnvConfig', function () {
+  var src = [];
+  var renameTo = 'local-development.js';
+
+  // only add the copy source if our destination file doesn't already exist
+  if (!fs.existsSync('config/env/' + renameTo)) {
+    src.push('config/env/local.example.js');
+  }
+
+  return gulp.src(src)
+    .pipe(plugins.rename(renameTo))
+    .pipe(gulp.dest('config/env'));
+});
+
 // Angular template cache task
 gulp.task('templatecache', function () {
   return gulp.src(defaultAssets.client.views)
@@ -307,7 +323,7 @@ gulp.task('build', function (done) {
 
 // Run the project tests
 gulp.task('test', function (done) {
-  runSequence('env:test', 'lint', 'mocha', 'karma', 'nodemon', 'protractor', done);
+  runSequence('env:test', ['copyLocalEnvConfig'], 'lint', 'mocha', 'karma', 'nodemon', 'protractor', done);
 });
 
 gulp.task('test:server', function (done) {
@@ -332,15 +348,15 @@ gulp.task('test:e2e', function (done) {
 
 // Run the project in development mode
 gulp.task('default', function (done) {
-  runSequence('env:dev', 'lint', ['nodemon', 'watch'], done);
+  runSequence('env:dev', ['copyLocalEnvConfig'], 'lint', ['nodemon', 'watch'], done);
 });
 
 // Run the project in debug mode
 gulp.task('debug', function (done) {
-  runSequence('env:dev', 'lint', ['nodemon', 'watch'], done);
+  runSequence('env:dev', ['copyLocalEnvConfig'], 'lint', ['nodemon', 'watch'], done);
 });
 
 // Run the project in production mode
 gulp.task('prod', function (done) {
-  runSequence('templatecache', 'build', 'env:prod', 'lint', ['nodemon', 'watch'], done);
+  runSequence('templatecache', ['copyLocalEnvConfig'], 'build', 'env:prod', 'lint', ['nodemon', 'watch'], done);
 });
