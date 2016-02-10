@@ -742,7 +742,7 @@ describe('User CRUD tests', function () {
               }
 
               // Call the assertion callback
-              userInfoRes.body.message.should.equal('Username already exists');
+              userInfoRes.body.message.toLowerCase().should.containEql('username already exists');
 
               return done();
             });
@@ -794,7 +794,7 @@ describe('User CRUD tests', function () {
               }
 
               // Call the assertion callback
-              userInfoRes.body.message.should.equal('Email already exists');
+              userInfoRes.body.message.toLowerCase().should.containEql('email already exists');
 
               return done();
             });
