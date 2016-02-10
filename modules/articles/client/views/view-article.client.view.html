@@ -2,7 +2,7 @@
   <div class="page-header">
     <h1 ng-bind="vm.article.title"></h1>
   </div>
-  <div class="pull-right" ng-show="vm.authentication.user._id == vm.article.user._id">
+  <div class="pull-right" ng-show="vm.article.isCurrentUserOwner">
     <a class="btn btn-primary" ui-sref="articles.edit({ articleId: vm.article._id })">
       <i class="glyphicon glyphicon-edit"></i>
     </a>
