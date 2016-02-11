@@ -11,46 +11,61 @@
     $stateProvider
       .state('articles', {
         abstract: true,
-        url: '/articles',
-        template: '<ui-view/>'
+        url: '/articles'
       })
       .state('articles.list', {
         url: '',
-        templateUrl: 'modules/articles/client/views/list-articles.client.view.html',
-        controller: 'ArticlesListController',
-        controllerAs: 'vm'
+        views: {
+          'main@': {
+            templateUrl: 'modules/articles/client/views/list-articles.client.view.html',
+            controller: 'ArticlesListController',
+            controllerAs: 'vm'
+          }
+        }
       })
       .state('articles.create', {
         url: '/create',
-        templateUrl: 'modules/articles/client/views/form-article.client.view.html',
-        controller: 'ArticlesController',
-        controllerAs: 'vm',
         resolve: {
           articleResolve: newArticle
         },
         data: {
           roles: ['user', 'admin']
+        },
+        views: {
+          'main@': {
+            templateUrl: 'modules/articles/client/views/form-article.client.view.html',
+            controller: 'ArticlesController',
+            controllerAs: 'vm'
+          }
         }
       })
       .state('articles.edit', {
         url: '/:articleId/edit',
-        templateUrl: 'modules/articles/client/views/form-article.client.view.html',
-        controller: 'ArticlesController',
-        controllerAs: 'vm',
         resolve: {
           articleResolve: getArticle
         },
         data: {
           roles: ['user', 'admin']
+        },
+        views: {
+          'main@': {
+            templateUrl: 'modules/articles/client/views/form-article.client.view.html',
+            controller: 'ArticlesController',
+            controllerAs: 'vm',
+          }
         }
       })
       .state('articles.view', {
         url: '/:articleId',
-        templateUrl: 'modules/articles/client/views/view-article.client.view.html',
-        controller: 'ArticlesController',
-        controllerAs: 'vm',
         resolve: {
           articleResolve: getArticle
+        },
+        views: {
+          'main@': {
+            templateUrl: 'modules/articles/client/views/view-article.client.view.html',
+            controller: 'ArticlesController',
+            controllerAs: 'vm'
+          }
         }
       });
   }
