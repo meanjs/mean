@@ -1,4 +1,4 @@
-<section ng-controller="SettingsController">
+<section>
   <div class="page-header">
     <h1>Settings</h1>
   </div>
@@ -11,7 +11,7 @@
         <li ui-sref-active="active">
           <a ui-sref="settings.picture">Change Profile Picture</a>
         </li>
-        <li ui-sref-active="active" ng-show="user.provider === 'local'">
+        <li ui-sref-active="active" ng-show="vm.user.provider === 'local'">
           <a ui-sref="settings.password">Change Password</a>
         </li>
         <li ui-sref-active="active">
