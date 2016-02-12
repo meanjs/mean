@@ -28,7 +28,15 @@ var ArticleSchema = new Schema({
   user: {
     type: Schema.ObjectId,
     ref: 'User'
-  }
+  },
+  replyCount: {
+    type: Number,
+    default: 0
+  },
+  replies: [{
+    type: Schema.ObjectId,
+    ref: 'Reply'
+  }]
 });
 
 mongoose.model('Article', ArticleSchema);

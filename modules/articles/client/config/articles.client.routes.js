@@ -46,11 +46,20 @@
       })
       .state('articles.view', {
         url: '/:articleId',
-        templateUrl: 'modules/articles/client/views/view-article.client.view.html',
-        controller: 'ArticlesController',
-        controllerAs: 'vm',
-        resolve: {
-          articleResolve: getArticle
+        views: {
+          '@' : {
+            templateUrl: 'modules/articles/client/views/view-article.client.view.html',
+            controller: 'ArticlesController',
+            controllerAs: 'vm',
+            resolve: {
+              articleResolve: getArticle
+            }
+          },
+          'replies@articles.view' : {
+            templateUrl: 'modules/replies/client/views/list-replies.client.view.html',
+            controller: 'RepliesController',
+            controllerAs: 'vm'
+          }
         }
       });
   }

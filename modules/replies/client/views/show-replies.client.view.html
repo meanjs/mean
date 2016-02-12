@@ -1,0 +1,80 @@
+<div  uib-collapse="reply.isDeleted">
+  <div class="media-heading" ng-show="!(vm.replyToEdit === reply._id)">
+    <button class="btn btn-default btn-xs" type="button" ng-click="vm.isCollapsed[reply._id] = !vm.isCollapsed[reply._id]">
+    <span class="glyphicon glyphicon-minus" ng-if="(!vm.isCollapsed[reply._id])"></span>
+    <span class="glyphicon glyphicon-plus" ng-if="vm.isCollapsed[reply._id]"></span> 
+    </button> 
+    <span class="label label-primary" ng-bind="reply.user.displayName"></span> 
+    <!-- TODO: Add icons for their social networks -->
+    <time title="{{ reply.created | amDateFormat: 'dddd, MMMM Do YYYY, h:mm a' }}" am-time-ago="reply.created"></time>
+    <span> -- {{ reply.replies.length }} replies</span>
+    <span ng-if="reply.edited"> -- edited <time title="{{ reply.edited | amDateFormat: 'dddd, MMMM Do YYYY, h:mm a' }}" am-time-ago="reply.edited"></time></span>
+
+  </div>
+
+  <div class="panel-collapse collapse in" uib-collapse="vm.isCollapsed[reply._id]">
+  <!--      Edit  Reply form - only shows after edit clicked -->
+    <div uib-collapse="!(vm.replyToEdit === reply._id)">
+      <div class="form-group">
+        <label for="editreply-{{ reply._id }}">Edit Your Reply:</label>
+        <textarea name="editreply-{{ reply._id }}" ng-model="reply.newContent" class="form-control" rows="3"></textarea>
+      </div>
+      <button type="submit" class="btn btn-success btn-sm" ng-click="vm.update(reply)">Submit</button>
+      <button class="btn btn-default btn-sm" ng-click="reply.newContent='';vm.cancelEdit()">Cancel</button>
+      <div ng-show="reply.error" class="text-danger">
+        <strong ng-bind="reply.error"></strong>
+      </div>
+    </div>
+
+    <div class="media-body">
+      <p  ng-show="vm.replyToEdit !== reply._id"><span ng-bind-html="reply.content | linky:'_blank'"></span></p>
+      <div class="reply-meta">
+        <div uib-collapse="(vm.currentReplyId === reply._id || vm.replyToDelete === reply._id || vm.replyToEdit === reply._id)">
+          <span ng-if="(reply.user.username == vm.authentication.user.username && reply.replies.length === 0)">
+            <a href="#" ng-click="vm.prepareDelete(reply._id)">delete</a></span>
+<!--           <span ng-if="reply.user.username != vm.authentication.user.username">
+            <a href="#" ng-click="vm.prepareReport(reply._id)">report</a>
+          </span> -->
+          <span ng-if="reply.user.username == vm.authentication.user.username">
+            <a href="#" ng-click="vm.prepareEdit(reply)">edit</a>
+          </span>
+          <span ng-if="reply.nestedLevel < 9">
+            <a role="button" href="#" ng-click="vm.showReplyForm(reply._id)">reply</a>
+          </span>
+        </div>
+  <!--       Delete form - only shows after delete clicked -->
+        <div uib-collapse="!(vm.replyToDelete === reply._id)">
+          <div class="form-group">
+            <div class="alert alert-danger" role="alert">
+              Are you <strong>really really sure</strong> you want to delete this reply? Really?
+            </div>
+          </div>
+          <button type="submit" class="btn btn-danger btn-sm" ng-click="vm.remove(reply)">DELETE</button>
+          <button class="btn btn-success btn-sm" ng-click="vm.cancelDelete()">Cancel</button>
+          <div ng-show="reply.error" class="text-danger">
+            <strong ng-bind="reply.error"></strong>
+          </div>
+        </div>
+  <!--       New  Reply form - only shows after reply clicked -->
+        <div uib-collapse="!(vm.currentReplyId === reply._id)">
+          <div class="form-group">
+            <label for="newreply-{{ reply._id }}">Your Reply:</label>
+            <textarea name="rewreply-{{ reply._id }}" ng-model="reply.newReply" class="form-control" rows="3"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary btn-sm" ng-click="vm.create(reply)">Submit</button>
+          <button class="btn btn-default btn-sm" ng-click="reply.newReply='';vm.cancelReply()">Cancel</button>
+          <div ng-show="reply.error" class="text-danger">
+            <strong ng-bind="reply.error"></strong>
+          </div>
+        </div>
+
+
+  <!--       TODO: Report Form -->
+
+      </div>
+      <div class="media" ng-repeat="reply in reply.replies">
+        <show-replies reply="reply"></show-replies>
+      </div>
+    </div>
+  </div>
+</div>
