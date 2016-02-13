@@ -18,7 +18,10 @@
         url: '',
         templateUrl: 'modules/articles/client/views/list-articles.client.view.html',
         controller: 'ArticlesListController',
-        controllerAs: 'vm'
+        controllerAs: 'vm',
+        data: {
+          pageTitle: 'Articles List'
+        }
       })
       .state('articles.create', {
         url: '/create',
@@ -29,7 +32,8 @@
           articleResolve: newArticle
         },
         data: {
-          roles: ['user', 'admin']
+          roles: ['user', 'admin'],
+          pageTitle : 'Articles Create'
         }
       })
       .state('articles.edit', {
@@ -41,7 +45,8 @@
           articleResolve: getArticle
         },
         data: {
-          roles: ['user', 'admin']
+          roles: ['user', 'admin'],
+          pageTitle: 'Edit Article {{ articleResolve.title }}'
         }
       })
       .state('articles.view', {
@@ -51,6 +56,9 @@
         controllerAs: 'vm',
         resolve: {
           articleResolve: getArticle
+        },
+        data:{
+          pageTitle: 'Article {{ articleResolve.title }}'
         }
       });
   }
