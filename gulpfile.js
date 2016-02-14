@@ -278,6 +278,18 @@ gulp.task('karma', function (done) {
   }, done).start();
 });
 
+// Connect to the MongoDB instance and load the models
+gulp.task('mongoose', function (done) {
+
+  // Use mongoose configuration
+  var mongoose = require('./config/lib/mongoose.js');
+
+  // Connect to database
+  mongoose.connect(function (db) {
+    db.connection.db.close(done);
+  });
+});
+
 // Drops the MongoDB database, used in e2e testing
 gulp.task('dropdb', function (done) {
   // Use mongoose configuration
