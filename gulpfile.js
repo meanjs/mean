@@ -203,6 +203,20 @@ gulp.task('imagemin', function () {
     .pipe(gulp.dest('public/dist/img'));
 });
 
+// node-inspector task
+gulp.task('node-inspector', function () {
+  return gulp.src([])
+    .pipe(plugins.nodeInspector({
+      debugPort: 5858,
+      webHost: 'localhost',
+      webPort: 1337,
+      saveLiveEdit: true,
+      preload: false,
+      hidden: [],
+      stackTraceLimit: 50,
+    }));
+});
+
 // Copy local development environment config example
 gulp.task('copyLocalEnvConfig', function () {
   var src = [];
@@ -362,7 +376,7 @@ gulp.task('default', function (done) {
 
 // Run the project in debug mode
 gulp.task('debug', function (done) {
-  runSequence('env:dev', ['copyLocalEnvConfig', 'makeUploadsDir'], 'lint', ['nodemon', 'watch'], done);
+  runSequence('env:dev', ['copyLocalEnvConfig', 'makeUploadsDir'], 'lint', ['nodemon', 'watch', 'node-inspector'], done);
 });
 
 // Run the project in production mode
