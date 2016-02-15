@@ -1,9 +1,8 @@
 language: node_js
 sudo: false
 node_js:
-  - 0.12
-  - 4
-  - 5
+  - '4.3'
+  - '5'
 os:
   - linux
   - centos
@@ -13,8 +12,6 @@ os:
 env:
   - NODE_ENV=travis CXX="g++-4.8" CC="gcc-4.8"
 matrix:
-  allow_failures:
-    - node_js: 5
 services:
   - mongodb
 # gcc 4.8 requires ubuntu-toolchain-r-test
