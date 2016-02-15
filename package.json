@@ -100,6 +100,7 @@
     "gulp-mocha": "~2.1.2",
     "gulp-ng-annotate": "~1.0.0",
     "gulp-nodemon": "~2.0.3",
+    "gulp-node-inspector": "~0.1.0",
     "gulp-protractor": "~1.0.0",
     "gulp-rename": "~1.2.2",
     "gulp-sass": "~2.0.3",
