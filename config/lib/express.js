@@ -17,7 +17,8 @@ var config = require('../config'),
   helmet = require('helmet'),
   flash = require('connect-flash'),
   consolidate = require('consolidate'),
-  path = require('path');
+  path = require('path'),
+  lusca = require('lusca');
 
 /**
  * Initialize local variables
@@ -122,6 +123,9 @@ module.exports.initSession = function (app, db) {
       collection: config.sessionCollection
     })
   }));
+
+  // Add Lusca CSRF Middleware
+  app.use(lusca(config.csrf));
 };
 
 /**
@@ -228,7 +232,7 @@ module.exports.init = function (db) {
 
   // Initialize Express view engine
   this.initViewEngine(app);
-  
+
   // Initialize Helmet security headers
   this.initHelmetHeaders(app);
 
