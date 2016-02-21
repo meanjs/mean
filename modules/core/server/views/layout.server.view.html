@@ -42,12 +42,7 @@
       {% block content %}{% endblock %}
     </section>
   </section>
-
-  <!--Embedding The User Object-->
-  <script type="text/javascript">
-    var user = {{ user | json | safe }};
-  </script>
-
+  
   <!--Load The Socket.io File-->
   <script type="text/javascript" src="/socket.io/socket.io.js"></script>
 

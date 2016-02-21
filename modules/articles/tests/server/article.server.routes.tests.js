@@ -45,7 +45,7 @@ describe('Article CRUD tests', function () {
     });
 
     // Save a user to the test db and create new article
-    user.save(function () {
+    user.save(function (err, user) {
       article = {
         title: 'Article Title',
         content: 'Article Content'
@@ -56,6 +56,7 @@ describe('Article CRUD tests', function () {
   });
 
   it('should be able to save an article if logged in', function (done) {
+
     agent.post('/api/auth/signin')
       .send(credentials)
       .expect(200)
@@ -66,10 +67,12 @@ describe('Article CRUD tests', function () {
         }
 
         // Get the userId
-        var userId = user.id;
+        var userId = signinRes.body.user._id;
+
 
         // Save a new article
         agent.post('/api/articles')
+          .set('Authorization', 'JWT ' + signinRes.body.token)
           .send(article)
           .expect(200)
           .end(function (articleSaveErr, articleSaveRes) {
@@ -103,7 +106,7 @@ describe('Article CRUD tests', function () {
   it('should not be able to save an article if not logged in', function (done) {
     agent.post('/api/articles')
       .send(article)
-      .expect(403)
+      .expect(401)
       .end(function (articleSaveErr, articleSaveRes) {
         // Call the assertion callback
         done(articleSaveErr);
@@ -124,10 +127,11 @@ describe('Article CRUD tests', function () {
         }
 
         // Get the userId
-        var userId = user.id;
+        var userId = signinRes.body.user._id;
 
         // Save a new article
         agent.post('/api/articles')
+          .set('Authorization', 'JWT ' + signinRes.body.token)
           .send(article)
           .expect(400)
           .end(function (articleSaveErr, articleSaveRes) {
@@ -151,10 +155,11 @@ describe('Article CRUD tests', function () {
         }
 
         // Get the userId
-        var userId = user.id;
+        var userId = signinRes.body.user._id;
 
         // Save a new article
         agent.post('/api/articles')
+          .set('Authorization', 'JWT ' + signinRes.body.token)
           .send(article)
           .expect(200)
           .end(function (articleSaveErr, articleSaveRes) {
@@ -168,6 +173,7 @@ describe('Article CRUD tests', function () {
 
             // Update an existing article
             agent.put('/api/articles/' + articleSaveRes.body._id)
+              .set('Authorization', 'JWT ' + signinRes.body.token)
               .send(article)
               .expect(200)
               .end(function (articleUpdateErr, articleUpdateRes) {
@@ -258,10 +264,11 @@ describe('Article CRUD tests', function () {
         }
 
         // Get the userId
-        var userId = user.id;
+        var userId = signinRes.body.user._id;
 
         // Save a new article
         agent.post('/api/articles')
+          .set('Authorization', 'JWT ' + signinRes.body.token)
           .send(article)
           .expect(200)
           .end(function (articleSaveErr, articleSaveRes) {
@@ -272,6 +279,7 @@ describe('Article CRUD tests', function () {
 
             // Delete an existing article
             agent.delete('/api/articles/' + articleSaveRes.body._id)
+              .set('Authorization', 'JWT ' + signinRes.body.token)
               .send(article)
               .expect(200)
               .end(function (articleDeleteErr, articleDeleteRes) {
@@ -301,11 +309,9 @@ describe('Article CRUD tests', function () {
     articleObj.save(function () {
       // Try deleting article
       request(app).delete('/api/articles/' + articleObj._id)
-        .expect(403)
+        .expect(401)
         .end(function (articleDeleteErr, articleDeleteRes) {
-          // Set message assertion
-          (articleDeleteRes.body.message).should.match('User is not authorized');
-
+        
           // Handle article error error
           done(articleDeleteErr);
         });
@@ -351,6 +357,7 @@ describe('Article CRUD tests', function () {
 
           // Save a new article
           agent.post('/api/articles')
+            .set('Authorization', 'JWT ' + signinRes.body.token)
             .send(article)
             .expect(200)
             .end(function (articleSaveErr, articleSaveRes) {

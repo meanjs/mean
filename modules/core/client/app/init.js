@@ -13,30 +13,33 @@ angular.module(ApplicationConfiguration.applicationModuleName).config(['$locatio
 ]);
 
 angular.module(ApplicationConfiguration.applicationModuleName).run(function ($rootScope, $state, Authentication) {
+  Authentication.ready
+    .then(function (auth) {
+      // Check authentication before changing state
+      $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
+        if (toState.data && toState.data.roles && toState.data.roles.length > 0) {
+          var allowed = false;
+          toState.data.roles.forEach(function (role) {
+            if ((role === 'guest') || (Authentication.user && Authentication.user.roles !== undefined && Authentication.user.roles.indexOf(role) !== -1)) {
+              allowed = true;
+              return true;
+            }
+          });
 
-  // Check authentication before changing state
-  $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
-    if (toState.data && toState.data.roles && toState.data.roles.length > 0) {
-      var allowed = false;
-      toState.data.roles.forEach(function (role) {
-        if ((role === 'guest') || (Authentication.user && Authentication.user.roles !== undefined && Authentication.user.roles.indexOf(role) !== -1)) {
-          allowed = true;
-          return true;
+          if (!allowed) {
+            event.preventDefault();
+            if (Authentication.user !== undefined && typeof Authentication.user === 'object') {
+              $state.go('forbidden');
+            } else {
+              $state.go('authentication.signin').then(function () {
+                storePreviousState(toState, toParams);
+              });
+            }
+          }
         }
       });
+    });
 
-      if (!allowed) {
-        event.preventDefault();
-        if (Authentication.user !== undefined && typeof Authentication.user === 'object') {
-          $state.go('forbidden');
-        } else {
-          $state.go('authentication.signin').then(function () {
-            storePreviousState(toState, toParams);
-          });
-        }
-      }
-    }
-  });
 
   // Record previous state
   $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
@@ -45,7 +48,7 @@ angular.module(ApplicationConfiguration.applicationModuleName).run(function ($ro
 
   // Store previous state
   function storePreviousState(state, params) {
-    // only store this state if it shouldn't be ignored 
+    // only store this state if it shouldn't be ignored
     if (!state.data || !state.data.ignoreState) {
       $state.previous = {
         state: state,

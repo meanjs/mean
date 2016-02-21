@@ -9,7 +9,8 @@
       $httpBackend,
       $stateParams,
       $state,
-      $location;
+      $location,
+      Authentication;
 
     beforeEach(function () {
       jasmine.addMatchers({
@@ -47,16 +48,20 @@
         });
       }));
 
+      afterEach(inject(function (Authentication) {
+        Authentication.signout();
+      }));
+
       describe('$scope.signin()', function () {
         it('should login with a correct user and password', function () {
           // Test expected GET request
-          $httpBackend.when('POST', '/api/auth/signin').respond(200, 'Fred');
+          $httpBackend.when('POST', '/api/auth/signin').respond(200, { user: { name : 'Fred' } });
 
           scope.signin(true);
           $httpBackend.flush();
 
           // Test scope value
-          expect(scope.authentication.user).toEqual('Fred');
+          expect(scope.authentication.user.name).toEqual('Fred');
           expect($location.url()).toEqual('/');
         });
 
@@ -121,13 +126,13 @@
         it('should register with correct data', function () {
           // Test expected GET request
           scope.authentication.user = 'Fred';
-          $httpBackend.when('POST', '/api/auth/signup').respond(200, 'Fred');
+          $httpBackend.when('POST', '/api/auth/signup').respond(200, { user: { name : 'Fred' } });
 
           scope.signup(true);
           $httpBackend.flush();
 
           // test scope value
-          expect(scope.authentication.user).toBe('Fred');
+          expect(scope.authentication.user.name).toBe('Fred');
           expect(scope.error).toEqual(null);
           expect($location.url()).toBe('/');
         });
