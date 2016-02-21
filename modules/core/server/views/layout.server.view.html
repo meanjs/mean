@@ -4,7 +4,6 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
-  <base href="/">
   <title page-title></title>
   <meta name="description" content="{{description}}">
   <meta name="fragment" content="!">
@@ -29,10 +28,10 @@
   <meta name="twitter:image" content="{{logo}}">
 
   <!-- Fav Icon -->
-  <link href="{{favicon}}" rel="shortcut icon" type="image/x-icon">
+  <link href="/{{favicon}}" rel="shortcut icon" type="image/x-icon">
 
   <!-- Application CSS Files -->
-  {{#each cssFiles}}<link rel="stylesheet" href="{{this}}">{{/each}}
+  {{#each cssFiles}}<link rel="stylesheet" href="/{{this}}">{{/each}}
 </head>
 
 <body class="ng-cloak">
@@ -64,7 +63,7 @@
   <script type="text/javascript" src="/socket.io/socket.io.js"></script>
 
   <!--Application JavaScript Files-->
-    {{#each jsFiles}}<script type="text/javascript" src="{{this}}"></script>{{/each}}
+    {{#each jsFiles}}<script type="text/javascript" src="/{{this}}"></script>{{/each}}
   
   <!--owasp config sync-->
   <script type="text/javascript">
