@@ -64,7 +64,7 @@
 
         beforeEach(inject(function ($controller, $state, $templateCache) {
           viewstate = $state.get('articles.view');
-          $templateCache.put('modules/articles/client/views/view-article.client.view.html', '');
+          $templateCache.put('/modules/articles/client/views/view-article.client.view.html', '');
 
           // create mock article
           mockArticle = new ArticlesService({
@@ -104,7 +104,7 @@
         });
 
         it('Should have templateUrl', function () {
-          expect(viewstate.templateUrl).toBe('modules/articles/client/views/view-article.client.view.html');
+          expect(viewstate.templateUrl).toBe('/modules/articles/client/views/view-article.client.view.html');
         });
       });
 
@@ -119,7 +119,7 @@
           $rootScope.$digest();
 
           expect($location.path()).toBe('/articles');
-          expect($state.current.templateUrl).toBe('modules/articles/client/views/list-articles.client.view.html');
+          expect($state.current.templateUrl).toBe('/modules/articles/client/views/list-articles.client.view.html');
         }));
       });
     });

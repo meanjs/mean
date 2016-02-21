@@ -9,7 +9,7 @@
   UsersService.$inject = ['$resource'];
 
   function UsersService($resource) {
-    var Users = $resource('api/users', {}, {
+    var Users = $resource('/api/users', {}, {
       update: {
         method: 'PUT'
       },
@@ -78,7 +78,7 @@
   AdminService.$inject = ['$resource'];
 
   function AdminService($resource) {
-    return $resource('api/users/:userId', {
+    return $resource('/api/users/:userId', {
       userId: '@_id'
     }, {
       update: {
