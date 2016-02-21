@@ -11,7 +11,7 @@
     $stateProvider
       .state('chat', {
         url: '/chat',
-        templateUrl: 'modules/chat/client/views/chat.client.view.html',
+        templateUrl: '/modules/chat/client/views/chat.client.view.html',
         controller: 'ChatController',
         controllerAs: 'vm',
         data: {

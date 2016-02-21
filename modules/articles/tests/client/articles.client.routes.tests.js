@@ -45,7 +45,7 @@
 
         beforeEach(inject(function ($controller, $state, $templateCache) {
           viewstate = $state.get('articles.view');
-          $templateCache.put('modules/articles/client/views/view-article.client.view.html', '');
+          $templateCache.put('/modules/articles/client/views/view-article.client.view.html', '');
 
           // create mock article
           mockArticle = new ArticlesService({
@@ -85,7 +85,7 @@
         });
 
         it('Should have templateUrl', function () {
-          expect(viewstate.templateUrl).toBe('modules/articles/client/views/view-article.client.view.html');
+          expect(viewstate.templateUrl).toBe('/modules/articles/client/views/view-article.client.view.html');
         });
       });
 
@@ -96,7 +96,7 @@
 
         beforeEach(inject(function ($controller, $state, $templateCache) {
           createstate = $state.get('articles.create');
-          $templateCache.put('modules/articles/client/views/form-article.client.view.html', '');
+          $templateCache.put('/modules/articles/client/views/form-article.client.view.html', '');
 
           // create mock article
           mockArticle = new ArticlesService();
@@ -131,7 +131,7 @@
         });
 
         it('Should have templateUrl', function () {
-          expect(createstate.templateUrl).toBe('modules/articles/client/views/form-article.client.view.html');
+          expect(createstate.templateUrl).toBe('/modules/articles/client/views/form-article.client.view.html');
         });
       });
 
@@ -142,7 +142,7 @@
 
         beforeEach(inject(function ($controller, $state, $templateCache) {
           editstate = $state.get('articles.edit');
-          $templateCache.put('modules/articles/client/views/form-article.client.view.html', '');
+          $templateCache.put('/modules/articles/client/views/form-article.client.view.html', '');
 
           // create mock article
           mockArticle = new ArticlesService({
@@ -182,7 +182,7 @@
         });
 
         it('Should have templateUrl', function () {
-          expect(editstate.templateUrl).toBe('modules/articles/client/views/form-article.client.view.html');
+          expect(editstate.templateUrl).toBe('/modules/articles/client/views/form-article.client.view.html');
         });
 
         xit('Should go to unauthorized route', function () {
