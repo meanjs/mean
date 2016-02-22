@@ -254,6 +254,22 @@ gulp.task('templatecache', function () {
     .pipe(gulp.dest('build'));
 });
 
+gulp.task('pre-test', function () {
+  var testSuites = Array.isArray(argv.changedTestFiles) && argv.changedTestFiles.length ? argv.changedTestFiles : testAssets.tests.server;
+
+  return gulp.src(testSuites)
+    // Covering files
+    .pipe(plugins.istanbul())
+    // Force `require` to return covered files
+    .pipe(plugins.istanbul.hookRequire());
+});
+
+gulp.task('test', ['pre-test'], function () {
+  return gulp.src(['test/*.js'])
+    .pipe(mocha())
+    
+});
+
 // Mocha tests task
 gulp.task('mocha', function (done) {
   // Open mongoose connections
@@ -279,7 +295,8 @@ gulp.task('mocha', function (done) {
         mongoose.disconnect(function () {
           done(error);
         });
-      });
+      })
+      .pipe(istanbul.writeReports());
   });
 
 });
@@ -299,7 +316,7 @@ gulp.task('dropdb', function (done) {
 
   mongoose.connect(function (db) {
     db.connection.db.dropDatabase(function (err) {
-      if(err) {
+      if (err) {
         console.log(err);
       } else {
         console.log('Successfully dropped db: ', db.connection.db.databaseName);
