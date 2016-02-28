@@ -38,6 +38,25 @@
         });
       });
 
+      describe('List Route', function () {
+        var liststate;
+        beforeEach(inject(function ($state) {
+          liststate = $state.get('articles.list');
+        }));
+
+        it('Should have the correct URL', function () {
+          expect(liststate.url).toEqual('');
+        });
+
+        it('Should not be abstract', function () {
+          expect(liststate.abstract).toBe(undefined);
+        });
+
+        it('Should have template', function () {
+          expect(liststate.templateUrl).toBe('modules/articles/client/views/list-articles.client.view.html');
+        });
+      });
+
       describe('View Route', function () {
         var viewstate,
           ArticlesController,
@@ -188,6 +207,21 @@
         xit('Should go to unauthorized route', function () {
 
         });
+      });
+
+      describe('Handle Trailing Slash', function () {
+        beforeEach(inject(function ($state, $rootScope) {
+          $state.go('articles.list');
+          $rootScope.$digest();
+        }));
+
+        it('Should remove trailing slash', inject(function ($state, $location, $rootScope) {
+          $location.path('articles/');
+          $rootScope.$digest();
+
+          expect($location.path()).toBe('/articles');
+          expect($state.current.templateUrl).toBe('modules/articles/client/views/list-articles.client.view.html');
+        }));
       });
 
     });
