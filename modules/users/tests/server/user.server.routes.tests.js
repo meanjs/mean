@@ -742,10 +742,7 @@ describe('User CRUD tests', function () {
               }
 
               // Call the assertion callback
-              // MongoDB changed document validation output in version 3.2:
-              // >= 3.2 11000 duplicate key error collection: mean-test.users index: username already exists
-              // < 3.2 Username already exists
-              userInfoRes.body.message.toLowerCase().should.containEql('username already exists');
+              userInfoRes.body.message.should.equal('Username already exists');
 
               return done();
             });
@@ -797,10 +794,7 @@ describe('User CRUD tests', function () {
               }
 
               // Call the assertion callback
-              // MongoDB changed document validation output in version 3.2:
-              // >= 3.2 11000 duplicate key error collection: mean-test.users index: email already exists
-              // < 3.2 Email already exists
-              userInfoRes.body.message.toLowerCase().should.containEql('email already exists');
+              userInfoRes.body.message.should.equal('Email already exists');
 
               return done();
             });
