@@ -4,8 +4,8 @@ declared-services:
     label: mongodb
     plan: 100
 applications:
-- name: mean
-  host: mean-${random-word}
+- name: jmean
+  host: jmean-${random-word}
   memory: 128M
   services:
   - mean-mongo
