@@ -119,6 +119,7 @@
     "karma-phantomjs-launcher": "~1.0.0",
     "load-grunt-tasks": "~3.2.0",
     "mock-fs": "~3.7.0",
+    "protractor": "~3.1.1",
     "run-sequence": "~1.1.5",
     "should": "~8.2.2",
     "supertest": "~1.2.0",
