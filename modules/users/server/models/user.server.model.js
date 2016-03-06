@@ -46,7 +46,10 @@ var UserSchema = new Schema({
   },
   email: {
     type: String,
-    unique: true,
+    index: {
+      unique: true,
+      sparse: true // For this to work on a previously indexed field, the index must be dropped & the application restarted.
+    },
     lowercase: true,
     trim: true,
     default: '',
