@@ -177,7 +177,7 @@ gulp.task('uglify', function () {
 // CSS minifying task
 gulp.task('cssmin', function () {
   return gulp.src(defaultAssets.client.css)
-    .pipe(plugins.cssmin())
+    .pipe(plugins.csso())
     .pipe(plugins.concat('application.min.css'))
     .pipe(gulp.dest('public/dist'));
 });
