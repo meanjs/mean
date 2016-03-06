@@ -50,6 +50,18 @@ gulp.task('nodemon', function () {
   });
 });
 
+// Nodemon debug task
+gulp.task('nodemon-debug', function () {
+  return plugins.nodemon({
+    exec: 'node_modules/node-inspector/bin/inspector.js --save-live-edit --preload=false --web-port 1337 & node --debug',
+    script: 'server.js',
+    nodeArgs: ['--debug'],
+    ext: 'js,html',
+    verbose: true,
+    watch: _.union(defaultAssets.server.views, defaultAssets.server.allJS, defaultAssets.server.config)
+  });
+});
+
 // Watch Files For Changes
 gulp.task('watch', function () {
   // Start livereload
@@ -201,20 +213,6 @@ gulp.task('imagemin', function () {
       use: [pngquant()]
     }))
     .pipe(gulp.dest('public/dist/img'));
-});
-
-// node-inspector task
-gulp.task('node-inspector', function () {
-  return gulp.src([])
-    .pipe(plugins.nodeInspector({
-      debugPort: 5858,
-      webHost: 'localhost',
-      webPort: 1337,
-      saveLiveEdit: true,
-      preload: false,
-      hidden: [],
-      stackTraceLimit: 50,
-    }));
 });
 
 // Copy local development environment config example
@@ -376,7 +374,7 @@ gulp.task('default', function (done) {
 
 // Run the project in debug mode
 gulp.task('debug', function (done) {
-  runSequence('env:dev', ['copyLocalEnvConfig', 'makeUploadsDir'], 'lint', ['nodemon', 'watch', 'node-inspector'], done);
+  runSequence('env:dev', ['copyLocalEnvConfig', 'makeUploadsDir'], 'lint', ['nodemon-debug', 'watch'], done);
 });
 
 // Run the project in production mode
