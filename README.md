@@ -39,10 +39,6 @@ $ npm install -g grunt-cli
 $ gem install sass
 ```
 
-```bash
-$ npm install -g grunt-cli
-```
-
 * Gulp - (Optional) You may use Gulp for Live Reload, Linting, and SASS or LESS.
 
 ```bash
