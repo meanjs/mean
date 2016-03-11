@@ -14,5 +14,17 @@
     "angular-ui-router": "~0.2.18",
     "bootstrap": "~3.3.6",
     "owasp-password-strength-test": "~1.3.0"
+  },
+  "overrides": {
+    "bootstrap": {
+      "main": [
+        "dist/css/bootstrap.css",
+        "dist/css/bootstrap-theme.css",
+        "less/bootstrap.less"
+      ]
+    },
+    "jquery": {
+      "main": []
+    }
   }
 }
