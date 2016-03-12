@@ -3,7 +3,7 @@
     <h1>{{vm.article._id ? 'Edit Article' : 'New Article'}}</h1>
   </div>
   <div class="pull-right">
-    <a class="btn btn-primary" ng-click="vm.remove()">
+    <a class="btn btn-primary" ng-click="vm.remove()" ng-if="!vm.isNew">
       <i class="glyphicon glyphicon-trash"></i>
     </a>
   </div>

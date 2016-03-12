@@ -6,7 +6,8 @@
 var path = require('path'),
   mongoose = require('mongoose'),
   Article = mongoose.model('Article'),
-  errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller'));
+  errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
+  mongooseFiltering = require(path.resolve('./modules/core/server/controllers/mongoose-filtering.server.controller'));
 
 /**
  * Create an article
@@ -75,6 +76,62 @@ exports.delete = function (req, res) {
       res.json(article);
     }
   });
+};
+
+exports.pageSortFilter = function (req, res) {
+  var searchRequest = req.body;
+
+  // Add default sorting if not provided with the request
+  if (!searchRequest.sorting || !searchRequest.sorting.length) {
+    // Note: It may be a good idea to disable sorting
+    // on large collections due to performance issues.
+    // For instance, when the collection size is greater
+    // than 100,000. Sorting on an indexed field should
+    // yield good performance, even on large
+    // collections.
+    searchRequest.sorting = '_id';
+  }
+
+  // Set base query.
+  var query = Article.find();
+
+  // Build parameterized query based on the specific
+  // request, using the base query. The resolved
+  // promise will return the modified query.
+  query = mongooseFiltering.buildParameterizedQuery(query, searchRequest)
+    .then(onQueryBuildSuccess)
+    .catch(onQueryBuildError);
+
+  // On successful building of the parameterized query.
+  function onQueryBuildSuccess(result) {
+    query = result.query;
+
+    // We can add any additional querying logic here.
+
+    // Populate the User field
+    query.populate('user', 'displayName');
+
+    // Finally, execute the Mongoose find()
+    // method on our modified query.
+    query.exec('find', function (err, articles) {
+      if (err) {
+        return res.status(400).send({
+          message: errorHandler.getErrorMessage(err)
+        });
+      } else {
+        res.json({
+          count: result.count,
+          articles: articles
+        });
+      }
+    });
+  }
+
+  function onQueryBuildError(err) {
+    return res.status(400).send({
+      message: errorHandler.getErrorMessage(err)
+    });
+  }
 };
 
 /**

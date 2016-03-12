@@ -13,6 +13,11 @@
     }, {
       update: {
         method: 'PUT'
+      },
+      pageSortFilter: {
+        method: 'POST',
+        isArray: false,
+        url: 'api/parameterized-query/articles'
       }
     });
 
@@ -20,6 +25,13 @@
       createOrUpdate: function () {
         var article = this;
         return createOrUpdate(article);
+      }
+    });
+
+    angular.extend(Article, {
+      find: function (params) {
+        var articlesResource = this;
+        return articlesResource.pageSortFilter(params).$promise;
       }
     });
 

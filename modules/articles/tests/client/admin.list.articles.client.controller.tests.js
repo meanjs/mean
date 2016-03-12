@@ -78,7 +78,6 @@
         // Set POST response
         $httpBackend.expectGET('api/articles').respond(mockArticleList);
 
-
         $httpBackend.flush();
 
         // Test form inputs are reset

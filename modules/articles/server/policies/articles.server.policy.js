@@ -20,6 +20,9 @@ exports.invokeRolesPolicies = function () {
     }, {
       resources: '/api/articles/:articleId',
       permissions: '*'
+    }, {
+      resources: '/api/parameterized-query/articles',
+      permissions: '*'
     }]
   }, {
     roles: ['user'],
@@ -29,6 +32,9 @@ exports.invokeRolesPolicies = function () {
     }, {
       resources: '/api/articles/:articleId',
       permissions: ['get']
+    }, {
+      resources: '/api/parameterized-query/articles',
+      permissions: ['post']
     }]
   }, {
     roles: ['guest'],
@@ -38,6 +44,9 @@ exports.invokeRolesPolicies = function () {
     }, {
       resources: '/api/articles/:articleId',
       permissions: ['get']
+    }, {
+      resources: '/api/parameterized-query/articles',
+      permissions: ['post']
     }]
   }]);
 };

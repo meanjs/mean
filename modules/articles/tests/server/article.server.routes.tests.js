@@ -73,10 +73,29 @@ describe('Article CRUD tests', function () {
           .send(article)
           .expect(403)
           .end(function (articleSaveErr, articleSaveRes) {
-            // Call the assertion callback
-            done(articleSaveErr);
-          });
+            // Handle article save error
+            if (articleSaveErr) {
+              return done(articleSaveErr);
+            }
 
+            // Get a list of articles
+            agent.get('/api/articles')
+              .end(function (articlesGetErr, articlesGetRes) {
+                // Handle article save error
+                if (articlesGetErr) {
+                  return done(articlesGetErr);
+                }
+
+                // Get articles list
+                var articles = articlesGetRes.body;
+
+                // Set assertions
+                (articles.length).should.equal(0);
+
+                // Call the assertion callback
+                done(articleSaveErr);
+              });
+          });
       });
   });
 
