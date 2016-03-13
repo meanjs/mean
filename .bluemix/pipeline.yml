@@ -13,6 +13,8 @@ stages:
     build_type: grunt
     script: |-
       #!/bin/bash
+      # Set Node version to 0.12
+      export PATH=/opt/IBM/node-v0.12/bin:$PATH
       # Install RVM, Ruby, and SASS
       # Needed when running grunt build
       gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
