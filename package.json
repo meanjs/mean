@@ -47,7 +47,7 @@
     "method-override": "~2.3.5",
     "gulp-wiredep": "~0.0.0",
     "mocha": "~2.4.5",
-    "mongoose": "~4.4.3",
+    "mongoose": "~4.4.3 <4.4.7",
     "morgan": "~1.6.1",
     "multer": "~1.1.0",
     "nodemailer": "~2.1.0",
