@@ -26,11 +26,11 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
     $stateProvider
       .state('home', {
         url: '/',
-        templateUrl: 'modules/core/client/views/home.client.view.html'
+        templateUrl: '/modules/core/client/views/home.client.view.html'
       })
       .state('not-found', {
         url: '/not-found',
-        templateUrl: 'modules/core/client/views/404.client.view.html',
+        templateUrl: '/modules/core/client/views/404.client.view.html',
         data: {
           ignoreState: true,
           pageTitle: 'Not-Found'
@@ -38,7 +38,7 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
       })
       .state('bad-request', {
         url: '/bad-request',
-        templateUrl: 'modules/core/client/views/400.client.view.html',
+        templateUrl: '/modules/core/client/views/400.client.view.html',
         data: {
           ignoreState: true,
           pageTitle: 'Bad-Request'
@@ -46,7 +46,7 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
       })
       .state('forbidden', {
         url: '/forbidden',
-        templateUrl: 'modules/core/client/views/403.client.view.html',
+        templateUrl: '/modules/core/client/views/403.client.view.html',
         data: {
           ignoreState: true,
           pageTitle: 'Forbidden'

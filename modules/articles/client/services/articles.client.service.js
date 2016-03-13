@@ -8,7 +8,7 @@
   ArticlesService.$inject = ['$resource'];
 
   function ArticlesService($resource) {
-    return $resource('api/articles/:articleId', {
+    return $resource('/api/articles/:articleId', {
       articleId: '@_id'
     }, {
       update: {
