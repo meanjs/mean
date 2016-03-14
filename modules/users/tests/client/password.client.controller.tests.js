@@ -46,7 +46,7 @@
         };
 
         // Initialize the Authentication controller
-        PasswordController = $controller('PasswordController', {
+        PasswordController = $controller('PasswordController as vm', {
           $scope: scope
         });
       }));
@@ -70,7 +70,7 @@
         $window.user = null;
 
         // Initialize the Authentication controller
-        PasswordController = $controller('PasswordController', {
+        PasswordController = $controller('PasswordController as vm', {
           $scope: scope
         });
       }));
@@ -85,16 +85,16 @@
           password: 'P@ssw0rd!!'
         };
         beforeEach(function() {
-          scope.credentials = credentials;
+          scope.vm.credentials = credentials;
         });
 
         it('should clear scope.success and scope.error', function() {
-          scope.success = 'test';
-          scope.error = 'test';
-          scope.askForPasswordReset(true);
+          scope.vm.success = 'test';
+          scope.vm.error = 'test';
+          scope.vm.askForPasswordReset(true);
 
-          expect(scope.success).toBeNull();
-          expect(scope.error).toBeNull();
+          expect(scope.vm.success).toBeNull();
+          expect(scope.vm.error).toBeNull();
         });
 
         describe('POST error', function() {
@@ -104,16 +104,16 @@
               'message': errorMessage
             });
 
-            scope.askForPasswordReset(true);
+            scope.vm.askForPasswordReset(true);
             $httpBackend.flush();
           });
 
           it('should clear form', function() {
-            expect(scope.credentials).toBe(null);
+            expect(scope.vm.credentials).toBe(null);
           });
 
           it('should set error to response message', function() {
-            expect(scope.error).toBe(errorMessage);
+            expect(scope.vm.error).toBe(errorMessage);
           });
         });
 
@@ -124,16 +124,16 @@
               'message': successMessage
             });
 
-            scope.askForPasswordReset(true);
+            scope.vm.askForPasswordReset(true);
             $httpBackend.flush();
           });
 
           it('should clear form', function() {
-            expect(scope.credentials).toBe(null);
+            expect(scope.vm.credentials).toBe(null);
           });
 
           it('should set success to response message', function() {
-            expect(scope.success).toBe(successMessage);
+            expect(scope.vm.success).toBe(successMessage);
           });
         });
       });
@@ -145,16 +145,16 @@
         };
         beforeEach(function() {
           $stateParams.token = token;
-          scope.passwordDetails = passwordDetails;
+          scope.vm.passwordDetails = passwordDetails;
         });
 
-        it('should clear scope.success and scope.error', function() {
-          scope.success = 'test';
-          scope.error = 'test';
-          scope.resetUserPassword(true);
+        it('should clear scope.success and scope.vm.error', function() {
+          scope.vm.success = 'test';
+          scope.vm.error = 'test';
+          scope.vm.resetUserPassword(true);
 
-          expect(scope.success).toBeNull();
-          expect(scope.error).toBeNull();
+          expect(scope.vm.success).toBeNull();
+          expect(scope.vm.error).toBeNull();
         });
 
         it('POST error should set scope.error to response message', function() {
@@ -163,10 +163,10 @@
             'message': errorMessage
           });
 
-          scope.resetUserPassword(true);
+          scope.vm.resetUserPassword(true);
           $httpBackend.flush();
 
-          expect(scope.error).toBe(errorMessage);
+          expect(scope.vm.error).toBe(errorMessage);
         });
 
         describe('POST success', function() {
@@ -176,16 +176,16 @@
           beforeEach(function() {
             $httpBackend.when('POST', '/api/auth/reset/' + token, passwordDetails).respond(user);
 
-            scope.resetUserPassword(true);
+            scope.vm.resetUserPassword(true);
             $httpBackend.flush();
           });
 
           it('should clear password form', function() {
-            expect(scope.passwordDetails).toBe(null);
+            expect(scope.vm.passwordDetails).toBe(null);
           });
 
           it('should attach user profile', function() {
-            expect(scope.authentication.user).toEqual(user);
+            expect(scope.vm.authentication.user).toEqual(user);
           });
 
           it('should redirect to password reset success view', function() {

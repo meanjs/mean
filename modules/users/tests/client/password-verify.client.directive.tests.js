@@ -26,7 +26,7 @@
     function compileDirective(template) {
       // function to compile a fresh directive with the given template, or a default one
       // input form with directive
-      if (!template) template = '<input type="password" id="newPassword" name="newPassword" class="form-control" ng-model="passwordMock.newPassword" placeholder="New Password" autocomplete="new-password" uib-popover="{{popoverMsg}}" uib-popover-trigger="focus" uib-popover-placement="top" password-validator required>' +
+      if (!template) template = '<input type="password" id="newPassword" name="newPassword" class="form-control" ng-model="passwordMock.newPassword" placeholder="New Password" autocomplete="new-password" uib-popover="{{getPopoverMsg}}" uib-popover-trigger="focus" uib-popover-placement="top" password-validator required>' +
         '<input type="password" id="verifyPassword" name="verifyPassword" class="form-control" ng-model="passwordMock.verifyPassword" placeholder="Verify Password" password-verify="passwordMock.newPassword" required>';
       template = '<form name="form"><div>' + template + '<input type="submit">submit form</input></div></form>';
 
