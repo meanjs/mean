@@ -4,13 +4,15 @@
   describe('Menus', function() {
     //Initialize global variables
     var scope,
-      Menus;
+      Menus,
+      $log;
 
     // Load the main application module
     beforeEach(module(ApplicationConfiguration.applicationModuleName));
 
-    beforeEach(inject(function(_Menus_) {
+    beforeEach(inject(function(_Menus_, _$log_) {
       Menus = _Menus_;
+      $log = _$log_; // $log === {} !
     }));
 
     it('should have topbar added', function() {
@@ -121,17 +123,19 @@
 
     describe('validateMenuExistance', function() {
       describe('when menuId not provided', function() {
-        it('should throw menuId error', function() {
-          expect(Menus.validateMenuExistance).toThrowError('MenuId was not provided');
+        spyOn($log, 'error');
+        it('should log missing menu IDs', function() {
+          expect($log.error).toHaveBeenCalled('MenuId was not provided');
         });
       });
 
       describe('when menu does not exist', function() {
         it('should throw no menu error', function() {
+          spyOn($log, 'error');
           var target = function() {
             Menus.validateMenuExistance('noMenuId');
           };
-          expect(target).toThrowError('Menu does not exist');
+          expect(target).toHaveBeenCalled('Menu "noMenuId" does not exist');
         });
       });
 
