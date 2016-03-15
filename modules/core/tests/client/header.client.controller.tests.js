@@ -2,7 +2,7 @@
 
 (function () {
   describe('HeaderController', function () {
-    //Initialize global variables
+    // Initialize global variables
     var scope,
       HeaderController,
       $state,
@@ -61,4 +61,4 @@
       });
     });
   });
-})();
+}());

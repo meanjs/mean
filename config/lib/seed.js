@@ -120,8 +120,8 @@ module.exports.start = function start(options) {
     seedOptions.logResults = options.logResults;
   }
 
-  if (_.has(options, 'seedUser')) { 
-    seedOptions.seedUser = options.seedUser; 
+  if (_.has(options, 'seedUser')) {
+    seedOptions.seedUser = options.seedUser;
   }
 
   if (_.has(options, 'seedAdmin')) {
@@ -134,7 +134,7 @@ module.exports.start = function start(options) {
     var adminAccount = new User(seedOptions.seedAdmin);
     var userAccount = new User(seedOptions.seedUser);
 
-    //If production only seed admin if it does not exist
+    // If production only seed admin if it does not exist
     if (process.env.NODE_ENV === 'production') {
       User.generateRandomPassphrase()
         .then(seedTheUser(adminAccount))

@@ -2,7 +2,7 @@
 
 (function () {
   describe('HomeController', function () {
-    //Initialize global variables
+    // Initialize global variables
     var scope,
       HomeController;
 
@@ -21,4 +21,4 @@
       expect(scope.authentication).toBeTruthy();
     });
   });
-})();
+}());

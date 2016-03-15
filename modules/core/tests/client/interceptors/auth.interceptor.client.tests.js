@@ -2,7 +2,7 @@
 
 (function() {
   describe('authInterceptor', function() {
-    //Initialize global variables
+    // Initialize global variables
     var authInterceptor,
       $q,
       $state,
@@ -12,7 +12,7 @@
     // Load the main application module
     beforeEach(module(ApplicationConfiguration.applicationModuleName));
 
-    //Load httpProvider
+    // Load httpProvider
     beforeEach(module(function($httpProvider) {
       httpProvider = $httpProvider;
     }));
@@ -22,8 +22,8 @@
       $q = _$q_;
       $state = _$state_;
       Authentication = _Authentication_;
-      spyOn($q,'reject');
-      spyOn($state,'transitionTo');
+      spyOn($q, 'reject');
+      spyOn($state, 'transitionTo');
     }));
 
     it('Auth Interceptor should be object', function() {
@@ -63,4 +63,4 @@
       });
     });
   });
-})();
+}());

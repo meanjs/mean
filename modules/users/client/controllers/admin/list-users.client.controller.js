@@ -39,4 +39,4 @@
       vm.figureOutItemsToDisplay();
     }
   }
-})();
+}());

@@ -12,4 +12,4 @@
 
     vm.user = Authentication.user;
   }
-})();
+}());

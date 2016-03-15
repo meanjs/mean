@@ -6,7 +6,7 @@
     var $scope,
       Authentication;
 
-    //We can start by loading the main application module
+    // We can start by loading the main application module
     beforeEach(module(ApplicationConfiguration.applicationModuleName));
 
     // The injector ignores leading and trailing underscores here (i.e. _$httpBackend_).
@@ -60,4 +60,4 @@
 
     });
   });
-})();
+}());

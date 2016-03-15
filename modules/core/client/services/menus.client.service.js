@@ -1,6 +1,6 @@
 'use strict';
 
-//Menu service used for managing  menus
+// Menu service used for managing  menus
 angular.module('core').service('Menus', [
   function () {
     // Define a set of default roles
@@ -14,13 +14,17 @@ angular.module('core').service('Menus', [
       if (!!~this.roles.indexOf('*')) {
         return true;
       } else {
-        if(!user) {
+        if (!user) {
           return false;
         }
         for (var userRoleIndex in user.roles) {
-          for (var roleIndex in this.roles) {
-            if (this.roles[roleIndex] === user.roles[userRoleIndex]) {
-              return true;
+          if (user.roles.hasOwnProperty(userRoleIndex)) {
+            for (var roleIndex in this.roles) {
+              if (this.roles.hasOwnProperty(roleIndex)) {
+                if (this.roles[roleIndex] === user.roles[userRoleIndex]) {
+                  return true;
+                }
+              }
             }
           }
         }
@@ -40,8 +44,6 @@ angular.module('core').service('Menus', [
       } else {
         throw new Error('MenuId was not provided');
       }
-
-      return false;
     };
 
     // Get the menu object by menu id
@@ -99,7 +101,9 @@ angular.module('core').service('Menus', [
       // Add submenu items
       if (options.items) {
         for (var i in options.items) {
-          this.addSubMenuItem(menuId, options.state, options.items[i]);
+          if (options.items.hasOwnProperty(i)) {
+            this.addSubMenuItem(menuId, options.state, options.items[i]);
+          }
         }
       }
 
@@ -155,9 +159,13 @@ angular.module('core').service('Menus', [
 
       // Search for menu item to remove
       for (var itemIndex in this.menus[menuId].items) {
-        for (var subitemIndex in this.menus[menuId].items[itemIndex].items) {
-          if (this.menus[menuId].items[itemIndex].items[subitemIndex].state === submenuItemState) {
-            this.menus[menuId].items[itemIndex].items.splice(subitemIndex, 1);
+        if (this.menus[menuId].items.hasOwnProperty(itemIndex)) {
+          for (var subitemIndex in this.menus[menuId].items[itemIndex].items) {
+            if (this.menus[menuId].items[itemIndex].items.hasOwnProperty(subitemIndex)) {
+              if (this.menus[menuId].items[itemIndex].items[subitemIndex].state === submenuItemState) {
+                this.menus[menuId].items[itemIndex].items.splice(subitemIndex, 1);
+              }
+            }
           }
         }
       }
@@ -166,7 +174,7 @@ angular.module('core').service('Menus', [
       return this.menus[menuId];
     };
 
-    //Adding the topbar menu
+    // Adding the topbar menu
     this.addMenu('topbar', {
       roles: ['*']
     });

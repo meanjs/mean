@@ -10,7 +10,12 @@ var should = require('should'),
 /**
  * Globals
  */
-var app, agent, credentials, user, _user, admin;
+var app,
+  agent,
+  credentials,
+  user,
+  _user,
+  admin;
 
 /**
  * User routes tests
@@ -254,7 +259,7 @@ describe('User CRUD tests', function () {
           }
 
           agent.delete('/api/users/' + user._id)
-            //.send(userUpdate)
+            // .send(userUpdate)
             .expect(200)
             .end(function (userInfoErr, userInfoRes) {
               if (userInfoErr) {
@@ -631,7 +636,7 @@ describe('User CRUD tests', function () {
 
           var userUpdate = {
             firstName: 'user_update_first',
-            lastName: 'user_update_last',
+            lastName: 'user_update_last'
           };
 
           agent.put('/api/users')
@@ -811,7 +816,7 @@ describe('User CRUD tests', function () {
 
       var userUpdate = {
         firstName: 'user_update_first',
-        lastName: 'user_update_last',
+        lastName: 'user_update_last'
       };
 
       agent.put('/api/users')

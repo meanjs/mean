@@ -11,7 +11,8 @@ var should = require('should'),
 /**
  * Globals
  */
-var user, article;
+var user,
+  article;
 
 /**
  * Unit tests

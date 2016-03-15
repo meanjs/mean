@@ -5,7 +5,7 @@
 // Use it for your API keys, passwords, etc.
 
 // WARNING: When using this example for multiple NODE_ENV's concurrently, make sure you update the 'db' settings appropriately.
-// You do not want to accidentally overwrite/lose any data. For instance, if you create a file for 'test' and don't change the 
+// You do not want to accidentally overwrite/lose any data. For instance, if you create a file for 'test' and don't change the
 // database name in the setting below, running the tests will drop all the data from the specified database.
 //
 // You may end up with a list of files, that will be used with their corresponding NODE_ENV:

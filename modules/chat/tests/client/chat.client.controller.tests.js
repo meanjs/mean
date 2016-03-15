@@ -5,7 +5,7 @@
   'use strict';
 
   describe('ChatController', function () {
-    //Initialize global variables
+    // Initialize global variables
     var $scope,
       Socket,
       ChatController,
@@ -91,4 +91,4 @@
       });
     });
   });
-})();
+}());

@@ -21,4 +21,4 @@
       element.css('text-transform', 'lowercase');
     }
   }
-})();
+}());

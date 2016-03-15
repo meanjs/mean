@@ -35,7 +35,7 @@ module.exports = function (karmaConfig) {
 
       cacheIdFromPath: function (filepath) {
         return filepath;
-      },
+      }
     },
 
     // List of files / patterns to load in the browser
@@ -47,7 +47,7 @@ module.exports = function (karmaConfig) {
 
     // Configure the coverage reporter
     coverageReporter: {
-      dir : 'coverage/client',
+      dir: 'coverage/client',
       reporters: [
         // Reporters not supporting the `file` property
         { type: 'html', subdir: 'report-html' },
