@@ -5,9 +5,9 @@
     .module('articles')
     .controller('ArticlesController', ArticlesController);
 
-  ArticlesController.$inject = ['$scope', '$state', 'articleResolve', 'Authentication'];
+  ArticlesController.$inject = ['$scope', '$state', 'articleResolve', '$window', 'Authentication'];
 
-  function ArticlesController($scope, $state, article, Authentication) {
+  function ArticlesController($scope, $state, article, $window, Authentication) {
     var vm = this;
 
     vm.article = article;
@@ -19,7 +19,7 @@
 
     // Remove existing Article
     function remove() {
-      if (confirm('Are you sure you want to delete?')) {
+      if ($window.confirm('Are you sure you want to delete?')) {
         vm.article.$remove($state.go('articles.list'));
       }
     }
