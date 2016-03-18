@@ -259,7 +259,7 @@ gulp.task('copyLocalEnvConfig', function () {
 gulp.task('makeUploadsDir', function () {
   return fs.mkdir('modules/users/client/img/profile/uploads', function (err) {
     if (err && err.code !== 'EEXIST') {
-      console.log(err);
+      console.error(err);
     }
   });
 });
@@ -323,7 +323,7 @@ gulp.task('dropdb', function (done) {
   mongoose.connect(function (db) {
     db.connection.db.dropDatabase(function (err) {
       if (err) {
-        console.log(err);
+        console.error(err);
       } else {
         console.log('Successfully dropped db: ', db.connection.db.databaseName);
       }
@@ -352,7 +352,8 @@ gulp.task('protractor', ['webdriver_update'], function () {
       process.exit(0);
     })
     .on('error', function(err) {
-      console.log('E2E Tests failed');
+      console.error('E2E Tests failed:');
+      console.error(err);
       process.exit(1);
     });
 });
