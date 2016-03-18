@@ -112,7 +112,7 @@ var validateSessionSecret = function (config, testing) {
 };
 
 /**
- * Initialize global configuration files
+ * Initialize global configuration folders
  */
 var initGlobalConfigFolders = function (config, assets) {
   // Appending files
