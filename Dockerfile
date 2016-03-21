@@ -1,32 +1,65 @@
-FROM node:0.12
+# Build:
+# docker build -t lirantal/meanjs .
+#
+# Run:
+# docker run -it lirantal/meanjs
 
-# Install gem sass for  grunt-contrib-sass
-RUN apt-get update -qq && apt-get install -y build-essential
+FROM ubuntu:latest
+MAINTAINER Liran Tal <liran.tal@gmail.com>
+
+# Install Utilities
+RUN apt-get update -q
+RUN apt-get install -yqq wget aptitude htop vim git traceroute dnsutils curl ssh sudo tree tcpdump nano psmisc gcc make build-essential libfreetype6 libfontconfig libkrb5-dev
+
+# Install gem sass for grunt-contrib-sass
 RUN apt-get install -y ruby
 RUN gem install sass
 
-WORKDIR /home/mean
+# Install NodeJS
+RUN curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
+RUN sudo apt-get install -yq nodejs
 
-# Install Mean.JS Prerequisites
-RUN npm install -g grunt-cli
-RUN npm install -g bower
+# Install MEAN.JS Prerequisites
+RUN npm install --quiet -g grunt-cli gulp bower yo mocha karma-cli pm2 forever
 
-# Install Mean.JS packages
-ADD package.json /home/mean/package.json
-RUN npm install
+RUN mkdir /opt/mean.js
+RUN mkdir -p /opt/mean.js/public/lib
+WORKDIR /opt/mean.js
 
-# Manually trigger bower. Why doesnt this work via npm install?
-ADD .bowerrc /home/mean/.bowerrc
-ADD bower.json /home/mean/bower.json
-RUN bower install --config.interactive=false --allow-root
+# Copies the local package.json file to the container
+# and utilities docker container cache to not needing to rebuild
+# and install node_modules/ everytime we build the docker, but only
+# when the local package.json file changes.
+ADD package.json /opt/mean.js/package.json
+ADD bower.json /opt/mean.js/bower.json
+ADD .bowerrc /opt/mean.js/.bowerrc
 
-# Make everything available for start
-ADD . /home/mean
+# Install MEAN.JS packages
+RUN npm install --quiet
+RUN bower install --quiet --allow-root --config.interactive=false
+
+# Share local directory on the docker container
+ADD . /opt/mean.js
+
+# Machine cleanup
+RUN npm cache clean
+RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Set development environment as default
 ENV NODE_ENV development
 
-# Port 3000 for server
+# Ports generic
+EXPOSE 80:80
+EXPOSE 443:443
+
+# Port 3000 for MEAN.JS server
+EXPOSE 3000:3000
+
+# Port 5858 for node debug
+EXPOSE 5858:5858
+
 # Port 35729 for livereload
-EXPOSE 3000 35729
-CMD ["grunt"]
+EXPOSE 35729:35729
+
+# Run MEAN.JS server
+CMD ["npm", "start"]
