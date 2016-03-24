@@ -1,9 +1,13 @@
-'use strict';
+(function () {
+  'use strict';
 
-// Setting up route
-angular.module('core').config(['$stateProvider', '$urlRouterProvider',
-  function ($stateProvider, $urlRouterProvider) {
+  angular
+    .module('core.routes')
+    .config(routeConfig);
 
+  routeConfig.$inject = ['$stateProvider', '$urlRouterProvider'];
+
+  function routeConfig($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.rule(function ($injector, $location) {
       var path = $location.path();
       var hasTrailingSlash = path.length > 1 && path[path.length - 1] === '/';
@@ -22,11 +26,12 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
       });
     });
 
-    // Home state routing
     $stateProvider
       .state('home', {
         url: '/',
-        templateUrl: 'modules/core/client/views/home.client.view.html'
+        templateUrl: 'modules/core/client/views/home.client.view.html',
+        controller: 'HomeController',
+        controllerAs: 'vm'
       })
       .state('not-found', {
         url: '/not-found',
@@ -53,4 +58,4 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
         }
       });
   }
-]);
+}());
