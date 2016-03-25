@@ -1,11 +1,14 @@
 # Build:
-# docker build -t lirantal/meanjs .
+# docker build -t meanjs/mean .
 #
 # Run:
-# docker run -it lirantal/meanjs
+# docker run -it meanjs/mean
+#
+# Compose:
+# docker-compose up -d
 
 FROM ubuntu:latest
-MAINTAINER Liran Tal <liran.tal@gmail.com>
+MAINTAINER MEAN.JS
 
 # Install Utilities
 RUN apt-get update -q
