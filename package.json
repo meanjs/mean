@@ -15,9 +15,20 @@
     "npm": ">=2.0.0"
   },
   "scripts": {
-    "start": "grunt",
-    "test": "grunt test",
-    "postinstall": "bower install --config.interactive=false"
+    "update": "npm update && npm prune && bower install --allow-root --config.interactive=false && bower prune --allow-root --config.interactive=false",
+    "start": "gulp",
+    "start:prod": "gulp prod",
+    "start:debug": "gulp debug",
+    "lint": "gulp lint",
+    "test": "gulp test",
+    "test:server": "gulp test:server",
+    "test:client": "gulp test:client",
+    "test:e2e": "gulp test:e2e",
+    "test:watch": "gulp test:server:watch",
+    "test:watch:onlyChanged": "gulp test:server:watch --onlyChanged",
+    "prestart": "if [ ! -d node_modules ]; then npm install --quiet; fi",
+    "postinstall": "bower install --allow-root --config.interactive=false && bower prune --allow-root --config.interactive=false",
+    "generate-ssl-certs": "scripts/generate-ssl-certs.sh"
   },
   "dependencies": {
     "acl": "~0.4.9",
