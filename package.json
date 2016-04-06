@@ -26,7 +26,6 @@
     "test:e2e": "gulp test:e2e",
     "test:watch": "gulp test:server:watch",
     "test:watch:onlyChanged": "gulp test:server:watch --onlyChanged",
-    "prestart": "if [ ! -d node_modules ]; then npm install --quiet; fi",
     "postinstall": "bower install --allow-root --config.interactive=false && bower prune --allow-root --config.interactive=false",
     "generate-ssl-certs": "scripts/generate-ssl-certs.sh"
   },
