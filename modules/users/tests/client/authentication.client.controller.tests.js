@@ -51,6 +51,8 @@
         $httpBackend.whenGET('/modules/core/client/views/home.client.view.html').respond(200);
         $httpBackend.whenGET('/modules/core/client/views/400.client.view.html').respond(200);
 
+        $httpBackend.when('GET', 'api/users/me').respond(200, {});
+
         // Initialize the Authentication controller
         AuthenticationController = $controller('AuthenticationController as vm', {
           $scope: scope
@@ -76,6 +78,7 @@
           $templateCache.put('/modules/core/client/views/home.client.view.html', '');
           // Test expected GET request
           $httpBackend.when('POST', '/api/auth/signin').respond(200, { email: 'Fred@email.com' });
+          $httpBackend.when('GET', 'api/users/me').respond(200, 'Fred');
 
           scope.vm.signin(true);
           $httpBackend.flush();
@@ -100,7 +103,8 @@
             spyOn($state, 'go');
 
             // Test expected GET request
-            $httpBackend.when('POST', '/api/auth/signin').respond(200, 'Fred');
+            $httpBackend.when('POST', '/api/auth/signin').respond(200, { user: 'Fred' });
+            $httpBackend.when('GET', 'api/users/me').respond(200, { user: 'Fred' });
 
             scope.vm.signin(true);
             $httpBackend.flush();
@@ -149,6 +153,7 @@
           // Test expected GET request
           scope.vm.authentication.user = 'Fred';
           $httpBackend.when('POST', '/api/auth/signup').respond(200, { username: 'Fred' });
+          $httpBackend.when('GET', 'api/users/me').respond(200, { user: 'Fred' });
 
           scope.vm.signup(true);
           $httpBackend.flush();
@@ -180,6 +185,8 @@
 
         $location = _$location_;
         $location.path = jasmine.createSpy().and.returnValue(true);
+
+        $httpBackend.when('GET', 'api/users/me').respond(200, {});
 
         // Mock logged in user
         _Authentication_.user = {

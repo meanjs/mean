@@ -18,6 +18,10 @@
       ArticlesService = _ArticlesService_;
     }));
 
+    afterEach(inject(function (Authentication) {
+      Authentication.signout();
+    }));
+
     describe('Route Config', function () {
       describe('Main Route', function () {
         var mainstate;

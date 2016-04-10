@@ -67,6 +67,10 @@
       spyOn($state, 'go');
     }));
 
+    afterEach(inject(function (Authentication) {
+      Authentication.signout();
+    }));
+
     describe('Instantiate', function () {
       var mockArticleList;
 

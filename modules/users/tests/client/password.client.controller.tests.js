@@ -6,6 +6,7 @@
     // Initialize global variables
     var PasswordController,
       scope,
+      Authentication,
       $httpBackend,
       $stateParams,
       $location,
@@ -35,6 +36,7 @@
         scope = $rootScope.$new();
 
         // Point global variables to injected services
+        Authentication = _Authentication_;
         $stateParams = _$stateParams_;
         $httpBackend = _$httpBackend_;
         $location = _$location_;
@@ -42,9 +44,11 @@
 
         // Ignore parent template gets on state transition
         $httpBackend.whenGET('/modules/core/client/views/404.client.view.html').respond(200);
+        $httpBackend.whenGET('api/users/me').respond({ user: { username: 'test', roles: ['user'] } });
+        $httpBackend.flush();
 
         // Mock logged in user
-        _Authentication_.user = {
+        Authentication.user = {
           username: 'test',
           roles: ['user']
         };
@@ -53,6 +57,10 @@
         PasswordController = $controller('PasswordController as vm', {
           $scope: scope
         });
+      }));
+
+      afterEach(inject(function (Authentication) {
+        Authentication.signout();
       }));
 
       it('should redirect logged in user to home', function() {
@@ -66,6 +74,7 @@
         scope = $rootScope.$new();
 
         // Point global variables to injected services
+        Authentication = _Authentication_;
         $stateParams = _$stateParams_;
         $httpBackend = _$httpBackend_;
         $location = _$location_;
@@ -77,6 +86,10 @@
         spyOn(Notification, 'error');
         spyOn(Notification, 'success');
 
+        Authentication.user = null;
+
+        $httpBackend.whenGET('api/users/me').respond({ user: null });
+
         // Ignore parent template gets on state transition
         $httpBackend.whenGET('/modules/core/client/views/404.client.view.html').respond(200);
         $httpBackend.whenGET('/modules/core/client/views/400.client.view.html').respond(200);
@@ -85,6 +98,10 @@
         PasswordController = $controller('PasswordController as vm', {
           $scope: scope
         });
+      }));
+
+      afterEach(inject(function (Authentication) {
+        Authentication.signout();
       }));
 
       it('should not redirect to home', function() {
@@ -168,7 +185,7 @@
             username: 'test'
           };
           beforeEach(function() {
-            $httpBackend.when('POST', '/api/auth/reset/' + token, passwordDetails).respond(user);
+            $httpBackend.when('POST', '/api/auth/reset/' + token, passwordDetails).respond({ user: user });
 
             scope.vm.resetUserPassword(true);
             $httpBackend.flush();
