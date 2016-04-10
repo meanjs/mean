@@ -19,11 +19,13 @@ var _ = require('lodash'),
   pngquant = require('imagemin-pngquant'),
   path = require('path'),
   endOfLine = require('os').EOL,
-  argv = require('yargs').argv,
   protractor = require('gulp-protractor').protractor,
   webdriver_update = require('gulp-protractor').webdriver_update,
   webdriver_standalone = require('gulp-protractor').webdriver_standalone,
   KarmaServer = require('karma').Server;
+
+// Local settings
+var changedTestFiles = [];
 
 // Set NODE_ENV to 'test'
 gulp.task('env:test', function () {
@@ -82,35 +84,31 @@ gulp.task('watch', function () {
     gulp.watch(defaultAssets.server.gulpConfig, ['eslint']);
     gulp.watch(defaultAssets.client.views).on('change', plugins.livereload.changed);
   }
+});
 
-  if (process.env.NODE_ENV === 'test') {
-    // Add Server Test file rules
-    gulp.watch([testAssets.tests.server, defaultAssets.server.allJS], ['test:server']).on('change', function (file) {
-      var runOnlyChangedTestFile = !!argv.onlyChanged;
+// Watch server test files
+gulp.task('watch:server:run-tests', function () {
+  // Start livereload
+  plugins.livereload.listen();
 
-      // check if we should only run a changed test file
-      if (runOnlyChangedTestFile) {
-        var changedTestFiles = [];
+  // Add Server Test file rules
+  gulp.watch([testAssets.tests.server, defaultAssets.server.allJS], ['test:server']).on('change', function (file) {
+    changedTestFiles = [];
 
-        // iterate through server test glob patterns
-        _.forEach(testAssets.tests.server, function (pattern) {
-          // determine if the changed (watched) file is a server test
-          _.forEach(glob.sync(pattern), function (f) {
-            var filePath = path.resolve(f);
-
-            if (filePath === path.resolve(file.path)) {
-              changedTestFiles.push(f);
-            }
-          });
-        });
-
-        // set task argument for tracking changed test files
-        argv.changedTestFiles = changedTestFiles;
-      }
-
-      plugins.livereload.changed();
+    // iterate through server test glob patterns
+    _.forEach(testAssets.tests.server, function (pattern) {
+      // determine if the changed (watched) file is a server test
+      _.forEach(glob.sync(pattern), function (f) {
+        var filePath = path.resolve(f);
+        
+        if (filePath === path.resolve(file.path)) {
+          changedTestFiles.push(f);
+        }
+      });
     });
-  }
+
+    plugins.livereload.changed();
+  });
 });
 
 // CSS linting task
@@ -281,7 +279,7 @@ gulp.task('templatecache', function () {
 gulp.task('mocha', function (done) {
   // Open mongoose connections
   var mongoose = require('./config/lib/mongoose.js');
-  var testSuites = Array.isArray(argv.changedTestFiles) && argv.changedTestFiles.length ? argv.changedTestFiles : testAssets.tests.server;
+  var testSuites = changedTestFiles.length ? changedTestFiles : testAssets.tests.server;
   var error;
 
   // Connect mongoose
@@ -378,11 +376,8 @@ gulp.task('test:server', function (done) {
 });
 
 // Watch all server files for changes & run server tests (test:server) task on changes
-// optional arguments:
-//    --onlyChanged - optional argument for specifying that only the tests in a changed Server Test file will be run
-// example usage: gulp test:server:watch --onlyChanged
 gulp.task('test:server:watch', function (done) {
-  runSequence('test:server', 'watch', done);
+  runSequence('test:server', 'watch:server:run-tests', done);
 });
 
 gulp.task('test:client', function (done) {
