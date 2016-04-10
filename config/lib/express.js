@@ -18,8 +18,8 @@ var config = require('../config'),
   flash = require('connect-flash'),
   hbs = require('express-hbs'),
   path = require('path'),
-  _ = require('lodash'),
-  lusca = require('lusca');
+  lusca = require('lusca'),
+  passport = require('passport');
 
 /**
  * Initialize local variables
@@ -89,6 +89,21 @@ module.exports.initMiddleware = function (app) {
   // Add the cookie parser and flash middleware
   app.use(cookieParser());
   app.use(flash());
+
+  // Authorize JWT
+  app.use(function (req, res, next) {
+    passport.authenticate('jwt', { session: false }, function (err, user) {
+      if (err) {
+        return next(new Error(err));
+      }
+
+      if (user) {
+        req.user = user;
+      }
+
+      next();
+    })(req, res, next);
+  });
 };
 
 /**
@@ -237,9 +252,6 @@ module.exports.init = function (db) {
 
   // Initialize modules static client routes, before session!
   this.initModulesClientRoutes(app);
-
-  // Initialize Express session
-  this.initSession(app, db);
 
   // Initialize Modules configuration
   this.initModulesConfiguration(app);

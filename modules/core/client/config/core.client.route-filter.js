@@ -8,7 +8,12 @@
   routeFilter.$inject = ['$rootScope', '$state', 'Authentication'];
 
   function routeFilter($rootScope, $state, Authentication) {
-    $rootScope.$on('$stateChangeStart', stateChangeStart);
+
+    Authentication.ready
+      .then(function (auth) {
+        $rootScope.$on('$stateChangeStart', stateChangeStart);
+      });
+
     $rootScope.$on('$stateChangeSuccess', stateChangeSuccess);
 
     function stateChangeStart(event, toState, toParams, fromState, fromParams) {

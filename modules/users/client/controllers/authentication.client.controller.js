@@ -66,8 +66,8 @@
     // Authentication Callbacks
 
     function onUserSignupSuccess(response) {
-      // If successful we assign the response to the global user model
-      vm.authentication.user = response;
+      // If successful we login the user client-side using the JWT token
+      Authentication.login(response.user, response.token);
       Notification.success({ message: '<i class="glyphicon glyphicon-ok"></i> Signup successful!' });
       // And redirect to the previous or home page
       $state.go($state.previous.state.name || 'home', $state.previous.params);
@@ -78,8 +78,8 @@
     }
 
     function onUserSigninSuccess(response) {
-      // If successful we assign the response to the global user model
-      vm.authentication.user = response;
+      // If successful we login the user client-side using the JWT Token
+      Authentication.login(response.user, response.token);
       Notification.info({ message: 'Welcome ' + response.firstName });
       // And redirect to the previous or home page
       $state.go($state.previous.state.name || 'home', $state.previous.params);

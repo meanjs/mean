@@ -66,8 +66,8 @@
       // If successful show success message and clear form
       vm.passwordDetails = null;
 
-      // Attach user profile
-      Authentication.user = response;
+      // Login the user
+      Authentication.login(response.user, response.token);
       Notification.success({ message: '<i class="glyphicon glyphicon-ok"></i> Password reset successful!' });
       // And redirect to the index page
       $location.path('/password/reset/success');
