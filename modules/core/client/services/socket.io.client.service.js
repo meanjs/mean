@@ -25,7 +25,8 @@
     function connect() {
       // Connect only when authenticated
       if (Authentication.user) {
-        service.socket = io('', { query: 'auth_token=' + Authentication.token });
+        service.socket = io();
+        service.socket.emit('authentication', { token: Authentication.token });
       }
     }
 

@@ -7,8 +7,7 @@ var config = require('../config'),
   http = require('http'),
   https = require('https'),
   passport = require('passport'),
-  socketio = require('socket.io'),
-  ExtractJwt = require('passport-jwt').ExtractJwt;
+  socketio = require('socket.io');
 
 // Define the Socket.io configuration method
 module.exports = function (app, db) {
@@ -67,30 +66,42 @@ module.exports = function (app, db) {
   // Create a new Socket.io server
   var io = socketio.listen(server);
 
-  // Intercept Socket.io's handshake request
-  io.use(function (socket, next) {
-    // Use Passport to populate the user details
-    passport.initialize()(socket.request, {}, function () {
-      passport.authenticate('jwt', { session: false }, function (err, user) {
-        if (err) {
-          return next(new Error(err));
-        }
-
-        if (user) {
-          socket.request.user = user;
-        }
-
-        next();
-      })(socket.request, socket.request.res, next);
-    });
-  });
-
-  // Add an event listener to the 'connection' event
-  io.on('connection', function (socket) {
-    config.files.server.sockets.forEach(function (socketConfiguration) {
-      require(path.resolve(socketConfiguration))(io, socket);
-    });
+  // Configure SocketIO Authentication
+  require('socketio-auth')(io, {
+    authenticate: authenticate,
+    postAuthenticate: postAuthenticate,
+    timeout: 1000
   });
 
   return server;
+
+  // Handler for authenticating the SocketIO connection
+  function authenticate(socket, data, callback) {
+    // Set the Authorization header using the provided token
+    socket.request.headers.authorization = 'JWT ' + data.token;
+
+    // Use Passport to populate the user details
+    passport.authenticate('jwt', { session: false }, function (err, user) {
+      if (err) {
+        return callback(new Error(err));
+      }
+
+      if (!user) {
+        return callback(new Error('User not found'));
+      }
+
+      // Set the socket user
+      socket.request.user = user;
+
+      return callback(null, true);
+    })(socket.request, socket.request.res, callback);
+  }
+
+  // Handler for post-Authentication
+  function postAuthenticate(socket, data) {
+    // Configure the server-side Socket listeners
+    config.files.server.sockets.forEach(function (socketConfiguration) {
+      require(path.resolve(socketConfiguration))(io, socket);
+    });
+  }
 };

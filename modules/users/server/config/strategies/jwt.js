@@ -10,14 +10,14 @@ var passport = require('passport'),
 
 module.exports = function (config) {
   var opts = {
-    jwtFromRequest: ExtractJwt.versionOneCompatibility({ tokenQueryParameterName: 'auth_token' }),
+    jwtFromRequest: ExtractJwt.fromAuthHeader(),
     secretOrKey: config.jwt.secret
     // opts.issuer = "accounts.examplesoft.com",
     // opts.audience = "yoursite.net"
   };
 
-  passport.use(new JwtStrategy(opts, function (jwt_payload, done) {
-    User.findById({ _id: jwt_payload.user }, '-salt -password', function (err, user) {
+  passport.use(new JwtStrategy(opts, function (jwtPayload, done) {
+    User.findById({ _id: jwtPayload.user }, '-salt -password', function (err, user) {
       if (err) {
         return done(err, false);
       }
