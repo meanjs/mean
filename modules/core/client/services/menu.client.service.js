@@ -85,7 +85,7 @@
           service.menus[menuId].items[itemIndex].items.push({
             title: options.title || '',
             state: options.state || '',
-            params: options.params || '',
+            params: options.params || {},
             roles: ((options.roles === null || typeof options.roles === 'undefined') ? service.menus[menuId].items[itemIndex].roles : options.roles),
             position: options.position || 0,
             shouldRender: shouldRender
