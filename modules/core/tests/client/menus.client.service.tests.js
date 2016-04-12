@@ -300,6 +300,7 @@
       var subItemOptions = {
         title: 'title',
         state: 'sub.state',
+        params: { p1: 'val1' },
         isPublic: false,
         roles: ['a', 'b'],
         position: 4
@@ -377,6 +378,10 @@
 
         it('should set position to options position', function() {
           expect(subItem1.position).toEqual(subItemOptions.position);
+        });
+
+        it('should set params to options params', function() {
+          expect(subItem1.params).toEqual(subItemOptions.params);
         });
       });
 
