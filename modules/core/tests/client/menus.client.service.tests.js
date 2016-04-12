@@ -381,7 +381,7 @@
         });
 
         it('should set params to options params', function() {
-          expect(subItem1.params).toEqual(subItemOptions.params); 
+          expect(subItem1.params).toEqual(subItemOptions.params);
         });
       });
 
