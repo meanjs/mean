@@ -100,7 +100,7 @@ gulp.task('watch:server:run-tests', function () {
       // determine if the changed (watched) file is a server test
       _.forEach(glob.sync(pattern), function (f) {
         var filePath = path.resolve(f);
-        
+
         if (filePath === path.resolve(file.path)) {
           changedTestFiles.push(f);
         }
