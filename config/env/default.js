@@ -34,11 +34,6 @@ module.exports = {
     csp: { /* Content Security Policy object */},
     xframe: 'SAMEORIGIN',
     p3p: 'ABCDEF',
-    hsts: {
-      maxAge: 31536000, // Forces HTTPS for one year
-      includeSubDomains: true,
-      preload: true
-    },
     xssProtection: true
   },
   logo: 'modules/core/client/img/brand/logo.png',
