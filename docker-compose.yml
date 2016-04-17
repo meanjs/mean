@@ -1,6 +1,7 @@
 web:
   restart: always
   build: .
+  container_name: meanjs
   command: npm start
   links:
    - db
@@ -16,8 +17,9 @@ web:
    - /opt/mean.js/public
    - /opt/mean.js/uploads
 db:
-  restart: always
   image: mongo:3.2
+  container_name: db_1
+  restart: always
   ports:
    - "27017:27017"
   volumes:
