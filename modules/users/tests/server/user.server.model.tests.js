@@ -193,6 +193,29 @@ describe('User Model Unit Tests:', function () {
 
     });
 
+    it('should not index missing email field, thus not enforce the model\'s unique index', function (done) {
+      var _user1 = new User(user1);
+      _user1.email = undefined;
+
+      var _user3 = new User(user3);
+      _user3.email = undefined;
+
+      _user1.save(function (err) {
+        should.not.exist(err);
+        _user3.save(function (err) {
+          should.not.exist(err);
+          _user3.remove(function (err) {
+            should.not.exist(err);
+            _user1.remove(function (err) {
+              should.not.exist(err);
+              done();
+            });
+          });
+        });
+      });
+
+    });
+
     it('should not save the password in plain text', function (done) {
       var _user1 = new User(user1);
       var passwordBeforeSave = _user1.password;
