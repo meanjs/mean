@@ -69,7 +69,7 @@ module.exports.initMiddleware = function (app) {
   app.use(favicon(app.locals.favicon));
 
   // Enable logger (morgan)
-  app.use(morgan(logger.getFormat(), logger.getOptions()));
+  app.use(morgan);
 
   // Environment dependent middleware
   if (process.env.NODE_ENV === 'development') {
