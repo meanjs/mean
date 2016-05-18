@@ -19,6 +19,7 @@ module.exports = {
     'new-cap': [2, { newIsCapExceptions: ['acl.memoryBackend', 'acl'] }],
     'no-bitwise': 0,
     'no-caller': 2,
+    'no-console': 0,
     'no-else-return': 0,
     'no-empty-class': 0,
     'no-multi-spaces': 2,
