@@ -1,6 +1,6 @@
 # EditorConfig is awesome: http://EditorConfig.org
 
-# Howto with your editor:
+# Howto with your editor: http://editorconfig.org/#download
 #   Sublime: https://github.com/sindresorhus/editorconfig-sublime
 
 # top-most EditorConfig file
@@ -14,18 +14,24 @@ insert_final_newline = true
 # Standard at: https://github.com/felixge/node-style-guide 
 [**.js, **.json]
 trim_trailing_whitespace = true
-indent_style = tab
+indent_style = space
+indent_size = 2
 quote_type = single
 curly_bracket_next_line = false
 spaces_around_operators = true
 space_after_control_statements = true
-space_after_anonymous_functions = false
+space_after_anonymous_functions = true
 spaces_in_brackets = false
 
 # No Standard.  Please document a standard if different from .js
-[**.yml, **.html, **.css]
+[**.yml, **.css]
 trim_trailing_whitespace = true
 indent_style = tab
+
+[**.html]
+trim_trailing_whitespace = true
+indent_style = space
+indent_size = 2
 
 # No standard.  Please document a standard if different from .js
 [**.md]
@@ -34,3 +40,9 @@ indent_style = tab
 # Standard at: 
 [Makefile]
 indent_style = tab
+
+# The indentation in package.json will always need to be 2 spaces
+# https://github.com/npm/npm/issues/4718
+[package.json, bower.json]
+indent_style = space
+indent_size = 2

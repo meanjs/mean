@@ -1,0 +1,51 @@
+<section>
+  <div class="page-header">
+    <div class="row">
+      <div class="col-md-6">
+        <h1 ng-bind="vm.user.username"></h1>
+      </div>
+      <div class="col-md-4">
+        <a class="btn btn-primary" ui-sref="admin.user-edit({userId: vm.user._id})">
+          <i class="glyphicon glyphicon-edit"></i>
+        </a>
+        <a class="btn btn-primary" ng-click="vm.remove()" ng-if="vm.user._id !== vm.authentication.user._id">
+          <i class="glyphicon glyphicon-trash"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-8">
+      <div class="row">
+        <div class="col-md-3"><strong>First Name</strong></div>
+        <div class="col-md-6" ng-bind="vm.user.firstName"></div>
+      </div>
+      <hr/>
+      <div class="row">
+        <div class="col-md-3"><strong>Last Name</strong></div>
+        <div class="col-md-6" ng-bind="vm.user.lastName"></div>
+      </div>
+      <hr/>
+      <div class="row">
+        <div class="col-md-3"><strong>Email</strong></div>
+        <div class="col-md-6" ng-bind="vm.user.email"></div>
+      </div>
+      <hr/>
+      <div class="row">
+        <div class="col-md-3"><strong>Provider</strong></div>
+        <div class="col-md-6" ng-bind="vm.user.provider"></div>
+      </div>
+      <hr/>
+      <div class="row">
+        <div class="col-md-3"><strong>Created</strong></div>
+        <div class="col-md-6" ng-bind="vm.user.created"></div>
+      </div>
+      <hr/>
+      <div class="row">
+        <div class="col-md-3"><strong>Roles</strong></div>
+        <div class="col-md-6" ng-bind="vm.user.roles"></div>
+      </div>
+    </div>
+  </div>
+</section>

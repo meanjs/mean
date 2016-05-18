@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <title></title>
+</head>
+
+<body>
+  <p>Dear {{name}},</p>
+  <p></p>
+  <p>This is a confirmation that the password for your account has just been changed</p>
+  <br />
+  <br />
+  <p>The {{appName}} Support Team</p>
+</body>
+
+</html>
