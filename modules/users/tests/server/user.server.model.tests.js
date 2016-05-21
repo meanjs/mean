@@ -10,7 +10,9 @@ var should = require('should'),
 /**
  * Globals
  */
-var user1, user2, user3;
+var user1,
+  user2,
+  user3;
 
 /**
  * Unit tests
@@ -191,6 +193,29 @@ describe('User Model Unit Tests:', function () {
 
     });
 
+    it('should not index missing email field, thus not enforce the model\'s unique index', function (done) {
+      var _user1 = new User(user1);
+      _user1.email = undefined;
+
+      var _user3 = new User(user3);
+      _user3.email = undefined;
+
+      _user1.save(function (err) {
+        should.not.exist(err);
+        _user3.save(function (err) {
+          should.not.exist(err);
+          _user3.remove(function (err) {
+            should.not.exist(err);
+            _user1.remove(function (err) {
+              should.not.exist(err);
+              done();
+            });
+          });
+        });
+      });
+
+    });
+
     it('should not save the password in plain text', function (done) {
       var _user1 = new User(user1);
       var passwordBeforeSave = _user1.password;
@@ -263,7 +288,7 @@ describe('User Model Unit Tests:', function () {
       });
     });
 
-    it('should not allow a less than 10 characters long - "P@$$w0rd!"', function (done) {
+    it('should not allow a password less than 10 characters long - "P@$$w0rd!"', function (done) {
       var _user1 = new User(user1);
       _user1.password = 'P@$$w0rd!';
 
@@ -273,7 +298,7 @@ describe('User Model Unit Tests:', function () {
       });
     });
 
-    it('should not allow a greater than 128 characters long.', function (done) {
+    it('should not allow a password greater than 128 characters long.', function (done) {
       var _user1 = new User(user1);
       _user1.password = ')!/uLT="lh&:`6X!]|15o!$!TJf,.13l?vG].-j],lFPe/QhwN#{Z<[*1nX@n1^?WW-%_.*D)m$toB+N7z}kcN#B_d(f41h%w@0F!]igtSQ1gl~6sEV&r~}~1ub>If1c+';
 
@@ -283,7 +308,7 @@ describe('User Model Unit Tests:', function () {
       });
     });
 
-    it('should not allow more than 3 or more repeating characters - "P@$$w0rd!!!"', function (done) {
+    it('should not allow a password with 3 or more repeating characters - "P@$$w0rd!!!"', function (done) {
       var _user1 = new User(user1);
       _user1.password = 'P@$$w0rd!!!';
 
@@ -344,10 +369,10 @@ describe('User Model Unit Tests:', function () {
 
     });
 
-    it('should not allow invalid email address - "123@123"', function (done) {
+    it('should not allow invalid email address - "123@123@123"', function (done) {
       var _user1 = new User(user1);
 
-      _user1.email = '123@123';
+      _user1.email = '123@123@123';
       _user1.save(function (err) {
         if (!err) {
           _user1.remove(function (err_remove) {
@@ -357,6 +382,25 @@ describe('User Model Unit Tests:', function () {
           });
         } else {
           should.exist(err);
+          done();
+        }
+      });
+
+    });
+
+    it('should allow email address - "123@123"', function (done) {
+      var _user1 = new User(user1);
+
+      _user1.email = '123@123';
+      _user1.save(function (err) {
+        if (!err) {
+          _user1.remove(function (err_remove) {
+            should.not.exist(err);
+            should.not.exist(err_remove);
+            done();
+          });
+        } else {
+          should.not.exist(err);
           done();
         }
       });

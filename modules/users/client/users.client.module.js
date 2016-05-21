@@ -1,6 +1,10 @@
-'use strict';
+(function (app) {
+  'use strict';
 
-// Use Applicaion configuration module to register a new module
-ApplicationConfiguration.registerModule('users', ['core']);
-ApplicationConfiguration.registerModule('users.admin', ['core.admin']);
-ApplicationConfiguration.registerModule('users.admin.routes', ['core.admin.routes']);
+  app.registerModule('users');
+  app.registerModule('users.admin');
+  app.registerModule('users.admin.routes', ['ui.router', 'core.routes', 'users.admin.services']);
+  app.registerModule('users.admin.services');
+  app.registerModule('users.routes', ['ui.router', 'core.routes']);
+  app.registerModule('users.services');
+}(ApplicationConfiguration));

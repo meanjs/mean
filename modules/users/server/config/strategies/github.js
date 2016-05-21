@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * Module dependencies.
+ * Module dependencies
  */
 var passport = require('passport'),
   GithubStrategy = require('passport-github').Strategy,
@@ -31,7 +31,7 @@ module.exports = function (config) {
       firstName: firstName,
       lastName: lastName,
       displayName: displayName,
-      email: profile.emails[0].value,
+      email: (profile.emails && profile.emails.length) ? profile.emails[0].value : undefined,
       username: profile.username,
       // jscs:disable requireCamelCaseOrUpperCaseIdentifiers
       profileImageURL: (providerData.avatar_url) ? providerData.avatar_url : undefined,

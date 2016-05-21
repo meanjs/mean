@@ -26,6 +26,12 @@ a:hover .header-profile-image {
   padding-top: 11px !important;
   padding-bottom: 11px !important;
 }
+.user-primary-account {
+  font-size: 30px;
+  top: 10px;
+  right: 10px;
+  position: absolute;
+}
 .error-text {
   display: none;
 }

@@ -1,12 +1,26 @@
 web:
+  restart: always
   build: .
+  container_name: meanjs
+  command: npm start
   links:
    - db
   ports:
    - "3000:3000"
-  environment: 
-   NODE_ENV: development
+   - "5858:5858"
+   - "35729:35729"
+  environment:
+   - NODE_ENV=development
+  volumes:
+   - ./:/opt/mean.js
+   - /opt/mean.js/node_modules
+   - /opt/mean.js/public
+   - /opt/mean.js/uploads
 db:
-  image: mongo
-  ports: 
+  image: mongo:3.2
+  container_name: db_1
+  restart: always
+  ports:
    - "27017:27017"
+  volumes:
+   - db:/data/db

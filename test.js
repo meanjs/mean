@@ -3,7 +3,6 @@
 /**
  * Module dependencies.
  */
-var app;
 
 var path = require('path');
 var app = require(path.resolve('./config/lib/app'));

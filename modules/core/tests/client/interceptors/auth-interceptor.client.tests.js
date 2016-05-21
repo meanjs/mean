@@ -2,26 +2,28 @@
 
 (function() {
   describe('authInterceptor', function() {
-    //Initialize global variables
+    // Initialize global variables
     var authInterceptor,
       $q,
       $state,
+      Authentication,
       httpProvider;
 
     // Load the main application module
     beforeEach(module(ApplicationConfiguration.applicationModuleName));
 
-    //Load httpProvider
+    // Load httpProvider
     beforeEach(module(function($httpProvider) {
       httpProvider = $httpProvider;
     }));
 
-    beforeEach(inject(function(_authInterceptor_, _$q_, _$state_) {
+    beforeEach(inject(function(_authInterceptor_, _$q_, _$state_, _Authentication_) {
       authInterceptor = _authInterceptor_;
       $q = _$q_;
       $state = _$state_;
-      spyOn($q,'reject');
-      spyOn($state,'transitionTo');
+      Authentication = _Authentication_;
+      spyOn($q, 'reject');
+      spyOn($state, 'transitionTo');
     }));
 
     it('Auth Interceptor should be object', function() {
@@ -56,8 +58,9 @@
         };
         var promise = authInterceptor.responseError(response);
         expect($q.reject).toHaveBeenCalled();
+        expect(Authentication.user).toBe(null);
         expect($state.transitionTo).toHaveBeenCalledWith('authentication.signin');
       });
     });
   });
-})();
+}());
