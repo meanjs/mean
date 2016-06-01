@@ -265,9 +265,9 @@ module.exports = function (grunt) {
     mongoose.connect(function (db) {
       db.connection.db.dropDatabase(function (err) {
         if (err) {
-          console.log(err);
+          console.log(err); //eslint-disable-line
         } else {
-          console.log('Successfully dropped db: ', db.connection.db.databaseName);
+          console.log('Successfully dropped db: ', db.connection.db.databaseName); //eslint-disable-line 
         }
         db.connection.db.close(done);
       });

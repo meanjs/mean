@@ -11,7 +11,7 @@ var config = require('../config'),
 
 function seedDB() {
   if (config.seedDB && config.seedDB.seed) {
-    console.log(chalk.bold.red('Warning:  Database seeding is turned on'));
+    console.log(chalk.bold.red('Warning:  Database seeding is turned on')); //eslint-disable-line
     seed.start();
   }
 }
@@ -42,16 +42,16 @@ module.exports.start = function start(callback) {
       // Create server URL
       var server = (process.env.NODE_ENV === 'secure' ? 'https://' : 'http://') + config.host + ':' + config.port;
       // Logging initialization
-      console.log('--');
-      console.log(chalk.green(config.app.title));
-      console.log();
-      console.log(chalk.green('Environment:     ' + process.env.NODE_ENV));
-      console.log(chalk.green('Server:          ' + server));
-      console.log(chalk.green('Database:        ' + config.db.uri));
-      console.log(chalk.green('App version:     ' + config.meanjs.version));
+      console.log('--'); //eslint-disable-line
+      console.log(chalk.green(config.app.title)); //eslint-disable-line
+      console.log(); //eslint-disable-line
+      console.log(chalk.green('Environment:     ' + process.env.NODE_ENV)); //eslint-disable-line
+      console.log(chalk.green('Server:          ' + server)); //eslint-disable-line
+      console.log(chalk.green('Database:        ' + config.db.uri)); //eslint-disable-line
+      console.log(chalk.green('App version:     ' + config.meanjs.version)); //eslint-disable-line
       if (config.meanjs['meanjs-version'])
-        console.log(chalk.green('MEAN.JS version: ' + config.meanjs['meanjs-version']));
-      console.log('--');
+        console.log(chalk.green('MEAN.JS version: ' + config.meanjs['meanjs-version'])); //eslint-disable-line
+      console.log('--'); //eslint-disable-line 
 
       if (callback) callback(app, db, config);
     });

@@ -202,7 +202,7 @@ module.exports.initErrorRoutes = function (app) {
     }
 
     // Log it
-    console.error(err.stack);
+    console.error(err.stack); //eslint-disable-line 
 
     // Redirect to error page
     res.redirect('/server-error');

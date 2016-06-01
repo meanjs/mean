@@ -57,7 +57,7 @@ function reportSuccess (password) {
   return function (user) {
     return new Promise(function (resolve, reject) {
       if (seedOptions.logResults) {
-        console.log(chalk.bold.red('Database Seeding:\t\t\tLocal ' + user.username + ' added with password set to ' + password));
+        console.log(chalk.bold.red('Database Seeding:\t\t\tLocal ' + user.username + ' added with password set to ' + password)); //eslint-disable-line
       }
       resolve();
     });
@@ -102,9 +102,9 @@ function seedTheUser (user) {
 function reportError (reject) {
   return function (err) {
     if (seedOptions.logResults) {
-      console.log();
-      console.log('Database Seeding:\t\t\t' + err);
-      console.log();
+      console.log(); //eslint-disable-line
+      console.log('Database Seeding:\t\t\t' + err); //eslint-disable-line
+      console.log(); //eslint-disable-line 
     }
     reject(err);
   };
