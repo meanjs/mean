@@ -56,10 +56,10 @@ logger.setupFileLogger = function setupFileLogger(options) {
     return true;
   } catch (err) {
     if (process.env.NODE_ENV !== 'test') {
-      console.log();
-      console.log(chalk.red('An error has occured during the creation of the File transport logger.'));
-      console.log(chalk.red(err));
-      console.log();
+      console.log(); //eslint-disable-line
+      console.log(chalk.red('An error has occured during the creation of the File transport logger.')); //eslint-disable-line
+      console.log(chalk.red(err)); //eslint-disable-line
+      console.log(); //eslint-disable-line
     }
 
     return false;
@@ -82,7 +82,7 @@ logger.getLogOptions = function getLogOptions(configOptions) {
   var configFileLogger = _config.log.fileLogger;
 
   if (!_.has(_config, 'log.fileLogger.directoryPath') || !_.has(_config, 'log.fileLogger.fileName')) {
-    console.log('unable to find logging file configuration');
+    console.log('unable to find logging file configuration'); //eslint-disable-line
     return false;
   }
 
@@ -132,9 +132,9 @@ logger.getLogFormat = function getLogFormat() {
     format = 'combined';
 
     if (process.env.NODE_ENV !== 'test') {
-      console.log();
-      console.log(chalk.yellow('Warning: An invalid format was provided. The logger will use the default format of "' + format + '"'));
-      console.log();
+      console.log(); //eslint-disable-line
+      console.log(chalk.yellow('Warning: An invalid format was provided. The logger will use the default format of "' + format + '"')); //eslint-disable-line
+      console.log(); //eslint-disable-line 
     }
   }
 

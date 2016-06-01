@@ -55,17 +55,17 @@ var getGlobbedPaths = function (globPatterns, excludes) {
  */
 var validateEnvironmentVariable = function () {
   var environmentFiles = glob.sync('./config/env/' + process.env.NODE_ENV + '.js');
-  console.log();
+  console.log(); //eslint-disable-line
   if (!environmentFiles.length) {
     if (process.env.NODE_ENV) {
-      console.error(chalk.red('+ Error: No configuration file found for "' + process.env.NODE_ENV + '" environment using development instead'));
+      console.error(chalk.red('+ Error: No configuration file found for "' + process.env.NODE_ENV + '" environment using development instead')); //eslint-disable-line
     } else {
-      console.error(chalk.red('+ Error: NODE_ENV is not defined! Using default development environment'));
+      console.error(chalk.red('+ Error: NODE_ENV is not defined! Using default development environment')); //eslint-disable-line
     }
     process.env.NODE_ENV = 'development';
   }
   // Reset console color
-  console.log(chalk.white(''));
+  console.log(chalk.white('')); //eslint-disable-line
 };
 
 /**
@@ -82,9 +82,9 @@ var validateSecureMode = function (config) {
   var certificate = fs.existsSync(path.resolve(config.secure.certificate));
 
   if (!privateKey || !certificate) {
-    console.log(chalk.red('+ Error: Certificate file or key file is missing, falling back to non-SSL mode'));
-    console.log(chalk.red('  To create them, simply run the following from your shell: sh ./scripts/generate-ssl-certs.sh'));
-    console.log();
+    console.log(chalk.red('+ Error: Certificate file or key file is missing, falling back to non-SSL mode')); //eslint-disable-line
+    console.log(chalk.red('  To create them, simply run the following from your shell: sh ./scripts/generate-ssl-certs.sh')); //eslint-disable-line
+    console.log(); //eslint-disable-line
     config.secure.ssl = false;
   }
 };
@@ -100,10 +100,10 @@ var validateSessionSecret = function (config, testing) {
 
   if (config.sessionSecret === 'MEAN') {
     if (!testing) {
-      console.log(chalk.red('+ WARNING: It is strongly recommended that you change sessionSecret config while running in production!'));
-      console.log(chalk.red('  Please add `sessionSecret: process.env.SESSION_SECRET || \'super amazing secret\'` to '));
-      console.log(chalk.red('  `config/env/production.js` or `config/env/local.js`'));
-      console.log();
+      console.log(chalk.red('+ WARNING: It is strongly recommended that you change sessionSecret config while running in production!')); //eslint-disable-line
+      console.log(chalk.red('  Please add `sessionSecret: process.env.SESSION_SECRET || \'super amazing secret\'` to ')); //eslint-disable-line
+      console.log(chalk.red('  `config/env/production.js` or `config/env/local.js`')); //eslint-disable-line
+      console.log(); //eslint-disable-line 
     }
     return false;
   } else {

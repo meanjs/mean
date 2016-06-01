@@ -25,8 +25,8 @@ module.exports.connect = function (cb) {
   var db = mongoose.connect(config.db.uri, config.db.options, function (err) {
     // Log Error
     if (err) {
-      console.error(chalk.red('Could not connect to MongoDB!'));
-      console.log(err);
+      console.error(chalk.red('Could not connect to MongoDB!')); //eslint-disable-line
+      console.log(err); //eslint-disable-line
     } else {
 
       // Enabling mongoose debug mode if required
@@ -40,7 +40,7 @@ module.exports.connect = function (cb) {
 
 module.exports.disconnect = function (cb) {
   mongoose.disconnect(function (err) {
-    console.info(chalk.yellow('Disconnected from MongoDB.'));
+    console.info(chalk.yellow('Disconnected from MongoDB.')); //eslint-disable-line 
     cb(err);
   });
 };
