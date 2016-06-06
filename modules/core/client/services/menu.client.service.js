@@ -17,7 +17,7 @@
       removeMenu: removeMenu,
       removeMenuItem: removeMenuItem,
       removeSubMenuItem: removeSubMenuItem,
-      validateMenuExistance: validateMenuExistance
+      validateMenuExistence: validateMenuExistence
     };
 
     init();
@@ -44,7 +44,7 @@
       options = options || {};
 
       // Validate that the menu exists
-      service.validateMenuExistance(menuId);
+      service.validateMenuExistence(menuId);
 
       // Push new menu item
       service.menus[menuId].items.push({
@@ -76,7 +76,7 @@
       options = options || {};
 
       // Validate that the menu exists
-      service.validateMenuExistance(menuId);
+      service.validateMenuExistence(menuId);
 
       // Search for menu item
       for (var itemIndex in service.menus[menuId].items) {
@@ -99,7 +99,7 @@
     // Get the menu object by menu id
     function getMenu(menuId) {
       // Validate that the menu exists
-      service.validateMenuExistance(menuId);
+      service.validateMenuExistence(menuId);
 
       // Return the menu object
       return service.menus[menuId];
@@ -138,7 +138,7 @@
     // Remove existing menu object by menu id
     function removeMenu(menuId) {
       // Validate that the menu exists
-      service.validateMenuExistance(menuId);
+      service.validateMenuExistence(menuId);
 
       delete service.menus[menuId];
     }
@@ -146,7 +146,7 @@
     // Remove existing menu object by menu id
     function removeMenuItem(menuId, menuItemState) {
       // Validate that the menu exists
-      service.validateMenuExistance(menuId);
+      service.validateMenuExistence(menuId);
 
       // Search for menu item to remove
       for (var itemIndex in service.menus[menuId].items) {
@@ -162,7 +162,7 @@
     // Remove existing menu object by menu id
     function removeSubMenuItem(menuId, submenuItemState) {
       // Validate that the menu exists
-      service.validateMenuExistance(menuId);
+      service.validateMenuExistence(menuId);
 
       // Search for menu item to remove
       for (var itemIndex in service.menus[menuId].items) {
@@ -180,7 +180,7 @@
     }
 
     // Validate menu existance
-    function validateMenuExistance(menuId) {
+    function validateMenuExistence(menuId) {
       if (menuId && menuId.length) {
         if (service.menus[menuId]) {
           return true;
