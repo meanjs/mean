@@ -11,8 +11,8 @@ root = true
 end_of_line = lf
 insert_final_newline = true
 
-# Standard at: https://github.com/felixge/node-style-guide 
-[**.js, **.json]
+# Standard at: https://github.com/felixge/node-style-guide
+[**.{js,json}]
 trim_trailing_whitespace = true
 indent_style = space
 indent_size = 2
@@ -24,7 +24,7 @@ space_after_anonymous_functions = true
 spaces_in_brackets = false
 
 # No Standard.  Please document a standard if different from .js
-[**.yml, **.css]
+[**.{yml,css}]
 trim_trailing_whitespace = true
 indent_style = tab
 
@@ -37,12 +37,12 @@ indent_size = 2
 [**.md]
 indent_style = tab
 
-# Standard at: 
+# Standard at:
 [Makefile]
 indent_style = tab
 
 # The indentation in package.json will always need to be 2 spaces
 # https://github.com/npm/npm/issues/4718
-[package.json, bower.json]
+[{package, bower}.json]
 indent_style = space
 indent_size = 2
