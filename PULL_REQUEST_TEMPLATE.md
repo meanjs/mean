@@ -15,7 +15,7 @@ An example, references as to where this idea came from, etc.
 The footer should have all the issues tagged:
 Fixes #123, Fixes #456
 
-So a commit should like like:
+So a commit should look like:
 feat(users): Add new Yahoo authentication
 
 Yahoo authentication idea proposed by @codydaig
@@ -35,4 +35,4 @@ Fixes #82
   * The subject line should be clear and concise as to what is being accomplished in the commit.
 * General Rules:
   * No Line in the Commit message can be longer than 80 characters.
-* Refrence: [Angular Conventions](https://github.com/ajoslin/conventional-changelog/blob/master/conventions/angular.md)
+* Reference: [Angular Conventions](https://github.com/ajoslin/conventional-changelog/blob/master/conventions/angular.md)
