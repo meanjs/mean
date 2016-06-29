@@ -11,6 +11,14 @@
   function routeConfig($stateProvider) {
     // Users state routing
     $stateProvider
+      .state('verify', {
+        url: '/verify/:token',
+        templateUrl: 'modules/users/client/views/verify/verify-account.client.view.html'
+      })
+      .state('resendVerifyEmail', {
+        url: '/verify',
+        templateUrl: 'modules/users/client/views/verify/resend-verify-email.client.view.html'
+      })
       .state('settings', {
         abstract: true,
         url: '/settings',

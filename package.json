@@ -32,6 +32,7 @@
     "consolidate": "~0.14.0",
     "cookie-parser": "~1.4.1",
     "crypto": "0.0.3",
+    "email-verification": "^0.4.3",
     "express": "~4.13.4",
     "express-session": "~1.13.0",
     "file-stream-rotator": "~0.0.6",
