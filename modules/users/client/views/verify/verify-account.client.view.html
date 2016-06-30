@@ -1,14 +1,14 @@
-<section style="margin-top:50px;" class="row text-center" data-ng-controller="VerifyController" ng-init="validateVerifyToken()">
+<section style="margin-top:50px;" class="row text-center" ng-init="vm.validateVerifyToken()">
 
-  <section class="row text-center" ng-if="isResetSent">
+  <section class="row text-center" ng-if="vm.isResetSent">
     <h3 class="col-md-12"></h3>
-    <a href="/#!/signin" class="col-md-12">{{ 'CONTINUE_TO_LOGIN' | translate }}</a>
+    <a href="/#!/signin" class="col-md-12">Continue to Sign In</a>
   </section>
 
-  <section class="row text-center" ng-if="!isResetSent">
-    <h3 class="col-md-12">{{ 'VERIFY_ERROR' | translate }}</h3>
-    <a href="/#!/verify" class="col-md-6">{{ 'REVERIFY_ACCOUNT_LINK' | translate }}</a>
-    <a href="/#!/signin" class="col-md-6">{{ 'SIGNIN_BTN' | translate }}</a>
+  <section class="row text-center" ng-if="!vm.isResetSent">
+    <h3 class="col-md-12">Error account could not be verified. Verification link is either expired or was invalid.</h3>
+    <a href="/#!/verify" class="col-md-6">Resend verification email</a>
+    <a href="/#!/signin" class="col-md-6">Continue to Sign In.</a>
   </section>
 
 </section>

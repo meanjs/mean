@@ -21,10 +21,8 @@ var noReturnUrls = [
 // NEV setup and configuration ================
 var config_nev = function () {
 
-  var User = require('../../models/user.server.model');
-
   nev.configure({
-    // tempUserCollection: "tempusers_collection",
+    tempUserCollection: "tempusers_collection",
     verificationURL: config.host + '/api/auth/verify/${URL}',
     persistentUserModel: User,
 
