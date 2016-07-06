@@ -17,7 +17,7 @@
 
     // Check if there are additional accounts
     function hasConnectedAdditionalSocialAccounts() {
-      return ($scope.user.additionalProvidersData && Object.keys($scope.user.additionalProvidersData).length);
+      return (vm.user.additionalProvidersData && Object.keys(vm.user.additionalProvidersData).length);
     }
 
     // Check if provider is already in use with current user
