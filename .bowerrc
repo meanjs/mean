@@ -1,3 +1,4 @@
 {
-  "directory": "public/lib"
+  "directory": "public/lib",
+  "interactive": false 
 }
