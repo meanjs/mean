@@ -31,12 +31,10 @@
         return false;
       }
 
-      // TODO: move create/update logic to service
-      if (vm.article._id) {
-        vm.article.$update(successCallback, errorCallback);
-      } else {
-        vm.article.$save(successCallback, errorCallback);
-      }
+      // Create a new article, or update the current instance
+      vm.article.createOrUpdate()
+        .then(successCallback)
+        .catch(errorCallback);
 
       function successCallback(res) {
         $state.go('articles.view', {
