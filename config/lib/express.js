@@ -26,6 +26,7 @@ var config = require('../config'),
  */
 module.exports.initLocalVariables = function (app) {
   // Setting application local variables
+  app.locals.env = process.env.NODE_ENV;
   app.locals.title = config.app.title;
   app.locals.description = config.app.description;
   if (config.secure && config.secure.ssl === true) {
