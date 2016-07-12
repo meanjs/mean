@@ -95,7 +95,7 @@ That's it! Your application should be running. To proceed with your development,
 If you encounter any problems, try the Troubleshooting section.
 
 * explore `config/env/development.js` for development environment configuration options
-* it is possible to
+* it is possible to run any gulp tasks using npm's run command, for example: `npm run gulp test:server:watch`
 
 ### Running in Production mode
 To run your application with *production* environment configuration, execute grunt as follows:
