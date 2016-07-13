@@ -19,6 +19,7 @@
     "start": "gulp",
     "start:prod": "gulp prod",
     "start:debug": "gulp debug",
+    "gulp": "gulp",
     "lint": "gulp lint",
     "test": "gulp test",
     "test:server": "gulp test:server",
