@@ -1,0 +1,37 @@
+<section class="auth row">
+  <section ng-if="vm.isResetSent">
+    <h3 class="col-md-12 text-center">Resend your account verification email</h3>
+    <p class="small text-center">Enter your account email.</p>
+    <div data-ng-show="error" class="text-center text-danger">
+      <strong>{{error}}</strong>
+    </div>
+    <div class="col-xs-offset-2 col-xs-8 col-md-offset-3 col-md-6">
+      <form data-ng-submit="vm.resendVerifyEmail()" class="signin form-horizontal" autocomplete="off">
+        <fieldset>
+          <div class="form-group">
+            <input type="text" id="username" name="email" class="form-control" data-ng-model="vm.credentials.email" placeholder="bob@example.com">
+          </div>
+          <div class="text-center form-group">
+            <button type="submit" class="btn btn-primary" ng-click="vm.resendVerifyEmail()">{{ 'SUBMIT_BTN' | translate }}</button>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+  </section>
+
+  <section ng-if="!vm.isResetSent">
+    <h3 class="col-xs-offset-2 col-xs-8 col-md-offset-3 col-md-6 text-center">Verification Email has been Sent </h3>
+    <div class="col-xs-offset-2 col-xs-8 col-md-offset-3 col-md-6">
+      <h2>
+        A verification email has been send to {{vm.authentictaion.user.username}}'s email account.
+        <br> However your account is *not* activated yet
+      </h2>
+      <p> Please check you email to activate your account </p>
+      <div class="text-center form-group">
+        <button type="submit" class="btn btn-large btn-primary">
+          <a href="/#!/" style="color:white;">Continue</a>
+        </button>
+      </div>
+    </div>
+  </section>
+</section>
