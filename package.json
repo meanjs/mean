@@ -97,7 +97,7 @@
     "grunt-node-inspector": "~0.4.1",
     "grunt-nodemon": "~0.4.0",
     "grunt-protractor-coverage": "~0.2.15",
-    "grunt-protractor-runner": "~3.0.0",
+    "grunt-protractor-runner": "~3.2.0",
     "grunt-sass": "^1.2.0",
     "gulp": "~3.9.1",
     "gulp-angular-templatecache": "~1.8.0",
