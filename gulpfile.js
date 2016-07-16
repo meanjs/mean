@@ -13,7 +13,8 @@ var _ = require('lodash'),
   runSequence = require('run-sequence'),
   plugins = gulpLoadPlugins({
     rename: {
-      'gulp-angular-templatecache': 'templateCache'
+      'gulp-angular-templatecache': 'templateCache',
+      'gulp-rtc': 'removeComma'
     }
   }),
   pngquant = require('imagemin-pngquant'),
@@ -202,6 +203,7 @@ gulp.task('wiredep', function () {
     .pipe(plugins.wiredep({
       ignorePath: '../../'
     }))
+    .pipe(plugins.removeComma())
     .pipe(gulp.dest('config/assets/'));
 });
 
@@ -235,6 +237,7 @@ gulp.task('wiredep:prod', function () {
         }
       }
     }))
+    .pipe(plugins.removeComma())
     .pipe(gulp.dest('config/assets/'));
 });
 
