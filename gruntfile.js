@@ -74,6 +74,34 @@ module.exports = function (grunt) {
         }
       }
     },
+    wiredep: {
+      fileTypes: {
+        src: 'config/assets/default.js',
+        ignorePath: '../../',
+        js: {
+          replace: {
+            css: function (filePath) {
+              var minFilePath = filePath.replace('.css', '.min.css');
+              var fullPath = path.join(process.cwd(), minFilePath);
+              if (!fs.existsSync(fullPath)) {
+                return '\'' + filePath + '\',';
+              } else {
+                return '\'' + minFilePath + '\',';
+              }
+            },
+            js: function (filePath) {
+              var minFilePath = filePath.replace('.js', '.min.js');
+              var fullPath = path.join(process.cwd(), minFilePath);
+              if (!fs.existsSync(fullPath)) {
+                return '\'' + filePath + '\',';
+              } else {
+                return '\'' + minFilePath + '\',';
+              }
+            }
+          }
+        }
+      }
+    },
     nodemon: {
       dev: {
         script: 'server.js',
@@ -288,7 +316,7 @@ module.exports = function (grunt) {
   grunt.registerTask('lint', ['sass', 'less', 'eslint', 'csslint']);
 
   // Lint project files and minify them into two production files.
-  grunt.registerTask('build', ['env:dev', 'lint', 'ngAnnotate', 'uglify', 'cssmin']);
+  grunt.registerTask('build', ['env:dev', 'wiredep', 'lint', 'ngAnnotate', 'uglify', 'cssmin']);
 
   // Run the project tests
   grunt.registerTask('test', ['env:test', 'lint', 'mkdir:upload', 'copy:localConfig', 'server', 'mochaTest', 'karma:unit', 'protractor']);
