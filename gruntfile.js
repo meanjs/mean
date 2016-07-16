@@ -102,6 +102,9 @@ module.exports = function (grunt) {
         }
       }
     },
+    rtc: {
+      files: 'config/assets/*.js'
+    },
     nodemon: {
       dev: {
         script: 'server.js',
@@ -315,8 +318,11 @@ module.exports = function (grunt) {
   // Lint CSS and JavaScript files.
   grunt.registerTask('lint', ['sass', 'less', 'eslint', 'csslint']);
 
+  // Update bower dependencies and remove trailing comma
+  grunt.registerTask('wiredepnocomma', ['wiredep', 'rtc']);
+
   // Lint project files and minify them into two production files.
-  grunt.registerTask('build', ['env:dev', 'wiredep', 'lint', 'ngAnnotate', 'uglify', 'cssmin']);
+  grunt.registerTask('build', ['env:dev', 'wiredepnocomma', 'lint', 'ngAnnotate', 'uglify', 'cssmin']);
 
   // Run the project tests
   grunt.registerTask('test', ['env:test', 'lint', 'mkdir:upload', 'copy:localConfig', 'server', 'mochaTest', 'karma:unit', 'protractor']);
