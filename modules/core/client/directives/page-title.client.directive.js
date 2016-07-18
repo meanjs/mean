@@ -8,7 +8,7 @@
 
   function pageTitle($rootScope, $interpolate, $state) {
     var directive = {
-      retrict: 'A',
+      restrict: 'A',
       link: link
     };
 
@@ -29,4 +29,4 @@
       }
     }
   }
-})();
+}());
