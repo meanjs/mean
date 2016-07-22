@@ -51,8 +51,6 @@
     "glob": "~7.0.0",
     "grunt": "~1.0.1",
     "grunt-cli": "~1.2.0",
-    "grunt-rtc": "~0.1.1",
-    "grunt-wiredep": "~3.0.1",
     "helmet": "~1.3.0",
     "jasmine-core": "~2.4.1",
     "lodash": "~4.6.1",
