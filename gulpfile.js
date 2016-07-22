@@ -13,11 +13,11 @@ var _ = require('lodash'),
   runSequence = require('run-sequence'),
   plugins = gulpLoadPlugins({
     rename: {
-      'gulp-angular-templatecache': 'templateCache',
-      'gulp-rtc': 'removeComma'
+      'gulp-angular-templatecache': 'templateCache'
     }
   }),
   pngquant = require('imagemin-pngquant'),
+  wiredep = require('wiredep').stream,
   path = require('path'),
   endOfLine = require('os').EOL,
   protractor = require('gulp-protractor').protractor,
@@ -200,17 +200,16 @@ gulp.task('imagemin', function () {
 // wiredep task to default
 gulp.task('wiredep', function () {
   return gulp.src('config/assets/default.js')
-    .pipe(plugins.wiredep({
+    .pipe(wiredep({
       ignorePath: '../../'
     }))
-    .pipe(plugins.removeComma())
     .pipe(gulp.dest('config/assets/'));
 });
 
 // wiredep task to production
 gulp.task('wiredep:prod', function () {
   return gulp.src('config/assets/production.js')
-    .pipe(plugins.wiredep({
+    .pipe(wiredep({
       ignorePath: '../../',
       fileTypes: {
         js: {
@@ -237,7 +236,6 @@ gulp.task('wiredep:prod', function () {
         }
       }
     }))
-    .pipe(plugins.removeComma())
     .pipe(gulp.dest('config/assets/'));
 });
 
