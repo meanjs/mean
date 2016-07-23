@@ -8,7 +8,8 @@ var _ = require('lodash'),
   testAssets = require('./config/assets/test'),
   testConfig = require('./config/env/test'),
   fs = require('fs'),
-  path = require('path');
+  path = require('path'),
+  wiredep = require('wiredep');
 
 module.exports = function (grunt) {
   // Project Configuration
@@ -71,6 +72,34 @@ module.exports = function (grunt) {
         tasks: ['less', 'csslint'],
         options: {
           livereload: true
+        }
+      }
+    },
+    wiredep: {
+      fileTypes: {
+        src: 'config/assets/default.js',
+        ignorePath: '../../',
+        js: {
+          replace: {
+            css: function (filePath) {
+              var minFilePath = filePath.replace('.css', '.min.css');
+              var fullPath = path.join(process.cwd(), minFilePath);
+              if (!fs.existsSync(fullPath)) {
+                return '\'' + filePath + '\',';
+              } else {
+                return '\'' + minFilePath + '\',';
+              }
+            },
+            js: function (filePath) {
+              var minFilePath = filePath.replace('.js', '.min.js');
+              var fullPath = path.join(process.cwd(), minFilePath);
+              if (!fs.existsSync(fullPath)) {
+                return '\'' + filePath + '\',';
+              } else {
+                return '\'' + minFilePath + '\',';
+              }
+            }
+          }
         }
       }
     },
@@ -228,7 +257,6 @@ module.exports = function (grunt) {
 
   // Load NPM tasks
   require('load-grunt-tasks')(grunt);
-  grunt.loadNpmTasks('grunt-protractor-coverage');
 
   // Make sure upload directory exists
   grunt.task.registerTask('mkdir:upload', 'Task that makes sure upload directory exists.', function () {
@@ -288,8 +316,15 @@ module.exports = function (grunt) {
   // Lint CSS and JavaScript files.
   grunt.registerTask('lint', ['sass', 'less', 'eslint', 'csslint']);
 
+  grunt.registerMultiTask('wiredep', 'Inject Bower dependencies.', function () {
+    this.requiresConfig(['wiredep', this.target, 'src']);
+
+    var options = this.options(this.data);
+    wiredep(options);
+  });
+
   // Lint project files and minify them into two production files.
-  grunt.registerTask('build', ['env:dev', 'lint', 'ngAnnotate', 'uglify', 'cssmin']);
+  grunt.registerTask('build', ['env:dev', 'wiredep', 'lint', 'ngAnnotate', 'uglify', 'cssmin']);
 
   // Run the project tests
   grunt.registerTask('test', ['env:test', 'lint', 'mkdir:upload', 'copy:localConfig', 'server', 'mochaTest', 'karma:unit', 'protractor']);
