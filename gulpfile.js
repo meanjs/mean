@@ -17,6 +17,7 @@ var _ = require('lodash'),
     }
   }),
   pngquant = require('imagemin-pngquant'),
+  wiredep = require('wiredep').stream,
   path = require('path'),
   endOfLine = require('os').EOL,
   protractor = require('gulp-protractor').protractor,
@@ -214,7 +215,7 @@ gulp.task('imagemin', function () {
 // wiredep task to default
 gulp.task('wiredep', function () {
   return gulp.src('config/assets/default.js')
-    .pipe(plugins.wiredep({
+    .pipe(wiredep({
       ignorePath: '../../'
     }))
     .pipe(gulp.dest('config/assets/'));
@@ -223,7 +224,7 @@ gulp.task('wiredep', function () {
 // wiredep task to production
 gulp.task('wiredep:prod', function () {
   return gulp.src('config/assets/production.js')
-    .pipe(plugins.wiredep({
+    .pipe(wiredep({
       ignorePath: '../../',
       fileTypes: {
         js: {
