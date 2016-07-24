@@ -23,7 +23,7 @@ RUN curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
 RUN sudo apt-get install -yq nodejs
 
 # Install MEAN.JS Prerequisites
-RUN npm install --quiet -g grunt-cli gulp bower yo mocha karma-cli pm2 forever
+RUN npm install --quiet -g grunt-cli gulp bower yo mocha karma-cli pm2
 
 RUN mkdir /opt/mean.js
 RUN mkdir -p /opt/mean.js/public/lib
