@@ -306,7 +306,6 @@ module.exports = function (grunt) {
     // Get the callback
     var done = this.async();
 
-    var path = require('path');
     var app = require(path.resolve('./config/lib/app'));
     var server = app.start(function () {
       done();
