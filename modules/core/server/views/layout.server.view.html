@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en" ng-strict-di>
 <head>
   <meta charset="utf-8">
@@ -31,6 +31,12 @@
   <!-- Fav Icon -->
   <link href="{{favicon}}" rel="shortcut icon" type="image/x-icon">
 
+  <!-- Application depencies -->
+  <!-- bower:css -->
+  <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap-theme.min.css">
+  <!-- endbower -->
+
   <!-- Application CSS Files -->
   {% for cssFile in cssFiles %}<link rel="stylesheet" href="{{cssFile}}">{% endfor %}
 </head>
@@ -50,6 +56,19 @@
 
   <!--Load The Socket.io File-->
   <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+
+  <!-- Application Dependencies -->
+  <!-- bower:js -->
+  <script type="text/javascript" src="lib/angular/angular.min.js"></script>
+  <script type="text/javascript" src="lib/angular-animate/angular-animate.min.js"></script>
+  <script type="text/javascript" src="lib/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+  <script type="text/javascript" src="lib/angular-file-upload/dist/angular-file-upload.min.js"></script>
+  <script type="text/javascript" src="lib/angular-messages/angular-messages.min.js"></script>
+  <script type="text/javascript" src="lib/angular-mocks/angular-mocks.js"></script>
+  <script type="text/javascript" src="lib/angular-resource/angular-resource.min.js"></script>
+  <script type="text/javascript" src="lib/angular-ui-router/release/angular-ui-router.min.js"></script>
+  <script type="text/javascript" src="lib/owasp-password-strength-test/owasp-password-strength-test.js"></script>
+  <!-- endbower -->
 
   <!--Application JavaScript Files-->
   {% for jsFile in jsFiles %}<script type="text/javascript" src="{{jsFile}}"></script>{% endfor %}

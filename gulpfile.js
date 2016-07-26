@@ -214,44 +214,44 @@ gulp.task('imagemin', function () {
 
 // wiredep task to default
 gulp.task('wiredep', function () {
-  return gulp.src('config/assets/default.js')
+  return gulp.src('modules/core/server/views/layout.server.view.html')
     .pipe(wiredep({
-      ignorePath: '../../'
+      ignorePath: /.*public\//
     }))
-    .pipe(gulp.dest('config/assets/'));
+    .pipe(gulp.dest('modules/core/server/views/'));
 });
 
 // wiredep task to production
 gulp.task('wiredep:prod', function () {
-  return gulp.src('config/assets/production.js')
+  return gulp.src('modules/core/server/views/layout.server.view.html')
     .pipe(wiredep({
-      ignorePath: '../../',
+      ignorePath: /.*public\//,
       fileTypes: {
-        js: {
+        html: {
           replace: {
             css: function (filePath) {
               var minFilePath = filePath.replace('.css', '.min.css');
-              var fullPath = path.join(process.cwd(), minFilePath);
+              var fullPath = path.join(process.cwd(), 'public', minFilePath);
               if (!fs.existsSync(fullPath)) {
-                return '\'' + filePath + '\',';
+                return '<link rel="stylesheet" href="' + filePath + '">';
               } else {
-                return '\'' + minFilePath + '\',';
+                return '<link rel="stylesheet" href="' + minFilePath + '">';
               }
             },
             js: function (filePath) {
               var minFilePath = filePath.replace('.js', '.min.js');
-              var fullPath = path.join(process.cwd(), minFilePath);
+              var fullPath = path.join(process.cwd(), 'public', minFilePath);
               if (!fs.existsSync(fullPath)) {
-                return '\'' + filePath + '\',';
+                return '<script type="text/javascript" src="' + filePath + '"></script>';
               } else {
-                return '\'' + minFilePath + '\',';
+                return '<script type="text/javascript" src="' + minFilePath + '"></script>';
               }
             }
           }
         }
       }
     }))
-    .pipe(gulp.dest('config/assets/'));
+    .pipe(gulp.dest('modules/core/server/views/'));
 });
 
 // Copy local development environment config example
@@ -406,7 +406,7 @@ gulp.task('test:e2e', function (done) {
 
 // Run the project in development mode
 gulp.task('default', function (done) {
-  runSequence('env:dev', ['copyLocalEnvConfig', 'makeUploadsDir'], 'lint', ['nodemon', 'watch'], done);
+  runSequence('env:dev', ['copyLocalEnvConfig', 'makeUploadsDir'], 'wiredep', 'lint', ['nodemon', 'watch'], done);
 });
 
 // Run the project in debug mode
