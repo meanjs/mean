@@ -2,14 +2,6 @@
   <div class="page-header">
     <h1 ng-bind="vm.article.title"></h1>
   </div>
-  <div class="pull-right" ng-show="vm.article.isCurrentUserOwner">
-    <a class="btn btn-primary" ui-sref="articles.edit({ articleId: vm.article._id })">
-      <i class="glyphicon glyphicon-edit"></i>
-    </a>
-    <a class="btn btn-primary" ng-click="vm.remove()">
-      <i class="glyphicon glyphicon-trash"></i>
-    </a>
-  </div>
   <small>
     <em class="text-muted">
       Posted on

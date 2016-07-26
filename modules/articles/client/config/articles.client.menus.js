@@ -18,14 +18,8 @@
     // Add the dropdown list item
     menuService.addSubMenuItem('topbar', 'articles', {
       title: 'List Articles',
-      state: 'articles.list'
-    });
-
-    // Add the dropdown create item
-    menuService.addSubMenuItem('topbar', 'articles', {
-      title: 'Create Article',
-      state: 'articles.create',
-      roles: ['user']
+      state: 'articles.list',
+      roles: ['*']
     });
   }
 }());

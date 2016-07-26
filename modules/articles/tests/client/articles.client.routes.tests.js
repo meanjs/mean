@@ -52,7 +52,7 @@
           expect(liststate.abstract).toBe(undefined);
         });
 
-        it('Should have template', function () {
+        it('Should have templateUrl', function () {
           expect(liststate.templateUrl).toBe('modules/articles/client/views/list-articles.client.view.html');
         });
       });
@@ -108,107 +108,6 @@
         });
       });
 
-      describe('Create Route', function () {
-        var createstate,
-          ArticlesController,
-          mockArticle;
-
-        beforeEach(inject(function ($controller, $state, $templateCache) {
-          createstate = $state.get('articles.create');
-          $templateCache.put('modules/articles/client/views/form-article.client.view.html', '');
-
-          // create mock article
-          mockArticle = new ArticlesService();
-
-          // Initialize Controller
-          ArticlesController = $controller('ArticlesController as vm', {
-            $scope: $scope,
-            articleResolve: mockArticle
-          });
-        }));
-
-        it('Should have the correct URL', function () {
-          expect(createstate.url).toEqual('/create');
-        });
-
-        it('Should have a resolve function', function () {
-          expect(typeof createstate.resolve).toEqual('object');
-          expect(typeof createstate.resolve.articleResolve).toEqual('function');
-        });
-
-        it('should respond to URL', inject(function ($state) {
-          expect($state.href(createstate)).toEqual('/articles/create');
-        }));
-
-        it('should attach an article to the controller scope', function () {
-          expect($scope.vm.article._id).toBe(mockArticle._id);
-          expect($scope.vm.article._id).toBe(undefined);
-        });
-
-        it('Should not be abstract', function () {
-          expect(createstate.abstract).toBe(undefined);
-        });
-
-        it('Should have templateUrl', function () {
-          expect(createstate.templateUrl).toBe('modules/articles/client/views/form-article.client.view.html');
-        });
-      });
-
-      describe('Edit Route', function () {
-        var editstate,
-          ArticlesController,
-          mockArticle;
-
-        beforeEach(inject(function ($controller, $state, $templateCache) {
-          editstate = $state.get('articles.edit');
-          $templateCache.put('modules/articles/client/views/form-article.client.view.html', '');
-
-          // create mock article
-          mockArticle = new ArticlesService({
-            _id: '525a8422f6d0f87f0e407a33',
-            title: 'An Article about MEAN',
-            content: 'MEAN rocks!'
-          });
-
-          // Initialize Controller
-          ArticlesController = $controller('ArticlesController as vm', {
-            $scope: $scope,
-            articleResolve: mockArticle
-          });
-        }));
-
-        it('Should have the correct URL', function () {
-          expect(editstate.url).toEqual('/:articleId/edit');
-        });
-
-        it('Should have a resolve function', function () {
-          expect(typeof editstate.resolve).toEqual('object');
-          expect(typeof editstate.resolve.articleResolve).toEqual('function');
-        });
-
-        it('should respond to URL', inject(function ($state) {
-          expect($state.href(editstate, {
-            articleId: 1
-          })).toEqual('/articles/1/edit');
-        }));
-
-        it('should attach an article to the controller scope', function () {
-          expect($scope.vm.article._id).toBe(mockArticle._id);
-        });
-
-        it('Should not be abstract', function () {
-          expect(editstate.abstract).toBe(undefined);
-        });
-
-        it('Should have templateUrl', function () {
-          expect(editstate.templateUrl).toBe('modules/articles/client/views/form-article.client.view.html');
-        });
-
-        xit('Should go to unauthorized route', function () {
-
-        });
-      });
-
       describe('Handle Trailing Slash', function () {
         beforeEach(inject(function ($state, $rootScope) {
           $state.go('articles.list');
@@ -223,7 +122,6 @@
           expect($state.current.templateUrl).toBe('modules/articles/client/views/list-articles.client.view.html');
         }));
       });
-
     });
   });
 }());
