@@ -1,9 +1,9 @@
-(function () {
+﻿(function () {
   'use strict';
 
-  describe('Articles Controller Tests', function () {
+  describe('Admin Articles List Controller Tests', function () {
     // Initialize global variables
-    var ArticlesController,
+    var ArticlesListController,
       $scope,
       $httpBackend,
       $state,
@@ -55,17 +55,38 @@
 
       // Mock logged in user
       Authentication.user = {
-        roles: ['user']
+        roles: ['user', 'admin']
       };
 
-      // Initialize the Articles controller.
-      ArticlesController = $controller('ArticlesController as vm', {
-        $scope: $scope,
-        articleResolve: {}
+      // Initialize the Articles List controller.
+      ArticlesListController = $controller('ArticlesListController as vm', {
+        $scope: $scope
       });
 
       // Spy on state go
       spyOn($state, 'go');
     }));
+
+    describe('Instantiate', function () {
+      var mockArticleList;
+
+      beforeEach(function () {
+        mockArticleList = [mockArticle, mockArticle];
+      });
+
+      it('should send a GET request and return all articles', inject(function (ArticlesService) {
+        // Set POST response
+        $httpBackend.expectGET('api/articles').respond(mockArticleList);
+
+
+        $httpBackend.flush();
+
+        // Test form inputs are reset
+        expect($scope.vm.articles.length).toEqual(2);
+        expect($scope.vm.articles[0]).toEqual(mockArticle);
+        expect($scope.vm.articles[1]).toEqual(mockArticle);
+
+      }));
+    });
   });
 }());
