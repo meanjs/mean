@@ -120,7 +120,7 @@ module.exports.initSession = function (app, db) {
       httpOnly: config.sessionCookie.httpOnly,
       secure: config.sessionCookie.secure && config.secure.ssl
     },
-    key: config.sessionKey,
+    name: config.sessionKey,
     store: new MongoStore({
       mongooseConnection: db.connection,
       collection: config.sessionCollection
