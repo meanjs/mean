@@ -11,6 +11,8 @@ var _ = require('lodash'),
   path = require('path'),
   wiredep = require('wiredep');
 
+var karmaConfigFile = 'karma.conf.js';
+
 module.exports = function (grunt) {
   // Project Configuration
   grunt.initConfig({
@@ -79,6 +81,16 @@ module.exports = function (grunt) {
       dev: {
         src: 'modules/core/server/views/layout.server.view.html',
         ignorePath: /.*public\//
+      },
+      test: {
+        src: karmaConfigFile,
+        fileTypes: {
+          js: {
+            replace: {
+              js: '\'{{filePath}}\','
+            }
+          }
+        }
       },
       production: {
         src: 'modules/core/server/views/layout.server.view.html',
@@ -224,7 +236,7 @@ module.exports = function (grunt) {
     },
     karma: {
       unit: {
-        configFile: 'karma.conf.js'
+        configFile: karmaConfigFile
       }
     },
     protractor: {
@@ -332,12 +344,12 @@ module.exports = function (grunt) {
   grunt.registerTask('build', ['env:dev', 'wiredep:production', 'lint', 'ngAnnotate', 'uglify', 'cssmin']);
 
   // Run the project tests
-  grunt.registerTask('test', ['env:test', 'lint', 'mkdir:upload', 'copy:localConfig', 'server', 'mochaTest', 'karma:unit', 'protractor']);
+  grunt.registerTask('test', ['env:test', 'wiredep:test', 'lint', 'mkdir:upload', 'copy:localConfig', 'server', 'mochaTest', 'karma:unit', 'protractor']);
   grunt.registerTask('test:server', ['env:test', 'lint', 'server', 'mochaTest']);
-  grunt.registerTask('test:client', ['env:test', 'lint', 'karma:unit']);
-  grunt.registerTask('test:e2e', ['env:test', 'lint', 'dropdb', 'server', 'protractor']);
+  grunt.registerTask('test:client', ['env:test', 'wiredep:test', 'lint', 'karma:unit']);
+  grunt.registerTask('test:e2e', ['env:test', 'wiredep:test', 'lint', 'dropdb', 'server', 'protractor']);
   // Run project coverage
-  grunt.registerTask('coverage', ['env:test', 'lint', 'mocha_istanbul:coverage', 'karma:unit']);
+  grunt.registerTask('coverage', ['env:test', 'wiredep:test', 'lint', 'mocha_istanbul:coverage', 'karma:unit']);
 
   // Run the project in development mode
   grunt.registerTask('default', ['env:dev', 'wiredep:dev', 'lint', 'mkdir:upload', 'copy:localConfig', 'concurrent:default']);

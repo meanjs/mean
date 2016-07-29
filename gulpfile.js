@@ -26,7 +26,8 @@ var _ = require('lodash'),
   KarmaServer = require('karma').Server;
 
 // Local settings
-var changedTestFiles = [];
+var changedTestFiles = [],
+  karmaConfigFile = __dirname + '/karma.conf.js';
 
 // Set NODE_ENV to 'test'
 gulp.task('env:test', function () {
@@ -221,6 +222,20 @@ gulp.task('wiredep', function () {
     .pipe(gulp.dest('modules/core/server/views/'));
 });
 
+gulp.task('wiredep:test', function () {
+  return gulp.src(karmaConfigFile)
+    .pipe(wiredep({
+      fileTypes: {
+        js: {
+          replace: {
+            js: '\'{{filePath}}\','
+          }
+        }
+      }
+    }))
+    .pipe(gulp.dest(__dirname));
+});
+
 // wiredep task to production
 gulp.task('wiredep:prod', function () {
   return gulp.src('modules/core/server/views/layout.server.view.html')
@@ -324,7 +339,7 @@ gulp.task('mocha', function (done) {
 // Karma test runner task
 gulp.task('karma', function (done) {
   new KarmaServer({
-    configFile: __dirname + '/karma.conf.js',
+    configFile: karmaConfigFile,
     singleRun: true
   }, done).start();
 });
@@ -384,7 +399,7 @@ gulp.task('build', function (done) {
 
 // Run the project tests
 gulp.task('test', function (done) {
-  runSequence('env:test', 'test:server', 'karma', 'nodemon', 'protractor', done);
+  runSequence('env:test', 'wiredep:test', 'test:server', 'karma', 'nodemon', 'protractor', done);
 });
 
 gulp.task('test:server', function (done) {
@@ -397,11 +412,11 @@ gulp.task('test:server:watch', function (done) {
 });
 
 gulp.task('test:client', function (done) {
-  runSequence('env:test', 'lint', 'dropdb', 'karma', done);
+  runSequence('env:test', 'wiredep:test', 'lint', 'dropdb', 'karma', done);
 });
 
 gulp.task('test:e2e', function (done) {
-  runSequence('env:test', 'lint', 'dropdb', 'nodemon', 'protractor', done);
+  runSequence('env:test', 'wiredep:test', 'lint', 'dropdb', 'nodemon', 'protractor', done);
 });
 
 // Run the project in development mode
