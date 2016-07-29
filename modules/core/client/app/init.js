@@ -11,7 +11,7 @@
     .config(bootstrapConfig);
 
   function bootstrapConfig($locationProvider, $httpProvider) {
-    $locationProvider.html5Mode(true).hashPrefix('!');
+    $locationProvider.html5Mode({ enabled: true, requireBase: false }).hashPrefix('!');
 
     $httpProvider.interceptors.push('authInterceptor');
   }
