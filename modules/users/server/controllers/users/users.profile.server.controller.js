@@ -18,16 +18,16 @@ var _ = require('lodash'),
 exports.update = function (req, res) {
   // Init Variables
   var user = req.user;
-
-  // For security measurement we remove the roles from the req.body object
-  delete req.body.roles;
-
-  // For security measurement do not use _id from the req.body object
-  delete req.body._id;
+  var secureFields = ['firstName', 'lastName', 'email', 'username'];
 
   if (user) {
-    // Merge existing user
-    user = _.extend(user, req.body);
+    // For security measurements update only secure fields
+    secureFields.forEach(function (field) {
+      if (req.body.hasOwnProperty(field)) {
+        user[field] = req.body[field];
+      }
+    });
+
     user.updated = Date.now();
     user.displayName = user.firstName + ' ' + user.lastName;
 
