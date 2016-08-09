@@ -28,6 +28,7 @@ module.exports = function (io, socket) {
       type: 'status',
       text: 'disconnected',
       created: Date.now(),
+      profileImageURL: socket.request.user.profileImageURL,
       username: socket.request.user.username
     });
   });
