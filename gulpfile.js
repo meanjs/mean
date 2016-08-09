@@ -26,7 +26,8 @@ var _ = require('lodash'),
   KarmaServer = require('karma').Server;
 
 // Local settings
-var changedTestFiles = [];
+var changedTestFiles = [],
+  karmaConfigFile = __dirname + '/karma.conf.js';
 
 // Set NODE_ENV to 'test'
 gulp.task('env:test', function () {
@@ -214,44 +215,58 @@ gulp.task('imagemin', function () {
 
 // wiredep task to default
 gulp.task('wiredep', function () {
-  return gulp.src('config/assets/default.js')
+  return gulp.src('modules/core/server/views/layout.server.view.html')
     .pipe(wiredep({
-      ignorePath: '../../'
+      ignorePath: /.*public\//
     }))
-    .pipe(gulp.dest('config/assets/'));
+    .pipe(gulp.dest('modules/core/server/views/'));
+});
+
+gulp.task('wiredep:test', function () {
+  return gulp.src(karmaConfigFile)
+    .pipe(wiredep({
+      fileTypes: {
+        js: {
+          replace: {
+            js: '\'{{filePath}}\','
+          }
+        }
+      }
+    }))
+    .pipe(gulp.dest(__dirname));
 });
 
 // wiredep task to production
 gulp.task('wiredep:prod', function () {
-  return gulp.src('config/assets/production.js')
+  return gulp.src('modules/core/server/views/layout.server.view.html')
     .pipe(wiredep({
-      ignorePath: '../../',
+      ignorePath: /.*public\//,
       fileTypes: {
-        js: {
+        html: {
           replace: {
             css: function (filePath) {
               var minFilePath = filePath.replace('.css', '.min.css');
-              var fullPath = path.join(process.cwd(), minFilePath);
+              var fullPath = path.join(process.cwd(), 'public', minFilePath);
               if (!fs.existsSync(fullPath)) {
-                return '\'' + filePath + '\',';
+                return '<link rel="stylesheet" href="' + filePath + '">';
               } else {
-                return '\'' + minFilePath + '\',';
+                return '<link rel="stylesheet" href="' + minFilePath + '">';
               }
             },
             js: function (filePath) {
               var minFilePath = filePath.replace('.js', '.min.js');
-              var fullPath = path.join(process.cwd(), minFilePath);
+              var fullPath = path.join(process.cwd(), 'public', minFilePath);
               if (!fs.existsSync(fullPath)) {
-                return '\'' + filePath + '\',';
+                return '<script type="text/javascript" src="' + filePath + '"></script>';
               } else {
-                return '\'' + minFilePath + '\',';
+                return '<script type="text/javascript" src="' + minFilePath + '"></script>';
               }
             }
           }
         }
       }
     }))
-    .pipe(gulp.dest('config/assets/'));
+    .pipe(gulp.dest('modules/core/server/views/'));
 });
 
 // Copy local development environment config example
@@ -324,7 +339,7 @@ gulp.task('mocha', function (done) {
 // Karma test runner task
 gulp.task('karma', function (done) {
   new KarmaServer({
-    configFile: __dirname + '/karma.conf.js',
+    configFile: karmaConfigFile,
     singleRun: true
   }, done).start();
 });
@@ -384,7 +399,7 @@ gulp.task('build', function (done) {
 
 // Run the project tests
 gulp.task('test', function (done) {
-  runSequence('env:test', 'test:server', 'karma', 'nodemon', 'protractor', done);
+  runSequence('env:test', 'wiredep:test', 'test:server', 'karma', 'nodemon', 'protractor', done);
 });
 
 gulp.task('test:server', function (done) {
@@ -397,16 +412,16 @@ gulp.task('test:server:watch', function (done) {
 });
 
 gulp.task('test:client', function (done) {
-  runSequence('env:test', 'lint', 'dropdb', 'karma', done);
+  runSequence('env:test', 'wiredep:test', 'lint', 'dropdb', 'karma', done);
 });
 
 gulp.task('test:e2e', function (done) {
-  runSequence('env:test', 'lint', 'dropdb', 'nodemon', 'protractor', done);
+  runSequence('env:test', 'wiredep:test', 'lint', 'dropdb', 'nodemon', 'protractor', done);
 });
 
 // Run the project in development mode
 gulp.task('default', function (done) {
-  runSequence('env:dev', ['copyLocalEnvConfig', 'makeUploadsDir'], 'lint', ['nodemon', 'watch'], done);
+  runSequence('env:dev', ['copyLocalEnvConfig', 'makeUploadsDir'], 'wiredep', 'lint', ['nodemon', 'watch'], done);
 });
 
 // Run the project in debug mode

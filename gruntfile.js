@@ -11,6 +11,8 @@ var _ = require('lodash'),
   path = require('path'),
   wiredep = require('wiredep');
 
+var karmaConfigFile = 'karma.conf.js';
+
 module.exports = function (grunt) {
   // Project Configuration
   grunt.initConfig({
@@ -76,27 +78,43 @@ module.exports = function (grunt) {
       }
     },
     wiredep: {
-      fileTypes: {
-        src: 'config/assets/default.js',
-        ignorePath: '../../',
-        js: {
-          replace: {
-            css: function (filePath) {
-              var minFilePath = filePath.replace('.css', '.min.css');
-              var fullPath = path.join(process.cwd(), minFilePath);
-              if (!fs.existsSync(fullPath)) {
-                return '\'' + filePath + '\',';
-              } else {
-                return '\'' + minFilePath + '\',';
-              }
-            },
-            js: function (filePath) {
-              var minFilePath = filePath.replace('.js', '.min.js');
-              var fullPath = path.join(process.cwd(), minFilePath);
-              if (!fs.existsSync(fullPath)) {
-                return '\'' + filePath + '\',';
-              } else {
-                return '\'' + minFilePath + '\',';
+      dev: {
+        src: 'modules/core/server/views/layout.server.view.html',
+        ignorePath: /.*public\//
+      },
+      test: {
+        src: karmaConfigFile,
+        fileTypes: {
+          js: {
+            replace: {
+              js: '\'{{filePath}}\','
+            }
+          }
+        }
+      },
+      production: {
+        src: 'modules/core/server/views/layout.server.view.html',
+        ignorePath: /.*public\//,
+        fileTypes: {
+          html: {
+            replace: {
+              css: function (filePath) {
+                var minFilePath = filePath.replace('.css', '.min.css');
+                var fullPath = path.join(process.cwd(), 'public', minFilePath);
+                if (!fs.existsSync(fullPath)) {
+                  return '<link rel="stylesheet" href="' + filePath + '">';
+                } else {
+                  return '<link rel="stylesheet" href="' + minFilePath + '">';
+                }
+              },
+              js: function (filePath) {
+                var minFilePath = filePath.replace('.js', '.min.js');
+                var fullPath = path.join(process.cwd(), 'public', minFilePath);
+                if (!fs.existsSync(fullPath)) {
+                  return '<script type="text/javascript" src="' + filePath + '"></script>';
+                } else {
+                  return '<script type="text/javascript" src="' + minFilePath + '"></script>';
+                }
               }
             }
           }
@@ -218,7 +236,7 @@ module.exports = function (grunt) {
     },
     karma: {
       unit: {
-        configFile: 'karma.conf.js'
+        configFile: karmaConfigFile
       }
     },
     protractor: {
@@ -306,7 +324,6 @@ module.exports = function (grunt) {
     // Get the callback
     var done = this.async();
 
-    var path = require('path');
     var app = require(path.resolve('./config/lib/app'));
     var server = app.start(function () {
       done();
@@ -324,18 +341,18 @@ module.exports = function (grunt) {
   });
 
   // Lint project files and minify them into two production files.
-  grunt.registerTask('build', ['env:dev', 'wiredep', 'lint', 'ngAnnotate', 'uglify', 'cssmin']);
+  grunt.registerTask('build', ['env:dev', 'wiredep:production', 'lint', 'ngAnnotate', 'uglify', 'cssmin']);
 
   // Run the project tests
-  grunt.registerTask('test', ['env:test', 'lint', 'mkdir:upload', 'copy:localConfig', 'server', 'mochaTest', 'karma:unit', 'protractor']);
+  grunt.registerTask('test', ['env:test', 'wiredep:test', 'lint', 'mkdir:upload', 'copy:localConfig', 'server', 'mochaTest', 'karma:unit', 'protractor']);
   grunt.registerTask('test:server', ['env:test', 'lint', 'server', 'mochaTest']);
-  grunt.registerTask('test:client', ['env:test', 'lint', 'karma:unit']);
-  grunt.registerTask('test:e2e', ['env:test', 'lint', 'dropdb', 'server', 'protractor']);
+  grunt.registerTask('test:client', ['env:test', 'wiredep:test', 'lint', 'karma:unit']);
+  grunt.registerTask('test:e2e', ['env:test', 'wiredep:test', 'lint', 'dropdb', 'server', 'protractor']);
   // Run project coverage
-  grunt.registerTask('coverage', ['env:test', 'lint', 'mocha_istanbul:coverage', 'karma:unit']);
+  grunt.registerTask('coverage', ['env:test', 'wiredep:test', 'lint', 'mocha_istanbul:coverage', 'karma:unit']);
 
   // Run the project in development mode
-  grunt.registerTask('default', ['env:dev', 'lint', 'mkdir:upload', 'copy:localConfig', 'concurrent:default']);
+  grunt.registerTask('default', ['env:dev', 'wiredep:dev', 'lint', 'mkdir:upload', 'copy:localConfig', 'concurrent:default']);
 
   // Run the project in debug mode
   grunt.registerTask('debug', ['env:dev', 'lint', 'mkdir:upload', 'copy:localConfig', 'concurrent:debug']);

@@ -13,6 +13,21 @@ if (testConfig.coverage) {
   karmaReporters.push('coverage');
 }
 
+var bowerDependencies = [
+  // bower:js
+  'public/lib/angular/angular.js',
+  'public/lib/angular-animate/angular-animate.js',
+  'public/lib/angular-bootstrap/ui-bootstrap-tpls.js',
+  'public/lib/angular-file-upload/dist/angular-file-upload.min.js',
+  'public/lib/angular-messages/angular-messages.js',
+  'public/lib/angular-mocks/angular-mocks.js',
+  'public/lib/angular-resource/angular-resource.js',
+  'public/lib/angular-ui-router/release/angular-ui-router.js',
+  'public/lib/owasp-password-strength-test/owasp-password-strength-test.js',
+  // endbower
+  'public/lib/angular-mocks/angular-mocks.js'
+];
+
 // Karma configuration
 module.exports = function (karmaConfig) {
   karmaConfig.set({
@@ -39,7 +54,7 @@ module.exports = function (karmaConfig) {
     },
 
     // List of files / patterns to load in the browser
-    files: _.union(defaultAssets.client.lib.js, defaultAssets.client.lib.tests, defaultAssets.client.js, testAssets.tests.client, defaultAssets.client.views),
+    files: _.union(bowerDependencies, defaultAssets.client.js, testAssets.tests.client, defaultAssets.client.views),
 
     // Test results reporter to use
     // Possible values: 'dots', 'progress', 'junit', 'growl', 'coverage'
