@@ -1,12 +1,14 @@
 <section class="row">
-  <h3 class="col-md-12 text-center">Sign in using your social accounts</h3>
-  <div class="col-md-12 text-center">
-    <img ng-click="vm.callOauthProvider('/api/auth/facebook')" ng-src="/modules/users/client/img/buttons/facebook.png">
-    <img ng-click="vm.callOauthProvider('/api/auth/twitter')" ng-src="/modules/users/client/img/buttons/twitter.png">
-    <img ng-click="vm.callOauthProvider('/api/auth/google')" ng-src="/modules/users/client/img/buttons/google.png">
-    <img ng-click="vm.callOauthProvider('/api/auth/linkedin')" ng-src="/modules/users/client/img/buttons/linkedin.png">
-    <img ng-click="vm.callOauthProvider('/api/auth/github')" ng-src="/modules/users/client/img/buttons/github.png">
-    <img ng-click="vm.callOauthProvider('/api/auth/paypal')"  ng-src="/modules/users/client/img/buttons/paypal.png">
+  <h3 class="col-xs-12 text-center">Sign in using your social accounts</h3>
+  <div class="row col-xs-12 col-md-6 text-center">
+    <div class="col-xs-4"><a class="btn"><img class="img-responsive" ng-click="vm.callOauthProvider('/api/auth/facebook')" ng-src="/modules/users/client/img/buttons/facebook.png"></a></div>
+    <div class="col-xs-4"><a class="btn"><img class="img-responsive" ng-click="vm.callOauthProvider('/api/auth/twitter')" ng-src="/modules/users/client/img/buttons/twitter.png"></a></div>
+    <div class="col-xs-4"><a class="btn"><img class="img-responsive" ng-click="vm.callOauthProvider('/api/auth/google')" ng-src="/modules/users/client/img/buttons/google.png"></a></div>
+  </div>
+  <div class="row col-xs-12 col-md-6 text-center">
+    <div class="col-xs-4"><a class="btn"><img class="img-responsive" ng-click="vm.callOauthProvider('/api/auth/linkedin')" ng-src="/modules/users/client/img/buttons/linkedin.png"></a></div>
+    <div class="col-xs-4"><a class="btn"><img class="img-responsive" ng-click="vm.callOauthProvider('/api/auth/github')" ng-src="/modules/users/client/img/buttons/github.png"></a></div>
+    <div class="col-xs-4"><a class="btn"><img class="img-responsive" ng-click="vm.callOauthProvider('/api/auth/paypal')"  ng-src="/modules/users/client/img/buttons/paypal.png"></a></div>
   </div>
   <div ui-view></div>
 </section>
