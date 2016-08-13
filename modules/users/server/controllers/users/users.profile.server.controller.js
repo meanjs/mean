@@ -60,13 +60,13 @@ exports.changeProfilePicture = function (req, res) {
   var user = req.user;
   var upload = multer(config.uploads.profileUpload).single('newProfilePicture');
   var profileUploadFileFilter = require(path.resolve('./config/lib/multer')).profileUploadFileFilter;
-  var tmpImageUrl;
+  var existingImageUrl;
 
   // Filtering to upload only images
   upload.fileFilter = profileUploadFileFilter;
-  
+
   if (user) {
-    tmpImageUrl = user.profileImageURL;
+    existingImageUrl = user.profileImageURL;
     uploadImage()
       .then(updateUser)
       .then(deleteOldImage)
@@ -87,6 +87,7 @@ exports.changeProfilePicture = function (req, res) {
     return new Promise(function (resolve, reject) {
       upload(req, res, function (uploadError) {
         if (uploadError) {
+          console.log(uploadError);
           reject({
             message: 'Error occurred while uploading profile picture'
           });
@@ -112,11 +113,12 @@ exports.changeProfilePicture = function (req, res) {
 
   function deleteOldImage () {
     return new Promise(function (resolve, reject) {
-      if (tmpImageUrl !== User.schema.path('profileImageURL').defaultValue) {
-        fs.unlink(tmpImageUrl, function (unlinkError) {
+      if (existingImageUrl !== User.schema.path('profileImageURL').defaultValue) {
+        fs.unlink(existingImageUrl, function (unlinkError) {
           if (unlinkError) {
+            console.log(unlinkError);
             reject({
-              message: 'Error occurred while uploading profile picture'
+              message: 'Error occurred while deleting old profile picture'
             });
           } else {
             resolve();
