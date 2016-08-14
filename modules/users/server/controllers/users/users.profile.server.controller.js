@@ -87,10 +87,7 @@ exports.changeProfilePicture = function (req, res) {
     return new Promise(function (resolve, reject) {
       upload(req, res, function (uploadError) {
         if (uploadError) {
-          console.log(uploadError);
-          reject({
-            message: 'Error occurred while uploading profile picture'
-          });
+          reject(errorHandler.getErrorMessage(uploadError));
         } else {
           resolve();
         }
