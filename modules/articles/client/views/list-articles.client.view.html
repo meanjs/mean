@@ -1,15 +1,15 @@
 <section>
   <div class="page-header">
-    <h1>Articles</h1>
+    <h1>{{'Articles'|translate}}</h1>
   </div>
   <div class="list-group">
     <a ng-repeat="article in vm.articles" ui-sref="articles.view({ articleId: article._id })" class="list-group-item">
       <small class="list-group-item-text">
-        Posted on
+        {{'modules.client.list.POSTED_ON'|translate}}
         <span ng-bind="article.created | date:'mediumDate'"></span>
-        by
+        {{'modules.client.list.POSTED_BY'|translate}}
         <span ng-if="article.user" ng-bind="article.user.displayName"></span>
-        <span ng-if="!article.user">Deleted User</span>
+        <span ng-if="!article.user">{{'Deleted User'|translate}}</span>
       </small>
       <h4 class="list-group-item-heading" ng-bind="article.title"></h4>
       <p class="list-group-item-text" ng-bind="article.content"></p>

@@ -6,12 +6,15 @@
     .module('articles.admin')
     .run(menuConfig);
 
-  menuConfig.$inject = ['menuService'];
+  menuConfig.$inject = ['menuService', '$translate'];
 
-  function menuConfig(Menus) {
+  function menuConfig(Menus, $translate) {
     Menus.addSubMenuItem('topbar', 'admin', {
       title: 'Manage Articles',
       state: 'admin.articles.list'
     });
+
+    $translate('Manage Articles');
   }
+
 }());

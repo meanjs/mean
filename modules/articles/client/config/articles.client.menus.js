@@ -5,9 +5,10 @@
     .module('articles')
     .run(menuConfig);
 
-  menuConfig.$inject = ['menuService'];
+  menuConfig.$inject = ['menuService', '$translate'];
 
-  function menuConfig(menuService) {
+  function menuConfig(menuService, $translate) {
+
     menuService.addMenuItem('topbar', {
       title: 'Articles',
       state: 'articles',
@@ -21,5 +22,7 @@
       state: 'articles.list',
       roles: ['*']
     });
+
+    $translate('List Articles');
   }
 }());

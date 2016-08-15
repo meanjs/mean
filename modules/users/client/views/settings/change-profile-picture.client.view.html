@@ -7,15 +7,15 @@
         </div>
         <div class="text-center form-group" ng-hide="vm.uploader.queue.length">
           <span class="btn btn-default btn-file">
-              Select Image <input type="file" nv-file-select uploader="vm.uploader">
+              {{'Select Image'|translate}} <input type="file" nv-file-select uploader="vm.uploader">
           </span>
         </div>
         <div class="text-center form-group" ng-show="vm.uploader.queue.length">
-          <button class="btn btn-primary" ng-click="vm.uploadProfilePicture();">Upload</button>
-          <button class="btn btn-default" ng-click="vm.cancelUpload();">Cancel</button>
+          <button class="btn btn-primary" ng-click="vm.uploadProfilePicture();">{{'Upload'|translate}}</button>
+          <button class="btn btn-default" ng-click="vm.cancelUpload();">{{'Cancel'|translate}}</button>
         </div>
         <div ng-show="vm.success" class="text-center text-success">
-          <strong>Profile Picture Changed Successfully</strong>
+          <strong>{{'Profile Picture Changed Successfully'|translate}}</strong>
         </div>
         <div ng-show="vm.error" class="text-center text-danger">
           <strong ng-bind="vm.error"></strong>

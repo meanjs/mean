@@ -2,10 +2,10 @@
   <div class="page-header">
     <div class="row">
       <div class="col-md-4">
-        <h1>Users</h1>
+        <h1>{{'Users'|translate}}</h1>
       </div>
       <div class="col-md-4" style="margin-top: 2em">
-        <input class="form-control col-md-4" type="text" ng-model="vm.search" placeholder="Search" ng-change="vm.figureOutItemsToDisplay()" />
+        <input class="form-control col-md-4" type="text" ng-model="vm.search" placeholder="{{'Search'|translate}}" ng-change="vm.figureOutItemsToDisplay()" />
       </div>
     </div>
   </div>
@@ -17,5 +17,5 @@
     </a>
   </div>
 
-  <uib-pagination boundary-links="true" max-size="8" items-per-page="vm.itemsPerPage" total-items="vm.filterLength" ng-model="vm.currentPage" ng-change="vm.pageChanged()"></uib-pagination>
+  <uib-pagination template-url="modules/core/client/views/pagination.client.view.html" boundary-links="true" max-size="8" items-per-page="vm.itemsPerPage" total-items="vm.filterLength" ng-model="vm.currentPage" ng-change="vm.pageChanged()"></uib-pagination>
 </section>

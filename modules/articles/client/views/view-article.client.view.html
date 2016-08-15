@@ -8,7 +8,7 @@
       <span ng-bind="vm.article.created | date:'mediumDate'"></span>
       by
       <span ng-if="vm.article.user" ng-bind="vm.article.user.displayName"></span>
-      <span ng-if="!vm.article.user">Deleted User</span>
+      <span ng-if="!vm.article.user">{{'Deleted User'|translate}}</span>
     </em>
   </small>
   <p class="lead" ng-bind="vm.article.content"></p>

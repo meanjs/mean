@@ -5,9 +5,9 @@
     .module('core')
     .run(menuConfig);
 
-  menuConfig.$inject = ['menuService'];
+  menuConfig.$inject = ['menuService', '$translate'];
 
-  function menuConfig(menuService) {
+  function menuConfig(menuService, $translate) {
     menuService.addMenu('account', {
       roles: ['user']
     });
@@ -38,5 +38,11 @@
       title: 'Manage Social Accounts',
       state: 'settings.accounts'
     });
+
+    $translate('Edit Profile');
+    $translate('Edit Profile Picture');
+    $translate('Change Password');
+    $translate('Manage Social Accounts');
+
   }
 }());
