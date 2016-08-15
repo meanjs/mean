@@ -80,6 +80,28 @@ gulp.task('nodemon-debug', function () {
   });
 });
 
+gulp.task('translate-extract', function () {
+
+  var extractTranslate = require('gulp-angular-translate-extractor');
+
+  var i18nsrc = [
+    'modules/**/client/config/*.js',
+    'modules/**/client/views/*.view.html',
+    'modules/**/client/views/**/*.view.html'
+  ];
+  var i18ndest = './public/i18n';
+
+  return gulp.src(i18nsrc)
+    .pipe(extractTranslate({
+      defaultLang: 'en-us',         // default language
+      lang: ['en-us', 'ru-ru'],   // array of languages
+      dest: i18ndest,             // destination, default '.'
+      safeMode: false,            // do not delete old translations, true - contrariwise, default false
+      stringifyOptions: true     // force json to be sorted, false - contrariwise, default false
+    }))
+    .pipe(gulp.dest(i18ndest));
+});
+
 // Watch Files For Changes
 gulp.task('watch', function () {
   // Start livereload
@@ -88,7 +110,7 @@ gulp.task('watch', function () {
   // Add watch rules
   gulp.watch(defaultAssets.server.views).on('change', plugins.livereload.changed);
   gulp.watch(defaultAssets.server.allJS, ['eslint']).on('change', plugins.livereload.changed);
-  gulp.watch(defaultAssets.client.js, ['eslint']).on('change', plugins.livereload.changed);
+  gulp.watch(defaultAssets.client.js, ['eslint', 'translate-extract']).on('change', plugins.livereload.changed);
   gulp.watch(defaultAssets.client.css, ['csslint']).on('change', plugins.livereload.changed);
   gulp.watch(defaultAssets.client.sass, ['sass', 'csslint']).on('change', plugins.livereload.changed);
   gulp.watch(defaultAssets.client.less, ['less', 'csslint']).on('change', plugins.livereload.changed);
@@ -98,7 +120,7 @@ gulp.task('watch', function () {
     gulp.watch(defaultAssets.client.views, ['templatecache']).on('change', plugins.livereload.changed);
   } else {
     gulp.watch(defaultAssets.server.gulpConfig, ['eslint']);
-    gulp.watch(defaultAssets.client.views).on('change', plugins.livereload.changed);
+    gulp.watch(defaultAssets.client.views, ['translate-extract']).on('change', plugins.livereload.changed);
   }
 });
 
@@ -406,12 +428,12 @@ gulp.task('test:e2e', function (done) {
 
 // Run the project in development mode
 gulp.task('default', function (done) {
-  runSequence('env:dev', ['copyLocalEnvConfig', 'makeUploadsDir'], 'lint', ['nodemon', 'watch'], done);
+  runSequence('env:dev', ['copyLocalEnvConfig', 'makeUploadsDir'], 'lint', 'translate-extract', ['nodemon', 'watch'], done);
 });
 
 // Run the project in debug mode
 gulp.task('debug', function (done) {
-  runSequence('env:dev', ['copyLocalEnvConfig', 'makeUploadsDir'], 'lint', ['node-inspector', 'nodemon-debug', 'watch'], done);
+  runSequence('env:dev', ['copyLocalEnvConfig', 'makeUploadsDir'], 'lint', 'translate-extract', ['node-inspector', 'nodemon-debug', 'watch'], done);
 });
 
 // Run the project in production mode

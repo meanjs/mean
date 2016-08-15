@@ -5,6 +5,7 @@
  */
 var config = require('../config'),
   express = require('express'),
+  i18n = require('./i18n'),
   morgan = require('morgan'),
   logger = require('./logger'),
   bodyParser = require('body-parser'),
@@ -39,6 +40,9 @@ module.exports.initLocalVariables = function (app) {
   app.locals.livereload = config.livereload;
   app.locals.logo = config.logo;
   app.locals.favicon = config.favicon;
+  app.locals.language = config.app.language;
+  app.locals.languages = config.app.languages;
+  app.locals.languagesDir = config.app.languagesDir;
 
   // Passing the request url to environment locals
   app.use(function (req, res, next) {
@@ -92,6 +96,10 @@ module.exports.initMiddleware = function (app) {
   // Add the cookie parser and flash middleware
   app.use(cookieParser());
   app.use(flash());
+
+  // Enable i18n
+  app.use(i18n.init);
+
 };
 
 /**
