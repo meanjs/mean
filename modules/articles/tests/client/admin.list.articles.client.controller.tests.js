@@ -3,7 +3,7 @@
 
   describe('Admin Articles List Controller Tests', function () {
     // Initialize global variables
-    var ArticlesListController,
+    var ArticlesAdminListController,
       $scope,
       $httpBackend,
       $state,
@@ -59,7 +59,7 @@
       };
 
       // Initialize the Articles List controller.
-      ArticlesListController = $controller('ArticlesListController as vm', {
+      ArticlesAdminListController = $controller('ArticlesAdminListController as vm', {
         $scope: $scope
       });
 
