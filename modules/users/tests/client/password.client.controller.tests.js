@@ -45,7 +45,6 @@
         // Ignore parent template gets on state transition
         $httpBackend.whenGET('/modules/core/client/views/404.client.view.html').respond(200);
         $httpBackend.whenGET('api/users/me').respond({ user: { username: 'test', roles: ['user'] } });
-        $httpBackend.flush();
 
         // Mock logged in user
         Authentication.user = {

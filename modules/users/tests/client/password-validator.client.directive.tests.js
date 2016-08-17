@@ -20,7 +20,6 @@
       $httpBackend = _$httpBackend_;
 
       $httpBackend.whenGET('api/users/me').respond({});
-      $httpBackend.flush();
 
       scope.passwordMock = {
         password: 'P@ssw0rd!!'

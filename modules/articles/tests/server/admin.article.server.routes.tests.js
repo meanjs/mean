@@ -74,6 +74,7 @@ describe('Article Admin CRUD tests', function () {
 
         // Save a new article
         agent.post('/api/articles')
+          .set('Authorization', 'JWT ' + signinRes.body.token)
           .send(article)
           .expect(200)
           .end(function (articleSaveErr, articleSaveRes) {
@@ -119,6 +120,7 @@ describe('Article Admin CRUD tests', function () {
 
         // Save a new article
         agent.post('/api/articles')
+          .set('Authorization', 'JWT ' + signinRes.body.token)
           .send(article)
           .expect(200)
           .end(function (articleSaveErr, articleSaveRes) {
@@ -132,6 +134,7 @@ describe('Article Admin CRUD tests', function () {
 
             // Update an existing article
             agent.put('/api/articles/' + articleSaveRes.body._id)
+              .set('Authorization', 'JWT ' + signinRes.body.token)
               .send(article)
               .expect(200)
               .end(function (articleUpdateErr, articleUpdateRes) {
@@ -169,6 +172,7 @@ describe('Article Admin CRUD tests', function () {
 
         // Save a new article
         agent.post('/api/articles')
+          .set('Authorization', 'JWT ' + signinRes.body.token)
           .send(article)
           .expect(422)
           .end(function (articleSaveErr, articleSaveRes) {
@@ -196,6 +200,7 @@ describe('Article Admin CRUD tests', function () {
 
         // Save a new article
         agent.post('/api/articles')
+          .set('Authorization', 'JWT ' + signinRes.body.token)
           .send(article)
           .expect(200)
           .end(function (articleSaveErr, articleSaveRes) {
@@ -206,6 +211,7 @@ describe('Article Admin CRUD tests', function () {
 
             // Delete an existing article
             agent.delete('/api/articles/' + articleSaveRes.body._id)
+              .set('Authorization', 'JWT ' + signinRes.body.token)
               .send(article)
               .expect(200)
               .end(function (articleDeleteErr, articleDeleteRes) {
@@ -243,6 +249,7 @@ describe('Article Admin CRUD tests', function () {
 
         // Save a new article
         agent.post('/api/articles')
+          .set('Authorization', 'JWT ' + signinRes.body.token)
           .send(article)
           .expect(200)
           .end(function (articleSaveErr, articleSaveRes) {
@@ -253,6 +260,7 @@ describe('Article Admin CRUD tests', function () {
 
             // Get the article
             agent.get('/api/articles/' + articleSaveRes.body._id)
+              .set('Authorization', 'JWT ' + signinRes.body.token)
               .expect(200)
               .end(function (articleInfoErr, articleInfoRes) {
                 // Handle article error
