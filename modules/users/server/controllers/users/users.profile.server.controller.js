@@ -12,21 +12,18 @@ var _ = require('lodash'),
   config = require(path.resolve('./config/config')),
   User = mongoose.model('User');
 
+var whitelistedFields = ['firstName', 'lastName', 'email', 'username'];
+
 /**
  * Update user details
  */
 exports.update = function (req, res) {
   // Init Variables
   var user = req.user;
-  var secureFields = ['firstName', 'lastName', 'email', 'username'];
 
   if (user) {
-    // For security measurements update only secure fields
-    secureFields.forEach(function (field) {
-      if (req.body.hasOwnProperty(field)) {
-        user[field] = req.body[field];
-      }
-    });
+    // Update whitelisted fields only
+    user = _.extend(user, _.pick(req.body, whitelistedFields));
 
     user.updated = Date.now();
     user.displayName = user.firstName + ' ' + user.lastName;
