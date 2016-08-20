@@ -5,8 +5,6 @@ services:
     build: .
     container_name: meanjs
     command: npm start
-    links:
-     - db
     ports:
      - "3000:3000"
      - "5858:5858"
