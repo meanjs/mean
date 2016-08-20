@@ -16,7 +16,7 @@ services:
     volumes_from:
      - web-data
   web-data:
-    image: busybox:latest
+    build: .
     volumes:
      - ./:/opt/mean.js
      - /opt/mean.js/node_modules
