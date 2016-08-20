@@ -17,6 +17,8 @@ services:
      - /opt/mean.js/node_modules
      - /opt/mean.js/public
      - /opt/mean.js/uploads
+    depends_on:
+      - db
   db:
     image: mongo:3.2
     restart: always
