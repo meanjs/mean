@@ -21,7 +21,15 @@ services:
      - /opt/mean.js/uploads
   db:
     image: mongo:3.2
-    container_name: db_1
     restart: always
     ports:
      - "27017:27017"
+    volumes_from:
+      - db-data
+  db-data:
+    image: mongo:3.2
+    volumes:
+      - /data/db
+      - /var/lib/mongodb
+      - /var/log/mongodb
+    entrypoint: /bin/true
