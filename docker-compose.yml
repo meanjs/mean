@@ -4,7 +4,6 @@ services:
     restart: always
     build: .
     container_name: meanjs
-    command: npm start
     ports:
      - "3000:3000"
      - "5858:5858"
@@ -12,13 +11,17 @@ services:
     environment:
      - NODE_ENV=development
      - DB_1_PORT_27017_TCP_ADDR=db
+    depends_on:
+     - db
+    volumes_from:
+     - web-data
+  web-data:
+    image: busybox:latest
     volumes:
      - ./:/opt/mean.js
      - /opt/mean.js/node_modules
      - /opt/mean.js/public
      - /opt/mean.js/uploads
-    depends_on:
-      - db
   db:
     image: mongo:3.2
     restart: always
