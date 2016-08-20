@@ -17,6 +17,7 @@ services:
      - web-data
   web-data:
     build: .
+    entrypoint: /bin/true
     volumes:
      - ./:/opt/mean.js
      - /opt/mean.js/node_modules
