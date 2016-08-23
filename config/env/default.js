@@ -8,7 +8,7 @@ module.exports = {
     googleAnalyticsTrackingID: process.env.GOOGLE_ANALYTICS_TRACKING_ID || 'GOOGLE_ANALYTICS_TRACKING_ID',
     language: 'en-us',
     languages: {
-      'en-us': 'Engish',
+      'en-us': 'English',
       'ru-ru': 'Русский'
     },
     languagesDir: __dirname + '/../../i18n'

@@ -1,3 +1,17 @@
 {
-	"Is now connected": "Подключен"
+	"Is now connected": "Подключен",
+	"Invalid username or password": "Неверное имя пользователя или пароль",
+	"User is not authorized": "Доступ запрещен для выбранного пользователя",
+	"Article is invalid": "Неверная статья",
+	"No article with that identifier has been found": "Такой статьи не существует",
+	"No account with that username has been found": "Пользователь с такими именем не существует",
+	"Username field must not be blank": "Имя пользователя не может быть пустым",
+	"Failure sending email": "Не удалось отправить email",
+	"Password changed successfully": "Пароль успешно изменен",
+	"Passwords do not match": "Пароли не совпадают",
+	"Current password is incorrect": "Текущий пароль неверен",
+	"Please provide a new password": "Введите новый пароль",
+	"User is not signed in": "Такой пользователь не зарегистрирован",
+	"Error occurred while uploading profile picture": "Не удалось загрузить картинку профиля",
+	"It seems like you signed up using your {{social}} account": "Вы успешно зарегистрировались с помощью своей учетной записи {{social}}"
 }

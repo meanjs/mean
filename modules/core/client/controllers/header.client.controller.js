@@ -23,7 +23,7 @@
     }
 
     vm.language = $translate.preferredLanguage();
-    vm.languages = window.application.languages;
+    vm.languages = window.application ? window.application.languages : {};
 
     $scope.changeLanguage = function (language) {
 

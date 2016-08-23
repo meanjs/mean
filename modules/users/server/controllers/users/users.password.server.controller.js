@@ -34,11 +34,11 @@ exports.forgot = function (req, res, next) {
         }, '-salt -password', function (err, user) {
           if (err || !user) {
             return res.status(400).send({
-              message: 'No account with that username has been found'
+              message: i18n.__('No account with that username has been found')
             });
           } else if (user.provider !== 'local') {
             return res.status(400).send({
-              message: 'It seems like you signed up using your ' + user.provider + ' account'
+              message: i18n.__('It seems like you signed up using your {{social}} account', { social: user.provider })
             });
           } else {
             user.resetPasswordToken = token;
@@ -51,7 +51,7 @@ exports.forgot = function (req, res, next) {
         });
       } else {
         return res.status(400).send({
-          message: 'Username field must not be blank'
+          message: i18n.__('Username field must not be blank')
         });
       }
     },
@@ -80,11 +80,11 @@ exports.forgot = function (req, res, next) {
       smtpTransport.sendMail(mailOptions, function (err) {
         if (!err) {
           res.send({
-            message: 'An email has been sent to the provided email with further instructions.'
+            message: i18n.__('An email has been sent to the provided email with further instructions.')
           });
         } else {
           return res.status(400).send({
-            message: 'Failure sending email'
+            message: i18n.__('Failure sending email')
           });
         }
 
@@ -161,12 +161,12 @@ exports.reset = function (req, res, next) {
             });
           } else {
             return res.status(400).send({
-              message: 'Passwords do not match'
+              message: i18n.__('Passwords do not match')
             });
           }
         } else {
           return res.status(400).send({
-            message: 'Password reset token is invalid or has expired.'
+            message: i18n.__('Password reset token is invalid or has expired.')
           });
         }
       });
@@ -225,7 +225,7 @@ exports.changePassword = function (req, res, next) {
                       res.status(400).send(err);
                     } else {
                       res.send({
-                        message: 'Password changed successfully'
+                        message: i18n.__('Password changed successfully')
                       });
                     }
                   });
@@ -233,28 +233,28 @@ exports.changePassword = function (req, res, next) {
               });
             } else {
               res.status(400).send({
-                message: 'Passwords do not match'
+                message: i18n.__('Passwords do not match')
               });
             }
           } else {
             res.status(400).send({
-              message: 'Current password is incorrect'
+              message: i18n.__('Current password is incorrect')
             });
           }
         } else {
           res.status(400).send({
-            message: 'User is not found'
+            message: i18n.__('User is not found')
           });
         }
       });
     } else {
       res.status(400).send({
-        message: 'Please provide a new password'
+        message: i18n.__('Please provide a new password')
       });
     }
   } else {
     res.status(400).send({
-      message: 'User is not signed in'
+      message: i18n.__('User is not signed in')
     });
   }
 };

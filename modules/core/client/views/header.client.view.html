@@ -11,7 +11,7 @@
   <nav class="navbar-collapse" uib-collapse="!vm.isCollapsed" role="navigation">
     <ul class="nav navbar-nav" ng-if="vm.menu.shouldRender(vm.authentication.user);">
 
-      <li ng-class="dropdown" ui-sref-active="active" uib-dropdown>
+      <li class="switch-language" ng-class="dropdown" ui-sref-active="active" uib-dropdown>
         <a class="dropdown-toggle" uib-dropdown-toggle role="button">{{'Switch Language'|translate}}&nbsp;<span class="caret"></span></a>
         <ul class="dropdown-menu">
           <li ng-repeat="(language, label) in vm.languages">

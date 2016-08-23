@@ -209,7 +209,7 @@ exports.removeOAuthProvider = function (req, res, next) {
 
   if (!user) {
     return res.status(401).json({
-      message: 'User is not authenticated'
+      message: i18n.__('User is not authenticated')
     });
   } else if (!provider) {
     return res.status(400).send();

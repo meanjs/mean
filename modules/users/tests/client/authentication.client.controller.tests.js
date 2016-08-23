@@ -41,6 +41,8 @@
         $httpBackend = _$httpBackend_;
         $location = _$location_;
 
+        $httpBackend.whenGET(/^i18n\/.+\.json$/).respond(200, '');
+
         // Initialize the Authentication controller
         AuthenticationController = $controller('AuthenticationController as vm', {
           $scope: scope

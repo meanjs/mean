@@ -1,3 +1,17 @@
 {
-	"Is now connected": "Is now connected"
+	"Is now connected": "Is now connected",
+	"Invalid username or password": "Invalid username or password",
+	"User is not authorized": "User is not authorized",
+	"Article is invalid": "Article is invalid",
+	"No article with that identifier has been found": "No article with that identifier has been found",
+	"No account with that username has been found": "No account with that username has been found",
+	"Username field must not be blank": "Username field must not be blank",
+	"Failure sending email": "Failure sending email",
+	"Password changed successfully": "Password changed successfully",
+	"Passwords do not match": "Passwords do not match",
+	"Current password is incorrect": "Current password is incorrect",
+	"Please provide a new password": "Please provide a new password",
+	"User is not signed in": "User is not signed in",
+	"Error occurred while uploading profile picture": "Error occurred while uploading profile picture",
+	"It seems like you signed up using your {{social}} account": "It seems like you signed up using your {{social}} account"
 }

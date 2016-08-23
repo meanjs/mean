@@ -11,7 +11,8 @@
       ChatController,
       $timeout,
       $state,
-      Authentication;
+      Authentication,
+      $httpBackend;
 
     // Load the main application module
     beforeEach(module(ApplicationConfiguration.applicationModuleName));
@@ -39,7 +40,11 @@
     });
 
     describe('when user logged in', function () {
-      beforeEach(inject(function ($controller, $rootScope, _Socket_, _Authentication_, _$timeout_, _$state_) {
+      beforeEach(inject(function ($controller, $rootScope, _Socket_, _Authentication_, _$timeout_, _$state_, _$httpBackend_) {
+
+        $httpBackend = _$httpBackend_;
+        $httpBackend.whenGET(/^i18n\/.+\.json$/).respond(200, '');
+
         Authentication.user = {
           name: 'user',
           roles: ['user']

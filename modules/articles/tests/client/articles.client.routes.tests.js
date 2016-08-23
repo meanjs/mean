@@ -4,7 +4,8 @@
   describe('Articles Route Tests', function () {
     // Initialize global variables
     var $scope,
-      ArticlesService;
+      ArticlesService,
+      $httpBackend;
 
     // We can start by loading the main application module
     beforeEach(module(ApplicationConfiguration.applicationModuleName));
@@ -12,10 +13,13 @@
     // The injector ignores leading and trailing underscores here (i.e. _$httpBackend_).
     // This allows us to inject a service but then attach it to a variable
     // with the same name as the service.
-    beforeEach(inject(function ($rootScope, _ArticlesService_) {
+    beforeEach(inject(function ($rootScope, _ArticlesService_, _$httpBackend_) {
       // Set a new global scope
       $scope = $rootScope.$new();
       ArticlesService = _ArticlesService_;
+      $httpBackend = _$httpBackend_;
+
+      $httpBackend.whenGET(/^i18n\/.+\.json$/).respond(200, '');
     }));
 
     describe('Route Config', function () {

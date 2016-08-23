@@ -55,8 +55,8 @@
     "MEAN.JS Documentation": "Документация MEAN.JS",
     "MEAN.JS is a web application boilerplate, which means you should start changing everything :-)": "MEAN.JS - это шаблон веб-приложения, а это значит, что его код можно изменить в любом месте :-)",
     "Modules": "Модули",
-    "modules.client.list.POSTED_BY": "автор:",
-    "modules.client.list.POSTED_ON": "Опубликовано",
+    "modules.client.POSTED_BY": "автор:",
+    "modules.client.POSTED_ON": "Опубликовано",
     "New Article": "Новая статья",
     "New Password": "Новый пароль",
     "No articles yet, why don't you": "Статей еще нет, хотите",
@@ -110,6 +110,6 @@
     "Verify your new password.": "Подтвердите новый пароль",
     "Yeoman Generator": "Yeoman Generator",
     "Your current password is required.": "Необходимо ввести текущий пароль",
-    "{{item.title}}": "",
-    "{{subitem.title}}": ""
+    "{{item.title}}": "{{item.title}}",
+    "{{subitem.title}}": "{{subitem.title}}"
 }

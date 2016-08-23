@@ -10,9 +10,9 @@
   <div class="list-group">
     <a data-ng-repeat="article in vm.articles" data-ui-sref="admin.articles.edit({articleId: article._id})" class="list-group-item">
       <small class="list-group-item-text">
-        {{'modules.client.list.POSTED_ON'|translate}}
+        {{'modules.client.POSTED_ON'|translate}}
         <span data-ng-bind="article.created | date:'mediumDate'"></span>
-        {{'modules.client.list.POSTED_BY'|translate}}
+        {{'modules.client.POSTED_BY'|translate}}
         <span ng-if="article.user" ng-bind="article.user.displayName"></span>
         <span ng-if="!article.user">{{'Deleted User'|translate}}</span>
       </small>
