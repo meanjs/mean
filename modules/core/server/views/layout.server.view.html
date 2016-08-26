@@ -46,13 +46,19 @@
   <!--Embedding The User Object-->
   <script type="text/javascript">
     var user = {{ user | json | safe }};
+
+    var application = {
+      language: {{ language | json | safe }},
+      languages: {{ languages | json | safe }}
+    };
   </script>
 
   <!--Load The Socket.io File-->
   <script type="text/javascript" src="/socket.io/socket.io.js"></script>
 
   <!--Application JavaScript Files-->
-  {% for jsFile in jsFiles %}<script type="text/javascript" src="{{jsFile}}"></script>{% endfor %}
+  {% for jsFile in jsFiles %}
+  <script type="text/javascript" src="{{jsFile}}"></script>{% endfor %}
 
   {% if livereload %}
   <!--Livereload script rendered -->

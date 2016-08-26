@@ -68,6 +68,7 @@ module.exports = {
     Promise: true,
     __TESTING__: true,
     _: false,
-    ApplicationConfiguration: true
+    ApplicationConfiguration: true,
+    i18n: true
   }
 };

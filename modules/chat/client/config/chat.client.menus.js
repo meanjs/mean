@@ -5,13 +5,14 @@
     .module('chat')
     .run(menuConfig);
 
-  menuConfig.$inject = ['menuService'];
+  menuConfig.$inject = ['menuService', '$translate'];
 
-  function menuConfig(menuService) {
+  function menuConfig(menuService, $translate) {
     // Set top bar menu items
     menuService.addMenuItem('topbar', {
       title: 'Chat',
       state: 'chat'
     });
+    $translate('Chat');
   }
 }());

@@ -1,29 +1,29 @@
 <div>
-  <h3 class="col-md-12 text-center">Or with your account</h3>
+  <h3 class="col-md-12 text-center">{{'Or with your account'|translate}}</h3>
   <div class="col-xs-offset-2 col-xs-8 col-md-offset-4 col-md-4">
     <form name="vm.userForm" ng-submit="vm.signin(vm.userForm.$valid)" class="signin" novalidate autocomplete="off">
       <fieldset>
         <div class="form-group" show-errors>
-          <label for="username">Username</label>
-          <input type="text" id="username" name="username" class="form-control" ng-model="vm.credentials.username" placeholder="Username" lowercase required>
+          <label for="username">{{'Username'|translate}}</label>
+          <input type="text" id="username" name="username" class="form-control" ng-model="vm.credentials.username" placeholder="{{'Username'|translate}}" lowercase required>
           <div ng-messages="vm.userForm.username.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">Username is required.</p>
+            <p class="help-block error-text" ng-message="required">{{'Username is required.'|translate}}</p>
           </div>
         </div>
         <div class="form-group" show-errors>
-          <label for="password">Password</label>
-          <input type="password" id="password" name="password" class="form-control" ng-model="vm.credentials.password" placeholder="Password" required>
+          <label for="password">{{'Password'|translate}}</label>
+          <input type="password" id="password" name="password" class="form-control" ng-model="vm.credentials.password" placeholder="{{'Password'|translate}}" required>
           <div ng-messages="vm.userForm.password.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">Password is required.</p>
+            <p class="help-block error-text" ng-message="required">{{'Password is required.'|translate}}</p>
           </div>
         </div>
         <div class="text-center form-group">
-          <button type="submit" class="btn btn-primary">Sign in</button>
-          &nbsp; or&nbsp;
-          <a ui-sref="authentication.signup">Sign up</a>
+          <button type="submit" class="btn btn-primary">{{'Sign in'|translate}}</button>
+          &nbsp; {{'or'|translate}}&nbsp;
+          <a ui-sref="authentication.signup">{{'Sign up'|translate}}</a>
         </div>
         <div class="text-center forgot-password">
-          <a ui-sref="password.forgot">Forgot your password?</a>
+          <a ui-sref="password.forgot">{{'Forgot your password?'|translate}}</a>
         </div>
         <uib-alert type="danger" ng-show="vm.error" class="text-center text-danger">
           <span ng-bind="vm.error"></span>

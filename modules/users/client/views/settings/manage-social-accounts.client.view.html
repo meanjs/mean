@@ -1,5 +1,5 @@
 <section class="row">
-  <h3 class="col-md-12 text-center" ng-show="vm.hasConnectedAdditionalSocialAccounts()">Connected social accounts:</h3>
+  <h3 class="col-md-12 text-center" ng-show="vm.hasConnectedAdditionalSocialAccounts()">{{'Connected social accounts:'|translate}}</h3>
   <div class="col-md-12 text-center">
     <!-- If the user's provider field (primary) is a social account, show it here -->
     <div ng-hide="vm.user.provider === 'local'" class="social-account-container">
@@ -13,7 +13,7 @@
       </a>
     </div>
   </div>
-  <h3 class="col-md-12 text-center" ng-show="vm.hasConnectedAdditionalSocialAccounts()">Unconnected social accounts:</h3>
+  <h3 class="col-md-12 text-center" ng-show="vm.hasConnectedAdditionalSocialAccounts()">{{'Unconnected social accounts:'|translate}}</h3>
   <div class="col-md-12 text-center">
     <div class="social-account-container" ng-hide="vm.isConnectedSocialAccount('facebook')">
       <img ng-src="/modules/users/client/img/buttons/facebook.png">

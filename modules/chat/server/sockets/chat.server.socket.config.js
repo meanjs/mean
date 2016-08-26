@@ -5,7 +5,7 @@ module.exports = function (io, socket) {
   // Emit the status event when a new socket client is connected
   io.emit('chatMessage', {
     type: 'status',
-    text: 'Is now connected',
+    text: i18n.__('Is now connected'),
     created: Date.now(),
     profileImageURL: socket.request.user.profileImageURL,
     username: socket.request.user.username

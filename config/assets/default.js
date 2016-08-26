@@ -22,6 +22,13 @@ module.exports = {
         'public/lib/angular-resource/angular-resource.js',
         'public/lib/angular-ui-router/release/angular-ui-router.js',
         'public/lib/owasp-password-strength-test/owasp-password-strength-test.js',
+        'public/lib/angular-translate/angular-translate.js',
+        'public/lib/angular-translate-loader-url/angular-translate-loader-url.js',
+        'public/lib/angular-translate-loader-static-files/angular-translate-loader-static-files.js',
+        'public/lib/angular-cookies/angular-cookies.js',
+        'public/lib/angular-translate-storage-cookie/angular-translate-storage-cookie.js',
+        'public/lib/angular-translate-storage-local/angular-translate-storage-local.js',
+        'public/lib/angular-dynamic-locale/src/tmhDynamicLocale.js',
         // endbower
       ],
       tests: ['public/lib/angular-mocks/angular-mocks.js']

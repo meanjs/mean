@@ -1,7 +1,7 @@
 ﻿<section>
   <div class="page-header">
     <h1>
-      Articles
+      {{'Articles'|translate}}
       <a class="btn btn-primary pull-right" data-ui-sref="admin.articles.create">
         <i class="glyphicon glyphicon-plus"></i>
       </a>
@@ -10,17 +10,17 @@
   <div class="list-group">
     <a data-ng-repeat="article in vm.articles" data-ui-sref="admin.articles.edit({articleId: article._id})" class="list-group-item">
       <small class="list-group-item-text">
-        Posted on
+        {{'modules.client.POSTED_ON'|translate}}
         <span data-ng-bind="article.created | date:'mediumDate'"></span>
-        by
+        {{'modules.client.POSTED_BY'|translate}}
         <span ng-if="article.user" ng-bind="article.user.displayName"></span>
-        <span ng-if="!article.user">Deleted User</span>
+        <span ng-if="!article.user">{{'Deleted User'|translate}}</span>
       </small>
       <h4 class="list-group-item-heading" data-ng-bind="article.title"></h4>
       <p class="list-group-item-text" data-ng-bind="article.content"></p>
     </a>
   </div>
   <div class="alert alert-warning text-center" data-ng-if="articles.$resolved && !articles.length">
-    No articles yet, why don't you <a data-ui-sref="admin.articles.create">create one</a>?
+    {{"No articles yet, why don't you"|translate}} <a data-ui-sref="admin.articles.create">{{'create one'|translate}}</a>?
   </div>
 </section>

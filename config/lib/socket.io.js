@@ -2,6 +2,7 @@
 
 // Load the module dependencies
 var config = require('../config'),
+  i18n = require('i18n'),
   path = require('path'),
   fs = require('fs'),
   http = require('http'),
@@ -96,6 +97,7 @@ module.exports = function (app, db) {
         passport.initialize()(socket.request, {}, function () {
           passport.session()(socket.request, {}, function () {
             if (socket.request.user) {
+              i18n.init(socket.request);
               next(null, true);
             } else {
               next(new Error('User is not authenticated'), false);

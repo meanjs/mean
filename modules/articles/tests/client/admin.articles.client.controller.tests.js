@@ -46,6 +46,8 @@
       Authentication = _Authentication_;
       ArticlesService = _ArticlesService_;
 
+      $httpBackend.whenGET(/^i18n\/.+\.json$/).respond(200, '');
+
       // create mock article
       mockArticle = new ArticlesService({
         _id: '525a8422f6d0f87f0e407a33',

@@ -2,10 +2,13 @@
   'use strict';
 
   var applicationModuleName = 'mean';
+  var application = window.application || false;
 
   var service = {
     applicationModuleName: applicationModuleName,
-    applicationModuleVendorDependencies: ['ngResource', 'ngAnimate', 'ngMessages', 'ui.router', 'ui.bootstrap', 'angularFileUpload'],
+    applicationLanguage: application.language || 'en-us',
+    applicationLanguages: application.languages || ['en-us'],
+    applicationModuleVendorDependencies: ['ngResource', 'ngCookies', 'tmh.dynamicLocale', 'pascalprecht.translate', 'ngAnimate', 'ngMessages', 'ui.router', 'ui.bootstrap', 'angularFileUpload'],
     registerModule: registerModule
   };
 

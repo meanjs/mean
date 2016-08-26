@@ -41,7 +41,7 @@ exports.isAllowed = function (req, res, next) {
         return next();
       } else {
         return res.status(403).json({
-          message: 'User is not authorized'
+          message: i18n.__('User is not authorized')
         });
       }
     }

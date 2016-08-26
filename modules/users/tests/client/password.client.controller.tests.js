@@ -39,6 +39,8 @@
         $location = _$location_;
         $location.path = jasmine.createSpy().and.returnValue(true);
 
+        $httpBackend.whenGET(/^i18n\/.+\.json$/).respond(200, '');
+
         // Mock logged in user
         _Authentication_.user = {
           username: 'test',
@@ -68,6 +70,8 @@
         $location.path = jasmine.createSpy().and.returnValue(true);
         $window = _$window_;
         $window.user = null;
+
+        $httpBackend.whenGET(/^i18n\/.+\.json$/).respond(200, '');
 
         // Initialize the Authentication controller
         PasswordController = $controller('PasswordController as vm', {

@@ -5,7 +5,13 @@ module.exports = {
     title: 'MEAN.JS',
     description: 'Full-Stack JavaScript with MongoDB, Express, AngularJS, and Node.js',
     keywords: 'mongodb, express, angularjs, node.js, mongoose, passport',
-    googleAnalyticsTrackingID: process.env.GOOGLE_ANALYTICS_TRACKING_ID || 'GOOGLE_ANALYTICS_TRACKING_ID'
+    googleAnalyticsTrackingID: process.env.GOOGLE_ANALYTICS_TRACKING_ID || 'GOOGLE_ANALYTICS_TRACKING_ID',
+    language: 'en-us',
+    languages: {
+      'en-us': 'English',
+      'ru-ru': 'Русский'
+    },
+    languagesDir: __dirname + '/../../i18n'
   },
   port: process.env.PORT || 3000,
   host: process.env.HOST || '0.0.0.0',

@@ -8,7 +8,21 @@
   // Setting HTML5 Location Mode
   angular
     .module(app.applicationModuleName)
-    .config(bootstrapConfig);
+    .config(bootstrapConfig)
+    .config(translateConfig);
+
+  function translateConfig(tmhDynamicLocaleProvider, $translateProvider) {
+
+    tmhDynamicLocaleProvider.localeLocationPattern('lib/angular-i18n/angular-locale_{{locale}}.js');
+
+    $translateProvider.preferredLanguage(app.applicationLanguage);
+    $translateProvider.useStaticFilesLoader({
+      prefix: 'i18n/',
+      suffix: '.json'
+    });
+    $translateProvider.useSanitizeValueStrategy('escapeParameters');
+    $translateProvider.useLocalStorage();
+  }
 
   function bootstrapConfig($locationProvider, $httpProvider) {
     $locationProvider.html5Mode(true).hashPrefix('!');

@@ -76,7 +76,7 @@ exports.list = function (req, res) {
 exports.userByID = function (req, res, next, id) {
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(400).send({
-      message: 'User is invalid'
+      message: i18n.__('User is invalid')
     });
   }
 

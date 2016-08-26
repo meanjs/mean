@@ -5,14 +5,15 @@
     .module('core.admin')
     .run(menuConfig);
 
-  menuConfig.$inject = ['menuService'];
+  menuConfig.$inject = ['menuService', '$translate'];
 
-  function menuConfig(menuService) {
+  function menuConfig(menuService, $translate) {
     menuService.addMenuItem('topbar', {
       title: 'Admin',
       state: 'admin',
       type: 'dropdown',
       roles: ['admin']
     });
+    $translate('Admin');
   }
 }());
