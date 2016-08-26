@@ -19,10 +19,6 @@ function seedDB() {
 // Initialize Models
 mongoose.loadModels(seedDB);
 
-module.exports.loadModels = function loadModels() {
-  mongoose.loadModels();
-};
-
 module.exports.init = function init(callback) {
   mongoose.connect(function (db) {
     // Initialize express
