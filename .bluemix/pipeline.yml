@@ -16,7 +16,7 @@ stages:
       # Set Node version to 0.12
       export PATH=/opt/IBM/node-v0.12/bin:$PATH
       # Build MEANJS
-      npm install
+      NODE_ENV=development npm install
       gulp build
 - name: Deploy
   inputs:
