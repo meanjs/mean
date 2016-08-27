@@ -12,6 +12,8 @@ var _ = require('lodash'),
   config = require(path.resolve('./config/config')),
   User = mongoose.model('User');
 
+var whitelistedFields = ['firstName', 'lastName', 'email', 'username'];
+
 /**
  * Update user details
  */
@@ -19,15 +21,10 @@ exports.update = function (req, res) {
   // Init Variables
   var user = req.user;
 
-  // For security measurement we remove the roles from the req.body object
-  delete req.body.roles;
-
-  // For security measurement do not use _id from the req.body object
-  delete req.body._id;
-
   if (user) {
-    // Merge existing user
-    user = _.extend(user, req.body);
+    // Update whitelisted fields only
+    user = _.extend(user, _.pick(req.body, whitelistedFields));
+
     user.updated = Date.now();
     user.displayName = user.firstName + ' ' + user.lastName;
 
