@@ -43,6 +43,17 @@
     </section>
   </section>
 
+  <noscript>
+    <style>
+      [ng\:cloak], [ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+        display: block !important;
+      }
+    </style>
+    <div class="alert alert-warning">
+      <strong>This page requires JavaScript.</strong> Please enable it in your browser.
+    </div>
+  </noscript>
+
   <!--Embedding The User Object-->
   <script type="text/javascript">
     var user = {{ user | json | safe }};
