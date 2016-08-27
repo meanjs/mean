@@ -23,10 +23,9 @@
     "lint": "gulp lint",
     "test": "gulp test",
     "test:server": "gulp test:server",
+    "test:server:watch": "gulp test:server:watch",
     "test:client": "gulp test:client",
     "test:e2e": "gulp test:e2e",
-    "test:watch": "gulp test:server:watch",
-    "test:watch:onlyChanged": "gulp test:server:watch --onlyChanged",
     "postinstall": "bower install --allow-root && bower prune --allow-root",
     "generate-ssl-certs": "scripts/generate-ssl-certs.sh"
   },
