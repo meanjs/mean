@@ -16,7 +16,7 @@ var config = require('../config'),
   cookieParser = require('cookie-parser'),
   helmet = require('helmet'),
   flash = require('connect-flash'),
-  consolidate = require('consolidate'),
+  hbs = require('express-hbs'),
   path = require('path'),
   _ = require('lodash'),
   lusca = require('lusca');
@@ -98,12 +98,11 @@ module.exports.initMiddleware = function (app) {
  * Configure view engine
  */
 module.exports.initViewEngine = function (app) {
-  // Set swig as the template engine
-  app.engine('server.view.html', consolidate[config.templateEngine]);
-
-  // Set views path and view engine
+  app.engine('server.view.html', hbs.express4({
+    extname: '.server.view.html'
+  }));
   app.set('view engine', 'server.view.html');
-  app.set('views', './');
+  app.set('views', path.resolve('./'));
 };
 
 /**
