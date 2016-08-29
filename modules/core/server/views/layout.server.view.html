@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en" ng-strict-di>
 <head>
   <meta charset="utf-8">
@@ -32,14 +32,14 @@
   <link href="{{favicon}}" rel="shortcut icon" type="image/x-icon">
 
   <!-- Application CSS Files -->
-  {% for cssFile in cssFiles %}<link rel="stylesheet" href="{{cssFile}}">{% endfor %}
+  {{#each cssFiles}}<link rel="stylesheet" href="{{this}}">{{/each}}
 </head>
 
 <body class="ng-cloak">
   <header ng-include="'/modules/core/client/views/header.client.view.html'" class="navbar navbar-fixed-top navbar-inverse"></header>
   <section class="content">
     <section class="container">
-      {% block content %}{% endblock %}
+      {{{block "content"}}}
     </section>
   </section>
 
@@ -56,20 +56,20 @@
 
   <!--Embedding The User Object-->
   <script type="text/javascript">
-    var user = {{ user | json | safe }},
-        env = "{{ env }}";
+    var user = {{{ user }}};
+    var env = "{{ env }}";
   </script>
 
   <!--Load The Socket.io File-->
   <script type="text/javascript" src="/socket.io/socket.io.js"></script>
 
   <!--Application JavaScript Files-->
-  {% for jsFile in jsFiles %}<script type="text/javascript" src="{{jsFile}}"></script>{% endfor %}
+    {{#each jsFiles}}<script type="text/javascript" src="{{this}}"></script>{{/each}}
 
-  {% if livereload %}
+  {{#if livereload}}
   <!--Livereload script rendered -->
   <script type="text/javascript" src="{{host}}:35729/livereload.js"></script>
-  {% endif %}
+  {{/if}}
 </body>
 
 </html>
