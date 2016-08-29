@@ -11,7 +11,6 @@
     var vm = this;
 
     vm.user = Authentication.user;
-    vm.fileSelected = false;
 
     vm.upload = function (dataUrl, name) {
       vm.success = vm.error = null;
@@ -32,6 +31,14 @@
       });
     };
 
+    // Called after the user has selected any file
+    vm.onFileSelection = function() {
+      vm.success = vm.error = vm.pictureSelected = null;
+
+      // proceed to crop if they didn't cancel and it's a valid image file
+      if (vm.picFile && !vm.userForm.$error.pattern) vm.pictureSelected = true;
+    };
+
     // Called after the user has successfully uploaded a new picture
     function onSuccessItem(response) {
       // Show success message
@@ -41,13 +48,13 @@
       vm.user = Authentication.user = response;
 
       // Reset form
-      vm.fileSelected = false;
+      vm.pictureSelected = false;
       vm.progress = 0;
     }
 
     // Called after the user has failed to uploaded a new picture
     function onErrorItem(response) {
-      vm.fileSelected = false;
+      vm.pictureSelected = false;
 
       // Show error message
       vm.error = response.message;
