@@ -24,7 +24,7 @@ exports.renderIndex = function (req, res) {
   }
 
   res.render('modules/core/server/views/index', {
-    user: safeUserObject
+    user: JSON.stringify(safeUserObject)
   });
 };
 
