@@ -26,18 +26,6 @@ Make sure you have installed all of the following prerequisites on your developm
 $ npm install -g bower
 ```
 
-* Gulp - Gulp is used to build the project and automate project tasks.
-
-```bash
-$ npm install gulp -g
-```
-
-* Grunt - (Optional) You're going to use the [Grunt Task Runner](http://gruntjs.com/) to automate your development process.
-
-```bash
-$ npm install -g grunt-cli
-```
-
 ## Downloading MEAN.JS
 There are several ways you can get the MEAN.JS boilerplate:
 
@@ -65,9 +53,9 @@ Another way would be to use the [Official Yo Generator](http://meanjs.org/genera
 ## Quick Install
 Once you've downloaded the boilerplate and installed all the prerequisites, you're just a few steps away from starting to develop your MEAN application.
 
-The first thing you should do is install the Node.js dependencies. The boilerplate comes pre-bundled with a package.json file that contains the list of modules you need to start your application. To learn more about the modules installed visit the npm & Package.json section.
+The boilerplate comes pre-bundled with a `package.json` and `bower.json` files that contain the list of modules you need to start your application.
 
-To install Node.js dependencies you're going to use npm again. In the application folder run this in the command-line:
+To install the dependencies, run this in the application folder from the command-line:
 
 ```bash
 $ npm install
@@ -76,12 +64,10 @@ $ npm install
 This command does a few things:
 * First it will install the dependencies needed for the application to run.
 * If you're running in a development environment, it will then also install development dependencies needed for testing and running your application.
-* Finally, when the install process is over, npm will initiate a bower install command to install all the front-end modules needed for the application
+* When the npm packages install process is over, npm will initiate a bower install command to install all the front-end modules needed for the application
+* To update these packages later on, just run `npm update`
 
 ## Running Your Application
-
-The MEAN.JS project integrates both Grunt and Gulp as build tools and task automation, but Grunt will be deprecated in favor of Gulp.
-While you are free to use both of them directly, we have wrapped Gulp tasks with npm scripts so that regardless of the build tool running the project is transparent to you.
 
 Run your application using npm:
 
@@ -94,17 +80,16 @@ Your application should run on port 3000 with the *development* environment conf
 That's it! Your application should be running. To proceed with your development, check the other sections in this documentation.
 If you encounter any problems, try the Troubleshooting section.
 
-* explore `config/env/development.js` for development environment configuration options
-* it is possible to run any gulp tasks using npm's run command, for example: `npm run gulp test:server:watch`
+Explore `config/env/development.js` for development environment configuration options.
 
 ### Running in Production mode
 To run your application with *production* environment configuration, execute grunt as follows:
 
 ```bash
-$ npm start:prod
+$ npm run start:prod
 ```
 
-* explore `config/env/production.js` for production environment configuration options
+Explore `config/env/production.js` for production environment configuration options.
 
 ### Running with User Seed
 To have default account(s) seeded at runtime:
@@ -126,13 +111,13 @@ Application will start by default with secure configuration (SSL mode) turned on
 To run your application in a secure manner you'll need to use OpenSSL and generate a set of self-signed certificates. Unix-based users can use the following command:
 
 ```bash
-$ sh ./scripts/generate-ssl-certs.sh
+$ npm run generate-ssl-certs
 ```
 
 Windows users can follow instructions found [here](http://www.websense.com/support/article/kbarticle/How-to-use-OpenSSL-and-Microsoft-Certification-Authority).
 After you've generated the key and certificate, place them in the *config/sslcerts* folder.
 
-Finally, execute grunt's prod task `npm start:prod`
+Finally, execute prod task `npm run start:prod`
 * enable/disable SSL mode in production environment change the `secure` option in `config/env/production.js`
 
 
@@ -147,38 +132,46 @@ This will run both the server-side tests (located in the `app/tests/` directory)
 To execute only the server tests, run the test:server task:
 
 ```bash
-$ npm test:server
+$ npm run test:server
+```
+
+To execute only the server tests and run again only changed tests, run the test:server:watch task:
+
+```bash
+$ npm run test:server:watch
 ```
 
 And to run only the client tests, run the test:client task:
 
 ```bash
-$ npm test:client
+$ npm run test:client
 ```
 
-## Running your application with Grunt
+## Running your application with Gulp
 
-After the install process, you can easily run your project with:
+The MEAN.JS project integrates Gulp as build tools and task automation.
+
+We have wrapped Gulp tasks with npm scripts so that regardless of the build tool running the project is transparent to you.
+
+To use Gulp directly, you need to first install it globally:
 
 ```bash
-$ grunt
+$ npm install gulp -g
 ```
-The server is now running on http://localhost:3000 if you are using the default settings.
 
-### Running your application with Gulp
-
-Start the development environment with:
+Then start the development environment with:
 
 ```bash
 $ gulp
 ```
 
-### Running in Production mode
 To run your application with *production* environment configuration, execute gulp as follows:
 
 ```bash
 $ gulp prod
 ```
+
+It is also possible to run any Gulp tasks using npm's run command and therefore use locally installed version of gulp, for example: `npm run gulp eslint`
 
 ## Development and deployment With Docker
 
@@ -215,7 +208,6 @@ $ docker-compose -f docker-compose-production.yml up -d
 $ docker build -t mean -f Dockerfile-production .
 $ docker run -p 27017:27017 -d --name db mongo
 $ docker run -p 3000:3000 --link db:db_1 mean
-$
 ```
 
 ## Getting Started With MEAN.JS
@@ -278,26 +270,7 @@ your changes to Bluemix.
 
 ## Credits
 Inspired by the great work of [Madhusudhan Srinivasa](https://github.com/madhums/)
-The MEAN name was coined by [Valeri Karpov](http://blog.mongodb.org/post/49262866911/the-mean-stack-mongodb-expressjs-angularjs-and)
+The MEAN name was coined by [Valeri Karpov](http://blog.mongodb.org/post/49262866911/the-mean-stack-mongodb-expressjs-angularjs-and).
 
 ## License
-(The MIT License)
-
-Permission is hereby granted, free of charge, to any person obtaining
-a copy of this software and associated documentation files (the
-'Software'), to deal in the Software without restriction, including
-without limitation the rights to use, copy, modify, merge, publish,
-distribute, sublicense, and/or sell copies of the Software, and to
-permit persons to whom the Software is furnished to do so, subject to
-the following conditions:
-
-The above copyright notice and this permission notice shall be
-included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND,
-EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
-CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
-TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
-SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+[The MIT License](LICENSE.md)
