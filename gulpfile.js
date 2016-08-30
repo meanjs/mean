@@ -7,6 +7,7 @@ var _ = require('lodash'),
   fs = require('fs'),
   defaultAssets = require('./config/assets/default'),
   testAssets = require('./config/assets/test'),
+  testConfig = require('./config/env/test'),
   glob = require('glob'),
   gulp = require('gulp'),
   gulpLoadPlugins = require('gulp-load-plugins'),
@@ -318,7 +319,34 @@ gulp.task('mocha', function (done) {
         });
       });
   });
+});
 
+// add configuration options for coverage here
+gulp.task('configure-coverage', function (done) {
+  // Set coverage config environment variable so karma-coverage knows to run it
+  testConfig.coverage = true;
+  done();
+});
+
+// prepare istanbul coverage test
+gulp.task('pre-test', function () {
+  var testSuites = changedTestFiles.length ? changedTestFiles : testAssets.tests.server;
+
+  return gulp.src(testSuites)
+    // Covering files
+    .pipe(plugins.istanbul())
+    // Force `require` to return covered files
+    .pipe(plugins.istanbul.hookRequire());
+});
+
+// run istanbul test and write report
+gulp.task('mocha:coverage', ['pre-test', 'mocha'], function () {
+  var testSuites = changedTestFiles.length ? changedTestFiles : testAssets.tests.server;
+
+  return gulp.src(testSuites)
+    .pipe(plugins.istanbul.writeReports({
+      reportOpts: { dir: './coverage/server' }
+    }));
 });
 
 // Karma test runner task
@@ -385,6 +413,10 @@ gulp.task('build', function (done) {
 // Run the project tests
 gulp.task('test', function (done) {
   runSequence('env:test', 'test:server', 'karma', 'nodemon', 'protractor', done);
+});
+
+gulp.task('test:coverage', function (done) {
+  runSequence('env:test', ['copyLocalEnvConfig', 'makeUploadsDir', 'dropdb'], 'lint', 'configure-coverage', 'mocha:coverage', 'karma', done);
 });
 
 gulp.task('test:server', function (done) {

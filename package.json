@@ -49,6 +49,7 @@
     "glob": "~7.0.0",
     "grunt": "~1.0.1",
     "grunt-cli": "~1.2.0",
+    "gulp-istanbul": "^1.1.1",
     "gulp-node-inspector": "~0.1.0",
     "helmet": "~2.1.2",
     "jasmine-core": "~2.4.1",

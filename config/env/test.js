@@ -93,6 +93,6 @@ module.exports = {
       }
     }
   },
-  // This config is set to true during grunt coverage
+  // This config is set to true during gulp coverage
   coverage: process.env.COVERAGE || false
 };
