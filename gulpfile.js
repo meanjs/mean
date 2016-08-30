@@ -24,7 +24,8 @@ var _ = require('lodash'),
   protractor = require('gulp-protractor').protractor,
   webdriver_update = require('gulp-protractor').webdriver_update,
   webdriver_standalone = require('gulp-protractor').webdriver_standalone,
-  KarmaServer = require('karma').Server;
+  KarmaServer = require('karma').Server,
+  lcovMerger = require('lcov-result-merger');
 
 // Local settings
 var changedTestFiles = [];
@@ -330,9 +331,9 @@ gulp.task('configure-coverage', function (done) {
 
 // prepare istanbul coverage test
 gulp.task('pre-test', function () {
-  var testSuites = changedTestFiles.length ? changedTestFiles : testAssets.tests.server;
 
-  return gulp.src(testSuites)
+  // tell istanbul to show results for all server js assets
+  return gulp.src(defaultAssets.server.allJS)
     // Covering files
     .pipe(plugins.istanbul())
     // Force `require` to return covered files
@@ -347,6 +348,19 @@ gulp.task('mocha:coverage', ['pre-test', 'mocha'], function () {
     .pipe(plugins.istanbul.writeReports({
       reportOpts: { dir: './coverage/server' }
     }));
+});
+
+// join the coverage files for client and server into a single file
+gulp.task('merge-lcov', function (done) {
+  return gulp.src('./coverage/**/lcov.info')
+    .pipe(lcovMerger())
+    .pipe(gulp.dest('./coverage/merged/'));
+});
+
+// send coverage test results to coveralls
+gulp.task('coveralls', ['merge-lcov'], function (done) {
+  return gulp.src('./coverage/merged/lcov.info')
+    .pipe(plugins.coveralls());
 });
 
 // Karma test runner task
@@ -415,10 +429,6 @@ gulp.task('test', function (done) {
   runSequence('env:test', 'test:server', 'karma', 'nodemon', 'protractor', done);
 });
 
-gulp.task('test:coverage', function (done) {
-  runSequence('env:test', ['copyLocalEnvConfig', 'makeUploadsDir', 'dropdb'], 'lint', 'configure-coverage', 'mocha:coverage', 'karma', done);
-});
-
 gulp.task('test:server', function (done) {
   runSequence('env:test', ['copyLocalEnvConfig', 'makeUploadsDir', 'dropdb'], 'lint', 'mocha', done);
 });
@@ -434,6 +444,10 @@ gulp.task('test:client', function (done) {
 
 gulp.task('test:e2e', function (done) {
   runSequence('env:test', 'lint', 'dropdb', 'nodemon', 'protractor', done);
+});
+
+gulp.task('test:coverage', function (done) {
+  runSequence('env:test', ['copyLocalEnvConfig', 'makeUploadsDir', 'dropdb'], 'lint', 'configure-coverage', 'mocha:coverage', 'karma', 'coveralls', done);
 });
 
 // Run the project in development mode
