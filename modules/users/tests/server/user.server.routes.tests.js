@@ -930,6 +930,26 @@ describe('User CRUD tests', function () {
       });
   });
 
+  it('should not be able to upload a non-image file as a profile picture', function (done) {
+    agent.post('/api/auth/signin')
+      .send(credentials)
+      .expect(200)
+      .end(function (signinErr, signinRes) {
+        // Handle signin error
+        if (signinErr) {
+          return done(signinErr);
+        }
+
+        agent.post('/api/users/picture')
+          .attach('newProfilePicture', './modules/users/tests/server/user.server.model.tests.js')
+          .send(credentials)
+          .expect(400)
+          .end(function (userInfoErr, userInfoRes) {
+            done(userInfoErr);
+          });
+      });
+  });
+
   it('should not be able to change profile picture if attach a picture with a different field name', function (done) {
     agent.post('/api/auth/signin')
       .send(credentials)
