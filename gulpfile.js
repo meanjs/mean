@@ -322,17 +322,17 @@ gulp.task('mocha', function (done) {
   });
 });
 
-// add configuration options for coverage here
+// Add configuration options for coverage here
 gulp.task('configure-coverage', function (done) {
   // Set coverage config environment variable so karma-coverage knows to run it
   testConfig.coverage = true;
   done();
 });
 
-// prepare istanbul coverage test
+// Prepare istanbul coverage test
 gulp.task('pre-test', function () {
 
-  // tell istanbul to show results for all server js assets
+  // Display coverage for all server JavaScript files
   return gulp.src(defaultAssets.server.allJS)
     // Covering files
     .pipe(plugins.istanbul())
@@ -340,7 +340,7 @@ gulp.task('pre-test', function () {
     .pipe(plugins.istanbul.hookRequire());
 });
 
-// run istanbul test and write report
+// Run istanbul test and write report
 gulp.task('mocha:coverage', ['pre-test', 'mocha'], function () {
   var testSuites = changedTestFiles.length ? changedTestFiles : testAssets.tests.server;
 
@@ -350,14 +350,15 @@ gulp.task('mocha:coverage', ['pre-test', 'mocha'], function () {
     }));
 });
 
-// join the coverage files for client and server into a single file
+// Join the coverage files for client and server into a single file
+// Otherwise they get sent to coveralls as separate builds
 gulp.task('merge-lcov', function (done) {
   return gulp.src('./coverage/**/lcov.info')
     .pipe(lcovMerger())
     .pipe(gulp.dest('./coverage/merged/'));
 });
 
-// send coverage test results to coveralls
+// Send coverage test results to coveralls
 gulp.task('coveralls', ['merge-lcov'], function (done) {
   return gulp.src('./coverage/merged/lcov.info')
     .pipe(plugins.coveralls());
