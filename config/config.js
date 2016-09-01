@@ -68,6 +68,14 @@ var validateEnvironmentVariable = function () {
   console.log(chalk.white(''));
 };
 
+/** Validate config.domain is set
+ */
+var validateDomainIsSet = function (config) {
+  if (!config.app.domain) {
+    console.log(chalk.red('+ Important warning: config.domain is empty. It should be set to the fully qualified domain of the app.'));
+  }
+};
+
 /**
  * Validate Secure=true parameter can actually be turned on
  * because it requires certs and key files to be available
@@ -203,6 +211,9 @@ var initGlobalConfig = function () {
 
   // Validate session secret
   validateSessionSecret(config);
+
+  // Print a warning if config.domain is not set
+  validateDomainIsSet(config);
 
   // Expose configuration utilities
   config.utils = {

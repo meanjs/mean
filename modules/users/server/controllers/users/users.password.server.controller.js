@@ -61,11 +61,14 @@ exports.forgot = function (req, res, next) {
       if (config.secure && config.secure.ssl === true) {
         httpTransport = 'https://';
       }
+      var baseUrl = req.app.get('domain') || httpTransport + req.headers.host;
+      console.log(baseUrl);
       res.render(path.resolve('modules/users/server/templates/reset-password-email'), {
         name: user.displayName,
         appName: config.app.title,
-        url: httpTransport + req.headers.host + '/api/auth/reset/' + token
+        url: baseUrl + '/api/auth/reset/' + token
       }, function (err, emailHTML) {
+        console.log(emailHTML);
         done(err, emailHTML, user);
       });
     },
