@@ -31,9 +31,9 @@
       });
     };
 
-    // Called after the user has selected any file
+    // Called after the user has selected any file and it's been cropped
     vm.onFileSelection = function() {
-      vm.success = vm.error = vm.pictureSelected = null;
+      vm.success = vm.error = vm.nowResizing = vm.pictureSelected = null;
 
       // proceed to crop if they didn't cancel and it's a valid image file
       if (vm.picFile && !vm.userForm.$error.pattern) vm.pictureSelected = true;
