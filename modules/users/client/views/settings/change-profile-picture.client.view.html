@@ -3,12 +3,12 @@
     <form name="vm.userForm" class="signin form-horizontal">
       <fieldset>
         <div ng-show="vm.nowResizing" class="text-center">
-          <p><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> Preparing your picture for cropping...</p>
+          <p><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> Preparing for cropping...</p>
         </div>
         <div ng-show="vm.pictureSelected" class="text-center">
           <p>Crop your picture then press upload below</p>
           <div class="cropArea">
-            <img-crop image="vm.picFile | ngfDataUrl" result-image="croppedDataUrl" ng-init="croppedDataUrl=''"></img-crop>
+            <img-crop image="vm.picFile | ngfDataUrl" result-image="croppedDataUrl" ng-init="croppedDataUrl=''" chargement="'Loading'"></img-crop>
           </div>
         </div>
         <div class="form-group text-center">
