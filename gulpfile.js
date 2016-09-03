@@ -7,6 +7,7 @@ var _ = require('lodash'),
   fs = require('fs'),
   defaultAssets = require('./config/assets/default'),
   testAssets = require('./config/assets/test'),
+  testConfig = require('./config/env/test'),
   glob = require('glob'),
   gulp = require('gulp'),
   gulpLoadPlugins = require('gulp-load-plugins'),
@@ -23,7 +24,8 @@ var _ = require('lodash'),
   protractor = require('gulp-protractor').protractor,
   webdriver_update = require('gulp-protractor').webdriver_update,
   webdriver_standalone = require('gulp-protractor').webdriver_standalone,
-  KarmaServer = require('karma').Server;
+  KarmaServer = require('karma').Server,
+  lcovMerger = require('lcov-result-merger');
 
 // Local settings
 var changedTestFiles = [];
@@ -318,7 +320,48 @@ gulp.task('mocha', function (done) {
         });
       });
   });
+});
 
+// Add configuration options for coverage here
+gulp.task('configure-coverage', function (done) {
+  // Set coverage config environment variable so karma-coverage knows to run it
+  testConfig.coverage = true;
+  done();
+});
+
+// Prepare istanbul coverage test
+gulp.task('pre-test', function () {
+
+  // Display coverage for all server JavaScript files
+  return gulp.src(defaultAssets.server.allJS)
+    // Covering files
+    .pipe(plugins.istanbul())
+    // Force `require` to return covered files
+    .pipe(plugins.istanbul.hookRequire());
+});
+
+// Run istanbul test and write report
+gulp.task('mocha:coverage', ['pre-test', 'mocha'], function () {
+  var testSuites = changedTestFiles.length ? changedTestFiles : testAssets.tests.server;
+
+  return gulp.src(testSuites)
+    .pipe(plugins.istanbul.writeReports({
+      reportOpts: { dir: './coverage/server' }
+    }));
+});
+
+// Join the coverage files for client and server into a single file
+// Otherwise they get sent to coveralls as separate builds
+gulp.task('merge-lcov', function (done) {
+  return gulp.src('./coverage/**/lcov.info')
+    .pipe(lcovMerger())
+    .pipe(gulp.dest('./coverage/merged/'));
+});
+
+// Send coverage test results to coveralls
+gulp.task('coveralls', ['merge-lcov'], function (done) {
+  return gulp.src('./coverage/merged/lcov.info')
+    .pipe(plugins.coveralls());
 });
 
 // Karma test runner task
@@ -402,6 +445,10 @@ gulp.task('test:client', function (done) {
 
 gulp.task('test:e2e', function (done) {
   runSequence('env:test', 'lint', 'dropdb', 'nodemon', 'protractor', done);
+});
+
+gulp.task('test:coverage', function (done) {
+  runSequence('env:test', ['copyLocalEnvConfig', 'makeUploadsDir', 'dropdb'], 'lint', 'configure-coverage', 'mocha:coverage', 'karma', 'coveralls', done);
 });
 
 // Run the project in development mode

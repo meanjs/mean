@@ -50,8 +50,7 @@ module.exports = function (karmaConfig) {
       dir: 'coverage/client',
       reporters: [
         // Reporters not supporting the `file` property
-        { type: 'html', subdir: 'report-html' },
-        { type: 'lcov', subdir: 'report-lcov' },
+        { type: 'lcov', subdir: '.' },
         // Output coverage to console
         { type: 'text' }
       ],
