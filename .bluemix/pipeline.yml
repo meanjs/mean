@@ -10,20 +10,14 @@ stages:
   - name: meanjs-build
     type: builder
     artifact_dir: ./
-    build_type: grunt
+    build_type: gulp
     script: |-
       #!/bin/bash
       # Set Node version to 0.12
       export PATH=/opt/IBM/node-v0.12/bin:$PATH
-      # Install RVM, Ruby, and SASS
-      # Needed when running grunt build
-      gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
-      curl -sSL https://get.rvm.io | bash -s stable --ruby --gems=sass
-      # Start RVM
-      source /home/pipeline/.rvm/scripts/rvm
       # Build MEANJS
-      npm install
-      grunt build
+      NODE_ENV=development npm install
+      gulp build
 - name: Deploy
   inputs:
   - type: job
