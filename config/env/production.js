@@ -1,5 +1,7 @@
 'use strict';
 
+var fs = require('fs');
+
 module.exports = {
   secure: {
     ssl: true,
@@ -15,6 +17,20 @@ module.exports = {
     options: {
       user: '',
       pass: ''
+      /**
+        * Uncomment to enable ssl certificate based authentication to mongodb
+        * servers. Adjust the settings below for your specific certificate
+        * setup.
+      server: {
+        ssl: true,
+        sslValidate: false,
+        checkServerIdentity: false,
+        sslCA: fs.readFileSync('./config/sslcerts/ssl-ca.pem'),
+        sslCert: fs.readFileSync('./config/sslcerts/ssl-cert.pem'),
+        sslKey: fs.readFileSync('./config/sslcerts/ssl-key.pem'),
+        sslPass: '1234'
+      }
+      */
     },
     // Enable mongoose debug mode
     debug: process.env.MONGODB_DEBUG || false
