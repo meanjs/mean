@@ -8,47 +8,59 @@
     </div>
     <div ng-repeat="(providerName, providerData) in vm.user.additionalProvidersData" class="social-account-container">
       <img ng-src="/modules/users/client/img/buttons/{{providerName}}.png">
-      <a class="btn btn-danger btn-remove-account" ng-click="vm.removeUserSocialAccount(providerName)">
+      <a class="btn btn-danger btn-add-remove-account" ng-click="vm.removeUserSocialAccount(providerName)">
         <i class="glyphicon glyphicon-trash"></i>
       </a>
     </div>
   </div>
-  <h3 class="col-md-12 text-center" ng-show="vm.hasConnectedAdditionalSocialAccounts()">Unconnected social accounts:</h3>
+  <h3 class="col-md-12 text-center" ng-show="!vm.hasConnectedAdditionalSocialAccounts()">Unconnected social accounts:</h3>
   <div class="col-md-12 text-center">
     <div class="social-account-container" ng-hide="vm.isConnectedSocialAccount('facebook')">
-      <img ng-src="/modules/users/client/img/buttons/facebook.png">
-      <a class="btn btn-success btn-remove-account" href="/api/auth/facebook" target="_self">
-        <i class="glyphicon glyphicon-plus"></i>
+      <a href="/api/auth/facebook" target="_self">
+        <img class="social-button" ng-src="/modules/users/client/img/buttons/facebook.png">
+        <span class="btn btn-success btn-add-remove-account">
+          <i class="glyphicon glyphicon-plus"></i>
+        </span>
       </a>
     </div>
     <div class="social-account-container" ng-hide="vm.isConnectedSocialAccount('twitter')">
-      <img ng-src="/modules/users/client/img/buttons/twitter.png">
-      <a class="btn btn-success btn-remove-account" href="/api/auth/twitter" target="_self">
-        <i class="glyphicon glyphicon-plus"></i>
+      <a href="/api/auth/twitter" target="_self">
+        <img class="social-button" ng-src="/modules/users/client/img/buttons/twitter.png">
+        <span class="btn btn-success btn-add-remove-account">
+          <i class="glyphicon glyphicon-plus"></i>
+        </span>
       </a>
     </div>
     <div class="social-account-container" ng-hide="vm.isConnectedSocialAccount('google')">
-      <img ng-src="/modules/users/client/img/buttons/google.png">
-      <a class="btn btn-success btn-remove-account" href="/api/auth/google" target="_self">
-        <i class="glyphicon glyphicon-plus"></i>
+      <a href="/api/auth/google" target="_self">
+        <img class="social-button" ng-src="/modules/users/client/img/buttons/google.png">
+        <span class="btn btn-success btn-add-remove-account">
+          <i class="glyphicon glyphicon-plus"></i>
+        </span>
       </a>
     </div>
     <div class="social-account-container" ng-hide="vm.isConnectedSocialAccount('linkedin')">
-      <img ng-src="/modules/users/client/img/buttons/linkedin.png">
-      <a class="btn btn-success btn-remove-account" href="/api/auth/linkedin" target="_self">
-        <i class="glyphicon glyphicon-plus"></i>
+      <a href="/api/auth/linkedin" target="_self">
+        <img class="social-button" ng-src="/modules/users/client/img/buttons/linkedin.png">
+        <span class="btn btn-success btn-add-remove-account">
+          <i class="glyphicon glyphicon-plus"></i>
+        </span>
       </a>
     </div>
     <div class="social-account-container" ng-hide="vm.isConnectedSocialAccount('github')">
-      <img ng-src="/modules/users/client/img/buttons/github.png">
-      <a class="btn btn-success btn-remove-account" href="/api/auth/github" target="_self">
-        <i class="glyphicon glyphicon-plus"></i>
+      <a href="/api/auth/github" target="_self">
+        <img class="social-button" ng-src="/modules/users/client/img/buttons/github.png">
+        <span class="btn btn-success btn-add-remove-account">
+          <i class="glyphicon glyphicon-plus"></i>
+        </span>
       </a>
     </div>
     <div class="social-account-container" ng-hide="vm.isConnectedSocialAccount('paypal')">
-      <img ng-src="/modules/users/client/img/buttons/paypal.png">
-      <a class="btn btn-success btn-remove-account" href="/api/auth/paypal" target="_self">
-        <i class="glyphicon glyphicon-plus"></i>
+      <a href="/api/auth/paypal" target="_self">
+        <img class="social-button" ng-src="/modules/users/client/img/buttons/paypal.png">
+        <span class="btn btn-success btn-add-remove-account">
+          <i class="glyphicon glyphicon-plus"></i>
+        </span>
       </a>
     </div>
   </div>
