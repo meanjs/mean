@@ -15,6 +15,7 @@ app/tests/coverage/
 .bower-*/
 .idea/
 coverage/
+.coveralls.yml
 
 # MEAN.js app and assets
 # ======================
