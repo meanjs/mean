@@ -7,7 +7,7 @@ var path = require('path'),
   mongoose = require('mongoose'),
   Article = mongoose.model('Article'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
-  mongooseFiltering = require(path.resolve('./modules/core/server/controllers/mongoose-filtering.server.controller'));
+  MongooseFiltering = require(path.resolve('./modules/core/server/controllers/mongoose-filtering.server.controller'));
 
 /**
  * Create an article
@@ -78,7 +78,7 @@ exports.delete = function (req, res) {
   });
 };
 
-exports.pageSortFilter = function (req, res) {
+exports.parameterizedQuery = function (req, res) {
   var searchRequest = req.body;
 
   // Add default sorting if not provided with the request
@@ -95,10 +95,12 @@ exports.pageSortFilter = function (req, res) {
   // Set base query.
   var query = Article.find();
 
+  var filterService = new MongooseFiltering(query, searchRequest);
+
   // Build parameterized query based on the specific
   // request, using the base query. The resolved
   // promise will return the modified query.
-  query = mongooseFiltering.buildParameterizedQuery(query, searchRequest)
+  filterService.pageSortFilter(true)
     .then(onQueryBuildSuccess)
     .catch(onQueryBuildError);
 
@@ -106,7 +108,8 @@ exports.pageSortFilter = function (req, res) {
   function onQueryBuildSuccess(result) {
     query = result.query;
 
-    // We can add any additional querying logic here.
+    // Now we can add any additional querying logic
+    // that might be specific to this controller method
 
     // Populate the User field
     query.populate('user', 'displayName');
@@ -138,15 +141,45 @@ exports.pageSortFilter = function (req, res) {
  * List of Articles
  */
 exports.list = function (req, res) {
-  Article.find().sort('-created').populate('user', 'displayName').exec(function (err, articles) {
-    if (err) {
-      return res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
-      });
-    } else {
-      res.json(articles);
-    }
-  });
+  // Allows paging options to be
+  // sent as query-string parameters.
+  var searchRequest = {
+    take: Number(req.query.take) || null,
+    page: Number(req.query.page) || null
+  };
+
+  // Set base query
+  var query = Article.find();
+
+  var filterService = new MongooseFiltering(query, searchRequest);
+
+  // Build parameterized query based on the specific
+  // request, using the base query. The resolved
+  // promise will return the modified query.
+  filterService.pageSortFilter()
+    .then(onQueryBuildSuccess)
+    .catch(onQueryBuildError);
+
+  // On successful building of the parameterized query.
+  function onQueryBuildSuccess(result) {
+    query = result.query;
+
+    query.sort('-created').populate('user', 'displayName').exec('find', function (err, articles) {
+      if (err) {
+        return res.status(400).send({
+          message: errorHandler.getErrorMessage(err)
+        });
+      } else {
+        res.json(articles);
+      }
+    });
+  }
+
+  function onQueryBuildError(err) {
+    return res.status(400).send({
+      message: errorHandler.getErrorMessage(err)
+    });
+  }
 };
 
 /**

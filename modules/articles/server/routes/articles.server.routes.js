@@ -13,7 +13,7 @@ module.exports = function (app) {
     .post(articles.create);
 
   app.route('/api/parameterized-query/articles').all(articlesPolicy.isAllowed)
-    .post(articles.pageSortFilter);
+    .post(articles.parameterizedQuery);
 
   // Single article routes
   app.route('/api/articles/:articleId').all(articlesPolicy.isAllowed)
