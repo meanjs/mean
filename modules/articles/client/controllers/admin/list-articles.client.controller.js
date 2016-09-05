@@ -12,6 +12,8 @@
 
     vm.error = null;
     vm.find = find;
+    vm.filter = filter;
+    vm.reset = reset;
 
     activate();
 
@@ -20,8 +22,17 @@
       vm.currentPage = 1;
       vm.filters = [];
       vm.sorting = '-created';
+      vm.search = null;
+      vm.filtered = false;
 
       find();
+    }
+
+    function reset() {
+      // Do something here before
+      // we re-activate the vm.
+
+      activate();
     }
 
     function find() {
@@ -33,6 +44,19 @@
       })
         .then(onSearchSuccess)
         .catch(onSearchError);
+    }
+
+    function filter() {
+      vm.filters = [{
+        title: vm.search
+      }];
+
+      // Start at first page for our filter
+      vm.currentPage = 1;
+      // Notify vm that a filter has been applied
+      vm.filtered = true;
+
+      find();
     }
 
     function onSearchSuccess(response) {
