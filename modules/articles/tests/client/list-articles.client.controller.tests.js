@@ -76,8 +76,7 @@
 
       it('should send a GET request and return all articles', inject(function (ArticlesService) {
         // Set POST response
-        $httpBackend.expectPOST('api/parameterized-query/articles').respond({ count: 2, articles: mockArticleList });
-
+        $httpBackend.expectGET('api/articles?page=1&take=20').respond({ count: 2, articles: mockArticleList });
 
         $httpBackend.flush();
 

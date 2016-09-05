@@ -91,9 +91,11 @@ describe('Article Admin CRUD tests', function () {
                 }
 
                 // Get articles list
-                var articles = articlesGetRes.body;
+                var articles = articlesGetRes.body.articles;
 
                 // Set assertions
+                articles.should.be.instanceof(Array).and.have.lengthOf(1);
+                (articlesGetRes.body.count).should.equal(1);
                 (articles[0].user._id).should.equal(userId);
                 (articles[0].title).should.match('Article Title');
 

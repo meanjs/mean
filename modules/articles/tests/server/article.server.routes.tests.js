@@ -87,7 +87,7 @@ describe('Article CRUD tests', function () {
                 }
 
                 // Get articles list
-                var articles = articlesGetRes.body;
+                var articles = articlesGetRes.body.articles;
 
                 // Set assertions
                 (articles.length).should.equal(0);
@@ -139,7 +139,10 @@ describe('Article CRUD tests', function () {
       request(app).get('/api/articles')
         .end(function (req, res) {
           // Set assertion
-          res.body.should.be.instanceof(Array).and.have.lengthOf(1);
+          var articles = res.body.articles;
+
+          articles.should.be.instanceof(Array).and.have.lengthOf(1);
+          (res.body.count).should.equal(1);
 
           // Call the assertion callback
           done();
