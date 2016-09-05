@@ -34,7 +34,7 @@ before_install:
   - 'node_modules/protractor/bin/webdriver-manager start 2>&1 &'
   - sleep 3
 after_script:
-  - nsp audit-package
+  - nsp check
   - gulp test:coverage
 notifications:
   webhooks:
