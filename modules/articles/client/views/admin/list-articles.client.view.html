@@ -23,4 +23,15 @@
   <div class="alert alert-warning text-center" data-ng-if="articles.$resolved && !articles.length">
     No articles yet, why don't you <a data-ui-sref="admin.articles.create">create one</a>?
   </div>
+  <div ng-show="vm.error" class="text-danger">
+    <strong ng-bind="vm.error"></strong>
+  </div>
+  <div class="row">
+    <div class="col-md-10">
+      <uib-pagination boundary-links="true" max-size="10" items-per-page="vm.itemsPerPage" total-items="vm.totalCount" ng-model="vm.currentPage" ng-change="vm.find()"></uib-pagination>
+    </div>
+    <div class="col-md-2">
+      <p class="text-muted">Showing {{vm.articles.length}} of {{vm.totalCount}}</p>
+    </div>
+  </div>
 </section>

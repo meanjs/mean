@@ -14,6 +14,13 @@
       update: {
         method: 'PUT'
       },
+      query: {
+        isArray: false,
+        params: {
+          take: '@take',
+          page: '@page'
+        }
+      },
       pageSortFilter: {
         method: 'POST',
         isArray: false,
@@ -29,9 +36,13 @@
     });
 
     angular.extend(Article, {
-      find: function (params) {
+      find: function (options) {
         var articlesResource = this;
-        return articlesResource.pageSortFilter(params).$promise;
+        return articlesResource.pageSortFilter(options).$promise;
+      },
+      list: function (params) {
+        var articlesResource = this;
+        return articlesResource.query(params).$promise;
       }
     });
 

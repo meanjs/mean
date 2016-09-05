@@ -32,9 +32,6 @@ exports.invokeRolesPolicies = function () {
     }, {
       resources: '/api/articles/:articleId',
       permissions: ['get']
-    }, {
-      resources: '/api/parameterized-query/articles',
-      permissions: ['post']
     }]
   }, {
     roles: ['guest'],
@@ -44,9 +41,6 @@ exports.invokeRolesPolicies = function () {
     }, {
       resources: '/api/articles/:articleId',
       permissions: ['get']
-    }, {
-      resources: '/api/parameterized-query/articles',
-      permissions: ['post']
     }]
   }]);
 };

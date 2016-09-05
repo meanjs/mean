@@ -18,18 +18,14 @@
     function activate() {
       vm.itemsPerPage = 20;
       vm.currentPage = 1;
-      vm.filters = [];
-      vm.sorting = '-created';
 
       find();
     }
 
     function find() {
-      ArticlesService.find({
+      ArticlesService.list({
         take: vm.itemsPerPage,
-        page: vm.currentPage,
-        filters: vm.filters,
-        sorting: vm.sorting
+        page: vm.currentPage
       })
         .then(onSearchSuccess)
         .catch(onSearchError);

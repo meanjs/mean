@@ -156,7 +156,7 @@ exports.list = function (req, res) {
   // Build parameterized query based on the specific
   // request, using the base query. The resolved
   // promise will return the modified query.
-  filterService.pageSortFilter()
+  filterService.pageSortFilter(true)
     .then(onQueryBuildSuccess)
     .catch(onQueryBuildError);
 
@@ -170,7 +170,10 @@ exports.list = function (req, res) {
           message: errorHandler.getErrorMessage(err)
         });
       } else {
-        res.json(articles);
+        res.json({
+          count: result.count,
+          articles: articles
+        });
       }
     });
   }
