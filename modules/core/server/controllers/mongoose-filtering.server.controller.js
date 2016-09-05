@@ -67,26 +67,32 @@ function pageSortFilter(performCountQuery) {
 }
 
 function page(query, take, page) {
-  if (take !== null) {
-    query = query.limit(take);
+  // There's no need to modify the query
+  // at this point if no "take" was provided.
+  // The "take" is required for the skip() &
+  // limit() methods of the Mongoose query.
+  if (!take) {
+    return query;
   }
 
-  if (page !== null & take !== null) {
-    query = query.skip(page * take);
-  }
-
-  return query;
+  // Only apply the skip() method when
+  // a "page" was specified. Otherwise,
+  // just apply take().
+  return page ? query.skip(page * take).limit(take) : query.limit(take);
 }
 
 function sort(query, sorting) {
-  if (sorting) {
-    query = query.sort(sorting);
+  if (!sorting) {
+    return query;
   }
 
-  return query;
+  return query.sort(sorting);
 }
 
 function filter(query, filters) {
+  // Apply each provided filter
+  // by appending a where() condition
+  // to the query for each.
   filters.forEach(function (filter) {
     query = query.where(filter);
   });
