@@ -36,6 +36,7 @@ before_install:
 after_script:
   - nsp audit-package
   - gulp test:coverage
+  - node_modules/.bin/lcov-result-merger 'coverage/**/lcov.info' | node_modules/coveralls/bin/coveralls.js
 notifications:
   webhooks:
     urls:

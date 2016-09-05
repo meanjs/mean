@@ -102,7 +102,6 @@
     "gulp-angular-templatecache": "~1.8.0",
     "gulp-autoprefixer": "~3.1.0",
     "gulp-concat": "~2.6.0",
-    "gulp-coveralls": "~0.1.4",
     "gulp-csslint": "~0.2.0",
     "gulp-csso": "~1.1.0",
     "gulp-eslint": "~2.0.0",

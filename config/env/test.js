@@ -92,7 +92,5 @@ module.exports = {
         roles: ['user', 'admin']
       }
     }
-  },
-  // This config is set to true during gulp coverage
-  coverage: process.env.COVERAGE || false
+  }
 };
