@@ -24,8 +24,7 @@ var _ = require('lodash'),
   protractor = require('gulp-protractor').protractor,
   webdriver_update = require('gulp-protractor').webdriver_update,
   webdriver_standalone = require('gulp-protractor').webdriver_standalone,
-  KarmaServer = require('karma').Server,
-  lcovMerger = require('lcov-result-merger');
+  KarmaServer = require('karma').Server;
 
 // Local settings
 var changedTestFiles = [];
@@ -322,13 +321,6 @@ gulp.task('mocha', function (done) {
   });
 });
 
-// Add configuration options for coverage here
-gulp.task('configure-coverage', function (done) {
-  // Set coverage config environment variable so karma-coverage knows to run it
-  testConfig.coverage = true;
-  done();
-});
-
 // Prepare istanbul coverage test
 gulp.task('pre-test', function () {
 
@@ -350,25 +342,37 @@ gulp.task('mocha:coverage', ['pre-test', 'mocha'], function () {
     }));
 });
 
-// Join the coverage files for client and server into a single file
-// Otherwise they get sent to coveralls as separate builds
-gulp.task('merge-lcov', function (done) {
-  return gulp.src('./coverage/**/lcov.info')
-    .pipe(lcovMerger())
-    .pipe(gulp.dest('./coverage/merged/'));
-});
-
-// Send coverage test results to coveralls
-gulp.task('coveralls', ['merge-lcov'], function (done) {
-  return gulp.src('./coverage/merged/lcov.info')
-    .pipe(plugins.coveralls());
-});
-
 // Karma test runner task
 gulp.task('karma', function (done) {
   new KarmaServer({
+    configFile: __dirname + '/karma.conf.js'
+  }, done).start();
+});
+
+// Run karma with coverage options set and write report
+gulp.task('karma:coverage', function(done) {
+  new KarmaServer({
     configFile: __dirname + '/karma.conf.js',
-    singleRun: true
+    preprocessors: {
+      'modules/*/client/views/**/*.html': ['ng-html2js'],
+      'modules/core/client/app/config.js': ['coverage'],
+      'modules/core/client/app/init.js': ['coverage'],
+      'modules/*/client/*.js': ['coverage'],
+      'modules/*/client/config/*.js': ['coverage'],
+      'modules/*/client/controllers/*.js': ['coverage'],
+      'modules/*/client/directives/*.js': ['coverage'],
+      'modules/*/client/services/*.js': ['coverage']
+    },
+    reporters: ['progress', 'coverage'],
+    coverageReporter: {
+      dir: 'coverage/client',
+      reporters: [
+        { type: 'lcov', subdir: '.' }
+        // printing summary to console currently weirdly causes gulp to hang so disabled for now
+        // https://github.com/karma-runner/karma-coverage/issues/209
+        // { type: 'text-summary' }
+      ]
+    }
   }, done).start();
 });
 
@@ -448,7 +452,7 @@ gulp.task('test:e2e', function (done) {
 });
 
 gulp.task('test:coverage', function (done) {
-  runSequence('env:test', ['copyLocalEnvConfig', 'makeUploadsDir', 'dropdb'], 'lint', 'configure-coverage', 'mocha:coverage', 'karma', 'coveralls', done);
+  runSequence('env:test', ['copyLocalEnvConfig', 'makeUploadsDir', 'dropdb'], 'lint', 'mocha:coverage', 'karma:coverage', done);
 });
 
 // Run the project in development mode
@@ -465,3 +469,4 @@ gulp.task('debug', function (done) {
 gulp.task('prod', function (done) {
   runSequence(['copyLocalEnvConfig', 'makeUploadsDir', 'templatecache'], 'build', 'env:prod', 'lint', ['nodemon', 'watch'], done);
 });
+

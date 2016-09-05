@@ -9,25 +9,13 @@ var _ = require('lodash'),
   testConfig = require('./config/env/test'),
   karmaReporters = ['progress'];
 
-if (testConfig.coverage) {
-  karmaReporters.push('coverage');
-}
-
 // Karma configuration
 module.exports = function (karmaConfig) {
   karmaConfig.set({
-    // Frameworks to use
     frameworks: ['jasmine'],
 
     preprocessors: {
-      'modules/*/client/views/**/*.html': ['ng-html2js'],
-      'modules/core/client/app/config.js': ['coverage'],
-      'modules/core/client/app/init.js': ['coverage'],
-      'modules/*/client/*.js': ['coverage'],
-      'modules/*/client/config/*.js': ['coverage'],
-      'modules/*/client/controllers/*.js': ['coverage'],
-      'modules/*/client/directives/*.js': ['coverage'],
-      'modules/*/client/services/*.js': ['coverage']
+      'modules/*/client/views/**/*.html': ['ng-html2js']
     },
 
     ngHtml2JsPreprocessor: {
@@ -44,20 +32,6 @@ module.exports = function (karmaConfig) {
     // Test results reporter to use
     // Possible values: 'dots', 'progress', 'junit', 'growl', 'coverage'
     reporters: karmaReporters,
-
-    // Configure the coverage reporter
-    coverageReporter: {
-      dir: 'coverage/client',
-      reporters: [
-        // Reporters not supporting the `file` property
-        { type: 'lcov', subdir: '.' },
-        // Output coverage to console
-        { type: 'text' }
-      ],
-      instrumenterOptions: {
-        istanbul: { noCompact: true }
-      }
-    },
 
     // Web server port
     port: 9876,
