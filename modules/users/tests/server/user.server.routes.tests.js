@@ -889,6 +889,7 @@ describe('User CRUD tests', function () {
 
           // Get own user details
           agent.put('/api/users')
+            .set('Authorization', 'JWT ' + signinRes.body.token)
             .send(userUpdate)
             .expect(200)
             .end(function (err, res) {

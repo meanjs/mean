@@ -51,6 +51,7 @@
     "glob": "~7.1.0",
     "helmet": "~2.3.0",
     "jasmine-core": "~2.5.0",
+    "jsonwebtoken": "~5.5.4",
     "lodash": "~4.16.2",
     "lusca": "~1.4.1",
     "method-override": "~2.3.5",
@@ -72,6 +73,7 @@
     "phantomjs-prebuilt": "~2.1.4",
     "serve-favicon": "~2.3.0",
     "socket.io": "^1.4.8",
+    "socketio-auth": "0.0.5",
     "validator": "~6.0.0",
     "winston": "^2.2.0",
     "wiredep": "~4.0.0"
