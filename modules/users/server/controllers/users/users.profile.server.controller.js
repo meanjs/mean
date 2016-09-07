@@ -62,7 +62,6 @@ exports.changeProfilePicture = function (req, res) {
     uploadImage()
       .then(updateUser)
       .then(deleteOldImage)
-      .then(login)
       .then(function () {
         res.json(user);
       })
@@ -116,18 +115,6 @@ exports.changeProfilePicture = function (req, res) {
       } else {
         resolve();
       }
-    });
-  }
-
-  function login () {
-    return new Promise(function (resolve, reject) {
-      req.login(user, function (err) {
-        if (err) {
-          res.status(400).send(err);
-        } else {
-          resolve();
-        }
-      });
     });
   }
 };
