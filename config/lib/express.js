@@ -16,7 +16,7 @@ var config = require('../config'),
   cookieParser = require('cookie-parser'),
   helmet = require('helmet'),
   flash = require('connect-flash'),
-  hbs = require('express-hbs'),
+  handlebars = require('./handlebars'),
   path = require('path'),
   _ = require('lodash'),
   lusca = require('lusca');
@@ -94,6 +94,10 @@ module.exports.initMiddleware = function (app) {
  * Configure view engine
  */
 module.exports.initViewEngine = function (app) {
+  // configure handlebars
+  var hbs = handlebars.initHbs();
+
+  // use configured handlebars
   app.engine('server.view.html', hbs.express4({
     extname: '.server.view.html'
   }));
