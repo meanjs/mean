@@ -20,7 +20,7 @@ var config = require('../config'),
   path = require('path'),
   _ = require('lodash'),
   lusca = require('lusca'),
-  passport = require('passport');
+  authorization = require('./authorization');
 
 /**
  * Initialize local variables
@@ -91,20 +91,8 @@ module.exports.initMiddleware = function (app) {
   app.use(cookieParser());
   app.use(flash());
 
-  // Authorize JWT
-  app.use(function (req, res, next) {
-    passport.authenticate('jwt', { session: false }, function (err, user) {
-      if (err) {
-        return next(new Error(err));
-      }
-
-      if (user) {
-        req.user = user;
-      }
-
-      next();
-    })(req, res, next);
-  });
+  // Authorize Request
+  app.use(authorization.authorize);
 };
 
 /**
