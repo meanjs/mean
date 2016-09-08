@@ -10,17 +10,15 @@
 FROM ubuntu:latest
 MAINTAINER MEAN.JS
 
+# 80 = HTTP, 443 = HTTPS, 3000 = MEAN.JS server, 35729 = livereload
+EXPOSE 80 443 3000 35729
+
 # Set development environment as default
 ENV NODE_ENV development
 
-# 80 = HTTP, 443 = HTTPS, 3000 = MEAN.JS server, 5858 = node debug, 35729 = livereload
-EXPOSE 80 443 3000 5858 35729
-
 # Install Utilities
-RUN apt-get update -q && apt-get install -yqq curl sudo apt-utils && apt-get clean
-RUN curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash - \
- && apt-get update -q \
- && apt-get install -yqq \
+RUN apt-get update -q  \
+ && apt-get install -yqq curl \
  wget \
  aptitude \
  htop \
@@ -41,7 +39,14 @@ RUN curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash - \
  libfontconfig \
  libkrb5-dev \
  ruby \
- nodejs \
+ sudo \
+ apt-utils \
+ && apt-get clean \
+ && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+# Install nodejs
+RUN curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
+RUN sudo apt-get install -yq nodejs \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
@@ -49,8 +54,7 @@ RUN curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash - \
 RUN gem install sass
 
 # Install MEAN.JS Prerequisites
-RUN npm install --quiet -g grunt-cli gulp gulp-cli bower yo mocha karma-cli pm2 \
- && npm cache clean
+RUN npm install --quiet -g grunt-cli gulp bower yo mocha karma-cli pm2 && npm cache clean
 
 RUN mkdir -p /opt/mean.js/public/lib
 WORKDIR /opt/mean.js
