@@ -170,7 +170,30 @@ exports.saveOAuthUserProfile = function (req, providerUserProfile, done) {
             });
           });
         } else {
-          return done(err, user);
+          // set the new tokens from the provider user profile
+          if (user.providerData && user.provider === providerUserProfile.provider) {
+            // Update user's provider data access and refresh tokens
+            user.providerData.accessToken = providerUserProfile.providerData.accessToken;
+            user.providerData.refreshToken = providerUserProfile.providerData.refreshToken;
+            // Then tell mongoose that we've updated the providerData field
+            user.markModified('providerData');
+             // And save the user
+            user.save(function(err) {
+              return done(err, user);
+            });
+          } else if (user.additionalProvidersData) {
+            // Update user's additional provider data access and refresh tokens
+            user.additionalProvidersData[providerUserProfile.provider].accessToken = providerUserProfile.providerData.accessToken;
+            user.additionalProvidersData[providerUserProfile.provider].refreshToken = providerUserProfile.providerData.refreshToken;
+            // Then tell mongoose that we've updated the providerData field
+            user.markModified('additionalProvidersData');
+            // Then tell mongoose that we've updated the image field
+            user.save(function(err) {
+              return done(err, user);
+            });
+          } else {
+            return done(err, user);
+          }
         }
       }
     });
