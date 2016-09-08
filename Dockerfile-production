@@ -14,10 +14,8 @@ MAINTAINER MEAN.JS
 EXPOSE 80 443 3000 35729
 
 # Install Utilities
-RUN apt-get update -q && apt-get install -yqq curl sudo apt-utils && apt-get clean
-RUN curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash - \
- && apt-get update -q \
- && apt-get install -yqq \
+RUN apt-get update -q  \
+ && apt-get install -yqq curl \
  wget \
  aptitude \
  htop \
@@ -38,7 +36,14 @@ RUN curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash - \
  libfontconfig \
  libkrb5-dev \
  ruby \
- nodejs \
+ sudo \
+ apt-utils \
+ && apt-get clean \
+ && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+# Install nodejs
+RUN curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
+RUN sudo apt-get install -yq nodejs \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
@@ -46,15 +51,10 @@ RUN curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash - \
 RUN gem install sass
 
 # Install MEAN.JS Prerequisites
-RUN npm install --quiet -g grunt-cli gulp gulp-cli bower yo mocha karma-cli pm2 && npm cache clean
+RUN npm install --quiet -g grunt-cli gulp bower yo mocha karma-cli pm2 && npm cache clean
 
 RUN mkdir -p /opt/mean.js/public/lib
 WORKDIR /opt/mean.js
-
-# Install bower packages
-ADD bower.json /opt/mean.js/bower.json
-ADD .bowerrc /opt/mean.js/.bowerrc
-RUN bower install --quiet --allow-root --config.interactive=false
 
 # Copies the local package.json file to the container
 # and utilities docker container cache to not needing to rebuild
@@ -62,7 +62,12 @@ RUN bower install --quiet --allow-root --config.interactive=false
 # when the local package.json file changes.
 # Install npm packages
 ADD package.json /opt/mean.js/package.json
-RUN npm install --quiet && npm cache clean
+RUN NODE_ENV=development npm install --quiet && npm cache clean
+
+# Install bower packages
+ADD bower.json /opt/mean.js/bower.json
+ADD .bowerrc /opt/mean.js/.bowerrc
+RUN bower install --quiet --allow-root --config.interactive=false
 
 # Set development environment as default
 ENV NODE_ENV production
