@@ -79,11 +79,11 @@ module.exports = {
     sandbox: false
   },
   owasp: {
-      allowPassphrases       : true,
-      maxLength              : 128,
-      minLength              : 10,
-      minPhraseLength        : 20,
-      minOptionalTestsToPass : 4,
+    allowPassphrases: true,
+    maxLength: 128,
+    minLength: 10,
+    minPhraseLength: 20,
+    minOptionalTestsToPass: 4
   },
   mailer: {
     from: process.env.MAILER_FROM || 'MAILER_FROM',
