@@ -129,15 +129,11 @@ gulp.task('watch:server:run-tests', function () {
 });
 
 // CSS linting task
-gulp.task('csslint', function (done) {
+gulp.task('csslint', function () {
   return gulp.src(defaultAssets.client.css)
     .pipe(plugins.csslint('.csslintrc'))
     .pipe(plugins.csslint.formatter())
-    .pipe(plugins.csslint.formatter(function (file) {
-      if (!file.csslint.errorCount) {
-        done();
-      }
-    }));
+    .pipe(plugins.csslint.failFormatter());
 });
 
 // ESLint JS linting task
