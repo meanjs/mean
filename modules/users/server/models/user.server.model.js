@@ -12,7 +12,7 @@ var mongoose = require('mongoose'),
   generatePassword = require('generate-password'),
   owasp = require('owasp-password-strength-test');
 
-owasp.configs = config.owasp;
+owasp.config(config.owasp);
 
 
 /**

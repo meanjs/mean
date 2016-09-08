@@ -14,7 +14,6 @@ var path = require('path'),
 
 var smtpTransport = nodemailer.createTransport(config.mailer.options);
 
-
 /**
  * Forgot for reset password (forgot POST)
  */
