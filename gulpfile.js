@@ -132,8 +132,8 @@ gulp.task('watch:server:run-tests', function () {
 gulp.task('csslint', function (done) {
   return gulp.src(defaultAssets.client.css)
     .pipe(plugins.csslint('.csslintrc'))
-    .pipe(plugins.csslint.reporter())
-    .pipe(plugins.csslint.reporter(function (file) {
+    .pipe(plugins.csslint.formatter())
+    .pipe(plugins.csslint.formatter(function (file) {
       if (!file.csslint.errorCount) {
         done();
       }
@@ -469,4 +469,3 @@ gulp.task('debug', function (done) {
 gulp.task('prod', function (done) {
   runSequence(['copyLocalEnvConfig', 'makeUploadsDir', 'templatecache'], 'build', 'env:prod', 'lint', ['nodemon', 'watch'], done);
 });
-
