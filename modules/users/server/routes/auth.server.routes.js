@@ -54,4 +54,8 @@ module.exports = function (app) {
   // Setting the paypal oauth routes
   app.route('/api/auth/paypal').get(users.oauthCall('paypal'));
   app.route('/api/auth/paypal/callback').get(users.oauthCallback('paypal'));
+
+
+  // get the config settings for the client side owasp
+  app.route('/password/rules').get(users.getowaspconfig);
 };

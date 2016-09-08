@@ -58,6 +58,13 @@ module.exports = {
     callbackURL: '/api/auth/paypal/callback',
     sandbox: true
   },
+  owasp: {
+    allowPassphrases: true,
+    maxLength: 128,
+    minLength: 4,
+    minPhraseLength: 20,
+    minOptionalTestsToPass: 2
+  },
   mailer: {
     from: process.env.MAILER_FROM || 'MAILER_FROM',
     options: {
