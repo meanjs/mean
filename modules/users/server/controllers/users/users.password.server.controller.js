@@ -14,12 +14,6 @@ var path = require('path'),
 
 var smtpTransport = nodemailer.createTransport(config.mailer.options);
 
-/**
- * Get the server defined owasp config for the client
- */
-exports.getowaspconfig = function (req, res) {
-  res.json(config.owasp);
-};
 
 /**
  * Forgot for reset password (forgot POST)

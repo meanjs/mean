@@ -6,17 +6,11 @@
     .module('users.services')
     .factory('PasswordValidator', PasswordValidator);
 
-  PasswordValidator.$inject = ['$window', '$http'];
+  PasswordValidator.$inject = ['$window'];
 
-  function PasswordValidator($window, $http) {
+  function PasswordValidator($window) {
     var owaspPasswordStrengthTest = $window.owaspPasswordStrengthTest;
 
-    // get the owasp config from the server configuration
-    $http.get('/password/rules').success(function (response) {
-      owaspPasswordStrengthTest.configs = response; // same owasp config used on the server
-    }).error(function (response) {
-      // well, it should fall back on the default owasp config defined in that package
-    });
 
     var service = {
       getResult: getResult,
