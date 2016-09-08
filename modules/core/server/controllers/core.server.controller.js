@@ -26,7 +26,7 @@ exports.renderIndex = function (req, res) {
 
   res.render('modules/core/server/views/index', {
     user: JSON.stringify(safeUserObject),
-    owaspcfg: JSON.stringify(config.owasp)
+    owaspConfig: JSON.stringify(config.owasp)
   });
 };
 
