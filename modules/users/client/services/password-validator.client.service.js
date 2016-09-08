@@ -11,7 +11,6 @@
   function PasswordValidator($window) {
     var owaspPasswordStrengthTest = $window.owaspPasswordStrengthTest;
 
-
     var service = {
       getResult: getResult,
       getPopoverMsg: getPopoverMsg
