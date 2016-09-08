@@ -4,11 +4,17 @@
  * Module dependencies
  */
 var mongoose = require('mongoose'),
+  path = require('path'),
+  config = require(path.resolve('./config/config')),
   Schema = mongoose.Schema,
   crypto = require('crypto'),
   validator = require('validator'),
   generatePassword = require('generate-password'),
   owasp = require('owasp-password-strength-test');
+
+
+owasp.configs = config.owasp;
+
 
 /**
  * A Validation function for local strategy properties
