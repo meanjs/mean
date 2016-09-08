@@ -260,7 +260,6 @@ describe('User CRUD tests', function () {
           }
 
           agent.delete('/api/users/' + user._id)
-            // .send(userUpdate)
             .expect(200)
             .end(function (userInfoErr, userInfoRes) {
               if (userInfoErr) {
