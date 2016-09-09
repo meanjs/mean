@@ -26,8 +26,7 @@ mongoose.connect(function (db) {
 
     if (err) {
       errors.push(err);
-      message = 'An error occured while removing the index "' + 
-        _indexToRemove + '".';
+      message = 'An error occured while removing the index "' + _indexToRemove + '".';
 
       if (err.message.indexOf('index not found with name') !== -1) {
         message = 'Index "' + _indexToRemove + '" could not be found.' +
@@ -51,7 +50,7 @@ function reportAndExit(message) {
     for (var i = 0; i < errors.length; i++) {
       console.log(chalk.red(errors[i]));
 
-      if (i === errors.length -1) {
+      if (i === (errors.length -1) ) {
         process.exit(0);
       }
     }
