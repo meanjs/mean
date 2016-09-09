@@ -133,7 +133,8 @@ gulp.task('csslint', function () {
   return gulp.src(defaultAssets.client.css)
     .pipe(plugins.csslint('.csslintrc'))
     .pipe(plugins.csslint.formatter())
-    .pipe(plugins.csslint.failFormatter());
+    // Don't fail CSS issues yet
+    //.pipe(plugins.csslint.failFormatter());
 });
 
 // ESLint JS linting task
