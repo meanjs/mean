@@ -8,19 +8,19 @@
   position: relative;
 }
 .btn-add-remove-account {
-  top: 10px;
-  right: 10px;
-  position: absolute;
   pointer-events: none;
+  position: absolute;
+  right: 10px;
+  top: 10px;
 }
 .user-profile-picture {
-  min-height: 150px;
   max-height: 150px;
+  min-height: 150px;
 }
 .cropArea {
   background: #E4E4E4;
-  width: 300px;
   height: 300px;
+  width: 300px;
 }
 .social-button {
   -webkit-transition-duration: 0.4s;
