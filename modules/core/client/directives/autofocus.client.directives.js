@@ -21,7 +21,7 @@
       if ($window.innerWidth >= 800) {
         $timeout(function() {
           element[0].focus();
-        }, 250);
+        }, 100);
       }
     }
   }
