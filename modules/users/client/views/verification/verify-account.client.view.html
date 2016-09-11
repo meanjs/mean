@@ -1,0 +1,30 @@
+<section style="margin-top: 20px;">
+
+  <div class="row text-center" ng-if="vm.success">
+    <div class="col-sm-12">
+      <div class="alert alert-success text-center">
+        <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+        {{ vm.success }}
+      </div>
+      <a ui-sref="authentication.signin">Continue to Sign In &raquo;</a>
+    </div>
+  </div>
+
+  <div class="row text-center" ng-if="vm.error">
+    <div class="col-sm-12">
+      <div class="alert alert-danger text-center">
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        <strong>Sorry, your account could not be verified.</strong> {{ vm.error }}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <a ui-sref="verification({token: ''})">Resend verification email</a>
+      </div>
+      <div class="col-sm-6">
+        <a ui-sref="authentication.signin">Continue to Sign In</a>
+      </div>
+    </div>
+  </div>
+
+</section>
