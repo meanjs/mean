@@ -23,11 +23,9 @@
           <a ui-sref="authentication.signup">Sign up</a>
         </div>
         <div class="text-center forgot-password">
-          <a ui-sref="password.forgot">Forgot your password?</a>
+          <a ui-sref="password.forgot">Forgot your password?</a> &#183; <a ui-sref="verification">Resend verification email</a>
         </div>
-        <p> 
-          &nbsp;
-        </p>
+        <br />
         <uib-alert type="danger" ng-show="vm.error" class="text-center text-danger">
           <span ng-bind="vm.error"></span>
         </uib-alert>

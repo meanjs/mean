@@ -123,6 +123,24 @@
         data: {
           pageTitle: 'Password reset form'
         }
+      })
+      .state('resendVerificationEmail', {
+        url: '/verification',
+        templateUrl: 'modules/users/client/views/verification/resend-verification-email.client.view.html',
+        controller: 'VerificationController',
+        controllerAs: 'vm',
+        data: {
+          pageTitle: 'Resend Verification Email'
+        }
+      })
+      .state('verification', {
+        url: '/verification/:token',
+        templateUrl: 'modules/users/client/views/verification/verify-account.client.view.html',
+        controller: 'VerificationController',
+        controllerAs: 'vm',
+        data: {
+          pageTitle: 'Verify Account'
+        }
       });
   }
 }());

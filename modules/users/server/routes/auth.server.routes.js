@@ -19,6 +19,10 @@ module.exports = function (app) {
   app.route('/api/auth/signin').post(users.signin);
   app.route('/api/auth/signout').get(users.signout);
 
+  // Setting up the users account verification api
+  app.route('/api/auth/verify/:token').get(users.validateVerificationToken);
+  app.route('/api/auth/verify').post(users.resendVerificationEmail);
+
   // Setting the facebook oauth routes
   app.route('/api/auth/facebook').get(users.oauthCall('facebook', {
     scope: ['email']

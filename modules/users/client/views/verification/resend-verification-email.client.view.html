@@ -1,0 +1,23 @@
+<section class="auth row">
+  <h3 class="col-md-12 text-center">Resend account verification email</h3>
+  <p class="small text-center">Please enter the email address you signed up with:</p>
+  <div class="col-xs-offset-2 col-xs-8 col-md-offset-3 col-md-6">
+    <form class="signin form-horizontal" autocomplete="off">
+      <fieldset>
+        <div class="form-group">
+          <input type="text" id="username" name="email" class="form-control" data-ng-model="vm.credentials.email" placeholder="bob@example.com" autofocus>
+        </div>
+        <div class="alert alert-success text-center" ng-if="vm.success">
+          {{ vm.success }}
+        </div>
+        <div class="alert alert-danger text-center" ng-if="vm.error">
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+          {{ vm.error }}
+        </div>
+        <div class="text-center form-group" ng-if="!vm.success">
+          <button type="submit" class="btn btn-primary" ng-click="vm.resendVerificationEmail()">Submit</button>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</section>

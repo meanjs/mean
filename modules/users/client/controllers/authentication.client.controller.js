@@ -14,6 +14,7 @@
     vm.getPopoverMsg = PasswordValidator.getPopoverMsg;
     vm.signup = signup;
     vm.signin = signin;
+    vm.pleaseVerifyMessage = null;
     vm.callOauthProvider = callOauthProvider;
 
     // Get an eventual error defined in the URL query string:
@@ -34,11 +35,16 @@
       }
 
       $http.post('/api/auth/signup', vm.credentials).success(function (response) {
-        // If successful we assign the response to the global user model
-        vm.authentication.user = response;
+        // It's a message string if user needs to verify their account
+        if (typeof response === 'string') {
+          vm.pleaseVerifyMessage = response;
+        } else {
+        // We assign the response to the global user model
+          vm.authentication.user = response;
 
-        // And redirect to the previous or home page
-        $state.go($state.previous.state.name || 'home', $state.previous.params);
+          // And redirect to the previous or home page
+          $state.go($state.previous.state.name || 'home', $state.previous.params);
+        }
       }).error(function (response) {
         vm.error = response.message;
       });
