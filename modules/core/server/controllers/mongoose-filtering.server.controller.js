@@ -1,32 +1,32 @@
-﻿// Service for managing Filtering/Parameterized-Queries.
+﻿// Service for managing filtering, sorting, and pagination of
+// Mongoose queries.
+function MongooseFiltering(query, options) {
+  options = options || {};
 
-var service = (function () {
-  function service(query, options) {
-    this._query = query;
-    this._modifiedQuery = null;
-    this._totalDocumentCount = null;
-    this._page = options.page ? Math.max(0, options.page - 1) : null;
-    this._take = options.take && options.take >= 0 ? options.take : null;
-    this._filters = Array.isArray(options.filters) ? options.filters : [];
-    this._sorting = options.sorting && options.sorting.length ? options.sorting : null;
+  this._query = query || null;
+  this._modifiedQuery = null;
+  this._totalDocumentCount = null;
+  this._page = options.page ? Math.max(0, options.page - 1) : null;
+  this._take = options.take && options.take >= 0 ? options.take : null;
+  this._filters = Array.isArray(options.filters) ? options.filters : [];
+  this._sorting = options.sorting && options.sorting.length ? options.sorting : null;
 
-    if (this._take > 300) {
-      // Provide a default take.
-      // This should probably be in the env configs.
-      this._take = 50;
-    }
+  if (this._take > 300) {
+    // Provide a default take.
+    // This should probably be in the env configs.
+    this._take = 50;
   }
+}
 
-  service.prototype.pageSortFilter = pageSortFilter;
+MongooseFiltering.prototype.pageSortFilter = pageSortFilter;
 
-  return service;
-}());
-
+// Perform Pagination, Sorting, and Filtering on the current
+// class instance. Uses the Mongoose query stored in the class
+// instance's _query property.
 function pageSortFilter(performCountQuery) {
   var self = this;
 
   return new Promise(function (resolve, reject) {
-
     // Add sorting to the query if specified
     self._modifiedQuery = sort(self._query, self._sorting);
 
@@ -100,4 +100,4 @@ function filter(query, filters) {
   return query;
 }
 
-module.exports = service;
+module.exports = MongooseFiltering;
