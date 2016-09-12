@@ -68,7 +68,8 @@
   
   <!--owasp config sync-->
   <script type="text/javascript">
-    owaspPasswordStrengthTest.config({{{ owaspConfig }}});
+    var sharedConfig = {{{ sharedConfig }}};
+    owaspPasswordStrengthTest.config(sharedConfig.owasp);
   </script>
 
   {{#if livereload}}
