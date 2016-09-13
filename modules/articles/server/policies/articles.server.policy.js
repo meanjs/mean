@@ -20,6 +20,9 @@ exports.invokeRolesPolicies = function () {
     }, {
       resources: '/api/articles/:articleId',
       permissions: '*'
+    }, {
+      resources: '/api/parameterized-query/articles',
+      permissions: '*'
     }]
   }, {
     roles: ['user'],

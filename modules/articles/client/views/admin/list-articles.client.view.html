@@ -1,11 +1,28 @@
 ﻿<section>
   <div class="page-header">
-    <h1>
-      Articles
-      <a class="btn btn-primary pull-right" data-ui-sref="admin.articles.create">
-        <i class="glyphicon glyphicon-plus"></i>
-      </a>
-    </h1>
+    <div class="row">
+      <div class="col-md-12">
+        <h1>
+          Articles
+          <a class="btn btn-primary pull-right" data-ui-sref="admin.articles.create">
+            <i class="glyphicon glyphicon-plus"></i>
+          </a>
+        </h1>
+      </div>
+      <div class="row" ng-if="vm.articles.length || (vm.filtered)" ng-cloak>
+        <div class="col-md-4 col-sm-8 col-xs-8" style="margin-top: 2em; margin-left: 1em;">
+          <div class="form-group">
+            <input class="form-control" type="text" ng-model="vm.search" placeholder="Search by Title" />
+          </div>
+        </div>
+        <div class="col-md-4 col-sm-8 col-xs-8" style="margin-top: 2em; margin-left: 1em;">
+          <div class="form-group">
+            <button class="btn btn-primary" ng-disabled="!vm.search" ng-click="vm.filter();">Search</button>
+            <button class="btn btn-default" ng-disabled="!vm.filtered" ng-click="vm.reset();">Reset</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
   <div class="list-group">
     <a data-ng-repeat="article in vm.articles" data-ui-sref="admin.articles.edit({articleId: article._id})" class="list-group-item">
@@ -20,7 +37,21 @@
       <p class="list-group-item-text" data-ng-bind="article.content"></p>
     </a>
   </div>
-  <div class="alert alert-warning text-center" data-ng-if="articles.$resolved && !articles.length">
+  <div class="alert alert-warning text-center ng-cloak" ng-if="!vm.filtered && !vm.articles.length" ng-cloak>
     No articles yet, why don't you <a data-ui-sref="admin.articles.create">create one</a>?
+  </div>
+  <div ng-show="vm.error" class="text-danger">
+    <strong ng-bind="vm.error"></strong>
+  </div>
+  <div class="row" ng-if="vm.articles.length">
+    <div class="col-md-10">
+      <uib-pagination boundary-links="true" max-size="10" items-per-page="vm.itemsPerPage" total-items="vm.totalCount" ng-model="vm.currentPage" ng-change="vm.find()"></uib-pagination>
+    </div>
+    <div class="col-md-2">
+      <p class="text-muted">Showing {{vm.articles.length}} of {{vm.totalCount}}</p>
+    </div>
+  </div>
+  <div class="alert alert-warning text-center" ng-if="vm.filtered && !vm.articles.length" ng-cloak>
+    No results found. Please provide new search criteria, or reset the form.
   </div>
 </section>

@@ -16,6 +16,7 @@
     vm.form = {};
     vm.remove = remove;
     vm.save = save;
+    vm.isNew = !article._id;
 
     // Remove existing Article
     function remove() {

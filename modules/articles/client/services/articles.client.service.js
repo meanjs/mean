@@ -13,6 +13,18 @@
     }, {
       update: {
         method: 'PUT'
+      },
+      query: {
+        isArray: false,
+        params: {
+          take: '@take',
+          page: '@page'
+        }
+      },
+      pageSortFilter: {
+        method: 'POST',
+        isArray: false,
+        url: 'api/parameterized-query/articles'
       }
     });
 
@@ -20,6 +32,17 @@
       createOrUpdate: function () {
         var article = this;
         return createOrUpdate(article);
+      }
+    });
+
+    angular.extend(Article, {
+      find: function (options) {
+        var articlesResource = this;
+        return articlesResource.pageSortFilter(options).$promise;
+      },
+      list: function (params) {
+        var articlesResource = this;
+        return articlesResource.query(params).$promise;
       }
     });
 

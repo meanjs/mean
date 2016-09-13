@@ -12,6 +12,9 @@ module.exports = function (app) {
     .get(articles.list)
     .post(articles.create);
 
+  app.route('/api/parameterized-query/articles').all(articlesPolicy.isAllowed)
+    .post(articles.parameterizedQuery);
+
   // Single article routes
   app.route('/api/articles/:articleId').all(articlesPolicy.isAllowed)
     .get(articles.read)
