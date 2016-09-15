@@ -25,7 +25,7 @@
 
         if (!allowed) {
           event.preventDefault();
-          if (Authentication.user !== null && typeof Authentication.user === 'object') {
+          if (Authentication.user !== undefined && typeof Authentication.user === 'object') {
             $state.transitionTo('forbidden');
           } else {
             $state.go('authentication.signin').then(function () {

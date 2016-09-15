@@ -2,5 +2,6 @@
 <div class="alert alert-danger" role="alert">
   <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
   <span class="sr-only">Error:</span>
-  You made a bad request
+  <span ng-if="vm.errorMessage" ng-bind="vm.errorMessage"></span>
+  <span ng-if="!vm.errorMessage">You made a bad request</span>
 </div>
