@@ -311,17 +311,6 @@ describe('Users E2E Tests:', function () {
       expect(element.all(by.css('.error-text')).get(1).getText()).toBe('Password is required.');
     });
 
-    it('Should autofocus on the username field', function() {
-      // Make sure user is signed out first
-      signout();
-      // Sign in
-      browser.get('http://localhost:3001/authentication/signin');
-      // Pause a moment as the autofocus timeout kick ins
-      browser.sleep(150);
-      // The ID of the username field should be the same as the ID of the current active element
-      expect(element(by.model('vm.credentials.username')).getId()).toEqual(browser.driver.switchTo().activeElement().getId());
-    });
-
     it('Verify that the user is logged in', function() {
       // Make sure user is signed out first
       signout();
