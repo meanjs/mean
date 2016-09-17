@@ -7,10 +7,9 @@
       <i class="glyphicon glyphicon-check text-success user-primary-account" data-toggle="popover" title="Primary: {{vm.user.provider}}"></i>
     </div>
     <div ng-repeat="(providerName, providerData) in vm.user.additionalProvidersData" class="social-account-container">
-      <img ng-src="/modules/users/client/img/buttons/{{providerName}}.png">
-      <a ng-click="vm.removeUserSocialAccount(providerName)">
-        <img class="social-button" ng-src="/modules/users/client/img/buttons/{{providerName}}.png">
-        <span class="btn btn-success btn-add-remove-account">
+      <a href ng-click="vm.removeUserSocialAccount(providerName)">
+        <img class="social-button" ng-src="/modules/users/client/img/buttons/{{::providerName}}.png">
+        <span class="btn btn-danger btn-add-remove-account">
           <i class="glyphicon glyphicon-trash"></i>
         </span>
       </a>
