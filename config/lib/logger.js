@@ -37,9 +37,8 @@ logger.stream = {
 /**
  * Instantiate a winston's File transport for disk file logging
  *
- * @param logger a valid winston logger object
  */
-logger.setupFileLogger = function setupFileLogger(options) {
+logger.setupFileLogger = function setupFileLogger() {
 
   var fileLoggerTransport = this.getLogOptions();
   if (!fileLoggerTransport) {
@@ -72,13 +71,9 @@ logger.setupFileLogger = function setupFileLogger(options) {
  *
  * Returns a Winston object for logging with the File transport
  */
-logger.getLogOptions = function getLogOptions(configOptions) {
+logger.getLogOptions = function getLogOptions() {
 
   var _config = _.clone(config, true);
-  if (configOptions) {
-    _config = configOptions;
-  }
-
   var configFileLogger = _config.log.fileLogger;
 
   if (!_.has(_config, 'log.fileLogger.directoryPath') || !_.has(_config, 'log.fileLogger.fileName')) {
@@ -141,6 +136,6 @@ logger.getLogFormat = function getLogFormat() {
   return format;
 };
 
-logger.setupFileLogger({});
+logger.setupFileLogger();
 
 module.exports = logger;
