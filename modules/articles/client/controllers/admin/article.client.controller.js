@@ -20,7 +20,9 @@
     // Remove existing Article
     function remove() {
       if ($window.confirm('Are you sure you want to delete?')) {
-        vm.article.$remove($state.go('admin.articles.list'));
+        vm.article.$remove(function() {
+          $state.go('admin.articles.list');
+        });
       }
     }
 
