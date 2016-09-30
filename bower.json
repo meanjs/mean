@@ -10,6 +10,7 @@
     "angular-messages": "~1.5.0",
     "angular-mocks": "~1.5.0",
     "angular-resource": "~1.5.0",
+    "angular-ui-notification": "~0.2.0",
     "angular-ui-router": "~0.2.18",
     "bootstrap": "~3.3.6",
     "ng-file-upload": "^12.1.0",
