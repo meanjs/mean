@@ -14,6 +14,7 @@
     vm.user = user;
     vm.remove = remove;
     vm.update = update;
+    vm.isContextUserSelf = isContextUserSelf;
 
     function remove(user) {
       if ($window.confirm('Are you sure you want to delete this user?')) {
@@ -45,6 +46,10 @@
       }, function (errorResponse) {
         vm.error = errorResponse.data.message;
       });
+    }
+
+    function isContextUserSelf() {
+      return vm.user.username === vm.authentication.user.username;
     }
   }
 }());
