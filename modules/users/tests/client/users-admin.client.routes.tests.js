@@ -34,7 +34,7 @@
         });
 
         it('Should have templateUrl', function () {
-          expect(mainstate.templateUrl).toBe('modules/users/client/views/admin/list-users.client.view.html');
+          expect(mainstate.templateUrl).toBe('/modules/users/client/views/admin/list-users.client.view.html');
         });
       });
 
@@ -53,7 +53,7 @@
         });
 
         it('Should have templateUrl', function () {
-          expect(viewstate.templateUrl).toBe('modules/users/client/views/admin/view-user.client.view.html');
+          expect(viewstate.templateUrl).toBe('/modules/users/client/views/admin/view-user.client.view.html');
         });
       });
 
@@ -72,7 +72,7 @@
         });
 
         it('Should have templateUrl', function () {
-          expect(editstate.templateUrl).toBe('modules/users/client/views/admin/edit-user.client.view.html');
+          expect(editstate.templateUrl).toBe('/modules/users/client/views/admin/edit-user.client.view.html');
         });
       });
 
@@ -92,7 +92,7 @@
           $rootScope.$digest();
 
           expect($location.path()).toBe('/admin/users');
-          expect($state.current.templateUrl).toBe('modules/users/client/views/admin/list-users.client.view.html');
+          expect($state.current.templateUrl).toBe('/modules/users/client/views/admin/list-users.client.view.html');
         }));
       });
 

@@ -87,7 +87,7 @@
 
       it('should send a POST request with the form input values and then locate to new object URL', inject(function (ArticlesService) {
         // Set POST response
-        $httpBackend.expectPOST('api/articles', sampleArticlePostData).respond(mockArticle);
+        $httpBackend.expectPOST('/api/articles', sampleArticlePostData).respond(mockArticle);
 
         // Run controller functionality
         $scope.vm.save(true);
@@ -101,7 +101,7 @@
 
       it('should call Notification.error if error', function () {
         var errorMessage = 'this is an error message';
-        $httpBackend.expectPOST('api/articles', sampleArticlePostData).respond(400, {
+        $httpBackend.expectPOST('/api/articles', sampleArticlePostData).respond(400, {
           message: errorMessage
         });
 
