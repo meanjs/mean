@@ -47,8 +47,6 @@
     "file-stream-rotator": "~0.0.6",
     "generate-password": "~1.1.1",
     "glob": "~7.0.0",
-    "grunt": "~1.0.1",
-    "grunt-cli": "~1.2.0",
     "helmet": "~2.1.2",
     "jasmine-core": "~2.5.0",
     "lodash": "~4.15.0",
