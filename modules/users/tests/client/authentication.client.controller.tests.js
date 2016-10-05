@@ -56,7 +56,7 @@
       describe('$scope.signin()', function () {
         it('should login with a correct username and password', function () {
           // Test expected GET request
-          $httpBackend.when('POST', 'api/auth/signin').respond(200, { username: 'Fred' });
+          $httpBackend.when('POST', '/api/auth/signin').respond(200, { username: 'Fred' });
 
           scope.vm.signin(true);
           $httpBackend.flush();
@@ -93,7 +93,7 @@
             spyOn($state, 'go');
 
             // Test expected GET request
-            $httpBackend.when('POST', 'api/auth/signin').respond(200, 'Fred');
+            $httpBackend.when('POST', '/api/auth/signin').respond(200, 'Fred');
 
             scope.vm.signin(true);
             $httpBackend.flush();
@@ -106,7 +106,7 @@
 
         it('should fail to log in with nothing', function () {
           // Test expected POST request
-          $httpBackend.expectPOST('api/auth/signin').respond(400, {
+          $httpBackend.expectPOST('/api/auth/signin').respond(400, {
             'message': 'Missing credentials'
           });
 
@@ -123,7 +123,7 @@
           scope.vm.credentials = 'Bar';
 
           // Test expected POST request
-          $httpBackend.expectPOST('api/auth/signin').respond(400, {
+          $httpBackend.expectPOST('/api/auth/signin').respond(400, {
             'message': 'Unknown user'
           });
 
@@ -139,7 +139,7 @@
         it('should register with correct data', function () {
           // Test expected GET request
           scope.vm.authentication.user = 'Fred';
-          $httpBackend.when('POST', 'api/auth/signup').respond(200, { username: 'Fred' });
+          $httpBackend.when('POST', '/api/auth/signup').respond(200, { username: 'Fred' });
 
           scope.vm.signup(true);
           $httpBackend.flush();
@@ -152,7 +152,7 @@
 
         it('should fail to register with duplicate Username', function () {
           // Test expected POST request
-          $httpBackend.when('POST', 'api/auth/signup').respond(400, {
+          $httpBackend.when('POST', '/api/auth/signup').respond(400, {
             'message': 'Username already exists'
           });
 

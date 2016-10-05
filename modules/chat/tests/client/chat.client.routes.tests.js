@@ -34,7 +34,7 @@
         });
 
         it('Should have templateUrl', function () {
-          expect(mainstate.templateUrl).toBe('modules/chat/client/views/chat.client.view.html');
+          expect(mainstate.templateUrl).toBe('/modules/chat/client/views/chat.client.view.html');
         });
       });
 
@@ -54,7 +54,7 @@
           $rootScope.$digest();
 
           expect($location.path()).toBe('/chat');
-          expect($state.current.templateUrl).toBe('modules/chat/client/views/chat.client.view.html');
+          expect($state.current.templateUrl).toBe('/modules/chat/client/views/chat.client.view.html');
         }));
       });
 

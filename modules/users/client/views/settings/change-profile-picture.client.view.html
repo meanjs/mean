@@ -9,7 +9,7 @@
           </div>
         </div>
         <div class="form-group text-center">
-          <img ng-src="{{vm.fileSelected ? croppedDataUrl : vm.user.profileImageURL}}" alt="{{vm.user.displayName}}" class="img-thumbnail user-profile-picture" ngf-drop>
+          <img ng-src="{{vm.fileSelected ? croppedDataUrl : '/' + vm.user.profileImageURL}}" alt="{{vm.user.displayName}}" class="img-thumbnail user-profile-picture" ngf-drop>
         </div>
         <div ng-show="!vm.fileSelected" class="text-center form-group">
           <button class="btn btn-default btn-file" ngf-select="vm.fileSelected = true" ng-model="picFile" accept="image/*">Select Picture</button>

@@ -53,7 +53,7 @@
         });
 
         it('Should have templateUrl', function () {
-          expect(liststate.templateUrl).toBe('modules/articles/client/views/list-articles.client.view.html');
+          expect(liststate.templateUrl).toBe('/modules/articles/client/views/list-articles.client.view.html');
         });
       });
 

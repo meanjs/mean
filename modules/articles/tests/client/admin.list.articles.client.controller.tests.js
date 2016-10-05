@@ -76,7 +76,7 @@
 
       it('should send a GET request and return all articles', inject(function (ArticlesService) {
         // Set POST response
-        $httpBackend.expectGET('api/articles').respond(mockArticleList);
+        $httpBackend.expectGET('/api/articles').respond(mockArticleList);
 
 
         $httpBackend.flush();
