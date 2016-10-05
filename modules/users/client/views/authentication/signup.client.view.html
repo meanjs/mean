@@ -5,7 +5,7 @@
       <fieldset>
         <div class="form-group" show-errors>
           <label for="firstName">First Name</label>
-          <input type="text" id="firstName" name="firstName" class="form-control" ng-model="vm.credentials.firstName" placeholder="First Name" required>
+          <input type="text" id="firstName" name="firstName" class="form-control" ng-model="vm.credentials.firstName" placeholder="First Name" required autofocus>
           <div ng-messages="vm.userForm.firstName.$error" role="alert">
             <p class="help-block error-text" ng-message="required">First name is required.</p>
           </div>
@@ -34,7 +34,7 @@
         </div>
         <div class="form-group" show-errors>
           <label for="password">Password</label>
-            <input type="password" id="password" name="password" class="form-control" ng-model="vm.credentials.password" placeholder="Password" uib-popover="{{vm.getPopoverMsg()}}" uib-popover-trigger="focus" password-validator required>
+            <input type="password" id="password" name="password" class="form-control" ng-model="vm.credentials.password" placeholder="Password" uib-popover="{{vm.getPopoverMsg()}}" popover-trigger="outsideClick" password-validator required>
           <div ng-messages="vm.userForm.password.$error" role="alert">
             <p class="help-block error-text" ng-message="required">Password is required.</p>
             <div ng-repeat="passwordError in passwordErrors">
