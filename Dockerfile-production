@@ -47,7 +47,7 @@ RUN sudo apt-get install -yq nodejs \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-# Install gem sass for grunt-contrib-sass
+# Install gem sass
 RUN gem install sass
 
 # Install MEAN.JS Prerequisites
