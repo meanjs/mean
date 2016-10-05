@@ -4,8 +4,11 @@
     <form name="vm.userForm" ng-submit="vm.signin(vm.userForm.$valid)" class="signin" novalidate autocomplete="off">
       <fieldset>
         <div class="form-group" show-errors>
+          <uib-alert type="danger" ng-show="vm.error" class="text-center text-danger">
+            <span ng-bind="vm.error"></span>
+          </uib-alert>
           <label for="username">Username</label>
-          <input type="text" id="username" name="username" class="form-control" ng-model="vm.credentials.username" placeholder="Username" lowercase required>
+          <input type="text" id="username" name="username" class="form-control" ng-model="vm.credentials.username" placeholder="Username" lowercase required autofocus>
           <div ng-messages="vm.userForm.username.$error" role="alert">
             <p class="help-block error-text" ng-message="required">Username is required.</p>
           </div>
@@ -25,12 +28,7 @@
         <div class="text-center forgot-password">
           <a ui-sref="password.forgot">Forgot your password?</a>
         </div>
-        <p> 
-          &nbsp;
-        </p>
-        <uib-alert type="danger" ng-show="vm.error" class="text-center text-danger">
-          <span ng-bind="vm.error"></span>
-        </uib-alert>
+        <br />
       </fieldset>
     </form>
   </div>
