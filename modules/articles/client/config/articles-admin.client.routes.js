@@ -15,7 +15,7 @@
         template: '<ui-view/>'
       })
       .state('admin.articles.list', {
-        url: '/',
+        url: '',
         templateUrl: '/modules/articles/client/views/admin/list-articles.client.view.html',
         controller: 'ArticlesAdminListController',
         controllerAs: 'vm',

@@ -48,6 +48,9 @@
       ArticlesService = _ArticlesService_;
       Notification = _Notification_;
 
+      // Ignore parent template get on state transitions
+      $httpBackend.whenGET('/modules/core/client/views/home.client.view.html').respond(200, '');
+
       // create mock article
       mockArticle = new ArticlesService({
         _id: '525a8422f6d0f87f0e407a33',

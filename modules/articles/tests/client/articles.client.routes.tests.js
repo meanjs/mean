@@ -109,7 +109,9 @@
       });
 
       describe('Handle Trailing Slash', function () {
-        beforeEach(inject(function ($state, $rootScope) {
+        beforeEach(inject(function ($state, $rootScope, $templateCache) {
+          $templateCache.put('/modules/articles/client/views/list-articles.client.view.html', '');
+
           $state.go('articles.list');
           $rootScope.$digest();
         }));

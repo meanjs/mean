@@ -40,6 +40,9 @@
         $location = _$location_;
         $location.path = jasmine.createSpy().and.returnValue(true);
 
+        // Ignore parent template gets on state transition
+        $httpBackend.whenGET('/modules/core/client/views/404.client.view.html').respond(200);
+
         // Mock logged in user
         _Authentication_.user = {
           username: 'test',
@@ -73,6 +76,10 @@
 
         spyOn(Notification, 'error');
         spyOn(Notification, 'success');
+
+        // Ignore parent template gets on state transition
+        $httpBackend.whenGET('/modules/core/client/views/404.client.view.html').respond(200);
+        $httpBackend.whenGET('/modules/core/client/views/400.client.view.html').respond(200);
 
         // Initialize the Authentication controller
         PasswordController = $controller('PasswordController as vm', {
