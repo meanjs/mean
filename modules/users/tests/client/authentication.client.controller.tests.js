@@ -48,7 +48,7 @@
       }));
 
       describe('$scope.signin()', function () {
-        it('should login with a correct user and password', function () {
+        it('should login with a correct username and password', function () {
           // Test expected GET request
           $httpBackend.when('POST', 'api/auth/signin').respond(200, { username: 'Fred' });
 
@@ -57,6 +57,18 @@
 
           // Test scope value
           expect(scope.vm.authentication.user.username).toEqual('Fred');
+          expect($location.url()).toEqual('/');
+        });
+
+        it('should login with a correct email and password', function () {
+          // Test expected GET request
+          $httpBackend.when('POST', 'api/auth/signin').respond(200, { email: 'Fred@email.com' });
+
+          scope.vm.signin(true);
+          $httpBackend.flush();
+
+          // Test scope value
+          expect(scope.vm.authentication.user.email).toEqual('Fred@email.com');
           expect($location.url()).toEqual('/');
         });
 
@@ -101,7 +113,7 @@
 
         it('should fail to log in with wrong credentials', function () {
           // Foo/Bar combo assumed to not exist
-          scope.vm.authentication.user = { usersname: 'Foo' };
+          scope.vm.authentication.user = { username: 'Foo' };
           scope.vm.credentials = 'Bar';
 
           // Test expected POST request

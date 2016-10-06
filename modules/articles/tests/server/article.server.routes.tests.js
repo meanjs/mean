@@ -33,7 +33,7 @@ describe('Article CRUD tests', function () {
   beforeEach(function (done) {
     // Create user credentials
     credentials = {
-      username: 'username',
+      usernameOrEmail: 'username',
       password: 'M3@n.jsI$Aw3$0m3'
     };
 
@@ -43,7 +43,7 @@ describe('Article CRUD tests', function () {
       lastName: 'Name',
       displayName: 'Full Name',
       email: 'test@test.com',
-      username: credentials.username,
+      username: credentials.usernameOrEmail,
       password: credentials.password,
       provider: 'local'
     });
@@ -216,7 +216,7 @@ describe('Article CRUD tests', function () {
   it('should be able to get a single article that has an orphaned user reference', function (done) {
     // Create orphan user creds
     var _creds = {
-      username: 'orphan',
+      usernameOrEmail: 'orphan',
       password: 'M3@n.jsI$Aw3$0m3'
     };
 
@@ -226,7 +226,7 @@ describe('Article CRUD tests', function () {
       lastName: 'Name',
       displayName: 'Full Name',
       email: 'orphan@test.com',
-      username: _creds.username,
+      username: _creds.usernameOrEmail,
       password: _creds.password,
       provider: 'local',
       roles: ['admin']
@@ -322,7 +322,7 @@ describe('Article CRUD tests', function () {
   it('should be able to get single article, that a different user created, if logged in & verify the "isCurrentUserOwner" field is set to "false"', function (done) {
     // Create temporary user creds
     var _creds = {
-      username: 'articleowner',
+      usernameOrEmail: 'articleowner',
       password: 'M3@n.jsI$Aw3$0m3'
     };
 
@@ -332,7 +332,7 @@ describe('Article CRUD tests', function () {
       lastName: 'Name',
       displayName: 'Full Name',
       email: 'temp@test.com',
-      username: _creds.username,
+      username: _creds.usernameOrEmail,
       password: _creds.password,
       provider: 'local',
       roles: ['admin', 'user']
