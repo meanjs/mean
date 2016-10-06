@@ -18,7 +18,7 @@ module.exports = function () {
       $or: [{
         username: usernameOrEmail.toLowerCase()
       }, {
-        email: usernameOrEmail
+        email: usernameOrEmail.toLowerCase()
       }]
     }, function (err, user) {
       if (err) {
