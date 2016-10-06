@@ -24,6 +24,7 @@ var _ = require('lodash'),
   protractor = require('gulp-protractor').protractor,
   webdriver_update = require('gulp-protractor').webdriver_update,
   webdriver_standalone = require('gulp-protractor').webdriver_standalone,
+  del = require('del'),
   KarmaServer = require('karma').Server;
 
 // Local settings
@@ -159,6 +160,7 @@ gulp.task('uglify', function () {
     defaultAssets.client.js,
     defaultAssets.client.templates
   );
+  del(['public/dist/*']);
 
   return gulp.src(assets)
     .pipe(plugins.ngAnnotate())
@@ -166,6 +168,7 @@ gulp.task('uglify', function () {
       mangle: false
     }))
     .pipe(plugins.concat('application.min.js'))
+    .pipe(plugins.rev())
     .pipe(gulp.dest('public/dist'));
 });
 
@@ -174,6 +177,7 @@ gulp.task('cssmin', function () {
   return gulp.src(defaultAssets.client.css)
     .pipe(plugins.csso())
     .pipe(plugins.concat('application.min.css'))
+    .pipe(plugins.rev())
     .pipe(gulp.dest('public/dist'));
 });
 
