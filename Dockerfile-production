@@ -47,9 +47,6 @@ RUN sudo apt-get install -yq nodejs \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-# Install gem sass
-RUN gem install sass
-
 # Install MEAN.JS Prerequisites
 RUN npm install --quiet -g grunt-cli gulp bower yo mocha karma-cli pm2 && npm cache clean
 
