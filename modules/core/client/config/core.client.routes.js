@@ -36,17 +36,31 @@
       .state('not-found', {
         url: '/not-found',
         templateUrl: 'modules/core/client/views/404.client.view.html',
+        controller: 'ErrorController',
+        controllerAs: 'vm',
+        params: {
+          message: function($stateParams) {
+            return $stateParams.message;
+          }
+        },
         data: {
           ignoreState: true,
-          pageTitle: 'Not-Found'
+          pageTitle: 'Not Found'
         }
       })
       .state('bad-request', {
         url: '/bad-request',
         templateUrl: 'modules/core/client/views/400.client.view.html',
+        controller: 'ErrorController',
+        controllerAs: 'vm',
+        params: {
+          message: function($stateParams) {
+            return $stateParams.message;
+          }
+        },
         data: {
           ignoreState: true,
-          pageTitle: 'Bad-Request'
+          pageTitle: 'Bad Request'
         }
       })
       .state('forbidden', {
