@@ -4,7 +4,8 @@
   describe('Users Admin Route Tests', function () {
     // Initialize global variables
     var $scope,
-      Authentication;
+      Authentication,
+      $httpBackend;
 
     // We can start by loading the main application module
     beforeEach(module(ApplicationConfiguration.applicationModuleName));
@@ -77,17 +78,26 @@
       });
 
       describe('Handle Trailing Slash', function () {
-        beforeEach(inject(function ($state, $rootScope, _Authentication_) {
+        beforeEach(inject(function ($state, $rootScope, _Authentication_, _$httpBackend_) {
           Authentication.user = {
             name: 'user',
             roles: ['admin']
           };
 
+          $httpBackend = _$httpBackend_;
+
+          // Ignore parent template gets on state transition
+          $httpBackend.whenGET('/modules/users/client/views/admin/list-users.client.view.html').respond(200);
+          $httpBackend.whenGET('/modules/core/client/views/home.client.view.html').respond(200);
+
           $state.go('admin.users');
           $rootScope.$digest();
         }));
 
-        it('Should remove trailing slash', inject(function ($state, $location, $rootScope) {
+        it('Should remove trailing slash', inject(function ($state, $location, $rootScope, $templateCache) {
+          $templateCache.put('/modules/users/client/views/admin/list-users.client.view.html', '');
+          $templateCache.put('/modules/core/client/views/home.client.view.html', '');
+
           $location.path('admin/users/');
           $rootScope.$digest();
 

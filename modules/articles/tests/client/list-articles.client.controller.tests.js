@@ -78,6 +78,8 @@
         // Set POST response
         $httpBackend.expectGET('/api/articles').respond(mockArticleList);
 
+        // Ignore parent template get on state transition
+        $httpBackend.whenGET('/modules/core/client/views/home.client.view.html').respond(200, '');
 
         $httpBackend.flush();
 

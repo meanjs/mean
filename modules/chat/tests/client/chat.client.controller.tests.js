@@ -11,7 +11,8 @@
       ChatController,
       $timeout,
       $state,
-      Authentication;
+      Authentication,
+      $httpBackend;
 
     // Load the main application module
     beforeEach(module(ApplicationConfiguration.applicationModuleName));
@@ -39,11 +40,16 @@
     });
 
     describe('when user logged in', function () {
-      beforeEach(inject(function ($controller, $rootScope, _Socket_, _Authentication_, _$timeout_, _$state_) {
+      beforeEach(inject(function ($controller, $rootScope, _$httpBackend_, _Socket_, _Authentication_, _$timeout_, _$state_) {
         Authentication.user = {
           name: 'user',
           roles: ['user']
         };
+
+        $httpBackend = _$httpBackend_;
+
+        // Ignore parent template get on state transitions
+        $httpBackend.whenGET('/modules/core/client/views/home.client.view.html').respond(200, '');
 
         ChatController = $controller('ChatController as vm', {
           $scope: $scope
