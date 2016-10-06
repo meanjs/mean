@@ -108,7 +108,6 @@
     "karma-ng-html2js-preprocessor": "~1.0.0",
     "karma-phantomjs-launcher": "~1.0.0",
     "lcov-result-merger": "~1.2.0",
-    "load-grunt-tasks": "~3.4.1",
     "mock-fs": "~3.11.0",
     "node-inspector": "~0.12.7",
     "run-sequence": "~1.2.2",
