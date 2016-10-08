@@ -5,9 +5,9 @@
     .module('articles.services')
     .factory('ArticlesService', ArticlesService);
 
-  ArticlesService.$inject = ['$resource'];
+  ArticlesService.$inject = ['$resource', '$log'];
 
-  function ArticlesService($resource) {
+  function ArticlesService($resource, $log) {
     var Article = $resource('api/articles/:articleId', {
       articleId: '@_id'
     }, {
@@ -47,7 +47,7 @@
 
     function handleError(error) {
       // Log error
-      console.log(error);
+      $log.error(error);
     }
   }
 }());
