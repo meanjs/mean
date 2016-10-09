@@ -29,7 +29,7 @@ exports.update = function (req, res) {
 
   user.save(function (err) {
     if (err) {
-      return res.status(400).send({
+      return res.status(422).send({
         message: errorHandler.getErrorMessage(err)
       });
     }
@@ -46,7 +46,7 @@ exports.delete = function (req, res) {
 
   user.remove(function (err) {
     if (err) {
-      return res.status(400).send({
+      return res.status(422).send({
         message: errorHandler.getErrorMessage(err)
       });
     }
@@ -61,7 +61,7 @@ exports.delete = function (req, res) {
 exports.list = function (req, res) {
   User.find({}, '-salt -password -providerData').sort('-created').populate('user', 'displayName').exec(function (err, users) {
     if (err) {
-      return res.status(400).send({
+      return res.status(422).send({
         message: errorHandler.getErrorMessage(err)
       });
     }
