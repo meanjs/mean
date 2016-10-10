@@ -9,7 +9,8 @@
       $httpBackend,
       $stateParams,
       $state,
-      $location;
+      $location,
+      Notification;
 
     beforeEach(function () {
       jasmine.addMatchers({
@@ -32,7 +33,7 @@
       // The injector ignores leading and trailing underscores here (i.e. _$httpBackend_).
       // This allows us to inject a service but then attach it to a variable
       // with the same name as the service.
-      beforeEach(inject(function ($controller, $rootScope, _$location_, _$stateParams_, _$httpBackend_) {
+      beforeEach(inject(function ($controller, $rootScope, _$location_, _$stateParams_, _$httpBackend_, _Notification_) {
         // Set a new global scope
         scope = $rootScope.$new();
 
@@ -40,6 +41,11 @@
         $stateParams = _$stateParams_;
         $httpBackend = _$httpBackend_;
         $location = _$location_;
+        Notification = _Notification_;
+
+        // Spy on Notification
+        spyOn(Notification, 'error');
+        spyOn(Notification, 'success');
 
         // Initialize the Authentication controller
         AuthenticationController = $controller('AuthenticationController as vm', {
@@ -107,8 +113,8 @@
           scope.vm.signin(true);
           $httpBackend.flush();
 
-          // Test scope value
-          expect(scope.vm.error).toEqual('Missing credentials');
+          // Test Notification.error is called
+          expect(Notification.error).toHaveBeenCalledWith({ message: 'Missing credentials', title: '<i class="glyphicon glyphicon-remove"></i> Signin Error!', delay: 6000 });
         });
 
         it('should fail to log in with wrong credentials', function () {
@@ -124,8 +130,8 @@
           scope.vm.signin(true);
           $httpBackend.flush();
 
-          // Test scope value
-          expect(scope.vm.error).toEqual('Unknown user');
+          // Test Notification.error is called
+          expect(Notification.error).toHaveBeenCalledWith({ message: 'Unknown user', title: '<i class="glyphicon glyphicon-remove"></i> Signin Error!', delay: 6000 });
         });
       });
 
@@ -140,7 +146,7 @@
 
           // test scope value
           expect(scope.vm.authentication.user.username).toBe('Fred');
-          expect(scope.vm.error).toEqual(null);
+          expect(Notification.success).toHaveBeenCalledWith({ message: '<i class="glyphicon glyphicon-ok"></i> Signup successful!' });
           expect($location.url()).toBe('/');
         });
 
@@ -153,8 +159,8 @@
           scope.vm.signup(true);
           $httpBackend.flush();
 
-          // Test scope value
-          expect(scope.vm.error).toBe('Username already exists');
+          // Test Notification.error is called
+          expect(Notification.error).toHaveBeenCalledWith({ message: 'Username already exists', title: '<i class="glyphicon glyphicon-remove"></i> Signup Error!', delay: 6000 });
         });
       });
     });
