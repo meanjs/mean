@@ -5,9 +5,9 @@
     .module('users.admin')
     .controller('UserController', UserController);
 
-  UserController.$inject = ['$scope', '$state', '$window', 'Authentication', 'userResolve'];
+  UserController.$inject = ['$scope', '$state', '$window', 'Authentication', 'userResolve', 'Notification'];
 
-  function UserController($scope, $state, $window, Authentication, user) {
+  function UserController($scope, $state, $window, Authentication, user, Notification) {
     var vm = this;
 
     vm.authentication = Authentication;
@@ -22,9 +22,11 @@
           user.$remove();
 
           vm.users.splice(vm.users.indexOf(user), 1);
+          Notification.success('User deleted successfully!');
         } else {
           vm.user.$remove(function () {
             $state.go('admin.users');
+            Notification.success({ message: '<i class="glyphicon glyphicon-ok"></i> User deleted successfully!' });
           });
         }
       }
@@ -43,8 +45,9 @@
         $state.go('admin.user', {
           userId: user._id
         });
+        Notification.success({ message: '<i class="glyphicon glyphicon-ok"></i> User saved successfully!' });
       }, function (errorResponse) {
-        vm.error = errorResponse.data.message;
+        Notification.error({ message: errorResponse.data.message, title: '<i class="glyphicon glyphicon-remove"></i> User update error!' });
       });
     }
 

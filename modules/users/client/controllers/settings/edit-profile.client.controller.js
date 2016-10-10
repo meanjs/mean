@@ -5,9 +5,9 @@
     .module('users')
     .controller('EditProfileController', EditProfileController);
 
-  EditProfileController.$inject = ['$scope', '$http', '$location', 'UsersService', 'Authentication'];
+  EditProfileController.$inject = ['$scope', '$http', '$location', 'UsersService', 'Authentication', 'Notification'];
 
-  function EditProfileController($scope, $http, $location, UsersService, Authentication) {
+  function EditProfileController($scope, $http, $location, UsersService, Authentication, Notification) {
     var vm = this;
 
     vm.user = Authentication.user;
@@ -15,7 +15,6 @@
 
     // Update a user profile
     function updateUserProfile(isValid) {
-      vm.success = vm.error = null;
 
       if (!isValid) {
         $scope.$broadcast('show-errors-check-validity', 'vm.userForm');
@@ -28,10 +27,10 @@
       user.$update(function (response) {
         $scope.$broadcast('show-errors-reset', 'vm.userForm');
 
-        vm.success = true;
+        Notification.success({ message: '<i class="glyphicon glyphicon-ok"></i> Edit profile successful!' });
         Authentication.user = response;
       }, function (response) {
-        vm.error = response.data.message;
+        Notification.error({ message: response.data.message, title: '<i class="glyphicon glyphicon-remove"></i> Edit profile failed!' });
       });
     }
   }

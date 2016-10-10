@@ -12,7 +12,7 @@
           <img ng-src="{{vm.fileSelected ? croppedDataUrl : vm.user.profileImageURL}}" alt="{{vm.user.displayName}}" class="img-thumbnail user-profile-picture" ngf-drop>
         </div>
         <div ng-show="!vm.fileSelected" class="text-center form-group">
-          <button class="btn btn-default btn-file" ngf-select="vm.fileSelected = true; vm.success = null" ng-model="picFile" accept="image/*">Select Picture</button>
+          <button class="btn btn-default btn-file" ngf-select="vm.fileSelected = true" ng-model="picFile" accept="image/*">Select Picture</button>
         </div>
         <div ng-show="vm.fileSelected" class="text-center form-group">
           <button class="btn btn-primary" ng-click="vm.upload(croppedDataUrl, picFile.name)">Upload</button>
@@ -22,12 +22,6 @@
           <div class="progress-bar" role="progressbar" aria-valuenow="{{vm.progress}}" aria-valuemin="0" aria-valuemax="100" style="width:{{vm.progress}}%" ng-bind="vm.progress + '%'">
             <span class="sr-only">{{vm.progress}}% Complete</span>
           </div>
-        </div>
-        <div ng-show="vm.success" class="text-center text-success">
-          <strong>Profile Picture Changed Successfully</strong>
-        </div>
-        <div ng-show="vm.error" class="text-center text-danger">
-          <strong ng-bind="vm.error"></strong>
         </div>
       </fieldset>
     </form>

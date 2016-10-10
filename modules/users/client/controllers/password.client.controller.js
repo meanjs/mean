@@ -5,9 +5,9 @@
     .module('users')
     .controller('PasswordController', PasswordController);
 
-  PasswordController.$inject = ['$scope', '$stateParams', 'UsersService', '$location', 'Authentication', 'PasswordValidator'];
+  PasswordController.$inject = ['$scope', '$stateParams', 'UsersService', '$location', 'Authentication', 'PasswordValidator', 'Notification'];
 
-  function PasswordController($scope, $stateParams, UsersService, $location, Authentication, PasswordValidator) {
+  function PasswordController($scope, $stateParams, UsersService, $location, Authentication, PasswordValidator, Notification) {
     var vm = this;
 
     vm.resetUserPassword = resetUserPassword;
@@ -22,7 +22,6 @@
 
     // Submit forgotten password account id
     function askForPasswordReset(isValid) {
-      vm.success = vm.error = null;
 
       if (!isValid) {
         $scope.$broadcast('show-errors-check-validity', 'vm.forgotPasswordForm');
@@ -37,7 +36,6 @@
 
     // Change user password
     function resetUserPassword(isValid) {
-      vm.success = vm.error = null;
 
       if (!isValid) {
         $scope.$broadcast('show-errors-check-validity', 'vm.resetPasswordForm');
@@ -55,13 +53,13 @@
     function onRequestPasswordResetSuccess(response) {
       // Show user success message and clear form
       vm.credentials = null;
-      vm.success = response.message;
+      Notification.success({ message: response.message, title: '<i class="glyphicon glyphicon-ok"></i> Password reset email sent successfully!' });
     }
 
     function onRequestPasswordResetError(response) {
       // Show user error message and clear form
       vm.credentials = null;
-      vm.error = response.data.message;
+      Notification.error({ message: response.data.message, title: '<i class="glyphicon glyphicon-remove"></i> Failed to send password reset email!', delay: 4000 });
     }
 
     function onResetPasswordSuccess(response) {
@@ -70,12 +68,13 @@
 
       // Attach user profile
       Authentication.user = response;
+      Notification.success({ message: '<i class="glyphicon glyphicon-ok"></i> Password reset successful!' });
       // And redirect to the index page
       $location.path('/password/reset/success');
     }
 
     function onResetPasswordError(response) {
-      vm.error = response.data.message;
+      Notification.error({ message: response.data.message, title: '<i class="glyphicon glyphicon-remove"></i> Password reset failed!', delay: 4000 });
     }
   }
 }());

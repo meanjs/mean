@@ -272,7 +272,7 @@ describe('Users E2E Tests:', function () {
       // Click Submit button
       element(by.css('button[type=submit]')).click();
       // Password Error
-      expect(element.all(by.css('strong')).get(0).getText()).toBe('Email already exists');
+      expect(element.all(by.css('.message')).get(0).getText()).toBe('Email already exists');
     });
 
     it('Should report Username already exists', function () {
@@ -291,7 +291,7 @@ describe('Users E2E Tests:', function () {
       // Click Submit button
       element(by.css('button[type=submit]')).click();
       // Password Error
-      expect(element.all(by.css('strong')).get(0).getText()).toBe('Username already exists');
+      expect(element.all(by.css('.message')).get(0).getText()).toBe('Username already exists');
     });
 
   });
@@ -436,7 +436,7 @@ describe('Users E2E Tests:', function () {
       // Click Submit button
       element(by.css('button[type=submit]')).click();
       // Password Changed
-      expect(element.all(by.css('.text-success')).get(0).getText()).toBe('Password Changed Successfully');
+      expect(element.all(by.css('.ui-notification')).get(0).getText()).toBe('Password Changed Successfully');
     });
   });
 });
