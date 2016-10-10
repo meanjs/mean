@@ -328,7 +328,7 @@ describe('User CRUD tests', function () {
         .send({
           username: ''
         })
-        .expect(400)
+        .expect(422)
         .end(function (err, res) {
           // Handle error
           if (err) {
@@ -507,7 +507,7 @@ describe('User CRUD tests', function () {
             verifyPassword: '1234567890-ABC-123-Aa$',
             currentPassword: credentials.password
           })
-          .expect(400)
+          .expect(422)
           .end(function (err, res) {
             if (err) {
               return done(err);
@@ -536,7 +536,7 @@ describe('User CRUD tests', function () {
             verifyPassword: '1234567890Aa$',
             currentPassword: 'some_wrong_passwordAa$'
           })
-          .expect(400)
+          .expect(422)
           .end(function (err, res) {
             if (err) {
               return done(err);
@@ -565,7 +565,7 @@ describe('User CRUD tests', function () {
             verifyPassword: '',
             currentPassword: credentials.password
           })
-          .expect(400)
+          .expect(422)
           .end(function (err, res) {
             if (err) {
               return done(err);
@@ -577,7 +577,7 @@ describe('User CRUD tests', function () {
       });
   });
 
-  it('should not be able to change user own password if no new password is at all given', function (done) {
+  it('should not be able to change user own password if not signed in', function (done) {
 
     // Change password
     agent.post('/api/users/password')
@@ -586,7 +586,7 @@ describe('User CRUD tests', function () {
         verifyPassword: '1234567890Aa$',
         currentPassword: credentials.password
       })
-      .expect(400)
+      .expect(401)
       .end(function (err, res) {
         if (err) {
           return done(err);
@@ -759,7 +759,7 @@ describe('User CRUD tests', function () {
 
           agent.put('/api/users')
             .send(userUpdate)
-            .expect(400)
+            .expect(422)
             .end(function (userInfoErr, userInfoRes) {
               if (userInfoErr) {
                 return done(userInfoErr);
@@ -811,7 +811,7 @@ describe('User CRUD tests', function () {
 
           agent.put('/api/users')
             .send(userUpdate)
-            .expect(400)
+            .expect(422)
             .end(function (userInfoErr, userInfoRes) {
               if (userInfoErr) {
                 return done(userInfoErr);
@@ -888,7 +888,7 @@ describe('User CRUD tests', function () {
 
       agent.put('/api/users')
         .send(userUpdate)
-        .expect(400)
+        .expect(401)
         .end(function (userInfoErr, userInfoRes) {
           if (userInfoErr) {
             return done(userInfoErr);
@@ -906,7 +906,7 @@ describe('User CRUD tests', function () {
 
     agent.post('/api/users/picture')
       .send({})
-      .expect(400)
+      .expect(401)
       .end(function (userInfoErr, userInfoRes) {
         if (userInfoErr) {
           return done(userInfoErr);
@@ -960,7 +960,7 @@ describe('User CRUD tests', function () {
         agent.post('/api/users/picture')
           .attach('fieldThatDoesntWork', './modules/users/client/img/profile/default.png')
           .send(credentials)
-          .expect(400)
+          .expect(422)
           .end(function (userInfoErr, userInfoRes) {
             done(userInfoErr);
           });
