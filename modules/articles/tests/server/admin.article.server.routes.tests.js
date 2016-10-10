@@ -170,7 +170,7 @@ describe('Article Admin CRUD tests', function () {
         // Save a new article
         agent.post('/api/articles')
           .send(article)
-          .expect(400)
+          .expect(422)
           .end(function (articleSaveErr, articleSaveRes) {
             // Set message assertion
             (articleSaveRes.body.message).should.match('Title cannot be blank');

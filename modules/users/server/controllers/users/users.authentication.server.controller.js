@@ -231,7 +231,7 @@ exports.removeOAuthProvider = function (req, res, next) {
 
   user.save(function (err) {
     if (err) {
-      return res.status(400).send({
+      return res.status(422).send({
         message: errorHandler.getErrorMessage(err)
       });
     } else {
