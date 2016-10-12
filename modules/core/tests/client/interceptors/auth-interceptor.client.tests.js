@@ -62,5 +62,22 @@
         expect($state.transitionTo).toHaveBeenCalledWith('authentication.signin');
       });
     });
+
+    describe('Unresponsive Interceptor', function() {
+      var Notification;
+      beforeEach(inject(function(_Notification_) {
+        Notification = _Notification_;
+        spyOn(Notification, 'error');
+      }));
+      it('should show error Notification', function () {
+        var response = {
+          status: -1,
+          config: {}
+        };
+        var promise = authInterceptor.responseError(response);
+        expect($q.reject).toHaveBeenCalled();
+        expect(Notification.error).toHaveBeenCalledWith({ message: 'No response received from server. Please try again later.', title: 'Error processing request!', delay: 5000 });
+      });
+    });
   });
 }());
