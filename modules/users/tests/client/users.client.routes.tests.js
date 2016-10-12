@@ -4,7 +4,8 @@
   describe('Users Route Tests', function () {
     // Initialize global variables
     var $scope,
-      Authentication;
+      Authentication,
+      $httpBackend;
 
     // We can start by loading the main application module
     beforeEach(module(ApplicationConfiguration.applicationModuleName));
@@ -34,7 +35,7 @@
         });
 
         it('Should have templateUrl', function () {
-          expect(mainstate.templateUrl).toBe('modules/users/client/views/settings/settings.client.view.html');
+          expect(mainstate.templateUrl).toBe('/modules/users/client/views/settings/settings.client.view.html');
         });
       });
 
@@ -53,7 +54,7 @@
         });
 
         it('Should have templateUrl', function () {
-          expect(profilestate.templateUrl).toBe('modules/users/client/views/settings/edit-profile.client.view.html');
+          expect(profilestate.templateUrl).toBe('/modules/users/client/views/settings/edit-profile.client.view.html');
         });
       });
 
@@ -72,7 +73,7 @@
         });
 
         it('Should have templateUrl', function () {
-          expect(passwordstate.templateUrl).toBe('modules/users/client/views/settings/change-password.client.view.html');
+          expect(passwordstate.templateUrl).toBe('/modules/users/client/views/settings/change-password.client.view.html');
         });
       });
 
@@ -91,7 +92,7 @@
         });
 
         it('Should have templateUrl', function () {
-          expect(accountsstate.templateUrl).toBe('modules/users/client/views/settings/manage-social-accounts.client.view.html');
+          expect(accountsstate.templateUrl).toBe('/modules/users/client/views/settings/manage-social-accounts.client.view.html');
         });
       });
 
@@ -110,27 +111,37 @@
         });
 
         it('Should have templateUrl', function () {
-          expect(picturestate.templateUrl).toBe('modules/users/client/views/settings/change-profile-picture.client.view.html');
+          expect(picturestate.templateUrl).toBe('/modules/users/client/views/settings/change-profile-picture.client.view.html');
         });
       });
 
       describe('Handle Trailing Slash', function () {
-        beforeEach(inject(function ($state, $rootScope, _Authentication_) {
+        beforeEach(inject(function ($state, $rootScope, _Authentication_, _$httpBackend_) {
           Authentication.user = {
             name: 'user',
             roles: ['user']
           };
 
+          $httpBackend = _$httpBackend_;
+
+          // Ignore parent template gets on state transitions
+          $httpBackend.whenGET('/modules/users/client/views/settings/settings.client.view.html').respond(200);
+          $httpBackend.whenGET('/modules/core/client/views/home.client.view.html').respond(200);
+          $httpBackend.whenGET('/modules/users/client/views/settings/edit-profile.client.view.html').respond(200);
+
           $state.go('settings.profile');
           $rootScope.$digest();
         }));
 
-        it('Should remove trailing slash', inject(function ($state, $location, $rootScope) {
+        it('Should remove trailing slash', inject(function ($state, $location, $rootScope, $templateCache) {
+          $templateCache.put('/modules/users/client/views/settings/settings.client.view.html', '');
+          $templateCache.put('/modules/users/client/views/settings/edit-profile.client.view.html', '');
+
           $location.path('settings/profile/');
           $rootScope.$digest();
 
           expect($location.path()).toBe('/settings/profile');
-          expect($state.current.templateUrl).toBe('modules/users/client/views/settings/edit-profile.client.view.html');
+          expect($state.current.templateUrl).toBe('/modules/users/client/views/settings/edit-profile.client.view.html');
         }));
       });
 
@@ -152,7 +163,7 @@
         });
 
         it('Should have templateUrl', function () {
-          expect(mainstate.templateUrl).toBe('modules/users/client/views/authentication/authentication.client.view.html');
+          expect(mainstate.templateUrl).toBe('/modules/users/client/views/authentication/authentication.client.view.html');
         });
       });
 
@@ -171,7 +182,7 @@
         });
 
         it('Should have templateUrl', function () {
-          expect(signupstate.templateUrl).toBe('modules/users/client/views/authentication/signup.client.view.html');
+          expect(signupstate.templateUrl).toBe('/modules/users/client/views/authentication/signup.client.view.html');
         });
       });
 
@@ -190,7 +201,7 @@
         });
 
         it('Should have templateUrl', function () {
-          expect(signinstate.templateUrl).toBe('modules/users/client/views/authentication/signin.client.view.html');
+          expect(signinstate.templateUrl).toBe('/modules/users/client/views/authentication/signin.client.view.html');
         });
       });
 
@@ -231,7 +242,7 @@
         });
 
         it('Should have templateUrl', function () {
-          expect(forgotstate.templateUrl).toBe('modules/users/client/views/password/forgot-password.client.view.html');
+          expect(forgotstate.templateUrl).toBe('/modules/users/client/views/password/forgot-password.client.view.html');
         });
       });
 
@@ -272,7 +283,7 @@
         });
 
         it('Should have templateUrl', function () {
-          expect(invalidstate.templateUrl).toBe('modules/users/client/views/password/reset-password-invalid.client.view.html');
+          expect(invalidstate.templateUrl).toBe('/modules/users/client/views/password/reset-password-invalid.client.view.html');
         });
       });
 
@@ -291,7 +302,7 @@
         });
 
         it('Should have templateUrl', function () {
-          expect(successstate.templateUrl).toBe('modules/users/client/views/password/reset-password-success.client.view.html');
+          expect(successstate.templateUrl).toBe('/modules/users/client/views/password/reset-password-success.client.view.html');
         });
       });
 
@@ -310,7 +321,7 @@
         });
 
         it('Should have templateUrl', function () {
-          expect(formstate.templateUrl).toBe('modules/users/client/views/password/reset-password.client.view.html');
+          expect(formstate.templateUrl).toBe('/modules/users/client/views/password/reset-password.client.view.html');
         });
       });
 

@@ -16,7 +16,7 @@
     vm.upload = function (dataUrl, name) {
 
       Upload.upload({
-        url: 'api/users/picture',
+        url: '/api/users/picture',
         data: {
           newProfilePicture: Upload.dataUrltoBlob(dataUrl, name)
         }

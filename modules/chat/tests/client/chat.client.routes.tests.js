@@ -4,7 +4,8 @@
   describe('Chat Route Tests', function () {
     // Initialize global variables
     var $scope,
-      Authentication;
+      Authentication,
+      $httpBackend;
 
     // We can start by loading the main application module
     beforeEach(module(ApplicationConfiguration.applicationModuleName));
@@ -34,27 +35,35 @@
         });
 
         it('Should have templateUrl', function () {
-          expect(mainstate.templateUrl).toBe('modules/chat/client/views/chat.client.view.html');
+          expect(mainstate.templateUrl).toBe('/modules/chat/client/views/chat.client.view.html');
         });
       });
 
       describe('Handle Trailing Slash', function () {
-        beforeEach(inject(function ($state, $rootScope, _Authentication_) {
+        beforeEach(inject(function ($state, $rootScope, _$httpBackend_, _Authentication_) {
           Authentication.user = {
             name: 'user',
             roles: ['user']
           };
 
+          $httpBackend = _$httpBackend_;
+
+          // Ignore parent template get on state transition
+          $httpBackend.whenGET('/modules/chat/client/views/chat.client.view.html').respond(200);
+          $httpBackend.whenGET('/modules/core/client/views/home.client.view.html').respond(200, '');
+
           $state.go('chat');
           $rootScope.$digest();
         }));
 
-        it('Should remove trailing slash', inject(function ($state, $location, $rootScope) {
+        it('Should remove trailing slash', inject(function ($state, $location, $rootScope, $templateCache) {
+          $templateCache.put('/modules/chat/client/views/chat.client.view.html', '');
+
           $location.path('chat/');
           $rootScope.$digest();
 
           expect($location.path()).toBe('/chat');
-          expect($state.current.templateUrl).toBe('modules/chat/client/views/chat.client.view.html');
+          expect($state.current.templateUrl).toBe('/modules/chat/client/views/chat.client.view.html');
         }));
       });
 
