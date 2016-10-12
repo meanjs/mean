@@ -32,6 +32,7 @@ module.exports = {
       }
       */
     },
+    promise: global.Promise,
     // Enable mongoose debug mode
     debug: process.env.MONGODB_DEBUG || false
   },
