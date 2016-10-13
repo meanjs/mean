@@ -23,8 +23,7 @@ module.exports = {
     options: {
       user: '',
       pass: ''
-    },
-    promise: global.Promise
+    }
   },
   sessionSecret: process.env.SESSION_SECRET || 'youshouldchangethistosomethingsecret',
   facebook: {
