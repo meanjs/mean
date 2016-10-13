@@ -14,7 +14,11 @@ module.exports = function (config) {
     consumerSecret: config.linkedin.clientSecret,
     callbackURL: config.linkedin.callbackURL,
     passReqToCallback: true,
-    profileFields: ['id', 'first-name', 'last-name', 'email-address', 'picture-url']
+    profileFields: ['id', 'first-name', 'last-name', 'email-address', 'picture-url'],
+    scope: [
+      'r_basicprofile',
+      'r_emailaddress'
+    ]
   },
   function (req, accessToken, refreshToken, profile, done) {
     // Set the provider data and include tokens
