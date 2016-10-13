@@ -51,33 +51,16 @@ gulp.task('nodemon', function () {
     script: 'server.js',
     nodeArgs: ['--debug'],
     ext: 'js,html',
+    verbose: true,
     watch: _.union(defaultAssets.server.views, defaultAssets.server.allJS, defaultAssets.server.config)
   });
 });
 
-gulp.task('node-inspector', function() {
-  gulp.src([])
-    .pipe(plugins.nodeInspector({
-      debugPort: 5858,
-      webHost: '0.0.0.0',
-      webPort: 1337,
-      saveLiveEdit: false,
-      preload: true,
-      inject: true,
-      hidden: [],
-      stackTraceLimit: 50,
-      sslKey: '',
-      sslCert: ''
-    }));
-});
-
-// Nodemon debug task
-gulp.task('nodemon-debug', function () {
+// Nodemon task without verbosity or debugging
+gulp.task('nodemon-nodebug', function () {
   return plugins.nodemon({
     script: 'server.js',
-    nodeArgs: ['--debug'],
     ext: 'js,html',
-    verbose: true,
     watch: _.union(defaultAssets.server.views, defaultAssets.server.allJS, defaultAssets.server.config)
   });
 });
@@ -463,10 +446,10 @@ gulp.task('default', function (done) {
 
 // Run the project in debug mode
 gulp.task('debug', function (done) {
-  runSequence('env:dev', ['copyLocalEnvConfig', 'makeUploadsDir'], 'lint', ['node-inspector', 'nodemon-debug', 'watch'], done);
+  runSequence('env:dev', ['copyLocalEnvConfig', 'makeUploadsDir'], 'lint', ['nodemon-nodebug', 'watch'], done);
 });
 
 // Run the project in production mode
 gulp.task('prod', function (done) {
-  runSequence(['copyLocalEnvConfig', 'makeUploadsDir', 'templatecache'], 'build', 'env:prod', 'lint', ['nodemon', 'watch'], done);
+  runSequence(['copyLocalEnvConfig', 'makeUploadsDir', 'templatecache'], 'build', 'env:prod', 'lint', ['nodemon-nodebug', 'watch'], done);
 });
