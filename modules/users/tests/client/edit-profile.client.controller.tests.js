@@ -8,7 +8,8 @@
       $httpBackend,
       $location,
       Authentication,
-      UsersService;
+      UsersService,
+      Notification;
 
     // The $resource service augments the response object with methods for updating and deleting the resource.
     // If we were to use the standard toEqual matcher, our tests would fail because the test values would not match
@@ -35,7 +36,7 @@
     // The injector ignores leading and trailing underscores here (i.e. _$httpBackend_).
     // This allows us to inject a service but then attach it to a variable
     // with the same name as the service.
-    beforeEach(inject(function ($controller, $rootScope, _$location_, _$httpBackend_, _Authentication_, _UsersService_) {
+    beforeEach(inject(function ($controller, $rootScope, _$location_, _$httpBackend_, _Authentication_, _UsersService_, _Notification_) {
       // Set a new global scope
       $scope = $rootScope.$new();
 
@@ -44,6 +45,15 @@
       $location = _$location_;
       Authentication = _Authentication_;
       UsersService = _UsersService_;
+      Notification = _Notification_;
+
+      // Spy on Notification
+      spyOn(Notification, 'error');
+      spyOn(Notification, 'success');
+
+      // Ignore parent template gets on state transition
+      $httpBackend.whenGET('/modules/core/client/views/home.client.view.html').respond(200);
+      $httpBackend.whenGET('/modules/core/client/views/400.client.view.html').respond(200);
 
       // Mock logged in user
       Authentication.user = {
@@ -72,10 +82,10 @@
         $scope.vm.updateUserProfile(true);
         $httpBackend.flush();
 
-        expect($scope.vm.success).toBe(true);
+        expect(Notification.success).toHaveBeenCalledWith({ message: '<i class="glyphicon glyphicon-ok"></i> Edit profile successful!' });
       }));
 
-      it('should set vm.error if error', inject(function (UsersService) {
+      it('should call Notification.error if error', inject(function (UsersService) {
         var errorMessage = 'error';
         $httpBackend.expectPUT(/api\/users/).respond(400, {
           message: errorMessage
@@ -84,7 +94,7 @@
         $scope.vm.updateUserProfile(true);
         $httpBackend.flush();
 
-        expect($scope.vm.error).toBe(errorMessage);
+        expect(Notification.error).toHaveBeenCalledWith({ message: errorMessage, title: '<i class="glyphicon glyphicon-remove"></i> Edit profile failed!' });
       }));
     });
 

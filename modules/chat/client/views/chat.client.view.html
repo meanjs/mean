@@ -18,7 +18,7 @@
     <!-- List all messages -->
     <li class="col-xs-12 col-md-offset-4 col-md-4 chat-message" ng-repeat="message in vm.messages">
       <small class="pull-right text-muted" ng-bind="message.created | date:'mediumTime'"></small>
-      <img ng-src="{{message.profileImageURL}}" alt="{{message.username}}" class="pull-left chat-profile-image" />
+      <img ng-src="/{{message.profileImageURL}}" alt="{{message.username}}" class="pull-left chat-profile-image" />
       <div class="pull-left chat-message-details">
         <strong ng-bind="message.username"></strong>
         <br>

@@ -50,7 +50,7 @@ exports.forgot = function (req, res, next) {
           }
         });
       } else {
-        return res.status(400).send({
+        return res.status(422).send({
           message: 'Username field must not be blank'
         });
       }
@@ -62,13 +62,11 @@ exports.forgot = function (req, res, next) {
         httpTransport = 'https://';
       }
       var baseUrl = req.app.get('domain') || httpTransport + req.headers.host;
-      console.log(baseUrl);
       res.render(path.resolve('modules/users/server/templates/reset-password-email'), {
         name: user.displayName,
         appName: config.app.title,
         url: baseUrl + '/api/auth/reset/' + token
       }, function (err, emailHTML) {
-        console.log(emailHTML);
         done(err, emailHTML, user);
       });
     },
@@ -143,7 +141,7 @@ exports.reset = function (req, res, next) {
 
             user.save(function (err) {
               if (err) {
-                return res.status(400).send({
+                return res.status(422).send({
                   message: errorHandler.getErrorMessage(err)
                 });
               } else {
@@ -163,7 +161,7 @@ exports.reset = function (req, res, next) {
               }
             });
           } else {
-            return res.status(400).send({
+            return res.status(422).send({
               message: 'Passwords do not match'
             });
           }
@@ -219,7 +217,7 @@ exports.changePassword = function (req, res, next) {
 
               user.save(function (err) {
                 if (err) {
-                  return res.status(400).send({
+                  return res.status(422).send({
                     message: errorHandler.getErrorMessage(err)
                   });
                 } else {
@@ -235,12 +233,12 @@ exports.changePassword = function (req, res, next) {
                 }
               });
             } else {
-              res.status(400).send({
+              res.status(422).send({
                 message: 'Passwords do not match'
               });
             }
           } else {
-            res.status(400).send({
+            res.status(422).send({
               message: 'Current password is incorrect'
             });
           }
@@ -251,12 +249,12 @@ exports.changePassword = function (req, res, next) {
         }
       });
     } else {
-      res.status(400).send({
+      res.status(422).send({
         message: 'Please provide a new password'
       });
     }
   } else {
-    res.status(400).send({
+    res.status(401).send({
       message: 'User is not signed in'
     });
   }

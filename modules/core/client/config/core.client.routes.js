@@ -29,29 +29,43 @@
     $stateProvider
       .state('home', {
         url: '/',
-        templateUrl: 'modules/core/client/views/home.client.view.html',
+        templateUrl: '/modules/core/client/views/home.client.view.html',
         controller: 'HomeController',
         controllerAs: 'vm'
       })
       .state('not-found', {
         url: '/not-found',
-        templateUrl: 'modules/core/client/views/404.client.view.html',
+        templateUrl: '/modules/core/client/views/404.client.view.html',
+        controller: 'ErrorController',
+        controllerAs: 'vm',
+        params: {
+          message: function($stateParams) {
+            return $stateParams.message;
+          }
+        },
         data: {
           ignoreState: true,
-          pageTitle: 'Not-Found'
+          pageTitle: 'Not Found'
         }
       })
       .state('bad-request', {
         url: '/bad-request',
-        templateUrl: 'modules/core/client/views/400.client.view.html',
+        templateUrl: '/modules/core/client/views/400.client.view.html',
+        controller: 'ErrorController',
+        controllerAs: 'vm',
+        params: {
+          message: function($stateParams) {
+            return $stateParams.message;
+          }
+        },
         data: {
           ignoreState: true,
-          pageTitle: 'Bad-Request'
+          pageTitle: 'Bad Request'
         }
       })
       .state('forbidden', {
         url: '/forbidden',
-        templateUrl: 'modules/core/client/views/403.client.view.html',
+        templateUrl: '/modules/core/client/views/403.client.view.html',
         data: {
           ignoreState: true,
           pageTitle: 'Forbidden'
