@@ -19,6 +19,9 @@ module.exports = function (app) {
   app.route('/api/auth/signin').post(users.signin);
   app.route('/api/auth/signout').get(users.signout);
 
+  //Get a list of available strategies
+  app.route('/api/auth/strategies').get(users.getAuthProviders);
+
   // Setting the oauth routes
   app.route('/api/auth/:strategy').get(users.oauthCall);
   app.route('/api/auth/:strategy/callback').get(users.oauthCallback);
