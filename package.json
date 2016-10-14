@@ -11,11 +11,13 @@
     "url": "https://github.com/meanjs/mean.git"
   },
   "engines": {
-    "node": ">=0.12.0",
-    "npm": ">=2.0.0"
+    "node": ">=4.6.0",
+    "npm": ">=3.10.8"
   },
   "scripts": {
     "update": "npm update && npm prune && bower install --allow-root && bower prune --allow-root",
+    "clean": "rm -rf node_modules/ public/lib/",
+    "reinstall": "npm run clean && npm install",
     "start": "gulp",
     "start:prod": "gulp prod",
     "start:debug": "node-debug --web-host 0.0.0.0 server.js & gulp debug",
