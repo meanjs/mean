@@ -7,6 +7,7 @@ services:
     ports:
      - "3000:3000"
      - "5858:5858"
+     - "8080:8080"
      - "35729:35729"
     environment:
      - NODE_ENV=development
