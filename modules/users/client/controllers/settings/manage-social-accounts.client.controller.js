@@ -5,15 +5,16 @@
     .module('users')
     .controller('SocialAccountsController', SocialAccountsController);
 
-  SocialAccountsController.$inject = ['$scope', 'UsersService', 'Authentication', 'Notification'];
+  SocialAccountsController.$inject = ['$state', '$window', 'UsersService', 'Authentication', 'Notification'];
 
-  function SocialAccountsController($scope, UsersService, Authentication, Notification) {
+  function SocialAccountsController($state, $window, UsersService, Authentication, Notification) {
     var vm = this;
 
     vm.user = Authentication.user;
     vm.hasConnectedAdditionalSocialAccounts = hasConnectedAdditionalSocialAccounts;
     vm.isConnectedSocialAccount = isConnectedSocialAccount;
     vm.removeUserSocialAccount = removeUserSocialAccount;
+    vm.callOauthProvider = callOauthProvider;
 
     // Check if there are additional accounts
     function hasConnectedAdditionalSocialAccounts() {
@@ -41,6 +42,14 @@
 
     function onRemoveSocialAccountError(response) {
       Notification.error({ message: response.message, title: '<i class="glyphicon glyphicon-remove"></i> Remove failed!' });
+    }
+
+    // OAuth provider request
+    function callOauthProvider(url) {
+      url += '?redirect_to=' + encodeURIComponent($state.$current.url.prefix);
+
+      // Effectively call OAuth authentication route:
+      $window.location.href = url;
     }
   }
 }());
