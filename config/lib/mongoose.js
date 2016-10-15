@@ -29,6 +29,8 @@ module.exports.connect = function (cb) {
       console.log(err);
     } else {
 
+      mongoose.Promise = config.db.promise;
+
       // Enabling mongoose debug mode if required
       mongoose.set('debug', config.db.debug);
 
