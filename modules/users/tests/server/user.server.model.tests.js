@@ -5,7 +5,9 @@
  */
 var should = require('should'),
   mongoose = require('mongoose'),
-  User = mongoose.model('User');
+  User = mongoose.model('User'),
+  path = require('path'),
+  config = require(path.resolve('./config/config'));
 
 /**
  * Globals
@@ -638,6 +640,89 @@ describe('User Model Unit Tests:', function () {
         } else {
           done();
         }
+      });
+    });
+
+  });
+
+  describe('Username Validation', function() {
+    it('should show error to save username beginning with .', function(done) {
+      var _user = new User(user1);
+
+      _user.username = '.login';
+      _user.save(function(err) {
+        should.exist(err);
+        done();
+      });
+    });
+
+    it('should be able to show an error when try to save with not allowed username', function (done) {
+      var _user = new User(user1);
+
+      _user.username = config.illegalUsernames[Math.floor(Math.random() * config.illegalUsernames.length)];
+      _user.save(function(err) {
+        should.exist(err);
+        done();
+      });
+    });
+
+    it('should show error to save username end with .', function(done) {
+      var _user = new User(user1);
+
+      _user.username = 'login.';
+      _user.save(function(err) {
+        should.exist(err);
+        done();
+      });
+    });
+
+    it('should show error to save username with ..', function(done) {
+      var _user = new User(user1);
+
+      _user.username = 'log..in';
+      _user.save(function(err) {
+        should.exist(err);
+        done();
+      });
+    });
+
+    it('should show error to save username shorter than 3 character', function(done) {
+      var _user = new User(user1);
+
+      _user.username = 'lo';
+      _user.save(function(err) {
+        should.exist(err);
+        done();
+      });
+    });
+
+    it('should show error saving a username without at least one alphanumeric character', function(done) {
+      var _user = new User(user1);
+
+      _user.username = '-_-';
+      _user.save(function(err) {
+        should.exist(err);
+        done();
+      });
+    });
+
+    it('should show error saving a username longer than 34 characters', function(done) {
+      var _user = new User(user1);
+
+      _user.username = 'l'.repeat(35);
+      _user.save(function(err) {
+        should.exist(err);
+        done();
+      });
+    });
+
+    it('should save username with dot', function(done) {
+      var _user = new User(user1);
+
+      _user.username = 'log.in';
+      _user.save(function(err) {
+        should.not.exist(err);
+        done();
       });
     });
 
