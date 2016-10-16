@@ -1,8 +1,11 @@
 'use strict';
 
-module.exports.profileUploadFileFilter = function (req, file, cb) {
+module.exports.profileUploadFileFilter = function (req, file, callback) {
   if (file.mimetype !== 'image/png' && file.mimetype !== 'image/jpg' && file.mimetype !== 'image/jpeg' && file.mimetype !== 'image/gif') {
-    return cb(new Error('Only image files are allowed!'), false);
+    var err = new Error();
+    err.code = 'UNSUPPORTED_MEDIA_TYPE';
+    return callback(err, false);
   }
-  cb(null, true);
+  callback(null, true);
 };
+

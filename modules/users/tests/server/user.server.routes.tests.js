@@ -967,6 +967,46 @@ describe('User CRUD tests', function () {
       });
   });
 
+  it('should not be able to upload a non-image file as a profile picture', function (done) {
+    agent.post('/api/auth/signin')
+      .send(credentials)
+      .expect(200)
+      .end(function (signinErr, signinRes) {
+        // Handle signin error
+        if (signinErr) {
+          return done(signinErr);
+        }
+
+        agent.post('/api/users/picture')
+          .attach('newProfilePicture', './modules/users/tests/server/img/text-file.txt')
+          .send(credentials)
+          .expect(400)
+          .end(function (userInfoErr, userInfoRes) {
+            done(userInfoErr);
+          });
+      });
+  });
+
+  it('should not be able to change profile picture to too big of a file', function (done) {
+    agent.post('/api/auth/signin')
+      .send(credentials)
+      .expect(200)
+      .end(function (signinErr) {
+        // Handle signin error
+        if (signinErr) {
+          return done(signinErr);
+        }
+
+        agent.post('/api/users/picture')
+          .attach('newProfilePicture', './modules/users/tests/server/img/too-big-file.png')
+          .send(credentials)
+          .expect(400)
+          .end(function (userInfoErr, userInfoRes) {
+            done(userInfoErr);
+          });
+      });
+  });
+
   afterEach(function (done) {
     User.remove().exec(done);
   });

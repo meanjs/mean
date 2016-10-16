@@ -28,6 +28,14 @@ module.exports = {
   app: {
     title: defaultEnvConfig.app.title + ' - Test Environment'
   },
+  uploads: {
+    profile: {
+      dest: './modules/users/client/img/profile/uploads/',
+      limits: {
+        fileSize: 100000 // Limit filesize (100kb) for testing purposes
+      }
+    }
+  },
   facebook: {
     clientID: process.env.FACEBOOK_ID || 'APP_ID',
     clientSecret: process.env.FACEBOOK_SECRET || 'APP_SECRET',
