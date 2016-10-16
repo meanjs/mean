@@ -5,9 +5,15 @@
     .module('users')
     .controller('AuthenticationController', AuthenticationController);
 
-  AuthenticationController.$inject = ['$scope', '$state', 'UsersService', '$location', '$window', 'Authentication', 'PasswordValidator', 'Notification'];
+  AuthenticationController.$inject = ['$scope', '$state', '$http', 'UsersService', '$location', '$window', 'Authentication', 'PasswordValidator', 'Notification'];
 
-  function AuthenticationController($scope, $state, UsersService, $location, $window, Authentication, PasswordValidator, Notification) {
+  function AuthenticationController($scope, $state, $http, UsersService, $location, $window, Authentication, PasswordValidator, Notification) {
+    //Populate The Strategies
+    $http.get('/api/auth/strategies').then(function(response) {
+        $scope.strategies = response.data;
+        $scope.showSocial = (Object.keys($scope.strategies).length > 0) ? true : false;
+    });
+
     var vm = this;
 
     vm.authentication = Authentication;

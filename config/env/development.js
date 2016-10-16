@@ -30,7 +30,13 @@ module.exports = {
   facebook: {
     clientID: process.env.FACEBOOK_ID || 'APP_ID',
     clientSecret: process.env.FACEBOOK_SECRET || 'APP_SECRET',
-    callbackURL: '/api/auth/facebook/callback'
+    callbackURL: '/api/auth/facebook/callback',
+    viewData : {
+      initURL : '/api/auth/facebook',
+      imageSRC : '/modules/users/client/img/buttons/facebook.png',
+      altText : 'Login with Facebook Today!',
+      name : 'Facebook'
+    }
   },
   twitter: {
     clientID: process.env.TWITTER_KEY || 'CONSUMER_KEY',

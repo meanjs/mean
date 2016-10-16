@@ -7,7 +7,8 @@ var path = require('path'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
   mongoose = require('mongoose'),
   passport = require('passport'),
-  User = mongoose.model('User');
+  User = mongoose.model('User'),
+  config = require(path.resolve('./config/config'));
 
 // URLs for which user can't be redirected on signin
 var noReturnUrls = [
@@ -245,3 +246,35 @@ exports.removeOAuthProvider = function (req, res, next) {
     }
   });
 };
+
+/**
+ * getAuthProviders - Retrieves a list of Authentication Providers for display on the client.
+ */
+exports.getAuthProviders = function(req, res, next){
+  var strategies = config.utils.getGlobbedPaths(path.join(__dirname, '../../config/strategies/**/*.js'));
+  var output={};
+
+  for(var i = 0; i < strategies.length; i++){
+    var strategy = strategies[i].substring(strategies[i].lastIndexOf('/')+1, strategies[i].lastIndexOf('.'));
+    if(config[strategy]){ //If any config settings for the strategy, assume its supposed to be present.
+
+      //Initialize all the variables to default values if not set.
+      var initUrl = (config[strategy].viewData && config[strategy].viewData.initUrl) ?
+                        config[strategy].viewData.initUrl : '/api/auth/' + strategy;
+
+      var imageSRC = (config[strategy].viewData && config[strategy].viewData.imageSRC) ?
+                        config[strategy].viewData.imageSRC : '/modules/users/client/img/buttons/' + strategy + '.png';
+
+      var name = (config[strategy].viewData && config[strategy].viewData.name) ?
+                    config[strategy].viewData.name : strategy.charAt(0).toUpperCase() + strategy.slice(1);;
+
+      var altText = (config[strategy].viewData && config[strategy].viewData.altText) ?
+                    config[strategy].viewData.altText : 'Login with ' + name;
+
+      output[strategy] =   {  'name' : name,              'initURL' : initUrl,
+                              'imageSRC' : imageSRC,      'altText' : altText      };
+    }
+  }
+  res.json(output);
+  return next;
+}
