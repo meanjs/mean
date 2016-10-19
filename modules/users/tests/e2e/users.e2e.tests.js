@@ -113,7 +113,7 @@ describe('Users E2E Tests:', function () {
       expect(element.all(by.css('.error-text')).get(0).getText()).toBe('Email address is invalid.');
     });
 
-    it('Should report missing username or email', function () {
+    it('Should report missing username', function () {
       browser.get('http://localhost:3001/authentication/signup');
       // Enter First Name
       element(by.model('vm.credentials.firstName')).sendKeys(user1.firstName);
