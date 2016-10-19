@@ -83,18 +83,17 @@ exports.signout = function (req, res) {
 /**
  * OAuth provider call
  */
-exports.oauthCall = function (strategy, scope) {
-  return function (req, res, next) {
+exports.oauthCall = function (req, res, next) {
+    var strategy = req.params.strategy;
     // Authenticate
-    passport.authenticate(strategy, scope)(req, res, next);
+    passport.authenticate(strategy)(req, res, next);
   };
-};
 
 /**
  * OAuth callback
  */
-exports.oauthCallback = function (strategy) {
-  return function (req, res, next) {
+exports.oauthCallback = function (req, res, next) {
+    var strategy = req.params.strategy;
 
     // info.redirect_to contains inteded redirect path
     passport.authenticate(strategy, function (err, user, info) {
@@ -112,7 +111,6 @@ exports.oauthCallback = function (strategy) {
         return res.redirect(info.redirect_to || '/');
       });
     })(req, res, next);
-  };
 };
 
 /**
