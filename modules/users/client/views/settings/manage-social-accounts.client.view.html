@@ -18,7 +18,7 @@
   <h3 class="col-md-12 text-center" ng-show="!vm.hasConnectedAdditionalSocialAccounts()">Unconnected social accounts:</h3>
   <div class="col-md-12 text-center">
     <div class="social-account-container" ng-hide="vm.isConnectedSocialAccount('facebook')">
-      <a href="/api/auth/facebook" target="_self">
+      <a href="" ng-click="vm.callOauthProvider('/api/auth/facebook')">
         <img class="social-button" ng-src="/modules/users/client/img/buttons/facebook.png">
         <span class="btn btn-success btn-add-remove-account">
           <i class="glyphicon glyphicon-plus"></i>
@@ -26,7 +26,7 @@
       </a>
     </div>
     <div class="social-account-container" ng-hide="vm.isConnectedSocialAccount('twitter')">
-      <a href="/api/auth/twitter" target="_self">
+      <a href="" ng-click="vm.callOauthProvider('/api/auth/twitter')">
         <img class="social-button" ng-src="/modules/users/client/img/buttons/twitter.png">
         <span class="btn btn-success btn-add-remove-account">
           <i class="glyphicon glyphicon-plus"></i>
@@ -34,7 +34,7 @@
       </a>
     </div>
     <div class="social-account-container" ng-hide="vm.isConnectedSocialAccount('google')">
-      <a href="/api/auth/google" target="_self">
+      <a href="" ng-click="vm.callOauthProvider('/api/auth/google')">
         <img class="social-button" ng-src="/modules/users/client/img/buttons/google.png">
         <span class="btn btn-success btn-add-remove-account">
           <i class="glyphicon glyphicon-plus"></i>
@@ -42,7 +42,7 @@
       </a>
     </div>
     <div class="social-account-container" ng-hide="vm.isConnectedSocialAccount('linkedin')">
-      <a href="/api/auth/linkedin" target="_self">
+      <a href="" ng-click="vm.callOauthProvider('/api/auth/linkedin')">
         <img class="social-button" ng-src="/modules/users/client/img/buttons/linkedin.png">
         <span class="btn btn-success btn-add-remove-account">
           <i class="glyphicon glyphicon-plus"></i>
@@ -50,7 +50,7 @@
       </a>
     </div>
     <div class="social-account-container" ng-hide="vm.isConnectedSocialAccount('github')">
-      <a href="/api/auth/github" target="_self">
+      <a href="" ng-click="vm.callOauthProvider('/api/auth/github')">
         <img class="social-button" ng-src="/modules/users/client/img/buttons/github.png">
         <span class="btn btn-success btn-add-remove-account">
           <i class="glyphicon glyphicon-plus"></i>
@@ -58,7 +58,7 @@
       </a>
     </div>
     <div class="social-account-container" ng-hide="vm.isConnectedSocialAccount('paypal')">
-      <a href="/api/auth/paypal" target="_self">
+      <a href="" ng-click="vm.callOauthProvider('/api/auth/paypal')">
         <img class="social-button" ng-src="/modules/users/client/img/buttons/paypal.png">
         <span class="btn btn-success btn-add-remove-account">
           <i class="glyphicon glyphicon-plus"></i>

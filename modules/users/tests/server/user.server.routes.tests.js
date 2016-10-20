@@ -90,7 +90,7 @@ describe('User CRUD tests', function () {
       });
   });
 
-  it('should be able to login with username and email successfully and logout successfully', function (done) {
+  it('should be able to login with username successfully and logout successfully', function (done) {
     // Login with username
     agent.post('/api/auth/signin')
       .send(credentials)
@@ -119,18 +119,41 @@ describe('User CRUD tests', function () {
               signoutRes.text.should.equal('Moved Temporarily. Redirecting to /');
             }
 
-            // Login with username
-            agent.post('/api/auth/signin')
-              .send(credentials)
-              .expect(200)
-              .end(function (signinErr, signinRes) {
-                // Handle signin error
-                if (signinErr) {
-                  return done(signinErr);
-                }
+            return done();
+          });
+      });
+  });
 
-                return done();
-              });
+  it('should be able to login with email successfully and logout successfully', function (done) {
+    // Login with username
+    agent.post('/api/auth/signin')
+      .send(credentialsEmail)
+      .expect(200)
+      .end(function (signinErr, signinRes) {
+        // Handle signin error
+        if (signinErr) {
+          return done(signinErr);
+        }
+
+        // Logout
+        agent.get('/api/auth/signout')
+          .expect(302)
+          .end(function (signoutErr, signoutRes) {
+            if (signoutErr) {
+              return done(signoutErr);
+            }
+
+            signoutRes.redirect.should.equal(true);
+
+            // NodeJS v4 changed the status code representation so we must check
+            // before asserting, to be comptabile with all node versions.
+            if (semver.satisfies(process.versions.node, '>=4.0.0')) {
+              signoutRes.text.should.equal('Found. Redirecting to /');
+            } else {
+              signoutRes.text.should.equal('Moved Temporarily. Redirecting to /');
+            }
+
+            return done();
           });
       });
   });
