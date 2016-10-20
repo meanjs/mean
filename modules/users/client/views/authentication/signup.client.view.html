@@ -27,9 +27,10 @@
         </div>
         <div class="form-group" show-errors>
           <label for="username">Username</label>
-          <input type="text" id="username" name="username" class="form-control" ng-model="vm.credentials.username" placeholder="Username" lowercase required>
+          <input type="text" id="username" name="username" class="form-control" ng-model="vm.credentials.username" ng-pattern="vm.usernameRegex" placeholder="Username" lowercase required>
           <div ng-messages="vm.userForm.username.$error" role="alert">
             <p class="help-block error-text" ng-message="required">Username is required.</p>
+            <p class="help-block error-text" ng-message="pattern">Please enter a valid username: 3+ characters long, non restricted word, characters "_-.", no consecutive dots, does not begin or end with dots, letters a-z and numbers 0-9.</p>
           </div>
         </div>
         <div class="form-group" show-errors>

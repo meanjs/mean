@@ -82,7 +82,7 @@ describe('Configuration Tests:', function () {
     });
 
     it('should not be an admin user to begin with', function(done) {
-      User.find({ username: 'admin' }, function(err, users) {
+      User.find({ username: 'seedadmin' }, function(err, users) {
         should.not.exist(err);
         users.should.be.instanceof(Array).and.have.lengthOf(0);
         return done();
@@ -90,7 +90,7 @@ describe('Configuration Tests:', function () {
     });
 
     it('should not be a "regular" user to begin with', function(done) {
-      User.find({ username: 'user' }, function(err, users) {
+      User.find({ username: 'seeduser' }, function(err, users) {
         should.not.exist(err);
         users.should.be.instanceof(Array).and.have.lengthOf(0);
         return done();
