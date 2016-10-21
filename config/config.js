@@ -187,12 +187,8 @@ var initGlobalConfig = function () {
   var pkg = require(path.resolve('./package.json'));
   config.meanjs = pkg;
 
-  // We only extend the config object with the local.js custom/local environment if we are on
-  // production or development environment. If test environment is used we don't merge it with local.js
-  // to avoid running test suites on a prod/dev environment (which delete records and make modifications)
-  if (process.env.NODE_ENV !== 'test') {
-    config = _.merge(config, (fs.existsSync(path.join(process.cwd(), 'config/env/local.js')) && require(path.join(process.cwd(), 'config/env/local.js'))) || {});
-  }
+  // Extend the config object with the local-NODE_ENV.js custom/local environment. This will override any settings present in the local configuration.
+  config = _.merge(config, (fs.existsSync(path.join(process.cwd(), 'config/env/local-' + process.env.NODE_ENV + '.js')) && require(path.join(process.cwd(), 'config/env/local-' + process.env.NODE_ENV + '.js'))) || {});
 
   // Initialize global globbed files
   initGlobalConfigFiles(config, assets);

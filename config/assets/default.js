@@ -13,9 +13,8 @@ module.exports = {
         'public/lib/angular-animate/angular-animate.js',
         'public/lib/angular-messages/angular-messages.js',
         'public/lib/angular-ui-router/release/angular-ui-router.js',
-        'public/lib/angular-ui-utils/ui-utils.js',
         'public/lib/angular-bootstrap/ui-bootstrap-tpls.js',
-        'public/lib/angular-file-upload/angular-file-upload.js',
+        'public/lib/angular-file-upload/dist/angular-file-upload.js',
         'public/lib/owasp-password-strength-test/owasp-password-strength-test.js'
       ],
       tests: ['public/lib/angular-mocks/angular-mocks.js']
@@ -35,18 +34,24 @@ module.exports = {
       'modules/*/client/*.js',
       'modules/*/client/**/*.js'
     ],
+    img: [
+      'modules/**/*/img/**/*.jpg',
+      'modules/**/*/img/**/*.png',
+      'modules/**/*/img/**/*.gif',
+      'modules/**/*/img/**/*.svg'
+    ],
     views: ['modules/*/client/views/**/*.html'],
     templates: ['build/templates.js']
   },
   server: {
-    gruntConfig: 'gruntfile.js',
-    gulpConfig: 'gulpfile.js',
+    gruntConfig: ['gruntfile.js'],
+    gulpConfig: ['gulpfile.js'],
     allJS: ['server.js', 'config/**/*.js', 'modules/*/server/**/*.js'],
     models: 'modules/*/server/models/**/*.js',
     routes: ['modules/!(core)/server/routes/**/*.js', 'modules/core/server/routes/**/*.js'],
     sockets: 'modules/*/server/sockets/**/*.js',
-    config: 'modules/*/server/config/*.js',
+    config: ['modules/*/server/config/*.js'],
     policies: 'modules/*/server/policies/*.js',
-    views: 'modules/*/server/views/*.html'
+    views: ['modules/*/server/views/*.html']
   }
 };

@@ -34,7 +34,7 @@
         </div>
         <div class="form-group" show-errors>
           <label for="password">Password</label>
-            <input type="password" id="password" name="password" class="form-control" ng-model="credentials.password" placeholder="Password" popover="{{popoverMsg}}" popover-trigger="focus" password-validator required>
+            <input type="password" id="password" name="password" class="form-control" ng-model="credentials.password" placeholder="Password" uib-popover="{{popoverMsg}}" uib-popover-trigger="focus" password-validator required>
           <div ng-messages="userForm.password.$error" role="alert">
             <p class="help-block error-text" ng-message="required">Password is required.</p>
             <div ng-repeat="passwordError in passwordErrors">
@@ -44,7 +44,7 @@
         </div>
         <div class="form-group" ng-show="!userForm.password.$error.required">
           <label>Password Requirements</label>
-          <progressbar value="requirementsProgress" type="{{requirementsColor}}"><span style="color:white; white-space:nowrap;">{{requirementsProgress}}%</span></progressbar>
+          <uib-progressbar value="requirementsProgress" type="{{requirementsColor}}"><span style="color:white; white-space:nowrap;">{{requirementsProgress}}%</span></uib-progressbar>
         </div>
         <div class="text-center form-group">
           <button type="submit" class="btn btn-primary">Sign up</button>

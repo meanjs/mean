@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * Module dependencies.
+ * Module dependencies
  */
 var path = require('path'),
   config = require(path.resolve('./config/config')),
@@ -32,7 +32,7 @@ exports.forgot = function (req, res, next) {
         User.findOne({
           username: req.body.username.toLowerCase()
         }, '-salt -password', function (err, user) {
-          if (!user) {
+          if (err || !user) {
             return res.status(400).send({
               message: 'No account with that username has been found'
             });
@@ -108,7 +108,7 @@ exports.validateResetToken = function (req, res) {
       $gt: Date.now()
     }
   }, function (err, user) {
-    if (!user) {
+    if (err || !user) {
       return res.redirect('/password/reset/invalid');
     }
 
@@ -122,7 +122,6 @@ exports.validateResetToken = function (req, res) {
 exports.reset = function (req, res, next) {
   // Init Variables
   var passwordDetails = req.body;
-  var message = null;
 
   async.waterfall([
 
@@ -206,7 +205,6 @@ exports.reset = function (req, res, next) {
 exports.changePassword = function (req, res, next) {
   // Init Variables
   var passwordDetails = req.body;
-  var message = null;
 
   if (req.user) {
     if (passwordDetails.newPassword) {

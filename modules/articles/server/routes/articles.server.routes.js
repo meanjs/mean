@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * Module dependencies.
+ * Module dependencies
  */
 var articlesPolicy = require('../policies/articles.server.policy'),
   articles = require('../controllers/articles.server.controller');

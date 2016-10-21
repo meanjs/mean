@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * Module dependencies.
+ * Module dependencies
  */
 var mongoose = require('mongoose'),
   Schema = mongoose.Schema,
@@ -21,7 +21,7 @@ var validateLocalStrategyProperty = function (property) {
  * A Validation function for local strategy email
  */
 var validateLocalStrategyEmail = function (email) {
-  return ((this.provider !== 'local' && !this.updated) || validator.isEmail(email));
+  return ((this.provider !== 'local' && !this.updated) || validator.isEmail(email, { require_tld: false }));
 };
 
 /**
@@ -168,7 +168,7 @@ UserSchema.statics.findUniqueUsername = function (username, suffix, callback) {
 };
 
 /**
-* Generates a random passphrase that passes the owasp test.
+* Generates a random passphrase that passes the owasp test
 * Returns a promise that resolves with the generated passphrase, or rejects with an error if something goes wrong.
 * NOTE: Passphrases are only tested against the required owasp strength tests, and not the optional tests.
 */
@@ -177,8 +177,8 @@ UserSchema.statics.generateRandomPassphrase = function () {
     var password = '';
     var repeatingCharacters = new RegExp('(.)\\1{2,}', 'g');
 
-    // iterate until the we have a valid passphrase. 
-    // NOTE: Should rarely iterate more than once, but we need this to ensure no repeating characters are present.
+    // iterate until the we have a valid passphrase
+    // NOTE: Should rarely iterate more than once, but we need this to ensure no repeating characters are present
     while (password.length < 20 || repeatingCharacters.test(password)) {
       // build the random password
       password = generatePassword.generate({
@@ -189,7 +189,7 @@ UserSchema.statics.generateRandomPassphrase = function () {
         excludeSimilarCharacters: true,
       });
 
-      // check if we need to remove any repeating characters.
+      // check if we need to remove any repeating characters
       password = password.replace(repeatingCharacters, '');
     }
 

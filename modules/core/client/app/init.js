@@ -19,7 +19,7 @@ angular.module(ApplicationConfiguration.applicationModuleName).run(function ($ro
     if (toState.data && toState.data.roles && toState.data.roles.length > 0) {
       var allowed = false;
       toState.data.roles.forEach(function (role) {
-        if (Authentication.user.roles !== undefined && Authentication.user.roles.indexOf(role) !== -1) {
+        if ((role === 'guest') || (Authentication.user && Authentication.user.roles !== undefined && Authentication.user.roles.indexOf(role) !== -1)) {
           allowed = true;
           return true;
         }

@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * Module dependencies.
+ * Module dependencies
  */
 var path = require('path'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
@@ -22,11 +22,8 @@ exports.signup = function (req, res) {
   // For security measurement we remove the roles from the req.body object
   delete req.body.roles;
 
-  // Init Variables
+  // Init user and add missing fields
   var user = new User(req.body);
-  var message = null;
-
-  // Add missing user fields
   user.provider = 'local';
   user.displayName = user.firstName + ' ' + user.lastName;
 
