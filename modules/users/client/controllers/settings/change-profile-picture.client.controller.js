@@ -11,6 +11,7 @@
     var vm = this;
 
     vm.user = Authentication.user;
+    vm.progress = 0;
 
     vm.upload = function (dataUrl) {
 
@@ -46,6 +47,7 @@
     // Called after the user has failed to upload a new picture
     function onErrorItem(response) {
       vm.fileSelected = false;
+      vm.progress = 0;
 
       // Show error message
       Notification.error({ message: response.message, title: '<i class="glyphicon glyphicon-remove"></i> Failed to change profile picture' });

@@ -9,10 +9,10 @@
           <img ng-src="/modules/core/client/img/loaders/loader.gif" height="50" width="50" alt="Loading image...">
         </div>
         <div ng-show="!vm.fileSelected" class="text-center form-group">
-          <button class="btn btn-default btn-file" ngf-select="(vm.fileSelected = true) && (vm.loading = false)" ng-model="picFile" accept="image/*" ngf-before-model-change="vm.loading = true">Select Picture</button>
+          <button class="btn btn-default btn-file" ngf-select="(vm.fileSelected = true) && (vm.loading = false)" ng-model="picFile" accept="image/*" ngf-before-model-change="vm.loading = true" ngf-resize="{width: 400}" ngf-resize-if="$width > 400 || $height > 400">Select Picture</button>
         </div>
         <div ng-show="vm.fileSelected" class="text-center form-group">
-          <button class="btn btn-primary" ng-click="vm.upload(picFile)">Upload</button>
+          <button class="btn btn-primary" ng-click="vm.upload(picFile)">Use This Picture</button>
           <button class="btn btn-default" ng-click="vm.fileSelected = false">Cancel</button>
         </div>
         <div ng-show="vm.fileSelected" class="progress text-center">
@@ -24,4 +24,3 @@
     </form>
   </div>
 </section>
-
