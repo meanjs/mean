@@ -4,6 +4,10 @@ node_js:
   - 4
   - 5
   - 6
+  - 7
+matrix:
+  allow_failures:
+    - node_js: 7
 os:
   - linux
   - centos
