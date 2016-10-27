@@ -30,6 +30,24 @@ var validateLocalStrategyEmail = function (email) {
 };
 
 /**
+ * A Validation function for username
+ * - at least 3 characters
+ * - only a-z0-9_-.
+ * - contain at least one alphanumeric character
+ * - not in list of illegal usernames
+ * - no consecutive dots: "." ok, ".." nope
+ * - not begin or end with "."
+ */
+
+var validateUsername = function(username) {
+  var usernameRegex = /^(?=[\w.-]+$)(?!.*[._-]{2})(?!\.)(?!.*\.$).{3,34}$/;
+  return (
+    this.provider !== 'local' ||
+    (username && usernameRegex.test(username) && config.illegalUsernames.indexOf(username) < 0)
+  );
+};
+
+/**
  * User Schema
  */
 var UserSchema = new Schema({
@@ -64,6 +82,7 @@ var UserSchema = new Schema({
     type: String,
     unique: 'Username already exists',
     required: 'Please fill in a username',
+    validate: [validateUsername, 'Please enter a valid username: 3+ characters long, non restricted word, characters "_-.", no consecutive dots, does not begin or end with dots, letters a-z and numbers 0-9.'],
     lowercase: true,
     trim: true
   },
