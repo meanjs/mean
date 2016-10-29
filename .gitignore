@@ -26,6 +26,11 @@ config/env/local.js
 config/env/local-*.js
 *.pem
 
+# Compiled less and sass files
+# ============================
+modules/*/client/scss/*.css
+modules/*/client/less/*.css
+
 # Ignoring MEAN.JS's gh-pages branch for documenation
 _site/
 
