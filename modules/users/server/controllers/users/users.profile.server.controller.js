@@ -13,7 +13,7 @@ var _ = require('lodash'),
   User = mongoose.model('User'),
   validator = require('validator');
 
-var whitelistedFields = ['firstName', 'lastName', 'email', 'username'];
+var whitelistedFields = ['firstName', 'lastName', 'email', 'username', 'profileImageURL'];
 
 /**
  * Update user details
@@ -81,7 +81,7 @@ exports.changeProfilePicture = function (req, res) {
     });
   }
 
-  function uploadImage () {
+  function uploadImage() {
     return new Promise(function (resolve, reject) {
       upload(req, res, function (uploadError) {
         if (uploadError) {
@@ -93,9 +93,11 @@ exports.changeProfilePicture = function (req, res) {
     });
   }
 
-  function updateUser () {
+  function updateUser() {
     return new Promise(function (resolve, reject) {
-      user.profileImageURL = config.uploads.profileUpload.dest + req.file.filename;
+      if (user.profileImageURL.indexOf('https') !== -1) {
+        user.profileImageURL = '/' + config.uploads.profileUpload.dest + req.file.filename;
+      }
       user.save(function (err, theuser) {
         if (err) {
           reject(err);
@@ -106,26 +108,31 @@ exports.changeProfilePicture = function (req, res) {
     });
   }
 
-  function deleteOldImage () {
-    return new Promise(function (resolve, reject) {
-      if (existingImageUrl !== User.schema.path('profileImageURL').defaultValue) {
-        fs.unlink(existingImageUrl, function (unlinkError) {
-          if (unlinkError) {
-            console.log(unlinkError);
-            reject({
-              message: 'Error occurred while deleting old profile picture'
-            });
-          } else {
-            resolve();
-          }
-        });
-      } else {
+  function deleteOldImage() {
+    if (!(existingImageUrl.indexOf('https') !== -1)) {
+      return new Promise(function (resolve, reject) {
+        if (existingImageUrl !== User.schema.path('profileImageURL').defaultValue) {
+          fs.unlink(existingImageUrl, function (unlinkError) {
+            if (unlinkError) {
+              reject({
+                message: 'Error occurred while deleting old profile picture'
+              });
+            } else {
+              resolve();
+            }
+          });
+        } else {
+          resolve();
+        }
+      });
+    } else {
+      return new Promise(function (resolve, reject) {
         resolve();
-      }
-    });
+      });
+    }
   }
 
-  function login () {
+  function login() {
     return new Promise(function (resolve, reject) {
       req.login(user, function (err) {
         if (err) {
@@ -149,6 +156,7 @@ exports.me = function (req, res) {
     safeUserObject = {
       displayName: validator.escape(req.user.displayName),
       provider: validator.escape(req.user.provider),
+      providerData: req.user.providerData,
       username: validator.escape(req.user.username),
       created: req.user.created.toString(),
       roles: req.user.roles,

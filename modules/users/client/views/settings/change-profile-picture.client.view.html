@@ -9,16 +9,24 @@
           </div>
         </div>
         <div class="form-group text-center">
-          <img ng-src="{{vm.fileSelected ? croppedDataUrl : '/' + vm.user.profileImageURL}}" alt="{{vm.user.displayName}}" class="img-thumbnail user-profile-picture" ngf-drop>
+          <img ng-show="vm.profileImageFromProvider" ng-src="{{vm.profileImageUrlProvider}}" alt="{{vm.user.displayName}}" class="img-thumbnail user-profile-picture" ngf-drop>
+          <img ng-show="!vm.profileImageFromProvider" ng-src="{{vm.fileSelected ? croppedDataUrl : vm.user.profileImageURL}}" alt="{{vm.user.displayName}}" class="img-thumbnail user-profile-picture" ngf-drop>
         </div>
-        <div ng-show="!vm.fileSelected" class="text-center form-group">
-          <button class="btn btn-default btn-file" ngf-select="vm.fileSelected = true" ng-model="picFile" accept="image/*">Select Picture</button>
+        <div ng-hide="vm.fileSelected || vm.profileImageFromProvider" class="text-center" uib-dropdown>
+          <button id="btn-append-to-single-button" type="button" class="btn" uib-dropdown-toggle ng-disabled="disabled">
+            Change Profile Image <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu dropdown-menu-center" uib-dropdown-menu role="menu" aria-labelledby="btn-append-to-single-button">
+            <li role="menuitem"><a href="#" ngf-select="vm.selectedFile()" ng-model="picFile" accept="image/*">Select Picture</a></li>
+            <li role="menuitem" ng-repeat="(name, provider) in vm.providers"><a href="#" ng-click="vm.importImgFromProvider(name)">Import profile image from {{name}}</a></li>
+          </ul>
         </div>
-        <div ng-show="vm.fileSelected" class="text-center form-group">
-          <button class="btn btn-primary" ng-click="vm.upload(croppedDataUrl, picFile.name)">Upload</button>
-          <button class="btn btn-default" ng-click="vm.fileSelected = false">Cancel</button>
+        <div ng-show="vm.fileSelected || vm.profileImageFromProvider" class="text-center form-group">
+          <button ng-show="vm.profileImageFromProvider" class="btn btn-primary" ng-click="vm.saveImageFromProvider()">Upload</button>
+          <button ng-show="vm.fileSelected" class="btn btn-primary" ng-click="vm.upload(croppedDataUrl, picFile.name)">Upload</button>
+          <button class="btn btn-default" ng-click="vm.cancel()">Cancel</button>
         </div>
-        <div ng-show="vm.fileSelected" class="progress text-center">
+        <div ng-show="vm.fileSelected || vm.profileImageFromProvider" class="progress text-center">
           <div class="progress-bar" role="progressbar" aria-valuenow="{{vm.progress}}" aria-valuemin="0" aria-valuemax="100" style="width:{{vm.progress}}%" ng-bind="vm.progress + '%'">
             <span class="sr-only">{{vm.progress}}% Complete</span>
           </div>
