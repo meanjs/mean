@@ -49,7 +49,7 @@ exports.getErrorMessage = function (err) {
         message = 'Unsupported filetype';
         break;
       case 'LIMIT_FILE_SIZE':
-        message = 'Image file too large. Maximum size allowed is ' + (config.uploads.profile.limits.fileSize / (1024 * 1024)).toFixed(2) + ' Mb files.';
+        message = 'Image file too large. Maximum size allowed is ' + (config.uploads.profile.image.limits.fileSize / (1024 * 1024)).toFixed(2) + ' Mb files.';
         break;
       case 'LIMIT_UNEXPECTED_FILE':
         message = 'Missing `newProfilePicture` field';

@@ -30,9 +30,11 @@ module.exports = {
   },
   uploads: {
     profile: {
-      dest: './modules/users/client/img/profile/uploads/',
-      limits: {
-        fileSize: 100000 // Limit filesize (100kb) for testing purposes
+      image: {
+        dest: './modules/users/client/img/profile/uploads/',
+        limits: {
+          fileSize: 100000 // Limit filesize (100kb) for testing purposes
+        }
       }
     }
   },
