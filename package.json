@@ -78,7 +78,7 @@
   "devDependencies": {
     "coveralls": "~2.11.6",
     "del": "^2.2.2",
-    "eslint": "~3.9.1",
+    "eslint": "~2.2.0",
     "eslint-config-airbnb": "~13.0.0",
     "gulp": "~3.9.1",
     "gulp-angular-templatecache": "~2.0.0",
