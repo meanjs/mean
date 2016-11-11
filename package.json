@@ -89,7 +89,7 @@
     "gulp-eslint": "~3.0.1",
     "gulp-imagemin": "~3.1.1",
     "gulp-istanbul": "~1.1.1",
-    "gulp-less": "~3.2.0",
+    "gulp-less": "~3.3.0",
     "gulp-load-plugins": "~1.4.0",
     "gulp-mocha": "~3.0.1",
     "gulp-ng-annotate": "~2.0.0",
