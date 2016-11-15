@@ -2,20 +2,17 @@
   <div class="col-xs-offset-1 col-xs-10 col-md-offset-3 col-md-4">
     <form class="signin form-horizontal">
       <fieldset>
-        <div ng-show="vm.fileSelected" class="text-center form-group">
-          <p>Crop your picture then press upload below:</p>
-          <div ngf-drop ng-model="picFile" ngf-pattern="image/*" class="cropArea">
-            <img-crop image="picFile | ngfDataUrl" result-image="croppedDataUrl" ng-init="croppedDataUrl=''"></img-crop>
-          </div>
-        </div>
         <div class="form-group text-center">
-          <img ng-src="{{vm.fileSelected ? croppedDataUrl : '/' + vm.user.profileImageURL}}" alt="{{vm.user.displayName}}" class="img-thumbnail user-profile-picture" ngf-drop>
+          <img ngf-src="vm.fileSelected ? picFile : '/' + vm.user.profileImageURL" alt="{{vm.user.displayName}}" class="img-thumbnail user-profile-picture" ngf-drop>
+        </div>
+        <div ng-show="vm.loading" class="form-group text-center">
+          <img ng-src="/modules/core/client/img/loaders/loader.gif" height="50" width="50" alt="Loading image...">
         </div>
         <div ng-show="!vm.fileSelected" class="text-center form-group">
-          <button class="btn btn-default btn-file" ngf-select="vm.fileSelected = true" ng-model="picFile" accept="image/*">Select Picture</button>
+          <button class="btn btn-default btn-file" ngf-select="(vm.fileSelected = true) && (vm.loading = false)" ng-model="picFile" accept="image/*" ngf-before-model-change="vm.loading = true" ngf-resize="{width: 400}" ngf-resize-if="$width > 400 || $height > 400">Select Picture</button>
         </div>
         <div ng-show="vm.fileSelected" class="text-center form-group">
-          <button class="btn btn-primary" ng-click="vm.upload(croppedDataUrl, picFile.name)">Upload</button>
+          <button class="btn btn-primary" ng-click="vm.upload(picFile)">Use This Picture</button>
           <button class="btn btn-default" ng-click="vm.fileSelected = false">Cancel</button>
         </div>
         <div ng-show="vm.fileSelected" class="progress text-center">

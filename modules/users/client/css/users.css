@@ -17,11 +17,6 @@
   max-height: 150px;
   min-height: 150px;
 }
-.cropArea {
-  background: #E4E4E4;
-  height: 300px;
-  width: 300px;
-}
 .social-button {
   -webkit-transition-duration: 0.4s;
   -moz-transition-duration: 0.4s;

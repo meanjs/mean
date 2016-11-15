@@ -46,10 +46,12 @@ module.exports = {
     'unknown', 'anonymous', 'null', 'undefined', 'api'
   ],
   uploads: {
-    profileUpload: {
-      dest: './modules/users/client/img/profile/uploads/', // Profile upload destination path
-      limits: {
-        fileSize: 1 * 1024 * 1024 // Max file size in bytes (1 MB)
+    profile: {
+      image: {
+        dest: './modules/users/client/img/profile/uploads/',
+        limits: {
+          fileSize: 1 * 1024 * 1024 // Max file size in bytes (1 MB)
+        }
       }
     }
   },
