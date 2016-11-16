@@ -78,7 +78,7 @@
   AdminService.$inject = ['$resource'];
 
   function AdminService($resource) {
-    return $resource('/api/users/:userId', {
+    return $resource('/api/admin/users/:userId', {
       userId: '@_id'
     }, {
       update: {
