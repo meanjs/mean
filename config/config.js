@@ -82,7 +82,7 @@ var validateNodeJsVersion = function (config) {
  * Validate config.domain is set
  */
 var validateDomainIsSet = function (config) {
-  if (!config.domain) {
+  if (!config.domain && process.env.NODE_ENV === 'production') {
     console.log(chalk.red('+ Important warning: config.domain is empty. It should be set to the fully qualified domain of the app.'));
   }
 };
