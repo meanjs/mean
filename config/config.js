@@ -7,7 +7,8 @@ var _ = require('lodash'),
   chalk = require('chalk'),
   glob = require('glob'),
   fs = require('fs'),
-  path = require('path');
+  path = require('path'),
+  semver = require('semver');
 
 /**
  * Get files by glob patterns
@@ -68,7 +69,17 @@ var validateEnvironmentVariable = function () {
   console.log(chalk.white(''));
 };
 
-/** Validate config.domain is set
+/**
+ * Validate user is running supported Node.js version
+ */
+var validateNodeJsVersion = function (config) {
+  if (!semver.satisfies(process.version, config.meanjs.engines.node)) {
+    console.log(chalk.red('+ Important warning: your version of Node (' + process.version.substr(1) + ') is unsupported by MEAN.js. Please use a version that satisfies the following requirements: ' + config.meanjs.engines.node + ', as specified in the package.json file.'));
+  }
+};
+
+/**
+ * Validate config.domain is set
  */
 var validateDomainIsSet = function (config) {
   if (!config.domain) {
@@ -172,6 +183,7 @@ var initGlobalConfigFiles = function (config, assets) {
  * Initialize global configuration
  */
 var initGlobalConfig = function () {
+
   // Validate NODE_ENV existence
   validateEnvironmentVariable();
 
@@ -211,6 +223,9 @@ var initGlobalConfig = function () {
 
   // Validate session secret
   validateSessionSecret(config);
+
+  // Print a warning if using unsupported version of Node.js
+  validateNodeJsVersion(config);
 
   // Print a warning if config.domain is not set
   validateDomainIsSet(config);

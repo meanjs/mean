@@ -47,6 +47,7 @@ module.exports.start = function start(callback) {
       console.log(chalk.green('App version:     ' + config.meanjs.version));
       if (config.meanjs['meanjs-version'])
         console.log(chalk.green('MEAN.JS version: ' + config.meanjs['meanjs-version']));
+      console.log(chalk.green('Node version:    ' + process.version.substr(1)));
       console.log('--');
 
       if (callback) callback(app, db, config);
