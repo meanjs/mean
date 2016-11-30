@@ -306,7 +306,10 @@ describe('Article CRUD tests', function () {
     var articleObj = new Article(article);
 
     // Save the article
-    articleObj.save(function () {
+    articleObj.save(function (err) {
+      if (err) {
+        done(err);
+      }
       request(app).get('/api/articles/' + articleObj._id)
         .end(function (req, res) {
           // Set assertion
