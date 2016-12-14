@@ -12,7 +12,7 @@
       <fieldset>
         <div class="form-group" show-errors>
           <label class="control-label" for="title">Title</label>
-          <input name="title" type="text" ng-model="vm.article.title" id="title" class="form-control" placeholder="Title" required>
+          <input name="title" type="text" ng-model="vm.article.title" id="title" class="form-control" placeholder="Title" required autofocus>
           <div ng-messages="vm.form.articleForm.title.$error" role="alert">
             <p class="help-block error-text" ng-message="required">Article title is required.</p>
           </div>
