@@ -169,9 +169,6 @@ gulp.task('sass', function () {
   return gulp.src(defaultAssets.client.sass)
     .pipe(plugins.sass())
     .pipe(plugins.autoprefixer())
-    .pipe(plugins.rename(function (file) {
-      file.dirname = file.dirname.replace(path.sep + 'scss', path.sep + 'css');
-    }))
     .pipe(gulp.dest('./modules/'));
 });
 
@@ -180,9 +177,6 @@ gulp.task('less', function () {
   return gulp.src(defaultAssets.client.less)
     .pipe(plugins.less())
     .pipe(plugins.autoprefixer())
-    .pipe(plugins.rename(function (file) {
-      file.dirname = file.dirname.replace(path.sep + 'less', path.sep + 'css');
-    }))
     .pipe(gulp.dest('./modules/'));
 });
 

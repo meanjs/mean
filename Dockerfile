@@ -18,34 +18,21 @@ ENV NODE_ENV development
 
 # Install Utilities
 RUN apt-get update -q  \
- && apt-get install -yqq curl \
- wget \
- aptitude \
- htop \
- vim \
- git \
- traceroute \
- dnsutils \
+ && apt-get install -yqq \
  curl \
+ git \
  ssh \
- tree \
- tcpdump \
- nano \
- psmisc \
  gcc \
  make \
  build-essential \
- libfreetype6 \
- libfontconfig \
  libkrb5-dev \
- ruby \
  sudo \
  apt-utils \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Install nodejs
-RUN curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
+RUN curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
 RUN sudo apt-get install -yq nodejs \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
@@ -72,4 +59,4 @@ RUN bower install --quiet --allow-root --config.interactive=false
 COPY . /opt/mean.js
 
 # Run MEAN.JS server
-CMD ["npm", "start"]
+CMD npm install && npm start
