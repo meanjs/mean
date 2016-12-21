@@ -1,6 +1,5 @@
 'use strict';
 
-
 /**
  * Module dependencies.
  */
@@ -15,6 +14,7 @@ var _ = require('lodash'),
   del = require('del');
 
 var defaultAssets = require('./config/assets/default');
+var changedTestFiles = [];
 
 // Set NODE_ENV to 'test'
 gulp.task('env:test', function () {
