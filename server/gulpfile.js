@@ -186,7 +186,7 @@ gulp.task('lint', function (done) {
 
 // Run the project tests
 gulp.task('test', function (done) {
-  runSequence('env:test', 'test:server', 'nodemon', done);
+  runSequence('env:test', 'test:server', done);
 });
 
 gulp.task('test:server', function (done) {
