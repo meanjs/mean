@@ -58,12 +58,12 @@ gulp.task('watch', function () {
 
   // Add watch rules
   gulp.watch(defaultAssets.server.views).on('change', plugins.refresh.changed);
-  gulp.watch(defaultAssets.server.allJS, ['eslint']).on('change', plugins.refresh.changed);
+  gulp.watch(defaultAssets.server.allJS, ['lint']).on('change', plugins.refresh.changed);
 
   if (process.env.NODE_ENV === 'production') {
-    gulp.watch(defaultAssets.server.gulpConfig, ['eslint']);
+    gulp.watch(defaultAssets.server.gulpConfig, ['lint']);
   } else {
-    gulp.watch(defaultAssets.server.gulpConfig, ['eslint']);
+    gulp.watch(defaultAssets.server.gulpConfig, ['lint']);
   }
 });
 
@@ -190,7 +190,7 @@ gulp.task('test', function (done) {
 });
 
 gulp.task('test:server', function (done) {
-  runSequence('env:test', ['copyLocalEnvConfig', 'makeUploadsDir'], 'mocha', done);
+  runSequence('env:test', 'lint', ['copyLocalEnvConfig', 'makeUploadsDir'], 'mocha', done);
 });
 
 // Watch all server files for changes & run server tests (test:server) task on changes
