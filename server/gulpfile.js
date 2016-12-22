@@ -1,6 +1,5 @@
 'use strict';
 
-
 /**
  * Module dependencies.
  */
@@ -15,6 +14,7 @@ var _ = require('lodash'),
   del = require('del');
 
 var defaultAssets = require('./config/assets/default');
+var changedTestFiles = [];
 
 // Set NODE_ENV to 'test'
 gulp.task('env:test', function () {
@@ -58,12 +58,12 @@ gulp.task('watch', function () {
 
   // Add watch rules
   gulp.watch(defaultAssets.server.views).on('change', plugins.refresh.changed);
-  gulp.watch(defaultAssets.server.allJS, ['eslint']).on('change', plugins.refresh.changed);
+  gulp.watch(defaultAssets.server.allJS, ['lint']).on('change', plugins.refresh.changed);
 
   if (process.env.NODE_ENV === 'production') {
-    gulp.watch(defaultAssets.server.gulpConfig, ['eslint']);
+    gulp.watch(defaultAssets.server.gulpConfig, ['lint']);
   } else {
-    gulp.watch(defaultAssets.server.gulpConfig, ['eslint']);
+    gulp.watch(defaultAssets.server.gulpConfig, ['lint']);
   }
 });
 
@@ -186,11 +186,11 @@ gulp.task('lint', function (done) {
 
 // Run the project tests
 gulp.task('test', function (done) {
-  runSequence('env:test', 'test:server', 'nodemon', done);
+  runSequence('env:test', 'test:server', done);
 });
 
 gulp.task('test:server', function (done) {
-  runSequence('env:test', ['copyLocalEnvConfig', 'makeUploadsDir'], 'mocha', done);
+  runSequence('env:test', 'lint', ['copyLocalEnvConfig', 'makeUploadsDir'], 'mocha', done);
 });
 
 // Watch all server files for changes & run server tests (test:server) task on changes
