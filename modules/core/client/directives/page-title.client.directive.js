@@ -1,4 +1,4 @@
-(function () {
+(function() {
   'use strict';
 
   angular.module('core')
@@ -19,13 +19,17 @@
 
       function listener(event, toState) {
         var applicationCoreTitle = 'MEAN.js',
-          separeteBy = ' - ';
+          separeteBy = ' - ',
+          stateTitle = applicationCoreTitle + separeteBy;
+
+        _.forEach(toState.name.split('.'), function(value, index) {
+          stateTitle = stateTitle + _.capitalize(value) + separeteBy;
+        });
         if (toState.data && toState.data.pageTitle) {
-          var stateTitle = $interpolate(toState.data.pageTitle)($state.$current.locals.globals);
-          element.html(applicationCoreTitle + separeteBy + stateTitle);
-        } else {
-          element.html(applicationCoreTitle);
+          stateTitle = $interpolate(stateTitle + toState.data.pageTitle + separeteBy)(($state.$current.locals.globals));
         }
+        stateTitle = stateTitle.slice(0, -3);
+        element.html(stateTitle);
       }
     }
   }

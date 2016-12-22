@@ -14,10 +14,7 @@
         url: '/users',
         templateUrl: '/modules/users/client/views/admin/list-users.client.view.html',
         controller: 'UserListController',
-        controllerAs: 'vm',
-        data: {
-          pageTitle: 'Users List'
-        }
+        controllerAs: 'vm'
       })
       .state('admin.user', {
         url: '/users/:userId',
@@ -28,7 +25,7 @@
           userResolve: getUser
         },
         data: {
-          pageTitle: 'Edit {{ userResolve.displayName }}'
+          pageTitle: '{{ userResolve.displayName }}'
         }
       })
       .state('admin.user-edit', {
@@ -40,7 +37,7 @@
           userResolve: getUser
         },
         data: {
-          pageTitle: 'Edit User {{ userResolve.displayName }}'
+          pageTitle: '{{ userResolve.displayName }}'
         }
       });
 
