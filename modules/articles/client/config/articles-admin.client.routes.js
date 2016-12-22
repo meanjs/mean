@@ -41,8 +41,7 @@
         controller: 'ArticlesAdminController',
         controllerAs: 'vm',
         data: {
-          roles: ['admin'],
-          pageTitle: '{{ articleResolve.title }}'
+          roles: ['admin']
         },
         resolve: {
           articleResolve: getArticle

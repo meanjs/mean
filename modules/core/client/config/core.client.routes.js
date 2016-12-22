@@ -44,7 +44,8 @@
           }
         },
         data: {
-          ignoreState: true
+          ignoreState: true,
+          pageTitle: 'Not Found'
         }
       })
       .state('bad-request', {
@@ -58,14 +59,16 @@
           }
         },
         data: {
-          ignoreState: true
+          ignoreState: true,
+          pageTitle: 'Bad Request'
         }
       })
       .state('forbidden', {
         url: '/forbidden',
         templateUrl: '/modules/core/client/views/403.client.view.html',
         data: {
-          ignoreState: true
+          ignoreState: true,
+          pageTitle: 'Forbidden'
         }
       });
   }
