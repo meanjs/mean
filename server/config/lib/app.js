@@ -6,32 +6,54 @@
 var config = require('../config'),
   mongoose = require('./mongoose'),
   express = require('./express'),
-  chalk = require('chalk'),
-  seed = require('./seed');
+  chalk = require('chalk');
 
-function seedDB() {
-  if (config.seedDB && config.seedDB.seed) {
-    console.log(chalk.bold.red('Warning:  Database seeding is turned on'));
-    seed.start();
-  }
+// Establish an SQL server connection, instantiating all models and schemas
+function startSequelize() {
+  return new Promise(function (resolve, reject) {
+    let orm = null;
+    if (config.orm) {
+      orm = require('./sequelize');
+      orm.sync()
+        .then(function () {
+          resolve(orm);
+        });
+    }
+  });
 }
 
-// Initialize Models
-mongoose.loadModels(seedDB);
-
-module.exports.init = function init(callback) {
-  mongoose.connect(function (db) {
-    // Initialize express
-    var app = express.init(db);
-    if (callback) callback(app, db, config);
-
+// Establish a MongoDB connection, instantiating all models
+function startMongoose() {
+  return new Promise(function (resolve, reject) {
+    mongoose.loadModels()
+      .then(mongoose.connect)
+      .then(mongoose.seed)
+      .then(function(dbConnection) {
+        resolve(dbConnection);
+      })
   });
-};
+}
 
-module.exports.start = function start(callback) {
-  var _this = this;
+/**
+ * Establish ExpressJS powered web server
+ * @param {object} db a Mongoose DB
+ * @param {object} orm an SQL DB
+ */
+function startExpress(db, orm) {
+  return new Promise(function (resolve, reject) {
+    // Initialize the ExpressJS web application server
+    const app = express.init(db, orm);
+    resolve(app);
+  })
+}
 
-  _this.init(function (app, db, config) {
+
+// Boot up the server
+module.exports.start = function start() {
+  return new Promise(async function (resolve, reject) {
+    const orm = await startSequelize();
+    const db = await startMongoose();
+    const app = await startExpress(db, orm);
 
     // Start the app by listening on <port> at <host>
     app.listen(config.port, config.host, function () {
@@ -45,13 +67,20 @@ module.exports.start = function start(callback) {
       console.log(chalk.green('Server:          ' + server));
       console.log(chalk.green('Database:        ' + config.db.uri));
       console.log(chalk.green('App version:     ' + config.meanjs.version));
-      if (config.meanjs['meanjs-version'])
+
+      if (config.meanjs['meanjs-version']) {
         console.log(chalk.green('MEAN.JS version: ' + config.meanjs['meanjs-version']));
+      }
+
       console.log('--');
 
-      if (callback) callback(app, db, config);
+      resolve({
+        db: db,
+        orm: orm,
+        app: app
+      });
+
     });
 
   });
-
 };
