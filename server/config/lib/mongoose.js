@@ -46,10 +46,11 @@ module.exports.seed = function(dbConnection) {
 module.exports.connect = function() {
   return new Promise(function (resolve, reject) {
 
+    // Attach Node.js native Promises library implementation to Mongoose
+    mongoose.Promise = config.db.promise;
+
     mongoose.connect(config.db.uri, config.db.options)
       .then(function() {
-        // Attach Node.js native Promises library implementation to Mongoose
-        mongoose.Promise = config.db.promise;
 
         // Enabling mongoose debug mode if required
         mongoose.set('debug', config.db.debug);
