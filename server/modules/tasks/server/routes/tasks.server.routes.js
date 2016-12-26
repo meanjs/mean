@@ -5,10 +5,14 @@ module.exports = function (app) {
   var tasks = require('../controllers/tasks.server.controller');
 
   // Setting up the models APIs profile api
+  // Query actions
   app.route('/api/tasks').get(tasks.getAllTasks);
   app.route('/api/tasks/me').get(tasks.validateSessionUser, tasks.getMyTasks);
-  app.route('/api/tasks/me').put(tasks.validateSessionUser, tasks.deleteTask);
-  app.route('/api/tasks/me').delete(tasks.validateSessionUser, tasks.updateTask);
+
+  // CRUD actions
   app.route('/api/tasks').post(tasks.validateSessionUser, tasks.addTask);
+  app.route('/api/tasks').put(tasks.validateSessionUser, tasks.updateTask);
+  app.route('/api/tasks').delete(tasks.validateSessionUser, tasks.deleteTask);
+
 
 };

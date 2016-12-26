@@ -33,7 +33,7 @@ exports.addTask = function (req, res) {
 
   orm.Task.create({
     title: title,
-    UserUsername: username
+    username: username
   }).then(function (tasks) {
     res.status(200).send(tasks);
   }).catch(function (error) {
@@ -74,7 +74,7 @@ exports.getMyTasks = function (req, res) {
 
   orm.Task.findAll({
     where: {
-      UserUsername: req.session.user.username
+      username: req.session.user.username
     }
   }).then(function (tasks) {
     res.status(200).send(tasks);
