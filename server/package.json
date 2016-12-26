@@ -20,7 +20,7 @@
     "reinstall": "npm cache clean && npm run clean && npm install",
     "start": "gulp",
     "start:prod": "gulp prod",
-    "start:debug": "node-debug --web-host 0.0.0.0 server.js & gulp debug",
+    "start:debug": "gulp debug",
     "gulp": "gulp",
     "test": "gulp test",
     "test:server": "gulp test:server",

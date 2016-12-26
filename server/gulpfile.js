@@ -35,7 +35,7 @@ gulp.task('env:prod', function () {
 gulp.task('nodemon', function () {
   return plugins.nodemon({
     script: 'server.js',
-    nodeArgs: ['--debug'],
+    nodeArgs: ['--harmony'],
     ext: 'js,html',
     verbose: true,
     watch: _.union(defaultAssets.server.views, defaultAssets.server.allJS, defaultAssets.server.config)
@@ -43,9 +43,10 @@ gulp.task('nodemon', function () {
 });
 
 // Nodemon task without verbosity or debugging
-gulp.task('nodemon-nodebug', function () {
+gulp.task('nodemon-debug', function () {
   return plugins.nodemon({
     script: 'server.js',
+    nodeArgs: ['--harmony', '--debug', '--inspect'],
     ext: 'js,html',
     watch: _.union(defaultAssets.server.views, defaultAssets.server.allJS, defaultAssets.server.config)
   });
@@ -209,7 +210,7 @@ gulp.task('default', function (done) {
 
 // Run the project in debug mode
 gulp.task('debug', function (done) {
-  runSequence('env:dev', ['copyLocalEnvConfig', 'makeUploadsDir'], ['nodemon-nodebug', 'watch'], done);
+  runSequence('env:dev', ['copyLocalEnvConfig', 'makeUploadsDir'], ['nodemon-debug', 'watch'], done);
 });
 
 // Run the project in production mode
