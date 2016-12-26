@@ -42,11 +42,39 @@ exports.addTask = function (req, res) {
 
 };
 
+exports.updateTask = function (req, res) {
+
+  orm.Task.update(req.body, {
+    where: {
+      id: req.body.id
+    }
+  }).then(function (tasks) {
+    res.status(200).send(tasks);
+  }).catch(function (error) {
+    res.status(500).send(error);
+  });
+
+};
+
+exports.deleteTask = function (req, res) {
+
+  orm.Task.destroy({
+    where: {
+      id: req.body.id
+    }
+  }).then(function (tasks) {
+    res.status(200).send(tasks);
+  }).catch(function (error) {
+    res.status(500).send(error);
+  });
+
+};
+
 exports.getMyTasks = function (req, res) {
 
   orm.Task.findAll({
     where: {
-      'UserUsername': req.session.user.username
+      UserUsername: req.session.user.username
     }
   }).then(function (tasks) {
     res.status(200).send(tasks);
