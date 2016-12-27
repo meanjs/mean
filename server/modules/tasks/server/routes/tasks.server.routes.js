@@ -14,5 +14,4 @@ module.exports = function (app) {
   app.route('/api/tasks').put(tasks.validateSessionUser, tasks.updateTask);
   app.route('/api/tasks').delete(tasks.validateSessionUser, tasks.deleteTask);
 
-
 };

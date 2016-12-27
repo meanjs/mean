@@ -48,12 +48,34 @@ function startExpress(db, orm) {
 }
 
 
-// Boot up the server
-module.exports.start = function start() {
+/**
+ * Bootstrap the required services
+ * @returns {Object} db, orm, and app instances
+ */
+function bootstrap () {
   return new Promise(async function (resolve, reject) {
     const orm = await startSequelize();
     const db = await startMongoose();
     const app = await startExpress(db, orm);
+
+    resolve({
+      db: db,
+      orm: orm,
+      app: app
+    });
+
+  });
+};
+
+
+// Expose the boostrap function publically
+exports.bootstrap = bootstrap;
+
+// Boot up the server
+exports.start = function start() {
+  return new Promise(async function (resolve, reject) {
+
+    const { db, orm, app } = await bootstrap();
 
     // Start the app by listening on <port> at <host>
     app.listen(config.port, config.host, function () {

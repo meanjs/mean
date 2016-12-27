@@ -89,7 +89,7 @@ exports.getMyTasks = function (req, res) {
 exports.validateSessionUser = function (req, res, next) {
   // Reject the request if no user exists on the session
   if (!res.session || !req.session.user) {
-    return res.status(400).send({
+    return res.status(401).send({
       message: 'No session user'
     });
   }
