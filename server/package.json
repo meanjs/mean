@@ -97,6 +97,11 @@
     "should": "~11.1.0",
     "supertest": "^2.0.1"
   },
+  "ava": {
+    "require": [
+      "async-to-gen/register"
+    ]
+  },
   "config": {
     "commitizen": {
       "path": "./server/node_modules/cz-conventional-changelog"
