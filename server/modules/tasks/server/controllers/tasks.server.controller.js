@@ -33,7 +33,7 @@ exports.addTask = function (req, res) {
 
   orm.Task.create({
     title: title,
-    UserUsername: username
+    username: username
   }).then(function (tasks) {
     res.status(200).send(tasks);
   }).catch(function (error) {
@@ -74,7 +74,7 @@ exports.getMyTasks = function (req, res) {
 
   orm.Task.findAll({
     where: {
-      UserUsername: req.session.user.username
+      username: req.session.user.username
     }
   }).then(function (tasks) {
     res.status(200).send(tasks);
@@ -89,7 +89,7 @@ exports.getMyTasks = function (req, res) {
 exports.validateSessionUser = function (req, res, next) {
   // Reject the request if no user exists on the session
   if (!res.session || !req.session.user) {
-    return res.status(400).send({
+    return res.status(401).send({
       message: 'No session user'
     });
   }
