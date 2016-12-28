@@ -75,6 +75,7 @@
     "async-to-gen": "^1.3.0",
     "ava": "^0.17.0",
     "coveralls": "~2.11.6",
+    "cz-conventional-changelog": "^1.2.0",
     "del": "^2.2.2",
     "eslint": "~2.2.0",
     "eslint-config-airbnb": "~6.0.2",
@@ -100,5 +101,10 @@
     "require": [
       "async-to-gen/register"
     ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "./server/node_modules/cz-conventional-changelog"
+    }
   }
 }
