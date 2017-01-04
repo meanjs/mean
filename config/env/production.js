@@ -1,5 +1,7 @@
 'use strict';
+
 var fs = require('fs');
+
 module.exports = {
   secure: {
     ssl: true,
