@@ -58,7 +58,7 @@
       $state.go('home', { reload: true });
     }
 
-    function refresh(requestFromServer, callback) {
+    function refresh() {
       readyPromise = $q.defer();
 
       UsersService.me().$promise

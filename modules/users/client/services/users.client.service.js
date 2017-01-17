@@ -15,7 +15,7 @@
       },
       me: {
         method: 'GET',
-        url: 'api/users/me'
+        url: '/api/users/me'
       },
       updatePassword: {
         method: 'POST',
