@@ -64,7 +64,7 @@
           $templateCache.put('/modules/core/client/views/home.client.view.html', '');
 
           // Test expected GET request
-          $httpBackend.when('POST', '/api/auth/signin').respond(200, { username: 'Fred' });
+          $httpBackend.when('POST', '/api/auth/signin').respond(200, { user: { username: 'Fred' }, token: 'somejwttoken' });
 
           scope.vm.signin(true);
           $httpBackend.flush();
@@ -77,7 +77,7 @@
         it('should login with a correct email and password', inject(function ($templateCache) {
           $templateCache.put('/modules/core/client/views/home.client.view.html', '');
           // Test expected GET request
-          $httpBackend.when('POST', '/api/auth/signin').respond(200, { email: 'Fred@email.com' });
+          $httpBackend.when('POST', '/api/auth/signin').respond(200, { user: { email: 'Fred@email.com' }, token: 'somejwttoken' });
           $httpBackend.when('GET', 'api/users/me').respond(200, 'Fred');
 
           scope.vm.signin(true);
@@ -152,7 +152,7 @@
 
           // Test expected GET request
           scope.vm.authentication.user = 'Fred';
-          $httpBackend.when('POST', '/api/auth/signup').respond(200, { username: 'Fred' });
+          $httpBackend.when('POST', '/api/auth/signup').respond(200, { user: { username: 'Fred' }, token: 'somejwttoken' });
           $httpBackend.when('GET', 'api/users/me').respond(200, { user: 'Fred' });
 
           scope.vm.signup(true);

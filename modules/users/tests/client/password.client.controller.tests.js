@@ -68,7 +68,7 @@
     });
 
     describe('Logged out user', function() {
-      beforeEach(inject(function($controller, $rootScope, _$window_, _$stateParams_, _$httpBackend_, _$location_, _Notification_) {
+      beforeEach(inject(function($controller, $rootScope, _$window_, _$stateParams_, _$httpBackend_, _$location_, _Notification_, _Authentication_) {
         // Set a new global scope
         scope = $rootScope.$new();
 

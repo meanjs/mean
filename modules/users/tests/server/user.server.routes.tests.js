@@ -1019,6 +1019,7 @@ describe('User CRUD tests', function () {
         }
 
         agent.post('/api/users/picture')
+          .set('Authorization', 'JWT ' + signinRes.body.token)
           .attach('newProfilePicture', './modules/users/tests/server/img/text-file.txt')
           .send(credentials)
           .expect(422)
@@ -1032,13 +1033,14 @@ describe('User CRUD tests', function () {
     agent.post('/api/auth/signin')
       .send(credentials)
       .expect(200)
-      .end(function (signinErr) {
+      .end(function (signinErr, signinRes) {
         // Handle signin error
         if (signinErr) {
           return done(signinErr);
         }
 
         agent.post('/api/users/picture')
+          .set('Authorization', 'JWT ' + signinRes.body.token)
           .attach('newProfilePicture', './modules/users/tests/server/img/too-big-file.png')
           .send(credentials)
           .expect(422)

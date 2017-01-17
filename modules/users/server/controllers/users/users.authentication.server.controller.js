@@ -49,7 +49,7 @@ exports.signup = function (req, res) {
  * Signin after passport authentication
  */
 exports.signin = function (req, res, next) {
-  passport.authenticate('local', function (err, user) {
+  passport.authenticate('local', function (err, user, info) {
     if (err || !user) {
       res.status(422).send(info);
     } else {
@@ -101,7 +101,6 @@ exports.oauthCallback = function (strategy) {
 
       var token = authorization.signToken(user);
       return res.redirect(info.redirect_to || '/');
-      });
     })(req, res, next);
   };
 };
