@@ -51,7 +51,7 @@
         $httpBackend.whenGET('/modules/core/client/views/home.client.view.html').respond(200);
         $httpBackend.whenGET('/modules/core/client/views/400.client.view.html').respond(200);
 
-        $httpBackend.when('GET', 'api/users/me').respond(200, {});
+        $httpBackend.when('GET', '/api/users/me').respond(200, {});
 
         // Initialize the Authentication controller
         AuthenticationController = $controller('AuthenticationController as vm', {
@@ -78,7 +78,7 @@
           $templateCache.put('/modules/core/client/views/home.client.view.html', '');
           // Test expected GET request
           $httpBackend.when('POST', '/api/auth/signin').respond(200, { user: { email: 'Fred@email.com' }, token: 'somejwttoken' });
-          $httpBackend.when('GET', 'api/users/me').respond(200, 'Fred');
+          $httpBackend.when('GET', '/api/users/me').respond(200, 'Fred');
 
           scope.vm.signin(true);
           $httpBackend.flush();
@@ -104,7 +104,7 @@
 
             // Test expected GET request
             $httpBackend.when('POST', '/api/auth/signin').respond(200, { user: 'Fred' });
-            $httpBackend.when('GET', 'api/users/me').respond(200, { user: 'Fred' });
+            $httpBackend.when('GET', '/api/users/me').respond(200, { user: 'Fred' });
 
             scope.vm.signin(true);
             $httpBackend.flush();
@@ -153,7 +153,7 @@
           // Test expected GET request
           scope.vm.authentication.user = 'Fred';
           $httpBackend.when('POST', '/api/auth/signup').respond(200, { user: { username: 'Fred' }, token: 'somejwttoken' });
-          $httpBackend.when('GET', 'api/users/me').respond(200, { user: 'Fred' });
+          $httpBackend.when('GET', '/api/users/me').respond(200, { user: 'Fred' });
 
           scope.vm.signup(true);
           $httpBackend.flush();
@@ -186,7 +186,7 @@
         $location = _$location_;
         $location.path = jasmine.createSpy().and.returnValue(true);
 
-        $httpBackend.when('GET', 'api/users/me').respond(200, {});
+        $httpBackend.when('GET', '/api/users/me').respond(200, {});
 
         // Mock logged in user
         _Authentication_.user = {

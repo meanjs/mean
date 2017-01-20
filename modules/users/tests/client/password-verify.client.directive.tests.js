@@ -19,7 +19,7 @@
       $compile = _$compile_;
       $httpBackend = _$httpBackend_;
 
-      $httpBackend.whenGET('api/users/me').respond({});
+      $httpBackend.whenGET('/api/users/me').respond({});
 
       scope.passwordMock = {
         newPassword: 'P@ssw0rd!!',

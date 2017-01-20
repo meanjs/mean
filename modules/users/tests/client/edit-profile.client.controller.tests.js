@@ -62,7 +62,7 @@
         roles: ['user']
       };
 
-      $httpBackend.whenGET('api/users/me').respond(Authentication.user);
+      $httpBackend.whenGET('/api/users/me').respond(Authentication.user);
 
       // Initialize the Articles controller.
       EditProfileController = $controller('EditProfileController as vm', {

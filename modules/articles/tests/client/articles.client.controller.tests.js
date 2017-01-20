@@ -46,7 +46,7 @@
       Authentication = _Authentication_;
       ArticlesService = _ArticlesService_;
 
-      $httpBackend.whenGET('api/users/me').respond({});
+      $httpBackend.whenGET('/api/users/me').respond({});
 
       // create mock article
       mockArticle = new ArticlesService({
