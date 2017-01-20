@@ -77,7 +77,7 @@ exports.signout = function (req, res) {
 exports.oauthCall = function (strategy, scope) {
   return function (req, res, next) {
     if (req.query && req.query.redirect_to)
-      req.session.redirect_to = req.query.redirect_to;
+      req.redirect_to = req.query.redirect_to;
 
     // Authenticate
     passport.authenticate(strategy, scope)(req, res, next);
@@ -100,7 +100,13 @@ exports.oauthCallback = function (strategy) {
       }
 
       var token = authorization.signToken(user);
-      return res.redirect(info.redirect_to || '/');
+      var redirect = info.redirect_to || '/';
+
+      if (token) {
+        redirect += '?token=' + token;
+      }
+
+      return res.redirect(redirect);
     })(req, res, next);
   };
 };
@@ -114,8 +120,8 @@ exports.saveOAuthUserProfile = function (req, providerUserProfile, done) {
 
   // Set redirection path on session.
   // Do not redirect to a signin or signup page
-  if (noReturnUrls.indexOf(req.session.redirect_to) === -1)
-    info.redirect_to = req.session.redirect_to;
+  if (noReturnUrls.indexOf(req.redirect_to) === -1)
+    info.redirect_to = req.redirect_to;
 
   if (!req.user) {
     // Define a search query fields

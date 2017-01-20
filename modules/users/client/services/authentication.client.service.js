@@ -10,7 +10,6 @@
   Authentication.$inject = ['$window', '$state', '$http', '$location', '$q', 'UsersService'];
 
   function Authentication($window, $state, $http, $location, $q, UsersService) {
-    var readyPromise = $q.defer();
 
     var auth = {
       user: null,
@@ -18,7 +17,7 @@
       login: login,
       signout: signout,
       refresh: refresh,
-      ready: readyPromise.promise
+      ready: $q.defer()
     };
 
     // Initialize service
@@ -34,9 +33,10 @@
       if (token) {
         auth.token = token;
         $http.defaults.headers.common.Authorization = 'JWT ' + token;
+
         refresh();
       } else {
-        readyPromise.resolve(auth);
+        auth.ready.resolve();
       }
     }
 
@@ -47,7 +47,7 @@
       localStorage.setItem('token', token);
       $http.defaults.headers.common.Authorization = 'JWT ' + token;
 
-      readyPromise.resolve(auth);
+      auth.ready.resolve();
     }
 
     function signout() {
@@ -59,16 +59,19 @@
     }
 
     function refresh() {
-      readyPromise = $q.defer();
-
       UsersService.me().$promise
-      .then(function (user) {
-        auth.user = user;
-        readyPromise.resolve(auth);
-      })
-      .catch(function (errorResponse) {
-        readyPromise.reject(errorResponse);
-      });
+        .then(function (user) {
+          if (!user || !user.roles || !user.roles.length) {
+            signout();
+            return auth.ready.resolve();
+          }
+
+          auth.user = user;
+          auth.ready.resolve();
+        })
+        .catch(function (errorResponse) {
+          auth.ready.reject(errorResponse);
+        });
     }
   }
 }());

@@ -80,7 +80,7 @@
     function onUserSigninSuccess(response) {
       // If successful we login the user client-side using the JWT Token
       Authentication.login(response.user, response.token);
-      Notification.info({ message: 'Welcome ' + response.firstName });
+      Notification.info({ message: 'Welcome ' + response.user.firstName });
       // And redirect to the previous or home page
       $state.go($state.previous.state.name || 'home', $state.previous.params);
     }

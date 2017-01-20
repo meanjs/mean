@@ -10,7 +10,10 @@ var passport = require('passport'),
 
 module.exports = function (config) {
   var opts = {
-    jwtFromRequest: ExtractJwt.fromAuthHeader(),
+    jwtFromRequest: ExtractJwt.fromExtractors([
+      ExtractJwt.fromUrlQueryParameter('token'),
+      ExtractJwt.fromAuthHeader()
+    ]),
     secretOrKey: config.jwt.secret
     // opts.issuer = "accounts.examplesoft.com",
     // opts.audience = "yoursite.net"
