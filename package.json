@@ -11,7 +11,7 @@
     "url": "https://github.com/meanjs/mean.git"
   },
   "engines": {
-    "node": ">=4.6.0",
+    "node": ">=6.3.0",
     "npm": ">=3.10.8"
   },
   "scripts": {
@@ -112,7 +112,6 @@
     "karma-phantomjs-launcher": "~1.0.0",
     "lcov-result-merger": "~1.2.0",
     "mock-fs": "~3.11.0",
-    "node-inspector": "~0.12.8",
     "run-sequence": "~1.2.2",
     "semver": "~5.3.0",
     "should": "~11.1.0",
