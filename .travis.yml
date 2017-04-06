@@ -30,6 +30,7 @@ addons:
 before_install:
   - npm i nsp -g
   - npm i snyk -g
+  - echo $SNYK_TOKEN
   - snyk auth $SNYK_TOKEN
   - gem update --system
   - gem install sass --version "=3.3.7"
@@ -40,7 +41,6 @@ before_install:
   - 'node_modules/protractor/bin/webdriver-manager start 2>&1 &'
   - sleep 3
 before_script:
-  - echo $SNYK_TOKEN
   - snyk auth $SNYK_TOKEN
   - snyk test
 after_script:
