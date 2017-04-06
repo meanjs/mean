@@ -28,6 +28,7 @@ addons:
     - gcc-4.8
     - clang
 before_install:
+  - snyk auth $SNYK_TOKEN
   - gem update --system
   - gem install sass --version "=3.3.7"
   - npm i nsp -g
