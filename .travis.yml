@@ -28,11 +28,11 @@ addons:
     - gcc-4.8
     - clang
 before_install:
+  - npm i nsp -g
+  - npm i snyk -g
   - snyk auth $SNYK_TOKEN
   - gem update --system
   - gem install sass --version "=3.3.7"
-  - npm i nsp -g
-  - npm i snyk -g
   - npm install protractor
   - "export DISPLAY=:99.0"
   - "sh -e /etc/init.d/xvfb start"
