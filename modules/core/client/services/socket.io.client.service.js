@@ -26,6 +26,7 @@
       // Connect only when authenticated
       if (Authentication.user) {
         service.socket = io();
+        service.socket.emit('authentication', { token: Authentication.token });
       }
     }
 

@@ -22,6 +22,8 @@ describe('Users E2E Tests:', function () {
     browser.get('http://localhost:3001/authentication/signout');
     // Delete all cookies
     browser.driver.manage().deleteAllCookies();
+    // Clear local storage
+    browser.executeScript('localStorage.clear();');
   };
 
   describe('Signup Validation', function () {

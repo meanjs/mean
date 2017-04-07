@@ -63,6 +63,11 @@ module.exports = {
       minPhraseLength: 20,
       minOptionalTestsToPass: 4
     }
+  },
+  jwt: {
+    secret: process.env.JWT_SECRET || 'M3@N_R0CK5',
+    options: {
+      expiresIn: process.env.JWT_EXPIRES_IN || '1d'
+    }
   }
-
 };

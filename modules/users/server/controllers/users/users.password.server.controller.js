@@ -10,7 +10,8 @@ var path = require('path'),
   User = mongoose.model('User'),
   nodemailer = require('nodemailer'),
   async = require('async'),
-  crypto = require('crypto');
+  crypto = require('crypto'),
+  authorization = require(path.resolve('./config/lib/authorization'));
 
 var smtpTransport = nodemailer.createTransport(config.mailer.options);
 
@@ -145,19 +146,13 @@ exports.reset = function (req, res, next) {
                   message: errorHandler.getErrorMessage(err)
                 });
               } else {
-                req.login(user, function (err) {
-                  if (err) {
-                    res.status(400).send(err);
-                  } else {
-                    // Remove sensitive data before return authenticated user
-                    user.password = undefined;
-                    user.salt = undefined;
+                user.password = undefined;
+                user.salt = undefined;
 
-                    res.json(user);
+                var token = authorization.signToken(user);
+                res.json({ user: user, token: token });
 
-                    done(err, user);
-                  }
-                });
+                done(err, user);
               }
             });
           } else {
@@ -221,14 +216,8 @@ exports.changePassword = function (req, res, next) {
                     message: errorHandler.getErrorMessage(err)
                   });
                 } else {
-                  req.login(user, function (err) {
-                    if (err) {
-                      res.status(400).send(err);
-                    } else {
-                      res.send({
-                        message: 'Password changed successfully'
-                      });
-                    }
+                  res.send({
+                    message: 'Password changed successfully'
                   });
                 }
               });

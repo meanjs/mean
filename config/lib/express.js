@@ -19,7 +19,8 @@ var config = require('../config'),
   hbs = require('express-hbs'),
   path = require('path'),
   _ = require('lodash'),
-  lusca = require('lusca');
+  lusca = require('lusca'),
+  authorization = require('./authorization');
 
 /**
  * Initialize local variables
@@ -89,6 +90,9 @@ module.exports.initMiddleware = function (app) {
   // Add the cookie parser and flash middleware
   app.use(cookieParser());
   app.use(flash());
+
+  // Authorize Request
+  app.use(authorization.authorize);
 };
 
 /**
@@ -237,9 +241,6 @@ module.exports.init = function (db) {
 
   // Initialize modules static client routes, before session!
   this.initModulesClientRoutes(app);
-
-  // Initialize Express session
-  this.initSession(app, db);
 
   // Initialize Modules configuration
   this.initModulesConfiguration(app);

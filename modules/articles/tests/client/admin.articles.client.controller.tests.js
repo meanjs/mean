@@ -91,6 +91,7 @@
       it('should send a POST request with the form input values and then locate to new object URL', inject(function (ArticlesService) {
         // Set POST response
         $httpBackend.expectPOST('/api/articles', sampleArticlePostData).respond(mockArticle);
+        $httpBackend.when('GET', '/api/users/me').respond(200, 'Fred');
 
         // Run controller functionality
         $scope.vm.save(true);
@@ -107,6 +108,7 @@
         $httpBackend.expectPOST('/api/articles', sampleArticlePostData).respond(400, {
           message: errorMessage
         });
+        $httpBackend.when('GET', '/api/users/me').respond(200, 'Fred');
 
         $scope.vm.save(true);
         $httpBackend.flush();
@@ -124,6 +126,7 @@
       it('should update a valid article', inject(function (ArticlesService) {
         // Set PUT response
         $httpBackend.expectPUT(/api\/articles\/([0-9a-fA-F]{24})$/).respond();
+        $httpBackend.when('GET', '/api/users/me').respond(200, 'Fred');
 
         // Run controller functionality
         $scope.vm.save(true);
@@ -140,6 +143,7 @@
         $httpBackend.expectPUT(/api\/articles\/([0-9a-fA-F]{24})$/).respond(400, {
           message: errorMessage
         });
+        $httpBackend.when('GET', '/api/users/me').respond(200, 'Fred');
 
         $scope.vm.save(true);
         $httpBackend.flush();
@@ -159,6 +163,7 @@
         spyOn(window, 'confirm').and.returnValue(true);
 
         $httpBackend.expectDELETE(/api\/articles\/([0-9a-fA-F]{24})$/).respond(204);
+        $httpBackend.when('GET', '/api/users/me').respond(200, 'Fred');
 
         $scope.vm.remove();
         $httpBackend.flush();

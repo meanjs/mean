@@ -24,6 +24,10 @@
 
     function connect() {
       io.socket = {};
+
+      // Mock authentication
+      io.on('authentication', function (msg, data) {
+      });
     }
 
     function emit(msg, data) {
