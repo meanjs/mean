@@ -19,8 +19,8 @@ Before you begin we recommend you read about the basic building blocks that asse
 ## Prerequisites
 Make sure you have installed all of the following prerequisites on your development machine:
 * Git - [Download & Install Git](https://git-scm.com/downloads). OSX and Linux machines typically have this already installed.
-* Node.js - [Download & Install Node.js](https://nodejs.org/en/download/) and the npm package manager. If you encounter any problems, you can also use this [GitHub Gist](https://gist.github.com/isaacs/579814) to install Node.js.
-* MongoDB - [Download & Install MongoDB](http://www.mongodb.org/downloads), and make sure it's running on the default port (27017).
+* Node.js - [Download & Install Node.js](https://nodejs.org/en/download/) (v4.6.0—v6, v7 won't work) and the npm package manager (v3+). If you encounter any problems, you can also use this [GitHub Gist](https://gist.github.com/isaacs/579814) to install Node.js.
+* MongoDB - [Download & Install MongoDB](https://www.mongodb.com/download-center) (v2 or v3), and make sure it's running on the default port (27017).
 * Bower - You're going to use the [Bower Package Manager](http://bower.io/) to manage your front-end packages. Make sure you've installed Node.js and npm first, then install bower globally using npm:
 
 ```bash
@@ -49,7 +49,7 @@ $ wget https://github.com/meanjs/mean/archive/master.zip -O meanjs.zip; unzip me
 Don't forget to rename **mean-master** after your project name.
 
 ### Yo Generator
-Another way would be to use the [Official Yo Generator](http://meanjs.org/generator.html), which generates a copy of the MEAN.JS 0.4.x boilerplate and supplies an application generator to ease your daily development cycles.
+Another way would be to use the [Official Yo Generator](http://meanjs.org/generator.html), which generates a copy of the MEAN.JS 0.4.x boilerplate (i.e. it's a bit [outdated](https://github.com/meanjs/mean/releases)) and supplies an application generator to ease your daily development cycles.
 
 ## Quick Install
 Once you've downloaded the boilerplate and installed all the prerequisites, you're just a few steps away from starting to develop your MEAN application.
