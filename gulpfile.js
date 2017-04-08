@@ -386,7 +386,13 @@ gulp.task('dropdb', function (done) {
 });
 
 // Downloads the selenium webdriver if protractor version is compatible
-gulp.task('webdriver_update', function() {
+gulp.task('webdriver_update', webdriver_update);
+
+gulp.task('webdriver_prep', function(done) {
+  runSequence('protractor_prep', 'webdriver_update', done);
+});
+
+gulp.task('protractor_prep', function() {
   var nodeVersions = process.versions;
   switch (nodeVersions.node.substr(0, 1)) {
     case '4':
@@ -405,7 +411,7 @@ gulp.task('webdriver_update', function() {
       break;
   }
 
-  return webdriver_update;
+  return gulp.src('*.js');
 });
 
 
@@ -415,7 +421,7 @@ gulp.task('webdriver_update', function() {
 gulp.task('webdriver_standalone', webdriver_standalone);
 
 // Protractor test runner task
-gulp.task('protractor', ['webdriver_update'], function () {
+gulp.task('protractor', ['webdriver_prep'], function () {
   gulp.src([])
     .pipe(protractor({
       configFile: 'protractor.conf.js'

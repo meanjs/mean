@@ -1,5 +1,6 @@
 #!/bin/bash -x
 
+echo "$TRAVIS_NODE_VERSION"
 if [[ "$TRAVIS_NODE_VERSION" == "6" || "$TRAVIS_NODE_VERSION" == "7" ]]
 then
   npm install protractor
