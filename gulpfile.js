@@ -47,9 +47,23 @@ gulp.task('env:prod', function () {
 
 // Nodemon task
 gulp.task('nodemon', function () {
+
+  var nodeVersions = process.versions;
+  var debugArgument = '--debug';
+  switch (nodeVersions.node.substr(0, 1)) {
+    case '4':
+    case '5':
+    case '6':
+      debugArgument = '--debug';
+      break;
+    case '7':
+      debugArgument = '--inspect';
+      break;
+  }
+
   return plugins.nodemon({
     script: 'server.js',
-    nodeArgs: ['--inspect'],
+    nodeArgs: [debugArgument],
     ext: 'js,html',
     verbose: true,
     watch: _.union(defaultAssets.server.views, defaultAssets.server.allJS, defaultAssets.server.config)
@@ -371,8 +385,29 @@ gulp.task('dropdb', function (done) {
   });
 });
 
-// Downloads the selenium webdriver
-gulp.task('webdriver_update', webdriver_update);
+// Downloads the selenium webdriver if protractor version is compatible
+gulp.task('webdriver_update', function() {
+  var nodeVersions = process.versions;
+  switch (nodeVersions.node.substr(0, 1)) {
+    case '4':
+    case '5':
+      console.log('E2E testing doesnt support v4 and v5');
+      process.exit(0);
+      break;
+    case '6':
+      if (parseInt(nodeVersions.node.substr(1, 1), 10) < 9) {
+        console.log('E2E testing with latest protractor requires v >= 6.9 ');
+        process.exit(0);
+      }
+      break;
+    default:
+      console.log('Detecting support for protractor E2E tests');
+      break;
+  }
+
+  return webdriver_update;
+});
+
 
 // Start the standalone selenium server
 // NOTE: This is not needed if you reference the
