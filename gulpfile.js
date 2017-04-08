@@ -49,7 +49,7 @@ gulp.task('env:prod', function () {
 gulp.task('nodemon', function () {
   return plugins.nodemon({
     script: 'server.js',
-    nodeArgs: ['--debug'],
+    nodeArgs: ['--inspect'],
     ext: 'js,html',
     verbose: true,
     watch: _.union(defaultAssets.server.views, defaultAssets.server.allJS, defaultAssets.server.config)
@@ -433,14 +433,9 @@ gulp.task('test:coverage', function (done) {
   runSequence('env:test', ['copyLocalEnvConfig', 'makeUploadsDir', 'dropdb'], 'lint', 'mocha:coverage', 'karma:coverage', done);
 });
 
-// Run the project in development mode
+// Run the project in development mode with node debugger enabled
 gulp.task('default', function (done) {
   runSequence('env:dev', ['copyLocalEnvConfig', 'makeUploadsDir'], 'lint', ['nodemon', 'watch'], done);
-});
-
-// Run the project in debug mode
-gulp.task('debug', function (done) {
-  runSequence('env:dev', ['copyLocalEnvConfig', 'makeUploadsDir'], 'lint', ['nodemon-nodebug', 'watch'], done);
 });
 
 // Run the project in production mode
