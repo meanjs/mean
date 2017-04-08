@@ -9,7 +9,6 @@ var _ = require('lodash'),
   User = mongoose.model('User'),
   path = require('path'),
   fs = require('fs'),
-  mock = require('mock-fs'),
   request = require('supertest'),
   config = require(path.resolve('./config/config')),
   logger = require(path.resolve('./config/lib/logger')),
@@ -421,12 +420,10 @@ describe('Configuration Tests:', function () {
 
     beforeEach(function () {
       originalLogConfig = _.clone(config.log, true);
-      mock();
     });
 
     afterEach(function () {
       config.log = originalLogConfig;
-      mock.restore();
     });
 
     it('should retrieve the log format from the logger configuration', function () {
