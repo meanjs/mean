@@ -34,8 +34,8 @@
   },
   "dependencies": {
     "acl": "~0.4.9",
-    "async": "~2.0.1",
-    "body-parser": "~1.15.0",
+    "async": "~2.3.0",
+    "body-parser": "~1.17.1",
     "bower": "~1.8.0",
     "chalk": "~1.1.1",
     "compression": "~1.6.1",
@@ -50,7 +50,7 @@
     "glob": "~7.1.0",
     "helmet": "~2.3.0",
     "jasmine-core": "~2.5.0",
-    "lodash": "~4.16.2",
+    "lodash": "~4.17.4",
     "lusca": "~1.4.1",
     "method-override": "~2.3.5",
     "mocha": "~3.2.0",
@@ -70,7 +70,7 @@
     "phantomjs-prebuilt": "~2.1.4",
     "serve-favicon": "~2.4.2",
     "socket.io": "^1.4.8",
-    "validator": "~6.1.0",
+    "validator": "~7.0.0",
     "winston": "^2.2.0",
     "wiredep": "~4.0.0"
   },
