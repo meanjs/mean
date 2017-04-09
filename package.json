@@ -93,7 +93,7 @@
     "gulp-mocha": "~3.0.1",
     "gulp-ng-annotate": "~2.0.0",
     "gulp-nodemon": "~2.2.1",
-    "gulp-protractor": "~3.0.0",
+    "gulp-protractor": "^3.0.0",
     "gulp-refresh": "~1.1.0",
     "gulp-rename": "~1.2.2",
     "gulp-rev": "^7.1.2",
