@@ -33,9 +33,9 @@ before_install:
   - export DISPLAY=:99.0
   - bash scripts/setup-protractor.sh
   - sleep 3
-#before_script:
-#  - snyk auth $SNYK_TOKEN
-#  - snyk test
+before_script:
+  - snyk auth $SNYK_TOKEN
+  - snyk test
 after_script:
   - nsp check
   - snyk test
