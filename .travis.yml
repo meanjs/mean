@@ -34,7 +34,6 @@ before_install:
   - bash scripts/setup-protractor.sh
   - sleep 3
 before_script:
-  - snyk auth $SNYK_TOKEN
   - snyk test
 after_script:
   - nsp check
