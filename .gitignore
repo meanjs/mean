@@ -48,6 +48,11 @@ _site/
 logs/
 build/
 
+# Emacs editor
+# ============
+*~
+.dir-locals.el
+
 # Sublime editor
 # ==============
 .sublime-project
