@@ -1,0 +1,56 @@
+<section>
+  <div class="page-header">
+    <h1>{{vm.imagegallery._id ? 'Edit Imagegallery' : 'New Imagegallery'}}</h1>
+  </div>
+
+<div class="container">
+  <h2>Image Gallery</h2>
+  <p>Click on the images to select it</p>
+  <div class="row">
+    <div class="col-md-3" ng-repeat="img in vm.imageNames">
+      <img ng-src="{{vm.basePath+img}}" style="width:150px;height:150px" ng-click="vm.selectImage($index)">
+      {{img}}
+    </div>
+  </div>
+</div>
+
+  <div class="col-md-12">
+    <form name="vm.form.imagegalleryForm" class="form-horizontal" ng-submit="vm.save(vm.form.imagegalleryForm.$valid)" novalidate>
+      <fieldset>
+        <div class="form-group" show-errors>
+          <label class="control-label" for="name">Name</label>
+          <input name="name" type="text" ng-model="vm.imagegallery.name" id="name" class="form-control" placeholder="Name" required>
+          <div ng-messages="vm.form.imagegalleryForm.name.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Imagegallery name is required.</p>
+          </div>
+        </div>
+        <div class="form-group" show-errors>
+          <label class="control-label" for="desc">Description</label>
+          <input name="name" type="text" ng-model="vm.imagegallery.description" id="desc" class="form-control" placeholder="Description" required>
+          <div ng-messages="vm.form.imagegalleryForm.description.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Description is required.</p>
+          </div>
+        </div>
+
+        <div class="form-group" ng-show="vm.selectedImages.length>0">
+          <div class="container">
+            <h2>Selected Images</h2>
+            <div class="row">
+              <div class="col-md-3" ng-repeat="img in vm.selectedImages">
+                <img ng-src="{{vm.basePath+img}}" style="width:150px;height:150px">
+                <!-- {{img}} -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <button type="submit" class="btn btn-default">{{vm.imagegallery._id ? 'Update' : 'Create'}}</button>
+        </div>
+        <div ng-show="vm.error" class="text-danger">
+          <strong ng-bind="vm.error"></strong>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</section>

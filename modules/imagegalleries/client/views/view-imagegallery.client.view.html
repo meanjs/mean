@@ -1,0 +1,26 @@
+<section>
+  <div class="page-header">
+    <h1 ng-bind="vm.imagegallery.name"></h1>
+  </div>
+  <div class="pull-right"
+       ng-show="vm.imagegallery.isCurrentUserOwner">
+    <a class="btn btn-primary"
+       ui-sref="imagegalleries.edit({ imagegalleryId: vm.imagegallery._id })">
+      <i class="glyphicon glyphicon-edit"></i>
+    </a>
+    <a class="btn btn-primary" ng-click="vm.remove()">
+      <i class="glyphicon glyphicon-trash"></i>
+    </a>
+  </div>
+  <small>
+    <em class="text-muted">
+      Posted on
+      <span ng-bind="vm.imagegallery.created | date:'mediumDate'"></span>
+      by
+      <span ng-if="vm.imagegallery.user"
+            ng-bind="vm.imagegallery.user.displayName"></span>
+      <span ng-if="!vm.imagegallery.user">Deleted User</span>
+    </em>
+  </small>
+  <p class="lead" ng-bind="vm.imagegallery.content"></p>
+</section>
