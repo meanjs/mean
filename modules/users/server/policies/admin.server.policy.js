@@ -5,6 +5,7 @@
  */
 var acl = require('acl');
 
+/*jshint -W055 */ // Added due to https://github.com/meanjs/mean/issues/882 
 // Using the memory backend
 acl = new acl(new acl.memoryBackend());
 
