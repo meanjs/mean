@@ -19,11 +19,20 @@ module.exports = function (app) {
   app.route('/api/auth/signin').post(users.signin);
   app.route('/api/auth/signout').get(users.signout);
 
+<<<<<<< HEAD
+  //Get a list of available strategies
+  app.route('/api/auth/strategies').get(users.getAuthProviders);
+
+  // Setting the oauth routes
+  app.route('/api/auth/:strategy').get(users.oauthCall);
+  app.route('/api/auth/:strategy/callback').get(users.oauthCallback);
+=======
   // Setting the facebook oauth routes
   app.route('/api/auth/facebook').get(users.oauthCall('facebook', {
     scope: ['email']
   }));
   app.route('/api/auth/facebook/callback').get(users.oauthCallback('facebook'));
+>>>>>>> parent of 9783700... Abstracted OAuth routes to use req param to identify strategy & moved scope to actual strategy definition.
 
   // Setting the twitter oauth routes
   app.route('/api/auth/twitter').get(users.oauthCall('twitter'));
