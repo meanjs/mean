@@ -21,6 +21,7 @@ module.exports = {
         * Uncomment to enable ssl certificate based authentication to mongodb
         * servers. Adjust the settings below for your specific certificate
         * setup.
+        * for connect to a replicaset, rename server:{...} to replset:{...}
       server: {
         ssl: true,
         sslValidate: false,

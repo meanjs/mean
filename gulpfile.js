@@ -47,9 +47,23 @@ gulp.task('env:prod', function () {
 
 // Nodemon task
 gulp.task('nodemon', function () {
+
+  var nodeVersions = process.versions;
+  var debugArgument = '--debug';
+  switch (nodeVersions.node.substr(0, 1)) {
+    case '4':
+    case '5':
+    case '6':
+      debugArgument = '--debug';
+      break;
+    case '7':
+      debugArgument = '--inspect';
+      break;
+  }
+
   return plugins.nodemon({
     script: 'server.js',
-    nodeArgs: ['--inspect'],
+    nodeArgs: [debugArgument],
     ext: 'js,html',
     verbose: true,
     watch: _.union(defaultAssets.server.views, defaultAssets.server.allJS, defaultAssets.server.config)
@@ -371,8 +385,35 @@ gulp.task('dropdb', function (done) {
   });
 });
 
-// Downloads the selenium webdriver
+// Downloads the selenium webdriver if protractor version is compatible
 gulp.task('webdriver_update', webdriver_update);
+
+gulp.task('webdriver_prep', function(done) {
+  runSequence('protractor_prep', 'webdriver_update', done);
+});
+
+gulp.task('protractor_prep', function() {
+  var nodeVersions = process.versions;
+  switch (nodeVersions.node.substr(0, 1)) {
+    case '4':
+    case '5':
+      console.log('E2E testing doesnt support v4 and v5');
+      process.exit(0);
+      break;
+    case '6':
+      if (parseInt(nodeVersions.node.substr(1, 1), 10) < 9) {
+        console.log('E2E testing with latest protractor requires v >= 6.9 ');
+        process.exit(0);
+      }
+      break;
+    default:
+      console.log('Detecting support for protractor E2E tests');
+      break;
+  }
+
+  return gulp.src('*.js');
+});
+
 
 // Start the standalone selenium server
 // NOTE: This is not needed if you reference the
@@ -380,7 +421,7 @@ gulp.task('webdriver_update', webdriver_update);
 gulp.task('webdriver_standalone', webdriver_standalone);
 
 // Protractor test runner task
-gulp.task('protractor', ['webdriver_update'], function () {
+gulp.task('protractor', ['webdriver_prep'], function () {
   gulp.src([])
     .pipe(protractor({
       configFile: 'protractor.conf.js'
