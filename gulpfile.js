@@ -394,7 +394,7 @@ gulp.task('webdriver_update', webdriver_update);
 gulp.task('webdriver_standalone', webdriver_standalone);
 
 // Protractor test runner task
-gulp.task('protractor', function () {
+gulp.task('protractor', ['webdriver_update'], function () {
   gulp.src([])
     .pipe(protractor({
       configFile: 'protractor.conf.js'
