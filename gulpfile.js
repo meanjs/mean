@@ -23,7 +23,7 @@ var _ = require('lodash'),
   endOfLine = require('os').EOL,
   protractor = require('gulp-protractor').protractor,
   webdriver_update = require('gulp-protractor').webdriver_update,
-  webdriver_standalone = require('gulp-protractor').webdriver_standalone,
+  // webdriver_standalone = require('gulp-protractor').webdriver_standalone,
   del = require('del'),
   KarmaServer = require('karma').Server;
 
@@ -418,10 +418,10 @@ gulp.task('protractor_prep', function() {
 // Start the standalone selenium server
 // NOTE: This is not needed if you reference the
 // seleniumServerJar in your protractor.conf.js
-gulp.task('webdriver_standalone', webdriver_standalone);
+// gulp.task('webdriver_standalone', webdriver_standalone);
 
 // Protractor test runner task
-gulp.task('protractor', ['webdriver_prep'], function () {
+gulp.task('protractor', function () {
   gulp.src([])
     .pipe(protractor({
       configFile: 'protractor.conf.js'
