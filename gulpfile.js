@@ -23,7 +23,7 @@ var _ = require('lodash'),
   endOfLine = require('os').EOL,
   protractor = require('gulp-protractor').protractor,
   webdriver_update = require('gulp-protractor').webdriver_update,
-  // webdriver_standalone = require('gulp-protractor').webdriver_standalone,
+  webdriver_standalone = require('gulp-protractor').webdriver_standalone,
   del = require('del'),
   KarmaServer = require('karma').Server;
 
@@ -388,37 +388,10 @@ gulp.task('dropdb', function (done) {
 // Downloads the selenium webdriver if protractor version is compatible
 gulp.task('webdriver_update', webdriver_update);
 
-gulp.task('webdriver_prep', function(done) {
-  runSequence('protractor_prep', 'webdriver_update', done);
-});
-
-gulp.task('protractor_prep', function() {
-  var nodeVersions = process.versions;
-  switch (nodeVersions.node.substr(0, 1)) {
-    case '4':
-    case '5':
-      console.log('E2E testing doesnt support v4 and v5');
-      process.exit(0);
-      break;
-    case '6':
-      if (parseInt(nodeVersions.node.substr(1, 1), 10) < 9) {
-        console.log('E2E testing with latest protractor requires v >= 6.9 ');
-        process.exit(0);
-      }
-      break;
-    default:
-      console.log('Detecting support for protractor E2E tests');
-      break;
-  }
-
-  return gulp.src('*.js');
-});
-
-
 // Start the standalone selenium server
 // NOTE: This is not needed if you reference the
 // seleniumServerJar in your protractor.conf.js
-// gulp.task('webdriver_standalone', webdriver_standalone);
+gulp.task('webdriver_standalone', webdriver_standalone);
 
 // Protractor test runner task
 gulp.task('protractor', function () {
