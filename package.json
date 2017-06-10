@@ -15,13 +15,14 @@
     "npm": ">=3.10.8"
   },
   "scripts": {
-    "update": "npm update && npm prune && bower install --allow-root && bower prune --allow-root",
+    "update": "npm update && npm prune && npm run bower",
     "clean": "rm -rf node_modules/ public/lib/",
     "reinstall": "npm cache clean && npm run clean && npm install",
     "start": "gulp",
     "start:prod": "gulp prod",
     "start:debug": "node-debug --web-host 0.0.0.0 server.js & gulp debug",
     "gulp": "gulp",
+    "bower": "bower install --allow-root && bower prune --allow-root",
     "lint": "gulp lint",
     "test": "gulp test",
     "test:server": "gulp test:server",
@@ -29,7 +30,7 @@
     "test:client": "gulp test:client",
     "test:e2e": "gulp test:e2e",
     "test:coverage": "gulp test:coverage",
-    "postinstall": "bower install --allow-root && bower prune --allow-root",
+    "postinstall": "npm run bower",
     "generate-ssl-certs": "scripts/generate-ssl-certs.sh"
   },
   "dependencies": {
