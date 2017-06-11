@@ -30,7 +30,9 @@
     "test:e2e": "gulp test:e2e",
     "test:coverage": "gulp test:coverage",
     "postinstall": "bower install --allow-root && bower prune --allow-root",
-    "generate-ssl-certs": "scripts/generate-ssl-certs.sh"
+    "generate-ssl-certs": "scripts/generate-ssl-certs.sh",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "dependencies": {
     "acl": "~0.4.10",
@@ -48,7 +50,7 @@
     "express-session": "~1.15.2",
     "generate-password": "~1.3.0",
     "glob": "~7.1.1",
-    "helmet": "~2.3.0",
+    "helmet": "~3.6.1",
     "jasmine-core": "~2.5.2",
     "lodash": "~4.17.4",
     "lusca": "~1.4.1",
@@ -68,10 +70,11 @@
     "passport-paypal-openidconnect": "~0.1.1",
     "passport-twitter": "~1.0.4",
     "serve-favicon": "~2.4.2",
-    "socket.io": "^1.7.3",
+    "socket.io": "^2.0.0",
     "validator": "~7.0.0",
     "winston": "^2.3.1",
-    "wiredep": "~4.0.0"
+    "wiredep": "~4.0.0",
+    "snyk": "^1.30.1"
   },
   "devDependencies": {
     "coveralls": "~2.13.0",
@@ -114,5 +117,6 @@
     "semver": "~5.3.0",
     "should": "~11.2.1",
     "supertest": "~2.0.0"
-  }
+  },
+  "snyk": true
 }
