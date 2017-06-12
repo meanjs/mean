@@ -79,3 +79,8 @@ mongod
 *.ntvs*
 *.njsproj
 *.sln
+
+# Miscellanous
+# ============
+mongodb/
+mongodb-data/
