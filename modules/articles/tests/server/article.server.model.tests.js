@@ -26,18 +26,21 @@ describe('Article Model Unit Tests:', function () {
       displayName: 'Full Name',
       email: 'test@test.com',
       username: 'username',
-      password: 'M3@n.jsI$Aw3$0m3'
+      password: 'M3@n.jsI$Aw3$0m3',
+      provider: 'local'
     });
 
-    user.save(function () {
-      article = new Article({
-        title: 'Article Title',
-        content: 'Article Content',
-        user: user
-      });
+    user.save()
+      .then(function () {
+        article = new Article({
+          title: 'Article Title',
+          content: 'Article Content',
+          user: user
+        });
 
-      done();
-    });
+        done();
+      })
+      .catch(done);
   });
 
   describe('Method Save', function () {
@@ -60,8 +63,9 @@ describe('Article Model Unit Tests:', function () {
   });
 
   afterEach(function (done) {
-    Article.remove().exec(function () {
-      User.remove().exec(done);
-    });
+    Article.remove().exec()
+      .then(User.remove().exec())
+      .then(done())
+      .catch(done);
   });
 });
