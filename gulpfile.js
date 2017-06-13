@@ -65,6 +65,7 @@ gulp.task('nodemon', function () {
     script: 'server.js',
     nodeArgs: [debugArgument],
     ext: 'js,html',
+    legacyWatch: true, // This is required for nodemon to work in docker
     verbose: true,
     watch: _.union(defaultAssets.server.views, defaultAssets.server.allJS, defaultAssets.server.config)
   });
@@ -75,6 +76,7 @@ gulp.task('nodemon-nodebug', function () {
   return plugins.nodemon({
     script: 'server.js',
     ext: 'js,html',
+    legacyWatch: true, // This is required for nodemon to work in docker
     watch: _.union(defaultAssets.server.views, defaultAssets.server.allJS, defaultAssets.server.config)
   });
 });
