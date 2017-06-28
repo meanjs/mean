@@ -37,9 +37,8 @@ before_install:
   - 'node_modules/protractor/bin/webdriver-manager update --standalone --firefox'
   - 'node_modules/protractor/bin/webdriver-manager start 2>&1 &'
   - sleep 3
-#before_script:
-#  - snyk auth $SNYK_TOKEN
-#  - snyk test
+before_script:
+  - snyk test
 after_script:
   - nsp check
   - snyk test
