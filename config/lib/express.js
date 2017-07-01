@@ -137,11 +137,12 @@ module.exports.initModulesConfiguration = function (app, db) {
 };
 
 /**
- * Configure Helmet headers configuration
+ * Configure Helmet headers configuration for security
  */
 module.exports.initHelmetHeaders = function (app) {
-  // Use helmet to secure Express headers
+  // six months expiration period specified in seconds
   var SIX_MONTHS = 15778476;
+  
   app.use(helmet.frameguard());
   app.use(helmet.xssFilter());
   app.use(helmet.noSniff());
