@@ -32,19 +32,20 @@ addons:
     - clang
     - google-chrome-stable
 before_install:
-  - npm i nsp -g
-  - npm i snyk -g
-  - export DISPLAY=:99.0
-  - "export PATH=$PATH:/usr/lib/chromium-browser/"
-  - "export DISPLAY=:99.0"
-  - "sh -e /etc/init.d/xvfb start"
+  - npm install nsp -g
+#  - npm install snyk -g
+  - 'export PATH=$PATH:/usr/lib/chromium-browser/'
+  - 'export DISPLAY=:99.0'
+  - 'sh -e /etc/init.d/xvfb start'
+  - 'node_modules/protractor/bin/webdriver-manager update --standalone'
+  - 'node_modules/protractor/bin/webdriver-manager start 2>&1 &'
   - sleep 3
 #before_script:
 #  - snyk auth $SNYK_TOKEN
 #  - snyk test
 after_script:
   - nsp check
-  - snyk test
+#  - snyk test
   - gulp test:coverage
   - node_modules/.bin/lcov-result-merger 'coverage/**/lcov.info' | node_modules/coveralls/bin/coveralls.js
 notifications:
