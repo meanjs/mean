@@ -142,7 +142,7 @@ module.exports.initModulesConfiguration = function (app, db) {
 module.exports.initHelmetHeaders = function (app) {
   // six months expiration period specified in seconds
   var SIX_MONTHS = 15778476;
-  
+
   app.use(helmet.frameguard());
   app.use(helmet.xssFilter());
   app.use(helmet.noSniff());
