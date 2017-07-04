@@ -381,6 +381,39 @@ gulp.task('dropdb', function (done) {
   });
 });
 
+// Seed Mongo database based on configuration
+gulp.task('mongo-seed', function (done) {
+  var db = require('./config/lib/mongoose');
+  var seed = require('./config/lib/mongo-seed');
+
+  // Open mongoose database connection
+  db.connect(function () {
+    db.loadModels();
+
+    seed
+      .start({
+        options: {
+          logResults: true
+        }
+      })
+      .then(() => {
+        // Disconnect and finish task
+        db.disconnect(done);
+      })
+      .catch((err) => {
+        db.disconnect((disconnectError) => {
+          if (disconnectError) {
+            console.log('Error disconnecting from the database, but was preceded by a Mongo Seed error.');
+          }
+
+          // Finish task with error
+          done(err);
+        });
+      });
+  });
+
+});
+
 // Downloads the selenium webdriver if protractor version is compatible
 gulp.task('webdriver_update', webdriver_update);
 
@@ -451,4 +484,18 @@ gulp.task('default', function (done) {
 // Run the project in production mode
 gulp.task('prod', function (done) {
   runSequence(['copyLocalEnvConfig', 'makeUploadsDir', 'templatecache'], 'build', 'env:prod', 'lint', ['nodemon-nodebug', 'watch'], done);
+});
+
+// Run Mongo Seed with default environment config
+gulp.task('seed', function (done) {
+  runSequence('env:dev', 'mongo-seed', done);
+});
+
+// Run Mongo Seed with production environment config
+gulp.task('seed:prod', function (done) {
+  runSequence('env:prod', 'mongo-seed', done);
+});
+
+gulp.task('seed:test', function (done) {
+  runSequence('env:test', 'mongo-seed', done);
 });
