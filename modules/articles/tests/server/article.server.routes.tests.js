@@ -49,14 +49,16 @@ describe('Article CRUD tests', function () {
     });
 
     // Save a user to the test db and create new article
-    user.save(function () {
-      article = {
-        title: 'Article Title',
-        content: 'Article Content'
-      };
+    user.save()
+      .then(function () {
+        article = {
+          title: 'Article Title',
+          content: 'Article Content'
+        };
 
-      done();
-    });
+        done();
+      })
+      .catch(done);
   });
 
   it('should not be able to save an article if logged in without the "admin" role', function (done) {
@@ -306,7 +308,10 @@ describe('Article CRUD tests', function () {
     var articleObj = new Article(article);
 
     // Save the article
-    articleObj.save(function () {
+    articleObj.save(function (err) {
+      if (err) {
+        return done(err);
+      }
       request(app).get('/api/articles/' + articleObj._id)
         .end(function (req, res) {
           // Set assertion
@@ -407,8 +412,9 @@ describe('Article CRUD tests', function () {
   });
 
   afterEach(function (done) {
-    User.remove().exec(function () {
-      Article.remove().exec(done);
-    });
+    Article.remove().exec()
+      .then(User.remove().exec())
+      .then(done())
+      .catch(done);
   });
 });
