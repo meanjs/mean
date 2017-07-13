@@ -7,8 +7,8 @@ node_js:
   - '8'
 matrix:
   fast_finish: true
-  allow_failures:
-    - node_js: '8'
+#  allow_failures:
+#    - node_js: '8'
 os:
   - linux
   - centos
