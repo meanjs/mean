@@ -4,9 +4,8 @@ var should = require('should'),
   request = require('supertest'),
   path = require('path'),
   mongoose = require('mongoose'),
-  User = mongoose.model('User'),
-  Article = mongoose.model('Article'),
-  express = require(path.resolve('./config/lib/express'));
+  express = require(path.resolve('./config/lib/express')),
+  mongooseService = require(path.resolve('./config/lib/mongoose.js'));
 
 /**
  * Globals
@@ -15,7 +14,9 @@ var app,
   agent,
   credentials,
   user,
-  article;
+  article,
+  User,
+  Article;
 
 /**
  * Article routes tests
@@ -23,11 +24,16 @@ var app,
 describe('Article CRUD tests', function () {
 
   before(function (done) {
-    // Get application
-    app = express.init(mongoose);
-    agent = request.agent(app);
+    mongooseService.loadModels(function () {
+      User = mongoose.model('User');
+      Article = mongoose.model('Article');
 
-    done();
+      // Get application
+      app = express.init(mongoose);
+      agent = request.agent(app);
+
+      done();
+    });
   });
 
   beforeEach(function (done) {

@@ -5,23 +5,30 @@
  */
 var should = require('should'),
   mongoose = require('mongoose'),
-  User = mongoose.model('User'),
   path = require('path'),
-  config = require(path.resolve('./config/config'));
+  config = require(path.resolve('./config/config')),
+  mongooseService = require(path.resolve('./config/lib/mongoose.js'));
 
 /**
  * Globals
  */
 var user1,
   user2,
-  user3;
+  user3,
+  User;
 
 /**
  * Unit tests
  */
 describe('User Model Unit Tests:', function () {
 
+  before(function(done) {
+    mongooseService.loadModels(done);
+  });
+
   before(function () {
+    User = mongoose.model('User');
+
     user1 = {
       firstName: 'Full',
       lastName: 'Name',

@@ -19,11 +19,10 @@
 
 module.exports = {
   db: {
+    // https://docs.mongodb.com/manual/reference/connection-string/
     uri: 'mongodb://localhost/local-dev',
-    options: {
-      user: '',
-      pass: ''
-    }
+    // http://mongoosejs.com/docs/connections.html#options
+    options: {}
   },
   sessionSecret: process.env.SESSION_SECRET || 'youshouldchangethistosomethingsecret',
   facebook: {

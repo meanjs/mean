@@ -16,15 +16,18 @@ function seedDB() {
   }
 }
 
-// Initialize Models
-mongoose.loadModels(seedDB);
-
 module.exports.init = function init(callback) {
+  // Connect to MongoDB
   mongoose.connect(function (db) {
-    // Initialize express
-    var app = express.init(db);
-    if (callback) callback(app, db, config);
+    // Initialize Models
+    mongoose.loadModels(function () {
+      // Seed database
+      seedDB();
 
+      // Initialize express
+      var app = express.init(db);
+      if (callback) callback(app, db, config);
+    });
   });
 };
 

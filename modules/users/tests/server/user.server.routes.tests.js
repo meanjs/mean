@@ -5,8 +5,8 @@ var semver = require('semver'),
   request = require('supertest'),
   path = require('path'),
   mongoose = require('mongoose'),
-  User = mongoose.model('User'),
-  express = require(path.resolve('./config/lib/express'));
+  express = require(path.resolve('./config/lib/express')),
+  mongooseService = require(path.resolve('./config/lib/mongoose.js'));
 
 /**
  * Globals
@@ -17,14 +17,22 @@ var app,
   credentialsEmail,
   user,
   _user,
-  admin;
+  admin,
+  User;
 
 /**
  * User routes tests
  */
 describe('User CRUD tests', function () {
 
+  before(function(done) {
+    mongooseService.loadModels(done);
+  });
+
   before(function (done) {
+
+    User = mongoose.model('User');
+
     // Get application
     app = express.init(mongoose);
     agent = request.agent(app);
