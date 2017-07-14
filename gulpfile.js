@@ -8,6 +8,7 @@ var _ = require('lodash'),
   defaultAssets = require('./config/assets/default'),
   testAssets = require('./config/assets/test'),
   testConfig = require('./config/env/test'),
+  chalk = require('chalk'),
   glob = require('glob'),
   gulp = require('gulp'),
   gulpLoadPlugins = require('gulp-load-plugins'),
@@ -26,7 +27,8 @@ var _ = require('lodash'),
   webdriver_standalone = require('gulp-protractor').webdriver_standalone,
   del = require('del'),
   KarmaServer = require('karma').Server,
-  semver = require('semver');
+  semver = require('semver'),
+  mongooseService = require('./config/lib/mongoose.js');
 
 // Local settings
 var changedTestFiles = [];
@@ -52,13 +54,29 @@ gulp.task('nodemon', function () {
   // Node.js v7 and newer use different debug argument
   var debugArgument = semver.satisfies(process.versions.node, '>=7.0.0') ? '--inspect' : '--debug';
 
-  return plugins.nodemon({
+  var stream = plugins.nodemon({
     script: 'server.js',
     nodeArgs: [debugArgument],
     ext: 'js,html',
     verbose: true,
     watch: _.union(defaultAssets.server.views, defaultAssets.server.allJS, defaultAssets.server.config)
   });
+
+  stream
+    .on('exit', function () {
+      mongooseService.disconnect();
+      console.log(chalk.yellow('Application has shut down.'));
+    })
+    .on('restart', function () {
+      console.log(chalk.yellow('Application restarted!'));
+    })
+    .on('crash', function() {
+      console.error(chalk.red('Application has crashed!'));
+      console.log(chalk.yellow('Restarting the server in 5 seconds...'));
+      stream.emit('restart', 5);
+    });
+
+  return stream;
 });
 
 // Nodemon task without verbosity or debugging
@@ -277,30 +295,48 @@ gulp.task('templatecache', function () {
 
 // Mocha tests task
 gulp.task('mocha', function (done) {
-  // Open mongoose connections
-  var mongoose = require('./config/lib/mongoose.js');
   var testSuites = changedTestFiles.length ? changedTestFiles : testAssets.tests.server;
   var error;
 
-  // Connect mongoose
-  mongoose.connect(function () {
-    mongoose.loadModels();
-    // Run the tests
-    gulp.src(testSuites)
-      .pipe(plugins.mocha({
-        reporter: 'spec',
-        timeout: 10000
-      }))
-      .on('error', function (err) {
-        // If an error occurs, save it
-        error = err;
-      })
-      .on('end', function () {
-        // When the tests are done, disconnect mongoose and pass the error state back to gulp
-        mongoose.disconnect(function () {
-          done(error);
-        });
+  // Run the tests
+  /*
+  gulp.src(testSuites)
+    .pipe(plugins.mocha({
+      reporter: 'spec',
+      timeout: 10000
+    }))
+    .on('error', function (err) {
+      // If an error occurs, save it
+      error = err;
+    })
+    .on('end', function () {
+      // When the tests are done, disconnect mongoose and pass the error state back to gulp
+      mongooseService.disconnect(function () {
+        done(error);
       });
+    });
+  */
+
+  // Connect mongoose
+  mongooseService.connect(function (db) {
+    mongooseService.loadModels(function () {
+      // Run the tests
+      gulp.src(testSuites)
+        .pipe(plugins.mocha({
+          reporter: 'spec',
+          timeout: 10000
+        }))
+        .on('error', function (err) {
+          // If an error occurs, save it
+          error = err;
+        })
+        .on('end', function () {
+          // When the tests are done, disconnect mongoose and pass the error state back to gulp
+          mongooseService.disconnect(function () {
+            done(error);
+          });
+        });
+    });
   });
 });
 
@@ -361,17 +397,14 @@ gulp.task('karma:coverage', function(done) {
 
 // Drops the MongoDB database, used in e2e testing
 gulp.task('dropdb', function (done) {
-  // Use mongoose configuration
-  var mongoose = require('./config/lib/mongoose.js');
-
-  mongoose.connect(function (db) {
-    db.connection.db.dropDatabase(function (err) {
-      if (err) {
-        console.error(err);
-      } else {
-        console.log('Successfully dropped db: ', db.connection.db.databaseName);
-      }
-      db.connection.db.close(done);
+  mongooseService.connect(function (db) {
+    db.dropDatabase().then(function () {
+      console.log(chalk.green('Successfully dropped db'));
+      mongooseService.disconnect(done);
+    }).catch(function(err) {
+      console.log(chalk.red('Failed to drop db'));
+      console.error(err);
+      mongooseService.disconnect(done);
     });
   });
 });

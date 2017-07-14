@@ -3,10 +3,15 @@
 var should = require('should'),
   request = require('supertest'),
   path = require('path'),
+  mongooseService = require(path.resolve('./config/lib/mongoose.js')),
   mongoose = require('mongoose'),
-  User = mongoose.model('User'),
-  Article = mongoose.model('Article'),
+  // userSchema = require(path.resolve('./modules/users/server/models/user.server.model')),
+  // User = mongoose.model('User'),
+  // Article = mongoose.model('Article'),
+  // articleSchema = require(path.resolve('./modules/articles/server/models/article.server.model')),
   express = require(path.resolve('./config/lib/express'));
+
+console.log('load admin test');
 
 /**
  * Globals
@@ -15,18 +20,26 @@ var app,
   agent,
   credentials,
   user,
-  article;
+  article,
+  User,
+  Article;
 
 /**
  * Article routes tests
  */
 describe('Article Admin CRUD tests', function () {
-  before(function (done) {
-    // Get application
-    app = express.init(mongoose);
-    agent = request.agent(app);
 
-    done();
+  before(function (done) {
+    mongooseService.loadModels(function () {
+      User = mongoose.model('User');
+      Article = mongoose.model('Article');
+
+      // Get application
+      app = express.init(mongoose);
+      agent = request.agent(app);
+
+      done();
+    });
   });
 
   beforeEach(function (done) {
@@ -282,4 +295,10 @@ describe('Article Admin CRUD tests', function () {
       .then(done())
       .catch(done);
   });
+
+  /*
+  after(function(done) {
+    mongooseService.disconnect(done);
+  });
+  */
 });

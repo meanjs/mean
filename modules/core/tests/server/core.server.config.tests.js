@@ -6,14 +6,14 @@
 var _ = require('lodash'),
   should = require('should'),
   mongoose = require('mongoose'),
-  User = mongoose.model('User'),
   path = require('path'),
   fs = require('fs'),
   request = require('supertest'),
   config = require(path.resolve('./config/config')),
   logger = require(path.resolve('./config/lib/logger')),
   seed = require(path.resolve('./config/lib/seed')),
-  express = require(path.resolve('./config/lib/express'));
+  express = require(path.resolve('./config/lib/express')),
+  mongooseService = require(path.resolve('./config/lib/mongoose.js'));
 
 /**
  * Globals
@@ -24,9 +24,16 @@ var app,
   admin1,
   userFromSeedConfig,
   adminFromSeedConfig,
-  originalLogConfig;
+  originalLogConfig,
+  User;
 
 describe('Configuration Tests:', function () {
+
+  before(function () {
+    mongooseService.loadModels(function () {
+      User = mongoose.model('User');
+    });
+  });
 
   describe('Testing default seedDB', function () {
     before(function(done) {
