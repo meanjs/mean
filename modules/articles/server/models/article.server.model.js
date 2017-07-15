@@ -48,6 +48,7 @@ function seed(doc, options) {
   return new Promise(function (resolve, reject) {
 
     skipDocument()
+      .then(findAdminUser)
       .then(add)
       .then(function (response) {
         return resolve(response);
@@ -55,6 +56,30 @@ function seed(doc, options) {
       .catch(function (err) {
         return reject(err);
       });
+
+    function findAdminUser(skip) {
+      if (skip) {
+        return resolve(true);
+      }
+
+      var User = mongoose.model('User');
+
+      return new Promise(function (resolve, reject) {
+        User
+          .findOne({
+            roles: { $in: ['admin'] }
+          })
+          .exec(function (err, admin) {
+            if (err) {
+              return reject(err);
+            }
+
+            doc.user = admin;
+
+            return resolve();
+          });
+      });
+    }
 
     function skipDocument() {
       return new Promise(function (resolve, reject) {
@@ -90,7 +115,6 @@ function seed(doc, options) {
 
     function add(skip) {
       return new Promise(function (resolve, reject) {
-
         if (skip) {
           return resolve({
             message: chalk.yellow('Database Seeding: Article\t\t' + doc.title + ' skipped')

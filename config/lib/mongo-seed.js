@@ -24,32 +24,50 @@ function start(config) {
       return resolve();
     }
 
-    var seeds = collections
-      .filter(function (collection) {
-        return collection.model;
+    var userSeed = collections
+      .filter((collection) => {
+        return collection.model === 'User';
       })
       .map(seed);
 
-    Promise.all(seeds)
-      .then(function () {
-        if (seedConfig.options.logResults) {
-          console.log();
-          console.log(chalk.bold.green('Database Seeding: Mongo Seed complete!'));
-          console.log();
-        }
-
-        return resolve();
+    var seeds = collections
+      .filter(function (collection) {
+        return collection.model && collection.model !== 'User';
       })
-      .catch(function (err) {
-        if (seedConfig.options.logResults) {
-          console.log();
-          console.log(chalk.bold.red('Database Seeding: Mongo Seed Failed!'));
-          console.log(chalk.bold.red('Database Seeding: ' + err));
-          console.log();
-        }
+      .map(seed);
 
-        return reject(err);
-      });
+    // Perform User seed if configured
+    Promise.all(userSeed)
+      .then(() => {
+        // Now perform remaining seeds
+        return Promise.all(seeds);
+      })
+      .then(onSuccessComplete)
+      .catch(onError);
+
+    // Local Promise handlers
+
+    function onSuccessComplete() {
+      if (seedConfig.options.logResults) {
+        console.log();
+        console.log(chalk.bold.green('Database Seeding: Mongo Seed complete!'));
+        console.log();
+      }
+
+      return resolve();
+    }
+
+    function onError(err) {
+      if (seedConfig.options.logResults) {
+        console.log();
+        console.log(chalk.bold.red('Database Seeding: Mongo Seed Failed!'));
+        console.log(chalk.bold.red('Database Seeding: ' + err));
+        console.log();
+      }
+
+      return reject(err);
+    }
+
   });
 }
 
