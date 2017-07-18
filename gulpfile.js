@@ -266,7 +266,7 @@ gulp.task('makeUploadsDir', function () {
 gulp.task('templatecache', function () {
   return gulp.src(defaultAssets.client.views)
     .pipe(plugins.templateCache('templates.js', {
-      root: 'modules/',
+      root: '/modules/',
       module: 'core',
       templateHeader: '(function () {' + endOfLine + '	\'use strict\';' + endOfLine + endOfLine + '	angular' + endOfLine + '		.module(\'<%= module %>\'<%= standalone %>)' + endOfLine + '		.run(templates);' + endOfLine + endOfLine + '	templates.$inject = [\'$templateCache\'];' + endOfLine + endOfLine + '	function templates($templateCache) {' + endOfLine,
       templateBody: '		$templateCache.put(\'<%= url %>\', \'<%= contents %>\');',
