@@ -25,7 +25,7 @@ function start(config) {
     }
 
     var userSeed = collections
-      .filter((collection) => {
+      .filter(function (collection) {
         return collection.model === 'User';
       })
       .map(seed);
@@ -38,7 +38,7 @@ function start(config) {
 
     // Perform User seed if configured
     Promise.all(userSeed)
-      .then(() => {
+      .then(function () {
         // Now perform remaining seeds
         return Promise.all(seeds);
       })

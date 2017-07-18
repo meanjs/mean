@@ -396,12 +396,12 @@ gulp.task('mongo-seed', function (done) {
           logResults: true
         }
       })
-      .then(() => {
+      .then(function () {
         // Disconnect and finish task
         db.disconnect(done);
       })
-      .catch((err) => {
-        db.disconnect((disconnectError) => {
+      .catch(function (err) {
+        db.disconnect(function (disconnectError) {
           if (disconnectError) {
             console.log('Error disconnecting from the database, but was preceded by a Mongo Seed error.');
           }
