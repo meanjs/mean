@@ -31,7 +31,9 @@
     "test:e2e": "gulp test:e2e",
     "test:coverage": "gulp test:coverage",
     "postinstall": "npm run bower",
-    "generate-ssl-certs": "scripts/generate-ssl-certs.sh"
+    "generate-ssl-certs": "scripts/generate-ssl-certs.sh",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "dependencies": {
     "acl": "~0.4.10",
@@ -72,7 +74,8 @@
     "socket.io": "^2.0.2",
     "validator": "~8.0.0",
     "winston": "^2.3.1",
-    "wiredep": "~4.0.0"
+    "wiredep": "~4.0.0",
+    "snyk": "^1.36.2"
   },
   "devDependencies": {
     "coveralls": "~2.13.0",
@@ -113,5 +116,6 @@
     "semver": "~5.3.0",
     "should": "~11.2.1",
     "supertest": "~3.0.0"
-  }
+  },
+  "snyk": true
 }
