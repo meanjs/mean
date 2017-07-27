@@ -26,7 +26,7 @@ describe('User CRUD tests', function () {
 
   before(function (done) {
     // Get application
-    app = express.init(mongoose);
+    app = express.init(mongoose.connection.db);
     agent = request.agent(app);
 
     done();

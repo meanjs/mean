@@ -118,7 +118,7 @@ module.exports.initSession = function (app, db) {
     },
     name: config.sessionKey,
     store: new MongoStore({
-      mongooseConnection: db.connection,
+      db: db,
       collection: config.sessionCollection
     })
   }));
@@ -130,9 +130,9 @@ module.exports.initSession = function (app, db) {
 /**
  * Invoke modules server configuration
  */
-module.exports.initModulesConfiguration = function (app, db) {
+module.exports.initModulesConfiguration = function (app) {
   config.files.server.configs.forEach(function (configPath) {
-    require(path.resolve(configPath))(app, db);
+    require(path.resolve(configPath))(app);
   });
 };
 
