@@ -72,6 +72,9 @@ module.exports = {
     options: {
       logResults: process.env.MONGO_SEED_LOG_RESULTS !== 'false'
     },
+    // Order of collections in configuration will determine order of seeding.
+    // i.e. given these settings, the User seeds will be complete before
+    // Article seed is performed.
     collections: [{
       model: 'User',
       docs: [{

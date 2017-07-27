@@ -130,26 +130,6 @@ describe('Configuration Tests:', function () {
         .catch(done);
     });
 
-    it('should seed data from default config with logging', function (done) {
-
-      seed
-        .start()
-        .then(function () {
-          // Check Articles Seed
-          return Article.find().exec();
-        })
-        .then(function (articles) {
-          articles.should.be.instanceof(Array).and.have.lengthOf(articleSeedConfig.docs.length);
-          // Check Users Seed
-          return User.find().exec();
-        })
-        .then(function (users) {
-          users.should.be.instanceof(Array).and.have.lengthOf(userSeedConfig.docs.length);
-          return done();
-        })
-        .catch(done);
-    });
-
     it('should overwrite existing article by default', function (done) {
       articleSeedConfig.docs.should.be.instanceof(Array).and.have.lengthOf(1);
 
@@ -250,6 +230,97 @@ describe('Configuration Tests:', function () {
           var newArticle = articles.pop();
           _article.title.should.equal(newArticle.title);
           _article.content.should.equal(newArticle.content);
+
+          return done();
+        })
+        .catch(done);
+    });
+
+    it('should seed custom article with user set to custom seeded admin user', function (done) {
+      seed
+        .start({
+          collections: [{
+            model: 'User',
+            docs: [{
+              data: _admin
+            }]
+          }, {
+            model: 'Article',
+            docs: [{
+              overwrite: true,
+              data: _article
+            }]
+          }]
+        })
+        .then(function () {
+          return User.find().exec();
+        })
+        .then(function (users) {
+          users.should.be.instanceof(Array).and.have.lengthOf(1);
+
+          return Article
+            .find()
+            .populate('user', 'firstName lastName username email roles')
+            .exec();
+        })
+        .then(function (articles) {
+          articles.should.be.instanceof(Array).and.have.lengthOf(1);
+
+          var newArticle = articles.pop();
+          _article.title.should.equal(newArticle.title);
+          _article.content.should.equal(newArticle.content);
+
+          should.exist(newArticle.user);
+          should.exist(newArticle.user._id);
+
+          _admin.username.should.equal(newArticle.user.username);
+          _admin.email.should.equal(newArticle.user.email);
+          _admin.firstName.should.equal(newArticle.user.firstName);
+          _admin.lastName.should.equal(newArticle.user.lastName);
+
+          should.exist(newArticle.user.roles);
+          newArticle.user.roles.indexOf('admin').should.equal(_admin.roles.indexOf('admin'));
+
+          return done();
+        })
+        .catch(done);
+    });
+
+    it('should seed custom article with NO user set due to seed order', function (done) {
+      seed
+        .start({
+          collections: [{
+            model: 'Article',
+            docs: [{
+              overwrite: true,
+              data: _article
+            }]
+          }, {
+            model: 'User',
+            docs: [{
+              data: _admin
+            }]
+          }]
+        })
+        .then(function () {
+          return User.find().exec();
+        })
+        .then(function (users) {
+          users.should.be.instanceof(Array).and.have.lengthOf(1);
+
+          return Article
+            .find()
+            .populate('user', 'firstName lastName username email roles')
+            .exec();
+        })
+        .then(function (articles) {
+          articles.should.be.instanceof(Array).and.have.lengthOf(1);
+
+          var newArticle = articles.pop();
+          _article.title.should.equal(newArticle.title);
+          _article.content.should.equal(newArticle.content);
+
+          should.not.exist(newArticle.user);
 
           return done();
         })

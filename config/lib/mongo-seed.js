@@ -24,24 +24,17 @@ function start(config) {
       return resolve();
     }
 
-    var userSeed = collections
-      .filter(function (collection) {
-        return collection.model === 'User';
-      })
-      .map(seed);
-
     var seeds = collections
       .filter(function (collection) {
-        return collection.model && collection.model !== 'User';
-      })
-      .map(seed);
+        return collection.model;
+      });
 
-    // Perform User seed if configured
-    Promise.all(userSeed)
-      .then(function () {
-        // Now perform remaining seeds
-        return Promise.all(seeds);
-      })
+    // Use the reduction pattern to ensure we process seeding in desired order.
+    seeds.reduce(function (p, item) {
+      return p.then(function () {
+        return seed(item);
+      });
+    }, Promise.resolve()) // start with resolved promise for initial previous (p) item
       .then(onSuccessComplete)
       .catch(onError);
 
