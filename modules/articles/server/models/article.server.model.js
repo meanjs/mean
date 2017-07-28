@@ -58,13 +58,13 @@ function seed(doc, options) {
       });
 
     function findAdminUser(skip) {
-      if (skip) {
-        return resolve(true);
-      }
-
       var User = mongoose.model('User');
 
       return new Promise(function (resolve, reject) {
+        if (skip) {
+          return resolve(true);
+        }
+
         User
           .findOne({
             roles: { $in: ['admin'] }

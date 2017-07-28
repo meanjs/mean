@@ -78,9 +78,15 @@ describe('Configuration Tests:', function () {
 
     afterEach(function (done) {
       Article.remove().exec()
-        .then(User.remove().exec())
-        .then(done())
-        .catch(done);
+        .then(function () {
+          return User.remove().exec();
+        })
+        .then(function () {
+          return done();
+        })
+        .catch(function (err) {
+          return done(err);
+        });
     });
 
     it('should have default seed configuration set for articles', function (done) {

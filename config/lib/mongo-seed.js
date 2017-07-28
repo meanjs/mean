@@ -12,7 +12,7 @@ exports.start = start;
 function start(config) {
   return new Promise(function (resolve, reject) {
 
-    seedConfig.options = _.merge(_.clone(seedConfig.options, true), config ? config.options : {});
+    var options = _.merge(_.clone(seedConfig.options, true), config ? config.options : {});
 
     if (config && config.collections) {
       seedConfig.collections = config.collections;
@@ -41,7 +41,7 @@ function start(config) {
     // Local Promise handlers
 
     function onSuccessComplete() {
-      if (seedConfig.options.logResults) {
+      if (options.logResults) {
         console.log();
         console.log(chalk.bold.green('Database Seeding: Mongo Seed complete!'));
         console.log();
@@ -51,7 +51,7 @@ function start(config) {
     }
 
     function onError(err) {
-      if (seedConfig.options.logResults) {
+      if (options.logResults) {
         console.log();
         console.log(chalk.bold.red('Database Seeding: Mongo Seed Failed!'));
         console.log(chalk.bold.red('Database Seeding: ' + err));
