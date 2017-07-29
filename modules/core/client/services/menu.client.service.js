@@ -5,7 +5,7 @@
     .module('core')
     .factory('menuService', menuService);
 
-  function menuService() {
+  function menuService () {
     var shouldRender;
     var service = {
       addMenu: addMenu,
@@ -25,7 +25,7 @@
     return service;
 
     // Add new menu object by menu id
-    function addMenu(menuId, options) {
+    function addMenu (menuId, options) {
       options = options || {};
 
       // Create the new menu
@@ -40,11 +40,11 @@
     }
 
     // Add menu item object
-    function addMenuItem(menuId, options) {
-      options = options || {};
-
+    function addMenuItem (menuId, options) {
       // Validate that the menu exists
       service.validateMenuExistence(menuId);
+
+      options = options || {};
 
       // Push new menu item
       service.menus[menuId].items.push({
@@ -60,11 +60,9 @@
 
       // Add submenu items
       if (options.items) {
-        for (var i in options.items) {
-          if (options.items.hasOwnProperty(i)) {
-            service.addSubMenuItem(menuId, options.state, options.items[i]);
-          }
-        }
+        options.items.forEach(function (subMenuItem) {
+          service.addSubMenuItem(menuId, options.state, subMenuItem);
+        });
       }
 
       // Return the menu object
@@ -72,33 +70,32 @@
     }
 
     // Add submenu item object
-    function addSubMenuItem(menuId, parentItemState, options) {
+    function addSubMenuItem (menuId, parentItemState, options) {
       options = options || {};
 
       // Validate that the menu exists
       service.validateMenuExistence(menuId);
 
       // Search for menu item
-      for (var itemIndex in service.menus[menuId].items) {
-        if (service.menus[menuId].items[itemIndex].state === parentItemState) {
-          // Push new submenu item
-          service.menus[menuId].items[itemIndex].items.push({
-            title: options.title || '',
-            state: options.state || '',
-            params: options.params || {},
-            roles: ((options.roles === null || typeof options.roles === 'undefined') ? service.menus[menuId].items[itemIndex].roles : options.roles),
-            position: options.position || 0,
-            shouldRender: shouldRender
-          });
-        }
-      }
+      service.menus[menuId].items.filter(function (item) {
+        return item.state === parentItemState;
+      }).forEach(function (item) {
+        item.items.push({
+          title: options.title || '',
+          state: options.state || '',
+          params: options.params || {},
+          roles: ((options.roles === null || typeof options.roles === 'undefined') ? item.roles : options.roles),
+          position: options.position || 0,
+          shouldRender: shouldRender
+        });
+      });
 
       // Return the menu object
       return service.menus[menuId];
     }
 
     // Get the menu object by menu id
-    function getMenu(menuId) {
+    function getMenu (menuId) {
       // Validate that the menu exists
       service.validateMenuExistence(menuId);
 
@@ -106,28 +103,22 @@
       return service.menus[menuId];
     }
 
-    function init() {
+    function init () {
       // A private function for rendering decision
       shouldRender = function (user) {
         if (this.roles.indexOf('*') !== -1) {
           return true;
-        } else {
-          if (!user) {
-            return false;
-          }
-
-          for (var userRoleIndex in user.roles) {
-            if (user.roles.hasOwnProperty(userRoleIndex)) {
-              for (var roleIndex in this.roles) {
-                if (this.roles.hasOwnProperty(roleIndex) && this.roles[roleIndex] === user.roles[userRoleIndex]) {
-                  return true;
-                }
-              }
-            }
-          }
         }
 
-        return false;
+        if (!user) {
+          return false;
+        }
+
+        var matchingRoles = user.roles.filter(function (userRole) {
+          return this.roles.indexOf(userRole) !== -1;
+        }, this);
+
+        return matchingRoles.length > 0;
       };
 
       // Adding the topbar menu
@@ -137,7 +128,7 @@
     }
 
     // Remove existing menu object by menu id
-    function removeMenu(menuId) {
+    function removeMenu (menuId) {
       // Validate that the menu exists
       service.validateMenuExistence(menuId);
 
@@ -145,52 +136,44 @@
     }
 
     // Remove existing menu object by menu id
-    function removeMenuItem(menuId, menuItemState) {
+    function removeMenuItem (menuId, menuItemState) {
       // Validate that the menu exists
       service.validateMenuExistence(menuId);
 
-      // Search for menu item to remove
-      for (var itemIndex in service.menus[menuId].items) {
-        if (service.menus[menuId].items.hasOwnProperty(itemIndex) && service.menus[menuId].items[itemIndex].state === menuItemState) {
-          service.menus[menuId].items.splice(itemIndex, 1);
-        }
-      }
+      // Filter out menu items that do not match the current menu item state.
+      service.menus[menuId].items = service.menus[menuId].items.filter(function (item) {
+        return item.state !== menuItemState;
+      });
 
       // Return the menu object
       return service.menus[menuId];
     }
 
     // Remove existing menu object by menu id
-    function removeSubMenuItem(menuId, submenuItemState) {
+    function removeSubMenuItem (menuId, subMenuItemState) {
       // Validate that the menu exists
       service.validateMenuExistence(menuId);
 
-      // Search for menu item to remove
-      for (var itemIndex in service.menus[menuId].items) {
-        if (this.menus[menuId].items.hasOwnProperty(itemIndex)) {
-          for (var subitemIndex in service.menus[menuId].items[itemIndex].items) {
-            if (this.menus[menuId].items[itemIndex].items.hasOwnProperty(subitemIndex) && service.menus[menuId].items[itemIndex].items[subitemIndex].state === submenuItemState) {
-              service.menus[menuId].items[itemIndex].items.splice(subitemIndex, 1);
-            }
-          }
-        }
-      }
+      // Filter out sub-menu items that do not match the current subMenuItemState
+      service.menus[menuId].items.forEach(function (parentMenuItem) {
+        parentMenuItem.items = parentMenuItem.items.filter(function (subMenuItem) {
+          return subMenuItem.state !== subMenuItemState;
+        });
+      });
 
       // Return the menu object
       return service.menus[menuId];
     }
 
-    // Validate menu existance
-    function validateMenuExistence(menuId) {
-      if (menuId && menuId.length) {
-        if (service.menus[menuId]) {
-          return true;
-        } else {
-          throw new Error('Menu does not exist');
-        }
-      } else {
+    // Validate menu existence
+    function validateMenuExistence (menuId) {
+      if (!(menuId && menuId.length)) {
         throw new Error('MenuId was not provided');
       }
+      if (!service.menus[menuId]) {
+        throw new Error('Menu does not exist');
+      }
+      return true;
     }
   }
 }());
