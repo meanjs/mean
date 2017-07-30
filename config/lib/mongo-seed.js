@@ -5,20 +5,14 @@ var _ = require('lodash'),
   mongoose = require('mongoose'),
   chalk = require('chalk');
 
-var seedConfig = _.clone(config.seedDB, true) || {};
-
 exports.start = start;
 
-function start(config) {
+function start(seedConfig) {
   return new Promise(function (resolve, reject) {
+    seedConfig = seedConfig || {};
 
-    var options = _.merge(_.clone(seedConfig.options, true), config ? config.options : {});
-
-    if (config && config.collections) {
-      seedConfig.collections = config.collections;
-    }
-
-    const collections = seedConfig.collections || [];
+    var options = seedConfig.options || (config.seedDB ? _.clone(config.seedDB.options, true) : {});
+    var collections = seedConfig.collections || (config.seedDB ? _.clone(config.seedDB.collections, true) : []);
 
     if (!collections.length) {
       return resolve();
@@ -32,7 +26,7 @@ function start(config) {
     // Use the reduction pattern to ensure we process seeding in desired order.
     seeds.reduce(function (p, item) {
       return p.then(function () {
-        return seed(item);
+        return seed(item, options);
       });
     }, Promise.resolve()) // start with resolved promise for initial previous (p) item
       .then(onSuccessComplete)
@@ -64,13 +58,14 @@ function start(config) {
   });
 }
 
-function seed(collection) {
+function seed(collection, options) {
+  // Merge options with collection options
+  options = _.merge(options || {}, collection.options || {});
+
   return new Promise(function (resolve, reject) {
     const Model = mongoose.model(collection.model);
     const docs = collection.docs;
 
-    // Merge global options with collection options
-    var options = _.merge(_.clone(seedConfig.options, true), collection.options || {});
     var skipWhen = collection.skip ? collection.skip.when : null;
 
     if (!Model.seed) {

@@ -242,7 +242,7 @@ describe('Configuration Tests:', function () {
         .catch(done);
     });
 
-    it('should seed custom article with user set to custom seeded admin user', function (done) {
+    it('should seed single article with user set to custom seeded admin user', function (done) {
       seed
         .start({
           collections: [{
@@ -292,7 +292,7 @@ describe('Configuration Tests:', function () {
         .catch(done);
     });
 
-    it('should seed custom article with NO user set due to seed order', function (done) {
+    it('should seed single article with NO user set due to seed order', function (done) {
       seed
         .start({
           collections: [{
@@ -333,7 +333,7 @@ describe('Configuration Tests:', function () {
         .catch(done);
     });
 
-    it('should seed admin, and user accounts with custom options', function (done) {
+    it('should seed admin and user accounts with custom options', function (done) {
       seed
         .start({
           collections: [{
@@ -591,7 +591,7 @@ describe('Configuration Tests:', function () {
         .catch(done);
     });
 
-    it('should seed when with custom options & skip.when results are empty', function (done) {
+    it('should seed article with custom options & skip.when results are empty', function (done) {
       seed
         .start({
           collections: [{
@@ -641,7 +641,7 @@ describe('Configuration Tests:', function () {
             collections: [{
               model: 'Article',
               skip: {
-                when: { title: article.title }
+                when: { title: newArticle.title }
               },
               docs: [{
                 data: _article
@@ -656,9 +656,9 @@ describe('Configuration Tests:', function () {
           // We should have the same article added at start of this unit test.
           articles.should.be.instanceof(Array).and.have.lengthOf(1);
 
-          var newArticle = articles.pop();
-          article.title.should.equal(newArticle.title);
-          article.content.should.equal(newArticle.content);
+          var existingArticle = articles.pop();
+          article.title.should.equal(existingArticle.title);
+          article.content.should.equal(existingArticle.content);
 
           return done();
         })

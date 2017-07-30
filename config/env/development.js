@@ -104,7 +104,7 @@ module.exports = {
       options: {
         // Override log results setting at the
         // collection level.
-        logResults: false
+        logResults: true
       },
       skip: {
         // Skip collection when this query returns results.
