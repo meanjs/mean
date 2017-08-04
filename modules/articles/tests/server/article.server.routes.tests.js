@@ -24,7 +24,7 @@ describe('Article CRUD tests', function () {
 
   before(function (done) {
     // Get application
-    app = express.init(mongoose);
+    app = express.init(mongoose.connection.db);
     agent = request.agent(app);
 
     done();
@@ -119,7 +119,7 @@ describe('Article CRUD tests', function () {
     // Save the article
     articleObj.save(function () {
       // Request articles
-      request(app).get('/api/articles')
+      agent.get('/api/articles')
         .end(function (req, res) {
           // Set assertion
           res.body.should.be.instanceof(Array).and.have.lengthOf(1);
@@ -137,7 +137,7 @@ describe('Article CRUD tests', function () {
 
     // Save the article
     articleObj.save(function () {
-      request(app).get('/api/articles/' + articleObj._id)
+      agent.get('/api/articles/' + articleObj._id)
         .end(function (req, res) {
           // Set assertion
           res.body.should.be.instanceof(Object).and.have.property('title', article.title);
@@ -150,7 +150,7 @@ describe('Article CRUD tests', function () {
 
   it('should return proper error for single article with an invalid Id, if not signed in', function (done) {
     // test is not a valid mongoose Id
-    request(app).get('/api/articles/test')
+    agent.get('/api/articles/test')
       .end(function (req, res) {
         // Set assertion
         res.body.should.be.instanceof(Object).and.have.property('message', 'Article is invalid');
@@ -162,7 +162,7 @@ describe('Article CRUD tests', function () {
 
   it('should return proper error for single article which doesnt exist, if not signed in', function (done) {
     // This is a valid mongoose Id but a non-existent article
-    request(app).get('/api/articles/559e9cd815f80b4c256a8f41')
+    agent.get('/api/articles/559e9cd815f80b4c256a8f41')
       .end(function (req, res) {
         // Set assertion
         res.body.should.be.instanceof(Object).and.have.property('message', 'No article with that identifier has been found');
@@ -202,7 +202,7 @@ describe('Article CRUD tests', function () {
     // Save the article
     articleObj.save(function () {
       // Try deleting article
-      request(app).delete('/api/articles/' + articleObj._id)
+      agent.delete('/api/articles/' + articleObj._id)
         .expect(403)
         .end(function (articleDeleteErr, articleDeleteRes) {
           // Set message assertion
@@ -312,7 +312,7 @@ describe('Article CRUD tests', function () {
       if (err) {
         return done(err);
       }
-      request(app).get('/api/articles/' + articleObj._id)
+      agent.get('/api/articles/' + articleObj._id)
         .end(function (req, res) {
           // Set assertion
           res.body.should.be.instanceof(Object).and.have.property('title', article.title);
