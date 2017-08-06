@@ -325,7 +325,7 @@ describe('User CRUD tests', function () {
       should.not.exist(err);
       agent.post('/api/auth/forgot')
         .send({
-          userhandle: 'some_username_that_doesnt_exist'
+          usernameOrEmail: 'some_username_that_doesnt_exist'
         })
         .expect(400)
         .end(function (err, res) {
@@ -349,7 +349,7 @@ describe('User CRUD tests', function () {
       should.not.exist(err);
       agent.post('/api/auth/forgot')
         .send({
-          userhandle: ''
+          usernameOrEmail: ''
         })
         .expect(422)
         .end(function (err, res) {
@@ -395,7 +395,7 @@ describe('User CRUD tests', function () {
       should.not.exist(err);
       agent.post('/api/auth/forgot')
         .send({
-          userhandle: user.username
+          usernameOrEmail: user.username
         })
         .expect(400)
         .end(function (err, res) {
@@ -417,7 +417,7 @@ describe('User CRUD tests', function () {
       should.not.exist(err);
       agent.post('/api/auth/forgot')
         .send({
-          userhandle: user.username
+          usernameOrEmail: user.username
         })
         .expect(400)
         .end(function (err, res) {
@@ -443,7 +443,7 @@ describe('User CRUD tests', function () {
       should.not.exist(err);
       agent.post('/api/auth/forgot')
         .send({
-          userhandle: user.email
+          usernameOrEmail: user.email
         })
         .expect(400)
         .end(function (err, res) {
@@ -469,7 +469,7 @@ describe('User CRUD tests', function () {
       should.not.exist(err);
       agent.post('/api/auth/forgot')
         .send({
-          userhandle: user.username
+          usernameOrEmail: user.username
         })
         .expect(400)
         .end(function (err, res) {
@@ -506,7 +506,7 @@ describe('User CRUD tests', function () {
       should.not.exist(err);
       agent.post('/api/auth/forgot')
         .send({
-          userhandle: user.username
+          usernameOrEmail: user.username
         })
         .expect(400)
         .end(function (err, res) {

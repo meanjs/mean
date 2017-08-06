@@ -28,14 +28,14 @@ exports.forgot = function (req, res, next) {
     },
     // Lookup user by username
     function (token, done) {
-      if (req.body.userhandle) {
+      if (req.body.usernameOrEmail) {
 
-        var userhandle = req.body.userhandle.toLowerCase();
+        var usernameOrEmail = String(req.body.usernameOrEmail).toLowerCase();
 
         User.findOne({
           $or: [
-            { username: userhandle },
-            { email: userhandle }
+            { username: usernameOrEmail },
+            { email: usernameOrEmail }
           ]
         }, '-salt -password', function (err, user) {
           if (err || !user) {
