@@ -28,17 +28,23 @@ exports.forgot = function (req, res, next) {
     },
     // Lookup user by username
     function (token, done) {
-      if (req.body.username) {
+      if (req.body.usernameOrEmail) {
+
+        var usernameOrEmail = String(req.body.usernameOrEmail).toLowerCase();
+
         User.findOne({
-          username: req.body.username.toLowerCase()
+          $or: [
+            { username: usernameOrEmail },
+            { email: usernameOrEmail }
+          ]
         }, '-salt -password', function (err, user) {
           if (err || !user) {
             return res.status(400).send({
-              message: 'No account with that username has been found'
+              message: 'No account with that username or email has been found'
             });
           } else if (user.provider !== 'local') {
             return res.status(400).send({
-              message: 'It seems like you signed up using your ' + user.provider + ' account'
+              message: 'It seems like you signed up using your ' + user.provider + ' account, please sign in using that provider.'
             });
           } else {
             user.resetPasswordToken = token;
@@ -51,7 +57,7 @@ exports.forgot = function (req, res, next) {
         });
       } else {
         return res.status(422).send({
-          message: 'Username field must not be blank'
+          message: 'Username/email field must not be blank'
         });
       }
     },
