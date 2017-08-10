@@ -18,10 +18,7 @@
         url: '',
         templateUrl: '/modules/articles/client/views/list-articles.client.view.html',
         controller: 'ArticlesListController',
-        controllerAs: 'vm',
-        data: {
-          pageTitle: 'Articles List'
-        }
+        controllerAs: 'vm'
       })
       .state('articles.view', {
         url: '/:articleId',
@@ -32,7 +29,7 @@
           articleResolve: getArticle
         },
         data: {
-          pageTitle: 'Article {{ articleResolve.title }}'
+          pageTitle: '{{ articleResolve.title }}'
         }
       });
   }
