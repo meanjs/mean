@@ -153,7 +153,7 @@ gulp.task('uglify', function () {
   return gulp.src(assets)
     .pipe(plugins.ngAnnotate())
     .pipe(plugins.uglify({
-      mangle: false
+      mangle: true
     }))
     .pipe(plugins.concat('application.min.js'))
     .pipe(plugins.rev())
