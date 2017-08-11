@@ -6,6 +6,7 @@ var semver = require('semver'),
   path = require('path'),
   mongoose = require('mongoose'),
   User = mongoose.model('User'),
+  config = require(path.resolve('./config/config')),
   express = require(path.resolve('./config/lib/express'));
 
 /**
@@ -1058,24 +1059,37 @@ describe('User CRUD tests', function () {
       });
   });
 
-  it('should not be able to change profile picture to too big of a file', function (done) {
-    agent.post('/api/auth/signin')
-      .send(credentials)
-      .expect(200)
-      .end(function (signinErr) {
-        // Handle signin error
-        if (signinErr) {
-          return done(signinErr);
-        }
+  it('should be able to change profile picture and not fail if existing picture file does not exist', function (done) {
 
-        agent.post('/api/users/picture')
-          .attach('newProfilePicture', './modules/users/tests/server/img/too-big-file.png')
-          .send(credentials)
-          .expect(422)
-          .end(function (userInfoErr, userInfoRes) {
-            done(userInfoErr);
-          });
-      });
+    user.profileImageURL = config.uploads.profile.image.dest + 'non-existing.png';
+
+    user.save(function(saveErr) {
+      // Handle error
+      if (saveErr) {
+        return done(saveErr);
+      }
+
+      agent.post('/api/auth/signin')
+        .send(credentials)
+        .expect(200)
+        .end(function (signinErr) {
+          // Handle signin error
+          if (signinErr) {
+            return done(signinErr);
+          }
+
+          agent.post('/api/users/picture')
+            .attach('newProfilePicture', './modules/users/client/img/profile/default.png')
+            .expect(200)
+            .end(function (userInfoErr) {
+
+              should.not.exist(userInfoErr);
+
+              return done();
+            });
+        });
+
+    });
   });
 
   afterEach(function (done) {
