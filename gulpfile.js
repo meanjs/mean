@@ -109,11 +109,10 @@ gulp.task('watch:server:run-tests', function () {
 
         if (filePath === path.resolve(file.path)) {
           changedTestFiles.push(f);
+          plugins.refresh.changed(f);
         }
       });
     });
-
-    plugins.refresh.changed();
   });
 });
 
