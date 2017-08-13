@@ -7,7 +7,7 @@ var config = require('../config'),
   mongooseService = require('./mongoose'),
   express = require('./express'),
   chalk = require('chalk'),
-  seed = require('./seed');
+  seed = require('./mongo-seed');
 
 function seedDB() {
   if (config.seedDB && config.seedDB.seed) {
