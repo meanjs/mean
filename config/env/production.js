@@ -16,19 +16,19 @@ module.exports = {
     uri: process.env.MONGOHQ_URL || process.env.MONGODB_URI || 'mongodb://' + (process.env.DB_1_PORT_27017_TCP_ADDR || 'localhost') + '/mean',
     options: {
       /**
-        * Uncomment to enable ssl certificate based authentication to mongodb
-        * servers. Adjust the settings below for your specific certificate
-        * setup.
-        * for connect to a replicaset, rename server:{...} to replset:{...}
-      server: {
-        ssl: true,
-        sslValidate: false,
-        checkServerIdentity: false,
-        sslCA: fs.readFileSync('./config/sslcerts/ssl-ca.pem'),
-        sslCert: fs.readFileSync('./config/sslcerts/ssl-cert.pem'),
-        sslKey: fs.readFileSync('./config/sslcerts/ssl-key.pem'),
-        sslPass: '1234'
-      }
+      * Uncomment to enable ssl certificate based authentication to mongodb
+      * servers. Adjust the settings below for your specific certificate
+      * setup.
+      * for connect to a replicaset, rename server:{...} to replset:{...}
+
+      ssl: true,
+      sslValidate: false,
+      checkServerIdentity: false,
+      sslCA: fs.readFileSync('./config/sslcerts/ssl-ca.pem'),
+      sslCert: fs.readFileSync('./config/sslcerts/ssl-cert.pem'),
+      sslKey: fs.readFileSync('./config/sslcerts/ssl-key.pem'),
+      sslPass: '1234'
+
       */
     },
     // Enable mongoose debug mode
