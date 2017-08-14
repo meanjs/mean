@@ -186,7 +186,7 @@ describe('User Model Unit Tests:', function () {
         _user3.email = _user1.email;
         _user3.save(function (err) {
           should.exist(err);
-          _user1.remove(function(err) {
+          _user1.remove(function (err) {
             should.not.exist(err);
             done();
           });
@@ -224,7 +224,7 @@ describe('User Model Unit Tests:', function () {
       _user1.save(function (err) {
         should.not.exist(err);
         _user1.password.should.not.equal(passwordBeforeSave);
-        _user1.remove(function(err) {
+        _user1.remove(function (err) {
           should.not.exist(err);
           done();
         });
@@ -238,7 +238,7 @@ describe('User Model Unit Tests:', function () {
       _user1.save(function (err) {
         should.not.exist(err);
         _user1.password.should.not.equal(passwordBeforeSave);
-        _user1.remove(function(err) {
+        _user1.remove(function (err) {
           should.not.exist(err);
           done();
         });
@@ -246,7 +246,7 @@ describe('User Model Unit Tests:', function () {
     });
   });
 
-  describe('User Password Validation Tests', function() {
+  describe('User Password Validation Tests', function () {
     it('should validate when the password strength passes - "P@$$w0rd!!"', function () {
       var _user1 = new User(user1);
       _user1.password = 'P@$$w0rd!!';
@@ -351,7 +351,7 @@ describe('User Model Unit Tests:', function () {
     });
   });
 
-  describe('User E-mail Validation Tests', function() {
+  describe('User E-mail Validation Tests', function () {
     it('should not allow invalid email address - "123"', function (done) {
       var _user1 = new User(user1);
 
@@ -645,12 +645,12 @@ describe('User Model Unit Tests:', function () {
 
   });
 
-  describe('Username Validation', function() {
-    it('should show error to save username beginning with .', function(done) {
+  describe('Username Validation', function () {
+    it('should show error to save username beginning with .', function (done) {
       var _user = new User(user1);
 
       _user.username = '.login';
-      _user.save(function(err) {
+      _user.save(function (err) {
         should.exist(err);
         done();
       });
@@ -660,67 +660,67 @@ describe('User Model Unit Tests:', function () {
       var _user = new User(user1);
 
       _user.username = config.illegalUsernames[Math.floor(Math.random() * config.illegalUsernames.length)];
-      _user.save(function(err) {
+      _user.save(function (err) {
         should.exist(err);
         done();
       });
     });
 
-    it('should show error to save username end with .', function(done) {
+    it('should show error to save username end with .', function (done) {
       var _user = new User(user1);
 
       _user.username = 'login.';
-      _user.save(function(err) {
+      _user.save(function (err) {
         should.exist(err);
         done();
       });
     });
 
-    it('should show error to save username with ..', function(done) {
+    it('should show error to save username with ..', function (done) {
       var _user = new User(user1);
 
       _user.username = 'log..in';
-      _user.save(function(err) {
+      _user.save(function (err) {
         should.exist(err);
         done();
       });
     });
 
-    it('should show error to save username shorter than 3 character', function(done) {
+    it('should show error to save username shorter than 3 character', function (done) {
       var _user = new User(user1);
 
       _user.username = 'lo';
-      _user.save(function(err) {
+      _user.save(function (err) {
         should.exist(err);
         done();
       });
     });
 
-    it('should show error saving a username without at least one alphanumeric character', function(done) {
+    it('should show error saving a username without at least one alphanumeric character', function (done) {
       var _user = new User(user1);
 
       _user.username = '-_-';
-      _user.save(function(err) {
+      _user.save(function (err) {
         should.exist(err);
         done();
       });
     });
 
-    it('should show error saving a username longer than 34 characters', function(done) {
+    it('should show error saving a username longer than 34 characters', function (done) {
       var _user = new User(user1);
 
       _user.username = 'l'.repeat(35);
-      _user.save(function(err) {
+      _user.save(function (err) {
         should.exist(err);
         done();
       });
     });
 
-    it('should save username with dot', function(done) {
+    it('should save username with dot', function (done) {
       var _user = new User(user1);
 
       _user.username = 'log.in';
-      _user.save(function(err) {
+      _user.save(function (err) {
         should.not.exist(err);
         done();
       });

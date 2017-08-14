@@ -823,7 +823,7 @@ describe('Configuration Tests:', function () {
 
   describe('Testing exposing environment as a variable to layout', function () {
 
-    ['development', 'production', 'test'].forEach(function(env) {
+    ['development', 'production', 'test'].forEach(function (env) {
       it('should expose environment set to ' + env, function (done) {
         // Set env to development for this test
         process.env.NODE_ENV = env;
