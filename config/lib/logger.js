@@ -29,7 +29,7 @@ var logger = new winston.Logger({
 // Useful for integrating with stream-related mechanism like Morgan's stream
 // option to log all HTTP requests to a file
 logger.stream = {
-  write: function(msg) {
+  write: function (msg) {
     logger.info(msg);
   }
 };

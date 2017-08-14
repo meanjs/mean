@@ -39,7 +39,7 @@
         controller: 'ErrorController',
         controllerAs: 'vm',
         params: {
-          message: function($stateParams) {
+          message: function ($stateParams) {
             return $stateParams.message;
           }
         },
@@ -53,7 +53,7 @@
         controller: 'ErrorController',
         controllerAs: 'vm',
         params: {
-          message: function($stateParams) {
+          message: function ($stateParams) {
             return $stateParams.message;
           }
         },

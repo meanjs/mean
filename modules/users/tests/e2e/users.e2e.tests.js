@@ -421,7 +421,7 @@ describe('Users E2E Tests:', function () {
       expect(element.all(by.css('.error-text')).get(1).getText()).toBe('Password is required.');
     });
 
-    it('Verify that the user is logged in', function() {
+    it('Verify that the user is logged in', function () {
       // Make sure user is signed out first
       signout();
       // Sign in

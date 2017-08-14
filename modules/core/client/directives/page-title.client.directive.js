@@ -22,7 +22,7 @@
           separator = ' - ',
           stateTitle = applicationCoreTitle + separator;
 
-        toState.name.split('.').forEach(function(value, index) {
+        toState.name.split('.').forEach(function (value, index) {
           stateTitle = stateTitle + value.charAt(0).toUpperCase() + value.slice(1) + separator;
         });
         if (toState.data && toState.data.pageTitle) {
