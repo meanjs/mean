@@ -1,0 +1,14 @@
+{
+  "name": "meanjs",
+  "short_name": "meanjs",
+  "start_url": ".",
+  "display": "browser",
+  "background_color": "#fff",
+  "theme_color": "#000",
+  "description": "Fullstack JavaScript with MongoDB, Express, AngularJS, and Node.js.",
+  "icons": [{
+    "src": "/modules/core/client/img/brand/favicon.ico",
+    "sizes": "64x64",
+    "type": "image/x-icon"
+  }]
+}
