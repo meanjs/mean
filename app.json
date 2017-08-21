@@ -9,7 +9,8 @@
     "angularjs",
     "node.js",
     "mongoose",
-    "passport"],
+    "passport"
+  ],
   "addons": [
     {
       "plan": "mongolab:sandbox"
@@ -19,7 +20,7 @@
     }
   ],
   "env": {
-    "NPM_CONFIG_PRODUCTION": "false",
+    "NPM_CONFIG_PRODUCTION": "true",
     "NPM_CONFIG_LOGLEVEL": "error",
     "NODE_ENV": "production",
     "NODE_VERBOSE": "false"
