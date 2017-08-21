@@ -1,0 +1,26 @@
+{
+  "name": "meanjs",
+  "description": "Full-Stack JavaScript with MongoDB, Express, AngularJS, and Node.js",
+  "repository": "https://github.com/Ghalleb/mean.git",
+  "logo": "http://meanjs.org/img/logo-small.png",
+  "keywords": [
+    "mongodb",
+    "express",
+    "angularjs",
+    "node.js",
+    "mongoose",
+    "passport"],
+  "addons": [
+    {
+      "plan": "mongolab:sandbox"
+    },
+    {
+      "plan": "papertrail:choklad"
+    }
+  ],
+  "env": {
+    "NPM_CONFIG_PRODUCTION": "false",
+    "NODE_ENV": "production"
+  }
+}
+}
