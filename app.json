@@ -20,7 +20,9 @@
   ],
   "env": {
     "NPM_CONFIG_PRODUCTION": "false",
-    "NODE_ENV": "production"
+    "NPM_CONFIG_LOGLEVEL": "error",
+    "NODE_ENV": "production",
+    "NODE_VERBOSE": "false"
   }
 }
 }
