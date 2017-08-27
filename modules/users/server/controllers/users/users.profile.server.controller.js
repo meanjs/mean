@@ -9,6 +9,8 @@ var _ = require('lodash'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
   mongoose = require('mongoose'),
   multer = require('multer'),
+  multerS3 = require('multer-s3'),
+  aws = require('aws-sdk'),
   config = require(path.resolve('./config/config')),
   User = mongoose.model('User'),
   validator = require('validator');
@@ -57,10 +59,31 @@ exports.update = function (req, res) {
 exports.changeProfilePicture = function (req, res) {
   var user = req.user;
   var existingImageUrl;
+  var multerConfig;
+
+
+  if (config.uploads.profile.s3Bucket) {
+    aws.config.update({
+      accessKeyId: config.s3Config.accessKeyId,
+      secretAccessKey: config.s3Config.secretAccessKey
+    });
+
+    var s3 = new aws.S3();
+
+    multerConfig = {
+      storage: multerS3({
+        s3: s3,
+        bucket: config.uploads.profile.s3Bucket,
+        acl: 'public-read'
+      })
+    };
+  } else {
+    multerConfig = config.uploads.profile.image;
+  }
 
   // Filtering to upload only images
-  var multerConfig = config.uploads.profile.image;
   multerConfig.fileFilter = require(path.resolve('./config/lib/multer')).imageFileFilter;
+
   var upload = multer(multerConfig).single('newProfilePicture');
 
   if (user) {
@@ -95,7 +118,9 @@ exports.changeProfilePicture = function (req, res) {
 
   function updateUser() {
     return new Promise(function (resolve, reject) {
-      user.profileImageURL = config.uploads.profile.image.dest + req.file.filename;
+      user.profileImageURL = config.uploads.profile.s3Bucket ?
+        req.file.location :
+        '/' + req.file.path;
       user.save(function (err, theuser) {
         if (err) {
           reject(err);

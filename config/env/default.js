@@ -45,8 +45,13 @@ module.exports = {
   illegalUsernames: ['meanjs', 'administrator', 'password', 'admin', 'user',
     'unknown', 'anonymous', 'null', 'undefined', 'api'
   ],
+  s3Config: {
+    accessKeyId: process.env.S3_ACCESS_KEY_ID,
+    secretAccessKey: process.env.S3_SECRET_ACCESS_KEY
+  },
   uploads: {
     profile: {
+      s3Bucket: process.env.S3_PROFILE_BUCKET,
       image: {
         dest: './modules/users/client/img/profile/uploads/',
         limits: {
