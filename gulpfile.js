@@ -152,7 +152,7 @@ gulp.task('uglify', function () {
   return gulp.src(assets)
     .pipe(plugins.ngAnnotate())
     .pipe(plugins.uglify({
-      mangle: false
+      mangle: true
     }).on('error', function(err) {
       console.log('Uglify error : ', err.toString());
     }))
