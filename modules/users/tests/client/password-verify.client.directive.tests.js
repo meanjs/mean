@@ -1,8 +1,8 @@
 'use strict';
 
-(function() {
+(function () {
   // Password Verify Directive Spec
-  describe('PasswordVerifyDirective', function() {
+  describe('PasswordVerifyDirective', function () {
     // Initialize global variables
     var scope,
       element,
@@ -12,7 +12,7 @@
     // Load the main application module
     beforeEach(module(ApplicationConfiguration.applicationModuleName));
 
-    beforeEach(inject(function(_$rootScope_, _$compile_) {
+    beforeEach(inject(function (_$rootScope_, _$compile_) {
       // Set a new global scope
       scope = _$rootScope_.$new();
       $compile = _$compile_;
@@ -32,7 +32,7 @@
 
       // inject allows you to use AngularJS dependency injection
       // to retrieve and use other services
-      inject(function($compile) {
+      inject(function ($compile) {
         var form = $compile(template)(scope);
         element = form.find('div');
 
@@ -41,7 +41,7 @@
       });
     }
 
-    describe('Initialize', function() {
+    describe('Initialize', function () {
       beforeEach(function () {
         compileDirective();
       });

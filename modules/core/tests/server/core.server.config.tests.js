@@ -12,8 +12,9 @@ var _ = require('lodash'),
   request = require('supertest'),
   config = require(path.resolve('./config/config')),
   logger = require(path.resolve('./config/lib/logger')),
-  seed = require(path.resolve('./config/lib/seed')),
-  express = require(path.resolve('./config/lib/express'));
+  seed = require(path.resolve('./config/lib/mongo-seed')),
+  express = require(path.resolve('./config/lib/express')),
+  Article = mongoose.model('Article');
 
 /**
  * Globals
@@ -28,355 +29,666 @@ var app,
 
 describe('Configuration Tests:', function () {
 
-  describe('Testing default seedDB', function () {
-    before(function(done) {
-      User.remove(function(err) {
-        should.not.exist(err);
+  describe('Testing Mongo Seed', function () {
+    var _seedConfig = _.clone(config.seedDB, true);
+    var articleSeedConfig;
+    var userSeedConfig;
+    var _admin;
+    var _user;
+    var _article;
 
-        user1 = {
-          username: 'user_config_test',
-          provider: 'local',
-          email: 'user_config_test_@localhost.com',
-          firstName: 'User',
-          lastName: 'Local',
-          displayName: 'User Local',
-          roles: ['user']
-        };
+    before(function (done) {
+      _admin = {
+        username: 'test-seed-admin',
+        email: 'test-admin@localhost.com',
+        firstName: 'Admin',
+        lastName: 'Test',
+        roles: ['admin', 'user']
+      };
 
-        admin1 = {
-          username: 'admin_config_test',
-          provider: 'local',
-          email: 'admin_config_test_@localhost.com',
-          firstName: 'Admin',
-          lastName: 'Local',
-          displayName: 'Admin Local',
-          roles: ['user', 'admin']
-        };
+      _user = {
+        username: 'test-seed-user',
+        email: 'test-user@localhost.com',
+        firstName: 'User',
+        lastName: 'Test',
+        roles: ['user']
+      };
 
-        userFromSeedConfig = config.seedDB.options.seedUser;
-        adminFromSeedConfig = config.seedDB.options.seedAdmin;
+      _article = {
+        title: 'Testing Database Seed Article',
+        content: 'Testing Article Seed right now!'
+      };
 
-        return done();
-
+      var articleCollections = _.filter(_seedConfig.collections, function (collection) {
+        return collection.model === 'Article';
       });
-    });
 
-    after(function(done) {
-      User.remove(function(err) {
-        should.not.exist(err);
-        return done();
+      // articleCollections.should.be.instanceof(Array).and.have.lengthOf(1);
+      articleSeedConfig = articleCollections[0];
+
+      var userCollections = _.filter(_seedConfig.collections, function (collection) {
+        return collection.model === 'User';
       });
+
+      // userCollections.should.be.instanceof(Array).and.have.lengthOf(1);
+      userSeedConfig = userCollections[0];
+
+      return done();
     });
 
-    it('should have seedDB configuration set for "regular" user', function() {
-      (typeof userFromSeedConfig).should.not.equal('undefined');
-      should.exist(userFromSeedConfig.username);
-      should.exist(userFromSeedConfig.email);
-    });
-
-    it('should have seedDB configuration set for admin user', function() {
-      (typeof adminFromSeedConfig).should.not.equal('undefined');
-      should.exist(adminFromSeedConfig.username);
-      should.exist(adminFromSeedConfig.email);
-    });
-
-    it('should not be an admin user to begin with', function(done) {
-      User.find({ username: 'seedadmin' }, function(err, users) {
-        should.not.exist(err);
-        users.should.be.instanceof(Array).and.have.lengthOf(0);
-        return done();
-      });
-    });
-
-    it('should not be a "regular" user to begin with', function(done) {
-      User.find({ username: 'seeduser' }, function(err, users) {
-        should.not.exist(err);
-        users.should.be.instanceof(Array).and.have.lengthOf(0);
-        return done();
-      });
-    });
-
-    it('should seed ONLY the admin user account when NODE_ENV is set to "production"', function(done) {
-
-      // Save original value
-      var nodeEnv = process.env.NODE_ENV;
-      // Set node env ro production environment
-      process.env.NODE_ENV = 'production';
-
-      User.find({ username: adminFromSeedConfig.username }, function(err, users) {
-
-        // There shouldn't be any errors
-        should.not.exist(err);
-        users.should.be.instanceof(Array).and.have.lengthOf(0);
-
-        seed
-          .start({ logResults: false })
-          .then(function() {
-            User.find({ username: adminFromSeedConfig.username }, function(err, users) {
-              should.not.exist(err);
-              users.should.be.instanceof(Array).and.have.lengthOf(1);
-
-              var _admin = users.pop();
-              _admin.username.should.equal(adminFromSeedConfig.username);
-
-              // Restore original NODE_ENV environment variable
-              process.env.NODE_ENV = nodeEnv;
-
-              User.remove(function(err) {
-                should.not.exist(err);
-                return done();
-              });
-            });
-          });
-      });
-    });
-
-    it('should seed admin, and "regular" user accounts when NODE_ENV is set to "test"', function(done) {
-
-      // Save original value
-      var nodeEnv = process.env.NODE_ENV;
-      // Set node env ro production environment
-      process.env.NODE_ENV = 'test';
-
-      User.find({ username: adminFromSeedConfig.username }, function(err, users) {
-
-        // There shouldn't be any errors
-        should.not.exist(err);
-        users.should.be.instanceof(Array).and.have.lengthOf(0);
-
-        seed
-          .start({ logResults: false })
-          .then(function() {
-            User.find({ username: adminFromSeedConfig.username }, function(err, users) {
-              should.not.exist(err);
-              users.should.be.instanceof(Array).and.have.lengthOf(1);
-
-              var _admin = users.pop();
-              _admin.username.should.equal(adminFromSeedConfig.username);
-
-              User.find({ username: userFromSeedConfig.username }, function(err, users) {
-
-                should.not.exist(err);
-                users.should.be.instanceof(Array).and.have.lengthOf(1);
-
-                var _user = users.pop();
-                _user.username.should.equal(userFromSeedConfig.username);
-
-                // Restore original NODE_ENV environment variable
-                process.env.NODE_ENV = nodeEnv;
-
-                User.remove(function(err) {
-                  should.not.exist(err);
-                  return done();
-                });
-              });
-            });
-          });
-      });
-    });
-
-    it('should seed admin, and "regular" user accounts when NODE_ENV is set to "test" when they already exist', function (done) {
-
-      // Save original value
-      var nodeEnv = process.env.NODE_ENV;
-      // Set node env ro production environment
-      process.env.NODE_ENV = 'test';
-
-      var _user = new User(userFromSeedConfig);
-      var _admin = new User(adminFromSeedConfig);
-
-      _admin.save(function (err) {
-        // There shouldn't be any errors
-        should.not.exist(err);
-        _user.save(function (err) {
-          // There shouldn't be any errors
-          should.not.exist(err);
-
-          User.find({ username: { $in: [adminFromSeedConfig.username, userFromSeedConfig.username] } }, function (err, users) {
-
-            // There shouldn't be any errors
-            should.not.exist(err);
-            users.should.be.instanceof(Array).and.have.lengthOf(2);
-
-            seed
-              .start({ logResults: false })
-              .then(function () {
-                User.find({ username: { $in: [adminFromSeedConfig.username, userFromSeedConfig.username] } }, function (err, users) {
-                  should.not.exist(err);
-                  users.should.be.instanceof(Array).and.have.lengthOf(2);
-
-                  // Restore original NODE_ENV environment variable
-                  process.env.NODE_ENV = nodeEnv;
-
-                  User.remove(function (err) {
-                    should.not.exist(err);
-                    return done();
-                  });
-                });
-              });
-          });
+    afterEach(function (done) {
+      Article.remove().exec()
+        .then(function () {
+          return User.remove().exec();
+        })
+        .then(function () {
+          return done();
+        })
+        .catch(function (err) {
+          return done(err);
         });
-      });
     });
 
-    it('should ONLY seed admin user account when NODE_ENV is set to "production" with custom admin', function(done) {
+    it('should have default seed configuration set for articles', function (done) {
+      articleSeedConfig.should.be.instanceof(Object);
+      articleSeedConfig.docs.should.be.instanceof(Array).and.have.lengthOf(1);
+      should.exist(articleSeedConfig.docs[0].data.title);
+      should.exist(articleSeedConfig.docs[0].data.content);
 
-      // Save original value
-      var nodeEnv = process.env.NODE_ENV;
-      // Set node env ro production environment
-      process.env.NODE_ENV = 'production';
+      return done();
+    });
 
-      User.find({ username: admin1.username }, function(err, users) {
+    it('should have default seed configuration set for users', function (done) {
+      userSeedConfig.should.be.instanceof(Object);
+      userSeedConfig.docs.should.be.instanceof(Array).and.have.lengthOf(2);
 
-        // There shouldn't be any errors
-        should.not.exist(err);
-        users.should.be.instanceof(Array).and.have.lengthOf(0);
+      should.exist(userSeedConfig.docs[0].data.username);
+      should.exist(userSeedConfig.docs[0].data.email);
+      should.exist(userSeedConfig.docs[0].data.firstName);
+      should.exist(userSeedConfig.docs[0].data.lastName);
+      should.exist(userSeedConfig.docs[0].data.roles);
 
-        seed
-          .start({ logResults: false, seedAdmin: admin1 })
-          .then(function() {
-            User.find({ username: admin1.username }, function(err, users) {
-              should.not.exist(err);
-              users.should.be.instanceof(Array).and.have.lengthOf(1);
+      should.exist(userSeedConfig.docs[1].data.username);
+      should.exist(userSeedConfig.docs[1].data.email);
+      should.exist(userSeedConfig.docs[1].data.firstName);
+      should.exist(userSeedConfig.docs[1].data.lastName);
+      should.exist(userSeedConfig.docs[1].data.roles);
 
-              var _admin = users.pop();
-              _admin.username.should.equal(admin1.username);
+      return done();
+    });
 
-              // Restore original NODE_ENV environment variable
-              process.env.NODE_ENV = nodeEnv;
+    it('should seed data from default config', function (done) {
 
-              User.remove(function(err) {
-                should.not.exist(err);
-                return done();
-              });
-            });
+      seed.start()
+        .then(function () {
+          // Check Articles Seed
+          return Article.find().exec();
+        })
+        .then(function (articles) {
+          articles.should.be.instanceof(Array).and.have.lengthOf(articleSeedConfig.docs.length);
+          // Check Users Seed
+          return User.find().exec();
+        })
+        .then(function (users) {
+          users.should.be.instanceof(Array).and.have.lengthOf(userSeedConfig.docs.length);
+          return done();
+        })
+        .catch(done);
+    });
+
+    it('should overwrite existing article by default', function (done) {
+      articleSeedConfig.docs.should.be.instanceof(Array).and.have.lengthOf(1);
+
+      var article = new Article(articleSeedConfig.docs[0].data);
+      article.content = '_temp_test_article_';
+
+      // save temp article
+      article.save()
+        .then(function () {
+          return seed.start();
+        })
+        .then(function () {
+          return Article.find().exec();
+        })
+        .then(function (articles) {
+          articles.should.be.instanceof(Array).and.have.lengthOf(1);
+
+          var newArticle = articles.pop();
+          articleSeedConfig.docs[0].data.title.should.equal(newArticle.title);
+          articleSeedConfig.docs[0].data.content.should.equal(newArticle.content);
+
+          return done();
+        })
+        .catch(done);
+    });
+
+    it('should overwrite existing users by default', function (done) {
+      userSeedConfig.docs.should.be.instanceof(Array).and.have.lengthOf(2);
+
+      var admin = new User(userSeedConfig.docs[0].data);
+      admin.email = 'temp-admin@localhost.com';
+      admin.provider = 'local';
+
+      var user = new User(userSeedConfig.docs[1].data);
+      user.email = 'temp-user@localhost.com';
+      user.provider = 'local';
+
+      admin.save()
+        .then(function () {
+          return user.save();
+        })
+        .then(function () {
+          return User.find().exec();
+        })
+        .then(function (users) {
+          users.should.be.instanceof(Array).and.have.lengthOf(2);
+          // Start Seed
+          return seed.start();
+        })
+        .then(function () {
+          return User.find().exec();
+        })
+        .then(function (users) {
+          // Should still only be two users, since we removed
+          // the existing users before seeding again.
+          users.should.be.instanceof(Array).and.have.lengthOf(2);
+
+          return User.find({ username: admin.username }).exec();
+        })
+        .then(function (users) {
+          users.should.be.instanceof(Array).and.have.lengthOf(1);
+
+          var newAdmin = users.pop();
+          userSeedConfig.docs[0].data.username.should.equal(newAdmin.username);
+          userSeedConfig.docs[0].data.email.should.equal(newAdmin.email);
+
+          return User.find({ username: user.username }).exec();
+        })
+        .then(function (users) {
+          users.should.be.instanceof(Array).and.have.lengthOf(1);
+
+          var newUser = users.pop();
+          userSeedConfig.docs[1].data.username.should.equal(newUser.username);
+          userSeedConfig.docs[1].data.email.should.equal(newUser.email);
+
+          return done();
+        })
+        .catch(done);
+    });
+
+    it('should seed single article with custom options', function (done) {
+      seed
+        .start({
+          collections: [{
+            model: 'Article',
+            docs: [{
+              overwrite: true,
+              data: _article
+            }]
+          }]
+        })
+        .then(function () {
+          return Article.find().exec();
+        })
+        .then(function (articles) {
+          articles.should.be.instanceof(Array).and.have.lengthOf(1);
+
+          var newArticle = articles.pop();
+          _article.title.should.equal(newArticle.title);
+          _article.content.should.equal(newArticle.content);
+
+          return done();
+        })
+        .catch(done);
+    });
+
+    it('should seed single article with user set to custom seeded admin user', function (done) {
+      seed
+        .start({
+          collections: [{
+            model: 'User',
+            docs: [{
+              data: _admin
+            }]
+          }, {
+            model: 'Article',
+            docs: [{
+              overwrite: true,
+              data: _article
+            }]
+          }]
+        })
+        .then(function () {
+          return User.find().exec();
+        })
+        .then(function (users) {
+          users.should.be.instanceof(Array).and.have.lengthOf(1);
+
+          return Article
+            .find()
+            .populate('user', 'firstName lastName username email roles')
+            .exec();
+        })
+        .then(function (articles) {
+          articles.should.be.instanceof(Array).and.have.lengthOf(1);
+
+          var newArticle = articles.pop();
+          _article.title.should.equal(newArticle.title);
+          _article.content.should.equal(newArticle.content);
+
+          should.exist(newArticle.user);
+          should.exist(newArticle.user._id);
+
+          _admin.username.should.equal(newArticle.user.username);
+          _admin.email.should.equal(newArticle.user.email);
+          _admin.firstName.should.equal(newArticle.user.firstName);
+          _admin.lastName.should.equal(newArticle.user.lastName);
+
+          should.exist(newArticle.user.roles);
+          newArticle.user.roles.indexOf('admin').should.equal(_admin.roles.indexOf('admin'));
+
+          return done();
+        })
+        .catch(done);
+    });
+
+    it('should seed single article with NO user set due to seed order', function (done) {
+      seed
+        .start({
+          collections: [{
+            model: 'Article',
+            docs: [{
+              overwrite: true,
+              data: _article
+            }]
+          }, {
+            model: 'User',
+            docs: [{
+              data: _admin
+            }]
+          }]
+        })
+        .then(function () {
+          return User.find().exec();
+        })
+        .then(function (users) {
+          users.should.be.instanceof(Array).and.have.lengthOf(1);
+
+          return Article
+            .find()
+            .populate('user', 'firstName lastName username email roles')
+            .exec();
+        })
+        .then(function (articles) {
+          articles.should.be.instanceof(Array).and.have.lengthOf(1);
+
+          var newArticle = articles.pop();
+          _article.title.should.equal(newArticle.title);
+          _article.content.should.equal(newArticle.content);
+
+          should.not.exist(newArticle.user);
+
+          return done();
+        })
+        .catch(done);
+    });
+
+    it('should seed admin and user accounts with custom options', function (done) {
+      seed
+        .start({
+          collections: [{
+            model: 'User',
+            docs: [{
+              data: _admin
+            }, {
+              data: _user
+            }]
+          }]
+        })
+        .then(function () {
+          return User.find().exec();
+        })
+        .then(function (users) {
+          users.should.be.instanceof(Array).and.have.lengthOf(2);
+          return User.find({ username: _admin.username }).exec();
+        })
+        .then(function (users) {
+          users.should.be.instanceof(Array).and.have.lengthOf(1);
+
+          var newAdmin = users.pop();
+          _admin.username.should.equal(newAdmin.username);
+          _admin.email.should.equal(newAdmin.email);
+
+          return User.find({ username: _user.username }).exec();
+        })
+        .then(function (users) {
+          users.should.be.instanceof(Array).and.have.lengthOf(1);
+
+          var newUser = users.pop();
+          _user.username.should.equal(newUser.username);
+          _user.email.should.equal(newUser.email);
+
+          return done();
+        })
+        .catch(done);
+    });
+
+    it('should NOT overwrite existing article with custom options', function (done) {
+
+      var article = new Article(_article);
+      article.content = '_temp_article_content_';
+
+      article.save()
+        .then(function () {
+          return seed.start({
+            collections: [{
+              model: 'Article',
+              docs: [{
+                overwrite: false,
+                data: _article
+              }]
+            }]
           });
-      });
+        })
+        .then(function () {
+          return Article.find().exec();
+        })
+        .then(function (articles) {
+          articles.should.be.instanceof(Array).and.have.lengthOf(1);
+
+          var existingArticle = articles.pop();
+          article.title.should.equal(existingArticle.title);
+          article.content.should.equal(existingArticle.content);
+
+          return done();
+        })
+        .catch(done);
     });
 
-    it('should seed admin, and "regular" user accounts when NODE_ENV is set to "test" with custom options', function(done) {
+    it('should NOT overwrite existing user with custom options', function (done) {
+      var user = new User(_user);
+      user.provider = 'local';
+      user.email = 'temp-test-user@localhost.com';
 
-      // Save original value
-      var nodeEnv = process.env.NODE_ENV;
-      // Set node env ro production environment
-      process.env.NODE_ENV = 'test';
-
-      User.find({ username: admin1.username }, function(err, users) {
-
-        // There shouldn't be any errors
-        should.not.exist(err);
-        users.should.be.instanceof(Array).and.have.lengthOf(0);
-
-        seed
-          .start({ logResults: false, seedAdmin: admin1, seedUser: user1 })
-          .then(function() {
-            User.find({ username: admin1.username }, function(err, users) {
-              should.not.exist(err);
-              users.should.be.instanceof(Array).and.have.lengthOf(1);
-
-              var _admin = users.pop();
-              _admin.username.should.equal(admin1.username);
-
-              User.find({ username: user1.username }, function(err, users) {
-
-                should.not.exist(err);
-                users.should.be.instanceof(Array).and.have.lengthOf(1);
-
-                var _user = users.pop();
-                _user.username.should.equal(user1.username);
-
-                // Restore original NODE_ENV environment variable
-                process.env.NODE_ENV = nodeEnv;
-
-                User.remove(function(err) {
-                  should.not.exist(err);
-                  return done();
-                });
-              });
-            });
+      user.save()
+        .then(function () {
+          return seed.start({
+            collections: [{
+              model: 'User',
+              docs: [{
+                overwrite: false,
+                data: _user
+              }]
+            }]
           });
-      });
+        })
+        .then(function () {
+          return User.find().exec();
+        })
+        .then(function (users) {
+          users.should.be.instanceof(Array).and.have.lengthOf(1);
+
+          var existingUser = users.pop();
+          user.username.should.equal(existingUser.username);
+          user.email.should.equal(existingUser.email);
+
+          return done();
+        })
+        .catch(done);
     });
 
-    it('should NOT seed admin user account if it already exists when NODE_ENV is set to "production"', function(done) {
-
-      // Save original value
-      var nodeEnv = process.env.NODE_ENV;
-      // Set node env ro production environment
-      process.env.NODE_ENV = 'production';
-
-      var _admin = new User(adminFromSeedConfig);
-
-      _admin.save(function(err, user) {
-        // There shouldn't be any errors
-        should.not.exist(err);
-        user.username.should.equal(adminFromSeedConfig.username);
-
-        seed
-          .start({ logResults: false })
-          .then(function () {
-            // we don't ever expect to make it here but we don't want to timeout
-            User.remove(function(err) {
-              should.not.exist(err);
-              // force this test to fail since we should never be here
-              should.exist(undefined);
-              // Restore original NODE_ENV environment variable
-              process.env.NODE_ENV = nodeEnv;
-
-              return done();
-            });
-          })
-          .catch(function (err) {
-            should.exist(err);
-            err.message.should.equal('Failed due to local account already exists: ' + adminFromSeedConfig.username);
-
-            // Restore original NODE_ENV environment variable
-            process.env.NODE_ENV = nodeEnv;
-
-            User.remove(function(removeErr) {
-              should.not.exist(removeErr);
-
-              return done();
-            });
-          });
-      });
-    });
-
-    it('should NOT seed "regular" user account if missing email when NODE_ENV set to "test"', function (done) {
-
-      // Save original value
-      var nodeEnv = process.env.NODE_ENV;
-      // Set node env ro test environment
-      process.env.NODE_ENV = 'test';
-
-      var _user = new User(user1);
-      _user.email = '';
+    it('should NOT seed article when missing title with custom options', function (done) {
+      var invalid = {
+        content: '_temp_article_content_'
+      };
 
       seed
-        .start({ logResults: false, seedUser: _user })
+        .start({
+          collections: [{
+            model: 'Article',
+            docs: [{
+              data: invalid
+            }]
+          }]
+        })
         .then(function () {
-          // we don't ever expect to make it here but we don't want to timeout
-          User.remove(function(err) {
-            // force this test to fail since we should never be here
-            should.exist(undefined);
-            // Restore original NODE_ENV environment variable
-            process.env.NODE_ENV = nodeEnv;
-
-            return done();
-          });
+          // We should not make it here so we
+          // force an assert failure to prevent hangs.
+          should.exist(undefined);
+          return done();
         })
         .catch(function (err) {
           should.exist(err);
-          err.message.should.equal('Failed to add local ' + user1.username);
+          err.message.should.equal('Article validation failed: title: Title cannot be blank');
 
-          // Restore original NODE_ENV environment variable
-          process.env.NODE_ENV = nodeEnv;
+          return done();
+        });
+    });
 
-          User.remove(function(removeErr) {
-            should.not.exist(removeErr);
+    it('should NOT seed user when missing username with custom options', function (done) {
+      var invalid = _.clone(_user, true);
+      invalid.username = undefined;
 
-            return done();
+      seed
+        .start({
+          collections: [{
+            model: 'User',
+            docs: [{
+              data: invalid
+            }]
+          }]
+        })
+        .then(function () {
+          // We should not make it here so we
+          // force an assert failure to prevent hangs.
+          should.exist(undefined);
+          return done();
+        })
+        .catch(function (err) {
+          should.exist(err);
+          err.message.should.equal('User validation failed: username: Please fill in a username');
+
+          return done();
+        });
+    });
+
+    it('should NOT seed user when missing email with custom options', function (done) {
+      var invalid = _.clone(_user, true);
+      invalid.email = undefined;
+
+      seed
+        .start({
+          collections: [{
+            model: 'User',
+            docs: [{
+              data: invalid
+            }]
+          }]
+        })
+        .then(function () {
+          // We should not make it here so we
+          // force an assert failure to prevent hangs.
+          should.exist(undefined);
+          return done();
+        })
+        .catch(function (err) {
+          should.exist(err);
+          err.message.should.equal('User validation failed: email: Please fill a valid email address');
+
+          return done();
+        });
+    });
+
+    it('should NOT seed user with invalid email with custom options', function (done) {
+      var invalid = _.clone(_user, true);
+      invalid.email = '...invalid-email...';
+
+      seed
+        .start({
+          collections: [{
+            model: 'User',
+            docs: [{
+              data: invalid
+            }]
+          }]
+        })
+        .then(function () {
+          // We should not make it here so we
+          // force an assert failure to prevent hangs.
+          should.exist(undefined);
+          return done();
+        })
+        .catch(function (err) {
+          should.exist(err);
+          err.message.should.equal('User validation failed: email: Please fill a valid email address');
+
+          return done();
+        });
+    });
+
+    it('should NOT continue seed when empty collections config', function (done) {
+      seed
+        .start({
+          collections: []
+        })
+        .then(function () {
+          return Article.find().exec();
+        })
+        .then(function (articles) {
+          articles.should.be.instanceof(Array).and.have.lengthOf(0);
+
+          return User.find().exec();
+        })
+        .then(function (users) {
+          users.should.be.instanceof(Array).and.have.lengthOf(0);
+
+          return done();
+        })
+        .catch(done);
+    });
+
+    it('should NOT seed any data when empty docs config', function (done) {
+      seed
+        .start({
+          collections: [{
+            model: 'Article',
+            docs: []
+          }]
+        })
+        .then(function () {
+          return Article.find().exec();
+        })
+        .then(function (articles) {
+          articles.should.be.instanceof(Array).and.have.lengthOf(0);
+
+          return User.find().exec();
+        })
+        .then(function (users) {
+          users.should.be.instanceof(Array).and.have.lengthOf(0);
+
+          return done();
+        })
+        .catch(done);
+    });
+
+    it('should seed article with custom options & skip.when results are empty', function (done) {
+      seed
+        .start({
+          collections: [{
+            model: 'Article',
+            skip: {
+              when: { title: 'should-not-find-this-title' }
+            },
+            docs: [{
+              data: _article
+            }]
+          }]
+        })
+        .then(function () {
+          return Article.find().exec();
+        })
+        .then(function (articles) {
+          articles.should.be.instanceof(Array).and.have.lengthOf(1);
+
+          var newArticle = articles.pop();
+          _article.title.should.be.equal(newArticle.title);
+          _article.content.should.be.equal(newArticle.content);
+
+          return done();
+        })
+        .catch(done);
+    });
+
+    it('should skip seed on collection with custom options & skip.when has results', function (done) {
+      var article = new Article({
+        title: 'temp-article-title',
+        content: 'temp-article-content'
+      });
+
+      article
+        .save()
+        .then(function () {
+          return Article.find().exec();
+        })
+        .then(function (articles) {
+          articles.should.be.instanceof(Array).and.have.lengthOf(1);
+
+          var newArticle = articles.pop();
+          article.title.should.equal(newArticle.title);
+          article.content.should.equal(newArticle.content);
+
+          return seed.start({
+            collections: [{
+              model: 'Article',
+              skip: {
+                when: { title: newArticle.title }
+              },
+              docs: [{
+                data: _article
+              }]
+            }]
           });
+        })
+        .then(function () {
+          return Article.find().exec();
+        })
+        .then(function (articles) {
+          // We should have the same article added at start of this unit test.
+          articles.should.be.instanceof(Array).and.have.lengthOf(1);
+
+          var existingArticle = articles.pop();
+          article.title.should.equal(existingArticle.title);
+          article.content.should.equal(existingArticle.content);
+
+          return done();
+        })
+        .catch(done);
+    });
+
+    it('should fail seed with custom options & invalid skip.when query', function (done) {
+      seed
+        .start({
+          collections: [{
+            model: 'Article',
+            skip: {
+              when: { created: 'not-a-valid-date' }
+            },
+            docs: [{
+              data: _article
+            }]
+          }]
+        })
+        .then(function () {
+          // We should not get here
+          should.exist(undefined);
+          return done();
+        })
+        .catch(function (err) {
+          should.exist(err);
+          // We expect the error message to include
+          err.message.indexOf('Cast to date failed').should.equal(0);
+
+          return done();
         });
     });
   });
@@ -511,7 +823,7 @@ describe('Configuration Tests:', function () {
 
   describe('Testing exposing environment as a variable to layout', function () {
 
-    ['development', 'production', 'test'].forEach(function(env) {
+    ['development', 'production', 'test'].forEach(function (env) {
       it('should expose environment set to ' + env, function (done) {
         // Set env to development for this test
         process.env.NODE_ENV = env;

@@ -31,6 +31,7 @@ addons:
     - clang
     - google-chrome-stable
 before_install:
+  - npm install webdriver-manager -g && webdriver-manager update
   - npm install nsp -g
 #  - npm install snyk -g
   - 'export PATH=$PATH:/usr/lib/chromium-browser/'
@@ -44,7 +45,8 @@ after_script:
   - nsp check
 #  - snyk test
   - gulp test:coverage
-  - node_modules/.bin/lcov-result-merger 'coverage/**/lcov.info' | node_modules/coveralls/bin/coveralls.js
+  - npm install lcov-result-merger@~1.2.0 -g
+  - lcov-result-merger 'coverage/**/lcov.info' | node_modules/coveralls/bin/coveralls.js
 notifications:
   webhooks:
     urls:

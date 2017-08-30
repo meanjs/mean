@@ -6,6 +6,7 @@ var semver = require('semver'),
   path = require('path'),
   mongoose = require('mongoose'),
   User = mongoose.model('User'),
+  config = require(path.resolve('./config/config')),
   express = require(path.resolve('./config/lib/express'));
 
 /**
@@ -325,7 +326,7 @@ describe('User CRUD tests', function () {
       should.not.exist(err);
       agent.post('/api/auth/forgot')
         .send({
-          username: 'some_username_that_doesnt_exist'
+          usernameOrEmail: 'some_username_that_doesnt_exist'
         })
         .expect(400)
         .end(function (err, res) {
@@ -334,13 +335,13 @@ describe('User CRUD tests', function () {
             return done(err);
           }
 
-          res.body.message.should.equal('No account with that username has been found');
+          res.body.message.should.equal('No account with that username or email has been found');
           return done();
         });
     });
   });
 
-  it('forgot password should return 400 for no username provided', function (done) {
+  it('forgot password should return 400 for empty username/email', function (done) {
     var provider = 'facebook';
     user.provider = provider;
     user.roles = ['user'];
@@ -349,7 +350,7 @@ describe('User CRUD tests', function () {
       should.not.exist(err);
       agent.post('/api/auth/forgot')
         .send({
-          username: ''
+          usernameOrEmail: ''
         })
         .expect(422)
         .end(function (err, res) {
@@ -358,7 +359,29 @@ describe('User CRUD tests', function () {
             return done(err);
           }
 
-          res.body.message.should.equal('Username field must not be blank');
+          res.body.message.should.equal('Username/email field must not be blank');
+          return done();
+        });
+    });
+  });
+
+  it('forgot password should return 400 for no username or email provided', function (done) {
+    var provider = 'facebook';
+    user.provider = provider;
+    user.roles = ['user'];
+
+    user.save(function (err) {
+      should.not.exist(err);
+      agent.post('/api/auth/forgot')
+        .send({})
+        .expect(422)
+        .end(function (err, res) {
+          // Handle error
+          if (err) {
+            return done(err);
+          }
+
+          res.body.message.should.equal('Username/email field must not be blank');
           return done();
         });
     });
@@ -373,7 +396,7 @@ describe('User CRUD tests', function () {
       should.not.exist(err);
       agent.post('/api/auth/forgot')
         .send({
-          username: user.username
+          usernameOrEmail: user.username
         })
         .expect(400)
         .end(function (err, res) {
@@ -382,20 +405,20 @@ describe('User CRUD tests', function () {
             return done(err);
           }
 
-          res.body.message.should.equal('It seems like you signed up using your ' + user.provider + ' account');
+          res.body.message.should.equal('It seems like you signed up using your ' + user.provider + ' account, please sign in using that provider.');
           return done();
         });
     });
   });
 
-  it('forgot password should be able to reset password for user password reset request', function (done) {
+  it('forgot password should be able to reset password for user password reset request using username', function (done) {
     user.roles = ['user'];
 
     user.save(function (err) {
       should.not.exist(err);
       agent.post('/api/auth/forgot')
         .send({
-          username: user.username
+          usernameOrEmail: user.username
         })
         .expect(400)
         .end(function (err, res) {
@@ -404,7 +427,33 @@ describe('User CRUD tests', function () {
             return done(err);
           }
 
-          User.findOne({ username: user.username.toLowerCase() }, function(err, userRes) {
+          User.findOne({ username: user.username.toLowerCase() }, function (err, userRes) {
+            userRes.resetPasswordToken.should.not.be.empty();
+            should.exist(userRes.resetPasswordExpires);
+            res.body.message.should.be.equal('Failure sending email');
+            return done();
+          });
+        });
+    });
+  });
+
+  it('forgot password should be able to reset password for user password reset request using email', function (done) {
+    user.roles = ['user'];
+
+    user.save(function (err) {
+      should.not.exist(err);
+      agent.post('/api/auth/forgot')
+        .send({
+          usernameOrEmail: user.email
+        })
+        .expect(400)
+        .end(function (err, res) {
+          // Handle error
+          if (err) {
+            return done(err);
+          }
+
+          User.findOne({ username: user.username.toLowerCase() }, function (err, userRes) {
             userRes.resetPasswordToken.should.not.be.empty();
             should.exist(userRes.resetPasswordExpires);
             res.body.message.should.be.equal('Failure sending email');
@@ -421,7 +470,7 @@ describe('User CRUD tests', function () {
       should.not.exist(err);
       agent.post('/api/auth/forgot')
         .send({
-          username: user.username
+          usernameOrEmail: user.username
         })
         .expect(400)
         .end(function (err, res) {
@@ -430,7 +479,7 @@ describe('User CRUD tests', function () {
             return done(err);
           }
 
-          User.findOne({ username: user.username.toLowerCase() }, function(err, userRes) {
+          User.findOne({ username: user.username.toLowerCase() }, function (err, userRes) {
             userRes.resetPasswordToken.should.not.be.empty();
             should.exist(userRes.resetPasswordExpires);
 
@@ -458,7 +507,7 @@ describe('User CRUD tests', function () {
       should.not.exist(err);
       agent.post('/api/auth/forgot')
         .send({
-          username: user.username
+          usernameOrEmail: user.username
         })
         .expect(400)
         .end(function (err, res) {
@@ -1028,6 +1077,39 @@ describe('User CRUD tests', function () {
             done(userInfoErr);
           });
       });
+  });
+
+  it('should be able to change profile picture and not fail if existing picture file does not exist', function (done) {
+
+    user.profileImageURL = config.uploads.profile.image.dest + 'non-existing.png';
+
+    user.save(function (saveErr) {
+      // Handle error
+      if (saveErr) {
+        return done(saveErr);
+      }
+
+      agent.post('/api/auth/signin')
+        .send(credentials)
+        .expect(200)
+        .end(function (signinErr) {
+          // Handle signin error
+          if (signinErr) {
+            return done(signinErr);
+          }
+
+          agent.post('/api/users/picture')
+            .attach('newProfilePicture', './modules/users/client/img/profile/default.png')
+            .expect(200)
+            .end(function (userInfoErr) {
+
+              should.not.exist(userInfoErr);
+
+              return done();
+            });
+        });
+
+    });
   });
 
   afterEach(function (done) {

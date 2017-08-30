@@ -16,19 +16,19 @@ module.exports = {
     uri: process.env.MONGOHQ_URL || process.env.MONGODB_URI || 'mongodb://' + (process.env.DB_1_PORT_27017_TCP_ADDR || 'localhost') + '/mean',
     options: {
       /**
-        * Uncomment to enable ssl certificate based authentication to mongodb
-        * servers. Adjust the settings below for your specific certificate
-        * setup.
-        * for connect to a replicaset, rename server:{...} to replset:{...}
-      server: {
-        ssl: true,
-        sslValidate: false,
-        checkServerIdentity: false,
-        sslCA: fs.readFileSync('./config/sslcerts/ssl-ca.pem'),
-        sslCert: fs.readFileSync('./config/sslcerts/ssl-cert.pem'),
-        sslKey: fs.readFileSync('./config/sslcerts/ssl-key.pem'),
-        sslPass: '1234'
-      }
+      * Uncomment to enable ssl certificate based authentication to mongodb
+      * servers. Adjust the settings below for your specific certificate
+      * setup.
+      * for connect to a replicaset, rename server:{...} to replset:{...}
+
+      ssl: true,
+      sslValidate: false,
+      checkServerIdentity: false,
+      sslCA: fs.readFileSync('./config/sslcerts/ssl-ca.pem'),
+      sslCert: fs.readFileSync('./config/sslcerts/ssl-cert.pem'),
+      sslKey: fs.readFileSync('./config/sslcerts/ssl-key.pem'),
+      sslPass: '1234'
+
       */
     },
     // Enable mongoose debug mode
@@ -91,25 +91,19 @@ module.exports = {
   seedDB: {
     seed: process.env.MONGO_SEED === 'true',
     options: {
-      logResults: process.env.MONGO_SEED_LOG_RESULTS !== 'false',
-      seedUser: {
-        username: process.env.MONGO_SEED_USER_USERNAME || 'seeduser',
-        provider: 'local',
-        email: process.env.MONGO_SEED_USER_EMAIL || 'user@localhost.com',
-        firstName: 'User',
-        lastName: 'Local',
-        displayName: 'User Local',
-        roles: ['user']
-      },
-      seedAdmin: {
-        username: process.env.MONGO_SEED_ADMIN_USERNAME || 'seedadmin',
-        provider: 'local',
-        email: process.env.MONGO_SEED_ADMIN_EMAIL || 'admin@localhost.com',
-        firstName: 'Admin',
-        lastName: 'Local',
-        displayName: 'Admin Local',
-        roles: ['user', 'admin']
-      }
-    }
+      logResults: process.env.MONGO_SEED_LOG_RESULTS !== 'false'
+    },
+    collections: [{
+      model: 'User',
+      docs: [{
+        data: {
+          username: 'local-admin',
+          email: 'admin@localhost.com',
+          firstName: 'Admin',
+          lastName: 'Local',
+          roles: ['admin', 'user']
+        }
+      }]
+    }]
   }
 };

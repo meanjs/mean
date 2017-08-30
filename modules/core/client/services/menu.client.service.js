@@ -5,7 +5,7 @@
     .module('core')
     .factory('menuService', menuService);
 
-  function menuService () {
+  function menuService() {
     var shouldRender;
     var service = {
       addMenu: addMenu,
@@ -25,7 +25,7 @@
     return service;
 
     // Add new menu object by menu id
-    function addMenu (menuId, options) {
+    function addMenu(menuId, options) {
       options = options || {};
 
       // Create the new menu
@@ -40,7 +40,7 @@
     }
 
     // Add menu item object
-    function addMenuItem (menuId, options) {
+    function addMenuItem(menuId, options) {
       // Validate that the menu exists
       service.validateMenuExistence(menuId);
 
@@ -70,7 +70,7 @@
     }
 
     // Add submenu item object
-    function addSubMenuItem (menuId, parentItemState, options) {
+    function addSubMenuItem(menuId, parentItemState, options) {
       options = options || {};
 
       // Validate that the menu exists
@@ -95,7 +95,7 @@
     }
 
     // Get the menu object by menu id
-    function getMenu (menuId) {
+    function getMenu(menuId) {
       // Validate that the menu exists
       service.validateMenuExistence(menuId);
 
@@ -103,7 +103,7 @@
       return service.menus[menuId];
     }
 
-    function init () {
+    function init() {
       // A private function for rendering decision
       shouldRender = function (user) {
         if (this.roles.indexOf('*') !== -1) {
@@ -128,7 +128,7 @@
     }
 
     // Remove existing menu object by menu id
-    function removeMenu (menuId) {
+    function removeMenu(menuId) {
       // Validate that the menu exists
       service.validateMenuExistence(menuId);
 
@@ -136,7 +136,7 @@
     }
 
     // Remove existing menu object by menu id
-    function removeMenuItem (menuId, menuItemState) {
+    function removeMenuItem(menuId, menuItemState) {
       // Validate that the menu exists
       service.validateMenuExistence(menuId);
 
@@ -150,7 +150,7 @@
     }
 
     // Remove existing menu object by menu id
-    function removeSubMenuItem (menuId, subMenuItemState) {
+    function removeSubMenuItem(menuId, subMenuItemState) {
       // Validate that the menu exists
       service.validateMenuExistence(menuId);
 
@@ -166,7 +166,7 @@
     }
 
     // Validate menu existence
-    function validateMenuExistence (menuId) {
+    function validateMenuExistence(menuId) {
       if (!(menuId && menuId.length)) {
         throw new Error('MenuId was not provided');
       }

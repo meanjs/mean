@@ -81,7 +81,7 @@ exports.changeProfilePicture = function (req, res) {
     });
   }
 
-  function uploadImage () {
+  function uploadImage() {
     return new Promise(function (resolve, reject) {
       upload(req, res, function (uploadError) {
         if (uploadError) {
@@ -93,7 +93,7 @@ exports.changeProfilePicture = function (req, res) {
     });
   }
 
-  function updateUser () {
+  function updateUser() {
     return new Promise(function (resolve, reject) {
       user.profileImageURL = config.uploads.profile.image.dest + req.file.filename;
       user.save(function (err, theuser) {
@@ -106,12 +106,20 @@ exports.changeProfilePicture = function (req, res) {
     });
   }
 
-  function deleteOldImage () {
+  function deleteOldImage() {
     return new Promise(function (resolve, reject) {
       if (existingImageUrl !== User.schema.path('profileImageURL').defaultValue) {
         fs.unlink(existingImageUrl, function (unlinkError) {
           if (unlinkError) {
-            console.log(unlinkError);
+
+            // If file didn't exist, no need to reject promise
+            if (unlinkError.code === 'ENOENT') {
+              console.log('Removing profile image failed because file did not exist.');
+              return resolve();
+            }
+
+            console.error(unlinkError);
+
             reject({
               message: 'Error occurred while deleting old profile picture'
             });
@@ -125,7 +133,7 @@ exports.changeProfilePicture = function (req, res) {
     });
   }
 
-  function login () {
+  function login() {
     return new Promise(function (resolve, reject) {
       req.login(user, function (err) {
         if (err) {
