@@ -153,6 +153,8 @@ gulp.task('uglify', function () {
     .pipe(plugins.ngAnnotate())
     .pipe(plugins.uglify({
       mangle: true
+    }).on('error', function (err) {
+      console.log('Uglify error : ', err.toString());
     }))
     .pipe(plugins.concat('application.min.js'))
     .pipe(plugins.rev())
