@@ -214,7 +214,8 @@ $ docker run -p 3000:3000 --link db:db_1 mean
 ### Amazon S3 configuration
 
 To save the profile images to S3, simply set those environment variables:
-S3_PROFILE_BUCKET: the name of the bucket where the images will be saved
+UPLOADS_STORAGE: s3
+S3_BUCKET: the name of the bucket where the images will be saved
 S3_ACCESS_KEY_ID: Your S3 access key
 S3_SECRET_ACCESS_KEY: Your S3 access key password
 

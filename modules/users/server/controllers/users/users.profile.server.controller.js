@@ -62,10 +62,10 @@ exports.changeProfilePicture = function (req, res) {
   var multerConfig;
 
 
-  if (config.uploads.profile.s3Bucket) {
+  if (config.uploads.storage === 's3' && config.aws.s3) {
     aws.config.update({
-      accessKeyId: config.s3Config.accessKeyId,
-      secretAccessKey: config.s3Config.secretAccessKey
+      accessKeyId: config.aws.s3.accessKeyId,
+      secretAccessKey: config.aws.s3.secretAccessKey
     });
 
     var s3 = new aws.S3();
@@ -73,7 +73,7 @@ exports.changeProfilePicture = function (req, res) {
     multerConfig = {
       storage: multerS3({
         s3: s3,
-        bucket: config.uploads.profile.s3Bucket,
+        bucket: config.aws.s3.bucket,
         acl: 'public-read'
       })
     };
@@ -118,7 +118,7 @@ exports.changeProfilePicture = function (req, res) {
 
   function updateUser() {
     return new Promise(function (resolve, reject) {
-      user.profileImageURL = config.uploads.profile.s3Bucket ?
+      user.profileImageURL = config.uploads.storage === 's3' && config.aws.s3 ?
         req.file.location :
         '/' + req.file.path;
       user.save(function (err, theuser) {
