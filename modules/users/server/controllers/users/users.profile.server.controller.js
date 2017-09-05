@@ -11,6 +11,7 @@ var _ = require('lodash'),
   multer = require('multer'),
   multerS3 = require('multer-s3'),
   aws = require('aws-sdk'),
+  amazonS3URI = require('amazon-s3-uri'),
   config = require(path.resolve('./config/config')),
   User = mongoose.model('User'),
   validator = require('validator');
@@ -134,24 +135,54 @@ exports.changeProfilePicture = function (req, res) {
   function deleteOldImage() {
     return new Promise(function (resolve, reject) {
       if (existingImageUrl !== User.schema.path('profileImageURL').defaultValue) {
-        fs.unlink(existingImageUrl, function (unlinkError) {
-          if (unlinkError) {
+        if (config.uploads.storage === 's3' && config.aws.s3) {
+          try {
+            var { region, bucket, key } = amazonS3URI(existingImageUrl);
+          } catch(err) {
+            console.warn(`${existingImageUrl} is not a valid S3 uri`);
 
-            // If file didn't exist, no need to reject promise
-            if (unlinkError.code === 'ENOENT') {
-              console.log('Removing profile image failed because file did not exist.');
-              return resolve();
+            return resolve();
+          }
+
+          aws.config.update({
+            accessKeyId: config.aws.s3.accessKeyId,
+            secretAccessKey: config.aws.s3.secretAccessKey
+          });
+
+          var s3 = new aws.S3();
+
+          var params = {
+            Bucket: config.aws.s3.bucket,
+            Key: key
+          };
+          s3.deleteObject(params, function (err) {
+            if (err) {
+              console.log('Error occurred while deleting old profile picture.');
+              console.log("Check if you have sufficient permissions : " + err);
             }
 
-            console.error(unlinkError);
-
-            reject({
-              message: 'Error occurred while deleting old profile picture'
-            });
-          } else {
             resolve();
-          }
-        });
+          });
+        } else {
+          fs.unlink(path.resolve('.' + existingImageUrl), function (unlinkError) {
+            if (unlinkError) {
+
+              // If file didn't exist, no need to reject promise
+              if (unlinkError.code === 'ENOENT') {
+                console.log('Removing profile image failed because file did not exist.');
+                return resolve();
+              }
+
+              console.error(unlinkError);
+
+              reject({
+                message: 'Error occurred while deleting old profile picture'
+              });
+            } else {
+              resolve();
+            }
+          });
+        }
       } else {
         resolve();
       }

@@ -38,6 +38,7 @@
   },
   "dependencies": {
     "acl": "~0.4.10",
+    "amazon-s3-uri": "0.0.3",
     "async": "~2.5.0",
     "aws-sdk": "^2.104.0",
     "body-parser": "~1.17.1",
