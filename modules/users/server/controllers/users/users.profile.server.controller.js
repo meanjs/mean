@@ -18,6 +18,18 @@ var _ = require('lodash'),
 
 var whitelistedFields = ['firstName', 'lastName', 'email', 'username'];
 
+var useS3Storage = config.uploads.storage === 's3' && config.aws.s3;
+var s3;
+
+if (useS3Storage) {
+  aws.config.update({
+    accessKeyId: config.aws.s3.accessKeyId,
+    secretAccessKey: config.aws.s3.secretAccessKey
+  });
+
+  s3 = new aws.S3();
+}
+
 /**
  * Update user details
  */
@@ -63,14 +75,7 @@ exports.changeProfilePicture = function (req, res) {
   var multerConfig;
 
 
-  if (config.uploads.storage === 's3' && config.aws.s3) {
-    aws.config.update({
-      accessKeyId: config.aws.s3.accessKeyId,
-      secretAccessKey: config.aws.s3.secretAccessKey
-    });
-
-    var s3 = new aws.S3();
-
+  if (useS3Storage) {
     multerConfig = {
       storage: multerS3({
         s3: s3,
@@ -135,34 +140,27 @@ exports.changeProfilePicture = function (req, res) {
   function deleteOldImage() {
     return new Promise(function (resolve, reject) {
       if (existingImageUrl !== User.schema.path('profileImageURL').defaultValue) {
-        if (config.uploads.storage === 's3' && config.aws.s3) {
+        if (useS3Storage) {
           try {
             var { region, bucket, key } = amazonS3URI(existingImageUrl);
-          } catch(err) {
+            var params = {
+              Bucket: config.aws.s3.bucket,
+              Key: key
+            };
+
+            s3.deleteObject(params, function (err) {
+              if (err) {
+                console.log('Error occurred while deleting old profile picture.');
+                console.log('Check if you have sufficient permissions : ' + err);
+              }
+
+              resolve();
+            });
+          } catch (err) {
             console.warn(`${existingImageUrl} is not a valid S3 uri`);
 
             return resolve();
           }
-
-          aws.config.update({
-            accessKeyId: config.aws.s3.accessKeyId,
-            secretAccessKey: config.aws.s3.secretAccessKey
-          });
-
-          var s3 = new aws.S3();
-
-          var params = {
-            Bucket: config.aws.s3.bucket,
-            Key: key
-          };
-          s3.deleteObject(params, function (err) {
-            if (err) {
-              console.log('Error occurred while deleting old profile picture.');
-              console.log("Check if you have sufficient permissions : " + err);
-            }
-
-            resolve();
-          });
         } else {
           fs.unlink(path.resolve('.' + existingImageUrl), function (unlinkError) {
             if (unlinkError) {
