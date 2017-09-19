@@ -84,33 +84,33 @@ exports.signout = function (req, res) {
  * OAuth provider call
  */
 exports.oauthCall = function (req, res, next) {
-    var strategy = req.params.strategy;
-    // Authenticate
-    passport.authenticate(strategy)(req, res, next);
-  };
+  var strategy = req.params.strategy;
+  // Authenticate
+  passport.authenticate(strategy)(req, res, next);
+};
 
 /**
  * OAuth callback
  */
 exports.oauthCallback = function (req, res, next) {
-    var strategy = req.params.strategy;
+  var strategy = req.params.strategy;
 
-    // info.redirect_to contains inteded redirect path
-    passport.authenticate(strategy, function (err, user, info) {
+  // info.redirect_to contains inteded redirect path
+  passport.authenticate(strategy, function (err, user, info) {
+    if (err) {
+      return res.redirect('/authentication/signin?err=' + encodeURIComponent(errorHandler.getErrorMessage(err)));
+    }
+    if (!user) {
+      return res.redirect('/authentication/signin');
+    }
+    req.login(user, function (err) {
       if (err) {
-        return res.redirect('/authentication/signin?err=' + encodeURIComponent(errorHandler.getErrorMessage(err)));
-      }
-      if (!user) {
         return res.redirect('/authentication/signin');
       }
-      req.login(user, function (err) {
-        if (err) {
-          return res.redirect('/authentication/signin');
-        }
 
-        return res.redirect(info.redirect_to || '/');
-      });
-    })(req, res, next);
+      return res.redirect(info.redirect_to || '/');
+    });
+  })(req, res, next);
 };
 
 /**
