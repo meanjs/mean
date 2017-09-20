@@ -240,5 +240,7 @@ The MEAN name was coined by [Valeri Karpov](http://blog.mongodb.org/post/4926286
 ## License
 [The MIT License](LICENSE.md)
 
-##Authors
+## Authors
+Ryan Clements
+Cianan Roden-Corrent
 Mark Davis markd315@gmail.com
