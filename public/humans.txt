@@ -3,7 +3,10 @@
 
 # TEAM
 
-    <name> -- <role> -- <twitter>
+    Mark Davis -- Product Manager -- @ZANZALAZ
+    Ryan Clements -- Scrum Master --
+    Kevin Bayas --...//TODO 
+
 
 # THANKS
 
