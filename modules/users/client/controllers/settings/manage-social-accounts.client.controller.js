@@ -1,38 +1,55 @@
-'use strict';
+(function () {
+  'use strict';
 
-angular.module('users').controller('SocialAccountsController', ['$scope', '$http', 'Authentication',
-  function ($scope, $http, Authentication) {
-    $scope.user = Authentication.user;
+  angular
+    .module('users')
+    .controller('SocialAccountsController', SocialAccountsController);
+
+  SocialAccountsController.$inject = ['$state', '$window', 'UsersService', 'Authentication', 'Notification'];
+
+  function SocialAccountsController($state, $window, UsersService, Authentication, Notification) {
+    var vm = this;
+
+    vm.user = Authentication.user;
+    vm.hasConnectedAdditionalSocialAccounts = hasConnectedAdditionalSocialAccounts;
+    vm.isConnectedSocialAccount = isConnectedSocialAccount;
+    vm.removeUserSocialAccount = removeUserSocialAccount;
+    vm.callOauthProvider = callOauthProvider;
 
     // Check if there are additional accounts
-    $scope.hasConnectedAdditionalSocialAccounts = function (provider) {
-      for (var i in $scope.user.additionalProvidersData) {
-        return true;
-      }
-
-      return false;
-    };
+    function hasConnectedAdditionalSocialAccounts() {
+      return (vm.user.additionalProvidersData && Object.keys(vm.user.additionalProvidersData).length);
+    }
 
     // Check if provider is already in use with current user
-    $scope.isConnectedSocialAccount = function (provider) {
-      return $scope.user.provider === provider || ($scope.user.additionalProvidersData && $scope.user.additionalProvidersData[provider]);
-    };
+    function isConnectedSocialAccount(provider) {
+      return vm.user.provider === provider || (vm.user.additionalProvidersData && vm.user.additionalProvidersData[provider]);
+    }
 
     // Remove a user social account
-    $scope.removeUserSocialAccount = function (provider) {
-      $scope.success = $scope.error = null;
+    function removeUserSocialAccount(provider) {
 
-      $http.delete('/api/users/accounts', {
-        params: {
-          provider: provider
-        }
-      }).success(function (response) {
-        // If successful show success message and clear form
-        $scope.success = true;
-        $scope.user = Authentication.user = response;
-      }).error(function (response) {
-        $scope.error = response.message;
-      });
-    };
+      UsersService.removeSocialAccount(provider)
+        .then(onRemoveSocialAccountSuccess)
+        .catch(onRemoveSocialAccountError);
+    }
+
+    function onRemoveSocialAccountSuccess(response) {
+      // If successful show success message and clear form
+      Notification.success({ message: '<i class="glyphicon glyphicon-ok"></i> Removed successfully!' });
+      vm.user = Authentication.user = response;
+    }
+
+    function onRemoveSocialAccountError(response) {
+      Notification.error({ message: response.message, title: '<i class="glyphicon glyphicon-remove"></i> Remove failed!' });
+    }
+
+    // OAuth provider request
+    function callOauthProvider(url) {
+      url += '?redirect_to=' + encodeURIComponent($state.$current.url.prefix);
+
+      // Effectively call OAuth authentication route:
+      $window.location.href = url;
+    }
   }
-]);
+}());

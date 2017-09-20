@@ -1,29 +1,125 @@
-﻿'use strict';
+'use strict';
 
 var _ = require('lodash'),
   config = require('../config'),
   chalk = require('chalk'),
-  fileStreamRotator = require('file-stream-rotator'),
-  fs = require('fs');
+  fs = require('fs'),
+  winston = require('winston');
 
 // list of valid formats for the logging
 var validFormats = ['combined', 'common', 'dev', 'short', 'tiny'];
 
-// build logger service
-var logger = {
-  getFormat: getLogFormat, // log format to use
-  getOptions: getLogOptions // log options to use
+// Instantiating the default winston application logger with the Console
+// transport
+var logger = new winston.Logger({
+  transports: [
+    new winston.transports.Console({
+      level: 'info',
+      colorize: true,
+      showLevel: true,
+      handleExceptions: true,
+      humanReadableUnhandledException: true
+    })
+  ],
+  exitOnError: false
+});
+
+// A stream object with a write function that will call the built-in winston
+// logger.info() function.
+// Useful for integrating with stream-related mechanism like Morgan's stream
+// option to log all HTTP requests to a file
+logger.stream = {
+  write: function (msg) {
+    logger.info(msg);
+  }
 };
 
-// export the logger service
-module.exports = logger;
+/**
+ * Instantiate a winston's File transport for disk file logging
+ *
+ */
+logger.setupFileLogger = function setupFileLogger() {
+
+  var fileLoggerTransport = this.getLogOptions();
+  if (!fileLoggerTransport) {
+    return false;
+  }
+
+  try {
+    // Check first if the configured path is writable and only then
+    // instantiate the file logging transport
+    if (fs.openSync(fileLoggerTransport.filename, 'a+')) {
+      logger.add(winston.transports.File, fileLoggerTransport);
+    }
+
+    return true;
+  } catch (err) {
+    if (process.env.NODE_ENV !== 'test') {
+      console.log();
+      console.log(chalk.red('An error has occured during the creation of the File transport logger.'));
+      console.log(chalk.red(err));
+      console.log();
+    }
+
+    return false;
+  }
+
+};
+
+/**
+ * The options to use with winston logger
+ *
+ * Returns a Winston object for logging with the File transport
+ */
+logger.getLogOptions = function getLogOptions() {
+
+  var _config = _.clone(config, true);
+  var configFileLogger = _config.log.fileLogger;
+
+  if (!_.has(_config, 'log.fileLogger.directoryPath') || !_.has(_config, 'log.fileLogger.fileName')) {
+    console.log('unable to find logging file configuration');
+    return false;
+  }
+
+  var logPath = configFileLogger.directoryPath + '/' + configFileLogger.fileName;
+
+  return {
+    level: 'debug',
+    colorize: false,
+    filename: logPath,
+    timestamp: true,
+    maxsize: configFileLogger.maxsize ? configFileLogger.maxsize : 10485760,
+    maxFiles: configFileLogger.maxFiles ? configFileLogger.maxFiles : 2,
+    json: (_.has(configFileLogger, 'json')) ? configFileLogger.json : false,
+    eol: '\n',
+    tailable: true,
+    showLevel: true,
+    handleExceptions: true,
+    humanReadableUnhandledException: true
+  };
+
+};
+
+/**
+ * The options to use with morgan logger
+ *
+ * Returns a log.options object with a writable stream based on winston
+ * file logging transport (if available)
+ */
+logger.getMorganOptions = function getMorganOptions() {
+
+  return {
+    stream: logger.stream
+  };
+
+};
 
 /**
  * The format to use with the logger
  *
  * Returns the log.format option set in the current environment configuration
  */
-function getLogFormat () {
+logger.getLogFormat = function getLogFormat() {
   var format = config.log && config.log.format ? config.log.format.toString() : 'combined';
 
   // make sure we have a valid format
@@ -38,72 +134,8 @@ function getLogFormat () {
   }
 
   return format;
-}
+};
 
-/**
- * The options to use with the logger
- *
- * Returns the log.options object set in the current environment configuration.
- * NOTE: Any options, requiring special handling (e.g. 'stream'), that encounter an error will be removed from the options.
- */
-function getLogOptions () {
-  var options = config.log && config.log.options ? _.clone(config.log.options, true) : {};
+logger.setupFileLogger();
 
-  // check if the current environment config has the log stream option set
-  if (_.has(options, 'stream')) {
-
-    try {
-
-      // check if we need to use rotating logs
-      if (_.has(options, 'stream.rotatingLogs') && options.stream.rotatingLogs.active) {
-
-        if (options.stream.rotatingLogs.fileName.length && options.stream.directoryPath.length) {
-
-          // ensure the log directory exists
-          if (!fs.existsSync(options.stream.directoryPath)) {
-            fs.mkdirSync(options.stream.directoryPath);
-          }
-
-          options.stream = fileStreamRotator.getStream({
-            filename: options.stream.directoryPath + '/' + options.stream.rotatingLogs.fileName,
-            frequency: options.stream.rotatingLogs.frequency,
-            verbose: options.stream.rotatingLogs.verbose
-          });
-
-        } else {
-          // throw a new error so we can catch and handle it gracefully
-          throw new Error('An invalid fileName or directoryPath was provided for the rotating logs option.');
-        }
-
-      } else {
-
-        // create the WriteStream to use for the logs
-        if (options.stream.fileName.length && options.stream.directoryPath.length) {
-
-          // ensure the log directory exists
-          if (!fs.existsSync(options.stream.directoryPath)) {
-            fs.mkdirSync(options.stream.directoryPath);
-          }
-
-          options.stream = fs.createWriteStream(options.stream.directoryPath + '/' + config.log.options.stream.fileName, { flags: 'a' });
-        } else {
-          // throw a new error so we can catch and handle it gracefully
-          throw new Error('An invalid fileName or directoryPath was provided for stream option.');
-        }
-      }
-    } catch (err) {
-
-      // remove the stream option
-      delete options.stream;
-
-      if (process.env.NODE_ENV !== 'test') {
-        console.log();
-        console.log(chalk.red('An error has occured during the creation of the WriteStream. The stream option has been omitted.'));
-        console.log(chalk.red(err));
-        console.log();
-      }
-    }
-  }
-
-  return options;
-}
+module.exports = logger;

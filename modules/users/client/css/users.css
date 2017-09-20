@@ -7,30 +7,22 @@
   display: inline-block;
   position: relative;
 }
-.btn-remove-account {
-  top: 10px;
+.btn-add-remove-account {
+  pointer-events: none;
+  position: absolute;
   right: 10px;
-  position: absolute;
-}
-.btn-file {
-  position: relative;
-  overflow: hidden;
-}
-.btn-file input[type=file] {
-  position: absolute;
-  top: 0;
-  right: 0;
-  min-width: 100%;
-  min-height: 100%;
-  font-size: 100px;
-  text-align: right;
-  filter: alpha(opacity=0);
-  opacity: 0;
-  background: white;
-  cursor: inherit;
-  display: block;
+  top: 10px;
 }
 .user-profile-picture {
-  min-height: 150px;
   max-height: 150px;
+  min-height: 150px;
+}
+.social-button {
+  -webkit-transition-duration: 0.4s;
+  -moz-transition-duration: 0.4s;
+  -o-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+}
+.social-button:hover {
+  opacity: 0.65;
 }

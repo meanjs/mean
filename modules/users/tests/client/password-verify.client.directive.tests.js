@@ -1,8 +1,8 @@
 'use strict';
 
-(function() {
+(function () {
   // Password Verify Directive Spec
-  describe('PasswordVerifyDirective', function() {
+  describe('PasswordVerifyDirective', function () {
     // Initialize global variables
     var scope,
       element,
@@ -12,7 +12,7 @@
     // Load the main application module
     beforeEach(module(ApplicationConfiguration.applicationModuleName));
 
-    beforeEach(inject(function(_$rootScope_, _$compile_) {
+    beforeEach(inject(function (_$rootScope_, _$compile_) {
       // Set a new global scope
       scope = _$rootScope_.$new();
       $compile = _$compile_;
@@ -26,13 +26,13 @@
     function compileDirective(template) {
       // function to compile a fresh directive with the given template, or a default one
       // input form with directive
-      if (!template) template = '<input type="password" id="newPassword" name="newPassword" class="form-control" ng-model="passwordMock.newPassword" placeholder="New Password" autocomplete="new-password" popover="{{popoverMsg}}" popover-trigger="focus" popover-placement="top" password-validator required>' +
+      if (!template) template = '<input type="password" id="newPassword" name="newPassword" class="form-control" ng-model="passwordMock.newPassword" placeholder="New Password" autocomplete="new-password" uib-popover="{{getPopoverMsg}}" uib-popover-trigger="focus" uib-popover-placement="top" password-validator required>' +
         '<input type="password" id="verifyPassword" name="verifyPassword" class="form-control" ng-model="passwordMock.verifyPassword" placeholder="Verify Password" password-verify="passwordMock.newPassword" required>';
       template = '<form name="form"><div>' + template + '<input type="submit">submit form</input></div></form>';
 
       // inject allows you to use AngularJS dependency injection
       // to retrieve and use other services
-      inject(function($compile) {
+      inject(function ($compile) {
         var form = $compile(template)(scope);
         element = form.find('div');
 
@@ -41,7 +41,7 @@
       });
     }
 
-    describe('Initialize', function() {
+    describe('Initialize', function () {
       beforeEach(function () {
         compileDirective();
       });

@@ -19,9 +19,18 @@ module.exports = function (app, db) {
     // Load SSL key and certificate
     var privateKey = fs.readFileSync(path.resolve(config.secure.privateKey), 'utf8');
     var certificate = fs.readFileSync(path.resolve(config.secure.certificate), 'utf8');
+    var caBundle;
+
+    try {
+      caBundle = fs.readFileSync(path.resolve(config.secure.caBundle), 'utf8');
+    } catch (err) {
+      console.log('Warning: couldn\'t find or read caBundle file');
+    }
+
     var options = {
       key: privateKey,
       cert: certificate,
+      ca: caBundle,
       //  requestCert : true,
       //  rejectUnauthorized : true,
       secureProtocol: 'TLSv1_method',
@@ -62,7 +71,7 @@ module.exports = function (app, db) {
 
   // Create a MongoDB storage object
   var mongoStore = new MongoStore({
-    mongooseConnection: db.connection,
+    db: db,
     collection: config.sessionCollection
   });
 

@@ -11,7 +11,8 @@ var should = require('should'),
 /**
  * Globals
  */
-var user, article;
+var user,
+  article;
 
 /**
  * Unit tests
@@ -25,42 +26,46 @@ describe('Article Model Unit Tests:', function () {
       displayName: 'Full Name',
       email: 'test@test.com',
       username: 'username',
-      password: 'M3@n.jsI$Aw3$0m3'
+      password: 'M3@n.jsI$Aw3$0m3',
+      provider: 'local'
     });
 
-    user.save(function () {
-      article = new Article({
-        title: 'Article Title',
-        content: 'Article Content',
-        user: user
-      });
+    user.save()
+      .then(function () {
+        article = new Article({
+          title: 'Article Title',
+          content: 'Article Content',
+          user: user
+        });
 
-      done();
-    });
+        done();
+      })
+      .catch(done);
   });
 
   describe('Method Save', function () {
     it('should be able to save without problems', function (done) {
       this.timeout(10000);
-      return article.save(function (err) {
+      article.save(function (err) {
         should.not.exist(err);
-        done();
+        return done();
       });
     });
 
     it('should be able to show an error when try to save without title', function (done) {
       article.title = '';
 
-      return article.save(function (err) {
+      article.save(function (err) {
         should.exist(err);
-        done();
+        return done();
       });
     });
   });
 
   afterEach(function (done) {
-    Article.remove().exec(function () {
-      User.remove().exec(done);
-    });
+    Article.remove().exec()
+      .then(User.remove().exec())
+      .then(done())
+      .catch(done);
   });
 });

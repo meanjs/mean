@@ -5,12 +5,16 @@
  */
 var should = require('should'),
   mongoose = require('mongoose'),
-  User = mongoose.model('User');
+  User = mongoose.model('User'),
+  path = require('path'),
+  config = require(path.resolve('./config/config'));
 
 /**
  * Globals
  */
-var user1, user2, user3;
+var user1,
+  user2,
+  user3;
 
 /**
  * Unit tests
@@ -182,9 +186,32 @@ describe('User Model Unit Tests:', function () {
         _user3.email = _user1.email;
         _user3.save(function (err) {
           should.exist(err);
-          _user1.remove(function(err) {
+          _user1.remove(function (err) {
             should.not.exist(err);
             done();
+          });
+        });
+      });
+
+    });
+
+    it('should not index missing email field, thus not enforce the model\'s unique index', function (done) {
+      var _user1 = new User(user1);
+      _user1.email = undefined;
+
+      var _user3 = new User(user3);
+      _user3.email = undefined;
+
+      _user1.save(function (err) {
+        should.not.exist(err);
+        _user3.save(function (err) {
+          should.not.exist(err);
+          _user3.remove(function (err) {
+            should.not.exist(err);
+            _user1.remove(function (err) {
+              should.not.exist(err);
+              done();
+            });
           });
         });
       });
@@ -197,7 +224,7 @@ describe('User Model Unit Tests:', function () {
       _user1.save(function (err) {
         should.not.exist(err);
         _user1.password.should.not.equal(passwordBeforeSave);
-        _user1.remove(function(err) {
+        _user1.remove(function (err) {
           should.not.exist(err);
           done();
         });
@@ -211,7 +238,7 @@ describe('User Model Unit Tests:', function () {
       _user1.save(function (err) {
         should.not.exist(err);
         _user1.password.should.not.equal(passwordBeforeSave);
-        _user1.remove(function(err) {
+        _user1.remove(function (err) {
           should.not.exist(err);
           done();
         });
@@ -219,7 +246,7 @@ describe('User Model Unit Tests:', function () {
     });
   });
 
-  describe('User Password Validation Tests', function() {
+  describe('User Password Validation Tests', function () {
     it('should validate when the password strength passes - "P@$$w0rd!!"', function () {
       var _user1 = new User(user1);
       _user1.password = 'P@$$w0rd!!';
@@ -263,7 +290,7 @@ describe('User Model Unit Tests:', function () {
       });
     });
 
-    it('should not allow a less than 10 characters long - "P@$$w0rd!"', function (done) {
+    it('should not allow a password less than 10 characters long - "P@$$w0rd!"', function (done) {
       var _user1 = new User(user1);
       _user1.password = 'P@$$w0rd!';
 
@@ -273,7 +300,7 @@ describe('User Model Unit Tests:', function () {
       });
     });
 
-    it('should not allow a greater than 128 characters long.', function (done) {
+    it('should not allow a password greater than 128 characters long.', function (done) {
       var _user1 = new User(user1);
       _user1.password = ')!/uLT="lh&:`6X!]|15o!$!TJf,.13l?vG].-j],lFPe/QhwN#{Z<[*1nX@n1^?WW-%_.*D)m$toB+N7z}kcN#B_d(f41h%w@0F!]igtSQ1gl~6sEV&r~}~1ub>If1c+';
 
@@ -283,7 +310,7 @@ describe('User Model Unit Tests:', function () {
       });
     });
 
-    it('should not allow more than 3 or more repeating characters - "P@$$w0rd!!!"', function (done) {
+    it('should not allow a password with 3 or more repeating characters - "P@$$w0rd!!!"', function (done) {
       var _user1 = new User(user1);
       _user1.password = 'P@$$w0rd!!!';
 
@@ -324,7 +351,7 @@ describe('User Model Unit Tests:', function () {
     });
   });
 
-  describe('User E-mail Validation Tests', function() {
+  describe('User E-mail Validation Tests', function () {
     it('should not allow invalid email address - "123"', function (done) {
       var _user1 = new User(user1);
 
@@ -344,10 +371,10 @@ describe('User Model Unit Tests:', function () {
 
     });
 
-    it('should not allow invalid email address - "123@123"', function (done) {
+    it('should not allow invalid email address - "123@123@123"', function (done) {
       var _user1 = new User(user1);
 
-      _user1.email = '123@123';
+      _user1.email = '123@123@123';
       _user1.save(function (err) {
         if (!err) {
           _user1.remove(function (err_remove) {
@@ -357,6 +384,25 @@ describe('User Model Unit Tests:', function () {
           });
         } else {
           should.exist(err);
+          done();
+        }
+      });
+
+    });
+
+    it('should allow email address - "123@123"', function (done) {
+      var _user1 = new User(user1);
+
+      _user1.email = '123@123';
+      _user1.save(function (err) {
+        if (!err) {
+          _user1.remove(function (err_remove) {
+            should.not.exist(err);
+            should.not.exist(err_remove);
+            done();
+          });
+        } else {
+          should.not.exist(err);
           done();
         }
       });
@@ -594,6 +640,89 @@ describe('User Model Unit Tests:', function () {
         } else {
           done();
         }
+      });
+    });
+
+  });
+
+  describe('Username Validation', function () {
+    it('should show error to save username beginning with .', function (done) {
+      var _user = new User(user1);
+
+      _user.username = '.login';
+      _user.save(function (err) {
+        should.exist(err);
+        done();
+      });
+    });
+
+    it('should be able to show an error when try to save with not allowed username', function (done) {
+      var _user = new User(user1);
+
+      _user.username = config.illegalUsernames[Math.floor(Math.random() * config.illegalUsernames.length)];
+      _user.save(function (err) {
+        should.exist(err);
+        done();
+      });
+    });
+
+    it('should show error to save username end with .', function (done) {
+      var _user = new User(user1);
+
+      _user.username = 'login.';
+      _user.save(function (err) {
+        should.exist(err);
+        done();
+      });
+    });
+
+    it('should show error to save username with ..', function (done) {
+      var _user = new User(user1);
+
+      _user.username = 'log..in';
+      _user.save(function (err) {
+        should.exist(err);
+        done();
+      });
+    });
+
+    it('should show error to save username shorter than 3 character', function (done) {
+      var _user = new User(user1);
+
+      _user.username = 'lo';
+      _user.save(function (err) {
+        should.exist(err);
+        done();
+      });
+    });
+
+    it('should show error saving a username without at least one alphanumeric character', function (done) {
+      var _user = new User(user1);
+
+      _user.username = '-_-';
+      _user.save(function (err) {
+        should.exist(err);
+        done();
+      });
+    });
+
+    it('should show error saving a username longer than 34 characters', function (done) {
+      var _user = new User(user1);
+
+      _user.username = 'l'.repeat(35);
+      _user.save(function (err) {
+        should.exist(err);
+        done();
+      });
+    });
+
+    it('should save username with dot', function (done) {
+      var _user = new User(user1);
+
+      _user.username = 'log.in';
+      _user.save(function (err) {
+        should.not.exist(err);
+        done();
       });
     });
 

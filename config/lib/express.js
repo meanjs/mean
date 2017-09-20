@@ -16,8 +16,10 @@ var config = require('../config'),
   cookieParser = require('cookie-parser'),
   helmet = require('helmet'),
   flash = require('connect-flash'),
-  consolidate = require('consolidate'),
-  path = require('path');
+  hbs = require('express-hbs'),
+  path = require('path'),
+  _ = require('lodash'),
+  lusca = require('lusca');
 
 /**
  * Initialize local variables
@@ -32,11 +34,14 @@ module.exports.initLocalVariables = function (app) {
   app.locals.keywords = config.app.keywords;
   app.locals.googleAnalyticsTrackingID = config.app.googleAnalyticsTrackingID;
   app.locals.facebookAppId = config.facebook.clientID;
+  app.locals.twitterUsername = config.twitter.username;
   app.locals.jsFiles = config.files.client.js;
   app.locals.cssFiles = config.files.client.css;
   app.locals.livereload = config.livereload;
   app.locals.logo = config.logo;
   app.locals.favicon = config.favicon;
+  app.locals.env = process.env.NODE_ENV;
+  app.locals.domain = config.domain;
 
   // Passing the request url to environment locals
   app.use(function (req, res, next) {
@@ -50,12 +55,6 @@ module.exports.initLocalVariables = function (app) {
  * Initialize application middleware
  */
 module.exports.initMiddleware = function (app) {
-  // Showing stack errors
-  app.set('showStackError', true);
-
-  // Enable jsonp
-  app.enable('jsonp callback');
-
   // Should be placed before express.static
   app.use(compress({
     filter: function (req, res) {
@@ -67,8 +66,10 @@ module.exports.initMiddleware = function (app) {
   // Initialize favicon middleware
   app.use(favicon(app.locals.favicon));
 
-  // Enable logger (morgan)
-  app.use(morgan(logger.getFormat(), logger.getOptions()));
+  // Enable logger (morgan) if enabled in the configuration file
+  if (_.has(config, 'log.format')) {
+    app.use(morgan(logger.getLogFormat(), logger.getMorganOptions()));
+  }
 
   // Environment dependent middleware
   if (process.env.NODE_ENV === 'development') {
@@ -94,12 +95,11 @@ module.exports.initMiddleware = function (app) {
  * Configure view engine
  */
 module.exports.initViewEngine = function (app) {
-  // Set swig as the template engine
-  app.engine('server.view.html', consolidate[config.templateEngine]);
-
-  // Set views path and view engine
+  app.engine('server.view.html', hbs.express4({
+    extname: '.server.view.html'
+  }));
   app.set('view engine', 'server.view.html');
-  app.set('views', './');
+  app.set('views', path.resolve('./'));
 };
 
 /**
@@ -116,33 +116,37 @@ module.exports.initSession = function (app, db) {
       httpOnly: config.sessionCookie.httpOnly,
       secure: config.sessionCookie.secure && config.secure.ssl
     },
-    key: config.sessionKey,
+    name: config.sessionKey,
     store: new MongoStore({
-      mongooseConnection: db.connection,
+      db: db,
       collection: config.sessionCollection
     })
   }));
+
+  // Add Lusca CSRF Middleware
+  app.use(lusca(config.csrf));
 };
 
 /**
  * Invoke modules server configuration
  */
-module.exports.initModulesConfiguration = function (app, db) {
+module.exports.initModulesConfiguration = function (app) {
   config.files.server.configs.forEach(function (configPath) {
-    require(path.resolve(configPath))(app, db);
+    require(path.resolve(configPath))(app);
   });
 };
 
 /**
- * Configure Helmet headers configuration
+ * Configure Helmet headers configuration for security
  */
 module.exports.initHelmetHeaders = function (app) {
-  // Use helmet to secure Express headers
-  var SIX_MONTHS = 15778476000;
-  app.use(helmet.xframe());
+  // six months expiration period specified in seconds
+  var SIX_MONTHS = 15778476;
+
+  app.use(helmet.frameguard());
   app.use(helmet.xssFilter());
-  app.use(helmet.nosniff());
-  app.use(helmet.ienoopen());
+  app.use(helmet.noSniff());
+  app.use(helmet.ieNoOpen());
   app.use(helmet.hsts({
     maxAge: SIX_MONTHS,
     includeSubdomains: true,
@@ -156,7 +160,7 @@ module.exports.initHelmetHeaders = function (app) {
  */
 module.exports.initModulesClientRoutes = function (app) {
   // Setting the app router and static folder
-  app.use('/', express.static(path.resolve('./public')));
+  app.use('/', express.static(path.resolve('./public'), { maxAge: 86400000 }));
 
   // Globbing static routing
   config.folders.client.forEach(function (staticPath) {
@@ -229,17 +233,17 @@ module.exports.init = function (db) {
   // Initialize Express view engine
   this.initViewEngine(app);
 
+  // Initialize Helmet security headers
+  this.initHelmetHeaders(app);
+
+  // Initialize modules static client routes, before session!
+  this.initModulesClientRoutes(app);
+
   // Initialize Express session
   this.initSession(app, db);
 
   // Initialize Modules configuration
   this.initModulesConfiguration(app);
-
-  // Initialize Helmet security headers
-  this.initHelmetHeaders(app);
-
-  // Initialize modules static client routes
-  this.initModulesClientRoutes(app);
 
   // Initialize modules server authorization policies
   this.initModulesServerPolicies(app);

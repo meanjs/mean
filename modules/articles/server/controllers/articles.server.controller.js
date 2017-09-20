@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * Module dependencies.
+ * Module dependencies
  */
 var path = require('path'),
   mongoose = require('mongoose'),
@@ -9,7 +9,7 @@ var path = require('path'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller'));
 
 /**
- * Create a article
+ * Create an article
  */
 exports.create = function (req, res) {
   var article = new Article(req.body);
@@ -17,7 +17,7 @@ exports.create = function (req, res) {
 
   article.save(function (err) {
     if (err) {
-      return res.status(400).send({
+      return res.status(422).send({
         message: errorHandler.getErrorMessage(err)
       });
     } else {
@@ -30,11 +30,18 @@ exports.create = function (req, res) {
  * Show the current article
  */
 exports.read = function (req, res) {
-  res.json(req.article);
+  // convert mongoose document to JSON
+  var article = req.article ? req.article.toJSON() : {};
+
+  // Add a custom field to the Article, for determining if the current User is the "owner".
+  // NOTE: This field is NOT persisted to the database, since it doesn't exist in the Article model.
+  article.isCurrentUserOwner = !!(req.user && article.user && article.user._id.toString() === req.user._id.toString());
+
+  res.json(article);
 };
 
 /**
- * Update a article
+ * Update an article
  */
 exports.update = function (req, res) {
   var article = req.article;
@@ -44,7 +51,7 @@ exports.update = function (req, res) {
 
   article.save(function (err) {
     if (err) {
-      return res.status(400).send({
+      return res.status(422).send({
         message: errorHandler.getErrorMessage(err)
       });
     } else {
@@ -61,7 +68,7 @@ exports.delete = function (req, res) {
 
   article.remove(function (err) {
     if (err) {
-      return res.status(400).send({
+      return res.status(422).send({
         message: errorHandler.getErrorMessage(err)
       });
     } else {
@@ -76,7 +83,7 @@ exports.delete = function (req, res) {
 exports.list = function (req, res) {
   Article.find().sort('-created').populate('user', 'displayName').exec(function (err, articles) {
     if (err) {
-      return res.status(400).send({
+      return res.status(422).send({
         message: errorHandler.getErrorMessage(err)
       });
     } else {

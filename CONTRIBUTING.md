@@ -51,7 +51,7 @@ Example implementation in file.js
 Fixes #82
 ```
 
-* Types: 
+* Types:
   * feat - Features, Enhancements, and overall Improvements
   * fix - Fixes, Bugs, HotFixs, etc...
   * doc - Changes to the Documentation and doesn't actually touch any code.
@@ -59,7 +59,7 @@ Fixes #82
   * The scope should be where the change took place.
   * Examples: users, core, config, articles
 * Subject:
-  * The subject line should be clear and consice as to what is being accomplished in the commit.
+  * The subject line should be clear and concise as to what is being accomplished in the commit.
 * General Rules:
   * No Line in the Commit message can be longer than 80 characters.
 * Refrence: [Angular Conventions](https://github.com/ajoslin/conventional-changelog/blob/master/conventions/angular.md)
@@ -82,4 +82,6 @@ The code for the documentation and the website are located in the meanjs/mean re
 
 For those who will be generating releases:
 * Don't forget to update the changelog!
-  * `conventional-changelog -r 1 | cat - CHANGELOG.md | tee CHANGELOG.md`
+  * Install the changelog cli tool: `npm install conventional-changelog-cli`
+  * Generate the updated changelog `node_modules/.bin/conventional-changelog -r 1 > /tmp/release && cat CHANGELOG.md >> /tmp/release && cat /tmp/release > CHANGELOG.md && rm /tmp/release`
+	* Review, and commit changes
