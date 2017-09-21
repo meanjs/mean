@@ -211,6 +211,14 @@ $ docker run -p 27017:27017 -d --name db mongo
 $ docker run -p 3000:3000 --link db:db_1 mean
 ```
 
+## Deploying to PAAS
+
+###  Deploying MEANJS To Heroku
+
+By clicking the button below you can signup for Heroku and deploy a working copy of MEANJS to the cloud without having to do the steps above.
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+
 ### Amazon S3 configuration
 
 To save the profile images to S3, simply set those environment variables:
@@ -218,7 +226,6 @@ UPLOADS_STORAGE: s3
 S3_BUCKET: the name of the bucket where the images will be saved
 S3_ACCESS_KEY_ID: Your S3 access key
 S3_SECRET_ACCESS_KEY: Your S3 access key password
-
 
 ## Getting Started With MEAN.JS
 You have your application running, but there is a lot of stuff to understand. We recommend you go over the [Official Documentation](http://meanjs.org/docs.html).
