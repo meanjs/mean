@@ -5,3 +5,7 @@ Name:
 Initial Commit - Sabrina Vega
 Second Commit - Zachary Pohl
 Third Commit - Noah Quinones
+
+Commit from test1 - Rebecca Loredo
+
+Second commit from test2 - Lauren Arfaras
