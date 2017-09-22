@@ -23,8 +23,8 @@ jobs:
             - run:
                 name: Install angularcli in devDependencies
                 command: npm install --save-dev @angular/cli@latest
-            - run:
-                name: Run unit tests with karma
-                command: ng test
-            - store_test_results:
-                path: test-results.xml
+            # - run:
+            #     name: Run unit tests with karma
+            #     command: ng test
+            # - store_test_results:
+            #     path: test-results.xml
