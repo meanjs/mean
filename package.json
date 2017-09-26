@@ -34,14 +34,16 @@
     "generate-ssl-certs": "scripts/generate-ssl-certs.sh",
     "seed": "gulp seed",
     "seed:prod": "gulp seed:prod",
-    "seed:test": "gulp seed:test"
+    "seed:test": "gulp seed:test",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "dependencies": {
     "acl": "~0.4.10",
     "amazon-s3-uri": "0.0.3",
     "async": "~2.5.0",
     "aws-sdk": "^2.104.0",
-    "body-parser": "~1.17.1",
+    "body-parser": "~1.18.2",
     "bower": "~1.8.0",
     "chalk": "~2.1.0",
     "compression": "~1.7.0",
@@ -97,7 +99,8 @@
     "socket.io": "~2.0.2",
     "validator": "~8.0.0",
     "winston": "~2.3.1",
-    "wiredep": "~4.0.0"
+    "wiredep": "~4.0.0",
+    "snyk": "^1.41.1"
   },
   "devDependencies": {
     "coveralls": "~2.13.0",
@@ -113,5 +116,6 @@
     "semver": "~5.4.1",
     "should": "~11.2.1",
     "supertest": "~3.0.0"
-  }
+  },
+  "snyk": true
 }
