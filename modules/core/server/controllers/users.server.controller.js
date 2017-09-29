@@ -1,7 +1,9 @@
 /* Dependencies */
 var mongoose = require('mongoose'), 
-    User = require('..../users/server/models/users.server.model.js');
+    User = require('../../../users/server/models/user.server.model.js');
     //TODO redefine user schema
+//TODO fix User require.
+
 /*
   In this file, you should use Mongoose queries in order to retrieve/add/remove/update users.
   On an error you should send a 404 status code, as well as the error message. 
