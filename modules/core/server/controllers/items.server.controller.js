@@ -2,79 +2,80 @@
 var mongoose = require('mongoose'), 
     Item = require('../models/item.server.model.js');
 //TODO define Item schema
+
 /*
-  In this file, you should use Mongoose queries in order to retrieve/add/remove/update listings.
+  In this file, you should use Mongoose queries in order to retrieve/add/remove/update items.
   On an error you should send a 404 status code, as well as the error message. 
-  On success (aka no error), you should send the listing(s) as JSON in the response.
+  On success (aka no error), you should send the item(s) as JSON in the response.
   HINT: if you are struggling with implementing these functions, refer back to this tutorial 
   from assignment 3 https://scotch.io/tutorials/using-mongoosejs-in-node-js-and-mongodb-applications
  */
 
-/* Create a listing */
+/* Create a item */
 exports.create = function(req, res) {
 
-  /* Instantiate a Listing */
-  var listing = new Listing(req.body);
+  /* Instantiate a Item */
+  var item = new Item(req.body);
 
   /* save the coordinates (located in req.results if there is an address property) */
   if(req.results) {
-    listing.coordinates = {
+    item.coordinates = {
       latitude: req.results.lat, 
       longitude: req.results.lng
     };
   }
 
-  /* Then save the listing */
-  listing.save(function(err) {
+  /* Then save the item */
+  item.save(function(err) {
     if(err) {
       console.log(err);
       res.status(400).send(err);
     } else {
-      res.json(listing);
+      res.json(item);
     }
   });
 };
 
-/* Show the current listing */
+/* Show the current item */
 exports.read = function(req, res) {
-  /* send back the listing as json from the request */
-  res.json(req.listing);
+  /* send back the item as json from the request */
+  res.json(req.item);
 };
 
-/* Update a listing */
+/* Update a item */
 exports.update = function(req, res) {
-  var listing = req.listing;
+  var item = req.item;
 
   /* Replace the article's properties with the new properties found in req.body */
-  listing.name = req.body.name;
-  listing.code = req.body.code;
-  listing.address = req.body.address;
+  item.name = req.body.name;
+  item.code = req.body.code;
+  item.address = req.body.address;
 
   /* save the coordinates (located in req.results if there is an address property) */
   if(req.results) {
-    listing.coordinates = {
+    item.coordinates = {
       latitude: req.results.lat, 
       longitude: req.results.lng
     };
   }
 
   /* Save the article */
-  listing.save(function(err) {
+  item.save(function(err) {
     if(err) {
       console.log(err);
       res.status(400).send(err);
     } else {
-      res.json(listing);
+      res.json(item);
     }
   });
 };
 
-/* Delete a listing */
+/* Delete a item */
 exports.delete = function(req, res) {
-  var listing = req.listing;
+  var item = req.item;
 
   /* Remove the article */
-  listing.remove(function(err) {
+  item.remove(function(err) {
     if(err) {
       res.status(400).send(err);
     }
@@ -84,29 +85,29 @@ exports.delete = function(req, res) {
   })
 };
 
-/* Retreive all the directory listings, sorted alphabetically by listing code */
+/* Retreive all the directory items, sorted alphabetically by item code */
 exports.list = function(req, res) {
-  Listing.find().sort('code').exec(function(err, listings) {
+  Item.find().sort('code').exec(function(err, items) {
     if(err) {
       res.status(400).send(err);
     } else {
-      res.json(listings);
+      res.json(items);
     }
   });
 };
 
 /* 
-  Middleware: find a listing by its ID, then pass it to the next request handler. 
-  HINT: Find the listing using a mongoose query, 
-        bind it to the request object as the property 'listing', 
+  Middleware: find a item by its ID, then pass it to the next request handler. 
+  HINT: Find the item using a mongoose query, 
+        bind it to the request object as the property 'item', 
         then finally call next
  */
-exports.listingByID = function(req, res, next, id) {
-  Listing.findById(id).exec(function(err, listing) {
+exports.itemByID = function(req, res, next, id) {
+  Item.findById(id).exec(function(err, item) {
     if(err) {
       res.status(400).send(err);
     } else {
-      req.listing = listing;
+      req.item = item;
       next();
     }
   });
