@@ -18,7 +18,7 @@ module.exports = function (app) {
   // Define application route
   app.route('/*').get(core.renderIndex);
 
-//User schema: username, passhash, approvedStatus, role, modulesAssigned, created_at, updated_at, 
+//User schema: approvedStatus, role, modulesAssigned 
 
 //Item schema: name, uniqueID, workingStatus, comment, categories, 
 

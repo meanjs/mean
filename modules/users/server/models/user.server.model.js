@@ -94,6 +94,15 @@ var UserSchema = new Schema({
   salt: {
     type: String
   },
+  role: {
+    type: String,
+    default: ''
+    //Escalating option levels include "TA", "Technician"=="SuperTA", "Admin".
+  },
+  approvedStatus{
+    type: Boolean,
+    default: false
+  },
   profileImageURL: {
     type: String,
     default: 'modules/users/client/img/profile/default.png'
