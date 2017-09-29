@@ -99,7 +99,7 @@ var UserSchema = new Schema({
     default: ''
     //Escalating option levels include "TA", "Technician"=="SuperTA", "Admin".
   },
-  approvedStatus{
+  approvedStatus :{
     type: Boolean,
     default: false
   },
