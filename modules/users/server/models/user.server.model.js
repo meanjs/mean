@@ -94,11 +94,6 @@ var UserSchema = new Schema({
   salt: {
     type: String
   },
-  role: {
-    type: String,
-    default: ''
-    //Escalating option levels include "TA", "Technician"=="SuperTA", "Admin".
-  },
   approvedStatus :{
     type: Boolean,
     default: false
@@ -113,10 +108,11 @@ var UserSchema = new Schema({
   },
   providerData: {},
   additionalProvidersData: {},
+  //Escalating option levels include "TA", "Technician"=="SuperTA", "Admin".
   roles: {
     type: [{
       type: String,
-      enum: ['user', 'admin']
+      enum: ['user', 'ta', 'technician', 'superta', 'admin']
     }],
     default: ['user'],
     required: 'Please provide at least one role'
