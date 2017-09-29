@@ -10,8 +10,12 @@ var itemSchema = new Schema({
     	default: '',
    	},
 	workingStatus : {
-		//TODO enforce enum possibilities (in controller??)
-		type: String, //Needs to function as enum.
+		type: [{
+      		type: String,
+      		enum: ['functional', 'needs inspection', 'needs service', 'broken']
+    	}],
+    	default: ['functional'],
+    	required: 'Please provide at least one role'
    		//Enum options: functional (green), needs inspection (yellow), needs service (orange), broken (red)
    	},
 	comment : {
