@@ -18,11 +18,9 @@ module.exports = function (app) {
   // Define application route
   app.route('/*').get(core.renderIndex);
 
-//User schema: approvedStatus, role, modulesAssigned 
+//TODO User schema still needs: modulesAssigned 
 
-//Item schema: name, uniqueID, workingStatus, comment, categories, 
-
-//Category schema: name, backref:itemList, 
+//TODO Category schema: name, backref:itemList, 
 
   // Render main home for no login, or for public/apply
   app.route('public/apply').get(core.renderIndex)
