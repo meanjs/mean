@@ -148,29 +148,11 @@
     });
 
     describe('Authentication Route Config', function () {
-      describe('Main Route', function () {
-        var mainstate;
-        beforeEach(inject(function ($state) {
-          mainstate = $state.get('authentication');
-        }));
-
-        it('Should have the correct URL', function () {
-          expect(mainstate.url).toEqual('/authentication');
-        });
-
-        it('Should be abstract', function () {
-          expect(mainstate.abstract).toBe(true);
-        });
-
-        it('Should have templateUrl', function () {
-          expect(mainstate.templateUrl).toBe('/modules/users/client/views/authentication/authentication.client.view.html');
-        });
-      });
 
       describe('Signup Route', function () {
         var signupstate;
         beforeEach(inject(function ($state) {
-          signupstate = $state.get('authentication.signup');
+          signupstate = $state.get('signup');
         }));
 
         it('Should have the correct URL', function () {
@@ -189,7 +171,7 @@
       describe('Signin Route', function () {
         var signinstate;
         beforeEach(inject(function ($state) {
-          signinstate = $state.get('authentication.signin');
+          signinstate = $state.get('signin');
         }));
 
         it('Should have the correct URL', function () {
