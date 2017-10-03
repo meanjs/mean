@@ -1,0 +1,22 @@
+<section>
+  <div class="page-header">
+    <h1>Profiles</h1>
+  </div>
+  <div class="list-group">
+    <a ng-repeat="profile in vm.profiles"
+       ui-sref="profiles.view({ profileId: profile._id })"
+       class="list-group-item">
+      <small class="list-group-item-text">
+        Posted on
+        <span ng-bind="profile.created | date:'mediumDate'"></span>
+        by
+        <span ng-if="profile.user" ng-bind="profile.user.displayName"></span>
+        <span ng-if="!profile.user">Deleted User</span>
+      </small>
+      <h4 class="list-group-item-heading" ng-bind="profile.name"></h4>
+    </a>
+  </div>
+  <div class="alert alert-warning text-center" ng-if="vm.profiles.$resolved && !vm.profiles.length">
+    No Profiles yet, why don't you <a ui-sref="profiles.create">create one</a>?
+  </div>
+</section>
