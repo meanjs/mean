@@ -31,26 +31,8 @@ exports.invokeRolesPolicies = function () {
       resources: '/api/articles/:articleId',
       permissions: ['get', 'post', 'put'] //TA's can modify and create articles but not delete them from the database.
     }]
-  },
-  {
-    roles: ['user'], //TODO these permissions roles are holdover from the sample app. I'm not sure if it's safe to delete.
-    allows: [{
-      resources: '/api/articles',
-      permissions: ['get']
-    }, {
-      resources: '/api/articles/:articleId',
-      permissions: ['get']
-    }]
-  }, {
-    roles: ['guest'],
-    allows: [{
-      resources: '/api/articles',
-      permissions: ['get']
-    }, {
-      resources: '/api/articles/:articleId',
-      permissions: ['get']
-    }]
-  }]);
+  }
+  ]);
 };
 
 /**
