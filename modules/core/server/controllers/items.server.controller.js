@@ -1,8 +1,6 @@
 /* Dependencies */
 var mongoose = require('mongoose'), 
     Item = require('../models/item.server.model.js');
-//TODO define Item schema
-
 /*
   In this file, you should use Mongoose queries in order to retrieve/add/remove/update items.
   On an error you should send a 404 status code, as well as the error message. 

@@ -22,7 +22,7 @@ var itemSchema = new Schema({
 	comment : {
 		type: String,
    	trim: true
-  }
+  },
   uniqueID : {
     type: String,
     trim: true
