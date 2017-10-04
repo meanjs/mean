@@ -2,7 +2,7 @@
 
 module.exports = function (app) {
   // Root routing
-  var core = require('../controllers/core.server.controller.js'), //Public view
+  var core = require('../controllers/core.server.controller.js'); //Public view
     //categories = require('../controllers/categories.server.controller.js'), //TODO enable category routing and item sorting.
     //express = require('express'), 
     //router = express.Router();
