@@ -14,6 +14,23 @@ var path = require('path'),
 
 var smtpTransport = nodemailer.createTransport(config.mailer.options);
 
+exports.approve = function(req, res) {
+  var user = req.user;
+  //TODO Validated permissions for this type of request.
+  user.approvedStatus = true;
+
+  /* Save the article */
+  user.save(function(err) {
+    if(err) {
+      console.log(err);
+      res.status(400).send(err);
+    } else {
+      res.json(user);
+    }
+  });
+};
+
+
 /**
  * Forgot for reset password (forgot POST)
  */
