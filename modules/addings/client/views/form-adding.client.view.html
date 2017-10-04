@@ -1,4 +1,5 @@
 <section>
+  <center>
   <div class="page-header">
     <h1>Create New Recipe</h1>
   </div>
@@ -8,20 +9,39 @@
         <div class="form-group" show-errors>
           <!--<label class="control-label" for="name"></label>-->
           <input name="name" type="text" ng-model="vm.adding.name" id="name" class="form-control" placeholder="Recipe Name" required>
-          <div ng-messages="vm.form.addingForm.name.$error" role="alert">
+          <!--<div ng-messages="vm.form.addingForm.name.$error" role="alert">
             <p class="help-block error-text" ng-message="required">Adding a recipe name is required.</p>
-          </div>
-          </br>
-          <table>
+          </div>-->
+          </br></br>
+          <table cellspacing="5" cellpading="3" width="50%">
             <tr>
               <td>Quantity</td>
               <td>Unit</td>
               <td>Ingredient Name</td>
             </tr>
+            <tr>
+              <td><input name="quantity" type="text" id="quantity" placeholder="0"/></td>
+              <td>
+                <div class="btn-group">
+                  <button type="button" class="btn btn-info">Units</button>
+                  <button type="button" class="btn btn-info dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span class="sr-only">Toggle Dropdown</span>
+                  </button>
+                  <div class="dropdown-menu">
+                    <button class="dropdown-item" href="#">Cups</button>
+                    <button class="dropdown-item" href="#">Ounces</button>
+                    <button class="dropdown-item" href="#">TBS</button>
+                    <button class="dropdown-item" href="#">TPS</button>
+                  </div>
+                </div>
+              </td>
+              <td><input name="ingredient" type="text" id="ingredient" placeholder="Ingredient Name"/></td>
+            </tr>
+
           </table>
         </div>
         <div class="form-group">
-          <button type="submit" class="btn btn-default"></button>
+          <button type="submit" class="btn btn-success"></button>
         </div>
         <div ng-show="vm.error" class="text-danger">
           <strong ng-bind="vm.error"></strong>
@@ -29,4 +49,5 @@
       </fieldset>
     </form>
   </div>
+  </center>
 </section>
