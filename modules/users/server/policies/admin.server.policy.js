@@ -12,6 +12,7 @@ acl = new acl(new acl.memoryBackend());
  * Invoke Admin Permissions
  */
 exports.invokeRolesPolicies = function () {
+  //TODO read about and allow permissions for different policies.
   acl.allow([{
     roles: ['admin'],
     allows: [{
