@@ -5,6 +5,13 @@ var validator = require('validator'),
   config = require(path.resolve('./config/config'));
 
 /**
+ * Render the user application page.
+ */
+exports.apply = function (req, res) {
+  //TODO unimplemented method stub.
+};
+
+/**
  * Render the main application page
  */
 exports.renderIndex = function (req, res) {
