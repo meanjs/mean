@@ -40,11 +40,11 @@
           pageTitle: '{{ userResolve.displayName }}'
         }
       })
-      .state('admin.view-applicants', {       //Adding view applicants view and functionality to routes
+      .state('admin.view-applicants', {// Adding view applicants view and functionality to routes
         url: 'users/:userId/viewApplicants',
         templateUrl: '/modules/users/client/views/admin/view-applicants.html',
-        //controller
-
+        controller: 'ViewApplicantsController',
+        controllerAs: 'vm'
       });
 
     getUser.$inject = ['$stateParams', 'AdminService'];
