@@ -19,14 +19,14 @@ describe('Users E2E Tests:', function () {
 
   var signout = function () {
     // Make sure user is signed out first
-    browser.get('http://localhost:3001/authentication/signout');
+    browser.get('http://localhost:3001/signout');
     // Delete all cookies
     browser.driver.manage().deleteAllCookies();
   };
 
   describe('Signup Validation', function () {
     it('Should report missing first name', function () {
-      browser.get('http://localhost:3001/authentication/signup');
+      browser.get('http://localhost:3001/signup');
       // Enter Last Name
       element(by.model('vm.credentials.lastName')).sendKeys(user1.lastName);
       // Enter Email
@@ -42,7 +42,7 @@ describe('Users E2E Tests:', function () {
     });
 
     it('Should report missing last name', function () {
-      browser.get('http://localhost:3001/authentication/signup');
+      browser.get('http://localhost:3001/signup');
       // Enter First Name
       element(by.model('vm.credentials.firstName')).sendKeys(user1.firstName);
       // Enter Email
@@ -58,7 +58,7 @@ describe('Users E2E Tests:', function () {
     });
 
     it('Should report missing email address', function () {
-      browser.get('http://localhost:3001/authentication/signup');
+      browser.get('http://localhost:3001/signup');
       // Enter First Name
       element(by.model('vm.credentials.firstName')).sendKeys(user1.firstName);
       // Enter Last Name
@@ -74,7 +74,7 @@ describe('Users E2E Tests:', function () {
     });
 
     it('Should report invalid email address - "123"', function () {
-      browser.get('http://localhost:3001/authentication/signup');
+      browser.get('http://localhost:3001/signup');
       // Enter First Name
       element(by.model('vm.credentials.firstName')).sendKeys(user1.firstName);
       // Enter Last Name
@@ -96,7 +96,7 @@ describe('Users E2E Tests:', function () {
      * However, 123@123@123 is an invalid email address.
      */
     it('Should report invalid email address - "123@123@123"', function () {
-      browser.get('http://localhost:3001/authentication/signup');
+      browser.get('http://localhost:3001/signup');
       // Enter First Name
       element(by.model('vm.credentials.firstName')).sendKeys(user1.firstName);
       // Enter Last Name
@@ -114,7 +114,7 @@ describe('Users E2E Tests:', function () {
     });
 
     it('Should report invalid username - ".login"', function () {
-      browser.get('http://localhost:3001/authentication/signup');
+      browser.get('http://localhost:3001/signup');
       // Enter First Name
       element(by.model('vm.credentials.firstName')).sendKeys(user1.firstName);
       // Enter Last Name
@@ -132,7 +132,7 @@ describe('Users E2E Tests:', function () {
     });
 
     it('Should report invalid username - "login."', function () {
-      browser.get('http://localhost:3001/authentication/signup');
+      browser.get('http://localhost:3001/signup');
       // Enter First Name
       element(by.model('vm.credentials.firstName')).sendKeys(user1.firstName);
       // Enter Last Name
@@ -150,7 +150,7 @@ describe('Users E2E Tests:', function () {
     });
 
     it('Should report invalid username - "log..in"', function () {
-      browser.get('http://localhost:3001/authentication/signup');
+      browser.get('http://localhost:3001/signup');
       // Enter First Name
       element(by.model('vm.credentials.firstName')).sendKeys(user1.firstName);
       // Enter Last Name
@@ -168,7 +168,7 @@ describe('Users E2E Tests:', function () {
     });
 
     it('Should report invalid username - "lo"', function () {
-      browser.get('http://localhost:3001/authentication/signup');
+      browser.get('http://localhost:3001/signup');
       // Enter First Name
       element(by.model('vm.credentials.firstName')).sendKeys(user1.firstName);
       // Enter Last Name
@@ -186,7 +186,7 @@ describe('Users E2E Tests:', function () {
     });
 
     it('Should report invalid username - "log$in"', function () {
-      browser.get('http://localhost:3001/authentication/signup');
+      browser.get('http://localhost:3001/signup');
       // Enter First Name
       element(by.model('vm.credentials.firstName')).sendKeys(user1.firstName);
       // Enter Last Name
@@ -204,7 +204,7 @@ describe('Users E2E Tests:', function () {
     });
 
     it('Should signup username with . - "log.in"', function () {
-      browser.get('http://localhost:3001/authentication/signup');
+      browser.get('http://localhost:3001/signup');
       // Enter First Name
       element(by.model('vm.credentials.firstName')).sendKeys(user2.firstName);
       // Enter Last Name
@@ -224,7 +224,7 @@ describe('Users E2E Tests:', function () {
     });
 
     it('Should report missing username', function () {
-      browser.get('http://localhost:3001/authentication/signup');
+      browser.get('http://localhost:3001/signup');
       // Enter First Name
       element(by.model('vm.credentials.firstName')).sendKeys(user1.firstName);
       // Enter Last Name
@@ -240,7 +240,7 @@ describe('Users E2E Tests:', function () {
     });
 
     it('Should report a password with less than 10 characters long - "P@$$w0rd!"', function () {
-      browser.get('http://localhost:3001/authentication/signup');
+      browser.get('http://localhost:3001/signup');
       // Enter First Name
       element(by.model('vm.credentials.firstName')).sendKeys(user1.firstName);
       // Enter Last Name
@@ -258,7 +258,7 @@ describe('Users E2E Tests:', function () {
     });
 
     it('Should report a password with greater than 128 characters long.', function () {
-      browser.get('http://localhost:3001/authentication/signup');
+      browser.get('http://localhost:3001/signup');
       // Enter First Name
       element(by.model('vm.credentials.firstName')).sendKeys(user1.firstName);
       // Enter Last Name
@@ -276,7 +276,7 @@ describe('Users E2E Tests:', function () {
     });
 
     it('Should report a password with more than 3 or more repeating characters - "P@$$w0rd!!!"', function () {
-      browser.get('http://localhost:3001/authentication/signup');
+      browser.get('http://localhost:3001/signup');
       // Enter First Name
       element(by.model('vm.credentials.firstName')).sendKeys(user1.firstName);
       // Enter Last Name
@@ -294,7 +294,7 @@ describe('Users E2E Tests:', function () {
     });
 
     it('Should report a password with no uppercase letters - "p@$$w0rd!!"', function () {
-      browser.get('http://localhost:3001/authentication/signup');
+      browser.get('http://localhost:3001/signup');
       // Enter First Name
       element(by.model('vm.credentials.firstName')).sendKeys(user1.firstName);
       // Enter Last Name
@@ -312,7 +312,7 @@ describe('Users E2E Tests:', function () {
     });
 
     it('Should report a password with less than one number - "P@$$word!!"', function () {
-      browser.get('http://localhost:3001/authentication/signup');
+      browser.get('http://localhost:3001/signup');
       // Enter First Name
       element(by.model('vm.credentials.firstName')).sendKeys(user1.firstName);
       // Enter Last Name
@@ -330,7 +330,7 @@ describe('Users E2E Tests:', function () {
     });
 
     it('Should report a password with less than one special character - "Passw0rdss"', function () {
-      browser.get('http://localhost:3001/authentication/signup');
+      browser.get('http://localhost:3001/signup');
       // Enter First Name
       element(by.model('vm.credentials.firstName')).sendKeys(user1.firstName);
       // Enter Last Name
@@ -348,7 +348,7 @@ describe('Users E2E Tests:', function () {
     });
 
     it('Should Successfully register new user', function () {
-      browser.get('http://localhost:3001/authentication/signup');
+      browser.get('http://localhost:3001/signup');
       // Enter FirstName
       element(by.model('vm.credentials.firstName')).sendKeys(user1.firstName);
       // Enter LastName
@@ -368,7 +368,7 @@ describe('Users E2E Tests:', function () {
       // Make sure user is signed out first
       signout();
       // Signup
-      browser.get('http://localhost:3001/authentication/signup');
+      browser.get('http://localhost:3001/signup');
       // Enter First Name
       element(by.model('vm.credentials.firstName')).sendKeys(user2.firstName);
       // Enter Last Name
@@ -387,7 +387,7 @@ describe('Users E2E Tests:', function () {
 
     it('Should report Username already exists', function () {
       // Signup
-      browser.get('http://localhost:3001/authentication/signup');
+      browser.get('http://localhost:3001/signup');
       // Enter First Name
       element(by.model('vm.credentials.firstName')).sendKeys(user2.firstName);
       // Enter Last Name
@@ -412,7 +412,7 @@ describe('Users E2E Tests:', function () {
       // Make sure user is signed out first
       signout();
       // Sign in
-      browser.get('http://localhost:3001/authentication/signin');
+      browser.get('http://localhost:3001/signin');
       // Click Submit button
       element(by.css('button[type="submit"]')).click();
       // Username Error
@@ -425,7 +425,7 @@ describe('Users E2E Tests:', function () {
       // Make sure user is signed out first
       signout();
       // Sign in
-      browser.get('http://localhost:3001/authentication/signin');
+      browser.get('http://localhost:3001/signin');
       // Enter UserName
       element(by.model('vm.credentials.usernameOrEmail')).sendKeys(user1.username);
       // Enter Password

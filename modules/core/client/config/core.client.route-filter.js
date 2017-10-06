@@ -28,7 +28,7 @@
           if (Authentication.user !== null && typeof Authentication.user === 'object') {
             $state.transitionTo('forbidden');
           } else {
-            $state.go('authentication.signin').then(function () {
+            $state.go('signin').then(function () {
               // Record previous state
               storePreviousState(toState, toParams);
             });
