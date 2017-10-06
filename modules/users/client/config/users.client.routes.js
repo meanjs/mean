@@ -39,15 +39,6 @@
           pageTitle: 'Settings password'
         }
       })
-      .state('settings.accounts', {
-        url: '/accounts',
-        templateUrl: '/modules/users/client/views/settings/manage-social-accounts.client.view.html',
-        controller: 'SocialAccountsController',
-        controllerAs: 'vm',
-        data: {
-          pageTitle: 'Settings accounts'
-        }
-      })
       .state('settings.picture', {
         url: '/picture',
         templateUrl: '/modules/users/client/views/settings/change-profile-picture.client.view.html',

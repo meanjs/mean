@@ -77,25 +77,6 @@
         });
       });
 
-      describe('Accounts Route', function () {
-        var accountsstate;
-        beforeEach(inject(function ($state) {
-          accountsstate = $state.get('settings.accounts');
-        }));
-
-        it('Should have the correct URL', function () {
-          expect(accountsstate.url).toEqual('/accounts');
-        });
-
-        it('Should not be abstract', function () {
-          expect(accountsstate.abstract).toBe(undefined);
-        });
-
-        it('Should have templateUrl', function () {
-          expect(accountsstate.templateUrl).toBe('/modules/users/client/views/settings/manage-social-accounts.client.view.html');
-        });
-      });
-
       describe('Picture Route', function () {
         var picturestate;
         beforeEach(inject(function ($state) {
