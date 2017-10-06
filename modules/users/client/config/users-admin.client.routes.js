@@ -28,6 +28,18 @@
           pageTitle: '{{ userResolve.displayName }}'
         }
       })
+      .state('admin.adduser', {
+        url: '/users/adduser',
+        templateUrl: '/modules/users/client/views/admin/adduser.client.view.html'//,
+        //controller: 'UserController',
+        //controllerAs: 'vm',
+        //resolve: {
+        //  userResolve: getUser
+        //},
+        //data: {
+        //  pageTitle: '{{ userResolve.displayName }}'
+        //}
+      })
       .state('admin.user-edit', {
         url: '/users/:userId/edit',
         templateUrl: '/modules/users/client/views/admin/edit-user.client.view.html',
