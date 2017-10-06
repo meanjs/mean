@@ -15,89 +15,38 @@
   </div>
   <div class="list-group">
     <table class="table table-hover" style="text-align:center; vertical-align: middle">
-              <thead>
-                <tr class="first-row" style="font-weight: bold">
-                  <td width="33%">Name</td>
-                  <td width="33%"> Approve <label>
-                      <input type="checkbox" class="radio" id="checkAll" name="checkAll" value="1">
-                    </label></td>
-                  <td width="33%">Disapprove</td>
-                </tr>
-            </thead>
-              <tbody>
-               <!-- 
-
-                  Fill in the rest of the table:
-                      * populate the rows with the code and name of each listing
-                      * include a way to remove individual listings
-
-                --> 
-                <tr class="other-rows">
-                  <td width="33%"> Kevin B</td>
-                  <td width="33%" style="text-align:center"> 
-                    <label>
-                      <input type="checkbox"  class="approve" name="approve[1][]" value="1">
+    	<thead>
+    		<tr class="first-row" style="font-weight: bold">
+    			<td width="33%">Name</td>
+               	<td width="33%"> Approve
+                	<label>
+                		<input type="checkbox" class="radio" ng-model="vm.checkAllApproved" ng-click="vm.approveAll()">
+                	</label>
+                </td>
+                <td width="33%">Disapprove</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="applicant-rows" ng-repeat="applicant in vm.applicants">
+             	<td width="33%">{{ applicant.name }}</td>
+                <td width="33%" style="text-align:center"> 
+                	<label>
+                    	<input type="checkbox"  ng-checked="applicant.approved">
                     </label>
-                  </td>
-                  <td width="33%">
-                    <label>
-                      <input type="checkbox"  name="approve[1][]" value="1">
+                </td>
+                <td width="33%">
+                	<label>
+                    	<input type="checkbox" ng-checked="applicant.declined">
                     </label>
-                  </td>
-                </tr>
-                <tr class="other-rows">
-                  <td width="33%"> Sam S</td>
-                  <td width="33%" style="text-align:center">
-                    <label>
-                      <input type="checkbox" class="approve" name="approve[2][]" value="1">
-                    </label>
-                  </td>
-                  <td width="33%">
-                    <label>
-                      <input type="checkbox" name="approve[2][]" value="1">
-                    </label>
-                  </td>
-                </tr>
-              </tbody>
+                </td>
+            </tr>
+        </tbody>
     </table>
   </div>
-
-  <button class="btn btn-default" type="submit">Submit</button>
-
+  <div class="col-md-4">
+  	<a class="btn btn-primary" ui-sref="admin.view-applicants">
+    	Submit
+    </a>
+  </div>
   <uib-pagination boundary-links="true" max-size="8" items-per-page="vm.itemsPerPage" total-items="vm.filterLength" ng-model="vm.currentPage" ng-change="vm.pageChanged()"></uib-pagination>
 </section>
-
-<script type="text/javascript">
-  //paste your code here
-  $("input:checkbox").on('click', function() {
-  // in the handler, 'this' refers to the box clicked on
-    var $box = $(this);
-    if ($box.is(":checked")) {
-      // the name of the box is retrieved using the .attr() method
-      // as it is assumed and expected to be immutable
-      var group = "input:checkbox[name='" + $box.attr("name") + "']";
-      // the checked state of the group/box on the other hand will change
-      // and the current value is retrieved using .prop() method
-      $(group).prop("checked", false);
-      $box.prop("checked", true);
-    } else {
-      $box.prop("checked", false);
-    }
-  });
-</script>
-
-<script type="text/javascript">
-  $(function(){
-    $("#checkAll").click(function(){
-      if($("checkAll").is(':checked')){
-        $(".approve").prop("checked", false);
-      }else{
-        $(".approve").prop("checked", true);
-      }
-    });
-  });
-
-
-</script>
-
-
