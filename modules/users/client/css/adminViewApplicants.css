@@ -1,0 +1,12 @@
+.applicantsTable{
+	text-align:center;
+	vertical-align: middle;
+}
+
+.first-row{
+	font-weight: bold;
+}
+
+.checkAll {
+	vertical-align: middle;
+}

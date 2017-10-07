@@ -15,29 +15,34 @@
 
     vm.applicants = [
       {
-        "name": "Kevin B",
-        "approved": false,
-        "declined": false
+        'name': 'Kevin B',
+        'role': 'Student',
+        'approved': false,
+        'declined': false
       },
       {
-        "name": "Sam S",
-        "approved": false,
-        "declined": false
+        'name': 'Sam S',
+        'role': 'TA',
+        'approved': false,
+        'declined': false
       },
       {
-        "name": "Richard",
-        "approved": false,
-        "declined": false
+        'name': 'Richard',
+        'role': 'Technician',
+        'approved': false,
+        'declined': false
       },
       {
-        "name": "Peter",
-        "approved": false,
-        "declined": false
+        'name': 'Peter',
+        'role': 'Student',
+        'approved': false,
+        'declined': false
       },
       {
-        "name": "Bob",
-        "approved": false,
-        "declined": false
+        'name': 'Bob',
+        'role': 'Student',
+        'approved': false,
+        'declined': false
       }
     ];
 
@@ -45,39 +50,27 @@
       if (vm.checkAllApproved) {
         for (var i = 0; i < vm.applicants.length; i++) {
           vm.applicants[i].approved = true;
+          vm.applicants[i].declined = false;
         }
       }
     };
 
-    /* var vm = this;
-    vm.buildPager = buildPager;
-    vm.figureOutItemsToDisplay = figureOutItemsToDisplay;
-    vm.pageChanged = pageChanged;
+    vm.changeDeclineState = function (applicant) {
+      if (applicant.declined)
+        applicant.declined = false;
+      else
+        applicant.declined = true;
+      if (applicant.declined)
+        applicant.approved = false;
+    };
 
-    AdminService.query(function (data) {
-      vm.users = data;
-      vm.buildPager();//
-    });
-
-    function buildPager() {
-      vm.pagedItems = [];
-      vm.itemsPerPage = 15;
-      vm.currentPage = 1;
-      vm.figureOutItemsToDisplay();
-    }
-
-    function figureOutItemsToDisplay() {
-      vm.filteredItems = $filter('filter')(vm.users, {
-        $: vm.search
-      });
-      vm.filterLength = vm.filteredItems.length;
-      var begin = ((vm.currentPage - 1) * vm.itemsPerPage);
-      var end = begin + vm.itemsPerPage;
-      vm.pagedItems = vm.filteredItems.slice(begin, end);
-    }
-
-    function pageChanged() {
-      vm.figureOutItemsToDisplay();
-    }*/
+    vm.changeApproveState = function (applicant) {
+      if (applicant.approved)
+        applicant.approved = false;
+      else
+        applicant.approved = true;
+      if (applicant.approved)
+        applicant.declined = false;
+    };
   }
 }());
