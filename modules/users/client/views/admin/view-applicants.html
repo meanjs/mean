@@ -1,7 +1,3 @@
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
 <section>
   <div class="page-header">
     <div class="row">
@@ -14,29 +10,32 @@
     </div>
   </div>
   <div class="list-group">
-    <table class="table table-hover" style="text-align:center; vertical-align: middle">
+    <table class="table table-hover applicantsTable">
     	<thead>
-    		<tr class="first-row" style="font-weight: bold">
-    			<td width="33%">Name</td>
-               	<td width="33%"> Approve
-                	<label>
+    		<tr class="first-row">
+    			<td width="25%">Name</td>
+    			<td width="25%">Role</td>
+               	<td width="25%">
+                	<label class="checkAll">
                 		<input type="checkbox" class="radio" ng-model="vm.checkAllApproved" ng-click="vm.approveAll()">
                 	</label>
+                	Approve
                 </td>
-                <td width="33%">Disapprove</td>
+                <td width="25%">Disapprove</td>
             </tr>
         </thead>
         <tbody>
             <tr class="applicant-rows" ng-repeat="applicant in vm.applicants">
-             	<td width="33%">{{ applicant.name }}</td>
-                <td width="33%" style="text-align:center"> 
+             	<td width="25%">{{ applicant.name }}</td>
+             	<td width="25%">{{ applicant.role }}</td>
+                <td width="25%" style="text-align:center">
                 	<label>
-                    	<input type="checkbox"  ng-checked="applicant.approved">
+                    	<input type="checkbox"  ng-checked="applicant.approved" ng-click="vm.changeApproveState(applicant)">
                     </label>
                 </td>
-                <td width="33%">
+                <td width="25%">
                 	<label>
-                    	<input type="checkbox" ng-checked="applicant.declined">
+                    	<input type="checkbox" ng-checked="applicant.declined" ng-click="vm.changeDeclineState(applicant)">
                     </label>
                 </td>
             </tr>
