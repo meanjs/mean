@@ -29,7 +29,7 @@
         }
       })
       .state('admin.adduser', {
-        url: '/users/adduser',
+        url: '/adduser',
         templateUrl: '/modules/users/client/views/admin/adduser.client.view.html'//,
         //controller: 'UserController',
         //controllerAs: 'vm',
