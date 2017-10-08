@@ -97,6 +97,11 @@ var UserSchema = new Schema({
     trim: true,
     validate: [validateLocalStrategyProperty, 'Please fill in your course']
   },
+  UFID: {
+    type: Number,
+    trim: true,
+    validate: [validateLocalStrategyProperty, 'Please fill in your UFID']
+  },
   password: {
     type: String,
     default: ''

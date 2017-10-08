@@ -26,6 +26,13 @@
           </div>
         </div>
         <div class="form-group" show-errors>
+          <label for="UFID">UF ID</label>
+          <input type="text" id="UFID" name="UFID" class="form-control" ng-model="vm.credentials.UFID" placeholder="00000000" required>
+          <div ng-messages="vm.userForm.UFID.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">UF ID is required.</p>
+          </div>
+        </div>
+        <div class="form-group" show-errors>
           <label for="course">Course</label>
           <select name="course" id="course" name="course" class="form-control" ng-model="vm.credentials.course" placeholder="TA" required>
             <option value="course1">Course1</option>
