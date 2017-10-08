@@ -87,6 +87,16 @@ var UserSchema = new Schema({
     lowercase: true,
     trim: true
   },
+  section: {
+    type: String,
+    trim: true,
+    validate: [validateLocalStrategyProperty, 'Please fill in your section']
+  },
+  course: {
+    type: String,
+    trim: true,
+    validate: [validateLocalStrategyProperty, 'Please fill in your course']
+  },
   password: {
     type: String,
     default: ''
@@ -115,7 +125,8 @@ var UserSchema = new Schema({
       enum: ['user', 'ta', 'technician', 'superta', 'admin']
     }],
     default: ['user'],
-    required: 'Please provide at least one role'
+    required: 'Please provide at least one role',
+    validate: [validateLocalStrategyProperty, 'Please fill in your desired role']
   },
   updated: {
     type: Date
