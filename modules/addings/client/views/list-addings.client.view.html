@@ -10,12 +10,17 @@
   #name{
     width: 50%;
   }
-  select {
-    width: 75%;
-    border: none;
-    border-radius: 4px;
-    background-color: #f1f1f1;
-}
+  #quantity{
+    margin: 0 8px;
+
+  }
+  #units {
+    width: 100%;
+    margin: 0 8px;
+  }
+  #ingredient {
+    margin: 0 8px;
+  }
 
 </style>
 
@@ -35,13 +40,14 @@
             </br></br>
             <table cellspacing="5" cellpading="3" width="50%">
               <tr>
-                <td>Quantity</td>
-                <td>Unit</td>
-                <td>Ingredient Name</td>
+                <td id="ingredient">Ingredient Name</td>
+                <td id="quantity">Quantity</td>
+                <td id="units">Unit</td>
               </tr>
               <tr>
-                <td><input name="quantity" type="number" id="quantity" placeholder="0"/></td>
-                <td>
+                <td id="ingredient"><input name="ingredient" type="text"  placeholder="Ingredient Name"/></td>
+                <td id="quantity"><input name="quantity" type="number"  placeholder="0"/></td>
+                <td id="units">
                   <!--<div class="btn-group">
                     <button type="button" class="btn btn-success">Action</button>
                     <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -59,7 +65,7 @@
                       <li><a href="#">dash</a></li>
                     </ul>
                   </div>-->
-                  <select class="form-control">
+                  <select class="form-control" >
                     <option>Cups</option>
                     <option>Ounces</option>
                     <option>Tbs</option>
@@ -70,7 +76,6 @@
                     <option>dash</option>
                   </select>
                 </td>
-                <td><input name="ingredient" type="text" id="ingredient" placeholder="Ingredient Name"/></td>
               </tr>
   
             </table>
