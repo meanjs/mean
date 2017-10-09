@@ -1,6 +1,6 @@
-.content {
+/*.content {
   margin-top: 50px;
-}
+}*/
 .undecorated-link:hover {
   text-decoration: none;
 }
@@ -41,3 +41,71 @@ a:hover .header-profile-image {
 .has-error .help-inline.error-text {
   display: inline;
 }
+
+/*header*/
+.navbar{
+  margin-bottom: 0;
+}
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
+.navbar-right {
+  margin-right: 20px;
+}
+.input-group{
+  width: 500px;
+}
+.glyphicon-user{
+  font-size: 20px;
+}
+.navbar-inverse{
+  /*background-color: rgba(223,93,74,0.3);*/
+  background-color: #ffffff;
+  background-image: none;
+  border-color: transparent;
+}
+.navbar-inverse .navbar-brand, .navbar-inverse .navbar-nav > li > a {
+  text-shadow: none;
+}
+
+/*body*/
+.container{
+  margin-right: 0;
+  margin-left: 0;
+  padding-left: 0;
+  padding-right: 0;
+  width: 100%;
+}
+.properties{
+  height: 300px;
+}
+.content{
+  margin-top: 58px;
+}
+.navbar-inverse .navbar-brand{
+  color: rgb(249,192,120);
+}
+
+/*lower nav*/
+.lowerNav .textLN{
+  height: 50px;
+  background-color: rgb(223,93,74);
+  padding-top: 15px; 
+}
+.left{
+  margin-right: 50px;
+}
+.textLN a{
+  color: #ffffff; 
+}
+
+
+
+/*
+Color Guide
+Green: rgb(174,200,107);
+light blue: rgb(140,212,201);
+light orange: rgb(249,192,120);
+orange: rgb(253,131,93);
+dark orange: rgb(223,93,74);
+*/
