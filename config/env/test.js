@@ -4,7 +4,7 @@ var defaultEnvConfig = require('./default');
 
 module.exports = {
   db: {
-    uri: process.env.MONGOHQ_URL || process.env.MONGODB_URI || 'mongodb://' + (process.env.DB_1_PORT_27017_TCP_ADDR || 'localhost') + '/mean-test',
+    uri: process.env.MONGOHQ_URL || process.env.MONGODB_URI || 'mongodb://InventoryApp:InventoryApp@ds155934.mlab.com:55934/cen3101-mean-test',
     options: {},
     // Enable mongoose debug mode
     debug: process.env.MONGODB_DEBUG || false

@@ -13,7 +13,7 @@ acl = new acl(new acl.memoryBackend());
  */
 exports.invokeRolesPolicies = function () {
   acl.allow([{
-    roles: ['admin'],
+    roles: ['admin', 'superta', 'technician'], //All should be able to create, read, update, and delete articles.
     allows: [{
       resources: '/api/articles',
       permissions: '*'
@@ -21,25 +21,18 @@ exports.invokeRolesPolicies = function () {
       resources: '/api/articles/:articleId',
       permissions: '*'
     }]
-  }, {
-    roles: ['user'],
+  }, 
+  {
+    roles: ['ta'],
     allows: [{
       resources: '/api/articles',
       permissions: ['get']
     }, {
       resources: '/api/articles/:articleId',
-      permissions: ['get']
+      permissions: ['get', 'post', 'put'] //TA's can modify and create articles but not delete them from the database.
     }]
-  }, {
-    roles: ['guest'],
-    allows: [{
-      resources: '/api/articles',
-      permissions: ['get']
-    }, {
-      resources: '/api/articles/:articleId',
-      permissions: ['get']
-    }]
-  }]);
+  }
+  ]);
 };
 
 /**
@@ -47,6 +40,13 @@ exports.invokeRolesPolicies = function () {
  */
 exports.isAllowed = function (req, res, next) {
   var roles = (req.user) ? req.user.roles : ['guest'];
+
+  //If a user is not yet an approved user, do not allow any changes to be made on the database.
+  if(!req.user || !req.user.approvedStatus || req.user.approvedStatus != true){
+    return res.status(403).json({
+      message: 'User is not yet approved for database changes (check attribute approvedStatus)'
+    });
+  }
 
   // If an article is being processed and the current user created it then allow any manipulation
   if (req.article && req.user && req.article.user && req.article.user.id === req.user.id) {

@@ -14,7 +14,7 @@ var mongoose = require('mongoose'),
   chalk = require('chalk');
 
 owasp.config(config.shared.owasp);
-
+//TODO User schema still needs: modulesAssigned 
 
 /**
  * A Validation function for local strategy properties
@@ -94,6 +94,10 @@ var UserSchema = new Schema({
   salt: {
     type: String
   },
+  approvedStatus :{
+    type: Boolean,
+    default: false
+  },
   profileImageURL: {
     type: String,
     default: 'modules/users/client/img/profile/default.png'
@@ -104,12 +108,13 @@ var UserSchema = new Schema({
   },
   providerData: {},
   additionalProvidersData: {},
+  //Escalating option levels include "TA", "Technician"=="SuperTA", "Admin".
   roles: {
     type: [{
       type: String,
-      enum: ['user', 'admin']
+      enum: ['ta', 'technician', 'superta', 'admin']
     }],
-    default: ['user'],
+    default: ['ta'],
     required: 'Please provide at least one role'
   },
   updated: {
