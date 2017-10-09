@@ -4,7 +4,7 @@ var defaultEnvConfig = require('./default');
 
 module.exports = {
   db: {
-    uri: process.env.MONGOHQ_URL || process.env.MONGODB_URI || 'mongodb://student:classcen3031@ds045465.mlab.com:45465/class',
+    uri: process.env.MONGOHQ_URL || process.env.MONGODB_URI || 'mongodb://jmcacioppo:healthify@ds161574.mlab.com:61574/health_tracker',
     options: {},
     // Enable mongoose debug mode
     debug: process.env.MONGODB_DEBUG || false
