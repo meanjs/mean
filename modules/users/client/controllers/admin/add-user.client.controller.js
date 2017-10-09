@@ -14,12 +14,6 @@
     vm.getPopoverMsg = PasswordValidator.getPopoverMsg;
     vm.signup = signup;
     vm.signin = signin;
-    vm.credentials = {};
-    vm.credentials.course = 'course1';
-    vm.credentials.roles = 'TA';
-    vm.credentials.UFID = 12345678;
-    vm.credentials.section = 'section1';
-    vm.callOauthProvider = callOauthProvider;
     vm.usernameRegex = /^(?=[\w.-]+$)(?!.*[._-]{2})(?!\.)(?!.*\.$).{3,34}$/;
 
     // Get an eventual error defined in the URL query string:
@@ -56,16 +50,6 @@
       UsersService.userSignin(vm.credentials)
         .then(onUserSigninSuccess)
         .catch(onUserSigninError);
-    }
-
-    // OAuth provider request
-    function callOauthProvider(url) {
-      if ($state.previous && $state.previous.href) {
-        url += '?redirect_to=' + encodeURIComponent($state.previous.href);
-      }
-
-      // Effectively call OAuth authentication route:
-      $window.location.href = url;
     }
 
     // Authentication Callbacks
