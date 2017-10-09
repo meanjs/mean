@@ -15,7 +15,6 @@
 
   }
   #units {
-    width: 100%;
     margin: 0 8px;
   }
   #ingredient {
@@ -33,6 +32,7 @@
         <fieldset>
           <div class="form-group" show-errors>
             <!--<label class="control-label" for="name"></label>-->
+            <p>Recipe Name</p>
             <input name="name" type="text" ng-model="vm.adding.name" id="name" class="form-control" placeholder="Recipe Name" required>
             <!--<div ng-messages="vm.form.addingForm.name.$error" role="alert">
               <p class="help-block error-text" ng-message="required">Adding a recipe name is required.</p>
@@ -40,9 +40,9 @@
             </br></br>
             <table cellspacing="5" cellpading="3" width="50%">
               <tr>
-                <td id="ingredient">Ingredient Name</td>
-                <td id="quantity">Quantity</td>
-                <td id="units">Unit</td>
+                <td id="ingredient"><p>Ingredient Name</p></td>
+                <td id="quantity"><p>Quantity</p></td>
+                <td id="units"><p>Unit</p></td>
               </tr>
               <tr>
                 <td id="ingredient"><input name="ingredient" type="text"  placeholder="Ingredient Name"/></td>
