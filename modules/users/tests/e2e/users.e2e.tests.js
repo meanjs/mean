@@ -9,6 +9,7 @@ describe('Users E2E Tests:', function () {
     password: 'P@$$w0rd!!',
     course: 'Course 1',
     section: 'Section 1',
+    role: 'TA',
     UFID: 12345678
   };
 
@@ -20,6 +21,7 @@ describe('Users E2E Tests:', function () {
     password: 'P@$$w0rd!!',
     course: 'Course 1',
     section: 'Section 1',
+    role: 'TA',
     UFID: 87654321
   };
 
