@@ -59,7 +59,11 @@
           </div>
           </br>
           <div class="form-group">
-            <button type="submit" class="btn btn-success">Healthify</button>
+            <button type="submit" class="btn btn-primary">Healthify</button>
+          </div>
+          <div class="alert alert-warning alert-dismissible" role="alert">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <strong>Please enter a recipe name!</strong>
           </div>
           <div ng-show="vm.error" class="text-danger">
             <strong ng-bind="vm.error"></strong>
