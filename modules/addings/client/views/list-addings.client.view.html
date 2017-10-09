@@ -1,4 +1,24 @@
 <section>
+<style>
+  #directions {
+    width: 75%;
+    /*padding: 100px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;*/
+    resize: true;
+  }
+  #name{
+    width: 50%;
+  }
+  select {
+    width: 75%;
+    border: none;
+    border-radius: 4px;
+    background-color: #f1f1f1;
+}
+
+</style>
+
     <center>
     <div class="page-header">
       <h1>Create New Recipe</h1>
@@ -20,7 +40,7 @@
                 <td>Ingredient Name</td>
               </tr>
               <tr>
-                <td><input name="quantity" type="text" id="quantity" placeholder="0"/></td>
+                <td><input name="quantity" type="number" id="quantity" placeholder="0"/></td>
                 <td>
                   <!--<div class="btn-group">
                     <button type="button" class="btn btn-success">Action</button>
@@ -64,8 +84,9 @@
           </div>
           </br>
           <div class="form-group">
-            <h4>Directions</h4>
-            <input name="directions" type="text" id="directions" class="form-control" placeholder="Enter Directions Here"/>
+            <h4>Recipe Directions</h4>
+            <!--<input name="directions" type="text" id="directions" class="form-control" placeholder="Enter Directions Here"/>-->
+            <textarea  id="directions" class="form-control" rows="5" placeholder="Enter Directions Here"></textarea>
           </div>
           </br>
           <div class="form-group">
