@@ -3,7 +3,7 @@
     <div class="page-header">
       <h1>Create New Recipe</h1>
     </div>
-    <div class="col-md-12">
+    <div class="jumbotron">
       <form name="vm.form.addingForm" class="form-horizontal" ng-submit="vm.save(vm.form.addingForm.$valid)" novalidate>
         <fieldset>
           <div class="form-group" show-errors>
@@ -22,7 +22,7 @@
               <tr>
                 <td><input name="quantity" type="text" id="quantity" placeholder="0"/></td>
                 <td>
-                  <div class="btn-group">
+                  <!--<div class="btn-group">
                     <button type="button" class="btn btn-success">Action</button>
                     <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       <span class="caret"></span>
@@ -38,7 +38,13 @@
                       <li><a href="#">pinch</a></li>
                       <li><a href="#">dash</a></li>
                     </ul>
-                  </div>
+                  </div>-->
+                  <select class="form-control">
+                    <option>Cups</option>
+                    <option>Ounces</option>
+                    <option>Tbs</option>
+                    <option>tsp</option>
+                  </select>
                 </td>
                 <td><input name="ingredient" type="text" id="ingredient" placeholder="Ingredient Name"/></td>
               </tr>
@@ -59,7 +65,7 @@
           </div>
           </br>
           <div class="form-group">
-            <button type="submit" class="btn btn-primary">Healthify</button>
+            <button type="submit" class="btn btn-lg btn-primary" disabled="disabled">Healthify</button>
           </div>
           <div class="alert alert-warning alert-dismissible" role="alert">
               <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
