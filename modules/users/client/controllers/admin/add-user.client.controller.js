@@ -3,17 +3,22 @@
 
   angular
     .module('users')
-    .controller('AuthenticationController', AuthenticationController);
+    .controller('AddUserController', AuthenticationController);
 
-  AuthenticationController.$inject = ['$scope', '$state', 'UsersService', '$location', '$window', 'Authentication', 'PasswordValidator', 'Notification'];
+  AddUserController.$inject = ['$scope', '$state', 'UsersService', '$location', '$window', 'Authentication', 'PasswordValidator', 'Notification'];
 
-  function AuthenticationController($scope, $state, UsersService, $location, $window, Authentication, PasswordValidator, Notification) {
+  function AddUserController($scope, $state, UsersService, $location, $window, Authentication, PasswordValidator, Notification) {
     var vm = this;
 
     vm.authentication = Authentication;
     vm.getPopoverMsg = PasswordValidator.getPopoverMsg;
     vm.signup = signup;
     vm.signin = signin;
+    vm.credentials = {};
+    vm.credentials.course = 'course1';
+    vm.credentials.roles = 'TA';
+    vm.credentials.UFID = 12345678;
+    vm.credentials.section = 'section1';
     vm.callOauthProvider = callOauthProvider;
     vm.usernameRegex = /^(?=[\w.-]+$)(?!.*[._-]{2})(?!\.)(?!.*\.$).{3,34}$/;
 
