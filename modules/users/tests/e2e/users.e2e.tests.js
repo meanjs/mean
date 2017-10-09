@@ -6,11 +6,7 @@ describe('Users E2E Tests:', function () {
     lastName: 'user',
     email: 'test.user@meanjs.com',
     username: 'testUser',
-    password: 'P@$$w0rd!!',
-    course: 'Course 1',
-    section: 'Section 1',
-    role: 'TA',
-    UFID: 12345678
+    password: 'P@$$w0rd!!'
   };
 
   var user2 = {
@@ -18,11 +14,7 @@ describe('Users E2E Tests:', function () {
     lastName: 'user2',
     email: 'test.user2@meanjs.com',
     username: 'testUser2',
-    password: 'P@$$w0rd!!',
-    course: 'Course 1',
-    section: 'Section 1',
-    role: 'TA',
-    UFID: 87654321
+    password: 'P@$$w0rd!!'
   };
 
   var signout = function () {

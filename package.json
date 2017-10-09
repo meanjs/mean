@@ -95,7 +95,6 @@
   },
   "devDependencies": {
     "coveralls": "~2.13.0",
-    "eslint": "^4.8.0",
     "gulp-istanbul": "~1.1.1",
     "gulp-mocha": "~3.0.1",
     "gulp-protractor": "~4.0.0",
