@@ -20,9 +20,11 @@
 
     // Remove existing Customizing
     function remove() {
-      if ($window.confirm('Are you sure you want to delete?')) {
-        vm.customizing.$remove($state.go('customizings.list'));
-      }
+      alert("YOOOOO");
+      // if ($window.confirm('Are you sure you want to delete?')) {
+      //   vm.customizing.$remove($state.go('customizings.list'));
+      // }
+
     }
 
     // Save Customizing
