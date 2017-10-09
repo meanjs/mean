@@ -30,7 +30,7 @@
       })
       .state('admin.adduser', {
         url: '/adduser',
-        templateUrl: '/modules/users/client/views/admin/adduser.client.view.html'//,
+        templateUrl: '/modules/users/client/views/admin/add-user.client.view.html'//,
         //controller: 'UserController',
         //controllerAs: 'vm',
         //resolve: {
