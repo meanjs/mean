@@ -70,6 +70,22 @@ exports.list = function (req, res) {
   });
 };
 
+exports.unapprovedList = function(req, res) {
+  User
+    .find({ approvedStatus: false })
+    .sort('-created')
+    .populate('user', 'displayName')
+    .exec(function(err, unapprovedUsers) {
+      if (err) {
+        return res.status(422).send({
+          message: errorHandler.getErrorMessage(err)
+        });
+      }
+
+      res.json(unapprovedUsers);
+    });
+}
+
 /**
  * User middleware
  */

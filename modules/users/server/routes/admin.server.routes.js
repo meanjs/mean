@@ -14,14 +14,18 @@ module.exports = function (app) {
   app.route('/api/users')
     .get(adminPolicy.isAllowed, admin.list);
 
+  app.route('/api/unapproved')
+    .get(adminPolicy.isAllowed, admin.unapprovedList)
+    //.delete(adminPolicy.isAllowed, admin.deleteUnapprovedUser);
+
   // Single user routes
   app.route('/api/users/:userId')
     .get(adminPolicy.isAllowed, admin.read)
     .put(adminPolicy.isAllowed, admin.update)
     .delete(adminPolicy.isAllowed, admin.delete);
 
-  // Accepting applicants routes
-  // app.route('/api/viewApplicants').put(adminPolicy.isAllowed, admin.unapprovedApplicants);
+
+
 
   // Finish by binding the user middleware
   app.param('userId', admin.userByID);
