@@ -3,17 +3,14 @@
 
   angular
     .module('users')
-    .controller('AddUserController', AuthenticationController);
+    .controller('AddUserController', AddUserController);
 
-  AddUserController.$inject = ['$scope', '$state', 'UsersService', '$location', '$window', 'Authentication', 'PasswordValidator', 'Notification'];
+  AddUserController.$inject = ['$scope', '$state', 'UsersService', '$location', '$window', 'Notification'];
 
-  function AddUserController($scope, $state, UsersService, $location, $window, Authentication, PasswordValidator, Notification) {
+  function AddUserController($scope, $state, UsersService, $location, $window, Notification) {
     var vm = this;
 
-    vm.authentication = Authentication;
-    vm.getPopoverMsg = PasswordValidator.getPopoverMsg;
     vm.signup = signup;
-    vm.signin = signin;
     vm.usernameRegex = /^(?=[\w.-]+$)(?!.*[._-]{2})(?!\.)(?!.*\.$).{3,34}$/;
 
     // Get an eventual error defined in the URL query string:
@@ -21,10 +18,6 @@
       Notification.error({ message: $location.search().err });
     }
 
-    // If user is signed in then redirect back home
-    if (vm.authentication.user) {
-      $location.path('/');
-    }
 
     function signup(isValid) {
 
@@ -35,26 +28,13 @@
       }
 
       UsersService.userSignup(vm.credentials)
-        .then(onUserSignupSuccess)
-        .catch(onUserSignupError);
-    }
-
-    function signin(isValid) {
-
-      if (!isValid) {
-        $scope.$broadcast('show-errors-check-validity', 'vm.userForm');
-
-        return false;
-      }
-
-      UsersService.userSignin(vm.credentials)
-        .then(onUserSigninSuccess)
-        .catch(onUserSigninError);
+        .then(onAddUserSuccess)
+        .catch(onAddUserError);
     }
 
     // Authentication Callbacks
 
-    function onUserSignupSuccess(response) {
+    function onAddUserSuccess(response) {
       // If successful we assign the response to the global user model
       vm.authentication.user = response;
       Notification.success({ message: '<i class="glyphicon glyphicon-ok"></i> Signup successful!' });
@@ -62,20 +42,10 @@
       $state.go($state.previous.state.name || 'home', $state.previous.params);
     }
 
-    function onUserSignupError(response) {
-      Notification.error({ message: response.data.message, title: '<i class="glyphicon glyphicon-remove"></i> Signup Error!', delay: 6000 });
+    function onAddUserError(response) {
+      Notification.error({ message: response.data.message, title: '<i class="glyphicon glyphicon-remove"></i> Add User Error!', delay: 6000 });
     }
 
-    function onUserSigninSuccess(response) {
-      // If successful we assign the response to the global user model
-      vm.authentication.user = response;
-      Notification.info({ message: 'Welcome ' + response.firstName });
-      // And redirect to the previous or home page
-      $state.go($state.previous.state.name || 'home', $state.previous.params);
-    }
-
-    function onUserSigninError(response) {
-      Notification.error({ message: response.data.message, title: '<i class="glyphicon glyphicon-remove"></i> Signin Error!', delay: 6000 });
-    }
+    
   }
 }());

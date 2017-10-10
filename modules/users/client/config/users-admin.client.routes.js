@@ -31,14 +31,8 @@
       .state('admin.adduser', {
         url: '/adduser',
         templateUrl: '/modules/users/client/views/admin/add-user.client.view.html'//,
-        //controller: 'UserController',
-        //controllerAs: 'vm',
-        //resolve: {
-        //  userResolve: getUser
-        //},
-        //data: {
-        //  pageTitle: '{{ userResolve.displayName }}'
-        //}
+        controller: 'UserController',
+        controllerAs: 'vm'
       })
       .state('admin.user-edit', {
         url: '/users/:userId/edit',
