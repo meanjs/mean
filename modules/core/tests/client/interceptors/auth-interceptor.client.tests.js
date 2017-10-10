@@ -59,7 +59,7 @@
         var promise = authInterceptor.responseError(response);
         expect($q.reject).toHaveBeenCalled();
         expect(Authentication.user).toBe(null);
-        expect($state.transitionTo).toHaveBeenCalledWith('authentication.signin');
+        expect($state.transitionTo).toHaveBeenCalledWith('signin');
       });
     });
 
