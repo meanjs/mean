@@ -29,6 +29,11 @@ module.exports = function () {
           message: 'Invalid username or password (' + (new Date()).toLocaleTimeString() + ')'
         });
       }
+      if(!user.approvedStatus) {
+        return done(null, false, {
+          message: 'Not approved by an admin'
+        });
+      }
 
       return done(null, user);
     });
