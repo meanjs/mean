@@ -14,6 +14,10 @@ module.exports = function (app) {
   app.route('/api/users')
     .get(adminPolicy.isAllowed, admin.list);
 
+  app.route('/api/unapproved')
+    .get(adminPolicy.isAllowed, admin.unapprovedList)
+    //.delete(adminPolicy.isAllowed, admin.deleteUnapprovedUser);
+
   // Single user routes
   app.route('/api/users/:userId')
     .get(adminPolicy.isAllowed, admin.read)

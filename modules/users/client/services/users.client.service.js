@@ -24,6 +24,10 @@
           provider: '@provider'
         }
       },
+      getUnapprovedUsers: {
+        method: 'GET',
+        url: '/api/users/unapproved'
+      },
       sendPasswordResetToken: {
         method: 'POST',
         url: '/api/auth/forgot'
@@ -59,10 +63,35 @@
       },
       userSignin: function (credentials) {
         return this.signin(credentials).$promise;
+      },
+      getAllUnapprovedUsers: function() {
+        return this.getUnapprovedUsers().$promise;
       }
     });
 
     return Users;
+  }
+
+  angular
+    .module('users.admin.services')
+    .factory('ApplicantsService', ApplicantsService);
+
+  ApplicantsService.$inject = ['$resource'];
+
+  function ApplicantsService($resource) {
+    var Applicants = $resource('/api/unapproved', {}, {
+      delete: {
+        method: 'DELETE'
+      }
+    });
+    
+    angular.extend(Users, {
+      deleteApplicant: function () {
+        return this.delete().$promise;
+      }
+    });
+
+    return Applicants;
   }
 
   // TODO this should be Users service
