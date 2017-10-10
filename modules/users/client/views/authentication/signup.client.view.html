@@ -1,15 +1,25 @@
 <div>
-  <h3 class="col-xs-12 text-center">Or sign up using your email</h3>
+  <br></br>
+  <h3 class="col-xs-12 text-center"><b>Sign up</b></h3>
   <div class="col-xs-offset-2 col-xs-8 col-md-offset-4 col-md-4">
     <form name="vm.userForm" ng-submit="vm.signup(vm.userForm.$valid)" class="signin" novalidate autocomplete="off">
       <fieldset>
+        <!--
         <div class="form-group" show-errors>
           <label for="firstName">First Name</label>
           <input type="text" id="firstName" name="firstName" class="form-control" ng-model="vm.credentials.firstName" placeholder="First Name" required autofocus>
           <div ng-messages="vm.userForm.firstName.$error" role="alert">
             <p class="help-block error-text" ng-message="required">First name is required.</p>
           </div>
+        -->
+        <div class="form-group" show-errors>
+          <label for="Name">Name</label>
+          <input type="text" id="Name" name="Name" class="form-control" ng-model="vm.credentials.Name" placeholder="Name" required autofocus>
+          <div ng-messages="vm.userForm.Name.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Name is required.</p>
+          </div>
         </div>
+        <!--
         <div class="form-group" show-errors>
           <label for="lastName">Last Name</label>
           <input type="text" id="lastName" name="lastName" class="form-control" ng-model="vm.credentials.lastName" placeholder="Last Name" required>
@@ -17,6 +27,13 @@
             <p class="help-block error-text" ng-message="required">Last name is required.</p>
           </div>
         </div>
+      -->
+      <div class="form-group" show-errors>
+          <label for="Age">Age</label>
+          <input type="text" id="age" name="age" class="form-control" ng-model="vm.credentials.age" placeholder="Age" required autofocus>
+          <div ng-messages="vm.userForm.age.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Age is required.</p>
+          </div>
         <div class="form-group" show-errors>
           <label for="email">Email</label>
           <input type="email" id="email" name="email" class="form-control" ng-model="vm.credentials.email" placeholder="Email" lowercase required>
