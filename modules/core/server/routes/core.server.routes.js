@@ -2,10 +2,7 @@
 
 module.exports = function (app) {
   // Root routing
-  var core = require('../controllers/core.server.controller.js'); //Public view
-    //categories = require('../controllers/categories.server.controller.js'), //TODO enable category routing and item sorting.
-    //express = require('express'), 
-    //router = express.Router();
+  var core = require('../controllers/core.server.controller');
 
   // Define error pages
   app.route('/server-error').get(core.renderServerError);
@@ -15,10 +12,4 @@ module.exports = function (app) {
 
   // Define application route
   app.route('/*').get(core.renderIndex);
-
-  // Render main home for no login, or for public/apply
-  app.route('/public/apply').get(core.renderIndex)
-  						   .post(core.apply); //For adding user applications
-
-  //TODO enforce admin login check below this point in controllers.
 };

@@ -152,7 +152,12 @@
         it('Should have templateUrl', function () {
           expect(editstate.templateUrl).toBe('/modules/articles/client/views/admin/form-article.client.view.html');
         });
+
+        xit('Should go to unauthorized route', function () {
+
+        });
       });
+
     });
   });
 }());

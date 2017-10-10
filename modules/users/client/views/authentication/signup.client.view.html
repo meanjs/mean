@@ -1,5 +1,5 @@
 <div>
-  <h3 class="col-xs-12 text-center">Sign up</h3>
+  <h3 class="col-xs-12 text-center">Or sign up using your email</h3>
   <div class="col-xs-offset-2 col-xs-8 col-md-offset-4 col-md-4">
     <form name="vm.userForm" ng-submit="vm.signup(vm.userForm.$valid)" class="signin" novalidate autocomplete="off">
       <fieldset>
@@ -26,48 +26,6 @@
           </div>
         </div>
         <div class="form-group" show-errors>
-          <label for="UFID">UF ID</label>
-          <input type="text" id="UFID" name="UFID" class="form-control" ng-model="vm.credentials.UFID" placeholder="00000000" required>
-          <div ng-messages="vm.userForm.UFID.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">UF ID is required.</p>
-          </div>
-        </div>
-        <div class="form-group" show-errors>
-          <label for="course">Course</label>
-          <select name="course" id="course" name="course" class="form-control" ng-model="vm.credentials.course" placeholder="course1" required>
-            <option value="course1">Course1</option>
-            <option value="course2">Course2</option>
-            <option value="course3">Course3</option>
-            <option value="course4">Course4</option>
-          </select>
-          <div ng-messages="vm.userForm.course.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">Course is required.</p>
-          </div>
-        </div>
-        <div class="form-group" show-errors>
-          <label for="section">Section</label>
-          <select name="section" id="section" name="section" class="form-control" ng-model="vm.credentials.section" placeholder="section1" required>
-            <option value="section1">Section 1</option>
-            <option value="section2">Section 2</option>
-            <option value="section3">Section 3</option>
-            <option value="section4">Section 4</option>
-          </select>
-          <div ng-messages="vm.userForm.section.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">Section is required.</p>
-          </div>
-        </div>
-        <div class="form-group" show-errors>
-          <label for="roles">Role</label>
-          <select name="roles" id="roles" name="roles" class="form-control" ng-model="vm.credentials.roles" placeholder="TA" required>
-            <option value="TA">TA</option>
-            <option value="seniorTA">Senior TA</option>
-            <option value="technician">Technician</option>
-            <option value="admin">Administrator</option>
-          </select>
-          <div ng-messages="vm.userForm.roles.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">Role is required.</p>
-          </div>
-        <div class="form-group" show-errors>
           <label for="username">Username</label>
           <input type="text" id="username" name="username" class="form-control" ng-model="vm.credentials.username" ng-pattern="vm.usernameRegex" placeholder="Username" lowercase required>
           <div ng-messages="vm.userForm.username.$error" role="alert">
@@ -92,11 +50,9 @@
         <div class="text-center form-group">
           <button type="submit" class="btn btn-primary">Sign up</button>
           &nbsp; or&nbsp;
-          <a ui-sref="signin" class="show-signup">Sign in</a>
+          <a ui-sref="authentication.signin" class="show-signup">Sign in</a>
         </div>
       </fieldset>
     </form>
   </div>
 </div>
-
-

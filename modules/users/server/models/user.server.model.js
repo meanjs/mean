@@ -14,7 +14,7 @@ var mongoose = require('mongoose'),
   chalk = require('chalk');
 
 owasp.config(config.shared.owasp);
-//TODO User schema still needs: modulesAssigned 
+
 
 /**
  * A Validation function for local strategy properties
@@ -87,31 +87,12 @@ var UserSchema = new Schema({
     lowercase: true,
     trim: true
   },
-  section: {
-    type: String,
-    trim: true,
-    validate: [validateLocalStrategyProperty, 'Please fill in your section']
-  },
-  course: {
-    type: String,
-    trim: true,
-    validate: [validateLocalStrategyProperty, 'Please fill in your course']
-  },
-  ufid: {
-    type: Number,
-    trim: true,
-    validate: [validateLocalStrategyProperty, 'Please fill in your UFID']
-  },
   password: {
     type: String,
     default: ''
   },
   salt: {
     type: String
-  },
-  approvedStatus :{
-    type: Boolean,
-    default: false
   },
   profileImageURL: {
     type: String,
@@ -123,15 +104,13 @@ var UserSchema = new Schema({
   },
   providerData: {},
   additionalProvidersData: {},
-  //Escalating option levels include "TA", "Technician"=="SuperTA", "Admin".
   roles: {
     type: [{
       type: String,
-      enum: ['ta', 'technician', 'superta', 'admin']
+      enum: ['user', 'admin']
     }],
-    default: ['ta'],
-    required: 'Please provide at least one role',
-    validate: [validateLocalStrategyProperty, 'Please fill in your desired role']
+    default: ['user'],
+    required: 'Please provide at least one role'
   },
   updated: {
     type: Date

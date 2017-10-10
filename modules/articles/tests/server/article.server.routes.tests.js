@@ -45,8 +45,7 @@ describe('Article CRUD tests', function () {
       email: 'test@test.com',
       username: credentials.usernameOrEmail,
       password: credentials.password,
-      provider: 'local',
-      approvedStatus: true
+      provider: 'local'
     });
 
     // Save a user to the test db and create new article
@@ -232,8 +231,7 @@ describe('Article CRUD tests', function () {
       username: _creds.usernameOrEmail,
       password: _creds.password,
       provider: 'local',
-      roles: ['admin'],
-      approvedStatus: true
+      roles: ['admin']
     });
 
     _orphan.save(function (err, orphan) {
@@ -342,8 +340,7 @@ describe('Article CRUD tests', function () {
       username: _creds.usernameOrEmail,
       password: _creds.password,
       provider: 'local',
-      roles: ['admin', 'user'],
-      approvedStatus: true
+      roles: ['admin', 'user']
     });
 
     _articleOwner.save(function (err, _user) {

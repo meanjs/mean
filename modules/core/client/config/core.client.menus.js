@@ -33,5 +33,10 @@
       title: 'Change Password',
       state: 'settings.password'
     });
+
+    menuService.addSubMenuItem('account', 'settings', {
+      title: 'Manage Social Accounts',
+      state: 'settings.accounts'
+    });
   }
 }());
