@@ -20,6 +20,9 @@ module.exports = function (app) {
     .put(adminPolicy.isAllowed, admin.update)
     .delete(adminPolicy.isAllowed, admin.delete);
 
+  // Accepting applicants routes
+  // app.route('/api/viewApplicants').put(adminPolicy.isAllowed, admin.unapprovedApplicants);
+
   // Finish by binding the user middleware
   app.param('userId', admin.userByID);
 };
