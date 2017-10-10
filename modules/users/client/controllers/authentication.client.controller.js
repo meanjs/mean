@@ -33,7 +33,7 @@
 
         return false;
       }
-
+      
       UsersService.userSignup(vm.credentials)
         .then(onUserSignupSuccess)
         .catch(onUserSignupError);
