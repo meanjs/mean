@@ -28,10 +28,10 @@
           pageTitle: '{{ userResolve.displayName }}'
         }
       })
-      .state('admin.adduser', {
-        url: '/adduser',
-        templateUrl: '/modules/users/client/views/admin/add-user.client.view.html'//,
-        controller: 'UserController',
+      .state('admin.add-user', {
+        url: '/add',
+        templateUrl: '/modules/users/client/views/admin/add-user.client.view.html',
+        controller: 'AddUserController',
         controllerAs: 'vm'
       })
       .state('admin.user-edit', {
