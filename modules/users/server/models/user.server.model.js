@@ -14,7 +14,7 @@ var mongoose = require('mongoose'),
   chalk = require('chalk');
 
 owasp.config(config.shared.owasp);
-
+//TODO User schema still needs: modulesAssigned 
 
 /**
  * A Validation function for local strategy properties
@@ -127,9 +127,9 @@ var UserSchema = new Schema({
   roles: {
     type: [{
       type: String,
-      enum: ['user', 'ta', 'technician', 'superta', 'admin']
+      enum: ['ta', 'technician', 'superta', 'admin']
     }],
-    default: ['user'],
+    default: ['ta'],
     required: 'Please provide at least one role',
     validate: [validateLocalStrategyProperty, 'Please fill in your desired role']
   },
