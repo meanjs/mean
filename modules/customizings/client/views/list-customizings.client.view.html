@@ -1,0 +1,118 @@
+<section>
+
+<!--   <div class="page-header">
+    <h1>Customizings</h1>
+  </div>
+  <div class="list-group">
+    <a ng-repeat="customizing in vm.customizings"
+       ui-sref="customizings.view({ customizingId: customizing._id })"
+       class="list-group-item">
+      <small class="list-group-item-text">
+        Posted on
+        <span ng-bind="customizing.created | date:'mediumDate'"></span>
+        by
+        <span ng-if="customizing.user" ng-bind="customizing.user.displayName"></span>
+        <span ng-if="!customizing.user">Deleted User</span>
+      </small>
+      <h4 class="list-group-item-heading" ng-bind="customizing.name"></h4>
+    </a>
+  </div>
+  <div class="alert alert-warning text-center" ng-if="vm.customizings.$resolved && !vm.customizings.length">
+    No Customizings yet, why don't you <a ui-sref="customizings.create">create one</a>?
+  </div> --> 
+<style>
+th, td {
+    border: 1px solid black;
+    padding: 5px;
+}
+table {
+  width: 60%;
+  margin-left: 200px;
+}
+p {
+  margin-left: 450px;
+}
+</style>
+
+<h1 style="margin-left: 400px">Customize Recipe</h1>
+
+<table style="margin-top: 90px">
+  <tr>
+    <td style="width: 50%">Ingredient Name #1</td>
+    <td style="width: 25%">Units: Cups</td>
+    <td>Quantity: 2</td>
+  </tr>
+</table>
+<button style="margin-left: 455px; margin-top: 5px; margin-bottom: 5px">see 3 other possibilities</button>
+<table>
+  <tr>
+    <td style="width: 50%">Ingredient Name #2</td>
+    <td style="width: 25%">Units: Pounds</td>
+    <td>Quantity: 1</td>
+  </tr>
+</table>
+<button style="margin-left: 455px; margin-top: 5px; margin-bottom: 5px">See 2 other possibilities</button>
+<table id = "myTable">
+  <tr>
+    <th>Ingredient Name #1</th>
+    <th>Alternate Ingredient #1</th>
+    <th>Alternate Ingredient #2</th>
+  </tr>
+  <tr>
+    <td>pic and data</td>
+    <td>pic and data</td>
+    <td>pic and data</td>
+  </tr>
+</table>
+<p></p>
+<table>
+  <tr>
+    <td style="width: 50%">Ingredient Name #3</td>
+    <td style="width: 25%">Units: Cups</td>
+    <td>Quantity: 2</td>
+  </tr>
+</table>
+<button style="margin-left: 455px; margin-top: 5px; margin-bottom: 5px">see 1 other possibilities</button>
+<br>
+<button style="margin-left: 510px; margin-top: 90px">SAVE</button>
+
+<!-- <h2>My Life</h2>
+<div class="container">
+    <div class="panel-group" id="accordion">
+        <div class="panel panel-default">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" ng-href="#something" target="_self">see something</a>
+                    </h4>
+                </div>
+                <div id="something" class="panel-collapse collapse">
+                    <div class="panel-body">you saw something</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
+<!-- 
+ <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo">Simple collapsible</button>
+  <div id="demo" class="collapse">
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+  </div>
+
+
+<button ng-click="vm.myFunction()">Click Me</button>
+<table id = "myTable">
+  <tr>
+    <th>Ingredient Name #1</th>
+    <th>Alternate Ingredient #1</th>
+    <th>Alternate Ingredient #2</th>
+  </tr>
+  <tr>
+    <td>pic and data</td>
+    <td>pic and data</td>
+    <td>pic and data</td>
+  </tr>
+</table> -->
+</section>
