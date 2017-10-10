@@ -45,8 +45,7 @@ describe('Article Admin CRUD tests', function () {
       roles: ['user', 'admin'],
       username: credentials.usernameOrEmail,
       password: credentials.password,
-      provider: 'local',
-      approvedStatus: true
+      provider: 'local'
     });
 
     // Save a user to the test db and create new article

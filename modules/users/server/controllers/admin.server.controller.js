@@ -8,24 +8,6 @@ var path = require('path'),
   User = mongoose.model('User'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller'));
 
-
-exports.approve = function(req, res) {
-  var user = req.user;
-  //TODO Validated permissions for this type of request.
-  user.approvedStatus = true;
-
-  /* Save the article */
-  user.save(function(err) {
-    if(err) {
-      console.log(err);
-      res.status(400).send(err);
-    } else {
-      res.json(user);
-    }
-  });
-};
-
-
 /**
  * Show the current user
  */

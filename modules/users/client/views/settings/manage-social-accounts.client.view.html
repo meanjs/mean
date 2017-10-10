@@ -1,0 +1,69 @@
+<section class="row">
+  <h3 class="col-md-12 text-center" ng-show="vm.hasConnectedAdditionalSocialAccounts()">Connected social accounts:</h3>
+  <div class="col-md-12 text-center">
+    <!-- If the user's provider field (primary) is a social account, show it here -->
+    <div ng-if="vm.user.provider !== 'local'" class="social-account-container">
+      <img ng-src="/modules/users/client/img/buttons/{{vm.user.provider}}.png">
+      <i class="glyphicon glyphicon-check text-success user-primary-account" data-toggle="popover" title="Primary: {{vm.user.provider}}"></i>
+    </div>
+    <div ng-repeat="(providerName, providerData) in vm.user.additionalProvidersData" class="social-account-container">
+      <a href ng-click="vm.removeUserSocialAccount(providerName)">
+        <img class="social-button" ng-src="/modules/users/client/img/buttons/{{::providerName}}.png">
+        <span class="btn btn-danger btn-add-remove-account">
+          <i class="glyphicon glyphicon-trash"></i>
+        </span>
+      </a>
+    </div>
+  </div>
+  <h3 class="col-md-12 text-center" ng-show="!vm.hasConnectedAdditionalSocialAccounts()">Unconnected social accounts:</h3>
+  <div class="col-md-12 text-center">
+    <div class="social-account-container" ng-hide="vm.isConnectedSocialAccount('facebook')">
+      <a href="" ng-click="vm.callOauthProvider('/api/auth/facebook')">
+        <img class="social-button" ng-src="/modules/users/client/img/buttons/facebook.png">
+        <span class="btn btn-success btn-add-remove-account">
+          <i class="glyphicon glyphicon-plus"></i>
+        </span>
+      </a>
+    </div>
+    <div class="social-account-container" ng-hide="vm.isConnectedSocialAccount('twitter')">
+      <a href="" ng-click="vm.callOauthProvider('/api/auth/twitter')">
+        <img class="social-button" ng-src="/modules/users/client/img/buttons/twitter.png">
+        <span class="btn btn-success btn-add-remove-account">
+          <i class="glyphicon glyphicon-plus"></i>
+        </span>
+      </a>
+    </div>
+    <div class="social-account-container" ng-hide="vm.isConnectedSocialAccount('google')">
+      <a href="" ng-click="vm.callOauthProvider('/api/auth/google')">
+        <img class="social-button" ng-src="/modules/users/client/img/buttons/google.png">
+        <span class="btn btn-success btn-add-remove-account">
+          <i class="glyphicon glyphicon-plus"></i>
+        </span>
+      </a>
+    </div>
+    <div class="social-account-container" ng-hide="vm.isConnectedSocialAccount('linkedin')">
+      <a href="" ng-click="vm.callOauthProvider('/api/auth/linkedin')">
+        <img class="social-button" ng-src="/modules/users/client/img/buttons/linkedin.png">
+        <span class="btn btn-success btn-add-remove-account">
+          <i class="glyphicon glyphicon-plus"></i>
+        </span>
+      </a>
+    </div>
+    <div class="social-account-container" ng-hide="vm.isConnectedSocialAccount('github')">
+      <a href="" ng-click="vm.callOauthProvider('/api/auth/github')">
+        <img class="social-button" ng-src="/modules/users/client/img/buttons/github.png">
+        <span class="btn btn-success btn-add-remove-account">
+          <i class="glyphicon glyphicon-plus"></i>
+        </span>
+      </a>
+    </div>
+    <div class="social-account-container" ng-hide="vm.isConnectedSocialAccount('paypal')">
+      <a href="" ng-click="vm.callOauthProvider('/api/auth/paypal')">
+        <img class="social-button" ng-src="/modules/users/client/img/buttons/paypal.png">
+        <span class="btn btn-success btn-add-remove-account">
+          <i class="glyphicon glyphicon-plus"></i>
+        </span>
+      </a>
+    </div>
+  </div>
+</section>
