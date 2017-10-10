@@ -1,4 +1,4 @@
-<section>
+<!-- <section>
   <div class="page-header">
     <h1>Options</h1>
   </div>
@@ -20,3 +20,86 @@
     No Options yet, why don't you <a ui-sref="options.create">create one</a>?
   </div>
 </section>
+ -->
+
+
+ <section>
+    <div class="container">
+      <div class="profile-edit-option">
+        <h1>My Profile</h1>
+        <div class="row">
+            <div class="col-md-4">
+                <h3>Your Name</h3>
+                <!-- <img src="../rsrc/profile_picture.png" class="img-circle" alt="Profile Photo" width="304" height="304"> -->
+                <i style="width: 304px; height: 304px" class="glyphicon glyphicon-user"></i>
+                <button type="button" class="btn btn-secondary">Upload New Photo</button>
+            </div>
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col-sm-2">
+                        <a class="nav-link active" href="#">Personal</a>
+                    </div>
+                    <div class="col-sm-2">
+                        <a class="nav-link" href="#">Health</a>
+                    </div>
+                </div>
+                <form class="row">
+                    <!-- PERSONAL -->
+                    <div class="col-md-6">
+                      <div class="form-update-profile row">
+                          <label for="inputEmail3" class="col-sm-3 col-form-label">Email</label>
+                          <div class="col-sm-9">
+                              <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+                          </div>
+                      </div>
+                      <div class="form-update-profile row">
+                          <label for="inputPassword3" class="col-sm-3 col-form-label">Password</label>
+                          <div class="col-sm-9">
+                              <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+                          </div>
+                      </div>
+                      <div class="form-update-profile row">
+                          <label for="inputPassword3" class="col-sm-3 col-form-label">Age</label>
+                          <div class="col-sm-9">
+                              <input type="password" class="form-control" id="inputPassword3" placeholder="Age">
+                          </div>
+                      </div>
+                      <div class="form-update-profile row">
+                          <div class="col-sm-10">
+                              <button type="submit" class="btn btn-primary">Update</button>
+                          </div>
+                      </div>
+                    </div>
+
+                    <!-- HEALTH -->
+                    <div class="col-md-6">
+                      <div class="form-update-profile row">
+                          <label for="inputEmail3" class="col-sm-3 col-form-label">Weight</label>
+                          <div class="col-sm-9">
+                              <input type="email" class="form-control" id="inputEmail3" placeholder="180 lbs">
+                          </div>
+                      </div>
+                      <div class="form-update-profile row">
+                          <label for="inputPassword3" class="col-sm-3 col-form-label">Allergies</label>
+                          <div class="col-sm-9">
+                              <input type="password" class="form-control" id="inputPassword3" placeholder="Nuts">
+                          </div>
+                      </div>
+                      <div class="form-update-profile row">
+                          <label for="inputPassword3" class="col-sm-3 col-form-label">Diabetic</label>
+                          <div class="col-sm-9">
+                              <input type="password" class="form-control" id="inputPassword3" placeholder="Yes">
+                          </div>
+                      </div>
+                      <div class="form-update-profile row">
+                          <div class="col-sm-10">
+                              <button type="submit" class="btn btn-primary">Save</button>
+                          </div>
+                      </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+      </div>
+    </div><!-- /.container -->
+ </section>
