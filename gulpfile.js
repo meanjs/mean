@@ -21,11 +21,7 @@ var _ = require('lodash'),
   wiredep = require('wiredep').stream,
   path = require('path'),
   endOfLine = require('os').EOL,
-  protractor = require('gulp-protractor').protractor,
-  webdriver_update = require('gulp-protractor').webdriver_update,
-  webdriver_standalone = require('gulp-protractor').webdriver_standalone,
   del = require('del'),
-  KarmaServer = require('karma').Server,
   semver = require('semver');
 
 // Local settings
@@ -153,6 +149,8 @@ gulp.task('uglify', function () {
     .pipe(plugins.ngAnnotate())
     .pipe(plugins.uglify({
       mangle: true
+    }).on('error', function (err) {
+      console.log('Uglify error : ', err.toString());
     }))
     .pipe(plugins.concat('application.min.js'))
     .pipe(plugins.rev())
@@ -330,6 +328,7 @@ gulp.task('mocha:coverage', ['pre-test', 'mocha'], function () {
 
 // Karma test runner task
 gulp.task('karma', function (done) {
+  var KarmaServer = require('karma').Server;
   new KarmaServer({
     configFile: __dirname + '/karma.conf.js'
   }, done).start();
@@ -337,6 +336,7 @@ gulp.task('karma', function (done) {
 
 // Run karma with coverage options set and write report
 gulp.task('karma:coverage', function (done) {
+  var KarmaServer = require('karma').Server;
   new KarmaServer({
     configFile: __dirname + '/karma.conf.js',
     preprocessors: {
@@ -414,15 +414,20 @@ gulp.task('mongo-seed', function (done) {
 });
 
 // Downloads the selenium webdriver if protractor version is compatible
-gulp.task('webdriver_update', webdriver_update);
+gulp.task('webdriver_update', function (done) {
+  return require('gulp-protractor').webdriver_update(done);
+});
 
 // Start the standalone selenium server
 // NOTE: This is not needed if you reference the
 // seleniumServerJar in your protractor.conf.js
-gulp.task('webdriver_standalone', webdriver_standalone);
+gulp.task('webdriver_standalone', function (done) {
+  return require('gulp-protractor').webdriver_standalone(done);
+});
 
 // Protractor test runner task
 gulp.task('protractor', ['webdriver_update'], function () {
+  var protractor = require('gulp-protractor').protractor;
   gulp.src([])
     .pipe(protractor({
       configFile: 'protractor.conf.js'

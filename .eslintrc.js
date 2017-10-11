@@ -40,7 +40,7 @@ module.exports = {
     'one-var': [0, 'never'],
     'one-var-declaration-per-line': [2, 'always'],
     'padded-blocks': 0,
-    'space-before-function-paren': ['error', {
+    'space-before-function-paren': [2, {
       'anonymous': 'always',
       'named': 'never',
       'asyncArrow': 'always'
