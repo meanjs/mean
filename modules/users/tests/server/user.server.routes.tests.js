@@ -54,7 +54,8 @@ describe('User CRUD tests', function () {
       email: 'test@test.com',
       username: credentials.usernameOrEmail,
       password: credentials.password,
-      provider: 'local'
+      provider: 'local',
+      approvedStatus: true
     };
 
     user = new User(_user);
