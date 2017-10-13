@@ -13,7 +13,7 @@ module.exports = {
   // Binding to 127.0.0.1 is safer in production.
   host: process.env.HOST || '0.0.0.0',
   db: {
-    uri: process.env.MONGOHQ_URL || process.env.MONGODB_URI || 'mongodb://' + (process.env.DB_1_PORT_27017_TCP_ADDR || 'localhost') + '/mean',
+    uri: 'mongodb://' + process.env.MONGO_PROD_USER + ':' + process.env.MONGO_PROD_PASS + '@ds119585.mlab.com:19585/' + process.env.DB_ENDPOINT,
     options: {
       /**
       * Uncomment to enable ssl certificate based authentication to mongodb
