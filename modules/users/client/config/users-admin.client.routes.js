@@ -41,7 +41,7 @@
         }
       })
       .state('admin.user-view-applicants', {// Adding view applicants view and functionality to routes
-        url: '/viewApplicants',
+        url: '/unapproved',
         templateUrl: '/modules/users/client/views/admin/view-applicants.html',
         controller: 'ViewApplicantsController',
         controllerAs: 'vm',

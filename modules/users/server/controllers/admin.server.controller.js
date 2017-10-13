@@ -86,6 +86,22 @@ exports.unapprovedList = function(req, res) {
     });
 }
 
+exports.changeToAccepeted = function(req, res){
+  var user = req.model;
+  user.approvedStatus = !user.approvedStatus;
+
+  user.save(function (err) {
+    if (err) {
+      return res.status(422).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    }
+
+    res.json(user);
+  });
+
+}
+
 /**
  * User middleware
  */

@@ -5,7 +5,6 @@
         <h1>Users</h1>
       </div>
       <div class="col-md-4" style="margin-top: 2em">
-        {{vm.unapprovedUsers}}
         <input class="form-control col-md-4" type="text" ng-model="vm.search" placeholder="Search" ng-change="vm.figureOutItemsToDisplay()" />
       </div>
     </div>
@@ -26,15 +25,15 @@
             </tr>
         </thead>
         <tbody>
-            <tr class="applicant-rows" ng-repeat="applicant in vm.users">
-             	<td width="25%">{{ applicant.username }}</td>
-             	<td width="25%"></td>
+            <tr class="applicant-rows" ng-repeat="applicant in vm.unapprovedUsers">
+             	<td width="25%">{{ applicant.firstName }} {{ applicant.lastName }}</td>
+             	<td width="25%"> {{ applicant.roles }} </td>
                 <td width="25%" style="text-align:center">
                 	<label>
-                    	<input type="checkbox" ng-click="vm.changeApproveState(applicant)">
+                    	<input type="checkbox" ng-check= "applicant.approvedStatus" ng-click="vm.changeApproveState(applicant)">
                     </label>
                 </td>
-                <td width="25%" class="delete-button" ng-click="vm.deleteApplicant(applicant)">x</td>
+                <td width="25%" class="delete-button" ng-click="vm.removeApplicant(applicant)">x</td>
             </tr>
         </tbody>
     </table>

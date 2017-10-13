@@ -64,7 +64,7 @@
       userSignin: function (credentials) {
         return this.signin(credentials).$promise;
       },
-      getAllUnapprovedUsers: function() {
+      getAllUnapprovedUsers: function () {
         return this.getUnapprovedUsers().$promise;
       }
     });
@@ -79,12 +79,54 @@
   ApplicantsService.$inject = ['$resource'];
 
   function ApplicantsService($resource) {
-    var Applicants = $resource('/api/unapproved', {}, {
-      delete: {
-        method: 'DELETE'
+    var Users = $resource('/api/users', {}, {
+      update: {
+        method: 'PUT'
+      },
+      updatePassword: {
+        method: 'POST',
+        url: '/api/users/password'
+      },
+      deleteProvider: {
+        method: 'DELETE',
+        url: '/api/users/accounts',
+        params: {
+          provider: '@provider'
+        }
+      },
+      getUnapprovedUsers: {
+        method: 'GET',
+        url: '/api/users/unapproved'
+      },
+      sendPasswordResetToken: {
+        method: 'POST',
+        url: '/api/auth/forgot'
+      },
+      resetPasswordWithToken: {
+        method: 'POST',
+        url: '/api/auth/reset/:token'
+      },
+      signup: {
+        method: 'POST',
+        url: '/api/auth/signup'
+      },
+      signin: {
+        method: 'POST',
+        url: '/api/auth/signin'
       }
     });
-    
+
+    var Applicants = $resource('/api/unapproved', {}, {
+      delete: {
+        method: 'DELETE',
+        url: '/api/unapproved'
+      },
+      updateApproval: {
+        method: 'PUT',
+        url: '/api/unapproved'
+      }
+    });
+
     angular.extend(Users, {
       deleteApplicant: function () {
         return this.delete().$promise;
