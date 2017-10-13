@@ -184,7 +184,7 @@
         // Mock logged in user
         _Authentication_.user = {
           username: 'test',
-          roles: ['user']
+          roles: ['ta']
         };
 
         AuthenticationController = $controller('AuthenticationController as vm', {

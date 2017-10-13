@@ -119,7 +119,7 @@
         beforeEach(inject(function ($state, $rootScope, _Authentication_, _$httpBackend_) {
           Authentication.user = {
             name: 'user',
-            roles: ['user']
+            roles: ['ta']
           };
 
           $httpBackend = _$httpBackend_;
