@@ -206,7 +206,7 @@ describe('Article CRUD tests', function () {
         .expect(403)
         .end(function (articleDeleteErr, articleDeleteRes) {
           // Set message assertion
-          (articleDeleteRes.body.message).should.match('User is not authorized');
+          (articleDeleteRes.body.message).should.match('User is not yet approved for database changes (check attribute approvedStatus)');
 
           // Handle article error error
           done(articleDeleteErr);
