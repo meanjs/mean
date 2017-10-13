@@ -35,8 +35,12 @@ exports.invokeRolesPolicies = function () {
  * Check If Admin Policy Allows
  */
 exports.isAllowed = function (req, res, next) {
-  var roles = (req.user) ? req.user.roles : ['guest'];
-
+  if(req.user){
+    roles = req.user.roles;
+  }
+  else{
+    roles = ['guest'];
+  }
   //If a user is not yet an approved user, do not allow any changes to be made on the database.
   if(!req.user || !req.user.approvedStatus || req.user.approvedStatus != true){
     return res.status(403).json({
