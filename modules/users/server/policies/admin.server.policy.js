@@ -35,6 +35,7 @@ exports.invokeRolesPolicies = function () {
  * Check If Admin Policy Allows
  */
 exports.isAllowed = function (req, res, next) {
+  var roles;
   if(req.user){
     roles = req.user.roles;
   }
