@@ -59,7 +59,7 @@
 
       // Mock logged in user
       Authentication.user = {
-        roles: ['user', 'admin']
+        roles: ['ta']
       };
 
       // Initialize the Articles List controller.

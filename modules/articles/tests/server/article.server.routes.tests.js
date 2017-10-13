@@ -340,7 +340,7 @@ describe('Article CRUD tests', function () {
       username: _creds.usernameOrEmail,
       password: _creds.password,
       provider: 'local',
-      roles: ['admin', 'user']
+      roles: ['admin']
     });
 
     _articleOwner.save(function (err, _user) {

@@ -43,7 +43,7 @@ describe('Configuration Tests:', function () {
         email: 'test-admin@localhost.com',
         firstName: 'Admin',
         lastName: 'Test',
-        roles: ['admin', 'user']
+        roles: ['admin']
       };
 
       _user = {
@@ -51,7 +51,7 @@ describe('Configuration Tests:', function () {
         email: 'test-user@localhost.com',
         firstName: 'User',
         lastName: 'Test',
-        roles: ['user']
+        roles: ['ta']
       };
 
       _article = {
