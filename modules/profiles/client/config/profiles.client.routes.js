@@ -21,7 +21,8 @@
         controllerAs: 'vm',
         data: {
           pageTitle: 'Profiles List'
-        }
+        },
+        css: 'modules/profiles/client/css/list-profile.css'
       })
       .state('profiles.create', {
         url: '/create',

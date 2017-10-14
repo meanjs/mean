@@ -5,10 +5,15 @@
     .module('addings')
     .controller('AddingsListController', AddingsListController);
 
-  AddingsListController.$inject = ['AddingsService'];
+  AddingsListController.$inject = ['AddingsService', '$scope'];
 
-  function AddingsListController(AddingsService) {
+  function AddingsListController(AddingsService, $scope) {
     var vm = this;
+
+    //DO YOUR FRONTEND JS CODE HERE
+    $scope.alert = () => {
+		alert('hello');
+	}
 
     vm.addings = AddingsService.query();
   }

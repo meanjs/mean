@@ -21,7 +21,8 @@
         controllerAs: 'vm',
         data: {
           pageTitle: 'Options List'
-        }
+        },
+        css: 'modules/options/client/css/list-options.css'
       })
       .state('options.create', {
         url: '/create',

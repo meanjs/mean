@@ -1,15 +1,21 @@
 body {
   padding-top: 50px;
 }
+
 .profile-edit-option {
   padding: 40px 15px;
   text-align: center;
 }
-.col { flex: 1 0 50%; }
+
+.col { 
+    flex: 1 0 50%; 
+}
+
 .image-circle {
     margin: 10px;
 }
-.form-update-profile{
+
+.form-update-profile {
     max-width: 400px;
     padding: 15px;
         padding-top: 15px;

@@ -1,0 +1,13 @@
+th, td {
+    border: 1px solid black;
+    padding: 5px;
+}
+
+table {
+  width: 60%;
+  margin-left: 200px;
+}
+
+p {
+  margin-left: 450px;
+}

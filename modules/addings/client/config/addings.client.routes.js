@@ -21,7 +21,8 @@
         controllerAs: 'vm',
         data: {
           pageTitle: 'Addings List'
-        }
+        },
+        css: 'modules/addings/client/css/list-addings.css'
       })
       .state('addings.create', {
         url: '/create',

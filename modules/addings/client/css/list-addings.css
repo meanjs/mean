@@ -1,0 +1,25 @@
+#directions {
+  width: 100%;
+  /*padding: 100px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;*/
+  overflow: auto;
+  resize: none;
+}
+
+#name{
+  width: 50%;
+}
+
+#quantity{
+  margin: 0 8px;
+
+}
+
+#units {
+  margin: 0 8px;
+}
+
+#ingredient {
+  margin: 0 8px;
+}

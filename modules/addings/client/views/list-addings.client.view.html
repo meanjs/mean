@@ -1,34 +1,9 @@
 <section>
-<style>
-  #directions {
-    width: 100%;
-    /*padding: 100px 20px;
-    margin: 8px 0;
-    box-sizing: border-box;*/
-    overflow: auto;
-    resize: none;
-  }
-  #name{
-    width: 50%;
-  }
-  #quantity{
-    margin: 0 8px;
-
-  }
-  #units {
-    margin: 0 8px;
-  }
-  #ingredient {
-    margin: 0 8px;
-  }
-
-</style>
-
   <div class="row">
     <center>
-    <div class="page-header">
-      <h1>Create New Recipe</h1>
-    </div>
+      <div class="page-header">
+        <h1 ng-click="alert()">Create New Recipe</h1>
+      </div>
     </center>
     <div class="jumbotron">
       <form name="vm.form.addingForm" class="form-horizontal" ng-submit="vm.save(vm.form.addingForm.$valid)" novalidate>
@@ -121,6 +96,5 @@
       </form>
     </div>
   </div>
-    
-  </section>
+</section>
   

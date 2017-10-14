@@ -21,7 +21,8 @@
         controllerAs: 'vm',
         data: {
           pageTitle: 'Customizings List'
-        }
+        },
+        css: 'modules/customizings/client/css/list-customizings.css'
       })
       .state('customizings.create', {
         url: '/create',
