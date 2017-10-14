@@ -1,6 +1,6 @@
 
-@import url(http://fonts.googleapis.com/css?family=Exo:100,200,400);
-@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:700,400,300);
+/*@import url(http://fonts.googleapis.com/css?family=Exo:100,200,400);
+@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:700,400,300);*/
 
 .body{
   background-image: url(http://training.health.ufl.edu/handouts/Templates/UF_background_orange_right_button.jpg);
@@ -16,7 +16,7 @@
   /*-webkit-filter: blur(0px);*/
 }
 .header{
-  left: calc(50% - 400px);
+  left: calc(50% - 420px);
   position: absolute;
   top: calc(50% - 120px);
 }
@@ -48,10 +48,10 @@
   font-family: 'Exo', sans-serif;
   font-size: 16px;
   font-weight: 400;
-  height: 30px;
+  height: 40px;
   margin-bottom: 10px;
   padding: 4px;
-  width: 250px;
+  width: 260px;
 }
 
 .login input[type=button]{
@@ -66,7 +66,7 @@
   font-weight: 400;
   height: 35px;
   padding: 6px;
-  width: 250px;
+  width: 260px;
 }
 .login input[type=button]:hover{
   opacity: 0.8;
@@ -89,6 +89,7 @@
   border: 1px solid rgba(255,255,255,0.9);
   outline: none;
 }
+
 ::-webkit-input-placeholder{
   color: white;
   color: rgba(255,255,255,0.6);
