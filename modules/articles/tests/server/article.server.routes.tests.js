@@ -45,7 +45,6 @@ describe('Article CRUD tests', function () {
       email: 'test@test.com',
       username: credentials.usernameOrEmail,
       password: credentials.password,
-      approvedStatus: true,
       provider: 'local'
     });
 
@@ -232,7 +231,6 @@ describe('Article CRUD tests', function () {
       username: _creds.usernameOrEmail,
       password: _creds.password,
       provider: 'local',
-      approvedStatus = true,
       roles: ['admin']
     });
 
