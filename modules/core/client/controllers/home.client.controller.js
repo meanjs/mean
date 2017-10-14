@@ -5,7 +5,14 @@
     .module('core')
     .controller('HomeController', HomeController);
 
-  function HomeController() {
+  HomeController.$inject = ['$scope'];
+
+  function HomeController($scope) {
     var vm = this;
+
+    //DO YOUR FRONTEND JS CODE HERE
+    $scope.alert = () => {
+		alert('hello');
+	}
   }
 }());
