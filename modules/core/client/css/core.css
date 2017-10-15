@@ -99,6 +99,18 @@ a:hover .header-profile-image {
   color: #ffffff; 
 }
 
+/*drop down menus in home page*/
+.dropMenu{
+  float: left;
+  width: 100%;
+  margin-left: 38.3%;
+
+}
+.dropup, .dropdown{
+  float: left;
+
+}
+
 
 
 /*
