@@ -103,12 +103,16 @@ a:hover .header-profile-image {
 .dropMenu{
   float: left;
   width: 100%;
-  margin-left: 38.3%;
+  margin-left: 36.3%;
 
 }
 .dropup, .dropdown{
   float: left;
 
+}
+.btn-prop{
+  background-color: white;
+  color: gray;
 }
 
 
