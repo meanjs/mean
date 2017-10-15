@@ -17,6 +17,7 @@
   "scripts": {
     "start": "grunt",
     "test": "grunt test",
+    "test:server": "grunt test:server",
     "postinstall": "bower install --config.interactive=false"
   },
   "dependencies": {
@@ -113,7 +114,7 @@
     "karma-ng-html2js-preprocessor": "^0.1.2",
     "karma-phantomjs-launcher": "~0.2.0",
     "load-grunt-tasks": "^3.2.0",
-    "mock-fs": "~3.4.0",
+    "mock-fs": "~3.12.0",
     "run-sequence": "^1.1.1",
     "should": "^7.0.1",
     "supertest": "^1.0.1"

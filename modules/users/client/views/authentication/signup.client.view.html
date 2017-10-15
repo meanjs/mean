@@ -4,19 +4,19 @@
     <form name="userForm" ng-submit="signup(userForm.$valid)" class="signin" novalidate autocomplete="off">
       <fieldset>
         <div class="form-group" show-errors>
-          <label for="firstName">First Name</label>
-          <input type="text" id="firstName" name="firstName" class="form-control" ng-model="credentials.firstName" placeholder="First Name" required>
-          <div ng-messages="userForm.firstName.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">First name is required.</p>
+          <label for="organization">Organization</label>
+          <input type="text" id="organization" name="organization" class="form-control" ng-model="credentials.organization" placeholder="Organization" required>
+          <div ng-messages="userForm.organization.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Organization is required.</p>
           </div>
         </div>
-        <div class="form-group" show-errors>
-          <label for="lastName">Last Name</label>
-          <input type="text" id="lastName" name="lastName" class="form-control" ng-model="credentials.lastName" placeholder="Last Name" required>
-          <div ng-messages="userForm.lastName.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">Last name is required.</p>
-          </div>
-        </div>
+        <!--<div class="form-group" show-errors>-->
+        <!--<label for="lastName">Last Name</label>-->
+        <!--<input type="text" id="lastName" name="lastName" class="form-control" ng-model="credentials.lastName" placeholder="Last Name" required>-->
+        <!--<div ng-messages="userForm.lastName.$error" role="alert">-->
+        <!--<p class="help-block error-text" ng-message="required">Last name is required.</p>-->
+        <!--</div>-->
+        <!--</div>-->
         <div class="form-group" show-errors>
           <label for="email">Email</label>
           <input type="email" id="email" name="email" class="form-control" ng-model="credentials.email" placeholder="Email" lowercase required>
@@ -34,11 +34,48 @@
         </div>
         <div class="form-group" show-errors>
           <label for="password">Password</label>
-            <input type="password" id="password" name="password" class="form-control" ng-model="credentials.password" placeholder="Password" popover="{{popoverMsg}}" popover-trigger="focus" password-validator required>
+          <input type="password" id="password" name="password" class="form-control" ng-model="credentials.password" placeholder="Password" popover="{{popoverMsg}}" popover-trigger="focus" password-validator required>
           <div ng-messages="userForm.password.$error" role="alert">
             <p class="help-block error-text" ng-message="required">Password is required.</p>
             <div ng-repeat="passwordError in passwordErrors">
               <p class="help-block error-text" ng-show="userForm.password.$error.requirements">{{passwordError}}</p>
+            </div>
+          </div>
+        </div>
+        <div class="form-group" show-errors>
+          <label for="schoolName">School Name</label>
+          <input type="schoolName" id="schoolName" name="schoolName" class="form-control" ng-model="credentials.schoolName" placeholder="School Name">
+          <div ng-messages="userForm.schoolName.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">School name is required.</p>
+            <!--<div ng-repeat="passwordError in passwordErrors">-->
+            <!--<p class="help-block error-text" ng-show="userForm.password.$error.requirements">{{passwordError}}</p>-->
+            <!--</div>-->
+          </div>
+        </div>
+        <div class="form-group" show-errors>
+          <div>
+            <label>Contact</label>
+          </div>
+          <div>
+            <label for="firstName">First Name</label>
+            <input type="contact.firstName" id="firstName" name="firstName" class="form-control" ng-model="credentials.contact.firstName" placeholder="First Name">
+            <div ng-messages="userForm.contact.firstName.$error" role="alert">
+              <p class="help-block error-text" ng-message="required">First name is required.</p>
+            </div>
+          </div>
+
+          <div>
+            <label for="lastName">Last Name</label>
+            <input type="contact.lastName" id="lastName" name="lastName" class="form-control" ng-model="credentials.contact.lastName" placeholder="Last Name">
+            <div ng-messages="userForm.contact.lastName.$error" role="alert">
+              <p class="help-block error-text" ng-message="required">Last name is required.</p>
+            </div>
+          </div>
+          <div>
+            <label for="phoneNumber">Phone Number</label>
+            <input type="contact.phoneNumber" id="phoneNumber" name="phoneNumber" class="form-control" ng-model="credentials.contact.phoneNumber" placeholder="Phone Number">
+            <div ng-messages="userForm.contact.lastName.$error" role="alert">
+              <p class="help-block error-text" ng-message="required">Phone number is required.</p>
             </div>
           </div>
         </div>
