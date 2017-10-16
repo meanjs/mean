@@ -133,23 +133,6 @@ describe('Article CRUD tests', function () {
     });
   });
 
-  it('should be able to get a single article if not signed in', function (done) {
-    // Create new article model instance
-    var articleObj = new Article(article);
-
-    // Save the article
-    articleObj.save(function () {
-      agent.get('/api/articles/' + articleObj._id)
-        .end(function (req, res) {
-          // Set assertion
-          res.body.should.be.instanceof(Object).and.have.property('title', article.title);
-
-          // Call the assertion callback
-          done();
-        });
-    });
-  });
-
   it('should return proper error for single article with an invalid Id, if not signed in', function (done) {
     // test is not a valid mongoose Id
     agent.get('/api/articles/test')
