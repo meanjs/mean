@@ -34,7 +34,8 @@ describe('Article CRUD tests', function () {
     // Create user credentials
     credentials = {
       usernameOrEmail: 'username',
-      password: 'M3@n.jsI$Aw3$0m3'
+      password: 'M3@n.jsI$Aw3$0m3',
+      approvedStatus: true
     };
 
     // Create a new user
@@ -45,7 +46,8 @@ describe('Article CRUD tests', function () {
       email: 'test@test.com',
       username: credentials.usernameOrEmail,
       password: credentials.password,
-      provider: 'local'
+      provider: 'local',
+      approvedStatus: true
     });
 
     // Save a user to the test db and create new article
@@ -219,7 +221,8 @@ describe('Article CRUD tests', function () {
     // Create orphan user creds
     var _creds = {
       usernameOrEmail: 'orphan',
-      password: 'M3@n.jsI$Aw3$0m3'
+      password: 'M3@n.jsI$Aw3$0m3',
+      approvedStatus: true
     };
 
     // Create orphan user
@@ -231,7 +234,8 @@ describe('Article CRUD tests', function () {
       username: _creds.usernameOrEmail,
       password: _creds.password,
       provider: 'local',
-      roles: ['admin']
+      roles: ['admin'],
+      approvedStatus: true
     });
 
     _orphan.save(function (err, orphan) {
