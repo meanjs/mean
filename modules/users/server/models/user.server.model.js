@@ -44,14 +44,14 @@ var OrgSchema = new Schema({
     type: String,
     trim: true
   },
-  email: {
-    type: String,
-    unique: true,
-    lowercase: true,
-    trim: true,
-    default: '',
-    validate: [validateLocalStrategyEmail, 'Please fill a valid email address']
-  },
+  // email: {
+  //   type: String,
+  //   unique: true,
+  //   lowercase: true,
+  //   trim: true,
+  //   default: '',
+  //   validate: [validateLocalStrategyEmail, 'Please fill a valid email address']
+  // },
   username: {
     type: String,
     unique: 'Username already exists',
