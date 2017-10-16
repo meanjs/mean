@@ -114,25 +114,6 @@ describe('Article CRUD tests', function () {
       });
   });
 
-  it('should be able to get a list of articles if not signed in', function (done) {
-    // Create new article model instance
-    var articleObj = new Article(article);
-
-    // Save the article
-    articleObj.save(function () {
-      // Request articles
-      agent.get('/api/articles')
-        .end(function (req, res) {
-          // Set assertion
-          res.body.should.be.instanceof(Array).and.have.lengthOf(1);
-
-          // Call the assertion callback
-          done();
-        });
-
-    });
-  });
-
   it('should return proper error for single article with an invalid Id, if not signed in', function (done) {
     // test is not a valid mongoose Id
     agent.get('/api/articles/test')
