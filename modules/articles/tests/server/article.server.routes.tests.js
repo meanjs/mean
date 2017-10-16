@@ -287,6 +287,7 @@ describe('Article CRUD tests', function () {
       username: _creds.usernameOrEmail,
       password: _creds.password,
       provider: 'local',
+      approvedStatus : true,
       roles: ['admin']
     });
 
