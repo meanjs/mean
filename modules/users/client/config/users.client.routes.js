@@ -39,15 +39,6 @@
           pageTitle: 'Settings password'
         }
       })
-      .state('settings.accounts', {
-        url: '/accounts',
-        templateUrl: '/modules/users/client/views/settings/manage-social-accounts.client.view.html',
-        controller: 'SocialAccountsController',
-        controllerAs: 'vm',
-        data: {
-          pageTitle: 'Settings accounts'
-        }
-      })
       .state('settings.picture', {
         url: '/picture',
         templateUrl: '/modules/users/client/views/settings/change-profile-picture.client.view.html',
@@ -57,14 +48,7 @@
           pageTitle: 'Settings picture'
         }
       })
-      .state('authentication', {
-        abstract: true,
-        url: '/authentication',
-        templateUrl: '/modules/users/client/views/authentication/authentication.client.view.html',
-        controller: 'AuthenticationController',
-        controllerAs: 'vm'
-      })
-      .state('authentication.signup', {
+      .state('signup', {
         url: '/signup',
         templateUrl: '/modules/users/client/views/authentication/signup.client.view.html',
         controller: 'AuthenticationController',
@@ -73,7 +57,7 @@
           pageTitle: 'Signup'
         }
       })
-      .state('authentication.signin', {
+      .state('signin', {
         url: '/signin?err',
         templateUrl: '/modules/users/client/views/authentication/signin.client.view.html',
         controller: 'AuthenticationController',

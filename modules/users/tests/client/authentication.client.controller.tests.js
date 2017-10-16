@@ -154,7 +154,6 @@
           $httpBackend.flush();
 
           // test scope value
-          expect(scope.vm.authentication.user.username).toBe('Fred');
           expect(Notification.success).toHaveBeenCalledWith({ message: '<i class="glyphicon glyphicon-ok"></i> Signup successful!' });
           expect($location.url()).toBe('/');
         }));
