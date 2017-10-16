@@ -271,27 +271,6 @@ describe('Article CRUD tests', function () {
     });
   });
 
-  it('should be able to get a single article if not signed in and verify the custom "isCurrentUserOwner" field is set to "false"', function (done) {
-    // Create new article model instance
-    var articleObj = new Article(article);
-
-    // Save the article
-    articleObj.save(function (err) {
-      if (err) {
-        return done(err);
-      }
-      agent.get('/api/articles/' + articleObj._id)
-        .end(function (req, res) {
-          // Set assertion
-          res.body.should.be.instanceof(Object).and.have.property('title', article.title);
-          // Assert the custom field "isCurrentUserOwner" is set to false for the un-authenticated User
-          res.body.should.be.instanceof(Object).and.have.property('isCurrentUserOwner', false);
-          // Call the assertion callback
-          done();
-        });
-    });
-  });
-
   it('should be able to get single article, that a different user created, if logged in & verify the "isCurrentUserOwner" field is set to "false"', function (done) {
     // Create temporary user creds
     var _creds = {
