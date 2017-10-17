@@ -59,13 +59,20 @@ a:hover .header-profile-image {
   font-size: 20px;
 }
 .navbar-inverse{
-  /*background-color: rgba(223,93,74,0.3);*/
   background-color: #ffffff;
   background-image: none;
   border-color: transparent;
 }
 .navbar-inverse .navbar-brand, .navbar-inverse .navbar-nav > li > a {
   text-shadow: none;
+}
+
+.searchBar{
+  border-radius: 0;
+}
+.head:hover{
+  /*background-color: red;*/
+  color: black;
 }
 
 /*body*/
