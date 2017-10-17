@@ -33,7 +33,8 @@ describe('Article Admin CRUD tests', function () {
     // Create user credentials
     credentials = {
       usernameOrEmail: 'username',
-      password: 'M3@n.jsI$Aw3$0m3'
+      password: 'M3@n.jsI$Aw3$0m3',
+      approvedStatus : true
     };
 
     // Create a new user
@@ -42,11 +43,12 @@ describe('Article Admin CRUD tests', function () {
       lastName: 'Name',
       displayName: 'Full Name',
       email: 'test@test.com',
-      roles: ['user', 'admin'],
+      roles: ['admin'],
       username: credentials.usernameOrEmail,
       password: credentials.password,
-      provider: 'local',
-      approvedStatus: true
+      approvedStatus : true,
+      provider: 'local'
+
     });
 
     // Save a user to the test db and create new article

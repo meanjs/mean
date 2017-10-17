@@ -55,7 +55,8 @@
 
       // Mock logged in user
       Authentication.user = {
-        roles: ['user']
+        roles: ['ta'],
+        approvedStatus: true
       };
 
       // Initialize the Articles controller.
