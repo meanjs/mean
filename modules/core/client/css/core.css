@@ -1,100 +1,72 @@
 
-/*@import url(http://fonts.googleapis.com/css?family=Exo:100,200,400);
-@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:700,400,300);*/
-
-.body{
-  background-image: url(http://training.health.ufl.edu/handouts/Templates/UF_background_orange_right_button.jpg);
-  background-size: cover;
-  bottom: -40px;
-  height: auto;
-  left: -20px;
-  overflow-y: scroll;
-  position: fixed;
-  right: -40px;
-  top: -20px;
-  width: auto;
-  /*-webkit-filter: blur(0px);*/
+.content {
+  margin-top: 50px;
 }
-.header{
-  left: calc(50% - 420px);
+.undecorated-link:hover {
+  text-decoration: none;
+}
+[ng\:cloak],
+[ng-cloak],
+[x-ng-cloak],
+.ng-cloak,
+.x-ng-cloak {
+  display: none !important;
+}
+.user-header-dropdown-toggle {
+  padding-bottom: 11px !important;
+  padding-top: 11px !important;
+}
+.user-primary-account {
+  font-size: 30px;
   position: absolute;
-  top: calc(50% - 120px);
+  right: 10px;
+  top: 10px;
 }
-.header div{
-  color: #fff;
-  float: left;
-  font-family: 'Exo', sans-serif;
-  font-size: 40px;
-  font-weight: 200;
+.error-text {
+  display: none;
 }
-.header div span{
-  color: #015496 !important;
+.has-error .help-block.error-text {
+  display: block;
 }
-.login{
-  height: 150px;
-  left: calc(50% - 50px);
-  padding: 10px;
-  position: absolute;
-  top: calc(50% - 150px);
-  width: 350px;
+.has-error .help-inline.error-text {
+  display: inline;
 }
 
-.customInputBox {
-  background: transparent;
-  border: 1px solid white;
-  border: 1px solid rgba(255,255,255,0.6);
-  border-radius: 2px;
-  color: #fff;
-  font-family: 'Exo', sans-serif;
-  font-size: 16px;
-  font-weight: 400;
-  height: 40px;
-  margin-bottom: 10px;
-  padding: 4px;
-  width: 260px;
+.searchBar {
+  margin: 15px 10px;
 }
 
-.login input[type=button]{
-  background: #fff;
-  border: 1px solid white;
-  border: 1px solid #fff;
-  border-radius: 2px;
-  color: #a18d6c;
-  cursor: pointer;
-  font-family: 'Exo', sans-serif;
-  font-size: 16px;
-  font-weight: 400;
-  height: 35px;
-  padding: 6px;
-  width: 260px;
-}
-.login input[type=button]:hover{
-  opacity: 0.8;
-}
-.login input[type=button]:active{
-  opacity: 0.6;
-}
-.login input[type=text]:focus{
-  border: 1px solid white;
-  border: 1px solid rgba(255,255,255,0.9);
-  outline: none;
-}
-.login input[type=password]:focus{
-  border: 1px solid white;
-  border: 1px solid rgba(255,255,255,0.9);
-  outline: none;
-}
-.login input[type=button]:focus{
-  border: 1px solid white;
-  border: 1px solid rgba(255,255,255,0.9);
-  outline: none;
+.tableWrapper {
+  max-height: 600px;
+  overflow: auto;
 }
 
-::-webkit-input-placeholder{
-  color: white;
-  color: rgba(255,255,255,0.6);
+.leftText {
+  text-align: left;
 }
-::-moz-input-placeholder{
-  color: white;
-  color: rgba(255,255,255,0.6);
+.rightText {
+  text-align: right;
+}
+.centerText {
+  text-align: center;
+  vertical-align: middle;
+}
+.actionButton {
+  text-align: center;
+  vertical-align: middle;
+}
+.title {
+  margin-left: 20px;
+}
+
+.addCart {
+  margin-top: 15px;
+}
+
+.cart {
+  margin-bottom: 15px;
+}
+
+.container {
+  width: 100%;
 }
