@@ -86,20 +86,32 @@ exports.unapprovedList = function(req, res) {
     });
 }
 
-exports.changeToAccepeted = function(req, res){
-  var user = req.model;
-  user.approvedStatus = !user.approvedStatus;
+exports.changeToAccepted = function (req, res) {
+  var unapprovedUser = req.model;
+  unapprovedUser.approvedStatus = !unapprovedUser.approvedStatus;
 
-  user.save(function (err) {
+  unapprovedUser.save(function (err) {
     if (err) {
       return res.status(422).send({
         message: errorHandler.getErrorMessage(err)
       });
     }
-
-    res.json(user);
+    console.log(unapprovedUser);
+    res.json(unapprovedUser);
   });
 
+}
+
+
+exports.deleteApplicant = function (req, res) {
+  // var unapprovedUser = req.model;
+  var unapprovedUser = req.body;
+  if (unapprovedUser !== null) {
+    User.findOneAndRemove({'username': unapprovedUser.username, 'approvedStatus': false}, function (err) {
+      if (err) throw err;
+      console.log(unapprovedUser.approvedStatus);
+    });
+  }
 }
 
 /**

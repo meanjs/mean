@@ -17,17 +17,18 @@
 
 
     vm.removeApplicant = function (applicant) {
-      applicant.deleteApplicant();
-      vm.unapprovedUsers.splice(vm.unapprovedUsers.indexOf(applicant), 1);
+      var unapprovedUser = vm.unapprovedUsers.indexOf(applicant);
+      ApplicantsService.delete(123);
+      vm.unapprovedUsers.splice(unapprovedUser, 1);
     };
 
-    vm.changeStatus = function (applicant) {
-      applicant.updateApproval();
+    vm.changeApproveState = function (applicant) {
+      //var unapprovedUser = vm.unapprovedUsers.indexOf(applicant);
+      ApplicantsService.put(applicant);
     };
 
-    vm.checkAllApproved = function(){
-      
-    }
+    vm.checkAllApproved = function () {
+    };
 
   }
 }());
