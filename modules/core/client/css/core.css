@@ -153,9 +153,17 @@ a:hover .header-profile-image {
   font-size: 14px;
   margin-top: 10px;
   margin-left: 10px;
+  float: left;
 }
-.card-gradient{
-
+.card-icon{
+  width: 25px;
+  height: 25px;
+  
+}
+.card-icon-container{
+  float: right;
+  margin-right: 21px;
+  margin-top: 10px;
 }
 /*drop down menus in home page*/
 .dropMenu{
