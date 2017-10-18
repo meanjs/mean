@@ -58,22 +58,40 @@ a:hover .header-profile-image {
 .glyphicon-user{
   font-size: 20px;
 }
+.searchBar{
+  border-radius: 0;
+  
+}
+.searchBar-btn{
+  background-color: rgb(249,192,120);
+}
+.searchBar-btn:hover{
+  background-color: rgb(247,202,154);
+}
+.head:hover{
+  color: black !important;
+}
+.navbar{
+  background-color: white;
+}
+.navbar-inverse .navbar-brand, .navbar-inverse .navbar-nav > li > a {
+     text-shadow: none; 
+}
 .navbar-inverse{
   background-color: #ffffff;
   background-image: none;
   border-color: transparent;
 }
-.navbar-inverse .navbar-brand, .navbar-inverse .navbar-nav > li > a {
-  text-shadow: none;
+.user-img{
+  border-radius: 50%;
+  width:30px;
+  height: 30px;
+  margin-right: 7px;
+}
+.user-move{
+  padding-top: 12px !important;
 }
 
-.searchBar{
-  border-radius: 0;
-}
-.head:hover{
-  /*background-color: red;*/
-  color: black;
-}
 
 /*body*/
 .container{
@@ -85,12 +103,18 @@ a:hover .header-profile-image {
 }
 .properties{
   height: 300px;
+  padding-right: 0; 
+  padding-left: 0; 
 }
 .content{
   margin-top: 58px;
 }
 .navbar-inverse .navbar-brand{
   color: rgb(249,192,120);
+}
+.img-prop{
+  width:100%; 
+  height:100%;
 }
 
 /*lower nav*/
@@ -105,7 +129,34 @@ a:hover .header-profile-image {
 .textLN a{
   color: #ffffff; 
 }
+.filter-dropdown{
+  margin: 0px 0 0;
+}
+.card-info{
+  position: absolute;
+  bottom: 0%;
+  left: 5%;
+  color: #fff;
+  width: 95%;
+  height: 60px;
+}
+.card-info2{
+  position: absolute;
+  bottom: 0%;
+  left: 0%;
+  color: #fff;
+  width: 100%;
+  background-color: rgba(68,68,68,0.3);
+  height: 60px;
+}
+.card-name{
+  font-size: 14px;
+  margin-top: 10px;
+  margin-left: 10px;
+}
+.card-gradient{
 
+}
 /*drop down menus in home page*/
 .dropMenu{
   float: left;
