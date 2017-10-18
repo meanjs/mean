@@ -16,19 +16,38 @@
       });
 
 
-    vm.removeApplicant = function (applicant) {
-      var unapprovedUser = vm.unapprovedUsers.indexOf(applicant);
-      ApplicantsService.delete(123);
-      vm.unapprovedUsers.splice(unapprovedUser, 1);
+    vm.removeApplicant = function (user) {
+      if (user) {
+          user.$remove(); //This database call isn't working.
+          vm.unapprovedUsers.splice(vm.unapprovedUsers.indexOf(user), 1);
+          Notification.success('User deleted successfully!');
+      } else {
+          vm.user.$remove(function () {
+            $state.go('admin.users');
+            Notification.success({ message: '<i class="glyphicon glyphicon-ok"></i> User deleted successfully!' });
+          });
+        }
     };
 
-    vm.changeApproveState = function (applicant) {
-      //var unapprovedUser = vm.unapprovedUsers.indexOf(applicant);
-      ApplicantsService.put(applicant);
+    vm.approve = function (user) {
+      if (user) {
+          var newUser = user;
+          user.approvedStatus = true;
+          user.$update(newUser); //This database call isn't working.
+          vm.unapprovedUsers.splice(vm.unapprovedUsers.indexOf(user), 1);
+          Notification.success('User approved successfully!');
+      } else {
+          vm.user.$remove(function () {
+            $state.go('admin.users');
+            Notification.success({ message: '<i class="glyphicon glyphicon-ok"></i> User approved successfully!' });
+          });
+        }
     };
 
-    vm.checkAllApproved = function () {
+    vm.approveAll = function () {
+      for(var i=0; i<vm.unapprovedUsers.length; i++){
+        vm.approve(vm.unapprovedUsers[i]);
+      }
     };
-
   }
 }());

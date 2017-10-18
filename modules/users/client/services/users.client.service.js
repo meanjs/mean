@@ -119,11 +119,11 @@
     var Applicants = $resource('/api/unapproved', {}, {
       delete: {
         method: 'DELETE',
-        url: '/api/unapproved'
+        url: '/api/admin/unapproved'
       },
       updateApproval: {
         method: 'PUT',
-        url: '/api/unapproved'
+        url: '/api/admin/unapproved'
       }
     });
 
@@ -143,6 +143,7 @@
 
   AdminService.$inject = ['$resource'];
 
+  //Try angular.extending a new thing onto the user prototype so we can approve or disapprove
   function AdminService($resource) {
     return $resource('/api/users/:userId', {
       userId: '@_id'
