@@ -16,7 +16,7 @@
       })
       .state('admin.articles.list', {
         url: '',
-        templateUrl: '/modules/articles/client/views/admin/list-articles.client.view.html',
+        templateUrl: '/modules/items/client/views/admin/list-items.client.view.html',
         controller: 'ArticlesAdminListController',
         controllerAs: 'vm',
         data: {
@@ -25,7 +25,7 @@
       })
       .state('admin.articles.create', {
         url: '/create',
-        templateUrl: '/modules/articles/client/views/admin/form-article.client.view.html',
+        templateUrl: '/modules/items/client/views/admin/form-item.client.view.html',
         controller: 'ArticlesAdminController',
         controllerAs: 'vm',
         data: {
@@ -37,7 +37,7 @@
       })
       .state('admin.articles.edit', {
         url: '/:articleId/edit',
-        templateUrl: '/modules/articles/client/views/admin/form-article.client.view.html',
+        templateUrl: '/modules/items/client/views/admin/form-item.client.view.html',
         controller: 'ArticlesAdminController',
         controllerAs: 'vm',
         data: {

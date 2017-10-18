@@ -16,13 +16,13 @@
       })
       .state('articles.list', {
         url: '',
-        templateUrl: '/modules/articles/client/views/list-articles.client.view.html',
+        templateUrl: '/modules/items/client/views/list-items.client.view.html',
         controller: 'ArticlesListController',
         controllerAs: 'vm'
       })
       .state('articles.view', {
         url: '/:articleId',
-        templateUrl: '/modules/articles/client/views/view-article.client.view.html',
+        templateUrl: '/modules/items/client/views/view-item.client.view.html',
         controller: 'ArticlesController',
         controllerAs: 'vm',
         resolve: {
