@@ -8,11 +8,18 @@
       <div>IPPD <span>Resume Portal </span></div>
     </div>
     <br>
-    <form name="login">
+    <form name="vm.userForm" ng-submit="vm.signin(vm.userForm.$valid)" class="signin" novalidate autocomplete="off">
       <div class="login">
-        <input class="customInputBox" type="text" placeholder="username" name="userid"><br>
-        <input class="customInputBox" type="password" placeholder="password" name="password"><br>
-        <input type="button" onclick="check(this.form)" value="Login"/>
+        <fieldset>
+          <label class="customText" for="usernameOrEmail">Username or Email</label>
+          <br>
+          <input type="text" id="usernameOrEmail" name="usernameOrEmail" class="customInputBox" ng-model="vm.credentials.usernameOrEmail" placeholder="Username or Email" required autofocus>
+          <br>
+          <label class="customText" for="password">Password</label>
+          <br>
+          <input type="password" id="password" name="password" class="customInputBox" ng-model="vm.credentials.password" placeholder="Password" required>
+          <input type="submit" value="Sign in"/>
+        </fieldset>
       </div>
     </form>
   </div>
