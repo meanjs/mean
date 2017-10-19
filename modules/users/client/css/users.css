@@ -3,6 +3,36 @@
     position: fixed;
   }
 }
+
+
+.btn {
+    padding: 14px 24px;
+    border: 0 none;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.btn:focus, .btn:active:focus, .btn.active:focus {
+    outline: 0 none;
+}
+
+.btn-primary {
+    background: #F5A623;
+    color: #ffffff;
+}
+
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary {
+    background: #F5A623;
+}
+
+.btn-primary:active, .btn-primary.active {
+    background: #F5A623;
+    box-shadow: none;
+}
+
+
+
 .social-account-container {
   display: inline-block;
   position: relative;
@@ -33,4 +63,15 @@
 .user-profile-picture {
   min-height: 150px;
   max-height: 150px;
+}
+
+.btn-primary.raised {
+    box-shadow: 0 3px 0 0 #F5A623;
+}
+
+.btn-primary.raised:active, .btn-primary.raised.active {
+    background: #F5A623;
+    box-shadow: none;
+    margin-bottom: -3px;
+    margin-top: 3px;
 }

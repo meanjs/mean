@@ -20,7 +20,7 @@ var noReturnUrls = [
  */
 exports.signup = function (req, res) {
   // For security measurement we remove the roles from the req.body object
-  delete req.body.roles;
+  //delete req.body.roles;
 
   // Init Variables
   var user = new User(req.body);
