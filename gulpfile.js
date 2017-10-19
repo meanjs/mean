@@ -276,7 +276,6 @@ gulp.task('templatecache', function () {
 gulp.task('mocha', function (done) {
   var mongooseService = require('./config/lib/mongoose');
   var testSuites = changedTestFiles.length ? changedTestFiles : testAssets.tests.server;
-  var error;
 
   // Connect mongoose
   mongooseService.connect(function (db) {
@@ -289,8 +288,7 @@ gulp.task('mocha', function (done) {
         timeout: 10000
       }))
       .on('error', function (err) {
-        // If an error occurs, save it
-        error = err;
+        console.error(err);
       })
       .on('end', function () {
         mongooseService.disconnect(function (err) {
