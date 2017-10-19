@@ -287,8 +287,8 @@ gulp.task('mocha', function (done) {
         reporter: 'spec',
         timeout: 10000
       }))
-      .on('error', function (err) {
-        console.error(err);
+      .on('error', function (error) {
+        console.error(error);
       })
       .on('end', function () {
         mongooseService.disconnect(function (err) {
@@ -297,7 +297,7 @@ gulp.task('mocha', function (done) {
             console.log(err);
           }
 
-          return done(error);
+          return done();
         });
       });
   });

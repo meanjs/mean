@@ -12,14 +12,14 @@
       title: 'Items',
       state: 'items',
       type: 'dropdown',
-      roles: ['*']
+      roles: ['admin', 'superta', 'ta', 'technician']
     });
 
     // Add the dropdown list item
     menuService.addSubMenuItem('topbar', 'items', {
       title: 'List Items',
       state: 'items.list',
-      roles: ['*']
+      roles: ['admin', 'superta', 'ta', 'technician']
     });
   }
 }());
