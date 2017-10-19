@@ -5,10 +5,10 @@
     .module('users.admin')
     .controller('ViewApplicantsController', ViewApplicantsController);
 
-  ViewApplicantsController.$inject = ['$scope', '$filter', 'ApplicantsService'];
+  ViewApplicantsController.$inject = ['$scope', '$filter', '$window', 'ApplicantsService', 'Notification'];
 
 
-  function ViewApplicantsController($scope, $filter, ApplicantsService) {
+  function ViewApplicantsController($scope, $filter, $window, ApplicantsService, Notification) {
     var vm = this;
     ApplicantsService
       .query(function (data) {
@@ -17,31 +17,23 @@
 
 
     vm.removeApplicant = function (user) {
-      if (user) {
-          user.$remove(); //This database call isn't working.
+      if ($window.confirm('Are you sure you want to delete this user?')) {
+        if (user) {
           vm.unapprovedUsers.splice(vm.unapprovedUsers.indexOf(user), 1);
+          ApplicantsService.remove(user);
           Notification.success('User deleted successfully!');
-      } else {
-          vm.user.$remove(function () {
-            $state.go('admin.users');
-            Notification.success({ message: '<i class="glyphicon glyphicon-ok"></i> User deleted successfully!' });
-          });
         }
+      }
     };
 
     vm.approve = function (user) {
       if (user) {
           var newUser = user;
           user.approvedStatus = true;
-          user.$update(newUser); //This database call isn't working.
+          ApplicantsService.approve(newUser); //This database call isn't working.
           vm.unapprovedUsers.splice(vm.unapprovedUsers.indexOf(user), 1);
           Notification.success('User approved successfully!');
-      } else {
-          vm.user.$remove(function () {
-            $state.go('admin.users');
-            Notification.success({ message: '<i class="glyphicon glyphicon-ok"></i> User approved successfully!' });
-          });
-        }
+      }
     };
 
     vm.approveAll = function () {
