@@ -84,7 +84,12 @@
   width: 260px;
 }
 
-.login input[type=button]{
+.customText {
+  color: #fff;
+  font-family: 'Exo', sans-serif;
+}
+
+.login input[type=submit]{
   background: #fff;
   border: 1px solid white;
   border: 1px solid #fff;
@@ -98,10 +103,10 @@
   padding: 6px;
   width: 260px;
 }
-.login input[type=button]:hover{
+.login input[type=submit]:hover{
   opacity: 0.8;
 }
-.login input[type=button]:active{
+.login input[type=submit]:active{
   opacity: 0.6;
 }
 .login input[type=text]:focus{
@@ -114,7 +119,7 @@
   border: 1px solid rgba(255,255,255,0.9);
   outline: none;
 }
-.login input[type=button]:focus{
+.login input[type=submit]:focus{
   border: 1px solid white;
   border: 1px solid rgba(255,255,255,0.9);
   outline: none;
