@@ -39,13 +39,13 @@ exports.read = function(req, res) {
 exports.update = function(req, res) {
   var user = req.user;
 
-  /* Replace the article's properties with the new properties found in req.body */
+  /* Replace the item's properties with the new properties found in req.body */
   //TODO replace whatever attributes we will need from this request.
   user.name = req.body.name;
   user.code = req.body.code;
   user.address = req.body.address;
 
-  /* Save the article */
+  /* Save the item */
   user.save(function(err) {
     if(err) {
       console.log(err);
@@ -60,15 +60,14 @@ exports.update = function(req, res) {
 exports.delete = function(req, res) {
   var user = req.user;
 
-  /* Remove the article */
+  /* Remove the item */
   user.remove(function(err) {
     if(err) {
       res.status(400).send(err);
-    }
-    else {
+    } else {
       res.end();
     }
-  })
+  });
 };
 
 /* Retreive all the directory users, sorted alphabetically by user code */

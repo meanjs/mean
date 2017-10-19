@@ -14,7 +14,7 @@ exports.approve = function(req, res) {
   //TODO Validated permissions for this type of request.
   user.approvedStatus = true;
 
-  /* Save the article */
+  /* Save the item */
   user.save(function(err) {
     if(err) {
       console.log(err);

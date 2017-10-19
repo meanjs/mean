@@ -36,14 +36,13 @@ exports.invokeRolesPolicies = function () {
  */
 exports.isAllowed = function (req, res, next) {
   var roles;
-  if(req.user){
+  if(req.user) {
     roles = req.user.roles;
-  }
-  else{
+  } else{
     roles = ['guest'];
   }
   //If a user is not yet an approved user, do not allow any changes to be made on the database.
-  if(!req.user || !req.user.approvedStatus || req.user.approvedStatus != true){
+  if(!req.user || !req.user.approvedStatus || req.user.approvedStatus != true) {
     return res.status(403).json({
       message: 'User is not yet approved for database changes (check attribute approvedStatus)'
     });

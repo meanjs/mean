@@ -17,8 +17,9 @@ module.exports = function (app) {
   app.route('/*').get(core.renderIndex);
 
   // Render main home for no login, or for public/apply
-  app.route('/public/apply').get(core.renderIndex)
-  						   .post(core.apply); //For adding user applications
+  app.route('/public/apply')
+    .get(core.renderIndex)
+    .post(core.apply); //For adding user applications
 
   //TODO enforce admin login check below this point in controllers.
 };

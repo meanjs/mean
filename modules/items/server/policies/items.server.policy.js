@@ -9,47 +9,47 @@ var acl = require('acl');
 acl = new acl(new acl.memoryBackend());
 
 /**
- * Invoke Articles Permissions
+ * Invoke Items Permissions
  */
 exports.invokeRolesPolicies = function () {
   acl.allow([{
-    roles: ['admin', 'superta', 'technician'], //All should be able to create, read, update, and delete articles.
+    roles: ['admin', 'superta', 'technician'], //All should be able to create, read, update, and delete items.
     allows: [{
-      resources: '/api/articles',
+      resources: '/api/items',
       permissions: '*'
     }, {
-      resources: '/api/articles/:articleId',
+      resources: '/api/items/:itemId',
       permissions: '*'
     }]
   }, 
   {
     roles: ['ta'],
     allows: [{
-      resources: '/api/articles',
+      resources: '/api/items',
       permissions: ['get']
     }, {
-      resources: '/api/articles/:articleId',
-      permissions: ['get', 'post', 'put'] //TA's can modify and create articles but not delete them from the database.
+      resources: '/api/items/:itemId',
+      permissions: ['get', 'post', 'put'] //TA's can modify and create items but not delete them from the database.
     }]
   }
   ]);
 };
 
 /**
- * Check If Articles Policy Allows
+ * Check If Items Policy Allows
  */
 exports.isAllowed = function (req, res, next) {
   var roles = (req.user) ? req.user.roles : ['guest'];
 
   //If a user is not yet an approved user, do not allow any changes to be made on the database.
-  if(!req.user || !req.user.approvedStatus || req.user.approvedStatus != true){
+  if(!req.user || !req.user.approvedStatus || req.user.approvedStatus != true) {
     return res.status(403).json({
       message: 'User is not yet approved for database changes (check attribute approvedStatus)'
     });
   }
 
-  // If an article is being processed and the current user created it then allow any manipulation
-  if (req.article && req.user && req.article.user && req.article.user.id === req.user.id) {
+  // If an item is being processed and the current user created it then allow any manipulation
+  if (req.item && req.user && req.item.user && req.item.user.id === req.user.id) {
     return next();
   }
 

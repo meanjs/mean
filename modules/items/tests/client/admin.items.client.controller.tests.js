@@ -1,15 +1,15 @@
 ﻿(function () {
   'use strict';
 
-  describe('Articles Admin Controller Tests', function () {
+  describe('Items Admin Controller Tests', function () {
     // Initialize global variables
-    var ArticlesAdminController,
+    var ItemsAdminController,
       $scope,
       $httpBackend,
       $state,
       Authentication,
-      ArticlesService,
-      mockArticle,
+      ItemsService,
+      mockItem,
       Notification;
 
     // The $resource service augments the response object with methods for updating and deleting the resource.
@@ -37,7 +37,7 @@
     // The injector ignores leading and trailing underscores here (i.e. _$httpBackend_).
     // This allows us to inject a service but then attach it to a variable
     // with the same name as the service.
-    beforeEach(inject(function ($controller, $rootScope, _$state_, _$httpBackend_, _Authentication_, _ArticlesService_, _Notification_) {
+    beforeEach(inject(function ($controller, $rootScope, _$state_, _$httpBackend_, _Authentication_, _ItemsService_, _Notification_) {
       // Set a new global scope
       $scope = $rootScope.$new();
 
@@ -45,16 +45,16 @@
       $httpBackend = _$httpBackend_;
       $state = _$state_;
       Authentication = _Authentication_;
-      ArticlesService = _ArticlesService_;
+      ItemsService = _ItemsService_;
       Notification = _Notification_;
 
       // Ignore parent template get on state transitions
       $httpBackend.whenGET('/modules/core/client/views/home.client.view.html').respond(200, '');
 
-      // create mock article
-      mockArticle = new ArticlesService({
+      // create mock item
+      mockItem = new ItemsService({
         _id: '525a8422f6d0f87f0e407a33',
-        title: 'An Article about MEAN',
+        title: 'An Item about MEAN',
         content: 'MEAN rocks!'
       });
 
@@ -64,10 +64,10 @@
         approvedStatus: true
       };
 
-      // Initialize the Articles controller.
-      ArticlesAdminController = $controller('ArticlesAdminController as vm', {
+      // Initialize the Items controller.
+      ItemsAdminController = $controller('ItemsAdminController as vm', {
         $scope: $scope,
-        articleResolve: {}
+        itemResolve: {}
       });
 
       // Spy on state go
@@ -77,98 +77,98 @@
     }));
 
     describe('vm.save() as create', function () {
-      var sampleArticlePostData;
+      var sampleItemPostData;
 
       beforeEach(function () {
-        // Create a sample article object
-        sampleArticlePostData = new ArticlesService({
-          title: 'An Article about MEAN',
+        // Create a sample item object
+        sampleItemPostData = new ItemsService({
+          title: 'An Item about MEAN',
           content: 'MEAN rocks!'
         });
 
-        $scope.vm.article = sampleArticlePostData;
+        $scope.vm.item = sampleItemPostData;
       });
 
-      it('should send a POST request with the form input values and then locate to new object URL', inject(function (ArticlesService) {
+      it('should send a POST request with the form input values and then locate to new object URL', inject(function (ItemsService) {
         // Set POST response
-        $httpBackend.expectPOST('/api/articles', sampleArticlePostData).respond(mockArticle);
+        $httpBackend.expectPOST('/api/items', sampleItemPostData).respond(mockItem);
 
         // Run controller functionality
         $scope.vm.save(true);
         $httpBackend.flush();
 
         // Test Notification success was called
-        expect(Notification.success).toHaveBeenCalledWith({ message: '<i class="glyphicon glyphicon-ok"></i> Article saved successfully!' });
-        // Test URL redirection after the article was created
-        expect($state.go).toHaveBeenCalledWith('admin.articles.list');
+        expect(Notification.success).toHaveBeenCalledWith({ message: '<i class="glyphicon glyphicon-ok"></i> Item saved successfully!' });
+        // Test URL redirection after the item was created
+        expect($state.go).toHaveBeenCalledWith('admin.items.list');
       }));
 
       it('should call Notification.error if error', function () {
         var errorMessage = 'this is an error message';
-        $httpBackend.expectPOST('/api/articles', sampleArticlePostData).respond(400, {
+        $httpBackend.expectPOST('/api/items', sampleItemPostData).respond(400, {
           message: errorMessage
         });
 
         $scope.vm.save(true);
         $httpBackend.flush();
 
-        expect(Notification.error).toHaveBeenCalledWith({ message: errorMessage, title: '<i class="glyphicon glyphicon-remove"></i> Article save error!' });
+        expect(Notification.error).toHaveBeenCalledWith({ message: errorMessage, title: '<i class="glyphicon glyphicon-remove"></i> Item save error!' });
       });
     });
 
     describe('vm.save() as update', function () {
       beforeEach(function () {
-        // Mock article in $scope
-        $scope.vm.article = mockArticle;
+        // Mock item in $scope
+        $scope.vm.item = mockItem;
       });
 
-      it('should update a valid article', inject(function (ArticlesService) {
+      it('should update a valid item', inject(function (ItemsService) {
         // Set PUT response
-        $httpBackend.expectPUT(/api\/articles\/([0-9a-fA-F]{24})$/).respond();
+        $httpBackend.expectPUT(/api\/items\/([0-9a-fA-F]{24})$/).respond();
 
         // Run controller functionality
         $scope.vm.save(true);
         $httpBackend.flush();
 
         // Test Notification success was called
-        expect(Notification.success).toHaveBeenCalledWith({ message: '<i class="glyphicon glyphicon-ok"></i> Article saved successfully!' });
+        expect(Notification.success).toHaveBeenCalledWith({ message: '<i class="glyphicon glyphicon-ok"></i> Item saved successfully!' });
         // Test URL location to new object
-        expect($state.go).toHaveBeenCalledWith('admin.articles.list');
+        expect($state.go).toHaveBeenCalledWith('admin.items.list');
       }));
 
-      it('should  call Notification.error if error', inject(function (ArticlesService) {
+      it('should  call Notification.error if error', inject(function (ItemsService) {
         var errorMessage = 'error';
-        $httpBackend.expectPUT(/api\/articles\/([0-9a-fA-F]{24})$/).respond(400, {
+        $httpBackend.expectPUT(/api\/items\/([0-9a-fA-F]{24})$/).respond(400, {
           message: errorMessage
         });
 
         $scope.vm.save(true);
         $httpBackend.flush();
 
-        expect(Notification.error).toHaveBeenCalledWith({ message: errorMessage, title: '<i class="glyphicon glyphicon-remove"></i> Article save error!' });
+        expect(Notification.error).toHaveBeenCalledWith({ message: errorMessage, title: '<i class="glyphicon glyphicon-remove"></i> Item save error!' });
       }));
     });
 
     describe('vm.remove()', function () {
       beforeEach(function () {
-        // Setup articles
-        $scope.vm.article = mockArticle;
+        // Setup items
+        $scope.vm.item = mockItem;
       });
 
-      it('should delete the article and redirect to articles', function () {
+      it('should delete the item and redirect to items', function () {
         // Return true on confirm message
         spyOn(window, 'confirm').and.returnValue(true);
 
-        $httpBackend.expectDELETE(/api\/articles\/([0-9a-fA-F]{24})$/).respond(204);
+        $httpBackend.expectDELETE(/api\/items\/([0-9a-fA-F]{24})$/).respond(204);
 
         $scope.vm.remove();
         $httpBackend.flush();
 
-        expect(Notification.success).toHaveBeenCalledWith({ message: '<i class="glyphicon glyphicon-ok"></i> Article deleted successfully!' });
-        expect($state.go).toHaveBeenCalledWith('admin.articles.list');
+        expect(Notification.success).toHaveBeenCalledWith({ message: '<i class="glyphicon glyphicon-ok"></i> Item deleted successfully!' });
+        expect($state.go).toHaveBeenCalledWith('admin.items.list');
       });
 
-      it('should should not delete the article and not redirect', function () {
+      it('should should not delete the item and not redirect', function () {
         // Return false on confirm message
         spyOn(window, 'confirm').and.returnValue(false);
 

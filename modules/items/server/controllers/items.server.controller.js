@@ -5,113 +5,113 @@
  */
 var path = require('path'),
   mongoose = require('mongoose'),
-  Article = mongoose.model('Article'),
+  Item = mongoose.model('Item'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller'));
 
 /**
- * Create an article
+ * Create an item
  */
 exports.create = function (req, res) {
-  var article = new Article(req.body);
-  article.user = req.user;
+  var item = new Item(req.body);
+  item.user = req.user;
 
-  article.save(function (err) {
+  item.save(function (err) {
     if (err) {
       return res.status(422).send({
         message: errorHandler.getErrorMessage(err)
       });
     } else {
-      res.json(article);
+      res.json(item);
     }
   });
 };
 
 /**
- * Show the current article
+ * Show the current item
  */
 exports.read = function (req, res) {
   // convert mongoose document to JSON
-  var article = req.article ? req.article.toJSON() : {};
+  var item = req.item ? req.item.toJSON() : {};
 
-  // Add a custom field to the Article, for determining if the current User is the "owner".
-  // NOTE: This field is NOT persisted to the database, since it doesn't exist in the Article model.
-  article.isCurrentUserOwner = !!(req.user && article.user && article.user._id.toString() === req.user._id.toString());
+  // Add a custom field to the Item, for determining if the current User is the "owner".
+  // NOTE: This field is NOT persisted to the database, since it doesn't exist in the Item model.
+  item.isCurrentUserOwner = !!(req.user && item.user && item.user._id.toString() === req.user._id.toString());
 
-  res.json(article);
+  res.json(item);
 };
 
 /**
- * Update an article
+ * Update an item
  */
 exports.update = function (req, res) {
-  var article = req.article;
+  var item = req.item;
 
-  article.title = req.body.title;
-  article.content = req.body.content;
+  item.title = req.body.title;
+  item.content = req.body.content;
 
-  article.save(function (err) {
+  item.save(function (err) {
     if (err) {
       return res.status(422).send({
         message: errorHandler.getErrorMessage(err)
       });
     } else {
-      res.json(article);
+      res.json(item);
     }
   });
 };
 
 /**
- * Delete an article
+ * Delete an item
  */
 exports.delete = function (req, res) {
-  var article = req.article;
+  var item = req.item;
 
-  article.remove(function (err) {
+  item.remove(function (err) {
     if (err) {
       return res.status(422).send({
         message: errorHandler.getErrorMessage(err)
       });
     } else {
-      res.json(article);
+      res.json(item);
     }
   });
 };
 
 /**
- * List of Articles
+ * List of Items
  */
 exports.list = function (req, res) {
-  Article.find().sort('-created').populate('user', 'displayName').exec(function (err, articles) {
+  Item.find().sort('-created').populate('user', 'displayName').exec(function (err, items) {
     if (err) {
       return res.status(422).send({
         message: errorHandler.getErrorMessage(err)
       });
     } else {
-      res.json(articles);
+      res.json(items);
     }
   });
 };
 
 /**
- * Article middleware
+ * Item middleware
  */
-exports.articleByID = function (req, res, next, id) {
+exports.itemByID = function (req, res, next, id) {
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(400).send({
-      message: 'Article is invalid'
+      message: 'Item is invalid'
     });
   }
 
-  Article.findById(id).populate('user', 'displayName').exec(function (err, article) {
+  Item.findById(id).populate('user', 'displayName').exec(function (err, item) {
     if (err) {
       return next(err);
-    } else if (!article) {
+    } else if (!item) {
       return res.status(404).send({
-        message: 'No article with that identifier has been found'
+        message: 'No item with that identifier has been found'
       });
     }
-    req.article = article;
+    req.item = item;
     next();
   });
 };

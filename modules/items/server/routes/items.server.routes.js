@@ -3,21 +3,21 @@
 /**
  * Module dependencies
  */
-var articlesPolicy = require('../policies/items.server.policy'),
-  articles = require('../controllers/items.server.controller');
+var itemsPolicy = require('../policies/items.server.policy'),
+  items = require('../controllers/items.server.controller');
 
 module.exports = function (app) {
-  // Articles collection routes
-  app.route('/api/articles').all(articlesPolicy.isAllowed)
-    .get(articles.list)
-    .post(articles.create);
+  // Items collection routes
+  app.route('/api/items').all(itemsPolicy.isAllowed)
+    .get(items.list)
+    .post(items.create);
 
-  // Single article routes
-  app.route('/api/articles/:articleId').all(articlesPolicy.isAllowed)
-    .get(articles.read)
-    .put(articles.update)
-    .delete(articles.delete);
+  // Single item routes
+  app.route('/api/items/:itemId').all(itemsPolicy.isAllowed)
+    .get(items.read)
+    .put(items.update)
+    .delete(items.delete);
 
-  // Finish by binding the article middleware
-  app.param('articleId', articles.articleByID);
+  // Finish by binding the item middleware
+  app.param('itemId', items.itemByID);
 };

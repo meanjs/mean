@@ -2,65 +2,65 @@
   'use strict';
 
   angular
-    .module('articles.admin.routes')
+    .module('items.admin.routes')
     .config(routeConfig);
 
   routeConfig.$inject = ['$stateProvider'];
 
   function routeConfig($stateProvider) {
     $stateProvider
-      .state('admin.articles', {
+      .state('admin.items', {
         abstract: true,
-        url: '/articles',
+        url: '/items',
         template: '<ui-view/>'
       })
-      .state('admin.articles.list', {
+      .state('admin.items.list', {
         url: '',
         templateUrl: '/modules/items/client/views/admin/list-items.client.view.html',
-        controller: 'ArticlesAdminListController',
+        controller: 'ItemsAdminListController',
         controllerAs: 'vm',
         data: {
           roles: ['ta', 'technician', 'superta', 'admin']
         }
       })
-      .state('admin.articles.create', {
+      .state('admin.items.create', {
         url: '/create',
         templateUrl: '/modules/items/client/views/admin/form-item.client.view.html',
-        controller: 'ArticlesAdminController',
+        controller: 'ItemsAdminController',
         controllerAs: 'vm',
         data: {
           roles: ['ta', 'technician', 'superta', 'admin']
         },
         resolve: {
-          articleResolve: newArticle
+          itemResolve: newItem
         }
       })
-      .state('admin.articles.edit', {
-        url: '/:articleId/edit',
+      .state('admin.items.edit', {
+        url: '/:itemId/edit',
         templateUrl: '/modules/items/client/views/admin/form-item.client.view.html',
-        controller: 'ArticlesAdminController',
+        controller: 'ItemsAdminController',
         controllerAs: 'vm',
         data: {
           roles: ['ta', 'technician', 'superta', 'admin'],
-          pageTitle: '{{ articleResolve.title }}'
+          pageTitle: '{{ itemResolve.title }}'
         },
         resolve: {
-          articleResolve: getArticle
+          itemResolve: getItem
         }
       });
   }
 
-  getArticle.$inject = ['$stateParams', 'ArticlesService'];
+  getItem.$inject = ['$stateParams', 'ItemsService'];
 
-  function getArticle($stateParams, ArticlesService) {
-    return ArticlesService.get({
-      articleId: $stateParams.articleId
+  function getItem($stateParams, ItemsService) {
+    return ItemsService.get({
+      itemId: $stateParams.itemId
     }).$promise;
   }
 
-  newArticle.$inject = ['ArticlesService'];
+  newItem.$inject = ['ItemsService'];
 
-  function newArticle(ArticlesService) {
-    return new ArticlesService();
+  function newItem(ItemsService) {
+    return new ItemsService();
   }
 }());

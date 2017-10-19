@@ -1,15 +1,15 @@
 (function () {
   'use strict';
 
-  describe('Articles Controller Tests', function () {
+  describe('Items Controller Tests', function () {
     // Initialize global variables
-    var ArticlesController,
+    var ItemsController,
       $scope,
       $httpBackend,
       $state,
       Authentication,
-      ArticlesService,
-      mockArticle;
+      ItemsService,
+      mockItem;
 
     // The $resource service augments the response object with methods for updating and deleting the resource.
     // If we were to use the standard toEqual matcher, our tests would fail because the test values would not match
@@ -36,7 +36,7 @@
     // The injector ignores leading and trailing underscores here (i.e. _$httpBackend_).
     // This allows us to inject a service but then attach it to a variable
     // with the same name as the service.
-    beforeEach(inject(function ($controller, $rootScope, _$state_, _$httpBackend_, _Authentication_, _ArticlesService_) {
+    beforeEach(inject(function ($controller, $rootScope, _$state_, _$httpBackend_, _Authentication_, _ItemsService_) {
       // Set a new global scope
       $scope = $rootScope.$new();
 
@@ -44,12 +44,12 @@
       $httpBackend = _$httpBackend_;
       $state = _$state_;
       Authentication = _Authentication_;
-      ArticlesService = _ArticlesService_;
+      ItemsService = _ItemsService_;
 
-      // create mock article
-      mockArticle = new ArticlesService({
+      // create mock item
+      mockItem = new ItemsService({
         _id: '525a8422f6d0f87f0e407a33',
-        title: 'An Article about MEAN',
+        title: 'An Item about MEAN',
         content: 'MEAN rocks!'
       });
 
@@ -59,10 +59,10 @@
         approvedStatus: true
       };
 
-      // Initialize the Articles controller.
-      ArticlesController = $controller('ArticlesController as vm', {
+      // Initialize the Items controller.
+      ItemsController = $controller('ItemsController as vm', {
         $scope: $scope,
-        articleResolve: {}
+        itemResolve: {}
       });
 
       // Spy on state go

@@ -73,12 +73,12 @@ module.exports = {
         }
       }]
     }, {
-      model: 'Article',
+      model: 'Item',
       docs: [{
         overwrite: true,
         data: {
-          title: 'Test Article',
-          content: 'Code coverage test article!'
+          title: 'Test Item',
+          content: 'Code coverage test item!'
         }
       }]
     }]

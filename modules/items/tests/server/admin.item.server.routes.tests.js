@@ -5,7 +5,7 @@ var should = require('should'),
   path = require('path'),
   mongoose = require('mongoose'),
   User = mongoose.model('User'),
-  Article = mongoose.model('Article'),
+  Item = mongoose.model('Item'),
   express = require(path.resolve('./config/lib/express'));
 
 /**
@@ -15,12 +15,12 @@ var app,
   agent,
   credentials,
   user,
-  article;
+  item;
 
 /**
- * Article routes tests
+ * Item routes tests
  */
-describe('Article Admin CRUD tests', function () {
+describe('Item Admin CRUD tests', function () {
   before(function (done) {
     // Get application
     app = express.init(mongoose.connection.db);
@@ -51,12 +51,12 @@ describe('Article Admin CRUD tests', function () {
 
     });
 
-    // Save a user to the test db and create new article
+    // Save a user to the test db and create new item
     user.save()
       .then(function () {
-        article = {
-          title: 'Article Title',
-          content: 'Article Content'
+        item = {
+          title: 'Item Title',
+          content: 'Item Content'
         };
 
         done();
@@ -64,7 +64,7 @@ describe('Article Admin CRUD tests', function () {
       .catch(done);
   });
 
-  it('should be able to save an article if logged in', function (done) {
+  it('should be able to save an item if logged in', function (done) {
     agent.post('/api/auth/signin')
       .send(credentials)
       .expect(200)
@@ -77,30 +77,30 @@ describe('Article Admin CRUD tests', function () {
         // Get the userId
         var userId = user.id;
 
-        // Save a new article
-        agent.post('/api/articles')
-          .send(article)
+        // Save a new item
+        agent.post('/api/items')
+          .send(item)
           .expect(200)
-          .end(function (articleSaveErr, articleSaveRes) {
-            // Handle article save error
-            if (articleSaveErr) {
-              return done(articleSaveErr);
+          .end(function (itemSaveErr, itemSaveRes) {
+            // Handle item save error
+            if (itemSaveErr) {
+              return done(itemSaveErr);
             }
 
-            // Get a list of articles
-            agent.get('/api/articles')
-              .end(function (articlesGetErr, articlesGetRes) {
-                // Handle article save error
-                if (articlesGetErr) {
-                  return done(articlesGetErr);
+            // Get a list of items
+            agent.get('/api/items')
+              .end(function (itemsGetErr, itemsGetRes) {
+                // Handle item save error
+                if (itemsGetErr) {
+                  return done(itemsGetErr);
                 }
 
-                // Get articles list
-                var articles = articlesGetRes.body;
+                // Get items list
+                var items = itemsGetRes.body;
 
                 // Set assertions
-                (articles[0].user._id).should.equal(userId);
-                (articles[0].title).should.match('Article Title');
+                (items[0].user._id).should.equal(userId);
+                (items[0].title).should.match('Item Title');
 
                 // Call the assertion callback
                 done();
@@ -109,7 +109,7 @@ describe('Article Admin CRUD tests', function () {
       });
   });
 
-  it('should be able to update an article if signed in', function (done) {
+  it('should be able to update an item if signed in', function (done) {
     agent.post('/api/auth/signin')
       .send(credentials)
       .expect(200)
@@ -122,32 +122,32 @@ describe('Article Admin CRUD tests', function () {
         // Get the userId
         var userId = user.id;
 
-        // Save a new article
-        agent.post('/api/articles')
-          .send(article)
+        // Save a new item
+        agent.post('/api/items')
+          .send(item)
           .expect(200)
-          .end(function (articleSaveErr, articleSaveRes) {
-            // Handle article save error
-            if (articleSaveErr) {
-              return done(articleSaveErr);
+          .end(function (itemSaveErr, itemSaveRes) {
+            // Handle item save error
+            if (itemSaveErr) {
+              return done(itemSaveErr);
             }
 
-            // Update article title
-            article.title = 'WHY YOU GOTTA BE SO MEAN?';
+            // Update item title
+            item.title = 'WHY YOU GOTTA BE SO MEAN?';
 
-            // Update an existing article
-            agent.put('/api/articles/' + articleSaveRes.body._id)
-              .send(article)
+            // Update an existing item
+            agent.put('/api/items/' + itemSaveRes.body._id)
+              .send(item)
               .expect(200)
-              .end(function (articleUpdateErr, articleUpdateRes) {
-                // Handle article update error
-                if (articleUpdateErr) {
-                  return done(articleUpdateErr);
+              .end(function (itemUpdateErr, itemUpdateRes) {
+                // Handle item update error
+                if (itemUpdateErr) {
+                  return done(itemUpdateErr);
                 }
 
                 // Set assertions
-                (articleUpdateRes.body._id).should.equal(articleSaveRes.body._id);
-                (articleUpdateRes.body.title).should.match('WHY YOU GOTTA BE SO MEAN?');
+                (itemUpdateRes.body._id).should.equal(itemSaveRes.body._id);
+                (itemUpdateRes.body.title).should.match('WHY YOU GOTTA BE SO MEAN?');
 
                 // Call the assertion callback
                 done();
@@ -156,9 +156,9 @@ describe('Article Admin CRUD tests', function () {
       });
   });
 
-  it('should not be able to save an article if no title is provided', function (done) {
+  it('should not be able to save an item if no title is provided', function (done) {
     // Invalidate title field
-    article.title = '';
+    item.title = '';
 
     agent.post('/api/auth/signin')
       .send(credentials)
@@ -172,21 +172,21 @@ describe('Article Admin CRUD tests', function () {
         // Get the userId
         var userId = user.id;
 
-        // Save a new article
-        agent.post('/api/articles')
-          .send(article)
+        // Save a new item
+        agent.post('/api/items')
+          .send(item)
           .expect(422)
-          .end(function (articleSaveErr, articleSaveRes) {
+          .end(function (itemSaveErr, itemSaveRes) {
             // Set message assertion
-            (articleSaveRes.body.message).should.match('Title cannot be blank');
+            (itemSaveRes.body.message).should.match('Title cannot be blank');
 
-            // Handle article save error
-            done(articleSaveErr);
+            // Handle item save error
+            done(itemSaveErr);
           });
       });
   });
 
-  it('should be able to delete an article if signed in', function (done) {
+  it('should be able to delete an item if signed in', function (done) {
     agent.post('/api/auth/signin')
       .send(credentials)
       .expect(200)
@@ -199,28 +199,28 @@ describe('Article Admin CRUD tests', function () {
         // Get the userId
         var userId = user.id;
 
-        // Save a new article
-        agent.post('/api/articles')
-          .send(article)
+        // Save a new item
+        agent.post('/api/items')
+          .send(item)
           .expect(200)
-          .end(function (articleSaveErr, articleSaveRes) {
-            // Handle article save error
-            if (articleSaveErr) {
-              return done(articleSaveErr);
+          .end(function (itemSaveErr, itemSaveRes) {
+            // Handle item save error
+            if (itemSaveErr) {
+              return done(itemSaveErr);
             }
 
-            // Delete an existing article
-            agent.delete('/api/articles/' + articleSaveRes.body._id)
-              .send(article)
+            // Delete an existing item
+            agent.delete('/api/items/' + itemSaveRes.body._id)
+              .send(item)
               .expect(200)
-              .end(function (articleDeleteErr, articleDeleteRes) {
-                // Handle article error error
-                if (articleDeleteErr) {
-                  return done(articleDeleteErr);
+              .end(function (itemDeleteErr, itemDeleteRes) {
+                // Handle item error error
+                if (itemDeleteErr) {
+                  return done(itemDeleteErr);
                 }
 
                 // Set assertions
-                (articleDeleteRes.body._id).should.equal(articleSaveRes.body._id);
+                (itemDeleteRes.body._id).should.equal(itemSaveRes.body._id);
 
                 // Call the assertion callback
                 done();
@@ -229,10 +229,10 @@ describe('Article Admin CRUD tests', function () {
       });
   });
 
-  it('should be able to get a single article if signed in and verify the custom "isCurrentUserOwner" field is set to "true"', function (done) {
-    // Create new article model instance
-    article.user = user;
-    var articleObj = new Article(article);
+  it('should be able to get a single item if signed in and verify the custom "isCurrentUserOwner" field is set to "true"', function (done) {
+    // Create new item model instance
+    item.user = user;
+    var itemObj = new Item(item);
 
     agent.post('/api/auth/signin')
       .send(credentials)
@@ -246,31 +246,31 @@ describe('Article Admin CRUD tests', function () {
         // Get the userId
         var userId = user.id;
 
-        // Save a new article
-        agent.post('/api/articles')
-          .send(article)
+        // Save a new item
+        agent.post('/api/items')
+          .send(item)
           .expect(200)
-          .end(function (articleSaveErr, articleSaveRes) {
-            // Handle article save error
-            if (articleSaveErr) {
-              return done(articleSaveErr);
+          .end(function (itemSaveErr, itemSaveRes) {
+            // Handle item save error
+            if (itemSaveErr) {
+              return done(itemSaveErr);
             }
 
-            // Get the article
-            agent.get('/api/articles/' + articleSaveRes.body._id)
+            // Get the item
+            agent.get('/api/items/' + itemSaveRes.body._id)
               .expect(200)
-              .end(function (articleInfoErr, articleInfoRes) {
-                // Handle article error
-                if (articleInfoErr) {
-                  return done(articleInfoErr);
+              .end(function (itemInfoErr, itemInfoRes) {
+                // Handle item error
+                if (itemInfoErr) {
+                  return done(itemInfoErr);
                 }
 
                 // Set assertions
-                (articleInfoRes.body._id).should.equal(articleSaveRes.body._id);
-                (articleInfoRes.body.title).should.equal(article.title);
+                (itemInfoRes.body._id).should.equal(itemSaveRes.body._id);
+                (itemInfoRes.body.title).should.equal(item.title);
 
                 // Assert that the "isCurrentUserOwner" field is set to true since the current User created it
-                (articleInfoRes.body.isCurrentUserOwner).should.equal(true);
+                (itemInfoRes.body.isCurrentUserOwner).should.equal(true);
 
                 // Call the assertion callback
                 done();
@@ -280,7 +280,7 @@ describe('Article Admin CRUD tests', function () {
   });
 
   afterEach(function (done) {
-    Article.remove().exec()
+    Item.remove().exec()
       .then(User.remove().exec())
       .then(done())
       .catch(done);
