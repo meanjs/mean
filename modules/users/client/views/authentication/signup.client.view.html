@@ -4,8 +4,15 @@
     <form name="userForm" ng-submit="signup(userForm.$valid)" class="signin" novalidate autocomplete="off">
       <fieldset>
         <div class="form-group" show-errors>
-          <label for="organization">Organization</label>
-          <input type="text" id="organization" name="organization" class="form-control" ng-model="credentials.organization" placeholder="Organization" required>
+          <label for="role">Role</label>
+          <input type="text" id="role" name="role" class="form-control" ng-model="credentials.roles" placeholder="Organization or business" required>
+          <div ng-messages="userForm.roles.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Role is required.</p>
+          </div>
+        </div>
+        <div class="form-group" show-errors>
+          <label for="organization">Organization/Business</label>
+          <input type="text" id="organization" name="organization" class="form-control" ng-model="credentials.organization" placeholder="Organization/Business" required>
           <div ng-messages="userForm.organization.$error" role="alert">
             <p class="help-block error-text" ng-message="required">Organization is required.</p>
           </div>
@@ -42,16 +49,16 @@
             </div>
           </div>
         </div>
-        <div class="form-group" show-errors>
-          <label for="schoolName">School Name</label>
-          <input type="schoolName" id="schoolName" name="schoolName" class="form-control" ng-model="credentials.schoolName" placeholder="School Name">
-          <div ng-messages="userForm.schoolName.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">School name is required.</p>
-            <!--<div ng-repeat="passwordError in passwordErrors">-->
-            <!--<p class="help-block error-text" ng-show="userForm.password.$error.requirements">{{passwordError}}</p>-->
-            <!--</div>-->
-          </div>
-        </div>
+        <!--<div class="form-group" show-errors>-->
+          <!--<label for="schoolName">School Name</label>-->
+          <!--<input type="schoolName" id="schoolName" name="schoolName" class="form-control" ng-model="credentials.schoolName" placeholder="School Name">-->
+          <!--<div ng-messages="userForm.schoolName.$error" role="alert">-->
+            <!--<p class="help-block error-text" ng-message="required">School name is required.</p>-->
+            <!--&lt;!&ndash;<div ng-repeat="passwordError in passwordErrors">&ndash;&gt;-->
+            <!--&lt;!&ndash;<p class="help-block error-text" ng-show="userForm.password.$error.requirements">{{passwordError}}</p>&ndash;&gt;-->
+            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+          <!--</div>-->
+        <!--</div>-->
         <div class="form-group" show-errors>
           <div>
             <label>Contact</label>
