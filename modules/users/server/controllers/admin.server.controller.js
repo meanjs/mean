@@ -87,19 +87,16 @@ exports.unapprovedList = function(req, res) {
 }
 
 exports.changeToAccepted = function (req, res) {
-  console.log("got to backend controller");
   var unapprovedUser = req.query;
-  unapprovedUser.approvedStatus = !unapprovedUser.approvedStatus;
-
-  //TODO it doesn't like this.
-  User.findOneAndUpdate.function (err) {
+  User.findOneAndUpdate({username : req.query.username}, {approvedStatus : true})
+  .exec(function(err, changedUser) {
     if (err) {
       return res.status(422).send({
         message: errorHandler.getErrorMessage(err)
       });
     }
-    console.log(unapprovedUser);
-    res.json(unapprovedUser);
+    console.log(changedUser);
+    res.json(changedUser);
   });
 
 }
