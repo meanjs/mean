@@ -23,6 +23,19 @@
     slider.oninput = function() {
         output.innerHTML = this.value;
     }
+
+    $scope.ready = function() {
+      var newSelect=document.createElement('select');
+          var selectHTML="";
+         /* for(i=0; i<choices.length; i=i+1){
+              selectHTML+= "<option value='"+choices[i]+"'>"+choices[i]+"</option>";
+          }*/
+          selectHTML+= "<option value='test'>test</option>";
+      
+          newSelect.innerHTML= selectHTML;
+          document.getElementById('book_selection').appendChild(newSelect);
+          
+      }
   
 
 
