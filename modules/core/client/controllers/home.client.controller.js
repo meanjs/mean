@@ -12,7 +12,13 @@
 
     //DO YOUR FRONTEND JS CODE HERE
     $scope.alert = () => {
-		alert('hello');
-	}
+		  alert('hello');
+    }
+    
+    
+  
+
+
+
   }
 }());
