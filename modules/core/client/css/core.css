@@ -184,7 +184,9 @@ a:hover .header-profile-image {
 
 
 
-
+#slidecontainer {
+  width: 10%; /* Width of the outside container */
+}
 
 .slider {
   -webkit-appearance: none;
@@ -193,9 +195,13 @@ a:hover .header-profile-image {
   border-radius: 5px;   
   background: #F9C078;
   outline: none;
-  opacity: 0.7;
+  opacity: 0.25;
   -webkit-transition: .2s;
   transition: opacity .2s;
+}
+
+.slider:hover{
+  opacity: 1; 
 }
 
 .slider::-webkit-slider-thumb {
