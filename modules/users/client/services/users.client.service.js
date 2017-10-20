@@ -105,8 +105,8 @@
         url: '/api/users/unapproved'
       },
       approvalSwap: {
-        method: 'PUT',
-        url: '/api/users/unapproved'
+        method: 'POST',
+        url: '/api/unapproved'
       },
       remove: {
         method: 'DELETE',
@@ -136,8 +136,8 @@
         url: '/api/admin/unapproved'
       },
       approvalSwap: {
-        method: 'PUT',
-        url: '/api/admin/unapproved'
+        method: 'POST',
+        url: '/api/unapproved'
       }
     });
 
