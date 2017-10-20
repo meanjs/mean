@@ -15,7 +15,7 @@
 		  alert('hello');
     }
     
-    var slider = document.getElementById("myRange");
+    var slider = document.getElementById("calories");
     var output = document.getElementById("demo");
     output.innerHTML = slider.value; // Display the default slider value
     
