@@ -87,6 +87,7 @@ exports.unapprovedList = function(req, res) {
 }
 
 exports.changeToAccepted = function (req, res) {
+  console.log("got to backend controller");
   var unapprovedUser = req.model;
   unapprovedUser.approvedStatus = !unapprovedUser.approvedStatus;
 
@@ -105,8 +106,6 @@ exports.changeToAccepted = function (req, res) {
 
 exports.deleteApplicant = function (req, res) {
   var unapprovedUser = req.query;
-  console.log("got to backend controller");
-  console.log(unapprovedUser);
   if (unapprovedUser) {
     User.findOneAndRemove({'username': unapprovedUser.username, 'approvedStatus': false}, function (err) {
       if (err) throw err;
