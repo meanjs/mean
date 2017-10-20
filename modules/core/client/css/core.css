@@ -207,16 +207,16 @@ a:hover .header-profile-image {
 .slider::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 25px;
-  height: 25px;
+  width: 15px;
+  height: 15px;
   border-radius: 50%; 
   background: #AEC86B;
   cursor: pointer;
 }
 
 .slider::-moz-range-thumb {
-  width: 25px;
-  height: 25px;
+  width: 15px;
+  height: 15px;
   border-radius: 50%;
   background: #AEC86B;
   cursor: pointer;
