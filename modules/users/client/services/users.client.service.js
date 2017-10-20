@@ -130,6 +130,16 @@
       }
     });
 
+    var Applicants = $resource('/api/unapproved', {}, {
+      delete: {
+        method: 'DELETE',
+        url: '/api/admin/unapproved'
+      },
+      updateApproval: {
+        method: 'PUT',
+        url: '/api/admin/unapproved'
+      }
+    });
 
     angular.extend(Users, {
       deleteApplicant: function () {
