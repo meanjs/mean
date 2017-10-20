@@ -224,6 +224,10 @@ a:hover .header-profile-image {
   cursor: pointer;
 }
 
+.checked {
+  color: #F9C078;
+}
+
 
 
 /*
