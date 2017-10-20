@@ -183,11 +183,46 @@ a:hover .header-profile-image {
 
 
 
+
+
+
+.slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 15px;
+  border-radius: 5px;   
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%; 
+  background: #4CAF50;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #4CAF50;
+  cursor: pointer;
+}
+
+
+
 /*
 Color Guide
-Green: rgb(174,200,107);
-light blue: rgb(140,212,201);
-light orange: rgb(249,192,120);
-orange: rgb(253,131,93);
-dark orange: rgb(223,93,74);
+Green: rgb(174,200,107), hex(AEC86B);
+light blue: rgb(140,212,201), hex(8CD4C9);
+light orange: rgb(249,192,120), hex(F9C078);
+orange: rgb(253,131,93), hex(FD835D);
+dark orange: rgb(223,93,74), hex(DF5D4A);
 */
