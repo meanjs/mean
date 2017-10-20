@@ -87,26 +87,22 @@ exports.unapprovedList = function(req, res) {
 }
 
 exports.changeToAccepted = function (req, res) {
-  var unapprovedUser = req.model;
+  var unapprovedUser = req.query;
   unapprovedUser.approvedStatus = !unapprovedUser.approvedStatus;
-
+  console.log("Gets to backend controller");
   unapprovedUser.save(function (err) {
-    if (err) {
+  if (err) {
       return res.status(422).send({
         message: errorHandler.getErrorMessage(err)
       });
-    }
-    console.log(unapprovedUser);
-    res.json(unapprovedUser);
+  }
+  console.log(unapprovedUser);
+  res.json(unapprovedUser);
   });
-
 }
-
 
 exports.deleteApplicant = function (req, res) {
   var unapprovedUser = req.query;
-  console.log("got to backend controller");
-  console.log(unapprovedUser);
   if (unapprovedUser) {
     User.findOneAndRemove({'username': unapprovedUser.username, 'approvedStatus': false}, function (err) {
       if (err) throw err;

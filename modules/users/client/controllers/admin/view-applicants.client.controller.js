@@ -28,11 +28,10 @@
 
     vm.approve = function (user) {
       if (user) {
-          var newUser = user;
-          user.approvedStatus = true;
-          ApplicantsService.approve(newUser); //This database call isn't working.
-          vm.unapprovedUsers.splice(vm.unapprovedUsers.indexOf(user), 1);
-          Notification.success('User approved successfully!');
+          //user.approvedStatus = true; //We let the backend handle the status update and just pass in the current user.
+          console.log(ApplicantsService.remove);
+          ApplicantsService.approve(user); //This database call isn't working.
+          Notification.success('User approval changed successfully!');
       }
     };
 
