@@ -185,7 +185,9 @@ a:hover .header-profile-image {
 
 
 #slidecontainer {
-  width: 10%; /* Width of the outside container */
+  float: left;
+  width: 10%;
+  margin-left: 26.3%;
 }
 
 .slider {
@@ -195,7 +197,7 @@ a:hover .header-profile-image {
   border-radius: 5px;   
   background: #F9C078;
   outline: none;
-  opacity: 0.25;
+  opacity: 0.5;
   -webkit-transition: .2s;
   transition: opacity .2s;
 }
