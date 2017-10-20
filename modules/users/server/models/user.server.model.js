@@ -125,6 +125,46 @@ var UserSchema = new Schema({
   },
   resetPasswordExpires: {
     type: Date
+  }, // ============== HEALTH TRACKER SPECIFIC ===========
+  allergies: {
+    corn: Boolean,
+    milk: Boolean,
+    eggs: Boolean,
+    peanuts: Boolean,
+    treeNuts: Boolean, // almonds, cashews, walnuts
+    fish: Boolean, // bass, cod, flounder
+    shellfish: Boolean, // crab, lobster shrimp
+    soy: Boolean,
+    wheatGluten: Boolean
+  },
+  dietaryDefinitions: {
+    vegan: Boolean,
+    ovoVegetarian: Boolean,
+    lactoVegetarian: Boolean,
+    lactoOvoVegetarian: Boolean,
+    prescetarian: Boolean
+  },
+  preferences: {
+    cholesterol: Boolean,
+    diabetes: Boolean,
+    lowSalt: Boolean,
+    lowFat: Boolean,
+    lowCalorie: Boolean, // less than 400 calories/meal
+    bland: Boolean,
+  },
+  religiousRestrictions: {
+    hinduism: Boolean,
+    islam: Boolean,
+    kosher: Boolean
+  },
+  myRecipes: {
+    name: String,
+    image: { 
+      type: String,
+      default: 'modules/users/client/img/profile/default.png'
+    },
+    directions: String,
+    ingredients: Array
   }
 });
 
