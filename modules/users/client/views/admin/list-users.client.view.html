@@ -17,5 +17,11 @@
     </a>
   </div>
 
+  <div class="col-md-4">
+      <a class="btn btn-primary" ui-sref="admin.add-user">
+          Add New User
+      </a>
+  </div>
+
   <uib-pagination boundary-links="true" max-size="8" items-per-page="vm.itemsPerPage" total-items="vm.filterLength" ng-model="vm.currentPage" ng-change="vm.pageChanged()"></uib-pagination>
 </section>
