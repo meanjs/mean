@@ -2,10 +2,8 @@
 
 module.exports = function (app) {
   // Root routing
-  var core = require('../controllers/core.server.controller.js'), //Public view
-    items = require('../controllers/items.server.controller.js'),
+  var core = require('../controllers/core.server.controller.js'); //Public view
     //categories = require('../controllers/categories.server.controller.js'), //TODO enable category routing and item sorting.
-    users = require('../controllers/users.server.controller.js');
     //express = require('express'), 
     //router = express.Router();
 
@@ -18,28 +16,9 @@ module.exports = function (app) {
   // Define application route
   app.route('/*').get(core.renderIndex);
 
-//TODO User schema still needs: modulesAssigned 
-
-//TODO Category schema: name, backref:itemList, 
-
   // Render main home for no login, or for public/apply
   app.route('/public/apply').get(core.renderIndex)
   						   .post(core.apply); //For adding user applications
 
-  //TODO enforce login check below this point in controllers.
-  app.route('/items').get(items.list)
-  					.post(items.create);
-  app.route('/items/:itemID').get(items.read)
-  							.put(items.update)
-  							.delete(items.delete);
-  app.param('/itemID', items.itemByID);
-
   //TODO enforce admin login check below this point in controllers.
-  //TODO routing for newuser approval page.
-  app.route('/users').get(users.list)
-  					.post(users.create);
-  app.route('/users/:userID').get(users.read)
-  							.put(users.update)
-  							.delete(users.delete);
-  app.param('userID', users.userByID);
 };

@@ -34,7 +34,8 @@ describe('Article CRUD tests', function () {
     // Create user credentials
     credentials = {
       usernameOrEmail: 'username',
-      password: 'M3@n.jsI$Aw3$0m3'
+      password: 'M3@n.jsI$Aw3$0m3',
+      approvedStatus: true
     };
 
     // Create a new user
@@ -113,42 +114,6 @@ describe('Article CRUD tests', function () {
       });
   });
 
-  it('should be able to get a list of articles if not signed in', function (done) {
-    // Create new article model instance
-    var articleObj = new Article(article);
-
-    // Save the article
-    articleObj.save(function () {
-      // Request articles
-      agent.get('/api/articles')
-        .end(function (req, res) {
-          // Set assertion
-          res.body.should.be.instanceof(Array).and.have.lengthOf(1);
-
-          // Call the assertion callback
-          done();
-        });
-
-    });
-  });
-
-  it('should be able to get a single article if not signed in', function (done) {
-    // Create new article model instance
-    var articleObj = new Article(article);
-
-    // Save the article
-    articleObj.save(function () {
-      agent.get('/api/articles/' + articleObj._id)
-        .end(function (req, res) {
-          // Set assertion
-          res.body.should.be.instanceof(Object).and.have.property('title', article.title);
-
-          // Call the assertion callback
-          done();
-        });
-    });
-  });
-
   it('should return proper error for single article with an invalid Id, if not signed in', function (done) {
     // test is not a valid mongoose Id
     agent.get('/api/articles/test')
@@ -207,7 +172,7 @@ describe('Article CRUD tests', function () {
         .expect(403)
         .end(function (articleDeleteErr, articleDeleteRes) {
           // Set message assertion
-          (articleDeleteRes.body.message).should.match('User is not authorized');
+          (articleDeleteRes.body.message).should.match('User is not yet approved for database changes (check attribute approvedStatus)');
 
           // Handle article error error
           done(articleDeleteErr);
@@ -220,7 +185,8 @@ describe('Article CRUD tests', function () {
     // Create orphan user creds
     var _creds = {
       usernameOrEmail: 'orphan',
-      password: 'M3@n.jsI$Aw3$0m3'
+      password: 'M3@n.jsI$Aw3$0m3',
+      approvedStatus: true
     };
 
     // Create orphan user
@@ -305,27 +271,6 @@ describe('Article CRUD tests', function () {
     });
   });
 
-  it('should be able to get a single article if not signed in and verify the custom "isCurrentUserOwner" field is set to "false"', function (done) {
-    // Create new article model instance
-    var articleObj = new Article(article);
-
-    // Save the article
-    articleObj.save(function (err) {
-      if (err) {
-        return done(err);
-      }
-      agent.get('/api/articles/' + articleObj._id)
-        .end(function (req, res) {
-          // Set assertion
-          res.body.should.be.instanceof(Object).and.have.property('title', article.title);
-          // Assert the custom field "isCurrentUserOwner" is set to false for the un-authenticated User
-          res.body.should.be.instanceof(Object).and.have.property('isCurrentUserOwner', false);
-          // Call the assertion callback
-          done();
-        });
-    });
-  });
-
   it('should be able to get single article, that a different user created, if logged in & verify the "isCurrentUserOwner" field is set to "false"', function (done) {
     // Create temporary user creds
     var _creds = {
@@ -342,8 +287,8 @@ describe('Article CRUD tests', function () {
       username: _creds.usernameOrEmail,
       password: _creds.password,
       provider: 'local',
-      roles: ['admin', 'user'],
-      approvedStatus: true
+      approvedStatus : true,
+      roles: ['admin']
     });
 
     _articleOwner.save(function (err, _user) {
