@@ -87,19 +87,19 @@ exports.unapprovedList = function(req, res) {
 }
 
 exports.changeToAccepted = function (req, res) {
-  var unapprovedUser = req.query;
-  //TODO error still next line.
-  User.findOneAndUpdate({username : req.query.username}, {approvedStatus : true})
-  .exec(function(err, changedUser) {
+  var unapprovedUser = req.body;
+  console.log("tryna change: " + unapprovedUser.username);
+  console.log("current status: " + unapprovedUser.approvedStatus);
+  User.findOneAndUpdate({'username' : unapprovedUser.username}, {$set: {'approvedStatus' : true}}, function(err, changedUser) {
     if (err) {
       return res.status(422).send({
         message: errorHandler.getErrorMessage(err)
       });
     }
+    console.log("now its: " + unapprovedUser.approvedStatus);
     console.log(changedUser);
     res.json(changedUser);
   });
-
 }
 
 
