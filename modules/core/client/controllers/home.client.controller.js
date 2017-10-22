@@ -36,8 +36,9 @@
           document.getElementById('book_selection').appendChild(newSelect);
           
       }
-  
 
+
+    
 
 
   }
