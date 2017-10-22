@@ -135,7 +135,6 @@
         return this.approvalSwap().$promise;
       }
     });
-
     return Applicants;
   }
 

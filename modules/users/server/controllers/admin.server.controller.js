@@ -8,24 +8,6 @@ var path = require('path'),
   User = mongoose.model('User'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller'));
 
-
-exports.approve = function(req, res) {
-  var user = req.user;
-  //TODO Validated permissions for this type of request.
-  user.approvedStatus = true;
-
-  /* Save the article */
-  user.save(function(err) {
-    if(err) {
-      console.log(err);
-      res.status(400).send(err);
-    } else {
-      res.json(user);
-    }
-  });
-};
-
-
 /**
  * Show the current user
  */
@@ -106,16 +88,12 @@ exports.unapprovedList = function(req, res) {
 
 exports.changeToAccepted = function (req, res) {
   var unapprovedUser = req.body;
-  console.log("tryna change: " + unapprovedUser.username);
-  console.log("current status: " + unapprovedUser.approvedStatus);
   User.findOneAndUpdate({'username' : unapprovedUser.username}, {$set: {'approvedStatus' : true}}, function(err, changedUser) {
     if (err) {
       return res.status(422).send({
         message: errorHandler.getErrorMessage(err)
       });
     }
-    console.log("now its: " + unapprovedUser.approvedStatus);
-    console.log(changedUser);
     res.json(changedUser);
   });
 }
