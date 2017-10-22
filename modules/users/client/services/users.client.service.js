@@ -84,18 +84,18 @@
         method: 'DELETE',
         url: '/api/admin/unapproved'
       },
-      approveUser: {
+      changeToAccepted: {
         method: 'POST',
         url: '/api/unapproved'
       }
     });
 
-    angular.extend(Users, {
+    angular.extend(Applicants, {
       deleteApplicant: function () {
         return this.delete().$promise;
       },
       approveUser: function () {
-        return this.approvalSwap().$promise;
+        return this.changeToAccepted().$promise;
       }
     });
     return Applicants;

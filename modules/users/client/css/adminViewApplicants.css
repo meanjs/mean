@@ -10,3 +10,7 @@
 .checkAll {
 	vertical-align: middle;
 }
+
+td{
+	width: 25%;
+}
