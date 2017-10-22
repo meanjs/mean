@@ -281,15 +281,6 @@ a:hover .header-profile-image {
     color: #F9C078;
 }
 
-.acidjs-rating-disabled
-{
-    opacity: .50;
-     
-    -webkit-pointer-events: none;
-    -moz-pointer-events: none;
-    pointer-events: none;
-}
-
 
 
 /*
