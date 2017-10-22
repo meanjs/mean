@@ -8,10 +8,10 @@
             <span ng-bind="vm.error"></span>
           </uib-alert>
           <br></br>
-          <label for="Email">Email</label>
-          <input type="text" id="Email" name="Email" class="form-control" ng-model="vm.credentials.Email" placeholder="Email" required autofocus>
-          <div ng-messages="vm.userForm.Email.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">Email is required.</p>
+          <label for="usernameOrEmail">Username or Email</label>
+            <input type="text" id="usernameOrEmail" name="usernameOrEmail" class="form-control" ng-model="vm.credentials.usernameOrEmail" placeholder="Username or Email" required autofocus>
+            <div ng-messages="vm.userForm.usernameOrEmail.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Username or Email is required.</p>
           </div>
         </div>
         <div class="form-group" show-errors>
