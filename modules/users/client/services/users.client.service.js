@@ -66,13 +66,7 @@
       },
       getAllUnapprovedUsers: function () {
         return this.getUnapprovedUsers().$promise;
-      },
-      approveUser: function () {
-        return this.approveUser().$promise;
-      },
-      remove: function () {
-        return this.remove().$promise;
-      },
+      }
     });
 
     return Users;
@@ -102,14 +96,6 @@
       },
       getUnapprovedUsers: {
         method: 'GET',
-        url: '/api/users/unapproved'
-      },
-      approveUser: {
-        method: 'POST',
-        url: '/api/unapproved'
-      },
-      remove: {
-        method: 'DELETE',
         url: '/api/users/unapproved'
       },
       sendPasswordResetToken: {
