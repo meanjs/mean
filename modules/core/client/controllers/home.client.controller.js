@@ -39,7 +39,7 @@
     
     
     
-    
+    /*
       filterSelection("all")
       $scope.filterSelection = function(c) {
         var x, i;
@@ -72,7 +72,7 @@
           }
         }
         element.className = arr1.join(" ");
-      }
+      }*/
 
 
     
