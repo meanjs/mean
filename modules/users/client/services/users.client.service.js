@@ -67,8 +67,8 @@
       getAllUnapprovedUsers: function () {
         return this.getUnapprovedUsers().$promise;
       },
-      approvalSwap: function () {
-        return this.approvalSwap().$promise;
+      approveUser: function () {
+        return this.approveUser().$promise;
       },
       remove: function () {
         return this.remove().$promise;
@@ -104,7 +104,7 @@
         method: 'GET',
         url: '/api/users/unapproved'
       },
-      approvalSwap: {
+      approveUser: {
         method: 'POST',
         url: '/api/unapproved'
       },
@@ -135,7 +135,7 @@
         method: 'DELETE',
         url: '/api/admin/unapproved'
       },
-      approvalSwap: {
+      approveUser: {
         method: 'POST',
         url: '/api/unapproved'
       }
@@ -145,7 +145,7 @@
       deleteApplicant: function () {
         return this.delete().$promise;
       },
-      approvalSwap: function () {
+      approveUser: function () {
         return this.approvalSwap().$promise;
       }
     });

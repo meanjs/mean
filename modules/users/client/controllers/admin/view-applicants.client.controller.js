@@ -26,11 +26,11 @@
       }
     };
 
-    vm.approvalSwap = function (user) {
+    vm.approveUser = function (user) {
       if (user) {
           var newUser = user;
           user.approvedStatus = true;
-          ApplicantsService.approvalSwap(newUser); //This database call isn't working.
+          ApplicantsService.approveUser(newUser);
           vm.unapprovedUsers.splice(vm.unapprovedUsers.indexOf(user), 1);
           Notification.success('User approved successfully!');
       }
@@ -38,7 +38,7 @@
 
     vm.approveAll = function () {
       for(var i=0; i<vm.unapprovedUsers.length; i++){
-        vm.approvalSwap(vm.unapprovedUsers[i]);
+        vm.approveUser(vm.unapprovedUsers[i]);
       }
     };
   }
