@@ -1,4 +1,8 @@
 // https://health--tracker.herokuapp.com/
+var mongoose = require('mongoose'), 
+    Schema = mongoose.Schema, 
+    Listing = require('./food_alternatives.json'), 
+    config = require('./config');
 
 usda.controller('USDAController',
     function($scope, $http) {
@@ -31,6 +35,17 @@ usda.controller('USDAController',
 				});
 		}
 
+		$scope.findFood = (searchedItem) => {
+			var findFood = element(by.model('findFood'));
+			findFood.clear();
+			findFood.sendKeys('m');
+			expectFriendNames(['Mary', 'Mike', 'Adam'], 'friend');
+
+			searchText.clear();
+			searchText.sendKeys('76');
+			expectFriendNames(['John', 'Julie'], 'friend');
+		}
+
 		$scope.getReport = (searchedItem) => {
 			var reportURL = 
 			  	"http://api.nal.usda.gov/ndb/reports/" + 
@@ -56,6 +71,7 @@ usda.controller('USDAController',
 		function getURL(url) {
 			return $http.get(url);
 		}
+		var findAltFoods = funi
     }
 );
 
