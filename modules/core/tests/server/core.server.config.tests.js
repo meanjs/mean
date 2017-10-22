@@ -43,7 +43,7 @@ describe('Configuration Tests:', function () {
         email: 'test-admin@localhost.com',
         firstName: 'Admin',
         lastName: 'Test',
-        roles: ['admin', 'user']
+        roles: ['admin']
       };
 
       _user = {
@@ -51,7 +51,7 @@ describe('Configuration Tests:', function () {
         email: 'test-user@localhost.com',
         firstName: 'User',
         lastName: 'Test',
-        roles: ['user']
+        roles: ['ta']
       };
 
       _article = {
@@ -820,35 +820,4 @@ describe('Configuration Tests:', function () {
       fileTransport.should.be.false();
     });
   });
-
-  describe('Testing exposing environment as a variable to layout', function () {
-
-    ['development', 'production', 'test'].forEach(function (env) {
-      it('should expose environment set to ' + env, function (done) {
-        // Set env to development for this test
-        process.env.NODE_ENV = env;
-
-        // Gget application
-        app = express.init(mongoose.connection.db);
-        agent = request.agent(app);
-
-        // Get rendered layout
-        agent.get('/')
-          .expect('Content-Type', 'text/html; charset=utf-8')
-          .expect(200)
-          .end(function (err, res) {
-            // Set env back to test
-            process.env.NODE_ENV = 'test';
-            // Handle errors
-            if (err) {
-              return done(err);
-            }
-            res.text.should.containEql('env = "' + env + '"');
-            return done();
-          });
-      });
-    });
-
-  });
-
 });

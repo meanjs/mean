@@ -56,24 +56,6 @@ exports.update = function(req, res) {
   });
 };
 
-exports.approve = function(req, res) {
-  var user = req.user;
-
-  /* Replace the article's properties with the new properties found in req.body */
-  //TODO Validated permissions for this type of request.
-  user.approvedStatus = true;
-
-  /* Save the article */
-  user.save(function(err) {
-    if(err) {
-      console.log(err);
-      res.status(400).send(err);
-    } else {
-      res.json(user);
-    }
-  });
-};
-
 /* Delete a user */
 exports.delete = function(req, res) {
   var user = req.user;
