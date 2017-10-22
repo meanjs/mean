@@ -3,23 +3,23 @@
     <div class="textLN"><a class=" test left" href="">Popular Recipes</a> <a class="test" href="">My Recipes</a> </div>
   </div>
   </div>
-  <div id="slidecontainer">
+  <!--<div id="slidecontainer">
     <center>Calories
     <input type="range" min="0" max="1000" value="500" class="slider" id="calories">
     <span id="calVal"></span></center>
-  </div>
+  </div>-->
   <div class="dropMenu">
-    <!--<div class="dropdown">
-      <button class="btn btn-secondary dropdown-toggle btn-prop" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
-      
+    <div class="dropdown">
+      <button class="btn btn-secondary dropdown-toggle btn-prop" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <!--<div id="slidecontainer">-->
-        
-        <!--<span class="caret"></span></a>
+        Calories
+        <span class="caret"></span></a>
       </button>
       <div class="dropdown-menu filter-dropdown" aria-labelledby="dropdownMenuButton">
-        <li><a class="dropdown-item" href="#">Slide bar</a></li>
+        <input type="range" min="0" max="1000" value="500" class="slider" id="calories">
+        <span id="calVal"></span>
       </div>
-    </div>-->
+    </div>
     <div class="dropdown">
       <button class="btn btn-secondary dropdown-toggle btn-prop" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         Diet
@@ -101,6 +101,13 @@
           <div class="card-icon-container">
             <img class="card-icon" src="https://manylivescm.com/wp-content/uploads/2014/03/icon-glutenfree.png">
             <img class="card-icon" src="http://www.theproteinbakeshop.com/ae/files/icon-no-refined-sugar.png">
+            <div id="stars">
+              <span class="fa fa-star checked"></span>
+              <span class="fa fa-star checked"></span>
+              <span class="fa fa-star checked"></span>
+              <span class="fa fa-star"></span>
+              <span class="fa fa-star"></span>
+            </div>
           </div>
         </div>
       </div>
