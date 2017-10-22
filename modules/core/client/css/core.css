@@ -282,6 +282,22 @@ a:hover .header-profile-image {
 }
 
 
+.filterDiv {
+  float: left;
+  background-color: #AEC86B;
+  color: #ffffff;
+  width: 100px;
+  line-height: 100px;
+  text-align: center;
+  margin: 2px;
+  display: none;
+}
+
+.show {
+  display: block;
+}
+
+
 
 /*
 Color Guide
