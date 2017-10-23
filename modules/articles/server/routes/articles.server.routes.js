@@ -4,7 +4,7 @@
  * Module dependencies
  */
 var articlesPolicy = require('../policies/articles.server.policy'),
-  articles = require('../controllers/articles.server.controller');
+  items = require('../controllers/articles.server.controller');
 
 module.exports = function (app) {
   // Articles collection routes
@@ -18,24 +18,19 @@ module.exports = function (app) {
     .put(articles.update)
     .delete(articles.delete);
 
-    app.route('/api/categories').all(articlesPolicy.isAllowed)
-    .get(articles.listAllCategories)
-    .post(articles.createCategory)
-    .delete(articles.deleteCategory);
+    app.route('/api/categories').all(itemsPolicy.isAllowed)
+    .get(items.listAllCategories)
+    .post(items.createCategory)
+    .delete(items.deleteCategory);
 
-    app.route('/api/modules/:categoryId').all(articlesPolicy.isAllowed)
-    .delete(articles.deleteCategory);
+    app.route('/api/modules').all(itemsPolicy.isAllowed)
+    .get(items.listAllModules)
+    .post(items.createModule)
+    .delete(items.deleteCategory);
 
-    app.route('/api/modules').all(articlesPolicy.isAllowed)
-    .get(articles.listAllModules)
-    .post(articles.createModule);
-
-    app.route('/api/modules/:moduleId').all(articlesPolicy.isAllowed)
-    .delete(articles.deleteModule);    
+    //We will list, delete and post new tags all from the same page.
+    //We will also list tags in dropdown checkboxes for item creation or 
 
   // Finish by binding the article middleware
   app.param('articleId', articles.articleByID);
-  app.param('categoryId', articles.categoryByID);
-  app.param('moduleId', articles.moduleByID);
-
 };
