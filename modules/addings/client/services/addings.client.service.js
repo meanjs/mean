@@ -9,12 +9,21 @@
   AddingsService.$inject = ['$resource'];
 
   function AddingsService($resource) {
-    return $resource('api/addings/:addingId', {
-      addingId: '@_id'
-    }, {
+    var Addings = $resource('api/addings', {addingId: '@_id'}, {
       update: {
         method: 'PUT'
+      },
+      test: {
+        method: 'POST'
       }
     });
+
+    angular.extend(Addings, {
+      testing: function(par) {
+        return this.test(par).$promise;
+      }
+    });
+
+    return Addings;
   }
 }());
