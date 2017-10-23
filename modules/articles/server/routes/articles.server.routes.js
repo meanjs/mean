@@ -29,7 +29,7 @@ module.exports = function (app) {
     .delete(items.deleteModule);
 
     //We will list, delete and post new tags all from the same page.
-    //We will also list tags in dropdown checkboxes for item creation or 
+    //We will also list tags in dropdown checkboxes for item creation or editing.
 
   // Finish by binding the article middleware
   app.param('articleId', articles.articleByID);
