@@ -12,4 +12,27 @@
   text-shadow:2px 2px #333;
   text-align: center;
   padding-top: 250px;
+  font-size: 30px;
+
+}
+.savebtn{
+	width: 150px;
+	height: 60px;
+	background-color: red;
+	float: right;
+	margin-right: 10%;
+}
+.recipeDetail{
+	text-align: center;
+	margin-top: 5%;
+}
+.heading{
+	font-size: 20px;
+}
+.text{
+	font-size: 15px;
+}
+hr{
+	width: 60%;
+	border-width: 1px;
 }
