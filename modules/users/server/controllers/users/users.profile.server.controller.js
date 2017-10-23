@@ -227,6 +227,7 @@ exports.me = function (req, res) {
 
 exports.test = function(req, res) {
   var user = req.user;
+  var hello = req.hello;
 
   res.json(user);
 }
