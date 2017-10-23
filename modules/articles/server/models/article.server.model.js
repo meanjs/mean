@@ -31,6 +31,14 @@ var ArticleSchema = new Schema({
   user: {
     type: Schema.ObjectId,
     ref: 'User'
+  },
+  categories: {
+    type: Schema.ObjectId,
+    ref: 'Category'
+  },
+  module: {
+    type: Schema.ObjectId,
+    ref: 'Module'
   }
 });
 
