@@ -1,0 +1,40 @@
+<section class="row">
+  <div class="col-xs-offset-1 col-xs-10 col-md-offset-4 col-md-4">
+    <form name="vm.passwordForm" ng-submit="vm.changeUserPassword(vm.passwordForm.$valid)" class="signin" novalidate autocomplete="off">
+      <fieldset>
+        <div class="form-group" show-errors>
+          <label for="currentUsername">Current Username</label>
+          <input type="username" id="currentUsername" name="currentUsername" class="form-control" ng-model="vm.usernameDetails.currentUsername" placeholder="Current Username" required autofocus>
+          <div ng-messages="vm.usernameForm.currentUsername.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Your current username is required.</p>
+          </div>
+        </div>
+        <div class="form-group" show-errors>
+          <label for="newUsername">New Username</label>
+          <input type="username" id="newUsername" name="newUsername" class="form-control" ng-model="vm.usernameDetails.newUsername" placeholder="New Username" uib-popover="{{vm.getPopoverMsg()}}" uib-popover-trigger="focus" username-validator required>
+          <div ng-messages="vm.usernameForm.newUsername.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Enter a new username.</p>
+            <div ng-repeat="usernameError in usernameErrors">
+              <p class="help-block error-text" ng-show="vm.usernameForm.newUsername.$error.requirements">{{usernameError}}</p>
+            </div>
+          </div>
+        </div>
+        <div class="form-group" show-errors>
+          <label for="verifyUsername">Verify Username</label>
+          <input type="username" id="verifyUsername" name="verifyUsername" class="form-control" ng-model="vm.usernameDetails.verifyUsername" placeholder="Verify Username" username-verify="vm.usernameDetails.newUsername" required>
+          <div ng-messages="vm.usernameForm.verifyUsername.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Verify your new username.</p>
+            <p class="help-block error-text" ng-show="vm.usernameForm.verifyUsername.$error.usernameVerify">Usernames do not match.</p>
+          </div>
+        </div>
+        <div class="form-group" ng-show="!vm.usernameForm.newUsername.$error.required">
+          <label>Username Requirements</label>
+          <uib-progressbar value="requirementsProgress" type="{{requirementsColor}}"><span style="color:white; white-space:nowrap;">{{requirementsProgress}}%</span></uib-progressbar>
+        </div>
+        <div class="text-center form-group">
+          <button type="submit" class="btn btn-primary">Save Username</button>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</section>
