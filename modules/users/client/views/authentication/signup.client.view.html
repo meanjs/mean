@@ -5,7 +5,12 @@
       <fieldset>
         <div class="form-group" show-errors>
           <label for="role">Role</label>
-          <input type="text" id="role" name="role" class="form-control" ng-model="credentials.roles" placeholder="Organization or business" required>
+          <div class="radio">
+            <label><input type="radio" id="role" name="role" ng-model="credentials.roles" value="Organization" required>Organization</label>
+          </div>
+          <div class="radio">
+            <label><input type="radio" id="role" name="role" ng-model="credentials.roles" value="Business" required>Business</label>
+          </div>
           <div ng-messages="userForm.roles.$error" role="alert">
             <p class="help-block error-text" ng-message="required">Role is required.</p>
           </div>
