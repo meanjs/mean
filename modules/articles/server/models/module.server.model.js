@@ -22,6 +22,18 @@ var ModuleSchema = new Schema({
     default: '',
     trim: true,
     required: 'Title cannot be blank'
+  },
+  textHex: {
+    type: String,
+    default: '#000000',
+    trim: true,
+    required: 'Color cannot be blank'
+  },
+  highlightHex: {
+    type: String,
+    default: '#ffffff',
+    trim: true,
+    required: 'Color cannot be blank'
   }
 });
 
