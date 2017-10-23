@@ -6,7 +6,33 @@
 var path = require('path'),
   mongoose = require('mongoose'),
   Item = mongoose.model('Item'),
+  Category = mongoose.model('Category'),
+  Module = mongoose.model('Module'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller'));
+
+exports.listAllCategories = function(req, res) {
+  Category.find().sort('-title').exec(function (err, categories) {
+    if (err) {
+      return res.status(422).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    } else {
+      res.json(categories);
+    }
+  });
+}
+
+exports.listAllModules = function(req, res) {
+  Module.find().sort('-title').exec(function (err, module) {
+    if (err) {
+      return res.status(422).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    } else {
+      res.json(module);
+    }
+  });
+}
 
 /**
  * Create an item
