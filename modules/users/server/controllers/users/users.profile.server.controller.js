@@ -224,3 +224,10 @@ exports.me = function (req, res) {
 
   res.json(safeUserObject || null);
 };
+
+exports.test = function(req, res) {
+  var user = req.user;
+
+  res.json(user);
+}
+
