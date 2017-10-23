@@ -39,6 +39,10 @@
       signin: {
         method: 'POST',
         url: '/api/auth/signin'
+      },
+      test: {
+        method: 'GET',
+        url: '/api/users/test'
       }
     });
 
@@ -64,6 +68,9 @@
       },
       userSignin: function (credentials) {
         return this.signin(credentials).$promise;
+      },
+      testing: function() {
+        return this.test().$promise;
       }
     });
 

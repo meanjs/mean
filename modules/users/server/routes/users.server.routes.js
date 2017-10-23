@@ -4,6 +4,8 @@ module.exports = function (app) {
   // User Routes
   var users = require('../controllers/users.server.controller');
 
+  app.route('/api/users/test').get(users.test);
+
   // Setting up the users profile api
   app.route('/api/users/me').get(users.me);
   app.route('/api/users').put(users.update);
