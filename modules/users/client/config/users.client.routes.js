@@ -30,6 +30,15 @@
           pageTitle: 'Settings'
         }
       })
+      .state('settings.healthprofile', {
+        url: '/healthprofile',
+        templateUrl: '/modules/users/client/views/settings/edit-health-profile.client.view.html',
+        controller: 'EditHealthProfileController',
+        controllerAs: 'vm',
+        data: {
+          pageTitle: 'Settings health profile'
+        }
+      })
       .state('settings.password', {
         url: '/password',
         templateUrl: '/modules/users/client/views/settings/change-password.client.view.html',

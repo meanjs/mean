@@ -1,0 +1,34 @@
+<section class="row">
+  <div class="col-xs-offset-1 col-xs-10 col-md-offset-4 col-md-4">
+    <form name="vm.userForm" ng-submit="vm.updateUserProfile(vm.userForm.$valid)" class="signin" novalidate autocomplete="off">
+      <fieldset>
+        <div class="form-group" show-errors>
+          <label for="weight">Weight</label>
+          <input type="text" id="weight" name="weight" class="form-control" ng-model="vm.user.weight" placeholder="Weight" required autofocus>
+          <div ng-messages="vm.userForm.weight.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Weight is required.</p>
+          </div>
+        </div>
+        <div class="form-group" show-errors>
+          <label for="allergies">Allergies</label>
+          <input type="text" id="allergies" name="allergies" class="form-control" ng-model="vm.user.allergies" placeholder="Allergies" required>
+          <div ng-messages="vm.userForm.allergies.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Allergies are required.</p>
+          </div>
+        </div>
+        <div class="form-group" show-errors>
+          <label for="diabetic">Diabetic</label>
+          <input type="diabetic" id="diabetic" name="diabetic" class="form-control" ng-model="vm.user.diabetic" placeholder="Diabetic" required>
+          <div ng-messages="vm.userForm.diabetic.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">This field is required.</p>
+        <!--    <p class="help-block error-text" ng-message="email">Email address is invalid.</p>   -->
+          </div>
+        </div>
+        <div class="text-center form-group">
+          <button type="submit" class="btn btn-primary">Save Profile</button>
+        </div>
+        
+      </fieldset>
+    </form>
+  </div>
+</section>

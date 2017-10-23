@@ -6,11 +6,17 @@
     <nav class="col-sm-3 col-md-3">
       <ul class="nav nav-pills nav-stacked">
         <li ui-sref-active="active">
-          <a ui-sref="settings.profile">Edit Profile</a>
+          <a ui-sref="settings.profile">Edit Personal Profile</a>
+        </li>
+        <li ui-sref-active="active">
+          <a ui-sref="settings.healthprofile">Edit Health Profile</a>
         </li>
         <li ui-sref-active="active">
           <a ui-sref="settings.picture">Change Profile Picture</a>
         </li>
+        <li ui-sref-active="active">
+          <a ui-sref="settings.username">Change Username</a>
+        </li>   
         <li ui-sref-active="active" ng-show="vm.user.provider === 'local'">
           <a ui-sref="settings.password">Change Password</a>
         </li>
