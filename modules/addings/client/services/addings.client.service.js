@@ -14,7 +14,8 @@
         method: 'PUT'
       },
       test: {
-        method: 'POST'
+        method: 'GET',
+        isArray: false
       }
     });
 

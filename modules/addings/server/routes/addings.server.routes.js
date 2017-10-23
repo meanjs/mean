@@ -11,7 +11,7 @@ module.exports = function(app) {
   app.route('/api/addings').all(addingsPolicy.isAllowed)
     .get(addings.list)
     .post(addings.create)
-    .post(addings.test);
+    .get(addings.test);
 
   app.route('/api/addings/:addingId').all(addingsPolicy.isAllowed)
     .get(addings.read)

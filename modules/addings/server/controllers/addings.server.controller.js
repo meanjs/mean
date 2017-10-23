@@ -10,7 +10,9 @@ var path = require('path'),
   _ = require('lodash');
 
 exports.test = function(req, res) {
-  var body = req.body;
+  var body = {
+    "hello" : "world"
+  };
 
   res.json(body);
 }

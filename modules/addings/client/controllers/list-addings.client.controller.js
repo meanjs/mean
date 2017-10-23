@@ -11,13 +11,13 @@
     var vm = this;
 
     // TESTING
-    var par = {
+    var params = {
       'hello' : 'world'
     };
 
-    AddingsService.testing(par)
-        .then(success)
-        .catch(failure);
+    // AddingsService.testing(params)
+    //     .then(success)
+    //     .catch(failure);
 
     function success(response) {
       console.log('worked!');
