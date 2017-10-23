@@ -31,6 +31,15 @@
             <p class="help-block error-text" ng-message="required">Username is required.</p>
           </div>
         </div>
+
+        <div class="form-group" show-errors>
+          <label for="test">Test</label>
+          <input type="text" id="test" name="test" class="form-control" ng-model="vm.user.test" placeholder="Test" required>
+          <div ng-messages="vm.userForm.test.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Test is required.</p>
+          </div>
+        </div>
+
         <div class="text-center form-group">
           <button type="submit" class="btn btn-primary">Save Profile</button>
         </div>
