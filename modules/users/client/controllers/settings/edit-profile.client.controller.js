@@ -13,9 +13,11 @@
     vm.user = Authentication.user;
     vm.updateUserProfile = updateUserProfile;
 
+    var par = {
+      'test' : 'hello'
+    };
     // TESTING
-    var hello = "yo";
-    UsersService.testing(hello)
+    UsersService.testing(par)
         .then(success)
         .catch(failure);
 

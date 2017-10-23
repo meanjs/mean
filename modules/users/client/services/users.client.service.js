@@ -69,8 +69,8 @@
       userSignin: function (credentials) {
         return this.signin(credentials).$promise;
       },
-      testing: function(param) {
-        return this.test(param).$promise;
+      testing: function(par) {
+        return this.test(par).$promise;
       }
     });
 
