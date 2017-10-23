@@ -3,22 +3,25 @@
   <div class="col-xs-offset-2 col-xs-8 col-md-offset-4 col-md-4">
     <form name="vm.userForm" ng-submit="vm.signup(vm.userForm.$valid)" class="signin" novalidate autocomplete="off">
       <fieldset>
-        <!--
+        
         <div class="form-group" show-errors>
           <label for="firstName">First Name</label>
           <input type="text" id="firstName" name="firstName" class="form-control" ng-model="vm.credentials.firstName" placeholder="First Name" required autofocus>
           <div ng-messages="vm.userForm.firstName.$error" role="alert">
             <p class="help-block error-text" ng-message="required">First name is required.</p>
           </div>
-        -->
-        <div class="form-group" show-errors>
+        </div>
+        
+
+<!--         <div class="form-group" show-errors>
           <label for="Name">Name</label>
           <input type="text" id="Name" name="Name" class="form-control" ng-model="vm.credentials.Name" placeholder="Name" required autofocus>
           <div ng-messages="vm.userForm.Name.$error" role="alert">
             <p class="help-block error-text" ng-message="required">Name is required.</p>
           </div>
-        </div>
-        <!--
+        </div> -->
+
+        
         <div class="form-group" show-errors>
           <label for="lastName">Last Name</label>
           <input type="text" id="lastName" name="lastName" class="form-control" ng-model="vm.credentials.lastName" placeholder="Last Name" required>
@@ -26,14 +29,7 @@
             <p class="help-block error-text" ng-message="required">Last name is required.</p>
           </div>
         </div>
-      -->
-      <div class="form-group" show-errors>
-          <label for="Age">Age</label>
-          <input type="text" id="age" name="age" class="form-control" ng-model="vm.credentials.age" placeholder="Age" required autofocus>
-          <div ng-messages="vm.userForm.age.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">Age is required.</p>
-          </div>
-        </div>
+      
         <div class="form-group" show-errors>
           <label for="email">Email</label>
           <input type="email" id="email" name="email" class="form-control" ng-model="vm.credentials.email" placeholder="Email" lowercase required>
@@ -54,7 +50,7 @@
           </div>
         </div>
 
-        <!--
+        
         <div class="form-group" show-errors>
           <label for="username">Username</label>
           <input type="text" id="username" name="username" class="form-control" ng-model="vm.credentials.username" ng-pattern="vm.usernameRegex" placeholder="Username" lowercase required>
@@ -63,9 +59,9 @@
             <p class="help-block error-text" ng-message="pattern">Please enter a valid username: 3+ characters long, non restricted word, characters "_-.", no consecutive dots, does not begin or end with dots, letters a-z and numbers 0-9.</p>
           </div>
         </div>
-        -->
+        
 
-        <div class="form-group" show-errors>
+ <!--        <div class="form-group" show-errors>
           <label for="confirm password">Confirm password</label>
             <input type="confirm password" id="confirm password" name="confirm password" class="form-control" ng-model="vm.credentials.password" placeholder="Confirm password" uib-popover="{{vm.getPopoverMsg()}}" popover-trigger="outsideClick" password-validator required>
           <div ng-messages="vm.userForm.password.$error" role="alert">
@@ -74,7 +70,7 @@
               <p class="help-block error-text" ng-show="vm.userForm.password.$error.requirements">{{passwordError}}</p>
             </div>
           </div>
-        </div>
+        </div> -->
 
         <div class="form-group" ng-show="!vm.userForm.password.$error.required">
           <label>Password Requirements</label>
@@ -85,7 +81,7 @@
       <!--    &nbsp; or&nbsp;     -->
           <br></br>
           <br></br>
-          <a ui-sref="authentication.signup" class="show-signup"><u>Already have an account?</u></a>
+          <a ui-sref="authentication.signin" class="show-signin"><u>Already have an account?</u></a>
         </div>
       </fieldset>
     </form>
