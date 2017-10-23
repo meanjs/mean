@@ -3,7 +3,7 @@
 /**
  * Module dependencies
  */
-var articlesPolicy = require('../policies/articles.server.policy'),
+var itemsPolicy = require('../policies/articles.server.policy'),
   items = require('../controllers/articles.server.controller');
 
 module.exports = function (app) {
@@ -26,7 +26,7 @@ module.exports = function (app) {
     app.route('/api/modules').all(itemsPolicy.isAllowed)
     .get(items.listAllModules)
     .post(items.createModule)
-    .delete(items.deleteCategory);
+    .delete(items.deleteModule);
 
     //We will list, delete and post new tags all from the same page.
     //We will also list tags in dropdown checkboxes for item creation or 
