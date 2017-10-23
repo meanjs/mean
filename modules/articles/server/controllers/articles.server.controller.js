@@ -20,10 +20,53 @@ exports.listAllCategories = function(req, res) {
       res.json(categories);
     }
   });
-}
+};
+
+exports.createCategory = function (req, res) {
+  var category = new Category(req.body);
+  category.user = req.user;
+
+  category.save(function (err) {
+    if (err) {
+      return res.status(422).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    } else {
+      res.json(category);
+    }
+  });
+};
+
+exports.deleteCategory = function(req, res) {
+  var toDelete = req.body;
+  Category.findOneAndDelete({'title' : toDelete.title}, function(err, deleted) {
+    if (err) {
+      return res.status(422).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    }
+    res.json(deleted);
+  });
+ };
+
 
 exports.listAllModules = function(req, res) {
-  Module.find().sort('-title').exec(function (err, module) {
+  Module.find().sort('-title').exec(function (err, modules) {
+    if (err) {
+      return res.status(422).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    } else {
+      res.json(modules);
+    }
+  });
+};
+
+exports.createModule = function (req, res) {
+  var module = new Module(req.body);
+  module.user = req.user;
+
+  module.save(function (err) {
     if (err) {
       return res.status(422).send({
         message: errorHandler.getErrorMessage(err)
@@ -32,7 +75,20 @@ exports.listAllModules = function(req, res) {
       res.json(module);
     }
   });
-}
+};
+
+
+exports.deleteModule = function(req, res) {
+  var toDelete = req.body;
+  Module.findOneAndDelete({'title' : toDelete.title}, function(err, deleted) {
+    if (err) {
+      return res.status(422).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    }
+    res.json(deleted);
+  });
+ };
 
 /**
  * Create an article
