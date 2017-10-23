@@ -9,6 +9,12 @@ var path = require('path'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
   _ = require('lodash');
 
+exports.test = function(req, res) {
+  var body = req.body;
+
+  res.json(body);
+}
+
 /**
  * Create a Adding
  */
