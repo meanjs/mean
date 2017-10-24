@@ -30,7 +30,7 @@
       if (user) {
           var newUser = user;
           user.approvedStatus = true;
-          ApplicantsService.approveUser(newUser);
+          ApplicantsService.changeToAccepted(newUser);
           vm.unapprovedUsers.splice(vm.unapprovedUsers.indexOf(user), 1);
           Notification.success('User approved successfully!');
       }
