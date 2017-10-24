@@ -28,6 +28,14 @@ exports.invokeRolesPolicies = function () {
     {
       resources: '/api/modules',
       permissions: '*'
+    },
+    {
+      resources: '/api/categories',
+      permissions: '*'
+    },
+    {
+      resources: '/api/modules',
+      permissions: '*'
     }]
   }, 
   {
