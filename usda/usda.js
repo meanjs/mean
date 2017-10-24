@@ -1,10 +1,7 @@
 // https://health--tracker.herokuapp.com/
-var mongoose = require('mongoose'), 
-    Schema = mongoose.Schema, 
-    Listing = require('./food_alternatives.json'), 
-    config = require('./config');
+//var Listing = require('./food_alternatives.json');
 
-usda.controller('USDAController',
+usda.controller('USDAController', 
     function($scope, $http) {
     	// API KEY
 		var apiKey = 'YAJ2M9l67OaqNMPCEfBcoccVtQDY5LPUR20rFzP8';
@@ -17,6 +14,32 @@ usda.controller('USDAController',
 		var sort = "n";
 		var max = "200";
 		var ds = 'Standard Reference';
+		$scope.map = {};
+		var in_food_group;
+
+		$scope.db = () => {
+			$http.get('food_alternatives.json')
+				.then( (response) => {
+					response.data.food_groups.forEach( (each_food_group, i) => {
+						console.log(each_food_group.group_name);
+						each_food_group.food_alt.forEach( (alternative, j) => {
+							if(alternative.db_name == $scope.search){
+								console.log(alternative.db_ndbno);
+								$scope.orig_ndbno = alternative.db_ndbno;
+								in_food_group = each_food_group;
+							}
+							//assuming fat content are organized in decreasing order, should list out all teh healthy alternative in console
+							//next task is to work on printing out the map and fixing a bug so that the map could be reset for each search
+							else if((each_food_group == in_food_group) && (alternative.db_name != $scope.search)){
+								//put the rest into an array
+								$scope.map[alternative.db_ndbno] = alternative.db_name;
+								console.log($scope.map);
+							}
+						});
+					});
+				});
+		}
+		
 
 		$scope.doSearch = () => {
 			var searchURL = 
@@ -33,17 +56,6 @@ usda.controller('USDAController',
 					if(response.data.list) $scope.arr = response.data.list.item;
 					//console.log(response.data);
 				});
-		}
-
-		$scope.findFood = (searchedItem) => {
-			var findFood = element(by.model('findFood'));
-			findFood.clear();
-			findFood.sendKeys('m');
-			expectFriendNames(['Mary', 'Mike', 'Adam'], 'friend');
-
-			searchText.clear();
-			searchText.sendKeys('76');
-			expectFriendNames(['John', 'Julie'], 'friend');
 		}
 
 		$scope.getReport = (searchedItem) => {
@@ -71,7 +83,6 @@ usda.controller('USDAController',
 		function getURL(url) {
 			return $http.get(url);
 		}
-		var findAltFoods = funi
     }
 );
 

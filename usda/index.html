@@ -9,9 +9,13 @@
 	<h1>USDA Info</h1>
 
 	<!--<input type="text" ng-model='search' ng-change='doSearch()'></input>-->
-	<input type="text" ng-model='search' ng-change='doSearch()'></input>
+	<input type="text" ng-model='search' ng-change='db()'></input>
+
+	<span ng-bind="orig_ndbno"></span>
 
 	<br> <hr>
+	<p ng-bind="map"></p>
+
 	<!--
 	<div style="height: 300px; overflow-y: scroll">
 		<table border="1">

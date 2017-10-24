@@ -22,6 +22,16 @@
                         "db_amount": "47.53"
                     }, 
                     "db_ndbno": "04630"
+                },
+                {
+                    "db_name": "margarine2",
+                    "db_full_name": "Margarine Spread, approximately 48% fat, tub",
+                    "db_main_nutrient": {
+                        "db_nutrient": "fat",
+                        "db_unit": "gram per 100g",
+                        "db_amount": "47.53"
+                    }, 
+                    "db_ndbno": "04630"
                 }
             ]
         },
