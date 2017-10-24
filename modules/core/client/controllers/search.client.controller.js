@@ -3,11 +3,11 @@
 
   angular
     .module('core')
-    .controller('HomeController', HomeController);
+    .controller('SearchController', SearchController);
 
-  HomeController.$inject = ['$scope'];
+  SearchController.$inject = ['$scope'];
 
-  function HomeController($scope) {
+  function SearchController($scope) {
     var vm = this;
 
     //DO YOUR FRONTEND JS CODE HERE
