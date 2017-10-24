@@ -1,65 +1,22 @@
-<nav class="navbar" role="navigation">
-  <div class="navbar-header">
-    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-      <span class="sr-only">Toggle navigation</span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-    </button>
-    <a class="navbar-brand head" href="#">Health Tracker</a>
-  </div>
-
-  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-    <div class="col-sm-3 col-md-3">
-        <form class="navbar-form" role="search">
-        <div class="input-group">
-            <input type="text" class="form-control searchBar" placeholder="Search" name="q">
-            <div class="input-group-btn">
-                <button class="btn searchBar searchBar-btn" type="submit"><i class="glyphicon glyphicon-search"></i></button>
-            </div>
-        </div>
-        </form>
-    </div>
-    <ul class="nav navbar-nav navbar-right">
-      <li><a class="head" href="#"><span class="glyphicon glyphicon-plus"></span> Add Recipe </a></li>
-      <li class="dropdown">
-        <a href="#" class="dropdown-toggle head user-move"  data-toggle="dropdown"><img class="user-img" src="https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png" alt="">Name</a>
-        <ul class="dropdown-menu">
-          <li><a href="#">My Profile</a></li>
-          <li><a href="#">Settings</a></li>
-          <li class="divider"></li>
-          <li><a href="#">Log Out</a></li>
-        </ul>
-      </li>
-    </ul>
-  </div>
-</nav>
-
-
-<!-- Old header -->
-
 <div class="container" ng-controller="HeaderController as vm">
+  <!-- HEADER -->
   <div class="navbar-header">
-    <button class="navbar-toggle" type="button" ng-click="vm.isCollapsed = !vm.isCollapsed">
-      <span class="sr-only">Toggle navigation</span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-    </button>
     <a ui-sref="home" class="navbar-brand">Health Tracker</a>
   </div>
   <nav class="navbar-collapse" uib-collapse="!vm.isCollapsed" role="navigation">
-    <ul class="nav navbar-nav" ng-if="vm.menu.shouldRender(vm.authentication.user);">
-      <li ng-repeat="item in vm.menu.items | orderBy: 'position'" ng-if="item.shouldRender(vm.authentication.user);" ng-switch="item.type" ng-class="{ dropdown: item.type === 'dropdown' }" ui-sref-active="active" class="{{item.class}}" uib-dropdown="item.type === 'dropdown'">
-        <a ng-switch-when="dropdown" class="dropdown-toggle" uib-dropdown-toggle role="button">{{::item.title}}&nbsp;<span class="caret"></span></a>
-        <ul ng-switch-when="dropdown" class="dropdown-menu">
-          <li ng-repeat="subitem in item.items | orderBy: 'position'" ng-if="subitem.shouldRender(vm.authentication.user);">
-            <a ui-sref="{{subitem.state}}({{subitem.params}})" ng-bind="subitem.title"></a>
-          </li>
-        </ul>
-        <a ng-switch-default ui-sref="{{item.state}}" ng-bind="item.title"></a>
-      </li>
-    </ul>
+    <!-- SEARCH BAR -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <div class="col-sm-3 col-md-3">
+        <form class="navbar-form" role="search">
+          <div class="input-group">
+              <input type="text" class="form-control searchBar" placeholder="Search" name="q">
+              <div class="input-group-btn">
+                  <button class="btn searchBar searchBar-btn" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+              </div>
+          </div>
+        </form>
+    </div>
+    <!-- LOGGED OUT = SIGN UP AND SIGN IN -->
     <ul class="nav navbar-nav navbar-right" ng-hide="vm.authentication.user">
       <li ui-sref-active="active">
         <a ui-sref="authentication.signup">Sign Up</a>
@@ -69,7 +26,12 @@
         <a ui-sref="authentication.signin">Sign In</a>
       </li>
     </ul>
+    <!-- LOGGED IN = ADD RECIPE, PROFILE INFO, SIGN OUT -->
     <ul class="nav navbar-nav navbar-right" ng-show="vm.authentication.user">
+      <li>
+        <a class="head" ui-sref="addings.list">
+          <span class="glyphicon glyphicon-plus"></span> Add Recipe 
+        </a></li>
       <li class="dropdown" uib-dropdown>
         <a class="dropdown-toggle user-header-dropdown-toggle" uib-dropdown-toggle role="button">
           <img ng-src="{{vm.authentication.user.profileImageURL}}" alt="{{vm.authentication.user.displayName}}" class="header-profile-image" />

@@ -13,17 +13,24 @@
     vm.user = Authentication.user;
     vm.updateUserProfile = updateUserProfile;
 
-    UsersService.testing()
+    var par = {
+      'test' : 'hello'
+    };
+    // TESTING
+    UsersService.testing(par)
         .then(success)
         .catch(failure);
 
-      function success(response) {
-        console.log('worked!', response.data);
-      }
+    function success(response) {
+      console.log('worked!');
+      console.log(response);
+    }
 
-      function failure(response) {
-        console.log('sadness', response.data);
-      }
+    function failure(response) {
+      console.log('sadness')
+      console.log(response);
+    }
+    // END TESTING
 
     // Update a user profile
     function updateUserProfile(isValid) {

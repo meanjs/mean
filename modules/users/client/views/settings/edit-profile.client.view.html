@@ -16,7 +16,6 @@
             <p class="help-block error-text" ng-message="required">Last name is required.</p>
           </div>
         </div>
-        <!--
         <div class="form-group" show-errors>
           <label for="email">Email</label>
           <input type="email" id="email" name="email" class="form-control" ng-model="vm.user.email" placeholder="Email" lowercase required>
@@ -25,7 +24,6 @@
             <p class="help-block error-text" ng-message="email">Email address is invalid.</p>
           </div>
         </div>
-      -->
         <div class="form-group" show-errors>
           <label for="username">Username</label>
           <input type="text" id="username" name="username" class="form-control" ng-model="vm.user.username" placeholder="Username" lowercase required>
@@ -34,17 +32,17 @@
           </div>
         </div>
 
-         <div class="form-group" show-errors>
-          <label for="age">Age</label>
-          <input type="text" id="age" name="age" class="form-control" ng-model="vm.user.age" placeholder="Age" required>
-          <div ng-messages="vm.userForm.age.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">Age is required.</p>
+        <div class="form-group" show-errors>
+          <label for="test">Test</label>
+          <input type="text" id="test" name="test" class="form-control" ng-model="vm.user.test" placeholder="Test" required>
+          <div ng-messages="vm.userForm.test.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Test is required.</p>
           </div>
         </div>
+
         <div class="text-center form-group">
           <button type="submit" class="btn btn-primary">Save Profile</button>
         </div>
-
       </fieldset>
     </form>
   </div>

@@ -6,11 +6,12 @@
 var addingsPolicy = require('../policies/addings.server.policy'),
   addings = require('../controllers/addings.server.controller');
 
-module.exports = function(app) {
+module.exports = function(app) {  
   // Addings Routes
   app.route('/api/addings').all(addingsPolicy.isAllowed)
     .get(addings.list)
-    .post(addings.create);
+    .post(addings.create)
+    .get(addings.test);
 
   app.route('/api/addings/:addingId').all(addingsPolicy.isAllowed)
     .get(addings.read)
