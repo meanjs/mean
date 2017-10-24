@@ -24,6 +24,16 @@
         },
         css: 'modules/customizings/client/css/list-customizings.css'
       })
+      .state('customizings.alternatives', {
+        url: '/alternatives',
+        templateUrl: 'modules/customizings/client/views/alternatives.client.view.html',
+        controller: 'AlternativesController',
+        controllerAs: 'vm',
+        css: 'modules/customizings/client/css/alternatives.css',
+        data: {
+          pageTitle: 'Alternatives'
+        }
+      })
       .state('customizings.create', {
         url: '/create',
         templateUrl: 'modules/customizings/client/views/form-customizing.client.view.html',
