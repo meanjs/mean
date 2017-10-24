@@ -1,4 +1,4 @@
-<div class="container" ng-controller="HeaderController">
+<div class="container" ng-controller="HeaderController" style="background-color:#1B5689">
   <div class="navbar-header">
     <button class="navbar-toggle" type="button" ng-click="toggleCollapsibleMenu()">
       <span class="sr-only">Toggle navigation</span>
@@ -6,9 +6,9 @@
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
     </button>
-    <a ui-sref="home" class="navbar-brand">Agora</a>
+    <a ui-sref="home" class="navbar-brand" style="color:white;text-shadow:none">Agora</a>
   </div>
-  <nav class="collapse navbar-collapse" collapse="!isCollapsed" role="navigation">
+  <nav class="collapse navbar-collapse"  collapse="!isCollapsed" role="navigation">
 
     <!-- Don't need the articles thing -->
 
@@ -24,17 +24,17 @@
       <!--</li>-->
     <!--</ul>-->
     <ul class="nav navbar-nav navbar-right" ng-hide="authentication.user">
-      <li ui-sref-active="active">
-        <a ui-sref="authentication.signup">Sign Up</a>
+      <li class="nav-item">
+        <a ui-sref="authentication.signup" style="color:white;text-shadow:none;background-color: transparent;">Sign Up</a>
       </li>
       <li class="divider-vertical"></li>
-      <li ui-sref-active="active">
-        <a ui-sref="authentication.signin">Sign In</a>
+      <li class="nav-item">
+        <a ui-sref="authentication.signin" style="color:white;text-shadow:none;background-color: transparent;">Sign In</a>
       </li>
     </ul>
     <ul class="nav navbar-nav navbar-right" ng-show="authentication.user">
       <li class="dropdown" dropdown>
-        <a class="dropdown-toggle user-header-dropdown-toggle" dropdown-toggle role="button">
+        <a class="dropdown-toggle user-header-dropdown-toggle" dropdown-toggle role="button" style="color:white;text-shadow:none;background-color: transparent;">
           <img ng-src="{{authentication.user.profileImageURL}}" alt="{{authentication.user.displayName}}" class="header-profile-image" />
           <span ng-bind="authentication.user.displayName"></span> <b class="caret"></b>
         </a>
@@ -56,7 +56,7 @@
           <!--</li>-->
           <li class="divider"></li>
           <li>
-            <a href="/api/auth/signout" target="_self">Signout</a>
+            <a href="/api/auth/signout" target="_self" ng-click="$scope.signedIn = 0">Signout</a>
           </li>
         </ul>
       </li>
