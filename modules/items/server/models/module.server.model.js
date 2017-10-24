@@ -37,6 +37,4 @@ var ModuleSchema = new Schema({
   }
 });
 
-ModuleSchema.statics.seed = seed;
-
 mongoose.model('Module', ModuleSchema);

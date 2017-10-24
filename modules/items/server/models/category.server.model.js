@@ -37,6 +37,4 @@ var CategorySchema = new Schema({
   }
 });
 
-CategorySchema.statics.seed = seed;
-
 mongoose.model('Category', CategorySchema);
