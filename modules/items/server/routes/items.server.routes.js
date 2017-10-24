@@ -32,5 +32,5 @@ module.exports = function (app) {
     //We will also list tags in dropdown checkboxes for item creation or editing.
 
   // Finish by binding the article middleware
-  app.param('articleId', items.articleByID);
+  app.param('itemId', items.itemByID);
 };
