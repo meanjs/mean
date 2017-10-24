@@ -9,7 +9,7 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
     $scope.isOrg = false;
     $scope.isBiz = false;
 
-    if($scope.authentication.user == ""){
+    if($scope.authentication.user === ""){
         $scope.isOrg = false;
       }else if($scope.authentication.user.roles.indexOf("Organization") >= 0){
         $scope.isOrg = true;
@@ -17,7 +17,7 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
         $scope.isOrg = false;
       }
 
-      if($scope.authentication.user == ""){
+      if($scope.authentication.user === ""){
         $scope.isBiz = false;
       }else if($scope.authentication.user.roles.indexOf("Business") >= 0){
         $scope.isBiz = true;
