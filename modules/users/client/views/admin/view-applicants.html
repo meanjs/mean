@@ -13,9 +13,9 @@
     <table class="table table-hover applicantsTable">
     	<thead>
     		<tr class="first-row">
-    			<td width="25%">Name</td>
-    			<td width="25%">Role</td>
-               	<td width="25%">
+    			<td>Name</td>
+    			<td>Role</td>
+               	<td>
                 	<label class="checkAll">
                 		<input type="checkbox" class="radio" ng-model="vm.checkAllApproved" ng-click="vm.approveAll()">
                 	</label>
@@ -26,10 +26,10 @@
         </thead>
         <tbody>
             <tr class="applicant-rows" ng-repeat="applicant in vm.unapprovedUsers">
-             	<td width="25%">{{ applicant.firstName }} {{ applicant.lastName }}</td>
-             	<td width="25%"> {{ applicant.roles }} </td>
-                <td width="25%" class="btn btn-success" ng-click="vm.approveUser(applicant)">√</td>
-                <td width="25%" class="btn btn-danger" ng-click="vm.removeApplicant(applicant)">x</td>
+             	<td>{{ applicant.firstName }} {{ applicant.lastName }}</td>
+             	<td>{{ applicant.roles }}</td>
+                <td class="btn btn-success" ng-click="vm.approveUser(applicant)">√</td>
+                <td class="btn btn-danger" ng-click="vm.removeApplicant(applicant)">x</td>
             </tr>
         </tbody>
     </table>
