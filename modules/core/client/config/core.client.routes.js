@@ -37,7 +37,8 @@
         url: '/search',
         templateUrl: '/modules/core/client/views/search.client.view.html',
         controller: 'SearchController',
-        controllerAs: 'vm'
+        controllerAs: 'vm',
+        css: '/modules/core/client/css/search.css'
       })
       .state('not-found', {
         url: '/not-found',
