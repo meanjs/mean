@@ -13,7 +13,7 @@ module.exports = function (app) {
     .post(items.create);
 
   // Single article routes
-  app.route('/api/items/:articleId').all(itemsPolicy.isAllowed)
+  app.route('/api/items/:itemId').all(itemsPolicy.isAllowed)
     .get(items.read)
     .put(items.update)
     .delete(items.delete);
