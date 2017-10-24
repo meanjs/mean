@@ -24,22 +24,23 @@ angular.module('users').controller('DeleteProfileController', ['$scope', '$http'
       user.$delete(users)
           .then(function (response) {
             $scope.$broadcast('show-errors-reset', 'userForm');
+            console.log(response);
 
             $scope.success = true;
-            Authentication.user = response;
 
             $http.get('/api/auth/signout').success(function (response) {
-              // If successful we assign the response to the global user model
+
+              // Set the response to undefined to trigger action in Home controller
+              response = undefined;
               Authentication.user = response;
 
-              // And redirect to the previous or home page
+              // Navigate back to the home state after successful delete and sign out
               $state.go($state.previous.state.name || 'home', $state.previous.params);
-            }).error(function (response) {
-              $scope.error = response.message;
             });
 
+
           }, function(error) {
-            //otherwise display the error
+            // Otherwise display the error
             $scope.error = 'Unable to delete user!';
           });
     };
