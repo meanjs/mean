@@ -79,4 +79,9 @@
       itemId: $stateParams.itemId
     }).$promise;
   }
+  newItem.$inject = ['ItemsService'];
+
+  function newItem(ItemsService) {
+    return new ItemsService();
+  }
 }());
