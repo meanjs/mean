@@ -145,7 +145,8 @@
                       <td>{{event.date}}</td>
                       <td>{{event.status}}</td>
                       <td>
-                        <button class="btn btn-danger" style="display: block; margin:auto" ng-click="">Cancel</button>
+                        <button ng-show="event.status == &quot;Confirmed&quot;" class="btn btn-danger" style="display: block; margin:auto" ng-click="">Cancel</button>
+                        <button ng-show="event.status == &quot;Pending&quot;" class="btn" style="display: block; margin:auto;background-color: #F5A623;border: solid 1px #D38401; color:white" ng-click="">Accept</button>
                       </td>
                     </tr>
                   </tbody>
