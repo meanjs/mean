@@ -94,6 +94,9 @@ a:hover .header-profile-image {
 
 
 /*body*/
+body{
+  font-family: "Source Sans Pro", "Sans"; 
+}
 .container{
   margin-right: 0;
   margin-left: 0;
@@ -171,6 +174,11 @@ a:hover .header-profile-image {
   width: 100%;
   margin-left: 36.3%;
 
+}
+@media  (max-width: 500px) {
+    .dropMenu {
+        margin-left: 10.3%;
+}
 }
 .dropup, .dropdown{
   float: left;
