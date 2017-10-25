@@ -20,7 +20,7 @@ table {
 td, th {
   /*border: 2px solid #AEC86B;*/
   text-align: center;
-  padding: 8px;
+  /*padding: 8px;*/
 }
 
 tr:nth-child(even) {

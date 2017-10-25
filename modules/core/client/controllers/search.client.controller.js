@@ -18,12 +18,16 @@
 		  alert('hello');
     }
 
-    $scope.show = function(item){
-      console.log("completed");
-      item.show = !item.show;
-    }
+    // $scope.show = function(item){
+    //   console.log("completed");
+    //   item.show = !item.show;
+    // }
 
-    
+    $scope.showItem = true; 
+
+    $scope.show = function() {
+      $scope.showItem = !$scope.showItem;
+    }
 
 
   }
