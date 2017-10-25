@@ -11,13 +11,13 @@
     var vm = this;
 
     // TESTING
-    var params = {
-      'hello' : 'world'
+    var par = {
+      'test' : 'world'
     };
-
-    // UsersService.testing(params)
-    //     .then(success)
-    //     .catch(failure);
+    // TESTING
+    UsersService.testing(par)
+        .then(success)
+        .catch(failure);
 
     function success(response) {
       console.log('worked!');
