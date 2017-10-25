@@ -17,10 +17,16 @@ table {
   border: 2px solid #AEC86B;
 }
 
-td, th {
+td{
+  color: #DF5D4A;
   /*border: 2px solid #AEC86B;*/
   text-align: center;
   /*padding: 8px;*/
+}
+
+th{
+  color: #8CD4C9;
+  text-align: center;
 }
 
 tr:nth-child(even) {
