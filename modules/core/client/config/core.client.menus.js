@@ -20,15 +20,15 @@
     });
 
     menuService.addSubMenuItem('account', 'settings', {
-      title: 'Edit Profile',
+      title: 'My Profile',
       state: 'settings.profile'
     });
 
     menuService.addSubMenuItem('account', 'settings', {
-      title: 'Edit Profile Picture',
+      title: 'Settings',
       state: 'settings.picture'
     });
-
+/*
     menuService.addSubMenuItem('account', 'settings', {
       title: 'Change Password',
       state: 'settings.password'
@@ -38,5 +38,6 @@
       title: 'Manage Social Accounts',
       state: 'settings.accounts'
     });
+*/
   }
 }());
