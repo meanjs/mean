@@ -21,13 +21,13 @@
         controllerAs: 'vm'
       })
       .state('items.cats', {
-        url: 'categories',
+        url: '/categories',
         templateUrl: '/modules/items/client/views/categories.html',
         controller: 'CatsController',
         controllerAs: 'vm'
       })
       .state('items.mods', {
-        url: 'modules',
+        url: '/modules',
         templateUrl: '/modules/items/client/views/modules.html',
         controller: 'ModsController',
         controllerAs: 'vm'
