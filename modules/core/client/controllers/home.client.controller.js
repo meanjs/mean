@@ -15,6 +15,14 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
       bizName: 'Taco Bell',
       date: '11/12/23',
       status: 'Confirmed'
+    },{
+      bizName: 'Blaze',
+      date: '10/17/17',
+      status: 'Pending'
+    },{
+      bizName: 'Taco Bell',
+      date: '11/12/23',
+      status: 'Confirmed'
     }];
 
     $scope.isOrg = false;
