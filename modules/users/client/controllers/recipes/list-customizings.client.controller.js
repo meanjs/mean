@@ -10,13 +10,13 @@
   function CustomizeController(UsersService, $scope) {
     var vm = this;
 
-   	$scope.name = "thisismyname";
+   	$scope.name = "TEST ALERT";
     //DO YOUR FRONTEND JS CODE HERE
     $scope.alert = function(){
     	// var input = document.getElementById("inputEmail3").value;
     	//alert(input)
-		alert($scope.name);
-	}
+		  alert($scope.name);
+	  }
 
 
 
