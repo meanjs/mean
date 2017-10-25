@@ -8,7 +8,7 @@
   SearchController.$inject = ['$scope'];
 
   function SearchController($scope) {
-    $scope.pages = [{name:"Item View", show: true},
+    $scope.pages = [{name:"Whole Milk", calories:"105", protein:"8", sugar:"13", fat:"2.5"},
                     {name:"Comparison View", show: false}
     ]
     var vm = this;
