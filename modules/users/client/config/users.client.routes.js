@@ -12,7 +12,7 @@
     // Users state routing
     $stateProvider
       .state('settings', {
-        abstract: true,
+        // abstract: true,
         url: '/settings',
         templateUrl: '/modules/users/client/views/settings/settings.client.view.html',
         controller: 'SettingsController',
@@ -21,22 +21,22 @@
           roles: ['user', 'admin']
         }
       })
-      .state('settings.profile', {
+      .state('profile', {
         url: '/profile',
         templateUrl: '/modules/users/client/views/settings/edit-profile.client.view.html',
         controller: 'EditProfileController',
         controllerAs: 'vm',
         data: {
-          pageTitle: 'Settings'
+          pageTitle: 'Profile'
         }
       })
-      .state('settings.healthprofile', {
+      .state('healthprofile', {
         url: '/healthprofile',
         templateUrl: '/modules/users/client/views/settings/edit-health-profile.client.view.html',
         controller: 'EditHealthProfileController',
         controllerAs: 'vm',
         data: {
-          pageTitle: 'Settings health profile'
+          pageTitle: 'Health Profile'
         }
       })
       .state('settings.password', {
@@ -45,7 +45,7 @@
         controller: 'ChangePasswordController',
         controllerAs: 'vm',
         data: {
-          pageTitle: 'Settings password'
+          pageTitle: 'Change Password'
         }
       })
       .state('settings.accounts', {
@@ -54,7 +54,7 @@
         controller: 'SocialAccountsController',
         controllerAs: 'vm',
         data: {
-          pageTitle: 'Settings accounts'
+          pageTitle: 'Social Accounts'
         }
       })
       .state('settings.picture', {
@@ -63,7 +63,7 @@
         controller: 'ChangeProfilePictureController',
         controllerAs: 'vm',
         data: {
-          pageTitle: 'Settings picture'
+          pageTitle: 'Change Picture'
         }
       })
       .state('authentication', {
@@ -102,7 +102,7 @@
         controller: 'PasswordController',
         controllerAs: 'vm',
         data: {
-          pageTitle: 'Password forgot'
+          pageTitle: 'Forgot Password'
         }
       })
       .state('password.reset', {
