@@ -12,8 +12,7 @@
     // Users state routing
     $stateProvider
       .state('settings', {
-        // abstract: true,
-        url: '/settings',
+        url: '/settings', // SETTINGS
         templateUrl: '/modules/users/client/views/settings/settings.client.view.html',
         controller: 'SettingsController',
         controllerAs: 'vm',
@@ -21,7 +20,7 @@
           roles: ['user', 'admin']
         }
       })
-      .state('add', {
+      .state('add', { // ADD RECIPES
         url: '/add-recipe',
         templateUrl: 'modules/users/client/views/recipes/addRecipe.client.view.html',
         controller: 'AddRecipeController',
@@ -31,7 +30,7 @@
         },
         css: 'modules/users/client/css/recipes/addRecipe.css'
       })
-      .state('details', {
+      .state('details', { // RECIPE DETAILS
         url: '/recipe-details',
         templateUrl: 'modules/users/client/views/recipes/recipeDetails.client.view.html',
         controller: 'RecipeDetailsController',
@@ -41,7 +40,7 @@
         },
         css: 'modules/users/client/css/recipes/recipeDetails.css'
       })
-      .state('alternatives', {
+      .state('alternatives', { // SUGGESTED ALTERNATIVES
         url: '/alternatives',
         templateUrl: 'modules/users/client/views/recipes/alternatives.client.view.html',
         controller: 'AlternativesController',
@@ -51,7 +50,7 @@
         },
         css: 'modules/users/client/css/recipes/alternatives.css'
       })
-      .state('customize', {
+      .state('customize', { // CUSTOMIZE A RECIPE
         url: '/customize',
         templateUrl: 'modules/users/client/views/recipes/customize.client.view.html',
         controller: 'CustomizeController',
@@ -61,7 +60,7 @@
         },
         css: 'modules/users/client/css/recipes/customize.css'
       })
-      .state('profile', {
+      .state('profile', { // MY PROFILE 
         url: '/profile',
         templateUrl: '/modules/users/client/views/settings/edit-profile.client.view.html',
         controller: 'EditProfileController',
@@ -70,7 +69,7 @@
           pageTitle: 'Profile'
         }
       })
-      .state('healthprofile', {
+      .state('healthprofile', { // HEALTH PROFILE
         url: '/healthprofile',
         templateUrl: '/modules/users/client/views/settings/edit-health-profile.client.view.html',
         controller: 'EditHealthProfileController',
