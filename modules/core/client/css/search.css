@@ -28,6 +28,11 @@ tr:nth-child(even) {
   /*border: 2px solid #AEC86B;*/
 }
 
+text{
+  font-size: 25px;
+  color: #FD835D;
+}
+
 
 /*
 Color Guide
