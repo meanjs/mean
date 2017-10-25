@@ -3,7 +3,13 @@ h1{
 }
 
 #title{
+  font-size: 40px;
   color: #8CD4C9;
+}
+
+#ingredient{
+  font-size: 40px;
+  color: #FD835D;
 }
 
 .boxed{
