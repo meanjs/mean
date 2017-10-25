@@ -14,16 +14,18 @@ table {
   font-family: arial, sans-serif;
   border-collapse: collapse;
   width: 100%;
+  border: 2px solid #AEC86B;
 }
 
 td, th {
-  border: 1px solid #AEC86B;
+  /*border: 2px solid #AEC86B;*/
   text-align: center;
   padding: 8px;
 }
 
 tr:nth-child(even) {
   background-color: #FD835D;
+  /*border: 2px solid #AEC86B;*/
 }
 
 
