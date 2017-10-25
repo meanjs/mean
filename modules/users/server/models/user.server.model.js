@@ -168,6 +168,13 @@ var UserSchema = new Schema({
   }, 
   test: {
     type: String
+  },
+  //===================================added test and weight
+  weight: {
+    type: String
+  },
+  test: {
+    type: String
   }
 });
 
