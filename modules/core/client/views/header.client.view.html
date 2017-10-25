@@ -38,8 +38,11 @@
           <span ng-bind="vm.authentication.user.displayName"></span> <b class="caret"></b>
         </a>
         <ul class="dropdown-menu" role="menu">
-          <li ui-sref-active="active" ng-repeat="item in vm.accountMenu.items">
-            <a ui-sref="{{item.state}}" ng-bind="item.title"></a>
+          <li>
+            <a ui-sref="profile">My Profile</a>
+          </li>
+          <li>
+            <a ui-sref="settings">Settings</a>
           </li>
           <li class="divider"></li>
           <li>

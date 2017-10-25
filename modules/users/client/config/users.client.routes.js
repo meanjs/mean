@@ -12,7 +12,7 @@
     // Users state routing
     $stateProvider
       .state('settings', {
-        abstract: true,
+        // abstract: true,
         url: '/settings',
         templateUrl: '/modules/users/client/views/settings/settings.client.view.html',
         controller: 'SettingsController',
@@ -21,13 +21,13 @@
           roles: ['user', 'admin']
         }
       })
-      .state('settings.profile', {
+      .state('profile', {
         url: '/profile',
         templateUrl: '/modules/users/client/views/settings/edit-profile.client.view.html',
         controller: 'EditProfileController',
         controllerAs: 'vm',
         data: {
-          pageTitle: 'Settings'
+          pageTitle: 'Profile'
         }
       })
       .state('settings.healthprofile', {
@@ -36,7 +36,7 @@
         controller: 'EditHealthProfileController',
         controllerAs: 'vm',
         data: {
-          pageTitle: 'Settings health profile'
+          pageTitle: 'Health Profile'
         }
       })
       .state('settings.password', {
