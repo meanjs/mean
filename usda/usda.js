@@ -17,32 +17,38 @@ usda.controller('USDAController',
 		$scope.map = [];
 		$scope.in_food_group;
 		$scope.orig_nutrient_amount;
+		$scope.all_alt_in_group = [];
+		$scope.have_match = 0;
 
-		$scope.db = () => {
+		$scope.getAltFood = () => {
 			$http.get('food_alternatives.json')
 				.then( (response) => {
 					response.data.food_groups.forEach( (each_food_group, i) => {
 						each_food_group.food_alt.forEach( (alternative, j) => {
-							
+
 							if(alternative.db_name == $scope.search){
+								$scope.have_match = 1;
 								$scope.orig_ndbno = alternative.db_ndbno;
 								$scope.in_food_group = each_food_group.group_name;
 								$scope.orig_nutrient_amount = alternative.db_main_nutrient.db_amount;
-								console.log(alternative.db_main_nutrient.db_amount);
 							}
-							else if((each_food_group.group_name == $scope.in_food_group) && (alternative.db_name != $scope.search)){
-								//put rest in array if itcaloeris is lower
-								if(alternative.db_main_nutrient.db_amount < $scope.orig_nutrient_amount){
-									$scope.map.push({"map_ndbno": alternative.db_ndbno, "map_name": alternative.db_name});
-									console.log($scope.map);
-								}
-
+							else{
+								$scope.all_alt_in_group.push(alternative);
 							}
-
 						});
+						if($scope.have_match == 1){
+							$scope.all_alt_in_group.forEach((alt_item, i) => {
+								if(alt_item.db_main_nutrient.db_amount < $scope.orig_nutrient_amount){
+									$scope.map.push({"map_ndbno": alt_item.db_ndbno, "map_name": alt_item.db_name});
+								}
+							});
+						}
+						$scope.have_match = 0;
+						$scope.all_alt_in_group = [];
 					});
 				});
-				$scope.map = [];
+			$scope.orig_nutrient_amount = 0;
+			$scope.map = [];
 		}
 		
 

@@ -9,31 +9,27 @@
 	<h1>USDA Info</h1>
 
 	<!--<input type="text" ng-model='search' ng-change='doSearch()'></input>-->
-	<input type="text" ng-model='search' ng-change='db()'></input>
+	<input type="text" ng-model='search' ng-change='getAltFood()'></input>
 
 	<span ng-bind="orig_ndbno"></span>
 
-	<br> <hr>
-	<div ng-repeat="item in map"><p>{{item.map_name}}</p></div>
-	
-	<!--
+	<br> <hr>	
+
 	<div style="height: 300px; overflow-y: scroll">
 		<table border="1">
 			<thead>
 				<th>Name</th>
-				<th>ndbno</th>
-				<th>Food Group</th>
 			</thead>
 			<tbody>
-				<tr ng-repeat="a in arr">
-					<td ng-click="getReport(a.ndbno)">{{a.name.toLowerCase()}}</li>
-					<td ng-click="getReport(a.ndbno)">{{a.ndbno}}</td>
-					<td ng-click="getReport(a.ndbno)">{{a.group}}</td>
+				<tr ng-repeat="item in map">
+					<td ng-click="getReport(item.map_ndbno)">{{item.map_name.toLowerCase()}}</li>
+		<!--		<td ng-click="getReport(a.ndbno)">{{item.ndbno}}</td>
+					<td ng-click="getReport(a.ndbno)">{{a.group}}</td> -->
 				</tr>
 			</tbody>
 		</table>
 	</div>
-	-->
+
 	<table id="searchAltResults">
 		<tr><th>Name</th><th>Food Groups</th></tr>
 		<tr ng-repeat="friend in friends | filter:searchText">
