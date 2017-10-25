@@ -27,14 +27,18 @@
     $scope.showComparison = false;
 
     $scope.showI = function() {
-      if($scope.showItem==false)
+      if($scope.showItem==false){
         $scope.showItem = true;
+        $scope.showComparison = false;
+      }
       //$scope.showItem = !$scope.showItem;
     }
 
     $scope.showC = function() {
-      if($scope.showComparison==false)
+      if($scope.showComparison==false){
         $scope.showComparison = true;
+        $scope.showItem = false;
+      }
       //$scope.showItem = !$scope.showItem;
     }
 
