@@ -5,9 +5,9 @@
     .module('items')
     .controller('ItemsController', ItemsController);
 
-  ItemsController.$inject = ['$scope', 'itemResolve', 'Authentication'];
+  ItemsController.$inject = ['$scope', '$state', '$window', 'itemResolve', 'Authentication', 'Notification'];
 
-  function ItemsController($scope, item, Authentication) {
+  function ItemsController($scope, $state, $window, item, Authentication, Notification) {
     var vm = this;
 
     vm.item = item;
@@ -20,7 +20,7 @@
     function remove() {
       if ($window.confirm('Are you sure you want to delete?')) {
         vm.item.$remove(function () {
-          $state.go('admin.items.list');
+          $state.go('items.list');
           Notification.success({ message: '<i class="glyphicon glyphicon-ok"></i> Item deleted successfully!' });
         });
       }
@@ -39,7 +39,7 @@
         .catch(errorCallback);
 
       function successCallback(res) {
-        $state.go('admin.items.list'); // should we send the User to the list or the updated Item's view?
+        $state.go('items.list'); // should we send the User to the list or the updated Item's view?
         Notification.success({ message: '<i class="glyphicon glyphicon-ok"></i> Item saved successfully!' });
       }
 
