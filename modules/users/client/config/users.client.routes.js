@@ -12,8 +12,7 @@
     // Users state routing
     $stateProvider
       .state('settings', {
-        // abstract: true,
-        url: '/settings',
+        url: '/settings', // SETTINGS
         templateUrl: '/modules/users/client/views/settings/settings.client.view.html',
         controller: 'SettingsController',
         controllerAs: 'vm',
@@ -21,37 +20,47 @@
           roles: ['user', 'admin']
         }
       })
-      .state('add', {
+      .state('add', { // ADD RECIPES
         url: '/add-recipe',
-        templateUrl: 'modules/addings/client/views/list-addings.client.view.html',
-        controller: 'AddingsListController',
+        templateUrl: 'modules/users/client/views/recipes/addRecipe.client.view.html',
+        controller: 'AddRecipeController',
         controllerAs: 'vm',
         data: {
           pageTitle: 'Add Recipe'
         },
-        css: 'modules/addings/client/css/list-addings.css'
+        css: 'modules/users/client/css/recipes/addRecipe.css'
       })
-      .state('alternatives', {
+      .state('details', { // RECIPE DETAILS
+        url: '/recipe-details',
+        templateUrl: 'modules/users/client/views/recipes/recipeDetails.client.view.html',
+        controller: 'RecipeDetailsController',
+        controllerAs: 'vm',
+        data: {
+          pageTitle: 'Recipe Details'
+        },
+        css: 'modules/users/client/css/recipes/recipeDetails.css'
+      })
+      .state('alternatives', { // SUGGESTED ALTERNATIVES
         url: '/alternatives',
-        templateUrl: 'modules/customizings/client/views/alternatives.client.view.html',
+        templateUrl: 'modules/users/client/views/recipes/alternatives.client.view.html',
         controller: 'AlternativesController',
         controllerAs: 'vm',
-        css: 'modules/customizings/client/css/alternatives.css',
         data: {
           pageTitle: 'Alternatives'
-        }
+        },
+        css: 'modules/users/client/css/recipes/alternatives.css'
       })
-      .state('customize', {
+      .state('customize', { // CUSTOMIZE A RECIPE
         url: '/customize',
-        templateUrl: 'modules/customizings/client/views/list-customizings.client.view.html',
-        controller: 'CustomizingsListController',
+        templateUrl: 'modules/users/client/views/recipes/customize.client.view.html',
+        controller: 'CustomizeController',
         controllerAs: 'vm',
         data: {
           pageTitle: 'Customize'
         },
-        css: 'modules/customizings/client/css/list-customizings.css'
+        css: 'modules/users/client/css/recipes/customize.css'
       })
-      .state('profile', {
+      .state('profile', { // MY PROFILE 
         url: '/profile',
         templateUrl: '/modules/users/client/views/settings/edit-profile.client.view.html',
         controller: 'EditProfileController',
@@ -60,7 +69,7 @@
           pageTitle: 'Profile'
         }
       })
-      .state('healthprofile', {
+      .state('healthprofile', { // HEALTH PROFILE
         url: '/healthprofile',
         templateUrl: '/modules/users/client/views/settings/edit-health-profile.client.view.html',
         controller: 'EditHealthProfileController',

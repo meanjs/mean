@@ -1,0 +1,84 @@
+<div class="heroimage">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <h5>Recipe Name</h5>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- <div class="savebtn">
+  
+</div> -->
+<div class="recipeDetail">
+  <div>
+    <div class="heading">
+      Ingredients
+    </div>
+    <hr>
+    <div class="text">
+      <ul class="list">
+        <li>Ingredient 1</li>
+        <li>Ingredient 2</li>
+        <li>Ingredient 3</li>
+        <li>Ingredient 4</li>
+      </ul>
+      
+    </div>
+  </div>  
+
+  <div class="directions">
+    <div class="heading">
+      Directions
+    </div>
+    <hr>
+    <div style="margin-left: 29%;">
+      <div class="verticalLine"><span class="glyphicon glyphicon-time" aria-hidden="true"></span>15 min | Total</div>
+    </div>
+    <div class="text">
+      <ul class="list">
+        <li class="direction-list"><div class="glyphicon-ring glyphicon-white"> 1  </div> Preheat oven to 500°F</li>
+        <li class="direction-list"><div class="glyphicon-ring glyphicon-white"> 2  </div> Drain and rinse chickpeas. Place on paper towels and pat dry. Transfer to a sheet pan.</li>
+        <li class="direction-list"><div class="glyphicon-ring glyphicon-white"> 3  </div> Drizzle chickpeas with oil and season with cumin, salt, and pepper. Toss to coat.</li>
+        <li class="direction-list"><div class="glyphicon-ring glyphicon-white"> 4  </div> Place in the oven and roast until crispy, 15-20 minutes. Stir halfway through cooking time.</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+<!-- Reviews -->
+<div class="review-containter">
+  <div>
+    <div class="heading">
+      Review
+    </div>
+    <hr>
+    
+  </div>
+  
+</div>
+
+
+
+<!-- <section>
+  <div class="page-header">
+    <h1>Recipedetails</h1>
+  </div>
+  <div class="list-group">
+    <a ng-repeat="recipedetail in vm.recipedetails"
+       ui-sref="recipedetails.view({ recipedetailId: recipedetail._id })"
+       class="list-group-item">
+      <small class="list-group-item-text">
+        Posted on
+        <span ng-bind="recipedetail.created | date:'mediumDate'"></span>
+        by
+        <span ng-if="recipedetail.user" ng-bind="recipedetail.user.displayName"></span>
+        <span ng-if="!recipedetail.user">Deleted User</span>
+      </small>
+      <h4 class="list-group-item-heading" ng-bind="recipedetail.name"></h4>
+    </a>
+  </div>
+  <div class="alert alert-warning text-center" ng-if="vm.recipedetails.$resolved && !vm.recipedetails.length">
+    No Recipedetails yet, why don't you <a ui-sref="recipedetails.create">create one</a>?
+  </div>
+</section>

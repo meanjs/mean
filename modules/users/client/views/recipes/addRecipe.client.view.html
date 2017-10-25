@@ -1,0 +1,101 @@
+<section>
+  <h1>NEW VERSION</h1>
+  <div class="row">
+    <center>
+      <div class="page-header">
+        <h1>Create New Recipe</h1>
+      </div>
+    </center>
+    <div class="jumbotron">
+      <form name="vm.form.addingForm" class="form-horizontal" ng-submit="vm.save(vm.form.addingForm.$valid)" novalidate>
+        <fieldset>
+          <div class="col-md-8">
+          <center>
+          <div class="form-group" show-errors>
+            <!--<label class="control-label" for="name"></label>-->
+            <p>Recipe Name</p>
+            <input name="name" type="text" ng-model="vm.adding.name" id="name" class="form-control" placeholder="Recipe Name" required>
+            <!--<div ng-messages="vm.form.addingForm.name.$error" role="alert">
+              <p class="help-block error-text" ng-message="required">Adding a recipe name is required.</p>
+            </div>-->
+            </br></br>
+            <table cellspacing="5" cellpading="3" width="75%">
+              <tr>
+                <td id="ingredient"><p>Ingredient Name</p></td>
+                <td id="quantity"><p>Quantity</p></td>
+                <td id="units"><p>Unit</p></td>
+              </tr>
+              <tr>
+                <td id="ingredient"><input name="ingredient" type="text"  placeholder="Ingredient Name"/></td>
+                <td id="quantity"><input name="quantity" type="number"  placeholder="0"/></td>
+                <td id="units">
+                  <!--<div class="btn-group">
+                    <button type="button" class="btn btn-success">Action</button>
+                    <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <span class="caret"></span>
+                      <span class="sr-only">Toggle Dropdown</span>
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li><a href="#">Cups</a></li>
+                      <li><a href="#">Ounces</a></li>
+                      <li><a href="#">Tbs</a></li>
+                      <li><a href="#">tsp</a></li>
+                      <li><a href="#">Quarts</a></li>
+                      <li><a href="#">Gallons</a></li>
+                      <li><a href="#">pinch</a></li>
+                      <li><a href="#">dash</a></li>
+                    </ul>
+                  </div>-->
+                  <select class="form-control" >
+                    <option>Cups</option>
+                    <option>Ounces</option>
+                    <option>Tbs</option>
+                    <option>tsp</option>
+                    <option>Quarts</option>
+                    <option>Gallons</option>
+                    <option>pinch</option>
+                    <option>dash</option>
+                  </select>
+                </td>
+              </tr>
+  
+            </table>
+          </div>
+          </br>
+          <div class="form-group">
+            <button type="button" class="btn btn-info">
+              Add More Ingredients 
+              <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+            </button>
+          </div>
+        </center>
+        </div>
+          </br>
+        <div class="col-md-4">
+        <center>
+          <div class="form-group">
+            <p>Recipe Directions</p>
+            <!--<input name="directions" type="text" id="directions" class="form-control" placeholder="Enter Directions Here"/>-->
+            <textarea  id="directions" class="form-control" rows="5" placeholder="Enter Directions Here"></textarea>
+          </div>
+          </br>
+          <div class="form-group">
+            <button type="submit" class="btn btn-lg btn-success" ui-sref="alternatives">Healthify</button>
+          </div>
+        
+        </br>
+          <div class="alert alert-warning alert-dismissible" role="alert" id="warn">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <strong>Please enter a recipe name!</strong>
+          </div>
+        </center>
+      </div>
+          <div ng-show="vm.error" class="text-danger">
+            <strong ng-bind="vm.error"></strong>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+</section>
+  
