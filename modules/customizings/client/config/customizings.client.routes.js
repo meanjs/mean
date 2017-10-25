@@ -14,15 +14,25 @@
         url: '/customizings',
         template: '<ui-view/>'
       })
-      .state('customizings.list', {
-        url: '',
-        templateUrl: 'modules/customizings/client/views/list-customizings.client.view.html',
-        controller: 'CustomizingsListController',
+      // .state('customizings.list', {
+      //   url: '',
+      //   templateUrl: 'modules/customizings/client/views/list-customizings.client.view.html',
+      //   controller: 'CustomizingsListController',
+      //   controllerAs: 'vm',
+      //   data: {
+      //     pageTitle: 'Customizings List'
+      //   },
+      //   css: 'modules/customizings/client/css/list-customizings.css'
+      // })
+      .state('customizings.alternatives', {
+        url: '/alternatives',
+        templateUrl: 'modules/customizings/client/views/alternatives.client.view.html',
+        controller: 'AlternativesController',
         controllerAs: 'vm',
+        css: 'modules/customizings/client/css/alternatives.css',
         data: {
-          pageTitle: 'Customizings List'
-        },
-        css: 'modules/customizings/client/css/list-customizings.css'
+          pageTitle: 'Alternatives'
+        }
       })
       .state('customizings.create', {
         url: '/create',

@@ -59,7 +59,8 @@
         },
         data: {
           pageTitle: 'Recipedetail {{ recipedetailResolve.name }}'
-        }
+        },
+        css: 'modules/recipedetails/client/css/recipe.css'
       });
   }
 

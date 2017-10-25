@@ -14,16 +14,16 @@
         url: '/addings',
         template: '<ui-view/>'
       })
-      .state('addings.list', {
-        url: '',
-        templateUrl: 'modules/addings/client/views/list-addings.client.view.html',
-        controller: 'AddingsListController',
-        controllerAs: 'vm',
-        data: {
-          pageTitle: 'Addings List'
-        },
-        css: 'modules/addings/client/css/list-addings.css'
-      })
+      // .state('addings.list', {
+      //   url: '',
+      //   templateUrl: 'modules/addings/client/views/list-addings.client.view.html',
+      //   controller: 'AddingsListController',
+      //   controllerAs: 'vm',
+      //   data: {
+      //     pageTitle: 'Addings List'
+      //   },
+      //   css: 'modules/addings/client/css/list-addings.css'
+      // })
       .state('addings.create', {
         url: '/create',
         templateUrl: 'modules/addings/client/views/form-adding.client.view.html',
