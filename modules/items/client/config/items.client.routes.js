@@ -20,6 +20,18 @@
         controller: 'ItemsListController',
         controllerAs: 'vm'
       })
+      .state('items.cats', {
+        url: '',
+        templateUrl: '/modules/items/client/views/categories.html',
+        controller: 'CatsController',
+        controllerAs: 'vm'
+      })
+      .state('items.mods', {
+        url: '',
+        templateUrl: '/modules/items/client/views/modules.html',
+        controller: 'ModsController',
+        controllerAs: 'vm'
+      })
       .state('items.view', {
         url: '/:itemId',
         templateUrl: '/modules/items/client/views/view-item.client.view.html',
