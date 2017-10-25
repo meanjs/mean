@@ -23,10 +23,19 @@
     //   item.show = !item.show;
     // }
 
-    $scope.showItem = true; 
+    $scope.showItem = true;
+    $scope.showComparison = false;
 
-    $scope.show = function() {
-      $scope.showItem = !$scope.showItem;
+    $scope.showI = function() {
+      if($scope.showItem==false)
+        $scope.showItem = true;
+      //$scope.showItem = !$scope.showItem;
+    }
+
+    $scope.showC = function() {
+      if($scope.showComparison==false)
+        $scope.showComparison = true;
+      //$scope.showItem = !$scope.showItem;
     }
 
 

@@ -8,8 +8,8 @@
   </br>
   <div class="lowerNav text-center">
     <div class="textLN">
-      <a class="test left" href="" ng-click="show()">Item View</a> 
-      <a class="test" href="" ng-click="show()">Comparison View</a> </div>
+      <a class="test left" href="" ng-click="showI()">Item View</a> 
+      <a class="test" href="" ng-click="showC()">Comparison View</a> </div>
   </div>
   <div ng-show="showItem">
   <center>
@@ -57,7 +57,7 @@
     </div>
   </center>
   </div>
-  <div ng-hide="showItem">
+  <div ng-show="showComparison">
         <table>
           <tr>
             <!--<th>Nutritional Information</th>-->
