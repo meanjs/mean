@@ -21,17 +21,18 @@
         controllerAs: 'vm'
       })
       .state('items.cats', {
-        url: '',
+        url: 'categories',
         templateUrl: '/modules/items/client/views/categories.html',
         controller: 'CatsController',
         controllerAs: 'vm'
       })
       .state('items.mods', {
-        url: '',
+        url: 'modules',
         templateUrl: '/modules/items/client/views/modules.html',
         controller: 'ModsController',
         controllerAs: 'vm'
       })
+
       .state('items.view', {
         url: '/:itemId',
         templateUrl: '/modules/items/client/views/view-item.client.view.html',
@@ -42,6 +43,31 @@
         },
         data: {
           pageTitle: '{{ itemResolve.title }}'
+        }
+      })
+      .state('items.create', {
+        url: '/create',
+        templateUrl: '/modules/items/client/views/form-item.client.view.html',
+        controller: 'ItemsController',
+        controllerAs: 'vm',
+        data: {
+          roles: ['ta', 'technician', 'superta', 'admin']
+        },
+        resolve: {
+          itemResolve: newItem
+        }
+      })
+      .state('items.edit', {
+        url: '/:itemId/edit',
+        templateUrl: '/modules/items/client/views/form-item.client.view.html',
+        controller: 'ItemsController',
+        controllerAs: 'vm',
+        data: {
+          roles: ['ta', 'technician', 'superta', 'admin'],
+          pageTitle: '{{ itemResolve.title }}'
+        },
+        resolve: {
+          itemResolve: getItem
         }
       });
   }
