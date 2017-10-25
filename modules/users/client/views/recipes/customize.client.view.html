@@ -67,14 +67,15 @@
     </div>
   </div>
 </center>
+</br>
 <table>
   <tr>
-    <td style="width: 50%">Ingredient Name #2</td>
+    <td style="width: 50%">Ingredient Name</td>
     <td style="width: 25%">Units: Pounds</td>
     <td>Quantity: 1</td>
   </tr>
 </table>
-<button class="btn btn-success" ng-click="alert()">See 2 other possibilities</button>
+<button class="btn btn-success" ng-click="alert()" id="collapseBTN">See 2 other possibilities</button>
 <table id = "myTable">
   <tr>
     <th>Original Ingredient Name</th>
@@ -132,7 +133,7 @@
     </td>
   </tr>
 </table>
-<p></p>
+</br>
 <table>
   <tr>
     <td style="width: 50%">Ingredient Name #3</td>
@@ -193,12 +194,14 @@ th{
 }
 
 td{
-  color: #DF5D4A;
+  background-color: white;
+  color: #8CD4C9;
   border: 1px solid #AEC86B;
   padding: 5px;
 }
 
 table {
+  background-color: white;
   border: 2px solid #AEC86B;
   width: 60%;
   margin-left: 200px;
@@ -210,5 +213,9 @@ p {
 
 #insideTable{
   margin-left: 12px;
+}
+
+#collapseBTN{
+  margin-left: 525px;
 }
 </style>
