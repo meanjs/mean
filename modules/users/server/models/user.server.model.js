@@ -165,6 +165,9 @@ var UserSchema = new Schema({
     },
     directions: String,
     ingredients: Array
+  }, 
+  test: {
+    type: String
   }
 });
 

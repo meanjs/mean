@@ -12,7 +12,7 @@
     // Users state routing
     $stateProvider
       .state('settings', {
-        abstract: true,
+        // abstract: true,
         url: '/settings',
         templateUrl: '/modules/users/client/views/settings/settings.client.view.html',
         controller: 'SettingsController',
@@ -21,22 +21,52 @@
           roles: ['user', 'admin']
         }
       })
-      .state('settings.profile', {
+      .state('add', {
+        url: '/add-recipe',
+        templateUrl: 'modules/addings/client/views/list-addings.client.view.html',
+        controller: 'AddingsListController',
+        controllerAs: 'vm',
+        data: {
+          pageTitle: 'Add Recipe'
+        },
+        css: 'modules/addings/client/css/list-addings.css'
+      })
+      .state('alternatives', {
+        url: '/alternatives',
+        templateUrl: 'modules/customizings/client/views/alternatives.client.view.html',
+        controller: 'AlternativesController',
+        controllerAs: 'vm',
+        css: 'modules/customizings/client/css/alternatives.css',
+        data: {
+          pageTitle: 'Alternatives'
+        }
+      })
+      .state('customize', {
+        url: '/customize',
+        templateUrl: 'modules/customizings/client/views/list-customizings.client.view.html',
+        controller: 'CustomizingsListController',
+        controllerAs: 'vm',
+        data: {
+          pageTitle: 'Customize'
+        },
+        css: 'modules/customizings/client/css/list-customizings.css'
+      })
+      .state('profile', {
         url: '/profile',
         templateUrl: '/modules/users/client/views/settings/edit-profile.client.view.html',
         controller: 'EditProfileController',
         controllerAs: 'vm',
         data: {
-          pageTitle: 'Settings'
+          pageTitle: 'Profile'
         }
       })
-      .state('settings.healthprofile', {
+      .state('healthprofile', {
         url: '/healthprofile',
         templateUrl: '/modules/users/client/views/settings/edit-health-profile.client.view.html',
         controller: 'EditHealthProfileController',
         controllerAs: 'vm',
         data: {
-          pageTitle: 'Settings health profile'
+          pageTitle: 'Health Profile'
         }
       })
       .state('settings.password', {
@@ -45,7 +75,7 @@
         controller: 'ChangePasswordController',
         controllerAs: 'vm',
         data: {
-          pageTitle: 'Settings password'
+          pageTitle: 'Change Password'
         }
       })
       .state('settings.accounts', {
@@ -54,7 +84,7 @@
         controller: 'SocialAccountsController',
         controllerAs: 'vm',
         data: {
-          pageTitle: 'Settings accounts'
+          pageTitle: 'Social Accounts'
         }
       })
       .state('settings.picture', {
@@ -63,7 +93,7 @@
         controller: 'ChangeProfilePictureController',
         controllerAs: 'vm',
         data: {
-          pageTitle: 'Settings picture'
+          pageTitle: 'Change Picture'
         }
       })
       .state('authentication', {
@@ -102,7 +132,7 @@
         controller: 'PasswordController',
         controllerAs: 'vm',
         data: {
-          pageTitle: 'Password forgot'
+          pageTitle: 'Forgot Password'
         }
       })
       .state('password.reset', {
