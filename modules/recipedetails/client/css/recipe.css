@@ -28,9 +28,15 @@
 }
 .heading{
 	font-size: 20px;
+	margin-right: 45%;
 }
 .text{
 	font-size: 15px;
+	/*margin-right: 45%;*/
+	display: inline-block;
+    text-align: left;
+    line-height: 230%;
+    margin-top: 10px;
 }
 hr{
 	width: 60%;
@@ -40,10 +46,36 @@ hr{
 .directions{
 	margin-top: 15px;
 }
+.direction-list{
+	margin-top: 10px;
+}
 span.glyphicon-time {
     font-size: 1.3em;
 }
 .verticalLine {
-  	border-right: 2px solid #ff0000;
+  	/*border-right: 2px solid #ff0000;*/
   	width: 70px;
+}
+.list{
+	list-style-type: none;
+}
+.glyphicon-ring {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1px solid white;
+  color: white;
+  display: inline-table;
+  text-align: center;
+}
+.glyphicon-white {
+  background: white;
+  color: black;
+  border: 1px solid black;
+}
+.review-containter{
+	height: 200px;
+	text-align: center;
+	margin-top: 3%;
+	background-color: grey;
 }
