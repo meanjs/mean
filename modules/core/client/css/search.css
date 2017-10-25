@@ -1,0 +1,39 @@
+h1{
+  color: #8CD4C9;
+}
+
+#title{
+  color: #8CD4C9;
+}
+
+.boxed{
+  border: 2px solid #AEC86B ;
+}
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  border: 2px solid #AEC86B;
+}
+
+td, th {
+  /*border: 2px solid #AEC86B;*/
+  text-align: center;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #FD835D;
+  /*border: 2px solid #AEC86B;*/
+}
+
+
+/*
+Color Guide
+Green: rgb(174,200,107), hex(AEC86B);
+light blue: rgb(140,212,201), hex(8CD4C9);
+light orange: rgb(249,192,120), hex(F9C078);
+orange: rgb(253,131,93), hex(FD835D);
+dark orange: rgb(223,93,74), hex(DF5D4A);
+*/
