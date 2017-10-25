@@ -14,8 +14,8 @@
 	<span ng-bind="orig_ndbno"></span>
 
 	<br> <hr>
-	<p ng-bind="map"></p>
-
+	<div ng-repeat="item in map"><p>{{item.map_name}}</p></div>
+	
 	<!--
 	<div style="height: 300px; overflow-y: scroll">
 		<table border="1">

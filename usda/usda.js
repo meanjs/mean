@@ -14,30 +14,35 @@ usda.controller('USDAController',
 		var sort = "n";
 		var max = "200";
 		var ds = 'Standard Reference';
-		$scope.map = {};
-		var in_food_group;
+		$scope.map = [];
+		$scope.in_food_group;
+		$scope.orig_nutrient_amount;
 
 		$scope.db = () => {
 			$http.get('food_alternatives.json')
 				.then( (response) => {
 					response.data.food_groups.forEach( (each_food_group, i) => {
-						console.log(each_food_group.group_name);
 						each_food_group.food_alt.forEach( (alternative, j) => {
+							
 							if(alternative.db_name == $scope.search){
-								console.log(alternative.db_ndbno);
 								$scope.orig_ndbno = alternative.db_ndbno;
-								in_food_group = each_food_group;
+								$scope.in_food_group = each_food_group.group_name;
+								$scope.orig_nutrient_amount = alternative.db_main_nutrient.db_amount;
+								console.log(alternative.db_main_nutrient.db_amount);
 							}
-							//assuming fat content are organized in decreasing order, should list out all teh healthy alternative in console
-							//next task is to work on printing out the map and fixing a bug so that the map could be reset for each search
-							else if((each_food_group == in_food_group) && (alternative.db_name != $scope.search)){
-								//put the rest into an array
-								$scope.map[alternative.db_ndbno] = alternative.db_name;
-								console.log($scope.map);
+							else if((each_food_group.group_name == $scope.in_food_group) && (alternative.db_name != $scope.search)){
+								//put rest in array if itcaloeris is lower
+								if(alternative.db_main_nutrient.db_amount < $scope.orig_nutrient_amount){
+									$scope.map.push({"map_ndbno": alternative.db_ndbno, "map_name": alternative.db_name});
+									console.log($scope.map);
+								}
+
 							}
+
 						});
 					});
 				});
+				$scope.map = [];
 		}
 		
 

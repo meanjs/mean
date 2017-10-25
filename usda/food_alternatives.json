@@ -29,9 +29,19 @@
                     "db_main_nutrient": {
                         "db_nutrient": "fat",
                         "db_unit": "gram per 100g",
-                        "db_amount": "47.53"
+                        "db_amount": "47.52"
                     }, 
-                    "db_ndbno": "04630"
+                    "db_ndbno": "04632"
+                },
+                {
+                    "db_name": "margarine3",
+                    "db_full_name": "Margarine Spread, approximately 48% fat, tub",
+                    "db_main_nutrient": {
+                        "db_nutrient": "fat",
+                        "db_unit": "gram per 100g",
+                        "db_amount": "47.51"
+                    }, 
+                    "db_ndbno": "04633"
                 }
             ]
         },
@@ -55,6 +65,26 @@
                         "db_nutrient": "fat",
                         "db_unit": "gram per 100g",
                         "db_amount": "0.08"
+                    }, 
+                    "db_ndbno": "01085"
+                },
+                {
+                    "db_name": "fat free milk2",
+                    "db_full_name": "Milk, nonfat, fluid, with added vitamin A and vitamin D (fat free or skim)",
+                    "db_main_nutrient": {
+                        "db_nutrient": "fat",
+                        "db_unit": "gram per 100g",
+                        "db_amount": "0.07"
+                    }, 
+                    "db_ndbno": "01085"
+                },
+                {
+                    "db_name": "fat free milk3",
+                    "db_full_name": "Milk, nonfat, fluid, with added vitamin A and vitamin D (fat free or skim)",
+                    "db_main_nutrient": {
+                        "db_nutrient": "fat",
+                        "db_unit": "gram per 100g",
+                        "db_amount": "0.06"
                     }, 
                     "db_ndbno": "01085"
                 }
