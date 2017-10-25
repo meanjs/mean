@@ -191,11 +191,128 @@ body{
 
 
 
+
+#slidecontainer {
+  float: left;
+  width: 10%;
+  margin-left: 26.3%;
+}
+
+.slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 15px;
+  border-radius: 5px;   
+  background: #F9C078;
+  outline: none;
+  opacity: 0.5;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.slider:hover{
+  opacity: 1; 
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%; 
+  background: #AEC86B;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: #AEC86B;
+  cursor: pointer;
+}
+
+.checked {
+  color: #F9C078;
+}
+
+
+
+
+
+.acidjs-rating-stars,
+.acidjs-rating-stars label::before
+{
+    display: inline-block;
+}
+ 
+.acidjs-rating-stars label:hover,
+.acidjs-rating-stars label:hover ~ label
+{
+    color: #AEC86B;
+}
+
+.acidjs-rating-stars *
+{
+    margin: 0;
+    padding: 0;
+}
+ 
+.acidjs-rating-stars input
+{
+    display: none;
+}
+ 
+.acidjs-rating-stars
+{
+    unicode-bidi: bidi-override;
+    direction: rtl;
+}
+ 
+.acidjs-rating-stars label
+{
+    color: #ccc;
+}
+ 
+.acidjs-rating-stars label::before
+{
+    content: "\2605";
+    width: 18px;
+    line-height: 18px;
+    text-align: center;
+    font-size: 18px;
+    cursor: pointer;
+}
+ 
+.acidjs-rating-stars input:checked ~ label
+{
+    color: #F9C078;
+}
+
+
+/*
+.filterDiv {
+  float: left;
+  background-color: #AEC86B;
+  color: #ffffff;
+  width: 100px;
+  line-height: 100px;
+  text-align: center;
+  margin: 2px;
+  display: none;
+}
+
+.show {
+  display: block;
+}*/
+
+
+
 /*
 Color Guide
-Green: rgb(174,200,107);
-light blue: rgb(140,212,201);
-light orange: rgb(249,192,120);
-orange: rgb(253,131,93);
-dark orange: rgb(223,93,74);
+Green: rgb(174,200,107), hex(AEC86B);
+light blue: rgb(140,212,201), hex(8CD4C9);
+light orange: rgb(249,192,120), hex(F9C078);
+orange: rgb(253,131,93), hex(FD835D);
+dark orange: rgb(223,93,74), hex(DF5D4A);
 */
