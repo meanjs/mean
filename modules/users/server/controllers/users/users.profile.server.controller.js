@@ -15,8 +15,8 @@ var _ = require('lodash'),
   config = require(path.resolve('./config/config')),
   User = mongoose.model('User'),
   validator = require('validator');
-
-var whitelistedFields = ['firstName', 'lastName', 'email', 'username'];
+//=====added test and weight
+var whitelistedFields = ['firstName', 'lastName', 'email', 'username','test','weight'];
 
 var useS3Storage = config.uploads.storage === 's3' && config.aws.s3;
 var s3;
@@ -212,6 +212,9 @@ exports.me = function (req, res) {
       displayName: validator.escape(req.user.displayName),
       provider: validator.escape(req.user.provider),
       username: validator.escape(req.user.username),
+     //======added test and weight
+      test: validator.escape(req.user.test),
+      weight: validator.escape(req.user.weight),
       created: req.user.created.toString(),
       roles: req.user.roles,
       profileImageURL: req.user.profileImageURL,
