@@ -32,10 +32,6 @@ describe('Users E2E Tests:', function () {
       // Enter Email
       element(by.model('vm.credentials.email')).sendKeys(user1.email);
       //Enter Additional Elements
-      element(by.model('vm.credentials.UFID')).sendKeys(12345678);
-      element(by.model('vm.credentials.roles')).sendKeys('TA');
-      element(by.model('vm.credentials.course')).sendKeys('Course 1');
-      element(by.model('vm.credentials.section')).sendKeys('Section 1');
       // Enter Username
       element(by.model('vm.credentials.username')).sendKeys(user1.username);
       // Enter Password
@@ -56,10 +52,6 @@ describe('Users E2E Tests:', function () {
       element(by.model('vm.credentials.username')).sendKeys(user1.username);
       // Enter Password
       element(by.model('vm.credentials.password')).sendKeys(user1.password);
-      element(by.model('vm.credentials.UFID')).sendKeys(12345678);
-      element(by.model('vm.credentials.roles')).sendKeys('TA');
-      element(by.model('vm.credentials.course')).sendKeys('Course 1');
-      element(by.model('vm.credentials.section')).sendKeys('Section 1');
       // Click Submit button
       element(by.css('button[type=submit]')).click();
       // Last Name Error
@@ -76,10 +68,6 @@ describe('Users E2E Tests:', function () {
       element(by.model('vm.credentials.username')).sendKeys(user1.username);
       // Enter Password
       element(by.model('vm.credentials.password')).sendKeys(user1.password);
-      element(by.model('vm.credentials.UFID')).sendKeys(12345678);
-      element(by.model('vm.credentials.roles')).sendKeys('TA');
-      element(by.model('vm.credentials.course')).sendKeys('Course 1');
-      element(by.model('vm.credentials.section')).sendKeys('Section 1');
       // Click Submit button
       element(by.css('button[type=submit]')).click();
       // Email address error
@@ -99,10 +87,6 @@ describe('Users E2E Tests:', function () {
       // Enter Password
       element(by.model('vm.credentials.password')).sendKeys(user1.password);
       //Enter Additional Elements
-      element(by.model('vm.credentials.UFID')).sendKeys(12345678);
-      element(by.model('vm.credentials.roles')).sendKeys('TA');
-      element(by.model('vm.credentials.course')).sendKeys('Course 1');
-      element(by.model('vm.credentials.section')).sendKeys('Section 1');
       // Click Submit button
       element(by.css('button[type=submit]')).click();
       // Email address error
@@ -126,10 +110,6 @@ describe('Users E2E Tests:', function () {
       // Enter Password
       element(by.model('vm.credentials.password')).sendKeys(user1.password);
       //Enter Additional Elements
-      element(by.model('vm.credentials.UFID')).sendKeys(12345678);
-      element(by.model('vm.credentials.roles')).sendKeys('TA');
-      element(by.model('vm.credentials.course')).sendKeys('Course 1');
-      element(by.model('vm.credentials.section')).sendKeys('Section 1');
       // Click Submit button
       element(by.css('button[type=submit]')).click();
       // Email address error
@@ -147,10 +127,6 @@ describe('Users E2E Tests:', function () {
       // Enter Username
       element(by.model('vm.credentials.username')).sendKeys('.login');
       //Enter Additional Elements
-      element(by.model('vm.credentials.UFID')).sendKeys(12345678);
-      element(by.model('vm.credentials.roles')).sendKeys('TA');
-      element(by.model('vm.credentials.course')).sendKeys('Course 1');
-      element(by.model('vm.credentials.section')).sendKeys('Section 1');
       // Enter Password
       element(by.model('vm.credentials.password')).sendKeys(user1.password);
       // Click Submit button
@@ -172,10 +148,6 @@ describe('Users E2E Tests:', function () {
       // Enter Password
       element(by.model('vm.credentials.password')).sendKeys(user1.password);
       //Enter Additional Elements
-      element(by.model('vm.credentials.UFID')).sendKeys(12345678);
-      element(by.model('vm.credentials.roles')).sendKeys('TA');
-      element(by.model('vm.credentials.course')).sendKeys('Course 1');
-      element(by.model('vm.credentials.section')).sendKeys('Section 1');
       // Click Submit button
       element(by.css('button[type=submit]')).click();
       // Email address error
@@ -195,10 +167,6 @@ describe('Users E2E Tests:', function () {
       // Enter Password
       element(by.model('vm.credentials.password')).sendKeys(user1.password);
       //Enter Additional Elements
-      element(by.model('vm.credentials.UFID')).sendKeys(12345678);
-      element(by.model('vm.credentials.roles')).sendKeys('TA');
-      element(by.model('vm.credentials.course')).sendKeys('Course 1');
-      element(by.model('vm.credentials.section')).sendKeys('Section 1');
       // Click Submit button
       element(by.css('button[type=submit]')).click();
       // Email address error
@@ -218,10 +186,6 @@ describe('Users E2E Tests:', function () {
       // Enter Password
       element(by.model('vm.credentials.password')).sendKeys(user1.password);
       //Enter Additional Elements
-      element(by.model('vm.credentials.UFID')).sendKeys(12345678);
-      element(by.model('vm.credentials.roles')).sendKeys('TA');
-      element(by.model('vm.credentials.course')).sendKeys('Course 1');
-      element(by.model('vm.credentials.section')).sendKeys('Section 1');
       // Click Submit button
       element(by.css('button[type=submit]')).click();
       // Email address error
@@ -241,10 +205,6 @@ describe('Users E2E Tests:', function () {
       // Enter Password
       element(by.model('vm.credentials.password')).sendKeys(user1.password);
       //Enter Additional Elements
-      element(by.model('vm.credentials.UFID')).sendKeys(12345678);
-      element(by.model('vm.credentials.roles')).sendKeys('TA');
-      element(by.model('vm.credentials.course')).sendKeys('Course 1');
-      element(by.model('vm.credentials.section')).sendKeys('Section 1');
       // Click Submit button
       element(by.css('button[type=submit]')).click();
       // Email address error
@@ -264,10 +224,6 @@ describe('Users E2E Tests:', function () {
       // Enter Password
       element(by.model('vm.credentials.password')).sendKeys(user2.password);
       //Enter Additional Elements
-      element(by.model('vm.credentials.UFID')).sendKeys(12345678);
-      element(by.model('vm.credentials.roles')).sendKeys('TA');
-      element(by.model('vm.credentials.course')).sendKeys('Course 1');
-      element(by.model('vm.credentials.section')).sendKeys('Section 1');
       // Click Submit button
       element(by.css('button[type=submit]')).click();
       // Signup successful with username having .
@@ -287,10 +243,6 @@ describe('Users E2E Tests:', function () {
       // Enter Password
       element(by.model('vm.credentials.password')).sendKeys(user1.password);
       //Enter Additional Elements
-      element(by.model('vm.credentials.UFID')).sendKeys(12345678);
-      element(by.model('vm.credentials.roles')).sendKeys('TA');
-      element(by.model('vm.credentials.course')).sendKeys('Course 1');
-      element(by.model('vm.credentials.section')).sendKeys('Section 1');
       // Click Submit button
       element(by.css('button[type=submit]')).click();
       // Username Error
@@ -310,10 +262,6 @@ describe('Users E2E Tests:', function () {
       // Enter Invalid Password
       element(by.model('vm.credentials.password')).sendKeys('P@$$w0rd!');
       //Enter Additional Elements
-      element(by.model('vm.credentials.UFID')).sendKeys(12345678);
-      element(by.model('vm.credentials.roles')).sendKeys('TA');
-      element(by.model('vm.credentials.course')).sendKeys('Course 1');
-      element(by.model('vm.credentials.section')).sendKeys('Section 1');
       // Click Submit button
       element(by.css('button[type=submit]')).click();
       // Password Error
@@ -331,10 +279,6 @@ describe('Users E2E Tests:', function () {
       // Enter Username
       element(by.model('vm.credentials.username')).sendKeys(user1.username);
       //Enter Additional Elements
-      element(by.model('vm.credentials.UFID')).sendKeys(12345678);
-      element(by.model('vm.credentials.roles')).sendKeys('TA');
-      element(by.model('vm.credentials.course')).sendKeys('Course 1');
-      element(by.model('vm.credentials.section')).sendKeys('Section 1');
       // Enter Invalid Password
       element(by.model('vm.credentials.password')).sendKeys(')!/uLT="lh&:`6X!]|15o!$!TJf,.13l?vG].-j],lFPe/QhwN#{Z<[*1nX@n1^?WW-%_.*D)m$toB+N7z}kcN#B_d(f41h%w@0F!]igtSQ1gl~6sEV&r~}~1ub>If1c+');
       // Click Submit button
@@ -354,10 +298,6 @@ describe('Users E2E Tests:', function () {
       // Enter Username
       element(by.model('vm.credentials.username')).sendKeys(user1.username);
       //Enter Additional Elements
-      element(by.model('vm.credentials.UFID')).sendKeys(12345678);
-      element(by.model('vm.credentials.roles')).sendKeys('TA');
-      element(by.model('vm.credentials.course')).sendKeys('Course 1');
-      element(by.model('vm.credentials.section')).sendKeys('Section 1');
       // Enter Invalid Password
       element(by.model('vm.credentials.password')).sendKeys('P@$$w0rd!!!');
       // Click Submit button
@@ -379,10 +319,6 @@ describe('Users E2E Tests:', function () {
       // Enter Invalid Password
       element(by.model('vm.credentials.password')).sendKeys('p@$$w0rd!!');
       //Enter Additional Elements
-      element(by.model('vm.credentials.UFID')).sendKeys(12345678);
-      element(by.model('vm.credentials.roles')).sendKeys('TA');
-      element(by.model('vm.credentials.course')).sendKeys('Course 1');
-      element(by.model('vm.credentials.section')).sendKeys('Section 1');
       // Click Submit button
       element(by.css('button[type=submit]')).click();
       // Password Error
@@ -402,10 +338,6 @@ describe('Users E2E Tests:', function () {
       // Enter Invalid Password
       element(by.model('vm.credentials.password')).sendKeys('P@$$word!!');
       //Enter Additional Elements
-      element(by.model('vm.credentials.UFID')).sendKeys(12345678);
-      element(by.model('vm.credentials.roles')).sendKeys('TA');
-      element(by.model('vm.credentials.course')).sendKeys('Course 1');
-      element(by.model('vm.credentials.section')).sendKeys('Section 1');
       // Click Submit button
       element(by.css('button[type=submit]')).click();
       // Password Error
@@ -425,10 +357,6 @@ describe('Users E2E Tests:', function () {
       // Enter Invalid Password
       element(by.model('vm.credentials.password')).sendKeys('Passw0rdss');
       //Enter Additional Elements
-      element(by.model('vm.credentials.UFID')).sendKeys(12345678);
-      element(by.model('vm.credentials.roles')).sendKeys('TA');
-      element(by.model('vm.credentials.course')).sendKeys('Course 1');
-      element(by.model('vm.credentials.section')).sendKeys('Section 1');
       // Click Submit button
       element(by.css('button[type=submit]')).click();
       // Password Error
@@ -448,10 +376,6 @@ describe('Users E2E Tests:', function () {
       // Enter Password
       element(by.model('vm.credentials.password')).sendKeys(user1.password);
       //Enter Additional Elements
-      element(by.model('vm.credentials.UFID')).sendKeys(12345678);
-      element(by.model('vm.credentials.roles')).sendKeys('TA');
-      element(by.model('vm.credentials.course')).sendKeys('Course 1');
-      element(by.model('vm.credentials.section')).sendKeys('Section 1');
       // Click Submit button
       element(by.css('button[type="submit"]')).click();
       expect(browser.getCurrentUrl()).toEqual('http://localhost:3001/');
@@ -473,10 +397,6 @@ describe('Users E2E Tests:', function () {
       // Enter Invalid Password
       element(by.model('vm.credentials.password')).sendKeys(user2.password);
       //Enter Additional Elements
-      element(by.model('vm.credentials.UFID')).sendKeys(12345678);
-      element(by.model('vm.credentials.roles')).sendKeys('TA');
-      element(by.model('vm.credentials.course')).sendKeys('Course 1');
-      element(by.model('vm.credentials.section')).sendKeys('Section 1');
       // Click Submit button
       element(by.css('button[type=submit]')).click();
       // Password Error
@@ -497,10 +417,6 @@ describe('Users E2E Tests:', function () {
       // Enter Invalid Password
       element(by.model('vm.credentials.password')).sendKeys(user2.password);
       //Enter Additional Elements
-      element(by.model('vm.credentials.UFID')).sendKeys(12345678);
-      element(by.model('vm.credentials.roles')).sendKeys('TA');
-      element(by.model('vm.credentials.course')).sendKeys('Course 1');
-      element(by.model('vm.credentials.section')).sendKeys('Section 1');
       // Click Submit button
       element(by.css('button[type=submit]')).click();
       // Password Error
