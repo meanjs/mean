@@ -166,6 +166,13 @@ var UserSchema = new Schema({
     directions: String,
     ingredients: Array
   }
+  //===================================added test and weight
+  weight: {
+    type: String
+  },
+  test: {
+    type: String
+  }
 });
 
 /**
