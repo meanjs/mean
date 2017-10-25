@@ -18,7 +18,7 @@
 		  alert('hello');
     }
 
-    $scope.show = function(){
+    $scope.show = function(item){
       console.log("completed");
       item.show = !item.show;
     }
