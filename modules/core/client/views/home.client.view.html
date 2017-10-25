@@ -26,13 +26,13 @@
                     <th>Cancel Event</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody ng-repeat="event in eventList">
                   <tr>
-                    <th>Blaze</th>
-                    <td>10/15/12</td>
-                    <td>Pending</td>
-                    <td style="justify-content: center">
-                      <button class="btn btn-danger" ng-click="">Cancel</button>
+                    <th>{{event.bizName}}</th>
+                    <td>{{event.date}}</td>
+                    <td>{{event.status}}</td>
+                    <td>
+                      <button class="btn btn-danger" style="display: block; margin:auto" ng-click="">Cancel</button>
                     </td>
                   </tr>
                 </tbody>

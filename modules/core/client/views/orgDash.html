@@ -1,4 +1,4 @@
-<div class="container-fluid" style="background-color: #dddddd" ng-controller="org_dash_controller">
+<div class="container-fluid" style="background-color: #dddddd">
 	<div class="row" style="margin-top:5px">
 		<div class="col-6">
 			<div class="jumbotron" style="padding:5px;border-width:1px;border-color:black;border-style:solid">
@@ -7,13 +7,13 @@
 					<h4 style="text-align:center; font-style:italic;">Click to open a menu</h4>
 					<div class="row" style="justify-content: center">
 						<ul class="nav nav-tabs">
-							<li class="active"><a class="nav-link org-menu-selects" style="color:#1B5689; cursor:pointer" ui-sref=".requestPage">Requests</a></li>
-							<li><a class="org-menu-selects nav-link" style="color:#1B5689; cursor:pointer" ui-sref=".calendar">Calendar</a></li>
-							<li><a class="org-menu-selects nav-link" style="color:#1B5689; cursor:pointer" ui-sref=".pEvents">Past Events</a></li>
+							<li class="active"><a class="nav-link org-menu-selects" style="color:#1B5689; cursor:pointer">Requests</a></li>
+							<li><a class="org-menu-selects nav-link" style="color:#1B5689; cursor:pointer" >Calendar</a></li>
+							<li><a class="org-menu-selects nav-link" style="color:#1B5689; cursor:pointer" >Past Events</a></li>
 						</ul>
 					</div>
 					<div class="row" style="justify-content: center">
-						<div class="tab-content" ui-view></div>
+						<!-- <div class="tab-content" ui-view></div> -->
 					</div>
 				</div>
 			</div>

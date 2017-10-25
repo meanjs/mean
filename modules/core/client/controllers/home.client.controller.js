@@ -4,7 +4,18 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
 	function ($scope, Authentication) {
     // This provides Authentication context.
     $scope.authentication = Authentication;
-    $scope.signedIn = 0;
+    //$scope.signedIn = 0;
+
+    $scope.eventList = [
+    {
+      bizName: 'Blaze',
+      date: '10/17/17',
+      status: 'Pending'
+    },{
+      bizName: 'Taco Bell',
+      date: '11/12/23',
+      status: 'Confirmed'
+    }];
 
     $scope.isOrg = false;
     $scope.isBiz = false;
@@ -24,7 +35,7 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
       }else{
         $scope.isBiz = false;
       }
-      console.log($scope.signedIn);
+      //console.log($scope.signedIn);
       console.log($scope.isBiz);
       console.log($scope.isOrg);
     }
