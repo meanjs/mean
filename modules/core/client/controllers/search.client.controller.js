@@ -11,6 +11,12 @@
     $scope.pages = [{name:"Whole Milk", calories:"105", protein:"8", sugar:"13", fat:"2.5"},
                     {name:"Comparison View", show: false}
     ]
+    $scope.wholename = "Whole Milk";
+    $scope.wholeCal = "105";
+    $scope.wholePro = "8";
+    $scope.wholeSug = "13";
+    $scope.wholeFat = "2.5";
+
     var vm = this;
 
     //DO YOUR FRONTEND JS CODE HERE
