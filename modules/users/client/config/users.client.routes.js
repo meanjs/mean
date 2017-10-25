@@ -21,16 +21,6 @@
           roles: ['user', 'admin']
         }
       })
-      .state('customize', {
-        url: '/customize',
-        templateUrl: 'modules/customizings/client/views/list-customizings.client.view.html',
-        controller: 'CustomizingsListController',
-        controllerAs: 'vm',
-        data: {
-          pageTitle: 'Customize'
-        },
-        css: 'modules/customizings/client/css/list-customizings.css'
-      })
       .state('add', {
         url: '/add-recipe',
         templateUrl: 'modules/addings/client/views/list-addings.client.view.html',
@@ -40,6 +30,26 @@
           pageTitle: 'Add Recipe'
         },
         css: 'modules/addings/client/css/list-addings.css'
+      })
+      .state('alternatives', {
+        url: '/alternatives',
+        templateUrl: 'modules/customizings/client/views/alternatives.client.view.html',
+        controller: 'AlternativesController',
+        controllerAs: 'vm',
+        css: 'modules/customizings/client/css/alternatives.css',
+        data: {
+          pageTitle: 'Alternatives'
+        }
+      })
+      .state('customize', {
+        url: '/customize',
+        templateUrl: 'modules/customizings/client/views/list-customizings.client.view.html',
+        controller: 'CustomizingsListController',
+        controllerAs: 'vm',
+        data: {
+          pageTitle: 'Customize'
+        },
+        css: 'modules/customizings/client/css/list-customizings.css'
       })
       .state('profile', {
         url: '/profile',
