@@ -3,11 +3,11 @@
 
   angular
     .module('customizings')
-    .controller('AlternativesController', AlternativesController);
+    .controller('AlternativeController', AlternativeController);
 
-  AlternativesController.$inject = ['CustomizingsService', '$scope'];
+  AlternativeController.$inject = ['CustomizingsService', '$scope'];
 
-  function AlternativesController(CustomizingsService, $scope) {
+  function AlternativeController(CustomizingsService, $scope) {
     var vm = this;
 
     //DO YOUR FRONTEND JS CODE HERE

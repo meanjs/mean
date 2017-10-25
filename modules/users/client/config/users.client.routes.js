@@ -23,33 +23,43 @@
       })
       .state('add', {
         url: '/add-recipe',
-        templateUrl: 'modules/addings/client/views/list-addings.client.view.html',
-        controller: 'AddingsListController',
+        templateUrl: 'modules/users/client/views/recipes/addRecipe.client.view.html',
+        controller: 'AddRecipeController',
         controllerAs: 'vm',
         data: {
           pageTitle: 'Add Recipe'
         },
-        css: 'modules/addings/client/css/list-addings.css'
+        css: 'modules/users/client/css/recipes/addRecipe.css'
+      })
+      .state('details', {
+        url: '/recipe-details',
+        templateUrl: 'modules/users/client/views/recipes/recipeDetails.client.view.html',
+        controller: 'RecipeDetailsController',
+        controllerAs: 'vm',
+        data: {
+          pageTitle: 'Recipe Details'
+        },
+        css: 'modules/users/client/css/recipes/recipeDetails.css'
       })
       .state('alternatives', {
         url: '/alternatives',
-        templateUrl: 'modules/customizings/client/views/alternatives.client.view.html',
+        templateUrl: 'modules/users/client/views/recipes/alternatives.client.view.html',
         controller: 'AlternativesController',
         controllerAs: 'vm',
-        css: 'modules/customizings/client/css/alternatives.css',
         data: {
           pageTitle: 'Alternatives'
-        }
+        },
+        css: 'modules/users/client/css/recipes/alternatives.css'
       })
       .state('customize', {
         url: '/customize',
-        templateUrl: 'modules/customizings/client/views/list-customizings.client.view.html',
-        controller: 'CustomizingsListController',
+        templateUrl: 'modules/users/client/views/recipes/customize.client.view.html',
+        controller: 'CustomizeController',
         controllerAs: 'vm',
         data: {
           pageTitle: 'Customize'
         },
-        css: 'modules/customizings/client/css/list-customizings.css'
+        css: 'modules/users/client/css/recipes/customize.css'
       })
       .state('profile', {
         url: '/profile',
