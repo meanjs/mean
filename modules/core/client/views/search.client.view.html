@@ -3,7 +3,7 @@
     <div class="textLN"><a class=" test left" href="">Popular Recipes</a> <a class="test" href="">My Recipes</a> </div>
   </div>-->
   <center>
-    <text id="title">Healhty Alternatives for "</text><text id="ingredient">{{pages.name}}</text><text id="title">"</text>
+    <text id="title">Healhty Alternatives for "</text><text id="ingredient">{{wholename}}</text><text id="title">"</text>
   </center>
   </br>
   <div class="lowerNav text-center">
@@ -64,7 +64,7 @@
       <tr>
         <!--<th>Nutritional Information</th>-->
         <td>Nutritional Information</td>
-        <th id="ing1"><!--<button class="btn btn-success">-->Whole Milk<!--</button>--></th>
+        <th id="ing1"><!--<button class="btn btn-success">-->{{wholename}}<!--</button>--></th>
         <th id="ing2"><!--<button class="btn btn-success">-->Soy Milk<!--</button>--></th>
         <th id="ing3"><!--<button class="btn btn-success">-->Almond Milk<!--</button>--></th>
         <th id="ing4"><!--<button class="btn btn-success">-->Coconut Milk<!--</button>--></th>
@@ -78,28 +78,28 @@
           </tr><!-->
       <tr>
         <td>Calories</td>
-        <td id="ing1Cal">105</td>
+        <td id="ing1Cal">{{wholeCal}}</td>
         <td id="ing2Cal">130</td>
         <td id="ing3Cal">90</td>
         <td id="ing4Cal">35</td>
       </tr>
       <tr>
         <td>Fat (in grams)</td>
-        <td id="ing1Fat">2.5</td>
+        <td id="ing1Fat">{{wholeFat}}</td>
         <td id="ing2Fat">4.5</td>
         <td id="ing3Fat">2.5</td>
         <td id="ing4Fat">3.5</td>
       </tr>
       <tr>
         <td>Sugar (in grams)</td>
-        <td id="ing1Sug">13</td>
+        <td id="ing1Sug">{{wholeSug}}</td>
         <td id="ing2Sug">10</td>
         <td id="ing3Sug">14</td>
         <td id="ing4Sug">0.5</td>
       </tr>
       <tr>
         <td>Protein (in grams)</td>
-        <td id="ing1Pro">8</td>
+        <td id="ing1Pro">{{wholePro}}</td>
         <td id="ing2Pro">8</td>
         <td id="ing3Pro">1</td>
         <td id="ing4Pro">0.3</td>
