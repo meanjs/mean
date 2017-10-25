@@ -30,7 +30,7 @@
           pageTitle: 'Profile'
         }
       })
-      .state('settings.healthprofile', {
+      .state('healthprofile', {
         url: '/healthprofile',
         templateUrl: '/modules/users/client/views/settings/edit-health-profile.client.view.html',
         controller: 'EditHealthProfileController',
@@ -45,7 +45,7 @@
         controller: 'ChangePasswordController',
         controllerAs: 'vm',
         data: {
-          pageTitle: 'Settings password'
+          pageTitle: 'Change Password'
         }
       })
       .state('settings.accounts', {
@@ -54,7 +54,7 @@
         controller: 'SocialAccountsController',
         controllerAs: 'vm',
         data: {
-          pageTitle: 'Settings accounts'
+          pageTitle: 'Social Accounts'
         }
       })
       .state('settings.picture', {
@@ -63,7 +63,7 @@
         controller: 'ChangeProfilePictureController',
         controllerAs: 'vm',
         data: {
-          pageTitle: 'Settings picture'
+          pageTitle: 'Change Picture'
         }
       })
       .state('authentication', {
@@ -102,7 +102,7 @@
         controller: 'PasswordController',
         controllerAs: 'vm',
         data: {
-          pageTitle: 'Password forgot'
+          pageTitle: 'Forgot Password'
         }
       })
       .state('password.reset', {
