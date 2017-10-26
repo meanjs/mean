@@ -17,7 +17,12 @@ exports.invokeRolesPolicies = function () {
     allows: [{
       resources: '/api/items',
       permissions: '*'
-    }, {
+    },
+    {
+      resources: '/api/items/create',
+      permissions: '*'
+    },
+    {
       resources: '/api/items/:itemId',
       permissions: '*'
     },
@@ -43,7 +48,12 @@ exports.invokeRolesPolicies = function () {
     allows: [{
       resources: '/api/items',
       permissions: ['get']
-    }, {
+    },
+    {
+      resources: '/api/items/create',
+      permissions: ['put', 'post']
+    },
+    {
       resources: '/api/items/:itemId',
       permissions: ['get', 'post', 'put'] //TA's can modify and create items but not delete them from the database.
     }]
