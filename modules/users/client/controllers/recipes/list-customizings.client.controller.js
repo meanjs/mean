@@ -11,6 +11,8 @@
     var vm = this;
 
     $scope.wholename = "Whole Milk";
+    $scope.wholeQua = "3"
+    $scope.wholeUni = "Cups"
     $scope.wholeCal = "105";
     $scope.wholePro = "8";
     $scope.wholeSug = "13";
