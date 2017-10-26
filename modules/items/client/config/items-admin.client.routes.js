@@ -23,6 +23,18 @@
           roles: ['ta', 'technician', 'superta', 'admin']
         }
       })
+      .state('admin.items.modules', {
+        url: '/modules',
+        templateUrl: '/modules/items/client/views/admin/add-delete-modules.view.html',
+        controller: 'ItemsAdminModulesController',
+        controllerAs: 'vm'
+      })
+      .state('admin.items.categories', {
+        url: '/categories',
+        templateUrl: '/modules/items/client/views/admin/add-delete-categories.view.html',
+        controller: 'ItemsAdminCategoriesController',
+        controllerAs: 'vm'
+      })
       .state('admin.items.create', {
         url: '/create',
         templateUrl: '/modules/items/client/views/admin/form-item.client.view.html',
