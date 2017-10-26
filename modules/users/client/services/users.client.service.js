@@ -43,6 +43,10 @@
       test: {
         method: 'POST',
         url: '/api/users/test'
+      },
+      add: {
+        method: 'POST',
+        url: '/api/users/add'
       }
     });
 
@@ -69,8 +73,11 @@
       userSignin: function (credentials) {
         return this.signin(credentials).$promise;
       },
-      testing: function(par) {
-        return this.test(par).$promise;
+      testing: function(param) {
+        return this.test(param).$promise;
+      },
+      adding: function(param) {
+        return this.test(param).$promise;
       }
     });
 

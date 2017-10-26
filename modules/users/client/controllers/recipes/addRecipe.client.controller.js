@@ -11,17 +11,17 @@
     var vm = this;
 
     // TESTING
-    var par = {
-      'test' : 'world'
+    var param = {
+      'add' : 'recipe'
     };
     // TESTING
-    UsersService.testing(par)
+    UsersService.adding(param)
         .then(success)
         .catch(failure);
 
     function success(response) {
       console.log('worked!');
-      console.log(response);
+      console.log(response.add);
     }
 
     function failure(response) {

@@ -10,7 +10,7 @@
             <center>
               <div class="form-group" show-errors>
                 <h3 id="recipeNameHeader">Recipe Name</h3>
-                <input name="name" type="text" ng-model="vm.adding.name" id="name" class="form-control" placeholder="Recipe Name" required>
+                <input name="name" type="text" ng-model="vm.user.recipes.name" id="name" class="form-control" placeholder="Recipe Name" required>
               </div>
             </center>
             <br>
@@ -22,10 +22,14 @@
               </thead>
               <tbody>
                 <tr ng-repeat="x in recipeList">
-                  <td id="ing"><input name="ingredient" type="text"  placeholder="Ingredient Name"/></td>
-                  <td id="quantity"><input name="quantity" type="number"  placeholder="0"/></td>
+                  <td id="ing">
+                    <input name="ingredient" type="text" ng-model="vm.user.recipes.ingredients.name" placeholder="Ingredient Name"/>
+                  </td>
+                  <td id="quantity">
+                    <input name="quantity" type="number" ng-model="vm.user.recipes.ingredients.quantity" placeholder="0"/>
+                  </td>
                   <td id="units">
-                    <select class="form-control" >
+                    <select class="form-control" ng-model="vm.user.recipes.ingredients.units">
                       <option>Cups</option>
                       <option>Ounces</option>
                       <option>Tbs</option>
@@ -40,18 +44,21 @@
               </tbody>
             </table>
           </br>
-          <div class="form-group">
-            <button type="button" class="btn btn-info" ng-click="recipeAdd()">
-              Add More Ingredients 
-              <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-            </button>
-          </div>
+          <center>
+            <div class="form-group">
+              <button type="button" class="btn btn-info" ng-click="recipeAdd()">
+                Add More Ingredients 
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+              </button>
+            </div>
+          </center>
         </div>
         <div class="col-md-4">
           <center>
             <div class="form-group">
               <h3 id="directionsHeader">Recipe Directions</h3>
-              <textarea id="directions" class="form-control" rows="5" placeholder="Enter Directions Here"></textarea>
+              <textarea id="directions" class="form-control" rows="5" 
+                ng-model="vm.user.recipes.directions" placeholder="Enter Directions Here"></textarea>
             </div>
           </center>
           </br>
