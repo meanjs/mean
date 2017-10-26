@@ -27,9 +27,9 @@
         <tbody>
             <tr class="applicant-rows" ng-repeat="applicant in vm.unapprovedUsers">
              	<td>{{ applicant.firstName }} {{ applicant.lastName }}</td>
-             	<td>{{ applicant.roles }}</td>
-                <td class="btn btn-success" ng-click="vm.approveUser(applicant)">√</td>
-                <td class="btn btn-danger" ng-click="vm.removeApplicant(applicant)">x</td>
+             	<td>{{ vm.modifyRoles(applicant) }}</td>
+                <td class="btn btn-success" ng-click="vm.approveUser(applicant)">APPROVE</td>
+                <td class="btn btn-danger" ng-click="vm.removeApplicant(applicant)">DENY</td>
             </tr>
         </tbody>
     </table>
