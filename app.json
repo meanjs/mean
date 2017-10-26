@@ -10,14 +10,7 @@
         }
     },
     "formation": {},
-    "addons": [
-        "mongolab",
-        "mongolab",
-        "mongolab",
-        "mongolab",
-        "mongolab",
-        "mongolab"
-    ],
+    "addons": [],
     "buildpacks": [
         {
             "url": "heroku/nodejs"
