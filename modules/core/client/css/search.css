@@ -29,7 +29,7 @@ table {
 }
 
 td{
-  color: #DF5D4A;
+  color: #FD835D;
   /*border: 2px solid #AEC86B;*/
   text-align: center;
   /*padding: 8px;*/
@@ -45,7 +45,7 @@ td:hover{
 }*/
 
 th{
-  color: #8CD4C9;
+  color: #AEC86B;
   text-align: center;
 }
 
