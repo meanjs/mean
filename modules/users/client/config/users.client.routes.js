@@ -54,6 +54,12 @@
         controller: 'EditProfileController',
         controllerAs: 'vm'
       })
+      .state('catalog', {
+        url: '/catalog',
+        templateUrl: '/modules/users/client/views/catalog/catalog.html',
+        controller: 'CatalogController',
+        controllerAs: 'vm'
+      })
       .state('authentication', {
         abstract: true,
         url: '/authentication',
