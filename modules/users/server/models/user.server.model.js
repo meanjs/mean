@@ -48,6 +48,23 @@ var validateUsername = function (username) {
   );
 };
 
+// Recipe Schema for user
+var IngredientSchema = new Schema({
+  name: String,
+  quantity: Number,
+  units: String
+});
+
+var RecipeSchema = new Schema({
+  name: String,
+  image: { 
+    type: String,
+    default: 'modules/users/client/img/profile/default.png'
+  },
+  directions: String,
+  ingredients: [IngredientSchema]
+});
+
 /**
  * User Schema
  */
@@ -157,23 +174,11 @@ var UserSchema = new Schema({
     islam: Boolean,
     kosher: Boolean
   },
-  myRecipes: {
-    name: String,
-    image: { 
-      type: String,
-      default: 'modules/users/client/img/profile/default.png'
-    },
-    directions: String,
-    ingredients: Array
-  }, 
+  recipes: [RecipeSchema], 
   test: {
     type: String
   },
-  //===================================added test and weight
   weight: {
-    type: String
-  },
-  test: {
     type: String
   }
 });
