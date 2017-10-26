@@ -45,6 +45,11 @@ text{
   color: #FD835D;
 }
 
+.active{
+  text-decoration: underline;
+  text-decoration-color: #8CD4C9;
+}
+
 
 /*
 Color Guide
