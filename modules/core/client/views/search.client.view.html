@@ -12,7 +12,7 @@
         <a class="test left active" href="" ng-click="showI()">Item View</a>
         <a class="test" href="" ng-click="showC()">Comparison View</a>
       </div>
-      <div ng-hide="showItem">
+      <div ng-show="showComparison">
         <a class="test left" href="" ng-click="showI()">Item View</a>
         <a class="test active" href="" ng-click="showC()">Comparison View</a>
       </div>
@@ -65,7 +65,7 @@
       </div>
     </center>
   </div>
-  <div ng-hide="showItem">
+  <div ng-show="showComparison">
     <table>
       <tr>
         <!--<th>Nutritional Information</th>-->
