@@ -46,8 +46,7 @@ text{
 }
 
 .active{
-  text-decoration: underline;
-  text-decoration-color: #8CD4C9;
+  text-decoration: underline !important;
 }
 
 
