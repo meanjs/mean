@@ -12,6 +12,10 @@ module.exports = function (app) {
     .get(items.list)
     .post(items.create);
 
+  app.route('/api/items/create').all(itemsPolicy.isAllowed)
+  .get(items.list)    
+  .post(items.create);
+
   // Single article routes
   app.route('/api/items/:itemId').all(itemsPolicy.isAllowed)
     .get(items.read)
