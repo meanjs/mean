@@ -35,7 +35,7 @@
     $scope.recipeList = [{}];
 
     $scope.recipeAdd = function() {
-        $scope.todoList.push({});
+        $scope.recipeList.push({});
     };
 //===========================================================================
     $scope.alert = () => {

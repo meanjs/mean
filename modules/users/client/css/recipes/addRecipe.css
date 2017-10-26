@@ -1,0 +1,9 @@
+#directions {
+  width: 100%;
+  overflow: auto;
+  resize: none;
+}
+
+#directionsHeader, #recipeNameHeader {
+  color: #8CD4C9;
+}
