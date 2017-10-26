@@ -29,14 +29,7 @@
         data: {
           pageTitle: 'Settings'
         }
-      })                   //THIS CRASHES BECAUSE IT DOESN'T EXIST YET?
-      // .state('catalog', {
-      //   url: '/catalog',
-      //   templateUrl: '/modules/users/client/views/catalog/catalog.html',
-      //   controller: 'CatalogController',
-      //   controllerAs: 'vm'
-      // })
-
+      })                  
       .state('settings.password', {
         url: '/password',
         templateUrl: '/modules/users/client/views/settings/change-password.client.view.html',
@@ -44,6 +37,15 @@
         controllerAs: 'vm',
         data: {
           pageTitle: 'Settings password'
+        }
+      })
+      .state('settings.catalog', {
+        url: '/catalog',
+        templateUrl: '/modules/users/controllers/views/catalog/catalog.html',
+        controller: 'CatalogController',
+        controllerAs: 'vm',
+       data: {
+          pageTitle: 'Settings catalog'
         }
       })
       .state('settings.accounts', {

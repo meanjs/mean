@@ -47,7 +47,7 @@
         $state.go($state.previous.state.name || 'settings.profile', $state.previous.params);
       }
       if ( vm.authentication.user.type === 'sponsor' ) {
-        $state.go($state.previous.state.name || 'home', $state.previous.params);
+        $state.go($state.previous.state.name || 'settings.catalog', $state.previous.params);
       }
     }
 
