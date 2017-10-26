@@ -35,6 +35,15 @@ td{
   /*padding: 8px;*/
 }
 
+/*
+td:hover{
+  background-color: #F9C078;
+}
+
+#ing1:hover {
+  background-color: #F9C078;
+}*/
+
 th{
   color: #8CD4C9;
   text-align: center;
@@ -53,10 +62,6 @@ text{
 .active{
   text-decoration: underline !important;
 }
-
-/*#ing1:hover {
-  background-color: #F9C078;
-}*/
 
 
 
