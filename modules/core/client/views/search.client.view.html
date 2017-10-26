@@ -28,7 +28,7 @@
         <div class="boxed">
           <div ng-hide="flipped" ng-click="flip()">
             </br>
-            <text>Whole Milk</text>
+            <text>{{wholename}}</text>
             </br>
             <img src="http://www.nextavenue.org/wp-content/uploads/2016/01/Are-Whole-Milk-Dairy-Products-Making-a-Comeback-534741081.jpg" alt="Whole Milk" width="250" height="200">
             </br>
@@ -36,7 +36,8 @@
           </div>
           <div ng-show="flipped" ng-click="flip()">
             </br>
-            <text>Whole Milk</text>
+            <text>{{wholename}}</text>
+            </br>
             </br>
             <table id="flipTable">
               <tr>
@@ -52,6 +53,7 @@
                 <td>{{wholePro}}</td>
               </tr>
             </table>
+            </br>
           </div>
         </div>
       </div>
