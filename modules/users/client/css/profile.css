@@ -1,0 +1,46 @@
+body{
+  font-family: "Source Sans Pro", "Sans"; 
+}
+
+.container{
+  margin-right: 0;
+  margin-left: 0;
+  padding-left: 0;
+  padding-right: 0;
+  width: 100%;
+}
+.properties{
+  height: 300px;
+  padding-right: 0; 
+  padding-left: 0; 
+}
+.content{
+  margin-top: 58px;
+}
+.navbar-inverse .navbar-brand{
+  color: rgb(249,192,120);
+}
+.img-prop{
+  width:100%; 
+  height:100%;
+}
+
+/*lower nav*/
+
+.lowerNav .textLN{
+  height: 50px;
+  background-color: rgb(223,93,74);
+  padding-top: 15px; 
+}
+.left{
+  margin-right: 50px;
+}
+
+/*
+.textLN a{
+  color: #ffffff; 
+}
+*/
+.filter-dropdown{
+  margin: 0px 0 0;
+}

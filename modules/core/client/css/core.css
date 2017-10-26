@@ -1,6 +1,7 @@
-/*.content {
+.content {
   margin-top: 50px;
-}*/
+}
+
 .undecorated-link:hover {
   text-decoration: none;
 }
@@ -11,6 +12,7 @@
 .x-ng-cloak {
   display: none !important;
 }
+
 .header-profile-image {
   border-radius: 50%;
   height: 28px;
@@ -94,9 +96,11 @@ a:hover .header-profile-image {
 
 
 /*body*/
+
 body{
   font-family: "Source Sans Pro", "Sans"; 
 }
+
 .container{
   margin-right: 0;
   margin-left: 0;
@@ -113,7 +117,7 @@ body{
   margin-top: 58px;
 }
 .navbar-inverse .navbar-brand{
-  color: rgb(249,192,120);
+  color: rgb(249,192,120); 
 }
 .img-prop{
   width:100%; 
@@ -121,6 +125,7 @@ body{
 }
 
 /*lower nav*/
+
 .lowerNav .textLN{
   height: 50px;
   background-color: rgb(223,93,74);
@@ -129,6 +134,7 @@ body{
 .left{
   margin-right: 50px;
 }
+
 .textLN a{
   color: #ffffff; 
 }
