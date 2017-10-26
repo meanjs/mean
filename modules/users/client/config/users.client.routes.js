@@ -23,13 +23,13 @@
       })
       .state('settings.profile', {
         url: '/profile',
-        templateUrl: '/modules/users/client/views/settings/edit-profile.client.view.html',
+        templateUrl: '/modules/users/client/views/profile/profile.html',
         controller: 'EditProfileController',
         controllerAs: 'vm',
         data: {
           pageTitle: 'Settings'
         }
-      })
+      })                  
       .state('settings.password', {
         url: '/password',
         templateUrl: '/modules/users/client/views/settings/change-password.client.view.html',
@@ -37,6 +37,15 @@
         controllerAs: 'vm',
         data: {
           pageTitle: 'Settings password'
+        }
+      })
+      .state('settings.catalog', {
+        url: '/catalog',
+        templateUrl: '/modules/users/controllers/views/catalog/catalog.html',
+        controller: 'CatalogController',
+        controllerAs: 'vm',
+       data: {
+          pageTitle: 'Settings catalog'
         }
       })
       .state('settings.accounts', {
