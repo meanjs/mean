@@ -31,6 +31,13 @@
     // END TESTING
 
     //DO YOUR FRONTEND JS CODE HERE
+//===========================================================================
+    $scope.recipeList = [{}];
+
+    $scope.recipeAdd = function() {
+        $scope.todoList.push({});
+    };
+//===========================================================================
     $scope.alert = () => {
   		alert('hello');
   	}
