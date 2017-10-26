@@ -31,3 +31,8 @@
 .social-button:hover {
   opacity: 0.65;
 }
+
+/* ADD RECIPE STYLING */
+#directionsHeader, #recipeNameHeader {
+  color: #8CD4C9;
+}
