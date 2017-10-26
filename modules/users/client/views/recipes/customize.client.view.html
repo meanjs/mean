@@ -1,6 +1,7 @@
 <section>
-<h1>NEW VERSION</h1>
-<!--   <div class="page-header">
+  <h1>NEW VERSION</h1>
+  <center>
+  <!--   <div class="page-header">
     <h1>Customizings</h1>
   </div>
   <div class="list-group">
@@ -19,51 +20,257 @@
   </div>
   <div class="alert alert-warning text-center" ng-if="vm.customizings.$resolved && !vm.customizings.length">
     No Customizings yet, why don't you <a ui-sref="customizings.create">create one</a>?
-  </div> --> 
+  </div> -->
 
-<h1 style="margin-left: 400px">Customize Recipe</h1>
+  <!--<h1 style="margin-left: 400px">--><h1>Customize Recipe</h1>
 
-<table style="margin-top: 90px">
-  <tr>
-    <td style="width: 50%">Ingredient Name #1</td>
-    <td style="width: 25%">Units: Cups</td>
-    <td>Quantity: 2</td>
-  </tr>
-</table>
-<button style="margin-left: 455px; margin-top: 5px; margin-bottom: 5px">see 3 other possibilities</button>
-<table>
-  <tr>
-    <td style="width: 50%">Ingredient Name #2</td>
-    <td style="width: 25%">Units: Pounds</td>
-    <td>Quantity: 1</td>
-  </tr>
-</table>
-<button style="margin-left: 455px; margin-top: 5px; margin-bottom: 5px" ng-click = "alert()">See 2 other possibilities</button>
-<table id = "myTable">
-  <tr>
-    <th>Ingredient Name #1</th>
-    <th>Alternate Ingredient #1</th>
-    <th>Alternate Ingredient #2</th>
-  </tr>
-  <tr>
-    <td>pic and data</td>
-    <td>pic and data</td>
-    <td>pic and data</td>
-  </tr>
-</table>
-<p></p>
-<table>
-  <tr>
-    <td style="width: 50%">Ingredient Name #3</td>
-    <td style="width: 25%">Units: Cups</td>
-    <td>Quantity: 2</td>
-  </tr>
-</table>
-<button style="margin-left: 455px; margin-top: 5px; margin-bottom: 5px">see 1 other possibilities</button>
-<br>
-<button style="margin-left: 510px; margin-top: 90px">SAVE</button>
-
-<!-- <h2>My Life</h2>
+  <!--<table style="margin-top: 90px">--><table>
+    <tr>
+      <td style="width: 50%">{{wholename}}</td>
+      <td style="width: 25%">Units: {{wholeUni}}</td>
+      <td>Quantity: {{wholeQua}}</td>
+    </tr>
+  </table>
+  <!--<button style="margin-left: 455px; margin-top: 5px; margin-bottom: 5px">see 3 other possibilities</button>-->
+  <!--<div class="container">
+      <h2>Collapsible Panel</h2>
+      <p>Click on the collapsible panel to open and close it.</p>
+      <div class="panel-group">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" href="#collapse1">Collapsible panel</a>
+            </h4>
+          </div>
+          <div id="collapse1" class="panel-collapse collapse">
+            <div class="panel-body">Panel Body</div>
+            <div class="panel-footer">Panel Footer</div>
+          </div>
+        </div>
+      </div>
+    </div>-->
+  <div class="container">
+    <button id="collapseBTN" type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo">See Other Possibilities</button>
+    <!--<div id="demo" class="collapse">-->
+      <table id="myTable">
+        <tr>
+          <th>{{wholename}}</th>
+          <th>Alternate Ingredient Name</th>
+          <th>Alternate Ingredient Name</th>
+        </tr>
+        <tr>
+          <td>
+            <img src="https://www.rxbar.com/media/wysiwyg/homepage/Ingredients.jpg" alt="PICTURE" width="225" height="170">
+            <table id="insideTable">
+              <tr>
+                <th>Calories</th>
+                <th>Fat</th>
+                <th>Sugar</th>
+                <th>Protein</th>
+              </tr>
+              <tr>
+                <td>{{wholeCal}}</td>
+                <td>{{wholeFat}}</td>
+                <td>{{wholeSug}}</td>
+                <td>{{wholePro}}</td>
+              </tr>
+            </table>
+          </td>
+          <td>
+            <img src="https://www.rxbar.com/media/wysiwyg/homepage/Ingredients.jpg" alt="PLACEHOLDER PICTURE" width="225" height="170">
+            <table id="insideTable">
+              <tr>
+                <th>Calories</th>
+                <th>Fat</th>
+                <th>Sugar</th>
+                <th>Protein</th>
+              </tr>
+              <tr>
+                <td>DATA</td>
+                <td>DATA</td>
+                <td>DATA</td>
+                <td>DATA</td>
+              </tr>
+            </table>
+          </td>
+          <td>
+            <img src="https://www.rxbar.com/media/wysiwyg/homepage/Ingredients.jpg" alt="PLACEHOLDER PICTURE" width="225" height="170">
+            <table id="insideTable">
+              <tr>
+                <th>Calories</th>
+                <th>Fat</th>
+                <th>Sugar</th>
+                <th>Protein</th>
+              </tr>
+              <tr>
+                <td>DATA</td>
+                <td>DATA</td>
+                <td>DATA</td>
+                <td>DATA</td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    <!--</div>-->
+  </div>
+  </br>
+  <table>
+    <tr>
+      <td style="width: 50%">Ingredient Name</td>
+      <td style="width: 25%">Units: Pounds</td>
+      <td>Quantity: 1</td>
+    </tr>
+  </table>
+  <!--<button class="btn btn-success" ng-click="alert()" id="collapseBTN">See 2 other possibilities</button>-->
+  <button id="collapseBTN" type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo">See Other Possibilities</button>
+  <div id="demo" class="collapse">
+    <table id="myTable">
+      <tr>
+        <th>Original Ingredient Name</th>
+        <th>Alternate Ingredient Name</th>
+        <th>Alternate Ingredient Name</th>
+      </tr>
+      <tr>
+        <td>
+          <img src="https://www.rxbar.com/media/wysiwyg/homepage/Ingredients.jpg" alt="PICTURE" width="225" height="170">
+          <table id="insideTable">
+            <tr>
+              <th>Calories</th>
+              <th>Fat</th>
+              <th>Sugar</th>
+              <th>Protein</th>
+            </tr>
+            <tr>
+              <td>DATA</td>
+              <td>DATA</td>
+              <td>DATA</td>
+              <td>DATA</td>
+            </tr>
+          </table>
+        </td>
+        <td>
+          <img src="https://www.rxbar.com/media/wysiwyg/homepage/Ingredients.jpg" alt="PLACEHOLDER PICTURE" width="225" height="170">
+          <table id="insideTable">
+            <tr>
+              <th>Calories</th>
+              <th>Fat</th>
+              <th>Sugar</th>
+              <th>Protein</th>
+            </tr>
+            <tr>
+              <td>DATA</td>
+              <td>DATA</td>
+              <td>DATA</td>
+              <td>DATA</td>
+            </tr>
+          </table>
+        </td>
+        <td>
+          <img src="https://www.rxbar.com/media/wysiwyg/homepage/Ingredients.jpg" alt="PLACEHOLDER PICTURE" width="225" height="170">
+          <table id="insideTable">
+            <tr>
+              <th>Calories</th>
+              <th>Fat</th>
+              <th>Sugar</th>
+              <th>Protein</th>
+            </tr>
+            <tr>
+              <td>DATA</td>
+              <td>DATA</td>
+              <td>DATA</td>
+              <td>DATA</td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </div>
+  </div>
+  </br>
+  </br>
+  <table>
+    <tr>
+      <td style="width: 50%">Ingredient Name #3</td>
+      <td style="width: 25%">Units: Cups</td>
+      <td>Quantity: 2</td>
+    </tr>
+  </table>
+  <button id="collapseBTN" type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo">See Other Possibilities</button>
+  <div id="demo" class="collapse">
+    <table id="myTable">
+      <tr>
+        <th>Original Ingredient Name</th>
+        <th>Alternate Ingredient Name</th>
+        <th>Alternate Ingredient Name</th>
+      </tr>
+      <tr>
+        <td>
+          <img src="https://www.rxbar.com/media/wysiwyg/homepage/Ingredients.jpg" alt="PICTURE" width="225" height="170">
+          <table id="insideTable">
+            <tr>
+              <th>Calories</th>
+              <th>Fat</th>
+              <th>Sugar</th>
+              <th>Protein</th>
+            </tr>
+            <tr>
+              <td>DATA</td>
+              <td>DATA</td>
+              <td>DATA</td>
+              <td>DATA</td>
+            </tr>
+          </table>
+        </td>
+        <td>
+          <img src="https://www.rxbar.com/media/wysiwyg/homepage/Ingredients.jpg" alt="PLACEHOLDER PICTURE" width="225" height="170">
+          <table id="insideTable">
+            <tr>
+              <th>Calories</th>
+              <th>Fat</th>
+              <th>Sugar</th>
+              <th>Protein</th>
+            </tr>
+            <tr>
+              <td>DATA</td>
+              <td>DATA</td>
+              <td>DATA</td>
+              <td>DATA</td>
+            </tr>
+          </table>
+        </td>
+        <td>
+          <img src="https://www.rxbar.com/media/wysiwyg/homepage/Ingredients.jpg" alt="PLACEHOLDER PICTURE" width="225" height="170">
+          <table id="insideTable">
+            <tr>
+              <th>Calories</th>
+              <th>Fat</th>
+              <th>Sugar</th>
+              <th>Protein</th>
+            </tr>
+            <tr>
+              <td>DATA</td>
+              <td>DATA</td>
+              <td>DATA</td>
+              <td>DATA</td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </div>
+  </div>
+  <!--<button style="margin-left: 455px; margin-top: 5px; margin-bottom: 5px">see 1 other possibilities</button>-->
+  </br>
+  </br>
+  </br>
+  </br>
+  <!--<button class="btn btn-success" style="margin-left: 575px">--><button class="btn btn-success">SAVE</button>
+  </br>
+  </br>
+  </br>
+</center>
+  <!-- <h2>My Life</h2>
 <div class="container">
     <div class="panel-group" id="accordion">
         <div class="panel panel-default">
@@ -80,7 +287,7 @@
         </div>
     </div>
 </div> -->
-<!-- 
+  <!-- 
  <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo">Simple collapsible</button>
   <div id="demo" class="collapse">
     Lorem ipsum dolor sit amet, consectetur adipisicing elit,
@@ -103,3 +310,38 @@
   </tr>
 </table> -->
 </section>
+
+<style>
+  th {
+    color: #DF5D4A;
+    border: 1px solid #AEC86B;
+    padding: 5px;
+  }
+
+  td {
+    background-color: white;
+    color: #8CD4C9;
+    border: 1px solid #AEC86B;
+    padding: 5px;
+  }
+
+  table {
+    /*color: #F9C078;*/
+    background-color: white;
+    border: 2px solid #AEC86B;
+    width: 60%;
+    margin-left: 200px;
+  }
+
+  p {
+    /*margin-left: 450px;*/
+  }
+
+  #insideTable {
+    margin-left: 12px;
+  }
+
+  #collapseBTN {
+    /*margin-left: 525px;*/
+  }
+</style>
