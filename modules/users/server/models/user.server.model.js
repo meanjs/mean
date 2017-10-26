@@ -79,26 +79,6 @@ var UserSchema = new Schema({
     default: '',
     validate: [validateLocalStrategyEmail, 'Please fill a valid email address']
   },
-  bio: {
-    type: String,
-    trim: true
-  },
-  major: {
-    type: String,
-    trim: true
-  },
-  availabiltyStatus: {
-    type: String,
-    trim: true
-  },
-  teamName: {
-    type: String,
-    trim: true
-  },
-  type: {
-    type: String,
-    trim: true
-  },
   username: {
     type: String,
     unique: 'Username already exists',
