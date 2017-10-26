@@ -42,6 +42,50 @@ angular.module('core').controller('HomeController', ['$scope', '$http', 'Authent
         console.log('Failed delete');
       });
     }
+
+    $scope.requestEvent = function(event){
+      console.log(event.organizationsPending.indexOf($scope.authentication.user.displayName));
+      console.log(event.organizationsPending);
+      if(event.organizationsPending.indexOf($scope.authentication.user.displayName) == -1){
+        var eventPlusName = event.organizationsPending.push($scope.authentication.user.displayName);
+      }else{
+        return;
+      } 
+      $http({
+        method:'PUT',
+        url:'api/events/'+event._id,
+        data: {
+          organizationsPending:{
+            organizationName: $scope.authentication.user.displayName
+          }
+        }
+      }).then(function(res){
+        console.log('Successful request');
+      },function(res){
+        console.log('Failed request');
+        console.log(res);
+      });
+    }
+
+    $scope.acceptEvent = function(event){
+      console.log(event.organizationsPending[0].organizationName);
+      if(event.organizationsPending[0].organizationName==""){
+        return;
+      }
+      $http({
+        method:'PUT',
+        url:'api/events/'+event._id,
+        data: {
+          organizationConfirmed: event.organizationsPending[0].organizationName
+        }
+      }).then(function(res){
+        console.log('Successful accept');
+      },function(res){
+        console.log('Failed accept');
+        console.log(res);
+      });
+    }
+
     $scope.loadEventList = function(){
        $http({
       method: 'GET',
