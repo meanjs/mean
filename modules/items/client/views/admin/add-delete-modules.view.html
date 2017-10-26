@@ -7,36 +7,28 @@
       <div class="col-md-4" style="margin-top: 2em">
         <input class="form-control col-md-4" type="text" ng-model="vm.search" placeholder="Search" ng-change="vm.figureOutItemsToDisplay()" />
       </div>
+      <div class="col-md-4" style="margin-top: 2em">
+        <a class="btn btn-primary pull-right" ui-sref="admin.items.modulecreate">
+          <i class="glyphicon glyphicon-plus"></i>
+        </a>
+      </div>
     </div>
+
   </div>
   <div class="list-group">
     <table class="table table-hover applicantsTable">
       <thead>
           <tr class="first-row">
-            <td>Modules</td>
-            <td></td>
+            <td class="firstColumn">Category</td>
+            <td class="secondColumn"></td>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Example Mod1</td>
-            <td>-</td>
-          </tr>
-          <tr>
-            <td>Example Mod2</td>
-            <td>-</td>
-          </tr>
-          <tr>
-            <td>Example Mod3</td>
-            <td>-</td>
-          </tr>
-          <tr>
-            <td>Example Mod4</td>
-            <td>-</td>
-          </tr>
-          <tr>
-            <td>Example Mod5</td>
-            <td>-</td>
+          <tr ng-repeat="module in vm.modules">
+            <td class="firstColumn">{{ module.name }}</td>
+            <td class="secondColumn">
+              <button class="btn btn-danger dangerButton" type="button" ng-click="vm.deleteModule(module)">-</button>
+            </td>
           </tr>
         </tbody>
     </table>

@@ -7,36 +7,27 @@
       <div class="col-md-4" style="margin-top: 2em">
         <input class="form-control col-md-4" type="text" ng-model="vm.search" placeholder="Search" ng-change="vm.figureOutItemsToDisplay()" />
       </div>
+      <div class="col-md-4" style="margin-top: 2em">
+        <a class="btn btn-primary pull-right" ui-sref="admin.items.categorycreate">
+          <i class="glyphicon glyphicon-plus"></i>
+        </a>
+      </div>
     </div>
   </div>
   <div class="list-group">
     <table class="table table-hover applicantsTable">
       <thead>
           <tr class="first-row">
-            <td>Category</td>
-            <td></td>
+            <td class="firstColumn">Category</td>
+            <td class="secondColumn"></td>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Example Cat1</td>
-            <td>-</td>
-          </tr>
-          <tr>
-            <td>Example Cat2</td>
-            <td>-</td>
-          </tr>
-          <tr>
-            <td>Example Cat3</td>
-            <td>-</td>
-          </tr>
-          <tr>
-            <td>Example Cat4</td>
-            <td>-</td>
-          </tr>
-          <tr>
-            <td>Example Cat5</td>
-            <td>-</td>
+          <tr ng-repeat="category in vm.categories">
+            <td class="firstColumn">{{ category.name }}</td>
+            <td class="secondColumn">
+              <button class="btn btn-danger dangerButton" type="button" ng-click="vm.deleteCategory(category)">-</button>
+            </td>
           </tr>
         </tbody>
     </table>

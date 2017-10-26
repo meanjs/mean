@@ -27,16 +27,26 @@
         url: '/modules',
         templateUrl: '/modules/items/client/views/admin/add-delete-modules.view.html',
         controller: 'ItemsAdminModulesController',
-        controllerAs: 'vm'
+        controllerAs: 'vm',
+        css: 'css/add-delete-categories-module.css'
+      })
+      .state('admin.items.modulecreate',{
+        url: '/modules/create',
+        templateUrl: '/modules/items/client/views/admin/form-module.client.view.html'
       })
       .state('admin.items.categories', {
         url: '/categories',
         templateUrl: '/modules/items/client/views/admin/add-delete-categories.view.html',
         controller: 'ItemsAdminCategoriesController',
-        controllerAs: 'vm'
+        controllerAs: 'vm',
+        css: 'css/add-delete-categories-module.css'
+      })
+      .state('admin.items.categorycreate',{
+        url: '/categories/create',
+        templateUrl: '/modules/items/client/views/admin/form-category.client.view.html'
       })
       .state('admin.items.create', {
-        url: '/create',
+        url: '/items/create',
         templateUrl: '/modules/items/client/views/admin/form-item.client.view.html',
         controller: 'ItemsAdminController',
         controllerAs: 'vm',

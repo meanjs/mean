@@ -1,0 +1,23 @@
+<section>
+  <div class="page-header">
+    <h1>New Module</h1>
+  </div>
+  <div class="pull-right">
+    <a ng-show="vm.item._id" class="btn btn-primary" ng-click="vm.remove()">
+      <i class="glyphicon glyphicon-trash"></i>
+    </a>
+  </div>
+  <div class="col-md-12">
+    <form name="vm.form.itemForm" class="form-horizontal" ng-submit="vm.save(vm.form.itemForm.$valid)" novalidate>
+      <fieldset>
+        <div class="form-group" show-errors>
+          <label class="control-label" for="title">Name</label>
+          <input name="title" type="text" ng-model="vm.item.title" id="title" class="form-control" placeholder="Title" required autofocus>
+          <div ng-messages="vm.form.itemForm.title.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Module name is required.</p>
+          </div>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</section>
