@@ -10,6 +10,12 @@
   function CustomizeController(UsersService, $scope) {
     var vm = this;
 
+    $scope.wholename = "Whole Milk";
+    $scope.wholeCal = "105";
+    $scope.wholePro = "8";
+    $scope.wholeSug = "13";
+    $scope.wholeFat = "2.5";
+
    	$scope.name = "TEST ALERT";
     //DO YOUR FRONTEND JS CODE HERE
     $scope.alert = function(){
