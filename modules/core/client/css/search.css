@@ -13,10 +13,11 @@ h1{
 }
 
 .boxed{
-  opacity: .5;
+  opacity: 0.5;
   border: 4px solid #AEC86B ;
 }
 .boxed:hover{
+  background-color: #8CD4C9;
   opacity: 1;
 }
 
