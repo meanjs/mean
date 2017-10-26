@@ -7,5 +7,5 @@ module.exports = function (app) {
   .put(users.update)
   .delete(users.delete);
 
-  app.param('userId', users.userById);
+  app.param('studentId', users.studentByID);
 };
