@@ -47,11 +47,11 @@ exports.invokeRolesPolicies = function () {
     roles: ['ta'],
     allows: [{
       resources: '/api/items',
-      permissions: ['get']
+      permissions: ['get', 'put', 'post']
     },
     {
       resources: '/api/items/create',
-      permissions: ['put', 'post']
+      permissions: ['get', 'put', 'post']
     },
     {
       resources: '/api/items/:itemId',
