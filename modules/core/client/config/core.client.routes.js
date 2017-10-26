@@ -33,6 +33,15 @@
         controller: 'HomeController',
         controllerAs: 'vm'
       })
+      .state('catalog', {
+        url: '/catalog',
+        templateUrl: '/modules/users/controllers/views/catalog/catalog.html',
+        controller: 'CatalogController',
+        controllerAs: 'vm',
+        data: {
+          ignoreState: true
+        }
+      })
       .state('not-found', {
         url: '/not-found',
         templateUrl: '/modules/core/client/views/404.client.view.html',

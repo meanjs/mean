@@ -1,5 +1,8 @@
-var mongoose = require('mongoose'),
-  Student = require('../models/user.server.model.js');
+'use strict';
+
+var path = require('path');
+var mongoose = require('mongoose');
+var Student = mongoose.model('User');
 
   /* Create a student */
 exports.create = function (req, res) {
@@ -39,8 +42,7 @@ exports.update = function (req, res) {
     if (err) {
       console.log(err);
       res.status(400).send(err);
-    }
-    else {
+    } else {
       res.json(student);
     }
 
@@ -57,8 +59,7 @@ exports.delete = function (req, res) {
     if (err) {
       console.log(err);
       res.status(400).send(err);
-    }
-    else {
+    } else {
       res.end();
     }
 
@@ -72,8 +73,7 @@ exports.list = function (req, res) {
     if (err) {
       console.log(err);
       res.status(400).send(err);
-    }
-    else {
+    } else {
       res.json(students);
     }
 

@@ -1,4 +1,4 @@
-angular.module('students').controller('CatalogController', ['$scope', '$location', '$stateParams', '$state', 'Students',
+angular.module('users').controller('CatalogController', ['$scope', '$location', '$stateParams', '$state', 'Students',
   function ($scope, $location, $stateParams, $state, Students) {
     $scope.find = function () {
       /* set loader*/
