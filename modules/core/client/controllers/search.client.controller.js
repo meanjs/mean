@@ -31,6 +31,7 @@
 
     $scope.showItem = true;
     $scope.showComparison = false;
+    $scope.flipped = false;
 
     $scope.showI = function() {
       if($scope.showItem==false){
@@ -46,6 +47,10 @@
         $scope.showItem = false;
       }
       //$scope.showItem = !$scope.showItem;
+    }
+
+    $scope.flip = function() {
+      $scope.flipped = !$scope.flipped;
     }
 
 
