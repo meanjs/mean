@@ -1,8 +1,8 @@
-<div class="page-header">
+<div class="container">
+  <div class="page-header">
     <h1 class="text-center">My profile</h1>
-  <div class="col-xs-offset-2 col-xs-8 col-md-offset-4 col-md-4">
+      <div class="col-xs-offset-2 col-xs-8 col-md-offset-4 col-md-4"></div>
   </div>
-</div>
 
 <!--
 <li>
@@ -23,32 +23,37 @@
       </li>
     </ul>
 -->
-
-<div class="container">
-  <div class="nav text-center">
-<!--    <div class="textLN">        -->
-      <a class="left" ui-sref = "authentication.personal" href="">Personal</a> 
-      <a class="right" ui-sref = "authentication.health" href="">Health</a>      
-<!--    </div>    -->
-  </div>
-</div>
-          
+<br></br>
 <section class="row">
-  <div class="col-xs-offset-1 col-xs-10 col-md-offset-4 col-md-4">
+  <div class="nav text-center">
+    <div class="textL" id="views">
+      <div ng-show="personalProfile">
+        <a class="test left active" href="" ng-click="personal()" id="viewName">Personal</a>
+        <a class="test" href="" ng-click="health()" id="viewName">Health</a>
+      </div>
+      <div ng-show="healthProfile">
+        <a class="test left" href="" ng-click="personal()" id="viewName">Personal</a>
+        <a class="test active" href="" ng-click="health()" id="viewName">Health</a>
+      </div>
+    </div>
+  </div>
+</section>
+<div ng-show="personalProfile">
+  <div class="col-xs-offset-1 col-xs-10 col-md-offset-5 col-md-4">
     <form name="vm.userForm" ng-submit="vm.updateUserProfile(vm.userForm.$valid)" class="signin" novalidate autocomplete="off">
       <fieldset>
         <div>
-        <div class="form-group" show-errors>
-          <br>
-          <br>
-          <br>
+        <div show-errors>
+          <br></br>
+          <br></br>
+     <!--     <br>      -->
           <label for="firstName">&emsp;&emsp;&emsp;First Name: &nbsp;</label>
           <input type="text" id="firstName" name="firstName" ng-model="vm.user.firstName" placeholder="First Name" required autofocus>
           <div ng-messages="vm.userForm.firstName.$error" role="alert">
             <p class="help-block error-text" ng-message="required">First name is required.</p>
           </div>
         </div>
-        <div class="form-group" show-errors>
+        <div show-errors>
           <label for="lastName">&emsp;&emsp;&nbsp;&nbsp;&nbsp;&nbsp;Last Name: &nbsp;</label>
           <input type="text" id="lastName" name="lastName" ng-model="vm.user.lastName" placeholder="Last Name" required>
           <div ng-messages="vm.userForm.lastName.$error" role="alert">
@@ -65,7 +70,7 @@
           </div>
         </div>
       -->
-        <div class="form-group" show-errors>
+        <div show-errors>
           <label for="username">&emsp;&emsp;&emsp;&nbsp;Username: &nbsp;</label>
           <input type="text" id="username" name="username" ng-model="vm.user.username" placeholder="Username" lowercase required>
           <div ng-messages="vm.userForm.username.$error" role="alert">
@@ -80,29 +85,50 @@
             <p class="help-block error-text" ng-message="required">Age is required.</p>
           </div>
         </div>
-
-<!--
-         <div class="form-group" show-errors>
-          <label for="weight">Weight</label>
-          <input type="text" id="weight" name="weight" class="form-control" ng-model="vm.user.weight" placeholder="Weight" required autofocus>
+        <div class="col-xs-offset-1 col-xs-10 col-md-offset-3 col-md-4 center">
+          <button type="submit" class="btn btn-primary">Save Profile</button>
+        </div>
+      </div>
+    </fieldset>
+    </form>
+  </div>
+</div>
+  
+<div ng-show="healthProfile">
+  <div class="col-xs-offset-1 col-xs-10 col-md-offset-5 col-md-4">
+    <form name="vm.userForm" ng-submit="vm.updateUserProfile(vm.userForm.$valid)" class="signin" novalidate autocomplete="off">
+      <fieldset>
+        <div>
+          <br></br>
+          <br></br>
+         <div show-errors>
+          <label for="weight">&nbsp;&nbsp;&nbsp;Weight: &nbsp;</label>
+          <input type="text" id="weight" name="weight" ng-model="vm.user.weight" placeholder="Weight" required autofocus>
           <div ng-messages="vm.userForm.weight.$error" role="alert">
             <p class="help-block error-text" ng-message="required">Weight is required.</p>
           </div>
         </div>
-        <div class="form-group" show-errors>
-          <label for="allergies">Allergies</label>
-          <input type="text" id="allergies" name="allergies" class="form-control" ng-model="vm.user.allergies" placeholder="Allergies" required>
+        <div show-errors>
+          <label for="allergies">Allergies: &nbsp;</label>
+          <input type="text" id="allergies" name="allergies" ng-model="vm.user.allergies" placeholder="Allergies" required>
           <div ng-messages="vm.userForm.allergies.$error" role="alert">
             <p class="help-block error-text" ng-message="required">Allergies are required.</p>
           </div>
         </div>
         <div class="form-group" show-errors>
-          <label for="diabetic">Diabetic</label>
-          <input type="diabetic" id="diabetic" name="diabetic" class="form-control" ng-model="vm.user.diabetic" placeholder="Diabetic" required>
+          <label for="diabetic">&nbsp;Diabetic: &nbsp;</label>
+          <input type="diabetic" id="diabetic" name="diabetic" ng-model="vm.user.diabetic" placeholder="Diabetic" required>
           <div ng-messages="vm.userForm.diabetic.$error" role="alert">
             <p class="help-block error-text" ng-message="required">This field is required.</p>
-
--->
+          </div>
+        </div>
+        <div class="col-xs-offset-1 col-xs-10 col-md-offset-2 col-md-4">
+          <button type="submit" class="btn btn-primary">Save Profile</button>
+        </div>
+      </div>
+      </fieldset>
+    </form>
+  </div>
         <!--
         <div class="form-group" show-errors>
           <label for="test">Test</label>
@@ -113,10 +139,5 @@
         </div>
       -->
 
-        <div class="text-center form-group">
-          <button type="submit" class="btn btn-primary">Save Profile</button>
-        </div>
-      </fieldset>
-    </form>
   </div>
-</section>
+</div>
