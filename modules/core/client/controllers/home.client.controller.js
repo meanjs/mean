@@ -4,14 +4,17 @@ angular.module('core').controller('HomeController', ['$scope', '$http', 'Authent
 	function ($scope, $http, Authentication) {
     // This provides Authentication context.
     $scope.authentication = Authentication;
-    //$scope.signedIn = 0;
+
+    //Initialize some variables
+    $scope.editEvent_flag = 0;
 
     $scope.name = null;
     $scope.date = null;
     $scope.eTime = null;
     $scope.sTime = null;
     $scope.requireTax = null;
-    $scope.button
+
+    $scope.acceptEvent_flag = 0;
 
     $scope.eventList = [
     {
@@ -32,6 +35,8 @@ angular.module('core').controller('HomeController', ['$scope', '$http', 'Authent
       status: 'Confirmed'
     }];
 
+
+    //Sends a delete request to remove a passed in event from the DB
     $scope.deleteEvent = function(event){
       $http({
         method:'DELETE',
@@ -43,11 +48,10 @@ angular.module('core').controller('HomeController', ['$scope', '$http', 'Authent
       });
     }
 
+    //Adds the organization name to the organizationsPending list
     $scope.requestEvent = function(event){
-      console.log(event.organizationsPending.indexOf($scope.authentication.user.displayName));
-      console.log(event.organizationsPending);
       if(event.organizationsPending.indexOf($scope.authentication.user.displayName) == -1){
-        var eventPlusName = event.organizationsPending.push($scope.authentication.user.displayName);
+        event.organizationsPending.push($scope.authentication.user.displayName);
       }else{
         return;
       } 
@@ -55,9 +59,7 @@ angular.module('core').controller('HomeController', ['$scope', '$http', 'Authent
         method:'PUT',
         url:'api/events/'+event._id,
         data: {
-          organizationsPending:{
-            organizationName: $scope.authentication.user.displayName
-          }
+          organizationsPending: event.organizationsPending
         }
       }).then(function(res){
         console.log('Successful request');
@@ -67,27 +69,72 @@ angular.module('core').controller('HomeController', ['$scope', '$http', 'Authent
       });
     }
 
-    $scope.acceptEvent = function(event){
-      console.log(event.organizationsPending[0].organizationName);
-      if(event.organizationsPending[0].organizationName==""){
+    //Determines whether or not the current user is confirmed for an event
+    $scope.generateStatus = function(event){
+      if(event.organizationConfirmed == $scope.authentication.user.displayName){
+        return 'Accepted';
+      }else{
+        return 'Pending';
+      }
+    }
+
+    //Allows a business to change the confirmed org based on it's index in the organizationsPending array
+    $scope.acceptEvent = function(index){
+      if($scope.globalEvent.organizationsPending.length == 0){
         return;
       }
       $http({
         method:'PUT',
-        url:'api/events/'+event._id,
+        url:'api/events/'+$scope.globalEvent._id,
         data: {
-          organizationConfirmed: event.organizationsPending[0].organizationName
+          organizationConfirmed: $scope.globalEvent.organizationsPending[index]
         }
       }).then(function(res){
         console.log('Successful accept');
+        console.log(index);
+        console.log($scope.globalEvent);
+        console.log($scope.globalEvent.organizationsPending[index]);
       },function(res){
         console.log('Failed accept');
         console.log(res);
       });
     }
 
+    //Returns true if the organization's name is not on the organizationsPending array
+    $scope.displayOrgNonRequest = function(event){
+      console.log($scope.eventList);
+      console.log(event.organizationsPending == []);
+      if(event.organizationsPending == []){
+        return true;
+      }
+      return event.organizationsPending.indexOf($scope.authentication.user.displayName) == -1;
+    }
+
+    //Allows an organizations to delete their name from the event that is passed in
+    $scope.deleteOrgRequest = function(event){
+      console.log(event.organizationsPending.splice(event.organizationsPending.indexOf($scope.authentication.user.displayName),1));
+      var newConfirmed = event.organizationConfirmed;
+      if(newConfirmed == $scope.authentication.user.displayName){
+        newConfirmed = "";
+      }
+      $http({
+        method:'PUT',
+        url:'api/events/'+event._id,
+        data: {
+          organizationsPending: event.organizationsPending.splice(event.organizationsPending.indexOf($scope.authentication.user.displayName),1),
+          organizationConfirmed: newConfirmed
+        }
+      }).then(function(res){
+        console.log('Successful org event delete');
+      },function(res){
+        console.log('Failed org event delete');
+        console.log(res);
+      });
+    }
+
+    //Loads the events database list into the eventList scope variable
     $scope.loadEventList = function(){
-       $http({
+     $http({
       method: 'GET',
       url:'/api/events'
     }).then(function(res){
@@ -98,68 +145,89 @@ angular.module('core').controller('HomeController', ['$scope', '$http', 'Authent
       console.log('Failed');
       console.log(res);
     });
-    }
-   
-   $scope.loadEventList();
+  }
 
-    $scope.filterByUser = function(item){
-      return item.user.displayName == $scope.authentication.user.displayName;
-    }
+  //Initially loading the events
+  $scope.loadEventList();
 
-    $scope.createEvent = function(){
-      console.log($scope.name);
-      console.log($scope.date);
-      console.log($scope.sTime);
+  //Checks if the event was made by the user
+  $scope.filterByUser = function(event){
+    return event.user.displayName == $scope.authentication.user.displayName;
+  }
 
-      $http({
-        method: 'POST',
-        url:'/api/events',
-        data: {
-          name : $scope.name,
-          dateOfEvent : $scope.date,
-          startTime : $scope.sTime,
-          endTime : $scope.eTime,
-          location: $scope.location,
-          taxIdRequired: $scope.requireTax
-        }
-      }).then(function(res){
-        console.log('Successful event');
-      },function(res){
-        console.log('Failed event');
-        console.log(res);
-        console.log(name);
-        console.log(date);
-        console.log(sTime);
-      });
+  //Checks if the user's name is in the organizationsPending list of an event
+  $scope.filterOrgEvents = function(event){
+    return event.organizationsPending.indexOf($scope.authentication.user.displayName) != -1;
+  }
 
-      $scope.name = null;
+  //Allows a business to create an event
+  $scope.createEvent = function(){
+    console.log($scope.name);
+    console.log($scope.date);
+    console.log($scope.sTime);
+
+    $http({
+      method: 'POST',
+      url:'/api/events',
+      data: {
+        name : $scope.name,
+        dateOfEvent : $scope.date,
+        startTime : $scope.sTime,
+        endTime : $scope.eTime,
+        location: $scope.location,
+        taxIdRequired: $scope.requireTax
+      }
+    }).then(function(res){
+      console.log('Successful event');
+    },function(res){
+      console.log('Failed event');
+      console.log(res);
+      console.log(name);
+      console.log(date);
+      console.log(sTime);
+    });
+
+      /*$scope.name = null;
       $scope.date = null;
       $scope.sTime = null;
       $scope.eTime = null;
       $scope.location = null;
-      $scope.requireTax = null;
+      $scope.requireTax = null;*/
     }
 
+    //Toggles the acceptEvent flag
+    $scope.toggleAcceptFlag= function(){
+      $scope.acceptEvent_flag = !$scope.acceptEvent_flag;
+      console.log('toggled accept flag');
+    }
+
+    //Sets some global event variable to a variable
+    $scope.setGlobalEvent = function(event){
+      console.log('setting event');
+      $scope.globalEvent = event;
+    }
+
+    //More initializations
     $scope.isOrg = false;
     $scope.isBiz = false;
 
     if($scope.authentication.user === ""){
-        $scope.isOrg = false;
-      }else if($scope.authentication.user.roles.indexOf("Organization") >= 0){
-        $scope.isOrg = true;
-      }else{
-        $scope.isOrg = false;
-      }
+      $scope.isOrg = false;
+    }else if($scope.authentication.user.roles.indexOf("Organization") >= 0){
+      $scope.isOrg = true;
+    }else{
+      $scope.isOrg = false;
+    }
 
-      if($scope.authentication.user === ""){
-        $scope.isBiz = false;
-      }else if($scope.authentication.user.roles.indexOf("Business") >= 0){
-        $scope.isBiz = true;
-      }else{
-        $scope.isBiz = false;
-      }
+    if($scope.authentication.user === ""){
+      $scope.isBiz = false;
+    }else if($scope.authentication.user.roles.indexOf("Business") >= 0){
+      $scope.isBiz = true;
+    }else{
+      $scope.isBiz = false;
+    }
       //console.log($scope.signedIn);
       console.log($scope.isBiz);
       console.log($scope.isOrg);
     }
-]);
+    ]);

@@ -32,9 +32,12 @@ var EventSchema = new Schema({
     type: String,
     required: 'Please enter a location for the event.'
   },
-  organizationsPending: [{
+  /*organizationsPending: [{
     organizationName: String
-  }],
+  }],*/
+  organizationsPending: {
+    type: [String]
+  },
   organizationConfirmed: {
     type: String
   },
