@@ -8,6 +8,7 @@ angular.module('core').controller('HomeController', ['$scope', '$http', 'Authent
     //Initialize some variables
     $scope.editEvent_flag = 0;
 
+
     $scope.name = null;
     $scope.date = null;
     $scope.eTime = null;
