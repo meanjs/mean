@@ -13,17 +13,13 @@
     vm.user = Authentication.user;
     vm.updateUserProfile = updateUserProfile;
 
-    var par = {
-      'test' : 'hello'
-    };
-
     $scope.personalProfile = true;
     $scope.healthProfile = false;
 
     $scope.personal = function() {
-      if($scope.personalProfile == false){          //user is on health profile
-        $scope.personalProfile = true;             //we still want to show personal profile info when user go back to that page so set that to true
-        $scope.healthProfile = false;              //At this point, we are on personal profile page, and we don't want health profile page to show up on personal profile so set that to false
+      if($scope.personalProfile == false) {  //user is on health profile
+        $scope.personalProfile = true; //we still want to show personal profile info when user go back to that page so set that to true
+        $scope.healthProfile = false;  //At this point, we are on personal profile page, and we don't want health profile page to show up on personal profile so set that to false
       }
     }
 
@@ -33,21 +29,6 @@
         $scope.personalProfile = false;
       }
     }
-    // TESTING
-    UsersService.testing(par)
-        .then(success)
-        .catch(failure);
-
-    function success(response) {
-      console.log('worked!');
-      console.log(response);
-    }
-
-    function failure(response) {
-      console.log('sadness')
-      console.log(response);
-    }
-    // END TESTING
 
     // Update a user profile
     function updateUserProfile(isValid) {
