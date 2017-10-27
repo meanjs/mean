@@ -2,7 +2,13 @@ html *
 {
    font-family: 'Source Sans Pro', sans-serif !important;
 }
-
+body {
+    background-image: url("https://agoraorg.com/assets/images/new-header-bg.jpg");
+    height: 100%;
+    background-size: cover;
+    position: relative;
+background-repeat: no-repeat;
+}
 .content {
   margin-top: 50px;
 }
