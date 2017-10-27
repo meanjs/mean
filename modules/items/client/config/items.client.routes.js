@@ -24,13 +24,19 @@
         url: '/categories',
         templateUrl: '/modules/items/client/views/categories.html',
         controller: 'CatsController',
-        controllerAs: 'vm'
+        controllerAs: 'vm',
+        resolve: {
+          catResolve : newCat
+        }
       })
       .state('items.mods', {
         url: '/modules',
         templateUrl: '/modules/items/client/views/modules.html',
         controller: 'ModsController',
-        controllerAs: 'vm'
+        controllerAs: 'vm',
+        resolve: {
+          modResolve : newMod
+        }
       })
 
       .state('items.view', {
@@ -84,4 +90,17 @@
   function newItem(ItemsService) {
     return new ItemsService();
   }
+
+  newCat.$inject = ['CategoriesService'];
+
+  function newCat(CategoriesService) {
+    return new CategoriesService();
+  }
+
+  newMod.$inject = ['ModulesService'];
+
+  function newMod(ModulesService) {
+    return new ModulesService();
+  }
+
 }());

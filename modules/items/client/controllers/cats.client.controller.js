@@ -5,9 +5,9 @@
     .module('items.cats')
     .controller('CatsController', CatsController);
 
-  CatsController.$inject = ['$scope', '$state', '$window', 'itemResolve', 'Authentication', 'Notification'];
+  CatsController.$inject = ['$scope', '$state', '$window', 'catResolve', 'Authentication', 'Notification'];
 
-  function CatsController($scope, $state, $window, item, Authentication, Notification) {
+  function CatsController($scope, $state, $window, cat, Authentication, Notification) {
     
 
   }
