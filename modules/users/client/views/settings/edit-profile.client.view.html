@@ -118,35 +118,35 @@
           <br>
         <div show-errors>
           <label for="allergies">&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;Allergies: &nbsp; corn</label>
-          <input type="checkbox" id="corn" name="corn" ng-model="vm.user.corn">
+          <input type="checkbox" id="corn" name="corn" ng-model="vm.user.allergies.corn">
           <label for="allergies">&emsp;milk</label>
-          <input type="checkbox" id="milk" name="milk" ng-model="vm.user.milk" required>
+          <input type="checkbox" id="milk" name="milk" ng-model="vm.user.allergies.milk" required>
           <label for="allergies">&emsp;eggs</label>
-          <input type="checkbox" id="eggs" name="eggs" ng-model="vm.user.eggs" required>
+          <input type="checkbox" id="eggs" name="eggs" ng-model="vm.user.allergies.eggs" required>
           <label for="allergies">&emsp;peanuts</label>
-          <input type="checkbox" id="peanuts" name="peanuts" ng-model="vm.user.peanuts" required>
+          <input type="checkbox" id="peanuts" name="peanuts" ng-model="vm.user.allergies.peanuts" required>
           <label for="allergies">&emsp;almonds</label>
-          <input type="checkbox" id="almonds" name="almonds" ng-model="vm.user.almonds" required>
+          <input type="checkbox" id="almonds" name="almonds" ng-model="vm.user.allergies.almonds" required>
           <label for="allergies">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;cashews</label>
-          <input type="checkbox" id="cashews" name="cashews" ng-model="vm.user.cashews" required>
+          <input type="checkbox" id="cashews" name="cashews" ng-model="vm.user.allergies.cashews" required>
           <label for="allergies">&emsp;walnuts</label>
-          <input type="checkbox" id="walnuts" name="walnuts" ng-model="vm.user.walnuts" required>
+          <input type="checkbox" id="walnuts" name="walnuts" ng-model="vm.user.allergies.walnuts" required>
           <label for="allergies">&emsp;bass</label>
-          <input type="checkbox" id="bass" name="bass" ng-model="vm.user.bass" required>
+          <input type="checkbox" id="bass" name="bass" ng-model="vm.user.allergies.bass" required>
           <label for="allergies">&emsp;cod</label>
-          <input type="checkbox" id="cod" name="cod" ng-model="vm.user.cod" required>
+          <input type="checkbox" id="cod" name="cod" ng-model="vm.user.allergies.cod" required>
           <label for="allergies">&emsp;flounder</label>
-          <input type="checkbox" id="flounder" name="flounder" ng-model="vm.user.flounder" required>
+          <input type="checkbox" id="flounder" name="flounder" ng-model="vm.user.allergies.flounder" required>
           <label for="allergies">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;crab</label>
-          <input type="checkbox" id="crab" name="crab" ng-model="vm.user.crab" required>
+          <input type="checkbox" id="crab" name="crab" ng-model="vm.user.allergies.crab" required>
           <label for="allergies">&emsp;lobster</label>
-          <input type="checkbox" id="lobster" name="lobster" ng-model="vm.user.lobster" required>
+          <input type="checkbox" id="lobster" name="lobster" ng-model="vm.user.allergies.lobster" required>
           <label for="allergies">&emsp;shrimp</label>
-          <input type="checkbox" id="shrimp" name="shrimp" ng-model="vm.user.shrimp" required>
+          <input type="checkbox" id="shrimp" name="shrimp" ng-model="vm.user.allergies.shrimp" required>
           <label for="allergies">&emsp;soy</label>
-          <input type="checkbox" id="soy" name="soy" ng-model="vm.user.soy" required>
+          <input type="checkbox" id="soy" name="soy" ng-model="vm.user.allergies.soy" required>
           <label for="allergies">&nbsp;&nbsp;&nbsp;wheat gluten</label>
-          <input type="checkbox" id="wheatGluten" name="wheatGluten" ng-model="vm.user.wheatGluten" required>
+          <input type="checkbox" id="wheatGluten" name="wheatGluten" ng-model="vm.user.allergies.wheatGluten" required>
           <div ng-messages="vm.userForm.allergies.$error" role="alert">
             <p class="help-block error-text" ng-message="required">Allergies are required.</p>
           </div>
@@ -154,15 +154,15 @@
         <br>
         <div show-errors>
           <label for="diet">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;Diet: &nbsp; vegan</label>
-          <input type="checkbox" id="vegan" name="vegan" ng-model="vm.user.vegan">
+          <input type="checkbox" id="vegan" name="vegan" ng-model="vm.user.dietaryDefinitions.vegan">
           <label for="diet">&emsp;ovo vegetarian</label>
-          <input type="checkbox" id="ovoVegetarian" name="ovoVegetarian" ng-model="vm.user.ovoVegetarian" required>
+          <input type="checkbox" id="ovoVegetarian" name="ovoVegetarian" ng-model="vm.user.dietaryDefinitions.ovoVegetarian" required>
           <label for="diet">&emsp;lacto vegetarian</label>
-          <input type="checkbox" id="lactoVegetarian" name="lactoVegetarian" ng-model="vm.user.lactoVegetarian" required>
+          <input type="checkbox" id="lactoVegetarian" name="lactoVegetarian" ng-model="vm.user.dietaryDefinitions.lactoVegetarian" required>
           <label for="diet">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;lacto-ovo vegetarian</label>
-          <input type="checkbox" id="lactoOvoVegetarian" name="lactoOvoVegetarian" ng-model="vm.user.lactoOvoVegetarian" required>
+          <input type="checkbox" id="lactoOvoVegetarian" name="lactoOvoVegetarian" ng-model="vm.user.dietaryDefinitions.lactoOvoVegetarian" required>
           <label for="diet">&emsp;pescetarian</label>
-          <input type="checkbox" id="pescetarian" name="pescetarian" ng-model="vm.user.pescetarian" required>
+          <input type="checkbox" id="pescetarian" name="pescetarian" ng-model="vm.user.dietaryDefinitions.pescetarian" required>
           <div ng-messages="vm.userForm.diet.$error" role="alert">
             <p class="help-block error-text" ng-message="required">Dietary preferences are required.</p>
           </div>
@@ -170,28 +170,28 @@
         <br>
         <div show-errors>
           <label for="preferences">&emsp;&emsp;&emsp;&emsp;Preferences: &nbsp; cholesterol</label>
-          <input type="checkbox" id="preferences" name="preferences" ng-model="vm.user.preferences" required>
+          <input type="checkbox" id="preferences" name="preferences" ng-model="vm.user.preferences.cholesterol" required>
           <label for="preferences">&emsp;diabetes</label>
-          <input type="checkbox" id="diabetes" name="diabetes" ng-model="vm.user.diabetes" required>
+          <input type="checkbox" id="diabetes" name="diabetes" ng-model="vm.user.preferences.diabetes" required>
           <label for="preferences">&emsp;low salt</label>
-          <input type="checkbox" id="lowSalt" name="lowSalt" ng-model="vm.user.lowSalt" required>
+          <input type="checkbox" id="lowSalt" name="lowSalt" ng-model="vm.user.preferences.lowSalt" required>
           <label for="preferences">&emsp;low fat</label>
-          <input type="checkbox" id="lowFat" name="lowFat" ng-model="vm.user.lowFat" required>
+          <input type="checkbox" id="lowFat" name="lowFat" ng-model="vm.user.preferences.lowFat" required>
           <label for="preferences">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;low calories(< 400)</label>
-          <input type="checkbox" id="lowCalories" name="lowCalories" ng-model="vm.user.lowCalories" required>
+          <input type="checkbox" id="lowCalories" name="lowCalories" ng-model="vm.user.preferences.lowCalories" required>
           <label for="preferences">&emsp;bland</label>
-          <input type="checkbox" id="bland" name="bland" ng-model="vm.user.bland" required>
+          <input type="checkbox" id="bland" name="bland" ng-model="vm.user.preferences.bland" required>
           <div ng-messages="vm.userForm.preferences.$error" role="alert">
             <p class="help-block error-text" ng-message="required">This field is required.</p>
           </div>
         </div>
         <div show-errors>
           <label for="religiousRestrictions">Religious restrictions: &nbsp; Hindu</label>
-          <input type="checkbox" id="religiousRestrictions" name="religiousRestrictions" ng-model="vm.user.religiousRestrictions" required autofocus>
+          <input type="checkbox" id="religiousRestrictions" name="religiousRestrictions" ng-model="vm.user.religiousRestrictions.hinduism" required autofocus>
           <label for="religiousRestrictions">&emsp;Islam</label>
-          <input type="checkbox" id="Islam" name="Islam" ng-model="vm.user.Islam" required>
+          <input type="checkbox" id="Islam" name="Islam" ng-model="vm.user.religiousRestrictions.islam" required>
           <label for="religiousRestrictions">&emsp;kosher</label>
-          <input type="checkbox" id="kosher" name="kosher" ng-model="vm.user.kosher" required>
+          <input type="checkbox" id="kosher" name="kosher" ng-model="vm.user.religiousRestrictions.kosher" required>
           <div ng-messages="vm.userForm.religiousRestrictions.$error" role="alert">
             <p class="help-block error-text" ng-message="required">Religious restrictions are required.</p>
           </div>
