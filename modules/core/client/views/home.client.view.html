@@ -150,7 +150,7 @@
                       <th>Organizations Requesting</th>
                       <th>Time</th>
                       <th>Location</th>
-                      <th>Description</th>
+                      <th>Event Description</th>
                       <th>Accepted Organization</th>
                       <th></th>
                     </tr>
@@ -196,7 +196,7 @@
           <div style="padding-bottom:2px">
             <form>
               <div class="form-group">
-                <label for="name">Event Name</label>
+                <label for="name">Event Description</label>
                 <input type="text" class="form-control" ng-model="name">
               </div>
               <div class="form-group">
@@ -219,12 +219,13 @@
                 <label for="requireTax">Require Tax ID?</label>
                 <input type="checkbox" id="requireTax" ng-model="requireTax">
               </div>
-              <button class="btn" style="display:block;margin:auto;color: white; background-color: #1B5689;border: solid 1px #0A4578" type="submit" ng-click="createEvent();addEvent_flag=0;loadEventList()">Create Event</button>
-            </form>
+              <div class="form-group">
+                <div style="width:720px; display:inline-block; padding-left:160px">
+                <button class="btn" style="float: center-left;color: white; background-color: #1B5689;border: solid 1px #0A4578; width: 200px" type="submit" ng-click="createEvent();addEvent_flag=0;loadEventList()">Create Event</button>
+              <button class="btn" style="float: center-right; color: white; background-color: #F5A623;border: solid 1px #D38401; width: 200px" ng-click="addEvent_flag=0">Cancel</button>
+            </div>
           </div>
-          <div class="row" style="justify-content: center">
-            <button class="btn" style="display: block; margin:auto; margin-bottom:6px; color: white; background-color: #F5A623;border: solid 1px #D38401" ng-click="addEvent_flag=0">Return to Dashboard</button>
-          </div>
+          </form>
         </div>
       </div>
       <div class="col-sm-2 col-2">
