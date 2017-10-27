@@ -229,16 +229,19 @@ exports.me = function (req, res) {
   res.json(safeUserObject || null);
 };
 
-exports.test = function(req, res) {
-  var user = req.user;
-  var body = req.body;
-
-  res.json(body);
-}
-
 exports.add = function(req, res) {
   var body = req.body.add;
 
   res.json(body);
 }
 
+exports.usda = function(req, res) {
+  // $http.get(path.resolve('./modules/users/server/food_alternatives.json'))
+  //   .then( (response) => {
+  //     res.json(response);
+  //   });
+
+  var body = req.body;
+
+  res.json(body);
+}

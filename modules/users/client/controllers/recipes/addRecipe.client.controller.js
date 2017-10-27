@@ -5,30 +5,33 @@
     .module('users')
     .controller('AddRecipeController', AddRecipeController);
 
-  AddRecipeController.$inject = ['UsersService', '$scope'];
+  AddRecipeController.$inject = ['UsersService', '$scope', '$http'];
 
-  function AddRecipeController(UsersService, $scope) {
+  function AddRecipeController(UsersService, $scope, $http) {
     var vm = this;
 
-    // TESTING
-    var param = {
-      'add' : 'recipe'
-    };
-    // TESTING
-    UsersService.adding(param)
-        .then(success)
-        .catch(failure);
+    var alternative = {
+      'hello' : 'world'
+    }
+
+    $http.get('food_alternatives.json')
+      .then( (response) => {
+        console.log(response);
+      });
+
+    UsersService.usdaAlternatives(alternative)
+      .then(success)
+      .catch(failure)
 
     function success(response) {
       console.log('worked!');
-      console.log(response.add);
+      console.log(response);
     }
 
     function failure(response) {
       console.log('sadness')
       console.log(response);
     }
-    // END TESTING
 
     //DO YOUR FRONTEND JS CODE HERE
 //===========================================================================
