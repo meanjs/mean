@@ -1,8 +1,36 @@
-
 <body>
+<section>
+  <div id="myCarousel" class="carousel slide" data-ride="carousel" ng-controller="DashboardController" ng-init="loadEventList()">
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">
+      <div class="item active">
+        <img src="https://mdbootstrap.com/img/Photos/Slides/img%20(70).jpg">
+        <div class="carousel-caption">
+          <h3>{{event.name}}</h3>
+          <p>{{event.date}} : {{event.stime}} - {{event.etime}}</p>
+        </div>
+      </div>
+
+    <div class="item" ng-repeat="event in eventList">
+        <img src="https://mdbootstrap.com/img/Photos/Slides/img%20(130).jpg">
+        <div class="carousel-caption">
+          <h3>{{event.name}}</h3>
+          <p>{{event.date}} : {{event.stime}} - {{event.etime}}</p>
+        </div>
+      </div>
+    </div>
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+</section>
 <section ng-controller="HomeController">
-
-
   <!-- ORG VIEWS -->
   <div class="container-fluid" ng-show="isOrg&&!requestEvent_flag" ng-init="requestEvent_flag=0">
     <div class="row" style="margin-top:5px">
