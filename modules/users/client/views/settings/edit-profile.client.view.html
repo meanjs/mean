@@ -38,9 +38,25 @@
     </div>
   </div>
 </section>
+<section>
+  <div class="row">
+    <nav class="col-sm-3 col-md-3">
+      <ul class="nav nav-pills nav-stacked">
+        <li ui-sref-active="active">
+           <li ui-sref-active="active">
+          <a ui-sref="profile.picture">Change Profile Picture</a>
+        </li>
+        </ul>
+    </nav>
+    <br></br>
+    <div class="col-sm-9 col-md-0 profile-view">
+      <div ui-view></div>
+    </div>
+  </div>
+</section>
 <div ng-show="personalProfile">
   <div class="col-xs-offset-1 col-xs-10 col-md-offset-5 col-md-4">
-    <form name="vm.userForm" ng-submit="vm.updateUserProfile(vm.userForm.$valid)" class="signin" novalidate autocomplete="off">
+    <form name="vm.userForm" ng-submit="vm.updateUserPersonalProfile(vm.userForm.$valid)" class="signin" novalidate autocomplete="off">
       <fieldset>
         <div>
         <div show-errors>
@@ -109,10 +125,25 @@
           </div>
         </div>
         <div show-errors>
-          <label for="allergies">Allergies: &nbsp;</label>
-          <input type="text" id="allergies" name="allergies" ng-model="vm.user.allergies" placeholder="Allergies" required>
+          <label for="allergies">Allergies: &nbsp; corn</label>
+          <input type="checkbox" id="corn" name="corn" ng-model="vm.user.corn">
+          <label for="allergies">&emsp;milk</label>
+          <input type="checkbox" id="milk" name="milk" ng-model="vm.user.milk" required>
+          <label for="allergies">&emsp;eggs</label>
+          <input type="checkbox" id="eggs" name="eggs" ng-model="vm.user.eggs" required>
           <div ng-messages="vm.userForm.allergies.$error" role="alert">
             <p class="help-block error-text" ng-message="required">Allergies are required.</p>
+          </div>
+        </div>
+        <div show-errors>
+          <label for="diet">Diet &nbsp; vegan</label>
+          <input type="checkbox" id="vegan" name="vegan" ng-model="vm.user.vegan">
+          <label for="diet">&emsp;ovoVegetarian</label>
+          <input type="checkbox" id="ovoVegetarian" name="ovoVegetarian" ng-model="vm.user.ovoVegetarian" required>
+          <label for="diet">&emsp;lactoVegetarian</label>
+          <input type="checkbox" id="lactoVegetarian" name="lactoVegetarian" ng-model="vm.user.lactoVegetarian" required>
+          <div ng-messages="vm.userForm.allergies.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Dietary preferences are required.</p>
           </div>
         </div>
         <div class="form-group" show-errors>

@@ -96,7 +96,7 @@
           pageTitle: 'Social Accounts'
         }
       })
-      .state('settings.picture', {
+      .state('profile.picture', {
         url: '/picture',
         templateUrl: '/modules/users/client/views/settings/change-profile-picture.client.view.html',
         controller: 'ChangeProfilePictureController',
