@@ -1,15 +1,22 @@
 <section ng-controller="HomeController">
+  <head> <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1"> <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">  
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script></head>
   <div id="myCarousel" class="carousel slide" data-ride="carousel" ng-controller="DashboardController" ng-init="loadEventList()">
     <!-- Indicators -->
-    <ol class="carousel-indicators">
-      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-      <li data-target="#myCarousel" data-slide-to="1"></li>
-      <li data-target="#myCarousel" data-slide-to="2"></li>
-    </ol>
 
     <!-- Wrapper for slides -->
-    <div class="carousel-inner" ng-repeat="event in eventList">
-      <div class="item">
+    <div class="carousel-inner">
+      <div class="item active">
+        <img src="https://mdbootstrap.com/img/Photos/Slides/img%20(70).jpg">
+        <div class="carousel-caption">
+          <h3>{{event.name}}</h3>
+          <p>{{event.date}} : {{event.stime}} - {{event.etime}}</p>
+        </div>
+      </div>
+
+    <div class="item" ng-repeat="event in eventList">
         <img src="https://mdbootstrap.com/img/Photos/Slides/img%20(130).jpg">
         <div class="carousel-caption">
           <h3>{{event.name}}</h3>
@@ -17,7 +24,6 @@
         </div>
       </div>
     </div>
-
     <!-- Left and right controls -->
     <a class="left carousel-control" href="#myCarousel" data-slide="prev">
       <span class="glyphicon glyphicon-chevron-left"></span>
