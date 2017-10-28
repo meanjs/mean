@@ -49,6 +49,7 @@ angular.module('core').controller('HomeController', ['$scope', '$http', 'Authent
       });
     }
 
+    
     //Adds the organization name to the organizationsPending list
     $scope.requestEvent = function(event){
       if(event.organizationsPending.indexOf($scope.authentication.user.displayName) == -1){
