@@ -4,7 +4,7 @@
     <!-- Wrapper for slides -->
     <div class="carousel-inner">
       <div class="item active">
-        <img src={{event.banner}}>
+        <img ng-src="{{event.banner}}">
         <div class="carousel-caption">
           <h3>{{event.name}}</h3>
           <h4>{{event.location}}</h4>
@@ -13,7 +13,7 @@
       </div>
 
     <div class="item" ng-repeat="event in eventList">
-        <img src={{event.banner}}>
+        <img ng-src="{{event.banner}}">
         <div class="carousel-caption">
           <h3>{{event.name}}</h3>
           <h4>{{event.location}}</h4>
