@@ -126,6 +126,7 @@ angular.module('core').controller('DashboardController', ['$scope', '$http', 'Au
           startTime: $scope.startTime,
           endTime: $scope.endTime,
           location: $scope.location,
+          banner: $scope.banner,
           taxIdRequired: $scope.requireTax
         }
       }).then(function (res) {
@@ -143,6 +144,7 @@ angular.module('core').controller('DashboardController', ['$scope', '$http', 'Au
       $scope.sTime = null;
       $scope.eTime = null;
       $scope.location = null;
+      $scope.banner = null;
       $scope.requireTax = null;
 
       function errorCallback(res) {

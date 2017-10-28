@@ -4,19 +4,20 @@
     <!-- Wrapper for slides -->
     <div class="carousel-inner">
       <div class="item active">
-        <img src="https://mdbootstrap.com/img/Photos/Slides/img%20(70).jpg">
+        <img src={{event.banner}}>
         <div class="carousel-caption">
           <h3>{{event.name}}</h3>
-          <p>{{event.date}} : {{event.stime}} - {{event.etime}}</p>
+          <h4>{{event.location}}</h4>
+          <p>{{event.dateOfEvent}} : {{event.startTime}} - {{event.endTime}}</p>
         </div>
       </div>
 
     <div class="item" ng-repeat="event in eventList">
-        <img src="https://mdbootstrap.com/img/Photos/Slides/img%20(130).jpg">
+        <img src={{event.banner}}>
         <div class="carousel-caption">
           <h3>{{event.name}}</h3>
-          <p>{{event.date}} : {{event.stime}} - {{event.etime}}</p>
-        </div>
+          <h4>{{event.location}}</h4>
+          <p>{{event.dateOfEvent}} : {{event.startTime}} - {{event.endTime}}</p>
       </div>
     </div>
     <!-- Left and right controls -->
