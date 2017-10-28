@@ -3,7 +3,7 @@ html *
    font-family: 'Source Sans Pro', sans-serif !important;
 }
 body {
-    background-image: url("https://agoraorg.com/assets/images/new-header-bg.jpg");
+    background-image: url("https://cdn.stocksnap.io/img-thumbs/960w/AXGGPGUUML.jpg");
     height: 100%;
     background-size: cover;
     position: relative;
@@ -11,6 +11,16 @@ background-repeat: no-repeat;
 }
 .content {
   margin-top: 50px;
+}
+.jumbotron{
+padding: 5px;
+border-width:1px;
+border-color: black;
+border-style: solid;
+background-color:rgba(18, 0, 183, 0.3)
+}
+.container-fluid{
+	background-color: none;
 }
 .undecorated-link:hover {
   text-decoration: none;
@@ -45,4 +55,7 @@ a:hover .header-profile-image {
 }
 .has-error .help-inline.error-text {
   display: inline;
+}
+h1, h2, th, label, p{
+	color: black;
 }
