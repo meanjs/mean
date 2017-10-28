@@ -42,9 +42,9 @@
             <!-- TABS -->
             <div class="row" style="justify-content: center">
               <ul class="nav nav-tabs">
-                <li class="active"><a class="nav-link org-menu-selects" style="color:#1B5689; cursor:pointer" ng-click="showMenu=0">Requests</a></li>
-                <li><a class="org-menu-selects nav-link" style="color:#1B5689; cursor:pointer" ng-click="showMenu=1">Calendar</a></li>
-                <li><a class="org-menu-selects nav-link" style="color:#1B5689; cursor:pointer" ng-click="showMenu=2">Past Events</a></li>
+                <li class="active"><a data-toggle="tab" class="nav-link org-menu-selects" style="color:#1B5689; cursor:pointer" ng-click="showMenu=0">Requests</a></li>
+                <li><a data-toggle="tab" class="org-menu-selects nav-link" style="color:#1B5689; cursor:pointer" ng-click="showMenu=1">Calendar</a></li>
+                <li><a data-toggle="tab" class="org-menu-selects nav-link" style="color:#1B5689; cursor:pointer" ng-click="showMenu=2">Past Events</a></li>
               </ul>
             </div>
 
@@ -79,7 +79,14 @@
                 </table>
               </div>
             </div>
-
+            <!--Menu 1 (AKA: the Calender Tab) -->
+            <div class="row" style="justify-content: center" ng-init="showMenu=0" ng-show="showMenu == 1">
+              <p>Insert the calender here</p>
+            </div>
+            <!--Menu 2 (AKA: the Past events Tab) -->
+            <div class="row" style="justify-content: center" ng-init="showMenu=0" ng-show="showMenu == 2">
+              <p>Insert the requests here</p>
+            </div>
             <!-- REQUEST EVENT BUTTON -->
             <div class="row" style="justify-content: center">
               <button class="btn" style="display: block; margin:auto; margin-bottom:6px; color: white; background-color: #F5A623;border: solid 1px #D38401" ng-click="requestEvent_flag=1">Request Event</button>
@@ -135,9 +142,9 @@
             <div class="row" style="justify-content: center">
               <!--Nav Tabs-->
               <ul class="nav nav-tabs">
-                <li class="active"><a class="nav-link org-menu-selects" style="color:black; cursor:pointer" ng-click="showMenu=0">Requests</a></li>
-                <li><a class="org-menu-selects nav-link" style="color:black; cursor:pointer" ng-click="showMenu=1">Calendar</a></li>
-                <li><a class="org-menu-selects nav-link" style="color:black; cursor:pointer" ng-click="showMenu=2">Past Events</a></li>
+                <li class="active"><a data-toggle="tab" class="nav-link org-menu-selects" style="color:black; cursor:pointer" ng-click="showMenu=0">Requests</a></li>
+                <li><a data-toggle="tab" class="org-menu-selects nav-link" style="color:black; cursor:pointer" ng-click="showMenu=1">Calendar</a></li>
+                <li><a data-toggle="tab" class="org-menu-selects nav-link" style="color:black; cursor:pointer" ng-click="showMenu=2">Past Events</a></li>
               </ul>
             </div>
             <!--Menu 0 (AKA: the Requests Tab) -->
