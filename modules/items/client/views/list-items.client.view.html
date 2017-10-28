@@ -18,6 +18,9 @@
       </small>
       <h4 class="list-group-item-heading" data-ng-bind="item.title"></h4>
       <p class="list-group-item-text" data-ng-bind="item.content"></p>
+      <span data-ng-bind="item.categories"></span>
+      <span data-ng-bind="item.modules"></span>
+     <b> Categories, Modules would go here </b>
     </a>
   </div>
   <div class="alert alert-warning text-center" data-ng-if="items.$resolved && !items.length">
