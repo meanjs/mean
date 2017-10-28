@@ -1,7 +1,7 @@
 <div ng-controller="AuthenticationController">
   <h3 class="col-md-12 text-center">Sign up using your email</h3>
   <div class="col-xs-offset-2 col-xs-8 col-md-offset-4 col-md-4">
-    <form name="userForm" ng-submit="signup(userForm.$valid)" class="signin" novalidate autocomplete="off">
+    <form name="userForm" ng-submit="signup(userForm.$valid)" class="signin" novalidate>
       <fieldset>
         <div class="form-group" show-errors>
           <label for="role">Role</label>
@@ -39,9 +39,10 @@
         <!--</div>-->
         <div class="form-group" show-errors>
           <label for="email">Email</label>
-          <input type="text" id="email" name="email" class="form-control" ng-model="credentials.username" placeholder="Email" lowercase required>
+          <input type="email" id="email" name="email" class="form-control" ng-model="credentials.username" placeholder="Email" maxlength="60" ng-maxlength="60" lowercase required>
           <div ng-messages="userForm.username.$error" role="alert">
             <p class="help-block error-text" ng-message="required">Email is required.</p>
+            <p class="help-block error-text" ng-message="email">Your email address is invalid</p>
           </div>
         </div>
         <div class="form-group" show-errors>
@@ -70,7 +71,7 @@
           </div>
           <div>
             <label for="firstName">First Name</label>
-            <input type="contact.firstName" id="firstName" name="firstName" class="form-control" ng-model="credentials.contact.firstName" placeholder="First Name">
+            <input type="contact.firstName" id="firstName" name="firstName" class="form-control" ng-model="credentials.contact.firstName" placeholder="First Name" required>
             <div ng-messages="userForm.contact.firstName.$error" role="alert">
               <p class="help-block error-text" ng-message="required">First name is required.</p>
             </div>
@@ -78,16 +79,17 @@
 
           <div>
             <label for="lastName">Last Name</label>
-            <input type="contact.lastName" id="lastName" name="lastName" class="form-control" ng-model="credentials.contact.lastName" placeholder="Last Name">
+            <input type="contact.lastName" id="lastName" name="lastName" class="form-control" ng-model="credentials.contact.lastName" placeholder="Last Name" required>
             <div ng-messages="userForm.contact.lastName.$error" role="alert">
               <p class="help-block error-text" ng-message="required">Last name is required.</p>
             </div>
           </div>
           <div>
             <label for="phoneNumber">Phone Number</label>
-            <input type="contact.phoneNumber" id="phoneNumber" name="phoneNumber" class="form-control" ng-model="credentials.contact.phoneNumber" placeholder="Phone Number">
-            <div ng-messages="userForm.contact.lastName.$error" role="alert">
+            <input type="contact.phoneNumber" id="phoneNumber" name="phoneNumber" class="form-control" ng-model="credentials.contact.phoneNumber" placeholder="Phone Number" ng-pattern="/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/" required>
+            <div ng-messages="userForm.contact.phoneNumber.$error" role="alert">
               <p class="help-block error-text" ng-message="required">Phone number is required.</p>
+              <p class="help-block error-text" ng-message="pattern">Must be a valid 10 digit phone number</p>
             </div>
           </div>
         </div>
@@ -96,7 +98,7 @@
           <progressbar value="requirementsProgress" type="{{requirementsColor}}"><span style="color:white; white-space:nowrap;">{{requirementsProgress}}%</span></progressbar>
         </div>
         <div class="text-center form-group">
-          <button type="submit"  class="btn btn-primary">Sign up</button>
+          <button type="submit"  class="btn btn-primary" ng-disabled="userForm.$invalid">Sign up</button>
           &nbsp; or&nbsp;
           <a ui-sref="authentication.signin" class="show-signup">Sign in</a>
         </div>
