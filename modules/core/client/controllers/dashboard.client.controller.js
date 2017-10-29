@@ -9,7 +9,7 @@ angular.module('core').controller('DashboardController', ['$scope', '$http', 'Au
     $scope.date = null;
     $scope.eTime = null;
     $scope.sTime = null;
-    $scope.banner = null;
+      $scope.banner = null;
     $scope.requireTax = null;
     //$scope.button
 
