@@ -1,10 +1,10 @@
 <body>
-<section ng-controller="HomeController">
+<section>
   <div id="myCarousel" class="carousel slide" data-ride="carousel" ng-controller="DashboardController" ng-init="loadEventList()">
     <!-- Wrapper for slides -->
     <div class="carousel-inner">
       <div class="item active">
-        <img ng-src="{{event.banner}}">
+        <img src="{{event.banner}}">
         <div class="carousel-caption">
           <h3>{{event.name}}</h3>
           <h4>{{event.location}}</h4>
@@ -13,7 +13,7 @@
       </div>
 
     <div class="item" ng-repeat="event in eventList">
-        <img ng-src="{{event.banner}}">
+        <img src="https://mdbootstrap.com/img/Photos/Slides/img%20(70).jpg">
         <div class="carousel-caption">
           <h3>{{event.name}}</h3>
           <h4>{{event.location}}</h4>
@@ -31,6 +31,8 @@
       <span class="sr-only">Next</span>
     </a>
   </div>
+</section>
+<section ng-controller="HomeController">
   <!-- ORG VIEWS -->
   <div class="container-fluid" ng-show="isOrg&&!requestEvent_flag" ng-init="requestEvent_flag=0">
     <div class="row" style="margin-top:5px;">
@@ -228,7 +230,6 @@
               <div class="form-group" style="display: inline-block">
                 <label for="sTime">Event Start Time</label>
                 <input type="time" class="form-control" id="sTime" ng-model="sTime">
-                <space>
                 <label for="eTime">Event End Time</label>
                 <input type="time" class="form-control" id="eTime" ng-model="eTime">
               </div>
