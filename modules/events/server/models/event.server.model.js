@@ -32,13 +32,13 @@ var EventSchema = new Schema({
     type: String,
     required: 'Please enter a location for the event.'
   },
-    banner: {
-        type: String,
-        default: 'modules/events/client/img/default_banner.jpg'
-    },
+  banner: {
+    type: String,
+    default: 'modules/events/client/img/default_banner.jpg'
+  },
   /*organizationsPending: [{
-    organizationName: String
-  }],*/
+   organizationName: String
+   }],*/
   organizationsPending: {
     type: [String]
   },
