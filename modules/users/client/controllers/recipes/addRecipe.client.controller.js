@@ -63,6 +63,8 @@
 						});
 					});
         });
+      $scope.orig_nutrient_amount = 0;
+			$scope.map = [];
     }
 
     $scope.getReport = (searchedItem) => {
