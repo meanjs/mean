@@ -32,7 +32,7 @@
       }
 
       // Create a new item, or update the current instance
-      vm.cat.createOrUpdate()
+      vm.cat.create()
         .then(successCallback)
         .catch(errorCallback);
 
