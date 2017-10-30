@@ -34,7 +34,10 @@
         url: '/modules/create',
         controller: 'ModsController',
         controllerAs: 'vm',
-        templateUrl: '/modules/items/client/views/admin/form-module.client.view.html'
+        templateUrl: '/modules/items/client/views/admin/form-module.client.view.html',
+        resolve: {
+          modResolve: newMod
+        }
       })
       .state('admin.items.categories', {
         url: '/categories',

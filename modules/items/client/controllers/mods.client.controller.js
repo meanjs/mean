@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('admin.items.modulecreate')
+    .module('items')
     .controller('ModsController', ModsController);
 
   ModsController.$inject = ['$scope', '$state', '$window', 'modResolve', 'Authentication', 'Notification'];
