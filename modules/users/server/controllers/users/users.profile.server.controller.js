@@ -238,9 +238,32 @@ exports.me = function (req, res) {
 };
 
 exports.add = function(req, res) {
-  var body = req.body.add;
+  var user = req.user;
+  var recipe = req.body;
+  var addedRecipe = {
+    'name' : recipe.name,
+    'directions' : recipe.directions,
+    'cookingStyle' : recipe.cookingStyle,
+    'ingredients' : recipe.ingredients
+  }
 
-  res.json(body);
+  user.recipes.push(addedRecipe);
+  
+  user.save(function (err) {
+    if (err) {
+      return res.status(422).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    } else {
+      req.login(user, function (err) {
+        if (err) {
+          res.status(400).send(err);
+        } else {
+          res.json(user);
+        }
+      });
+    }
+  });
 }
 
 exports.usda = function(req, res) {

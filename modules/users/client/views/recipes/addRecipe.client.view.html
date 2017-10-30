@@ -4,17 +4,17 @@
         <h1 style="color: rgb(249,192,120)">Create New Recipe</h1>
       </div>
     </center>
-    <form name="vm.userForm" class="jumbotron" method="GET"
-        ng-submit="vm.updateUserProfile(vm.userForm.$valid)" novalidate>
+    <form name="vm.addRecipeForm" class="jumbotron"
+        ng-submit="vm.updateMyRecipes(vm.addRecipeForm.$valid)" novalidate>
       <fieldset class="row">
         <div class="col-md-8">
             <center>
               <div class="form-group" show-errors>
                 <h3 id="recipeNameHeader">Recipe Name</h3>
-                <input name="name" type="text" ng-model="vm.user.recipes[1].name" 
+                <input name="name" type="text" ng-model="recipe.name" 
                     id="name" class="form-control" placeholder="Recipe Name" required>
                 <select style = "width: 15%" class="form-control"
-                  ng-model="vm.user.recipes[1].cookingStyle">
+                  ng-model="recipe.cookingStyle">
                       <option>Baked</option>
                       <option>Fried</option>
                       <option>Grilled</option>
@@ -31,13 +31,13 @@
               <tbody>
                 <tr ng-repeat="ingredient in recipeList">
                   <td id="ing">
-                    <input name="ingredient" type="text" ng-model="vm.user.recipes[1].ingredients[$index].name" placeholder="Ingredient Name"/>
+                    <input name="ingredient" type="text" ng-model="recipe.ingredients[$index].name" placeholder="Ingredient Name"/>
                   </td>
                   <td id="quantity">
-                    <input name="quantity" type="number" ng-model="vm.user.recipes[1].ingredients[$index].quantity" placeholder="0"/>
+                    <input name="quantity" type="number" ng-model="recipe.ingredients[$index].quantity" placeholder="0"/>
                   </td>
                   <td id="units">
-                    <select class="form-control" ng-model="vm.user.recipes[1].ingredients[$index].units">
+                    <select class="form-control" ng-model="recipe.ingredients[$index].units">
                       <option>Cups</option>
                       <option>Ounces</option>
                       <option>Tbs</option>
@@ -66,7 +66,7 @@
             <div class="form-group">
               <h3 id="directionsHeader">Recipe Directions</h3>
               <textarea id="directions" class="form-control" rows="5" 
-                ng-model="vm.user.recipes[1].directions" placeholder="Enter Directions Here"></textarea>
+                ng-model="recipe.directions" placeholder="Enter Directions Here"></textarea>
             </div>
           </center>
           </br>
@@ -77,10 +77,11 @@
           </center>
         
           </br>
-          <!--<div class="alert alert-warning alert-dismissible" role="alert" id="warn">
+
+          <div ng-show="vm.error" class="alert alert-warning alert-dismissible" role="alert" id="warn">
               <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
               <strong>Please enter a recipe name!</strong>
-          </div>-->
+          </div>
         </div>
         <div ng-show="vm.error" class="text-danger">
           <strong ng-bind="vm.error"></strong>

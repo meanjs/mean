@@ -13,26 +13,53 @@
     var vm = this;
 
     vm.user = Authentication.user;
-    vm.updateUserProfile = updateUserProfile;
+    vm.updateMyRecipes = updateMyRecipes;
 
-    function updateUserProfile(isValid) {
+    $scope.recipe = {
+      'name' : '',
+      'directions' : '',
+      'cookingStyle' : '',
+      'ingredients' : [{
+        'name' : '',
+        'quantity' : '',
+        'units' : ''
+      }]
+    };
+
+    function updateMyRecipes(isValid) {
+      var recipe = $scope.recipe;
       getAlternatives();
 
-      if (!isValid) {
-        $scope.$broadcast('show-errors-check-validity', 'vm.userForm');
+      if(!isValid) {
+        $scope.$broadcast('show-errors-check-validity', 'vm.addRecipeForm');
         return false;
       }
 
-      var user = new UsersService(vm.user);
+      //var user = new UsersService(vm.user);
+      //console.log("User ", user);
 
-      user.$update(function (response) {
-        $scope.$broadcast('show-errors-reset', 'vm.userForm');
+      UsersService.addRecipe(recipe)
+        .then(success)
+        .catch(failure);
 
-        Notification.success({ message: '<i class="glyphicon glyphicon-ok"></i> Add recipe successful!' });
-        Authentication.user = response;
-      }, function (response) {
-        Notification.error({ message: response.data.message, title: '<i class="glyphicon glyphicon-remove"></i> Add recipe failed!' });
-      });
+      function success(response) {
+        Notification.success({ message: '<i class="glyphicon glyphicon-ok"></i> Add recipe successful!' })
+        console.log("Recipes success: ", response);
+        //$scope.recipes = response.recipes;
+      }
+
+      function failure(response) {
+        Notification.error({ message: '<i class="glyphicon glyphicon-remove"></i> Add recipe failed!' })
+        console.log("Failure: ", response);
+      }
+      // user.$update(function (response) {
+      //   $scope.$broadcast('show-errors-reset', 'vm.addRecipeForm');
+
+      //   Notification.success({ message: '<i class="glyphicon glyphicon-ok"></i> Add recipe successful!' });
+      //   Authentication.user = response;
+      // }, function (response) {
+      //   Notification.error({ message: response.data.message, title: '<i class="glyphicon glyphicon-remove"></i> Add recipe failed!' });
+      // });
 
       $location.path('/alternatives');
     }

@@ -105,7 +105,7 @@
       userSignin: function (credentials) {
         return this.signin(credentials).$promise;
       },
-      adding: function(param) {
+      addRecipe: function(param) {
         return this.add(param).$promise;
       },
       usdaAlternatives: function(param) {
