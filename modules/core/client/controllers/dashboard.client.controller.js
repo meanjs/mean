@@ -37,6 +37,14 @@ angular.module('core').controller('DashboardController', ['$scope', '$compile', 
         status: 'Confirmed'
       }];
 
+    /* add custom event*/
+    $scope.addEvent = function(title) {
+      $scope.events.push({
+        title: title,
+        start: new Date(2017, 10, 30)
+      });
+    };
+
 
     //Sends a delete request to remove a passed in event from the DB
     $scope.deleteEvent = function (event) {
@@ -144,12 +152,18 @@ angular.module('core').controller('DashboardController', ['$scope', '$compile', 
         console.log('Successful');
         console.log(res);
         $scope.eventList = res.data;
+
       }, function (res) {
         console.log('Failed');
         console.log(res);
       });
 
+      console.log($scope.eventList[0].name);
+      for (var i = 0; i < $scope.eventList.length-1; i++) {
+        $scope.addEvent($scope.eventList[i].name);
+      }
     };
+
 
     //Initially loading the events
     $scope.loadEventList();
@@ -183,12 +197,12 @@ angular.module('core').controller('DashboardController', ['$scope', '$compile', 
         }
       }).then(function (res) {
         console.log('Successful event');
-        $scope.addEvent();
       }, function (res) {
         console.log('Failed event');
         console.log(res);
         console.log(name);
       });
+
 
       /*$scope.name = null;
        $scope.date = null;
@@ -196,6 +210,7 @@ angular.module('core').controller('DashboardController', ['$scope', '$compile', 
        $scope.eTime = null;
        $scope.location = null;
        $scope.requireTax = null;*/
+
     };
 
     //Toggles the acceptEvent flag
@@ -237,16 +252,6 @@ angular.module('core').controller('DashboardController', ['$scope', '$compile', 
     var d = date.getDate();
     var m = date.getMonth();
     var y = date.getFullYear();
-
-    /* add custom event*/
-    $scope.addEvent = function() {
-      $scope.events.push({
-        title: 'Open Sesame',
-        start: new Date(y, m, 30),
-        end: new Date(y, m, 29),
-        className: ['openSesame']
-      });
-    };
 
 
     /* event source that contains custom events on the scope */

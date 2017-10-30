@@ -1,62 +1,80 @@
-html *
-{
-   font-family: 'Source Sans Pro', sans-serif !important;
+html * {
+    font-family: 'Source Sans Pro', sans-serif !important;
 }
+
 body {
     /*https://www.pexels.com/photo/armchairs-blur-business-chair-296883/ */
     background-image: url("https://static.pexels.com/photos/296883/pexels-photo-296883.jpeg");
     height: 100%;
     background-size: cover;
     position: relative;
-background-repeat: no-repeat;
+    background-repeat: no-repeat;
 }
+
 .content {
-  margin-top: 50px;
+    margin-top: 50px;
 }
-.jumbotron{
-padding: 5px;
-border-width:1px;
-border-color: black;
-border-style: solid;
+
+.jumbotron {
+    padding: 5px;
+    border-width: 1px;
+    border-color: black;
+    border-style: solid;
     background-color: rgba(137, 137, 137, 0.68)
 }
-.container-fluid{
-	background-color: none;
+
+.container-fluid {
+    background-color: none;
 }
+
 .undecorated-link:hover {
-  text-decoration: none;
+    text-decoration: none;
 }
+
 [ng\:cloak],
 [ng-cloak],
 [x-ng-cloak],
 .ng-cloak,
 .x-ng-cloak {
-  display: none !important;
+    display: none !important;
 }
+
 .header-profile-image {
-  opacity: 0.8;
-  height: 28px;
-  width: 28px;
-  border-radius: 50%;
-  margin-right: 5px;
+    opacity: 0.8;
+    height: 28px;
+    width: 28px;
+    border-radius: 50%;
+    margin-right: 5px;
 }
+
 .open .header-profile-image,
 a:hover .header-profile-image {
-  opacity: 1;
+    opacity: 1;
 }
+
 .user-header-dropdown-toggle {
-  padding-top: 11px !important;
-  padding-bottom: 11px !important;
+    padding-top: 11px !important;
+    padding-bottom: 11px !important;
 }
+
 .error-text {
-  display: none;
+    display: none;
 }
+
 .has-error .help-block.error-text {
-  display: block;
+    display: block;
 }
+
 .has-error .help-inline.error-text {
-  display: inline;
+    display: inline;
 }
-h1, h2, th, label, p{
-	color: black;
+
+h1, h2, th, label {
+    color: black;
 }
+
+#eventData {
+    color: white;
+}
+
+

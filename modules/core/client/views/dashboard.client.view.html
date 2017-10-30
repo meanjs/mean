@@ -12,11 +12,11 @@
           <!-- TABS -->
           <div class="row" style="justify-content: center">
             <ul class="nav nav-tabs">
-              <li class="active"><a class="nav-link org-menu-selects" style="color:#1B5689; cursor:pointer"
+              <li class="active"><a class="nav-link org-menu-selects" style="color:black; cursor:pointer"
                                     ng-click="showMenu=0">Requests</a></li>
-              <li><a class="org-menu-selects nav-link" style="color:#1B5689; cursor:pointer" ng-click="showMenu=1">Calendar</a>
+              <li><a class="org-menu-selects nav-link" style="color:black; cursor:pointer" ng-click="showMenu=1;">Calendar</a>
               </li>
-              <li><a class="org-menu-selects nav-link" style="color:#1B5689; cursor:pointer" ng-click="showMenu=2">Past
+              <li><a class="org-menu-selects nav-link" style="color:black; cursor:pointer" ng-click="showMenu=2">Past
                 Events</a></li>
             </ul>
           </div>
@@ -34,12 +34,12 @@
                   <th>Location</th>
                   <th>Time</th>
                   <th>Status</th>
-                  <th>Cancel Event</th>
+                  <th>Cancel Request</th>
                 </tr>
                 </thead>
                 <tbody ng-repeat="event in eventList">
                 <tr ng-show="filterOrgEvents(event)">
-                  <th>{{event.user.displayName}}</th>
+                  <th>{{event.name}}</th>
                   <td>{{event.dateOfEvent | date:"MM'/'dd'/'yyyy"}}</td>
                   <td>{{event.location}}</td>
                   <td>{{event.startTime | date:"hh':'mm"}} - {{event.endTime | date:"hh':'mm"}}</td>
@@ -67,6 +67,11 @@
     </div>
   </div>
 
+  <!--&lt;!&ndash;Menu 1 (AKA: the Calender Tab) &ndash;&gt;-->
+  <!--<div class="row" style="justify-content: center" ng-init="showMenu=0" ng-show="showMenu == 1">-->
+    <!--<div id="calendarOrg" ui-calendar="uiConfig.calendar" class="span8 calendar" ng-model="eventSources"></div>-->
+  <!--</div>-->
+
 
 
   <!-- ORG REQUEST EVENT -->
@@ -79,6 +84,7 @@
             <thead>
             <tr>
               <th>Business Name</th>
+              <th>Description</th>
               <th>Date</th>
               <th>Location</th>
               <th>Time</th>
@@ -88,6 +94,7 @@
             <tbody ng-repeat="event in eventList">
             <tr ng-init="eventObj = event" ng-show="$parent.displayOrgNonRequest(event)">
               <th>{{event.user.displayName}}</th>
+              <th>{{event.name}}</th>
               <td>{{event.dateOfEvent | date:"MM'/'dd'/'yyyy"}}</td>
               <td>{{event.location}}</td>
               <td>{{event.startTime | date:"hh':'mm"}} - {{event.endTime | date:"hh':'mm"}}</td>
@@ -181,8 +188,12 @@
               </div>
             </div>
             <!--Menu 1 (AKA: the Calender Tab) -->
-            <div class="row" style="justify-content: center" ng-init="showMenu=0" ng-show="showMenu == 1">
+            <div class="row" style="justify-content: center" ng-init="showMenu=0" ng-show="showMenu==1&&isBiz==1">
               <div id="calendar" ui-calendar="uiConfig.calendar" class="span8 calendar" ng-model="eventSources"></div>
+            </div>
+            <!--Menu 1 (AKA: the Calender Tab) -->
+            <div class="row" style="justify-content: center" ng-init="showMenu=0" ng-show="showMenu==1&&isBiz==0">
+              <div id="calendarOrg" ui-calendar="uiConfig.calendar" class="span8 calendar" ng-model="eventSources"></div>
             </div>
             <!--Menu 2 (AKA: the Past events Tab) -->
             <div class="row" style="justify-content: center" ng-init="showMenu=0" ng-show="showMenu == 2">
@@ -255,7 +266,7 @@
                   </button>
                   <button class="btn"
                           style="float: center-right; color: white; background-color: #F5A623;border: solid 1px #D38401; width: 200px"
-                          ng-click="addEvent_flag=0">Cancel
+                          ng-click="addEvent_flag=0;addEvent();">Cancel
                   </button>
                 </div>
               </div>
