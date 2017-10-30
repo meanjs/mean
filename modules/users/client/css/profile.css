@@ -1,4 +1,4 @@
-.content {
+/*.content {
   margin-top: 50px;
 }
 
@@ -42,10 +42,10 @@ a:hover .header-profile-image {
 }
 .has-error .help-inline.error-text {
   display: inline;
-}
+}*/
 
 /*header*/
-.navbar{
+/*.navbar{
   margin-bottom: 0;
 }
 .dropdown:hover .dropdown-menu {
@@ -93,11 +93,11 @@ a:hover .header-profile-image {
 .user-move{
   padding-top: 12px !important;
 }
-
+*/
 
 /*body*/
 
-body{
+/*body{
   font-family: "Source Sans Pro", "Sans"; 
 }
 
@@ -123,10 +123,10 @@ body{
   width:100%; 
   height:100%;
 }
-
+*/
 /*lower nav*/
 
-.lowerNav .textLN{
+/*.lowerNav .textLN{
   height: 50px;
   background-color: rgb(223,93,74);
   padding-top: 15px; 
@@ -173,9 +173,9 @@ body{
   float: right;
   margin-right: 21px;
   margin-top: 10px;
-}
+}*/
 /*drop down menus in home page*/
-.dropMenu{
+/*.dropMenu{
   float: left;
   width: 100%;
   margin-left: 36.3%;
@@ -293,7 +293,7 @@ body{
 .acidjs-rating-stars input:checked ~ label
 {
     color: #F9C078;
-}
+}*/
 
 /*PROFILE EDITTING PAGE*/
 .allergiesContainer, .dietContainer, .preferencesContainer, .religiousContainer {
