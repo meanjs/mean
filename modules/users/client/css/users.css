@@ -37,6 +37,10 @@
   color: #8CD4C9;
 }
 
+
+
+
+
 /* ALTERNATIVE VIEW*/
 .ingredient-containerL{
   background-color: rgba(156,156,156,0.3);
@@ -49,10 +53,12 @@
 .al-h1L{
   color: #383838;
   margin-bottom: 25px;
+  font-size: 28px;
 }
 .al-h1{
   color: #383838;
   margin-bottom: 5px;
+  font-size: 28px;
 }
 .al-containerPaddingL{
   padding: 0px 25px 0 130px;
