@@ -38,9 +38,10 @@
         $scope.recipeList.push({});
     };
 //===========================================================================
-    $scope.alert = () => {
-  		alert('hello');
-  	}
+
+    // $scope.alert = () => {
+  	// 	alert('hello');
+  	// }
 
     //vm.addings = UsersService.query();
   }

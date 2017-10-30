@@ -1,10 +1,10 @@
 <div class="container">
     <div class="lowerNav text-center">
       <div class="textLN">
-        <a class="left" href="">Popular Recipes</a> 
+        <a class="left" href="">Popular Recipes</a>
         <a class="" href="">My Recipes</a> </div>
     </div>
-    
+
     <div class="dropMenu">
       <!--<button class="btn btn-primary" type="button" id="dropdownMenuButton" onclick="filterSelection(' all ')">
         Show All
@@ -73,7 +73,7 @@
         </div>
         </div>
       </div>
-  
+
     </div>
     <div>
       <div class="row">
@@ -87,6 +87,9 @@
             <div class="card-icon-container">
               <img class="card-icon" src="https://manylivescm.com/wp-content/uploads/2014/03/icon-glutenfree.png">
               <img class="card-icon" src="http://www.theproteinbakeshop.com/ae/files/icon-no-refined-sugar.png">
+              <a onclick="alert('Recipe has been added')" class="head" ui-sref="add">
+                  <span class="glyphicon glyphicon-plus"></span>
+              </a>
               <div id="stars">
                 <span class="fa fa-star checked"></span>
                 <span class="fa fa-star checked"></span>
@@ -244,7 +247,7 @@
                 <span class="fa fa-star"></span>
               </div>
             </div>
-            
+
           </div>
         </div>
         <div class="col-md-3 properties">
@@ -303,15 +306,15 @@
         </div>
       </div>
     </div>
-  
+
   </div>
-  
-  
-  
-  
-  
+
+
+
+
+
   <!-- Old home view -->
-  
+
   <!-- <section>
     <div class="jumbotron text-center">
       <div class="row">
@@ -336,10 +339,10 @@
     <h5>Zach was also here!</h5>
     <p>Joseph was here!</p>
     <p>Liliana was here!</p>
-    <p>Cristo was NOT here (jk)</p>  
+    <p>Cristo was NOT here (jk)</p>
     <p>Ming was maybe here</p>
     <p>Himal was here!</p>
-      
+
       <p>MEAN.JS is a web application boilerplate, which means you should start changing everything :-)</p>
       <p>This sample application tracks users and articles.</p>
       <ul>
@@ -403,10 +406,10 @@
   </section>
    -->
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-   
-   
+
+
    <script type="text/javascript">
-     
+
      var options = [];
   $( '.dropdown-menu a' ).on( 'click', function( event ) {
      var $target = $( event.currentTarget ),
@@ -421,7 +424,7 @@
         setTimeout( function() { $inp.prop( 'checked', true ) }, 0);
      }
      $( event.target ).blur();
-        
+
      console.log( options );
      return false;
   });

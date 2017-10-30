@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="page-header">
+ <!-- <div class="page-header">   -->
     <h1 class="text-center">My profile</h1>
       <div class="col-xs-offset-2 col-xs-8 col-md-offset-4 col-md-4"></div>
   </div>
@@ -43,15 +43,16 @@
     <nav class="col-sm-3 col-md-3">
       <ul class="nav nav-pills nav-stacked">
         <li ui-sref-active="active">
-           <li ui-sref-active="active">
-          <a ui-sref="profile.picture">Change Profile Picture</a>
+           <!--<li ui-sref-active="active">-->
+          <a ui-sref="profile.picture"></a>
         </li>
         </ul>
+    <div ui-view></div>
     </nav>
     <br></br>
-    <div class="col-sm-9 col-md-0 profile-view">
+   <!--  <div class="col-sm-9 col-md-0 profile-view">
       <div ui-view></div>
-    </div>
+    </div> -->
   </div>
 </section>
 <div ng-show="personalProfile">
@@ -109,7 +110,7 @@
     </form>
   </div>
 </div>
-  
+
 <div ng-show="healthProfile">
   <div class="col-xs-offset-1 col-xs-10 col-md-offset-5 col-md-4">
     <form name="vm.userForm" ng-submit="vm.updateUserProfile(vm.userForm.$valid)" class="signin" novalidate autocomplete="off">
