@@ -32,6 +32,8 @@
       })
       .state('admin.items.modulecreate',{
         url: '/modules/create',
+        controller: 'ModsController',
+        controllerAs: 'vm',
         templateUrl: '/modules/items/client/views/admin/form-module.client.view.html'
       })
       .state('admin.items.categories', {
@@ -86,5 +88,16 @@
 
   function newItem(ItemsService) {
     return new ItemsService();
+  }
+  newCat.$inject = ['CategoriesService'];
+
+  function newCat(CategoriesService) {
+    return new CategoriesService();
+  }
+
+  newMod.$inject = ['ModulesService'];
+
+  function newMod(ModulesService) {
+    return new ModulesService();
   }
 }());

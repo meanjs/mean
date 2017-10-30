@@ -2,8 +2,8 @@
   'use strict';
 
   angular
-    .module('items.mods')
-    .controller('ItemsAdminModuleController', ItemsAdminModuleController);
+    .module('admin.items.modulecreate')
+    .controller('ModsController', ModsController);
 
   ModsController.$inject = ['$scope', '$state', '$window', 'modResolve', 'Authentication', 'Notification'];
 
