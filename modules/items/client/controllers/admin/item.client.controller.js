@@ -5,12 +5,14 @@
     .module('items.admin')
     .controller('ItemsAdminController', ItemsAdminController);
 
-    ItemsAdminController.$inject = ['$scope', '$state', '$window', 'itemResolve', 'Authentication', 'Notification'];
+    ItemsAdminController.$inject = ['$scope', '$state', '$window', 'itemResolve', 'CategoriesService', 'ModulesService', 'Authentication', 'Notification'];
 
-  function ItemsAdminController($scope, $state, $window, item, Authentication, Notification) {
+  function ItemsAdminController($scope, $state, $window, item, CategoriesService, ModulesService, Authentication, Notification) {
     var vm = this;
 
     vm.item = item;
+    vm.cats = CategoriesService.query();
+    vm.mods = ModulesService.query();
     vm.authentication = Authentication;
     vm.form = {};
     vm.remove = remove;
@@ -25,7 +27,7 @@
         });
       }
     }
-
+    
     // Save Item
     function save(isValid) {
       if (!isValid) {

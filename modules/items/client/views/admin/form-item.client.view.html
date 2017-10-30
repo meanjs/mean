@@ -19,18 +19,18 @@
         </div>
         <div class = "module-group">
         <label for="modules">Modules</label>
-          <select name="module" id="module" name="module" class="form-control" ng-model="vm.modules" placeholder="module">
-            <option ng-repeat="x in modules">{{x}}</option>
+          <select name="module" id="module" name="module" class="form-control" ng-model="vm.item.modules" placeholder="module">
+            <option ng-repeat="x in vm.mods" value={{x._id}}>{{x.title}}</option>
           </select>
          <a ng-show="vm.item._id" class="btn btn-primary" ng-click="vm.addModule()">
           <i class="glyphicon glyphicon-plus"></i>
         </a>
         <div class = "category-group">
         <label for="category">Categories</label>
-          <select name="category" id="category" name="category" class="form-control" ng-model="vm.categories" placeholder="category">
-            <option ng-repeat="x in category">{{x}}</option>
+          <select name="category" id="category" name="category" class="form-control" ng-model="vm.item.categories" placeholder="category">
+            <option ng-repeat="x in vm.cats" value="{{x._id}}">{{x.title}}</option>
           </select>
-         <a ng-show="vm.item._id" class="btn btn-primary" ng-click="vm.addCategory()">
+         <a ng-show="vm.item._id" class="btn btn-primary" ng-click="vm.addCat()">
           <i class="glyphicon glyphicon-plus"></i>
         </a>
           </div>
