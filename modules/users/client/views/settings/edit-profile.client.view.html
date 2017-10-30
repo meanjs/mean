@@ -128,158 +128,139 @@
           class="signin" novalidate autocomplete="off">
           <fieldset>
             <h3>Allergies</h3>
-            <div class="row form-group" show-errors>
+            <div class="row form-group">
               <div class="col-md-3">
-                <div class="form-group" show-errors>
-                  <label for="allergies">corn</label>
+                <div class="form-group">
+                  <label for="allergies">Corn</label>
                   <input type="checkbox" id="corn" name="corn" ng-model="vm.user.allergies.corn">
                 </div>
                 <div class="form-group">
-                  <label for="allergies">milk</label>
-                  <input type="checkbox" id="milk" name="milk" ng-model="vm.user.allergies.milk" required>
+                  <label for="allergies">Milk</label>
+                  <input type="checkbox" id="milk" name="milk" ng-model="vm.user.allergies.milk">
                 </div>
                 <div class="form-group">
-                  <label for="allergies">eggs</label>
-                  <input type="checkbox" id="eggs" name="eggs" ng-model="vm.user.allergies.eggs" required>
+                  <label for="allergies">Eggs</label>
+                  <input type="checkbox" id="eggs" name="eggs" ng-model="vm.user.allergies.eggs">
                 </div>
               </div>
               <div class="col-md-3">
                 <div class="form-group">
-                  <label for="allergies">peanuts</label>
-                  <input type="checkbox" id="peanuts" name="peanuts" ng-model="vm.user.allergies.peanuts" required>
+                  <label for="allergies">Peanuts</label>
+                  <input type="checkbox" id="peanuts" name="peanuts" ng-model="vm.user.allergies.peanuts">
                 </div>
                 <div class="form-group">
                   <label for="allergies">Tree Nuts</label>
-                  <input type="checkbox" id="treeNuts" name="treeNuts" ng-model="vm.user.allergies.treeNuts" required>
+                  <input type="checkbox" id="treeNuts" name="treeNuts" ng-model="vm.user.allergies.treeNuts">
                 </div>
                 <div class="form-group">
                   <label for="allergies">Fish</label>
-                  <input type="checkbox" id="fish" name="fish" ng-model="vm.user.allergies.fish" required>
+                  <input type="checkbox" id="fish" name="fish" ng-model="vm.user.allergies.fish">
                 </div>
                 <div class="form-group">
                   <label for="allergies">Shellfish</label>
-                  <input type="checkbox" id="shellfish" name="shellfish" ng-model="vm.user.allergies.shellfish" required>
+                  <input type="checkbox" id="shellfish" name="shellfish" ng-model="vm.user.allergies.shellfish">
                 </div>
               </div>
               <div class="col-md-3">
                 <div class="form-group">
-                  <label for="allergies">soy</label>
-                  <input type="checkbox" id="soy" name="soy" ng-model="vm.user.allergies.soy" required>
+                  <label for="allergies">Soy</label>
+                  <input type="checkbox" id="soy" name="soy" ng-model="vm.user.allergies.soy">
                 </div>
                 <div class="form-group">
-                  <label for="allergies">wheat gluten</label>
-                  <input type="checkbox" id="wheatGluten" name="wheatGluten" ng-model="vm.user.allergies.wheatGluten" required>
+                  <label for="allergies">Wheat Gluten</label>
+                  <input type="checkbox" id="wheatGluten" name="wheatGluten" ng-model="vm.user.allergies.wheatGluten">
                 </div>
               </div>
             </div>
 
-            <div ng-messages="vm.userForm.allergies.$error" role="alert">
-              <p class="help-block error-text" ng-message="required">Allergies are required.</p>
-            </div>    
-
             <h3>Diet</h3>
-            <div class="row form-group" show-errors>
+            <div class="row form-group">
               <div class="col-md-4">
                 <div class="form-group">
                   <label for="diet">Vegan</label>
                   <input type="checkbox" id="vegan" name="vegan" ng-model="vm.user.dietaryDefinitions.vegan">
                 </div>
                 <div class="form-group">
-                  <label for="diet">ovo vegetarian</label>
-                  <input type="checkbox" id="ovoVegetarian" name="ovoVegetarian" ng-model="vm.user.dietaryDefinitions.ovoVegetarian" required> 
+                  <label for="diet">Ovo-vegetarian</label>
+                  <input type="checkbox" id="ovoVegetarian" name="ovoVegetarian" ng-model="vm.user.dietaryDefinitions.ovoVegetarian"> 
                 </div>
                 <div class="form-group">
-                  <label for="diet">lacto vegetarian</label>
-                  <input type="checkbox" id="lactoVegetarian" name="lactoVegetarian" ng-model="vm.user.dietaryDefinitions.lactoVegetarian" required>
+                  <label for="diet">Lacto-vegetarian</label>
+                  <input type="checkbox" id="lactoVegetarian" name="lactoVegetarian" ng-model="vm.user.dietaryDefinitions.lactoVegetarian">
                 </div>
               </div>
               <div class="col-md-4">
                 <div class="form-group">
-                  <label for="diet">lacto-ovo vegetarian</label>
-                  <input type="checkbox" id="lactoOvoVegetarian" name="lactoOvoVegetarian" ng-model="vm.user.dietaryDefinitions.lactoOvoVegetarian" required>
+                  <label for="diet">Lacto-ovo-vegetarian</label>
+                  <input type="checkbox" id="lactoOvoVegetarian" name="lactoOvoVegetarian" ng-model="vm.user.dietaryDefinitions.lactoOvoVegetarian">
                 </div>
                 <div class="form-group">
-                  <label for="diet">pescetarian</label>
-                    <input type="checkbox" id="pescetarian" name="pescetarian" ng-model="vm.user.dietaryDefinitions.pescetarian" required>
+                  <label for="diet">Pescetarian</label>
+                    <input type="checkbox" id="pescetarian" name="pescetarian" ng-model="vm.user.dietaryDefinitions.pescetarian">
                 </div>
               </div>
             </div>        
 
-            <div ng-messages="vm.userForm.diet.$error" role="alert">
-              <p class="help-block error-text" ng-message="required">Dietary preferences are required.</p>
-            </div>
-
             <h3>Preferences</h3>
-            <div class="row form-group" show-errors>
+            <div class="row form-group">
               <div class="col-md-4">
                 <div class="form-group">
                   <label for="preferences">Cholesterol</label>
-                  <input type="checkbox" id="preferences" name="preferences" ng-model="vm.user.preferences.cholesterol" required>
+                  <input type="checkbox" id="preferences" name="preferences" ng-model="vm.user.preferences.cholesterol">
                 </div>
                 <div class="form-group">
-                  <label for="preferences">diabetes</label>
-                  <input type="checkbox" id="diabetes" name="diabetes" ng-model="vm.user.preferences.diabetes" required>
+                  <label for="preferences">Diabetes</label>
+                  <input type="checkbox" id="diabetes" name="diabetes" ng-model="vm.user.preferences.diabetes">
                 </div>
                 <div class="form-group">
-                  <label for="preferences">low salt</label>
-                  <input type="checkbox" id="lowSalt" name="lowSalt" ng-model="vm.user.preferences.lowSalt" required>
+                  <label for="preferences">Low Salt</label>
+                  <input type="checkbox" id="lowSalt" name="lowSalt" ng-model="vm.user.preferences.lowSalt">
                 </div>
               </div>
               <div class="col-md-4">
                 <div class="form-group">
-                  <label for="preferences">low fat</label>
-                  <input type="checkbox" id="lowFat" name="lowFat" ng-model="vm.user.preferences.lowFat" required>
+                  <label for="preferences">Low Fat</label>
+                  <input type="checkbox" id="lowFat" name="lowFat" ng-model="vm.user.preferences.lowFat">
                 </div>
                 <div class="form-group">
-                  <label for="preferences">low calories(< 400)</label>
-                  <input type="checkbox" id="lowCalories" name="lowCalories" ng-model="vm.user.preferences.lowCalories" required>
+                  <label for="preferences">Low Calories(< 400)</label>
+                  <input type="checkbox" id="lowCalories" name="lowCalories" ng-model="vm.user.preferences.lowCalories">
                 </div>
                 <div class="form-group">
-                  <label for="preferences">bland</label>
-                  <input type="checkbox" id="bland" name="bland" ng-model="vm.user.preferences.bland" required>
+                  <label for="preferences">Bland</label>
+                  <input type="checkbox" id="bland" name="bland" ng-model="vm.user.preferences.bland">
                 </div>
               </div>
             </div>
 
-            <div ng-messages="vm.userForm.preferences.$error" role="alert">
-              <p class="help-block error-text" ng-message="required">This field is required.</p>
-            </div>
-
             <h3>Religious Restrictions</h3>
-            <div class="row form-group" show-errors>
+            <div class="row form-group">
               <div class="col-md-2">
                 <div class="form-group">
                   <label for="religiousRestrictions">Hindu</label>
-                  <input type="checkbox" id="religiousRestrictions" name="religiousRestrictions" ng-model="vm.user.religiousRestrictions.hindu" required autofocus>
+                  <input type="checkbox" id="religiousRestrictions" name="religiousRestrictions" ng-model="vm.user.religiousRestrictions.hindu" autofocus>
                 </div>
               </div>
               <div class="col-md-2">
                 <div class="form-group">
                   <label for="religiousRestrictions">Islam</label>
-                  <input type="checkbox" id="Islam" name="Islam" ng-model="vm.user.religiousRestrictions.Islam" required>
+                  <input type="checkbox" id="Islam" name="Islam" ng-model="vm.user.religiousRestrictions.Islam">
                 </div>
               </div>
               <div class="col-md-2">
                 <div class="form-group">
-                  <label for="religiousRestrictions">kosher</label>
-                  <input type="checkbox" id="kosher" name="kosher" ng-model="vm.user.religiousRestrictions.kosher" required>
+                  <label for="religiousRestrictions">Kosher</label>
+                  <input type="checkbox" id="kosher" name="kosher" ng-model="vm.user.religiousRestrictions.kosher">
                 </div>
               </div>
             </div>
 
-            <div ng-messages="vm.userForm.religiousRestrictions.$error" role="alert">
-              <p class="help-block error-text" ng-message="required">Religious restrictions are required.</p>
-            </div>
-
-            <div class="form-group" show-errors>
+            <div class="form-group">
               <label for="weight">Weight:</label>
               <input type="text" id="weight" name="weight" class="form-control" style="width:50%"
-                ng-model="vm.user.weight" placeholder="Weight" required autofocus>
-
-              <div ng-messages="vm.userForm.weight.$error" role="alert">
-                <p class="help-block error-text" ng-message="required">Weight is required.</p>
-              </div>
+                ng-model="vm.user.weight" placeholder="Weight" autofocus>
             </div>
+
             <div>
               <button type="submit" class="btn btn-primary">Save Profile</button>
             </div>
