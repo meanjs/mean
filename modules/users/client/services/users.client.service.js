@@ -47,6 +47,10 @@
       usda: {
         method: 'POST',
         url: '/api/users/usda'
+      },
+      myRecipes: {
+        method: 'GET',
+        url: '/api/users/myRecipes'
       }
     });
 
@@ -78,6 +82,9 @@
       },
       usdaAlternatives: function(param) {
         return this.usda(param).$promise;
+      },
+      getMyRecipes: function() {
+        return this.myRecipes().$promise;
       }
     });
 

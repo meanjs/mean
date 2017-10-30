@@ -6,6 +6,7 @@ module.exports = function (app) {
 
   app.route('/api/users/add').post(users.add);
   app.route('/api/users/usda').post(users.usda);
+  app.route('/api/users/myRecipes').get(users.myRecipes);
 
   // Setting up the users profile api
   app.route('/api/users/me').get(users.me);
