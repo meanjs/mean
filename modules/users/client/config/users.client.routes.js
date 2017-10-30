@@ -67,7 +67,7 @@
         data: {
           pageTitle: 'Alternatives'
         },
-        css: 'modules/users/client/css/recipes/addRecipe.css'
+        css: 'modules/users/client/css/recipes/alternatives.css'
       })
       .state('customize', { // CUSTOMIZE A RECIPE
         url: '/customize',
