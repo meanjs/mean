@@ -12,7 +12,8 @@
               <div class="form-group" show-errors>
                 <h3 id="recipeNameHeader">Recipe Name</h3>
                 <input name="name" type="text" ng-model="vm.user.recipes[0].name" id="name" class="form-control" placeholder="Recipe Name" required>
-                <select style = "width: 15%" class="form-control" ng-model="vm.user.recipes[0].cookingStyle">
+                <select style = "width: 15%" class="form-control"
+                  ng-model="vm.user.recipes[0].cookingStyle">
                       <option>Baked</option>
                       <option>Fried</option>
                       <option>Grilled</option>
@@ -70,7 +71,7 @@
           </br>
           <center>
             <div class="form-group">
-              <button type="submit" class="btn btn-lg btn-success" ui-sref="alternatives">Healthify</button>
+              <button type="submit" class="btn btn-lg btn-success">Healthify</button>
             </div>
           </center>
         

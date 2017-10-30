@@ -5,15 +5,17 @@
     .module('users')
     .controller('AddRecipeController', AddRecipeController);
 
-  AddRecipeController.$inject = ['UsersService', '$scope', '$http','Authentication','Notification'];
+  AddRecipeController.$inject = ['UsersService', '$scope', '$http', 'Authentication', 'Notification', '$location'];
 
-  function AddRecipeController(UsersService, $scope, $http,Authentication,Notification) {
+  function AddRecipeController(UsersService, $scope, $http, Authentication, Notification, $location) {
     var vm = this;
 
     vm.user = Authentication.user;
     vm.updateUserProfile = updateUserProfile;
 
     function updateUserProfile(isValid) {
+
+      getAlternatives();
 
       if (!isValid) {
         $scope.$broadcast('show-errors-check-validity', 'vm.userForm');
@@ -31,6 +33,8 @@
       }, function (response) {
         Notification.error({ message: response.data.message, title: '<i class="glyphicon glyphicon-remove"></i> Edit profile failed!' });
       });
+
+      $location.path('/alternatives');
     }
 
     // var alternative = {
@@ -58,6 +62,9 @@
     $scope.search = "butter";
 
     function getAlternatives() {
+      $scope.map = [];
+      $scope.orig_nutrient_amount = 0;
+
       $http.get('./modules/users/client/controllers/recipes/food_alternatives.json')
         .then( (response) => {
           response.data.cooking_methods.forEach( (cooking_method, i) => {
@@ -86,8 +93,7 @@
 						});
 					});
         });
-      $scope.orig_nutrient_amount = 0;
-			$scope.map = [];
+        console.log($scope.map);
     }
 
     $scope.getReport = (searchedItem) => {
@@ -114,9 +120,6 @@
     function getURL(url) {
 			return $http.get(url);
 		}
-
-    getAlternatives();
-    console.log($scope.map);
 
 
     // UsersService.usdaAlternatives(alternative)
