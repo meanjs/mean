@@ -19,39 +19,43 @@ usda.controller('USDAController',
 		$scope.orig_nutrient_amount;
 		$scope.all_alt_in_group = [];
 		$scope.have_match = 0;
+		$scope.c_method = "baked";
 
 		$scope.getAltFood = () => {
 			$http.get('food_alternatives.json')
 				.then( (response) => {
-					response.data.food_groups.forEach( (each_food_group, i) => {
-						each_food_group.food_alt.forEach( (alternative, j) => {
+					response.data.cooking_methods.forEach( (cooking_method, i) => {
+						cooking_method.food_groups.forEach( (food_group, j) => {
+							food_group.food_alts.forEach( (food_alt, k) => {
 
-							if(alternative.db_name == $scope.search){
-								$scope.have_match = 1;
-								$scope.orig_ndbno = alternative.db_ndbno;
-								$scope.in_food_group = each_food_group.group_name;
-								$scope.orig_nutrient_amount = alternative.db_main_nutrient.db_amount;
-							}
-							else{
-								$scope.all_alt_in_group.push(alternative);
-							}
-						});
-						if($scope.have_match == 1){
-							$scope.all_alt_in_group.forEach((alt_item, i) => {
-								if(alt_item.db_main_nutrient.db_amount < $scope.orig_nutrient_amount){
-									$scope.map.push({"map_ndbno": alt_item.db_ndbno, "map_name": alt_item.db_name});
+								if((food_alt.db_name == $scope.search) && ($scope.c_method == cooking_method.method_name)){
+									console.log(cooking_method);
+									console.log($scope.c_method);
+									$scope.have_match = 1;
+									$scope.orig_ndbno = food_alt.db_ndbno;
+									$scope.in_food_group = food_group.group_name;
+									$scope.orig_nutrient_amount = food_alt.db_main_nutrient.db_amount;
+								}
+								else{
+									$scope.all_alt_in_group.push(food_alt);
 								}
 							});
-						}
-						$scope.have_match = 0;
-						$scope.all_alt_in_group = [];
+							if($scope.have_match == 1){
+								$scope.all_alt_in_group.forEach((alt_item, i) => {
+									if(alt_item.db_main_nutrient.db_amount < $scope.orig_nutrient_amount){
+										$scope.map.push({"map_ndbno": alt_item.db_ndbno, "map_name": alt_item.db_name});
+									}
+								});
+							}
+							$scope.have_match = 0;
+							$scope.all_alt_in_group = [];
+						});
 					});
 				});
 			$scope.orig_nutrient_amount = 0;
 			$scope.map = [];
 		}
 		
-
 		$scope.doSearch = () => {
 			var searchURL = 
 				"https://api.nal.usda.gov/ndb/search/" + 
