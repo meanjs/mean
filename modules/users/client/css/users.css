@@ -36,3 +36,124 @@
 #directionsHeader, #recipeNameHeader {
   color: #8CD4C9;
 }
+
+/* ALTERNATIVE VIEW*/
+.ingredient-containerL{
+  background-color: rgba(156,156,156,0.3);
+  padding: 25px 45px 25px 45px;
+}
+.ingredient-containerR{
+  background-color: rgba(156,156,156,0.6);
+  padding: 25px 45px 25px 45px;
+}
+.al-h1L{
+  color: black;
+  margin-bottom: 25px;
+}
+.al-h1{
+  color: black;
+  margin-bottom: 5px;
+}
+.al-containerPaddingL{
+  padding: 0px 25px 0 130px;
+}
+.al-containerPaddingR{
+  padding: 0px 130px 0 25px;
+}
+.al-row{
+  margin-top: 50px;
+  margin-right: 0; 
+  margin-left: 0; 
+}
+.al-tabs{
+  padding-left: 35%;
+}
+.al-test{
+  float: left;
+  margin-right: 15px
+}
+.al-list{
+  list-style-type: none;
+  line-height: 230%;
+}
+.al-list-measure{
+  float: left;
+  margin-right: 25px;
+  color: rgb(174,200,107);
+}
+/*BUTTONS*/
+/*.btn {
+  display: inline-block;
+  padding: 6px 12px;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1.42857143;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  padding: 10px 16px;
+}
+  
+.btn-lg {
+  font-size: 18px;
+  line-height: 1.33;
+  border-radius: 6px;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #428bca;
+  border-color: #357ebd;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary.active,
+.open .dropdown-toggle.btn-primary {
+  color: #fff;
+  background-color: #3276b1;
+  border-color: #285e8e;
+}*/
+
+.sharp {
+  border-radius:0;
+}
+
+.htb {
+    padding: 5px 24px;
+    border: 0 none;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-size: 16px;
+}
+.htb:focus, .htb:active:focus, .htb.active:focus {
+    outline: 0 none;
+}
+
+.htb-primary {
+    background: rgb(249,192,120);
+    color: #ffffff;
+}
+.htb-primary:hover, .htb-primary:focus, .htb-primary:active, .htb-primary.active, .open > .dropdown-toggle.htb-primary {
+    background: rgba(249,192,120,0.8);
+}
+.htb-primary:active, .htb-primary.active {
+    background: #007299;
+    box-shadow: none;
+}
+
+
+
+
+
