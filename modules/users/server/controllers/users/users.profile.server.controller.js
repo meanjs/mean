@@ -17,7 +17,7 @@ var _ = require('lodash'),
   validator = require('validator');
 
 // ADD FIELDS
-var whitelistedFields = ['firstName', 'lastName', 'email', 'username', 'weight', 'allergies', 'dietaryDefinitions', 'preferences', 'religiousRestrictions'];
+var whitelistedFields = ['firstName', 'lastName', 'email', 'username', 'weight', 'allergies', 'dietaryDefinitions', 'preferences', 'religiousRestrictions','recipes'];
 
 var useS3Storage = config.uploads.storage === 's3' && config.aws.s3;
 var s3;
@@ -219,6 +219,7 @@ exports.me = function (req, res) {
       dietaryDefinitions: validator.escape(req.user.dietaryDefinitions),
       preferences: validator.escape(req.user.preferences),
       religiousRestrictions: validator.escape(req.user.religiousRestrictions),
+      recipes: validator.escape(req.user.recipes),
       created: req.user.created.toString(),
       roles: req.user.roles,
       profileImageURL: req.user.profileImageURL,
@@ -247,4 +248,10 @@ exports.usda = function(req, res) {
   var body = req.body;
 
   res.json(body);
+}
+
+exports.myRecipes = function(req, res) {
+  var user = req.user;
+
+  res.json(user);
 }

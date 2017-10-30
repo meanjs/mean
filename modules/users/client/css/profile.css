@@ -135,7 +135,7 @@ body{
   margin-right: 50px;
 }
 
-.textLN a{
+.textLN div a{
   color: #ffffff; 
 }
 .filter-dropdown{
@@ -295,6 +295,12 @@ body{
     color: #F9C078;
 }
 
+/*PROFILE EDITTING PAGE*/
+.allergiesContainer, .dietContainer, .preferencesContainer, .religiousContainer {
+  width: 80%;
+  padding: 1%;
+  text-align:center;
+}
 
 /*
 .filterDiv {
