@@ -15,13 +15,13 @@
       .catch(failure)
 
     function success(response) {
-      console.log('worked!');
-      console.log(response.recipes);
+      console.log("Recipes success: ", response.recipes);
+      $scope.recipes = response.recipes;
     }
 
     function failure(response) {
       console.log('sadness')
-      console.log(response);
+      console.log("Failure: ", response);
     }
     //vm.addings = UsersService.query();
   }

@@ -1,6 +1,30 @@
 (function () {
   'use strict';
 
+  angular
+    .module('users.services')
+    .factory('TransferService', TransferService);
+
+  TransferService.$inject = ['$resource'];
+
+  // This transfers data from one page to another
+  function TransferService() {
+    var savedData = {};
+
+    function set(data) {
+      savedData = data;
+    }
+
+    function get() {
+      return savedData;
+    }
+
+    return {
+      set: set,
+      get: get
+    }
+  }
+
   // Users service used for communicating with the users REST endpoint
   angular
     .module('users.services')
@@ -51,6 +75,10 @@
       myRecipes: {
         method: 'GET',
         url: '/api/users/myRecipes'
+      },
+      alternatives: {
+        method: 'POST',
+        url: '/api/users/alternatives'
       }
     });
 
@@ -85,6 +113,9 @@
       },
       getMyRecipes: function() {
         return this.myRecipes().$promise;
+      },
+      getAlternatives: function(search) {
+        return this.alternatives(search).$promise;
       }
     });
 

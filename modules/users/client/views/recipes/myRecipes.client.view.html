@@ -2,4 +2,11 @@
     <center>
         <h1>My Recipes</h1>
     </center>
+    <hr>
+    <div ng-repeat="recipe in recipes">
+        <p>ID: {{recipe._id}}</p>
+        <p>Ingredients: {{recipe.ingredients}}</p>
+        <p>Name: {{recipe.name}}</p>
+        <hr>
+    </div>
 </section>

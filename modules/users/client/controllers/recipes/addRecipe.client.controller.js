@@ -5,21 +5,21 @@
     .module('users')
     .controller('AddRecipeController', AddRecipeController);
 
-  AddRecipeController.$inject = ['UsersService', '$scope', '$http', 'Authentication', 'Notification', '$location'];
+  AddRecipeController.$inject = ['UsersService', 'TransferService', '$scope', '$http', 
+      'Authentication', 'Notification', '$location'];
 
-  function AddRecipeController(UsersService, $scope, $http, Authentication, Notification, $location) {
+  function AddRecipeController(UsersService, TransferService, $scope, $http, 
+      Authentication, Notification, $location) {
     var vm = this;
 
     vm.user = Authentication.user;
     vm.updateUserProfile = updateUserProfile;
 
     function updateUserProfile(isValid) {
-
       getAlternatives();
 
       if (!isValid) {
         $scope.$broadcast('show-errors-check-validity', 'vm.userForm');
-
         return false;
       }
 
@@ -28,31 +28,16 @@
       user.$update(function (response) {
         $scope.$broadcast('show-errors-reset', 'vm.userForm');
 
-        Notification.success({ message: '<i class="glyphicon glyphicon-ok"></i> Edit profile successful!' });
+        Notification.success({ message: '<i class="glyphicon glyphicon-ok"></i> Add recipe successful!' });
         Authentication.user = response;
       }, function (response) {
-        Notification.error({ message: response.data.message, title: '<i class="glyphicon glyphicon-remove"></i> Edit profile failed!' });
+        Notification.error({ message: response.data.message, title: '<i class="glyphicon glyphicon-remove"></i> Add recipe failed!' });
       });
 
       $location.path('/alternatives');
     }
 
-    // var alternative = {
-    //   'hello' : 'world'
-    // }
-
-    // API KEY
-		var apiKey = 'YAJ2M9l67OaqNMPCEfBcoccVtQDY5LPUR20rFzP8';
-
-		// FOR REPORT
-		var type = "b";
-		var format = "json";
-
-		// FOR INDIVIDUAL SEARCHES
-		var sort = "n";
-		var max = "200";
-		var ds = 'Standard Reference';
-
+    // GET ALTERNATIVES FROM RECIPE
     $scope.map = [];
 		$scope.in_food_group;
 		$scope.orig_nutrient_amount;
@@ -93,50 +78,10 @@
 						});
 					});
         });
-        console.log($scope.map);
+        TransferService.set($scope.map);
     }
 
-    $scope.getReport = (searchedItem) => {
-			var reportURL = 
-			  	"http://api.nal.usda.gov/ndb/reports/" + 
-			  	"?ndbno=" + searchedItem + 
-          "&type=" + type + 
-          "&format=" + format + 
-          "&api_key=" + apiKey; 
-
-        getURL(reportURL)
-          .then( (results) => {
-            $scope.searched = results.data;
-            assignFood();
-          });
-		}
-
-    function assignFood() {
-			$scope.food = $scope.searched.report.food.name.toLowerCase();
-			// $scope.ingredients = $scope.searched.report.food.ing.desc.toLowerCase();
-			$scope.nutrients = $scope.searched.report.food.nutrients;
-		}
-
-    function getURL(url) {
-			return $http.get(url);
-		}
-
-
-    // UsersService.usdaAlternatives(alternative)
-    //   .then(success)
-    //   .catch(failure)
-
-    // function success(response) {
-    //   console.log('worked!');
-    //   console.log(response);
-    // }
-
-    // function failure(response) {
-    //   console.log('sadness')
-    //   console.log(response);
-    // }
-
-    //DO YOUR FRONTEND JS CODE HERE
+    // Add to ingredient list
     $scope.recipeList = [{}];
 
     $scope.recipeAdd = function() {
