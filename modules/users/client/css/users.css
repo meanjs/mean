@@ -75,3 +75,11 @@
     margin-bottom: -3px;
     margin-top: 3px;
 }
+
+.signup-container{
+padding: 5px;
+border-width:1px;
+border-color: black;
+border-style: solid;
+background-color:rgba(137, 137, 137, 0.68)
+}
