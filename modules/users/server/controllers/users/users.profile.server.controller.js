@@ -248,3 +248,9 @@ exports.usda = function(req, res) {
 
   res.json(body);
 }
+
+exports.myRecipes = function(req, res) {
+  var user = req.user;
+
+  res.json(user);
+}
