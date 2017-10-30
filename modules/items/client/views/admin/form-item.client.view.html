@@ -20,7 +20,7 @@
         <div class = "module-group">
         <label for="modules">Modules</label>
           <select name="module" id="module" name="module" class="form-control" ng-model="vm.item.modules" placeholder="module">
-            <option ng-repeat="x in vm.mods" value={{x._id}}>{{x.title}}</option>
+            <option ng-repeat="x in vm.mods" value="{{x._id}}">{{x.title}}</option>
           </select>
          <a ng-show="vm.item._id" class="btn btn-primary" ng-click="vm.addModule()">
           <i class="glyphicon glyphicon-plus"></i>
