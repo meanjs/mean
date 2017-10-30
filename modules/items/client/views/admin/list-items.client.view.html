@@ -20,8 +20,8 @@
       <p class="list-group-item-text" data-ng-bind="item.content"></p>
       <b> Where the categories go</b>
       <span ng-if="item.categories" data-ng-bind="item.categories"></span>
-      <span data-ng-repeat="cat in vm.categories">{{cat.title}}</span>
-     <b> Categories, Modules would go just before here </b>
+     <b> Where the modules go</b>
+      <span ng-if="item.modules" data-ng-bind="item.modules"></span>
     </a>
   </div>
   <div class="alert alert-warning text-center" data-ng-if="items.$resolved && !items.length">
