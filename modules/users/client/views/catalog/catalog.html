@@ -1,0 +1,66 @@
+<!-- sponsors and admins should be able to see this -->
+
+<section>
+	<head>
+	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	  <link rel="stylesheet" href="style.css">
+	</head>
+	<div class="container">
+	  <div class="row">
+	    <h1 class="title">Resume Portal</h1>
+	  </div>
+	  <div class="row" ng-controller="ListingsController">
+	    <div class="col-md-6">
+	      <div class="input-group" id="searchBar">
+	        <span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-search"></span></span>
+	        <input type="text" class="form-control" placeholder="Search" ng-model="searchInput" ng-keyup="searchData()" />
+	      </div>
+	      <div class="tableWrapper">
+	        <table class="table table-striped table-hover">
+	            <tbody class="container">
+	                <tr ng-repeat="list in listings" ng-click="showDetails($index)">
+	                  <div>
+	                    <td>
+	                      <img class="centerText" src="profilePic.png" height=50 width=50></img>
+	                    </td>
+	                    <td class="information leftText">
+	                      <p colspan="100%">
+	                        {{list.name}}
+	                        <br> Major
+	                        <br> Team
+	                      </p>
+	                    </td>
+	                    <td>
+	                      <br><a class="actionButton" href="mailto:bry3133@ufl.edu?Subject=We%20Should%20Talk">Email</a>
+	                    </td>
+	                    <td>
+	                      <br><i class="actionButton glyphicon glyphicon-circle-arrow-down" style="font-size: 25px;"></i>
+	                    </td>
+	                  </div>
+	                </tr>
+	            </tbody>
+	        </table>
+	      </div>
+	    </div>
+	    <div class="col-md-6">
+	      <div id="cart">
+	        <h4 class="leftText"><i class="glyphicon glyphicon-shopping-cart" style="font-size: 25px;"></i>  Cart</h4>
+	      </div>
+	      <div class="jumbotron">
+	        <div ng-if="detailedInfo" class="rightText"><i>Avaliablity Status</i></div>
+	        <div ng-if="detailedInfo == null">
+	          <h2>Click Student for Details</h2>
+	        </div>
+	        <div ng-if="detailedInfo">
+	          <h2>Name</h2>
+	          <ul class="list-unstyled">
+	          </ul>
+	          <div id="addCart" class="rightText">
+	            <button type="addButton">Add to Cart</button>
+	          </div>
+	        </div>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+</section>
