@@ -3,8 +3,8 @@
   <div id="myCarousel" class="carousel slide" data-ride="carousel" ng-controller="DashboardController" ng-init="loadEventList()">
     <!-- Wrapper for slides -->
     <div class="carousel-inner">
-      <div class="item active">
-        <img ng-src="{{event.banner}}">
+      <div class="item active" >
+        <img src="https://media1.s-nbcnews.com/j/newscms/2017_29/2076501/170715-chipotle-restaurant-ew-1227p_5fa0d17495b09c2189e8632005bc9e95.nbcnews-ux-2880-1000.jpg" >
         <div class="carousel-caption">
           <h3>{{event.name}}</h3>
           <h4>{{event.location}}</h4>
@@ -13,7 +13,7 @@
       </div>
 
     <div class="item" ng-repeat="event in eventList">
-        <img ng-src="{{event.banner}}">
+        <img src="http://www.sarcomastrong.com/wp-content/uploads/2017/03/os-bz-blaze-pizza-20170411.jpg">
         <div class="carousel-caption">
           <h3>{{event.name}}</h3>
           <h4>{{event.location}}</h4>
@@ -228,7 +228,6 @@
               <div class="form-group" style="display: inline-block">
                 <label for="sTime">Event Start Time</label>
                 <input type="time" class="form-control" id="sTime" ng-model="sTime">
-                <space>
                 <label for="eTime">Event End Time</label>
                 <input type="time" class="form-control" id="eTime" ng-model="eTime">
               </div>
@@ -249,7 +248,6 @@
       </div>
     </div>
   </div>
-
   <!-- BIZ ACCEPT EVENT FORM -->
   <div class="container-fluid" style="background-color: #dddddd" ng-show="acceptEvent_flag">
     <div class="row">
