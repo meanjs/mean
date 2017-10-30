@@ -50,7 +50,10 @@
         url: '/categories/create',
         templateUrl: '/modules/items/client/views/admin/form-category.client.view.html',
         controller: 'CatsController',
-        controllerAs: 'vm'
+        controllerAs: 'vm',
+        resolve: {
+          catResolve: newCat
+        }
       })
       .state('admin.items.create', {
         url: '/items/create',
