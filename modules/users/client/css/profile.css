@@ -295,6 +295,16 @@ body{
     color: #F9C078;
 }
 
+/*PROFILE EDITTING PAGE*/
+.allergiesContainer, .dietContainer, .preferencesContainer, .religiousContainer {
+  width: 80%;
+  padding: 1%;
+  text-align:center;
+}
+
+.allergiesContainer h3, .dietContainer h3, .preferencesContainer h3, .religiousContainer h3 {
+  text-align: center;
+}
 
 /*
 .filterDiv {
