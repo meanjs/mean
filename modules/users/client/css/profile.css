@@ -302,10 +302,6 @@ body{
   text-align:center;
 }
 
-.allergiesContainer h3, .dietContainer h3, .preferencesContainer h3, .religiousContainer h3 {
-  text-align: center;
-}
-
 /*
 .filterDiv {
   float: left;
