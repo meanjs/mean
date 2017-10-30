@@ -40,18 +40,18 @@
 /* ALTERNATIVE VIEW*/
 .ingredient-containerL{
   background-color: rgba(156,156,156,0.3);
-  padding: 25px 45px 25px 45px;
+  padding: 25px 50px 25px 50px;
 }
 .ingredient-containerR{
   background-color: rgba(156,156,156,0.6);
-  padding: 25px 45px 25px 45px;
+  padding: 25px 50px 25px 50px;
 }
 .al-h1L{
-  color: black;
+  color: #474747;
   margin-bottom: 25px;
 }
 .al-h1{
-  color: black;
+  color: #474747;
   margin-bottom: 5px;
 }
 .al-containerPaddingL{
@@ -76,10 +76,14 @@
   list-style-type: none;
   line-height: 230%;
 }
-.al-list-measure{
+.al-list-measureL{
   float: left;
   margin-right: 25px;
   color: rgb(174,200,107);
+}
+.al-list-measureR{
+  float: left;
+  margin-right: 25px;
 }
 /*BUTTONS*/
 /*.btn {
@@ -149,8 +153,11 @@
     background: rgba(249,192,120,0.8);
 }
 .htb-primary:active, .htb-primary.active {
-    background: #007299;
+    background: rgba(249,192,120,1);
     box-shadow: none;
+}
+.al-btnR{
+  float: right;
 }
 
 
