@@ -1,4 +1,6 @@
 <section ng-controller="DashboardController">
+
+
   <!-- ORG VIEWS -->
   <div class="container-fluid" ng-show="isOrg&&!requestEvent_flag" ng-init="requestEvent_flag=0">
     <div class="row" style="margin-top:5px;">
@@ -64,6 +66,8 @@
       </div>
     </div>
   </div>
+
+
 
   <!-- ORG REQUEST EVENT -->
   <div class="container-fluid" ng-show="requestEvent_flag">
@@ -178,7 +182,7 @@
             </div>
             <!--Menu 1 (AKA: the Calender Tab) -->
             <div class="row" style="justify-content: center" ng-init="showMenu=0" ng-show="showMenu == 1">
-              <p>Insert the calender here</p>
+              <div id="calendar" ui-calendar="uiConfig.calendar" class="span8 calendar" ng-model="eventSources"></div>
             </div>
             <!--Menu 2 (AKA: the Past events Tab) -->
             <div class="row" style="justify-content: center" ng-init="showMenu=0" ng-show="showMenu == 2">
@@ -294,5 +298,7 @@
       </div>
     </div>
   </div>
+
+
 </section>
 </body>

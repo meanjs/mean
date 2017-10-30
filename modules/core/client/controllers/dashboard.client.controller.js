@@ -1,9 +1,10 @@
 'use strict';
 
-angular.module('core').controller('DashboardController', ['$scope', '$http', 'Authentication',
-  function ($scope, $http, Authentication) {
+angular.module('core').controller('DashboardController', ['$scope', '$compile', '$http', 'Authentication',
+  function ($scope, $compile, $http, Authentication) {
     // This provides Authentication context.
     $scope.authentication = Authentication;
+    $scope.events = [];
 
     //Initialize some variables
     $scope.editEvent_flag = 0;
@@ -147,6 +148,7 @@ angular.module('core').controller('DashboardController', ['$scope', '$http', 'Au
         console.log('Failed');
         console.log(res);
       });
+
     };
 
     //Initially loading the events
@@ -181,6 +183,7 @@ angular.module('core').controller('DashboardController', ['$scope', '$http', 'Au
         }
       }).then(function (res) {
         console.log('Successful event');
+        $scope.addEvent();
       }, function (res) {
         console.log('Failed event');
         console.log(res);
@@ -229,5 +232,61 @@ angular.module('core').controller('DashboardController', ['$scope', '$http', 'Au
     //console.log($scope.signedIn);
     console.log($scope.isBiz);
     console.log($scope.isOrg);
+
+    var date = new Date();
+    var d = date.getDate();
+    var m = date.getMonth();
+    var y = date.getFullYear();
+
+    /* add custom event*/
+    $scope.addEvent = function() {
+      $scope.events.push({
+        title: 'Open Sesame',
+        start: new Date(y, m, 30),
+        end: new Date(y, m, 29),
+        className: ['openSesame']
+      });
+    };
+
+
+    /* event source that contains custom events on the scope */
+
+
+      // { title: 'Long Event', start: new Date(y, m, d - 5), end: new Date(y, m, d - 2) },
+      // { id: 999, title: 'Repeating Event', start: new Date(y, m, d - 3, 16, 0), allDay: false },
+      // { id: 999, title: 'Repeating Event', start: new Date(y, m, d + 4, 16, 0), allDay: false },
+      // { title: 'Birthday Party', start: new Date(y, m, d + 1, 19, 0), end: new Date(y, m, d + 1, 22, 30), allDay: false },
+      // { title: 'Click for Google', start: new Date(y, m, 28), end: new Date(y, m, 29), url: 'http://google.com/'}
+    /* event source that calls a function on every view switch */
+
+
+    /* Render Tooltip */
+    $scope.eventRender = function (event, element, view) {
+      element.attr({
+        'tooltip': event.title,
+        'tooltip-append-to-body': true
+      });
+      $compile(element)($scope);
+    };
+
+    /* config object */
+    $scope.uiConfig = {
+      calendar: {
+        height: 450,
+        editable: true,
+        header: {
+          left: 'title',
+          center: '',
+          right: 'today prev,next'
+        },
+        eventRender: $scope.eventRender
+      }
+    };
+    /* event sources array*/
+    $scope.eventSources = [$scope.events];
+
   }
-]);
+
+
+])
+;
