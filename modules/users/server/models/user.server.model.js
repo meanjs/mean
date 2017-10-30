@@ -62,6 +62,7 @@ var RecipeSchema = new Schema({
     default: 'modules/users/client/img/profile/default.png'
   },
   directions: String,
+  cookingStyle: String,
   ingredients: [IngredientSchema]
 });
 
@@ -174,7 +175,20 @@ var UserSchema = new Schema({
     islam: Boolean,
     kosher: Boolean
   },
-  recipes: [RecipeSchema], 
+  recipes: [{
+    name: String,
+    image: { 
+        type: String,
+        default: 'modules/users/client/img/profile/default.png'
+    },
+    directions: String,
+    cookingStyle: String,
+    ingredients: [{
+        name: String,
+        quantity: Number,
+        units: String
+    }]
+  }], 
   test: {
     type: String
   },
