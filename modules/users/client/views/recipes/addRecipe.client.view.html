@@ -4,13 +4,19 @@
         <h1 style="color: rgb(249,192,120)">Create New Recipe</h1>
       </div>
     </center>
-    <form name="vm.userForm" class="jumbotron" ng-submit="vm.updateUserProfile(vm.userForm.$valid)" novalidate>
+    <form name="vm.userForm" class="jumbotron" 
+        ng-submit="vm.updateUserProfile(vm.userForm.$valid)" novalidate>
       <fieldset class="row">
         <div class="col-md-8">
             <center>
               <div class="form-group" show-errors>
                 <h3 id="recipeNameHeader">Recipe Name</h3>
-                <input name="name" type="text" ng-model="vm.user.recipes.name" id="name" class="form-control" placeholder="Recipe Name" required>
+                <input name="name" type="text" ng-model="vm.user.recipes[0].name" id="name" class="form-control" placeholder="Recipe Name" required>
+                <select style = "width: 15%" class="form-control" ng-model="vm.user.recipes[0].cookingStyle">
+                      <option>Baked</option>
+                      <option>Fried</option>
+                      <option>Grilled</option>
+                </select>
               </div>
             </center>
             <br>
@@ -23,13 +29,13 @@
               <tbody>
                 <tr ng-repeat="x in recipeList">
                   <td id="ing">
-                    <input name="ingredient" type="text" ng-model="vm.user.recipes.ingredients.name" placeholder="Ingredient Name"/>
+                    <input name="ingredient" type="text" ng-model="vm.user.recipes[0].ingredients[0].name" placeholder="Ingredient Name"/>
                   </td>
                   <td id="quantity">
-                    <input name="quantity" type="number" ng-model="vm.user.recipes.ingredients.quantity" placeholder="0"/>
+                    <input name="quantity" type="number" ng-model="vm.user.recipes[0].ingredients[0].quantity" placeholder="0"/>
                   </td>
                   <td id="units">
-                    <select class="form-control" ng-model="vm.user.recipes.ingredients.units">
+                    <select class="form-control" ng-model="vm.user.recipes[0].ingredients[0].units">
                       <option>Cups</option>
                       <option>Ounces</option>
                       <option>Tbs</option>
@@ -58,7 +64,7 @@
             <div class="form-group">
               <h3 id="directionsHeader">Recipe Directions</h3>
               <textarea id="directions" class="form-control" rows="5" 
-                ng-model="vm.user.recipes.directions" placeholder="Enter Directions Here"></textarea>
+                ng-model="vm.user.recipes[0].directions" placeholder="Enter Directions Here"></textarea>
             </div>
           </center>
           </br>
