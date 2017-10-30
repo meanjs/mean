@@ -1,8 +1,8 @@
 /*.content {
   margin-top: 50px;
 }
-
-.undecorated-link:hover {
+*/
+/*.undecorated-link:hover {
   text-decoration: none;
 }
 [ng\:cloak],
@@ -113,9 +113,6 @@ a:hover .header-profile-image {
   padding-right: 0; 
   padding-left: 0; 
 }
-.content{
-  margin-top: 58px;
-}
 .navbar-inverse .navbar-brand{
   color: rgb(249,192,120); 
 }
@@ -124,6 +121,7 @@ a:hover .header-profile-image {
   height:100%;
 }
 */
+
 /*lower nav*/
 
 /*.lowerNav .textLN{

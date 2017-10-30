@@ -1,5 +1,5 @@
 .content {
-  margin-top: 50px;
+  margin-top: 0px ;
 }
 
 .undecorated-link:hover {
@@ -100,6 +100,10 @@ a:hover .header-profile-image {
 body{
   font-family: "Source Sans Pro", "Sans";
 }
+.row-margin{
+       margin-right: 0; 
+     margin-left: 0; 
+}
 
 .container{
   margin-right: 0;
@@ -113,9 +117,7 @@ body{
   padding-right: 0;
   padding-left: 0;
 }
-.content{
-  margin-top: 58px;
-}
+
 .navbar-inverse .navbar-brand{
   color: rgb(249,192,120);
 }
@@ -128,7 +130,7 @@ body{
 
 .lowerNav .textLN{
   height: 50px;
-  background-color: rgb(255,0,0);
+  background-color: rgb(223,93,74);
   padding-top: 15px;
 }
 
@@ -179,13 +181,13 @@ body{
 .dropMenu{
   float: left;
   width: 100%;
-  margin-left: 36.3%;
+  padding-left: 36.3%;
 
 }
 @media  (max-width: 500px) {
-    .dropMenu {
-        margin-left: 10.3%;
-}
+  .dropMenu {
+    padding-left: 10.3%;
+  }
 }
 .dropup, .dropdown{
   float: left;
