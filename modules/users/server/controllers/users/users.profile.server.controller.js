@@ -17,7 +17,7 @@ var _ = require('lodash'),
   validator = require('validator');
 
 // ADD FIELDS
-var whitelistedFields = ['firstName', 'lastName', 'email', 'username', 'test', 'weight'];
+var whitelistedFields = ['firstName', 'lastName', 'email', 'username', 'weight', 'allergies', 'dietaryDefinitions', 'preferences', 'religiousRestrictions'];
 
 var useS3Storage = config.uploads.storage === 's3' && config.aws.s3;
 var s3;
@@ -213,9 +213,12 @@ exports.me = function (req, res) {
       displayName: validator.escape(req.user.displayName),
       provider: validator.escape(req.user.provider),
       username: validator.escape(req.user.username),
-     //======added test and weight
-      test: validator.escape(req.user.test),
+     //======Added other fields
       weight: validator.escape(req.user.weight),
+      allergies: validator.escape(req.user.allergies),
+      dietaryDefinitions: validator.escape(req.user.dietaryDefinitions),
+      preferences: validator.escape(req.user.preferences),
+      religiousRestrictions: validator.escape(req.user.religiousRestrictions),
       created: req.user.created.toString(),
       roles: req.user.roles,
       profileImageURL: req.user.profileImageURL,
@@ -229,16 +232,19 @@ exports.me = function (req, res) {
   res.json(safeUserObject || null);
 };
 
-exports.test = function(req, res) {
-  var user = req.user;
-  var body = req.body;
-
-  res.json(body);
-}
-
 exports.add = function(req, res) {
   var body = req.body.add;
 
   res.json(body);
 }
 
+exports.usda = function(req, res) {
+  // $http.get(path.resolve('./modules/users/server/food_alternatives.json'))
+  //   .then( (response) => {
+  //     res.json(response);
+  //   });
+
+  var body = req.body;
+
+  res.json(body);
+}

@@ -11,10 +11,10 @@
     var vm = this;
 
     //DO YOUR FRONTEND JS CODE HERE
-    $scope.alert = () => {
-		  alert('hello');
-    }
-    
+    // $scope.alert = () => {
+		//   alert('hello');
+    // }
+
     //CALORIE SLIDER
     var slider = document.getElementById("calories");
     var output = document.getElementById("calVal");
@@ -32,16 +32,16 @@
               selectHTML+= "<option value='"+choices[i]+"'>"+choices[i]+"</option>";
           }
           selectHTML+= "<option value='test'>test</option>";
-      
+
           newSelect.innerHTML= selectHTML;
           document.getElementById('book_selection').appendChild(newSelect);
-          
+
       }
       */
 
-    
-    
-    
+
+
+
     /*
       filterSelection("all")
       $scope.filterSelection = function(c) {
@@ -55,7 +55,7 @@
             w3AddClass(x[i], "show");
         }
       }
-      
+
       $scope.w3AddClass = function(element, name) {
         var i, arr1, arr2;
         arr1 = element.className.split(" ");
@@ -64,21 +64,21 @@
           if (arr1.indexOf(arr2[i]) == -1) {element.className += " " + arr2[i];}
         }
       }
-      
+
       $scope.w3RemoveClass = function(element, name) {
         var i, arr1, arr2;
         arr1 = element.className.split(" ");
         arr2 = name.split(" ");
         for (i = 0; i < arr2.length; i++) {
           while (arr1.indexOf(arr2[i]) > -1) {
-            arr1.splice(arr1.indexOf(arr2[i]), 1);     
+            arr1.splice(arr1.indexOf(arr2[i]), 1);
           }
         }
         element.className = arr1.join(" ");
       }*/
 
 
-    
+
 
 
   }

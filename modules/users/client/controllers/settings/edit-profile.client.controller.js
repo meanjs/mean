@@ -13,27 +13,45 @@
     vm.user = Authentication.user;
     vm.updateUserProfile = updateUserProfile;
 
-    var par = {
-      'test' : 'hello'
-    };
-    // TESTING
-    UsersService.testing(par)
-        .then(success)
-        .catch(failure);
+    $scope.personalProfile = true;
+    $scope.healthProfile = false;
 
-    function success(response) {
-      console.log('worked!');
-      console.log(response);
+    $scope.personal = function() {
+      if($scope.personalProfile == false) {  //user is on health profile
+        $scope.personalProfile = true; //we still want to show personal profile info when user go back to that page so set that to true
+        $scope.healthProfile = false;  //At this point, we are on personal profile page, and we don't want health profile page to show up on personal profile so set that to false
+      }
     }
 
-    function failure(response) {
-      console.log('sadness')
-      console.log(response);
+    $scope.health = function() {
+      if($scope.healthProfile == false){
+        $scope.healthProfile = true;
+        $scope.personalProfile = false;
+      }
     }
-    // END TESTING
 
     // Update a user profile
     function updateUserProfile(isValid) {
+
+      if (!isValid) {
+        $scope.$broadcast('show-errors-check-validity', 'vm.userForm');
+
+        return false;
+      }
+
+      var user = new UsersService(vm.user);
+
+      user.$update(function (response) {
+        $scope.$broadcast('show-errors-reset', 'vm.userForm');
+
+        Notification.success({ message: '<i class="glyphicon glyphicon-ok"></i> Edit profile successful!' });
+        Authentication.user = response;
+      }, function (response) {
+        Notification.error({ message: response.data.message, title: '<i class="glyphicon glyphicon-remove"></i> Edit profile failed!' });
+      });
+    }
+
+    function updateUserPersonalProfile(isValid) {
 
       if (!isValid) {
         $scope.$broadcast('show-errors-check-validity', 'vm.userForm');

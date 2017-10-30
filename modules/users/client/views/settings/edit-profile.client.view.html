@@ -1,37 +1,275 @@
-<section class="row">
-  <div class="col-xs-offset-1 col-xs-10 col-md-offset-4 col-md-4">
-    <form name="vm.userForm" ng-submit="vm.updateUserProfile(vm.userForm.$valid)" class="signin" novalidate autocomplete="off">
-      <fieldset>
-        <div class="form-group" show-errors>
-          <label for="firstName">First Name</label>
-          <input type="text" id="firstName" name="firstName" class="form-control" ng-model="vm.user.firstName" placeholder="First Name" required autofocus>
-          <div ng-messages="vm.userForm.firstName.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">First name is required.</p>
-          </div>
-        </div>
-        <div class="form-group" show-errors>
-          <label for="lastName">Last Name</label>
-          <input type="text" id="lastName" name="lastName" class="form-control" ng-model="vm.user.lastName" placeholder="Last Name" required>
-          <div ng-messages="vm.userForm.lastName.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">Last name is required.</p>
-          </div>
-        </div>
-        <div class="form-group" show-errors>
-          <label for="email">Email</label>
-          <input type="email" id="email" name="email" class="form-control" ng-model="vm.user.email" placeholder="Email" lowercase required>
-          <div ng-messages="vm.userForm.email.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">Email address is required.</p>
-            <p class="help-block error-text" ng-message="email">Email address is invalid.</p>
-          </div>
-        </div>
-        <div class="form-group" show-errors>
-          <label for="username">Username</label>
-          <input type="text" id="username" name="username" class="form-control" ng-model="vm.user.username" placeholder="Username" lowercase required>
-          <div ng-messages="vm.userForm.username.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">Username is required.</p>
-          </div>
-        </div>
+<section class="container">
+  <!--HEADER-->
+  <div class="page-header">
+    <h1 class="text-center">My Profile</h1>
+  </div>
+  <!--END HEADER-->
 
+  <!--NAVBAR -->
+  <div class="row">
+    <div class="nav text-center">
+      <div class="textL" id="views">
+        <div ng-show="personalProfile">
+          <!--TODO: MAKE THE TEXT OF THIS NAVIGATION BIGGER BIGGER-->
+          <a class="test left active" href="" ng-click="personal()" id="viewName">Personal</a>
+          <a class="test" href="" ng-click="health()" id="viewName">Health</a>
+        </div>
+        <div ng-show="healthProfile">
+          <a class="test left" href="" ng-click="personal()" id="viewName">Personal</a>
+          <a class="test active" href="" ng-click="health()" id="viewName">Health</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--END NAVBAR-->
+
+  <br>
+
+  <!--PROFILE INFO-->
+  <div class="row">
+    <!--PROFILE PICTURE-->
+    <center class="col-md-4">
+      <!--TODO: PUT THE PICTURE HERE. DO NOT LINK TO ANOTHER VIEW, JUST PUT THE HTML HERE.-->
+      <div style="background: gray; height: 300px;">Profile Picture Goes Here</div>
+    </center>
+    <!--END PROFILE PICTURE 
+
+    PERSONAL PROFILE INPUTS-->
+    <div class="col-md-8">
+      <div ng-show="personalProfile">
+        <div>
+          <form name="vm.userForm" ng-submit="vm.updateUserPersonalProfile(vm.userForm.$valid)" 
+              class="signin" novalidate autocomplete="off">
+            <fieldset>
+              <div class="form-group row" show-errors>
+                <label for="firstName" class="col-sm-2 col-form-label">First Name</label>
+                <div class="col-sm-10">
+                  <input type="text" id="firstName" name="firstName" class="form-control" style="width: 50%"
+                      ng-model="vm.user.firstName" placeholder="First Name" required autofocus>
+                </div>
+
+                <div ng-messages="vm.userForm.firstName.$error" role="alert">
+                  <p class="help-block error-text" ng-message="required">First name is required.</p>
+                </div>
+              </div>
+
+              <div class="form-group row" show-errors>
+                <label for="lastName" class="col-sm-2 col-form-label">Last Name</label>
+                <div class="col-sm-10">
+                  <input type="text" id="lastName" name="lastName" class="form-control" style="width: 50%"
+                      ng-model="vm.user.lastName" placeholder="Last Name" required>
+                </div>
+
+                <div ng-messages="vm.userForm.lastName.$error" role="alert">
+                  <p class="help-block error-text" ng-message="required">Last name is required.</p>
+                </div>
+              </div>
+              <!--
+              <div class="form-group" show-errors>
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" class="form-control" ng-model="vm.user.email" placeholder="Email" lowercase required>
+                <div ng-messages="vm.userForm.email.$error" role="alert">
+                  <p class="help-block error-text" ng-message="required">Email address is required.</p>
+                  <p class="help-block error-text" ng-message="email">Email address is invalid.</p>
+                </div>
+              </div>
+            -->
+              <div class="form-group row" show-errors>
+                <label for="username" class="col-sm-2 col-form-label">Username</label>
+                <div class="col-sm-10">
+                  <input type="text" id="username" name="username" class="form-control" style="width: 50%"
+                    ng-model="vm.user.username" placeholder="Username" lowercase required>
+                </div>
+
+                <div ng-messages="vm.userForm.username.$error" role="alert">
+                  <p class="help-block error-text" ng-message="required">Username is required.</p>
+                </div>
+              </div>
+
+              <div>
+                <button type="submit" class="btn btn-primary">Save Profile</button>
+              </div>
+            </fieldset>
+          </form>
+        </div>
+      </div>
+      <!--END PERSONAL PROFILE INPUTS-->
+    
+    <!--HEALTH PROFILE INPUTS-->
+    <div ng-hide="personalProfile">
+      <div>
+        <form name="vm.userForm" ng-submit="vm.updateUserProfile(vm.userForm.$valid)" 
+          class="signin" novalidate autocomplete="off">
+          <fieldset>
+            <h3>Allergies</h3>
+            <div class="row form-group" show-errors>
+              <div class="col-md-3">
+                <div class="form-group" show-errors>
+                  <label for="allergies">corn</label>
+                  <input type="checkbox" id="corn" name="corn" ng-model="vm.user.allergies.corn">
+                </div>
+                <div class="form-group">
+                  <label for="allergies">milk</label>
+                  <input type="checkbox" id="milk" name="milk" ng-model="vm.user.allergies.milk" required>
+                </div>
+                <div class="form-group">
+                  <label for="allergies">eggs</label>
+                  <input type="checkbox" id="eggs" name="eggs" ng-model="vm.user.allergies.eggs" required>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label for="allergies">peanuts</label>
+                  <input type="checkbox" id="peanuts" name="peanuts" ng-model="vm.user.allergies.peanuts" required>
+                </div>
+                <div class="form-group">
+                  <label for="allergies">Tree Nuts</label>
+                  <input type="checkbox" id="treeNuts" name="treeNuts" ng-model="vm.user.allergies.treeNuts" required>
+                </div>
+                <div class="form-group">
+                  <label for="allergies">Fish</label>
+                  <input type="checkbox" id="fish" name="fish" ng-model="vm.user.allergies.fish" required>
+                </div>
+                <div class="form-group">
+                  <label for="allergies">Shellfish</label>
+                  <input type="checkbox" id="shellfish" name="shellfish" ng-model="vm.user.allergies.shellfish" required>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label for="allergies">soy</label>
+                  <input type="checkbox" id="soy" name="soy" ng-model="vm.user.allergies.soy" required>
+                </div>
+                <div class="form-group">
+                  <label for="allergies">wheat gluten</label>
+                  <input type="checkbox" id="wheatGluten" name="wheatGluten" ng-model="vm.user.allergies.wheatGluten" required>
+                </div>
+              </div>
+            </div>
+
+            <div ng-messages="vm.userForm.allergies.$error" role="alert">
+              <p class="help-block error-text" ng-message="required">Allergies are required.</p>
+            </div>    
+
+            <h3>Diet</h3>
+            <div class="row form-group" show-errors>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="diet">Vegan</label>
+                  <input type="checkbox" id="vegan" name="vegan" ng-model="vm.user.dietaryDefinitions.vegan">
+                </div>
+                <div class="form-group">
+                  <label for="diet">ovo vegetarian</label>
+                  <input type="checkbox" id="ovoVegetarian" name="ovoVegetarian" ng-model="vm.user.dietaryDefinitions.ovoVegetarian" required> 
+                </div>
+                <div class="form-group">
+                  <label for="diet">lacto vegetarian</label>
+                  <input type="checkbox" id="lactoVegetarian" name="lactoVegetarian" ng-model="vm.user.dietaryDefinitions.lactoVegetarian" required>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="diet">lacto-ovo vegetarian</label>
+                  <input type="checkbox" id="lactoOvoVegetarian" name="lactoOvoVegetarian" ng-model="vm.user.dietaryDefinitions.lactoOvoVegetarian" required>
+                </div>
+                <div class="form-group">
+                  <label for="diet">pescetarian</label>
+                    <input type="checkbox" id="pescetarian" name="pescetarian" ng-model="vm.user.dietaryDefinitions.pescetarian" required>
+                </div>
+              </div>
+            </div>        
+
+            <div ng-messages="vm.userForm.diet.$error" role="alert">
+              <p class="help-block error-text" ng-message="required">Dietary preferences are required.</p>
+            </div>
+
+            <h3>Preferences</h3>
+            <div class="row form-group" show-errors>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="preferences">Cholesterol</label>
+                  <input type="checkbox" id="preferences" name="preferences" ng-model="vm.user.preferences.cholesterol" required>
+                </div>
+                <div class="form-group">
+                  <label for="preferences">diabetes</label>
+                  <input type="checkbox" id="diabetes" name="diabetes" ng-model="vm.user.preferences.diabetes" required>
+                </div>
+                <div class="form-group">
+                  <label for="preferences">low salt</label>
+                  <input type="checkbox" id="lowSalt" name="lowSalt" ng-model="vm.user.preferences.lowSalt" required>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="preferences">low fat</label>
+                  <input type="checkbox" id="lowFat" name="lowFat" ng-model="vm.user.preferences.lowFat" required>
+                </div>
+                <div class="form-group">
+                  <label for="preferences">low calories(< 400)</label>
+                  <input type="checkbox" id="lowCalories" name="lowCalories" ng-model="vm.user.preferences.lowCalories" required>
+                </div>
+                <div class="form-group">
+                  <label for="preferences">bland</label>
+                  <input type="checkbox" id="bland" name="bland" ng-model="vm.user.preferences.bland" required>
+                </div>
+              </div>
+            </div>
+
+            <div ng-messages="vm.userForm.preferences.$error" role="alert">
+              <p class="help-block error-text" ng-message="required">This field is required.</p>
+            </div>
+
+            <h3>Religious Restrictions</h3>
+            <div class="row form-group" show-errors>
+              <div class="col-md-2">
+                <div class="form-group">
+                  <label for="religiousRestrictions">Hindu</label>
+                  <input type="checkbox" id="religiousRestrictions" name="religiousRestrictions" ng-model="vm.user.religiousRestrictions.hindu" required autofocus>
+                </div>
+              </div>
+              <div class="col-md-2">
+                <div class="form-group">
+                  <label for="religiousRestrictions">Islam</label>
+                  <input type="checkbox" id="Islam" name="Islam" ng-model="vm.user.religiousRestrictions.Islam" required>
+                </div>
+              </div>
+              <div class="col-md-2">
+                <div class="form-group">
+                  <label for="religiousRestrictions">kosher</label>
+                  <input type="checkbox" id="kosher" name="kosher" ng-model="vm.user.religiousRestrictions.kosher" required>
+                </div>
+              </div>
+            </div>
+
+            <div ng-messages="vm.userForm.religiousRestrictions.$error" role="alert">
+              <p class="help-block error-text" ng-message="required">Religious restrictions are required.</p>
+            </div>
+
+            <div class="form-group" show-errors>
+              <label for="weight">Weight:</label>
+              <input type="text" id="weight" name="weight" class="form-control" style="width:50%"
+                ng-model="vm.user.weight" placeholder="Weight" required autofocus>
+
+              <div ng-messages="vm.userForm.weight.$error" role="alert">
+                <p class="help-block error-text" ng-message="required">Weight is required.</p>
+              </div>
+            </div>
+            <div>
+              <button type="submit" class="btn btn-primary">Save Profile</button>
+            </div>
+          </div>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+    <!--END HEALTH PROFILE INPUTS-->
+  </div>
+  <!--END PROFILE INFO-->
+</section>
+
+
+
+        <!--
         <div class="form-group" show-errors>
           <label for="test">Test</label>
           <input type="text" id="test" name="test" class="form-control" ng-model="vm.user.test" placeholder="Test" required>
@@ -39,11 +277,19 @@
             <p class="help-block error-text" ng-message="required">Test is required.</p>
           </div>
         </div>
+      -->
 
-        <div class="text-center form-group">
-          <button type="submit" class="btn btn-primary">Save Profile</button>
-        </div>
-      </fieldset>
-    </form>
-  </div>
-</section>
+
+
+<!--<nav class="col-sm-3 col-md-3">
+      <ul class="nav nav-pills nav-stacked">
+        <li ui-sref-active="active">
+           <li ui-sref-active="active">
+          <a ui-sref="profile.picture">Change Profile Picture</a>
+        </li>
+        </ul>
+    </nav>
+    <br></br>
+    <div class="col-sm-9 col-md-0 profile-view">
+      <div ui-view></div>
+    </div>-->

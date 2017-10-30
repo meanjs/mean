@@ -20,6 +20,15 @@
           roles: ['user', 'admin']
         }
       })
+      .state('profile', { // MY PROFILE
+        url: '/profile',
+        templateUrl: '/modules/users/client/views/settings/edit-profile.client.view.html',
+        controller: 'EditProfileController',
+        controllerAs: 'vm',
+        data: {
+          pageTitle: 'Profile'
+        }
+      })
       .state('add', { // ADD RECIPES
         url: '/add-recipe',
         templateUrl: 'modules/users/client/views/recipes/addRecipe.client.view.html',
@@ -60,15 +69,6 @@
         },
         css: 'modules/users/client/css/recipes/customize.css'
       })
-      .state('profile', { // MY PROFILE 
-        url: '/profile',
-        templateUrl: '/modules/users/client/views/settings/edit-profile.client.view.html',
-        controller: 'EditProfileController',
-        controllerAs: 'vm',
-        data: {
-          pageTitle: 'Profile'
-        }
-      })
       .state('healthprofile', { // HEALTH PROFILE
         url: '/healthprofile',
         templateUrl: '/modules/users/client/views/settings/edit-health-profile.client.view.html',
@@ -96,7 +96,7 @@
           pageTitle: 'Social Accounts'
         }
       })
-      .state('settings.picture', {
+      .state('profile.picture', {
         url: '/picture',
         templateUrl: '/modules/users/client/views/settings/change-profile-picture.client.view.html',
         controller: 'ChangeProfilePictureController',
