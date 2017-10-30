@@ -25,7 +25,7 @@
       //   css: 'modules/customizings/client/css/list-customizings.css'
       // })
       .state('customizings.alternatives', {
-        url: '/alternatives',
+        url: '/alternativessss',
         templateUrl: 'modules/customizings/client/views/alternatives.client.view.html',
         controller: 'AlternativesController',
         controllerAs: 'vm',

@@ -40,13 +40,13 @@
         method: 'POST',
         url: '/api/auth/signin'
       },
-      test: {
-        method: 'POST',
-        url: '/api/users/test'
-      },
       add: {
         method: 'POST',
         url: '/api/users/add'
+      },
+      usda: {
+        method: 'POST',
+        url: '/api/users/usda'
       }
     });
 
@@ -73,11 +73,11 @@
       userSignin: function (credentials) {
         return this.signin(credentials).$promise;
       },
-      testing: function(param) {
-        return this.test(param).$promise;
-      },
       adding: function(param) {
-        return this.test(param).$promise;
+        return this.add(param).$promise;
+      },
+      usdaAlternatives: function(param) {
+        return this.usda(param).$promise;
       }
     });
 

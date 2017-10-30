@@ -1,0 +1,150 @@
+{
+    "food_groups": [
+        {
+            "group_name": "db_Fats_and_Oils",
+            "food_alt": [
+                {
+                    "db_name": "butter",
+                    "db_full_name": "Butter, light, stick, without salt",
+                    "db_main_nutrient": {
+                        "db_nutrient": "fat",
+                        "db_unit": "gram per 100g",
+                        "db_amount": 55.10
+                    }, 
+                    "db_ndbno": "04602"
+                },
+                {
+                    "db_name": "olive oil",
+                    "db_full_name": "Oil, olive, salad or cooking",
+                    "db_main_nutrient": {
+                        "db_nutrient": "fat",
+                        "db_unit": "gram per 100g",
+                        "db_amount": 100
+                    }, 
+                    "db_ndbno": "04053"
+                },
+                {
+                    "db_name": "coconut oil",
+                    "db_full_name": "Oil, Coconut",
+                    "db_main_nutrient": {
+                        "db_nutrient": "fat",
+                        "db_unit": "gram per 100g",
+                        "db_amount": 99.06
+                    }, 
+                    "db_ndbno": "04047"
+                },
+                {
+                    "db_name": "margarine",
+                    "db_full_name": "Margarine Spread, approximately 48% fat, tub",
+                    "db_main_nutrient": {
+                        "db_nutrient": "fat",
+                        "db_unit": "gram per 100g",
+                        "db_amount": 47.53
+                    }, 
+                    "db_ndbno": "04630"
+                },
+                {
+                    "db_name": "canola oil",
+                    "db_full_name": "Oil, canola",
+                    "db_main_nutrient": {
+                        "db_nutrient": "fat",
+                        "db_unit": "gram per 100g",
+                        "db_amount": 100
+                    }, 
+                    "db_ndbno": "04582"
+                }
+            ]
+        },
+        {
+            "group_name": "db_Dairy_and_Egg_Products",
+            "food_alt": [
+                {
+                    "db_name": "whole milk",
+                    "db_full_name": "Milk, whole, 3.25% milkfat, with added vitamin D",
+                    "db_main_nutrient": {
+                        "db_nutrient": "fat",
+                        "db_unit": "gram per 100g",
+                        "db_amount": 55.10
+                    }, 
+                    "db_ndbno": "01077"
+                },
+                {
+                    "db_name": "almond milk",
+                    "db_full_name": "Beverages, almond milk, unsweetened, shelf stable",
+                    "db_main_nutrient": {
+                        "db_nutrient": "fat",
+                        "db_unit": "gram per 100g",
+                        "db_amount": 1.10
+                    }, 
+                    "db_ndbno": "14091"
+                },
+                {
+                    "db_name": "coconut milk",
+                    "db_full_name": "Beverages, coconut milk, sweetened, fortified with calcium, vitamins A, B12, D2",
+                    "db_main_nutrient": {
+                        "db_nutrient": "fat",
+                        "db_unit": "gram per 100g",
+                        "db_amount": 2.08
+                    }, 
+                    "db_ndbno": "14171"
+                },
+                {
+                    "db_name": "rice milk",
+                    "db_full_name": "Beverages, rice milk, unsweetened",
+                    "db_main_nutrient": {
+                        "db_nutrient": "fat",
+                        "db_unit": "gram per 100g",
+                        "db_amount": 0.97
+                    }, 
+                    "db_ndbno": "14639"
+                },
+                {
+                    "db_name": "reduced fat milk",
+                    "db_full_name": "Milk, reduced fat, fluid, 2% milkfat, with added nonfat milk solids and vitamin A and vitamin D",
+                    "db_main_nutrient": {
+                        "db_nutrient": "fat",
+                        "db_unit": "gram per 100g",
+                        "db_amount": 1.92
+                    }, 
+                    "db_ndbno": "01080"
+                },
+                {
+                    "db_name": "nonfat milk",
+                    "db_full_name": " Milk, nonfat, fluid, with added nonfat milk solids, vitamin A and vitamin D (fat free or skim)",
+                    "db_main_nutrient": {
+                        "db_nutrient": "fat",
+                        "db_unit": "gram per 100g",
+                        "db_amount": 0.25
+                    }, 
+                    "db_ndbno": "01086"
+                }
+            ]
+        },
+        {
+            "group_name": "db_Cheese",
+            "food_alt": [
+                {
+                    "db_name": "cheddar cheese",
+                    "db_full_name": "Cheese, cheddar",
+                    "db_main_nutrient": {
+                        "db_nutrient": "fat",
+                        "db_unit": "gram per 100g",
+                        "db_amount": 33.31
+                    }, 
+                    "db_ndbno": "01009"
+                },
+                {
+                    "db_name": "nutritional yeast",
+                    "db_full_name": "PREMIUM NUTRITIONAL YEAST SEASONING",
+                    "db_main_nutrient": {
+                        "db_nutrient": "fat",
+                        "db_unit": "gram per 100g",
+                        "db_amount": 0
+                    }, 
+                    "db_ndbno": "45067042"
+                }
+            ]
+        }
+    ]
+    
+}
