@@ -47,11 +47,11 @@
   padding: 25px 50px 25px 50px;
 }
 .al-h1L{
-  color: #474747;
+  color: #383838;
   margin-bottom: 25px;
 }
 .al-h1{
-  color: #474747;
+  color: #383838;
   margin-bottom: 5px;
 }
 .al-containerPaddingL{
@@ -68,9 +68,16 @@
 .al-tabs{
   padding-left: 35%;
 }
-.al-test{
+.al-tabMargin{
   float: left;
   margin-right: 15px
+}
+.tabA{
+  color: gray;
+}
+.tabA:hover{
+  color: black;
+
 }
 .al-list{
   list-style-type: none;
