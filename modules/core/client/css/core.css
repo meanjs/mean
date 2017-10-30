@@ -71,7 +71,7 @@ a:hover .header-profile-image {
   background-color: rgb(247,202,154);
 }
 .head:hover{
-  color: black !important;
+  color: #383838 !important;
 }
 .navbar{
   background-color: white;
@@ -84,6 +84,11 @@ a:hover .header-profile-image {
   background-image: none;
   border-color: transparent;
 }
+.navbar-inverse .navbar-brand:hover, .navbar-inverse .navbar-brand:focus {
+    /* color: #fff; */
+    background-color: transparent;
+}
+
 .user-img{
   border-radius: 50%;
   width:30px;
@@ -92,6 +97,17 @@ a:hover .header-profile-image {
 }
 .user-move{
   padding-top: 12px !important;
+}
+.logo{
+  margin-left: 15px !important;
+}  
+.logo-color{
+  font-weight: bolder;
+  text-shadow: 0px 1px 0px rgba(0,0,0,0.3) !important
+
+}
+.lo:hover{
+  color: rgba(249,192,120, 0.8) !important;
 }
 
 
