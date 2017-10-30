@@ -20,7 +20,7 @@
           roles: ['user', 'admin']
         }
       })
-      .state('profile', { // MY PROFILE 
+      .state('profile', { // MY PROFILE
         url: '/profile',
         templateUrl: '/modules/users/client/views/settings/edit-profile.client.view.html',
         controller: 'EditProfileController',
