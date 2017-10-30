@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('items.cats')
+    .module('items.addCats')
     .controller('CatsController', CatsController);
 
   CatsController.$inject = ['$scope', '$state', '$window', 'catResolve', 'Authentication', 'Notification'];

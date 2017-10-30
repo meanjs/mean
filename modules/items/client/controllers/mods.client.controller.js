@@ -3,7 +3,7 @@
 
   angular
     .module('items.mods')
-    .controller('ModsController', ModsController);
+    .controller('ItemsAdminModuleController', ItemsAdminModuleController);
 
   ModsController.$inject = ['$scope', '$state', '$window', 'modResolve', 'Authentication', 'Notification'];
 
