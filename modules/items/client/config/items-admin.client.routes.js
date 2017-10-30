@@ -43,7 +43,9 @@
       })
       .state('admin.items.categorycreate',{
         url: '/categories/create',
-        templateUrl: '/modules/items/client/views/admin/form-category.client.view.html'
+        templateUrl: '/modules/items/client/views/admin/form-category.client.view.html',
+        controller: 'CatsController',
+        controllerAs: 'vm'
       })
       .state('admin.items.create', {
         url: '/items/create',
