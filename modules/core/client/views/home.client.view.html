@@ -89,6 +89,10 @@
               <img class="card-icon" src="http://www.theproteinbakeshop.com/ae/files/icon-no-refined-sugar.png">
               <a onclick="alert('Recipe has been added')" class="head" ui-sref="add">
                   <span class="glyphicon glyphicon-plus"></span>
+                <div class="ui-notification ng-scope info clickable killed" style="botton: 20px; right: 10px;">
+                  <h3 ng-show="title" ng-bind-html="title" class="ng-binding ng-hide" style></h3>
+                  <div class="message ng-binding" ng-bind-html="message">Recipe has been added!</div>
+                </div>
               </a>
               <div id="stars">
                 <span class="fa fa-star checked"></span>
