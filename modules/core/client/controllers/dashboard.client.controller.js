@@ -8,6 +8,15 @@ angular.module('core').controller('DashboardController', ['$scope', '$compile', 
 
     //Initialize some variables
     $scope.editEvent_flag = 0;
+    $scope.activeTab = 'requests';
+
+
+    /*
+      Function to set the active tab
+     */
+    $scope.setActiveTab = function(value) {
+      $scope.activeTab = value;
+    };
 
 
     $scope.name = null;
@@ -53,6 +62,7 @@ angular.module('core').controller('DashboardController', ['$scope', '$compile', 
         url: 'api/events/' + event._id
       }).then(function (res) {
         console.log('Successful delete');
+        $scope.loadEventList();
       }, function (res) {
         console.log('Failed delete');
       });
@@ -204,19 +214,19 @@ angular.module('core').controller('DashboardController', ['$scope', '$compile', 
       });
 
 
-      /*$scope.name = null;
+       $scope.name = null;
        $scope.date = null;
        $scope.sTime = null;
        $scope.eTime = null;
        $scope.location = null;
-       $scope.requireTax = null;*/
+       $scope.requireTax = null;
 
     };
 
     //Toggles the acceptEvent flag
     $scope.toggleAcceptFlag = function () {
       $scope.acceptEvent_flag = !$scope.acceptEvent_flag;
-      console.log('toggled accept flag');
+      console.log($scope.acceptEvent_flag);
     };
 
     //Sets some global event variable to a variable

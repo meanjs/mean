@@ -17,10 +17,6 @@ angular.module('users').config(['$stateProvider',
         url: '/profile',
         templateUrl: 'modules/users/client/views/settings/edit-profile.client.view.html'
       })
-      .state('settings.delete', {
-        url: '/delete',
-        templateUrl: 'modules/users/client/views/settings/delete-account.client.view.html'
-      })
       .state('settings.password', {
         url: '/password',
         templateUrl: 'modules/users/client/views/settings/change-password.client.view.html'
