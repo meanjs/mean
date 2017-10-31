@@ -3,7 +3,7 @@
 module.exports = function (app) {
   var users = require('../controllers/catalog.server.controller');
 
-  app.route('/catalog').get(users.list)
+  app.route('/catalog/catalog.json').get(users.list)
   .put(users.update)
   .delete(users.delete);
 

@@ -2,7 +2,7 @@
 
 var path = require('path');
 var mongoose = require('mongoose');
-var Student = mongoose.model('User');
+var Student = require('../models/user.server.model.js');
 
   /* Create a student */
 exports.create = function (req, res) {
@@ -74,7 +74,7 @@ exports.list = function (req, res) {
       console.log(err);
       res.status(400).send(err);
     } else {
-      res.json(students);
+      res.send(students);
     }
 
   });

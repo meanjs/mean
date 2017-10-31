@@ -8,7 +8,7 @@
 
   UsersService.$inject = ['$resource'];
 
-  function UsersService($resource) {
+  function UsersService($resource, $http) {
     var Users = $resource('/api/users', {}, {
       update: {
         method: 'PUT'
@@ -17,6 +17,9 @@
         method: 'POST',
         url: '/api/users/password'
       },
+      // getList: function () {
+      //   return $http.get('/catalog/catalog.json');
+      // },
       deleteProvider: {
         method: 'DELETE',
         url: '/api/users/accounts',
