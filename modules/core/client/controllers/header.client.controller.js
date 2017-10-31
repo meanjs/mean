@@ -29,7 +29,6 @@
 		$scope.all_alt_in_group = [];
 		$scope.have_match = 0;
 		$scope.c_method = "baked";
-    $scope.search = "butter";
 
     vm.getAlternatives = getAlternatives;
 
@@ -37,13 +36,15 @@
       $scope.map = [];
       $scope.orig_nutrient_amount = 0;
 
+      $scope.map.push(vm.searchFood);
+
       $http.get('./modules/users/client/controllers/recipes/food_alternatives.json')
         .then( (response) => {
           response.data.cooking_methods.forEach( (cooking_method, i) => {
 						cooking_method.food_groups.forEach( (food_group, j) => {
 							food_group.food_alts.forEach( (food_alt, k) => {
 
-								if((food_alt.db_name == $scope.search) && ($scope.c_method == cooking_method.method_name)){
+								if((food_alt.db_name == vm.searchFood) && ($scope.c_method == cooking_method.method_name)){
 									$scope.have_match = 1;
 									$scope.orig_ndbno = food_alt.db_ndbno;
 									$scope.in_food_group = food_group.group_name;
@@ -66,8 +67,8 @@
 					});
         });
 
+        // FIRST ITEM IN MAP IS THE ORIGINAL ITEM
         TransferService.setAlternatives($scope.map);
-        TransferService.setIngredient($scope.searchFood);
 
         $state.go('search');
     }

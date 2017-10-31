@@ -5,9 +5,9 @@
     .module('core')
     .controller('SearchController', SearchController);
 
-  SearchController.$inject = ['$scope', 'menuService', 'TransferService'];
+  SearchController.$inject = ['$scope', 'menuService', 'TransferService', '$http'];
 
-  function SearchController($scope, menuService, TransferService) {
+  function SearchController($scope, menuService, TransferService, $http) {
     $scope.pages = [{name:"Whole Milk", calories:"105", protein:"8", sugar:"13", fat:"2.5"},
                     {name:"Comparison View", show: false}
     ]
@@ -18,12 +18,6 @@
     $scope.wholeFat = "2.5";
 
     var vm = this;
-
-    //DO YOUR FRONTEND JS CODE HERE
-    $scope.alert = () => {
-		  alert('hello');
-    }
-
     // $scope.show = function(item){
     //   console.log("completed");
     //   item.show = !item.show;
@@ -53,10 +47,10 @@
       $scope.flipped = !$scope.flipped;
     }
 
+    // FIRST ITME IS ORIGINAL INGREDIENT
     $scope.alternatives = TransferService.getAlternatives();
-    //$scope.ingredient = TransferService.getIngredient();
     console.log("Here are alternatives: ", $scope.alternatives);
-    //console.log("Here is the ingredient", $scope.ingredient);
+
 
     // API KEY
 		var apiKey = 'YAJ2M9l67OaqNMPCEfBcoccVtQDY5LPUR20rFzP8';
@@ -87,7 +81,16 @@
 
     function assignFood() {
 			$scope.food = $scope.searched.report.food.name.toLowerCase();
-			$scope.nutrients = $scope.searched.report.food.nutrients;
+			$scope.nutrients = [];
+
+      $scope.searched.report.food.nutrients.forEach( (nutrient, i) => {
+        if(nutrient.name == 'Protein') $scope.nutrients.push(nutrient);
+        else if(nutrient.name == 'Total lipid (fat)') $scope.nutrients.push(nutrient);
+        else if(nutrient.name == 'Carbohydrate, by difference') $scope.nutrients.push(nutrient);
+        else if(nutrient.name == 'Fiber, total dietary') $scope.nutrients.push(nutrient);
+        else if(nutrient.name == 'Sugars, total') $scope.nutrients.push(nutrient);
+        else if(nutrient.name == 'Cholesterol') $scope.nutrients.push(nutrient);
+      });
 		}
 
     function getURL(url) {

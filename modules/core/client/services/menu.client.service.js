@@ -3,41 +3,6 @@
 
   angular
     .module('core')
-    .factory('TransferService', TransferService);
-
-  TransferService.$inject = ['$resource'];
-
-  // This transfers data from one page to another
-  function TransferService() {
-    var savedAlternativeData = {};
-    var savedIngredientData = {};
-
-    function setAlternatives(data) {
-      savedAlternativeData = data;
-    }
-
-    function getAlternatives() {
-      return savedAlternativeData;
-    }
-
-    function setIngredient(data) {
-      savedIngredientData = data;
-    }
-
-    function getIngredient() {
-      return savedIngredientData;
-    }
-
-    return {
-      setAlternatives: setAlternatives,
-      getAlternatives: getAlternatives,
-      setIngredient: setIngredient,
-      getIngredient: getIngredient
-    }
-  }
-
-  angular
-    .module('core')
     .factory('menuService', menuService);
 
   function menuService() {
