@@ -39,7 +39,7 @@ _site/
 *.bak
 *.swp
 logs/
-build/
+#build/
 
 # Sublime editor
 # ==============
