@@ -5,10 +5,21 @@
     .module('users')
     .controller('CatalogController', CatalogController);
 
-  CatalogController.$inject = ['$scope', '$state'];
+  CatalogController.$inject = ['$scope', '$state', 'UsersService', '$http'];
 
-  function CatalogController($scope, $state) {
+  function CatalogController($scope, $state, UsersService, $http) {
     var vm = this;
+    $scope.detailedInfo = null;
+    $scope.usersList = [];
+    $http.get('/catalog/catalog.json').then(function (response) {
+      $scope.usersList = response.data;
+    }, function (error) {
+      $scope.error = 'Unable to retrieve listings!\n' + error;
+    });
+    $scope.showDetails = function (index) {
+      $scope.detailedInfo = $scope.users[index];
+      $scope.names = $scope.users[index].firstName;
+    };
   }
 }());
 
