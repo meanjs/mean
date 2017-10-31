@@ -1,0 +1,34 @@
+{
+  "name": "angular-ui-router",
+  "version": "0.2.18",
+  "license": "MIT",
+  "main": "./release/angular-ui-router.js",
+  "dependencies": {
+    "angular": "^1.0.8"
+  },
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "component.json",
+    "package.json",
+    "lib",
+    "config",
+    "sample",
+    "test",
+    "tests",
+    "ngdoc_assets",
+    "Gruntfile.js",
+    "files.js"
+  ],
+  "homepage": "https://github.com/angular-ui/angular-ui-router-bower",
+  "_release": "0.2.18",
+  "_resolution": {
+    "type": "version",
+    "tag": "0.2.18",
+    "commit": "2b8d5241b4c631ca2aef079bb96690b213eff449"
+  },
+  "_source": "https://github.com/angular-ui/angular-ui-router-bower.git",
+  "_target": "~0.2",
+  "_originalSource": "angular-ui-router"
+}
