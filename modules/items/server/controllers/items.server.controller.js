@@ -6,7 +6,89 @@
 var path = require('path'),
   mongoose = require('mongoose'),
   Item = mongoose.model('Item'),
+  Category = mongoose.model('Category'),
+  Module = mongoose.model('Module'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller'));
+
+exports.listAllCategories = function(req, res) {
+  Category.find().sort('-title').exec(function (err, categories) {
+    if (err) {
+      return res.status(422).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    } else {
+      res.json(categories);
+    }
+  });
+};
+
+exports.createCategory = function (req, res) {
+  var category = new Category(req.body);
+  category.user = req.user;
+
+  category.save(function (err) {
+    if (err) {
+      return res.status(422).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    } else {
+      res.json(category);
+    }
+  });
+};
+
+exports.deleteCategory = function(req, res) {
+  var toDelete = req.body;
+  Category.findOneAndRemove({'title' : toDelete.title}, function(err, deleted) {
+    if (err) {
+      return res.status(422).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    }
+    res.json(deleted);
+  });
+ };
+
+
+exports.listAllModules = function(req, res) {
+  Module.find().sort('-title').exec(function (err, modules) {
+    if (err) {
+      return res.status(422).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    } else {
+      res.json(modules);
+    }
+  });
+};
+
+exports.createModule = function (req, res) {
+  var module = new Module(req.body);
+  module.user = req.user;
+
+  module.save(function (err) {
+    if (err) {
+      return res.status(422).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    } else {
+      res.json(module);
+    }
+  });
+};
+
+
+exports.deleteModule = function(req, res) {
+  var toDelete = req.body;
+  Module.findOneAndRemove({'title' : toDelete.title}, function(err, deleted) {
+    if (err) {
+      return res.status(422).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    }
+    res.json(deleted);
+  });
+ };
 
 /**
  * Create an item
@@ -48,6 +130,8 @@ exports.update = function (req, res) {
 
   item.title = req.body.title;
   item.content = req.body.content;
+  item.categories = req.body.categories;
+  item.modules = req.body.modules;
 
   item.save(function (err) {
     if (err) {
