@@ -79,6 +79,26 @@ var UserSchema = new Schema({
     default: '',
     validate: [validateLocalStrategyEmail, 'Please fill a valid email address']
   },
+  bio: {
+    type: String,
+    trim: true
+  },
+  major: {
+    type: String,
+    trim: true
+  },
+  availabiltyStatus: {
+    type: String,
+    trim: true
+  },
+  teamName: {
+    type: String,
+    trim: true
+  },
+  type: {
+    type: String,
+    trim: true
+  },
   username: {
     type: String,
     unique: 'Username already exists',
@@ -234,6 +254,8 @@ UserSchema.statics.generateRandomPassphrase = function () {
 UserSchema.statics.seed = seed;
 
 mongoose.model('User', UserSchema);
+var Users = mongoose.model('User', UserSchema);
+module.exports = Users;
 
 /**
 * Seeds the User collection with document (User)

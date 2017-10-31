@@ -21,15 +21,6 @@
           roles: ['user', 'admin']
         }
       })
-      .state('settings.profile', {
-        url: '/profile',
-        templateUrl: '/modules/users/client/views/settings/edit-profile.client.view.html',
-        controller: 'EditProfileController',
-        controllerAs: 'vm',
-        data: {
-          pageTitle: 'Settings'
-        }
-      })
       .state('settings.password', {
         url: '/password',
         templateUrl: '/modules/users/client/views/settings/change-password.client.view.html',
@@ -56,6 +47,18 @@
         data: {
           pageTitle: 'Settings picture'
         }
+      })
+      .state('profile', {
+        url: '/profile',
+        templateUrl: '/modules/users/client/views/profile/profile.html',
+        controller: 'EditProfileController',
+        controllerAs: 'vm'
+      })
+      .state('catalog', {
+        url: '/catalog',
+        templateUrl: '/modules/users/client/views/catalog/catalog.html',
+        controller: 'CatalogController',
+        controllerAs: 'vm'
       })
       .state('authentication', {
         abstract: true,
