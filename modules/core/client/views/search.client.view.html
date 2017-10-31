@@ -3,7 +3,9 @@
     <div class="textLN"><a class=" test left" href="">Popular Recipes</a> <a class="test" href="">My Recipes</a> </div>
   </div>-->
   <center>
-    <text id="title">Healhty Alternatives for "</text><text id="ingredient">{{wholename}}</text><text id="title">"</text>
+    <text id="title">Healthy Alternatives for "</text>
+    <text id="ingredient">{{wholename}}</text>
+    <text id="title">"</text>
   </center>
   </br>
   <div class="lowerNav text-center">
@@ -20,6 +22,24 @@
   </div>
   </br>
   <div ng-show="showItem">
+    <center>
+      <div class="row">
+        <div style="float: left;" class="col-md-4" ng-repeat="alternative in alternatives">
+          <div ng-click="getReport(alternative.map_ndbno)">
+            <h3>{{alternative.map_name.toUpperCase()}}</h3>
+          </div>
+        </div>
+      </div>
+      <div>
+        <h3><strong>Food:</strong> {{food.toUpperCase()}}</h3>
+        <h4><strong>Nutrients: </h4>
+          <div ng-repeat="nutrient in nutrients">
+            <b>{{nutrient.name}}:</b> {{nutrient.value}} {{nutrient.unit}}
+          </div>
+        </div>
+      </div>
+    </center>
+    
     <center>
 
       </br>
@@ -59,32 +79,101 @@
       </div>
       <div class="col-md-3">
         <div class="boxed">
-          </br>
-          <text>Soy Milk</text>
-          </br>
-          <img src="http://www.newhealthadvisor.com/images/1HT19198/soy%20milk.jpg" alt="Soy Milk" width="250" height="200">
-          </br>
-          </br>
+          <div ng-hide="flipped" ng-click="flip()">
+            </br>
+            <text>Soy Milk</text>
+            </br>
+            <img src="http://www.newhealthadvisor.com/images/1HT19198/soy%20milk.jpg" alt="Soy Milk" width="250" height="200">
+            </br>
+            </br>
+          </div>
+          <div ng-show="flipped" ng-click="flip()">
+            </br>
+            <text>Soy Milk</text>
+            </br>
+            </br>
+            <table id="flipTable">
+              <tr>
+                <th>Calories</th>
+                <th>Fat</th>
+                <th>Sugar</th>
+                <th>Protein</th>
+              </tr>
+              <tr>
+                <td>130</td>
+                <td>4.5</td>
+                <td>10</td>
+                <td>8</td>
+              </tr>
+            </table>
+            </br>
+          </div>
         </div>
       </div>
       <div class="col-md-3">
         <div class="boxed">
-          </br>
-          <text>Almond Milk</text>
-          </br>
-          <img src="https://img.purch.com/h/1000/aHR0cDovL3d3dy5saXZlc2NpZW5jZS5jb20vaW1hZ2VzL2kvMDAwLzA3Ny81NTgvb3JpZ2luYWwvYWxtb25kLW1pbGsuanBn" alt="Almond Milk" width="250" height="200">
-          </br>
-          </br>
+          <div ng-hide="flipped" ng-click="flip()">
+            </br>
+            <text>Almond Milk</text>
+            </br>
+            <img src="https://img.purch.com/h/1000/aHR0cDovL3d3dy5saXZlc2NpZW5jZS5jb20vaW1hZ2VzL2kvMDAwLzA3Ny81NTgvb3JpZ2luYWwvYWxtb25kLW1pbGsuanBn" alt="Almond Milk" width="250" height="200">
+            </br>
+            </br>
+          </div>
+          <div ng-show="flipped" ng-click="flip()">
+            </br>
+            <text>Almond Milk</text>
+            </br>
+            </br>
+            <table id="flipTable">
+              <tr>
+                <th>Calories</th>
+                <th>Fat</th>
+                <th>Sugar</th>
+                <th>Protein</th>
+              </tr>
+              <tr>
+                <td>90</td>
+                <td>2.5</td>
+                <td>14</td>
+                <td>1</td>
+              </tr>
+            </table>
+            </br>
+          </div>
         </div>
       </div>
       <div class="col-md-3">
         <div class="boxed">
-          </br>
-          <text>Coconut Milk</text>
-          </br>
-          <img src="https://www.thefreshvapor.com/wp-content/uploads/2016/04/Coconut-Milk.jpg" alt="Coconut Milk" width="250" height="200">
-          </br>
-          </br>
+          <div ng-hide="flipped" ng-click="flip()">
+            </br>
+            <text>Coconut Milk</text>
+            </br>
+            <img src="https://www.thefreshvapor.com/wp-content/uploads/2016/04/Coconut-Milk.jpg" alt="Coconut Milk" width="250" height="200">
+            </br>
+            </br>
+          </div>
+          <div ng-show="flipped" ng-click="flip()">
+            </br>
+            <text>Coconut Milk</text>
+            </br>
+            </br>
+            <table id="flipTable">
+              <tr>
+                <th>Calories</th>
+                <th>Fat</th>
+                <th>Sugar</th>
+                <th>Protein</th>
+              </tr>
+              <tr>
+                <td>35</td>
+                <td>3.5</td>
+                <td>0.5</td>
+                <td>0.3</td>
+              </tr>
+            </table>
+            </br>
+          </div>
         </div>
       </div>
     </center>

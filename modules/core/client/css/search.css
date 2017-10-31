@@ -13,6 +13,7 @@ h1{
 #title{
   font-size: 40px;
   color: #8CD4C9;
+  font-weight: normal;
 }
 
 #ingredient{
@@ -21,12 +22,12 @@ h1{
 }
 
 .boxed{
-  opacity: 0.5;
+  opacity: 1;
   border: 4px solid #AEC86B;
   min-height: 300px;
 }
 .boxed:hover{
-  background-color: #8CD4C9;
+  background-color: #dfdfdf;
   opacity: 1;
 }
 
@@ -56,6 +57,7 @@ td:hover{
 th{
   color: #AEC86B;
   text-align: center;
+  font-weight: normal;
 }
 
 tr:nth-child(even) {
@@ -66,6 +68,7 @@ tr:nth-child(even) {
 text{
   font-size: 25px;
   color: #FD835D;
+  font-weight: bold;
 }
 
 .active{

@@ -1,18 +1,21 @@
 <link rel="stylesheet" href="../css/core.css">
 <div class="container" ng-controller="HeaderController as vm">
   <!-- HEADER -->
-  <div class="navbar-header">
-    <a ui-sref="home" class="navbar-brand">Health Tracker</a>
+  <div class="navbar-header logo">
+    <a ui-sref="home" class="navbar-brand lo logo-color">HEALTH TRACKER</a>
   </div>
   <nav class="navbar-collapse" uib-collapse="!vm.isCollapsed" role="navigation">
     <!-- SEARCH BAR -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <div class="col-sm-3 col-md-3">
-        <form class="navbar-form" role="search">
+        <form class="navbar-form" role="search" ng-submit="vm.getAlternatives()">
           <div class="input-group">
-              <input type="text" class="form-control searchBar" placeholder="Search" name="q">
+              <input type="text" class="form-control searchBar" ng-model="vm.searchFood"
+                placeholder="Search" name="q">
               <div class="input-group-btn">
-                <button class="btn searchBar searchBar-btn" type="submit" ui-sref="search"><i class="glyphicon glyphicon-search"></i></button>
+                <button class="btn searchBar searchBar-btn" type="submit">
+                  <i class="glyphicon glyphicon-search"></i>
+                </button>
               </div>
           </div>
         </form>
@@ -34,7 +37,7 @@
           <span class="glyphicon glyphicon-plus"></span> Add Recipe
         </a></li>
       <li class="dropdown" uib-dropdown>
-        <a class="dropdown-toggle user-header-dropdown-toggle" uib-dropdown-toggle role="button">
+        <a class="dropdown-toggle user-header-dropdown-toggle head" uib-dropdown-toggle role="button">
           <img ng-src="{{vm.authentication.user.profileImageURL}}" alt="{{vm.authentication.user.displayName}}" class="header-profile-image" />
           <span ng-bind="vm.authentication.user.displayName"></span> <b class="caret"></b>
         </a>
