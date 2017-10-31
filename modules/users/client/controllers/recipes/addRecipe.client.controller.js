@@ -52,15 +52,8 @@
         Notification.error({ message: '<i class="glyphicon glyphicon-remove"></i> Add recipe failed!' })
         console.log("Failure: ", response);
       }
-      // user.$update(function (response) {
-      //   $scope.$broadcast('show-errors-reset', 'vm.addRecipeForm');
 
-      //   Notification.success({ message: '<i class="glyphicon glyphicon-ok"></i> Add recipe successful!' });
-      //   Authentication.user = response;
-      // }, function (response) {
-      //   Notification.error({ message: response.data.message, title: '<i class="glyphicon glyphicon-remove"></i> Add recipe failed!' });
-      // });
-
+      TransferService.setRecipe(recipe);
       $location.path('/alternatives');
     }
 
@@ -105,7 +98,7 @@
 						});
 					});
         });
-        TransferService.set($scope.map);
+        TransferService.setAlternatives($scope.map);
     }
 
     // Add to ingredient list

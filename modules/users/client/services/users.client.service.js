@@ -9,19 +9,30 @@
 
   // This transfers data from one page to another
   function TransferService() {
-    var savedData = {};
+    var savedAlternativeData = {};
+    var savedRecipeData = {};
 
-    function set(data) {
-      savedData = data;
+    function setAlternatives(data) {
+      savedAlternativeData = data;
     }
 
-    function get() {
-      return savedData;
+    function getAlternatives() {
+      return savedAlternativeData;
+    }
+
+    function setRecipe(data) {
+      savedRecipeData = data;
+    }
+
+    function getRecipe() {
+      return savedRecipeData;
     }
 
     return {
-      set: set,
-      get: get
+      setAlternatives: setAlternatives,
+      getAlternatives: getAlternatives,
+      setRecipe: setRecipe,
+      getRecipe: getRecipe
     }
   }
 

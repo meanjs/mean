@@ -10,8 +10,12 @@
   function AlternativesController(UsersService, TransferService, $scope) {
     var vm = this;
 
-    var alternatives = TransferService.get();
-    console.log("Here are alternatives: ", alternatives);
+    $scope.alternatives = TransferService.getAlternatives();
+    $scope.recipe = TransferService.getRecipe();
+    console.log("Here are alternatives: ", $scope.alternatives);
+    console.log("Here is the recipe", $scope.recipe);
+
+    $scope.ingredients = $scope.recipe.ingredients;
 
     // API KEY
 		var apiKey = 'YAJ2M9l67OaqNMPCEfBcoccVtQDY5LPUR20rFzP8';
@@ -42,7 +46,6 @@
 
     function assignFood() {
 			$scope.food = $scope.searched.report.food.name.toLowerCase();
-			// $scope.ingredients = $scope.searched.report.food.ing.desc.toLowerCase();
 			$scope.nutrients = $scope.searched.report.food.nutrients;
 		}
 

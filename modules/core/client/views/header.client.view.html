@@ -1,7 +1,7 @@
 <div class="container" ng-controller="HeaderController as vm">
   <!-- HEADER -->
-  <div class="navbar-header">
-    <a ui-sref="home" class="navbar-brand">Health Tracker</a>
+  <div class="navbar-header logo">
+    <a ui-sref="home" class="navbar-brand lo logo-color">HEALTH TRACKER</a>
   </div>
   <nav class="navbar-collapse" uib-collapse="!vm.isCollapsed" role="navigation">
     <!-- SEARCH BAR -->
@@ -33,7 +33,7 @@
           <span class="glyphicon glyphicon-plus"></span> Add Recipe
         </a></li>
       <li class="dropdown" uib-dropdown>
-        <a class="dropdown-toggle user-header-dropdown-toggle" uib-dropdown-toggle role="button">
+        <a class="dropdown-toggle user-header-dropdown-toggle head" uib-dropdown-toggle role="button">
           <img ng-src="{{vm.authentication.user.profileImageURL}}" alt="{{vm.authentication.user.displayName}}" class="header-profile-image" />
           <span ng-bind="vm.authentication.user.displayName"></span> <b class="caret"></b>
         </a>

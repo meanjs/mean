@@ -1,7 +1,36 @@
-<section>
-    <h1>NEW VERSION</h1>
-    <h1 id="alternative-header">Alternatives</h1>
-    <a ui-sref="customize">
-        <button class="btn btn-success">Customize</button>
-    </a>
-</section>
+<!-- <div> -->
+	<div class="row al-row">
+		<div class="col-md-6 al-containerPaddingL">
+			<h1 class="al-h1L text-center">{{recipe.name}}</h1>
+			<div class="ingredient-containerL al-list" ng-repeat="ingredient in ingredients">
+				<li><div class="al-list-measureL">
+					{{ingredient.quantity}} {{ingredient.units}}
+				</div>{{ingredient.name}}</li>
+				<!--<li><div class="al-list-measureL">0 cups</div>Ingredient 2</li>
+				<li><div class="al-list-measureL">0 cups</div>Ingredient 3</li>
+				<li><div class="al-list-measureL">0 cups</div>Ingredient 4</li>
+				<li><div class="al-list-measureL">0 cups</div>Ingredient 5</li>-->
+			</div>
+			<button type="button" class="htb htb-primary btn-lg sharp">Edit</button>
+		</div>
+		<div class="col-md-6 al-containerPaddingR">
+			<h1 class="al-h1 text-center">Alternative Recipe</h1>
+			<div class="al-tabs">
+				<div class="al-tabMargin"><a class="tabA" href="">Healthiest</a> </div>
+				<div class=""><a class="tabA" href="">Truest to Taste</a></div>
+			</div>
+			<div class="ingredient-containerR al-list" ng-repeat="alternative in alternatives" 
+					ng-click="getReport(alternative.map_ndbno)">
+				<li><div class="al-list-measureR">0 cups</div>{{alternative.map_name}}</li>
+				<!--<li><div class="al-list-measureR">0 cups</div>Ingredient 2</li>
+				<li><div class="al-list-measureR">0 cups</div>Ingredient 3</li>
+				<li><div class="al-list-measureR">0 cups</div>Ingredient 4</li>
+				<li><div class="al-list-measureR">0 cups</div>Ingredient 5</li>-->
+			</div>
+			<button type="button" class="htb htb-primary btn-lg sharp al-btnR"
+				ui-sref="customize">Customize</button>
+		</div>
+	</div>
+
+<!-- </div> -->
+
