@@ -2,11 +2,18 @@
     <center>
         <h1>My Recipes</h1>
     </center>
+
     <hr>
-    <div ng-repeat="recipe in recipes">
-        <p>ID: {{recipe._id}}</p>
-        <p>Ingredients: {{recipe.ingredients}}</p>
-        <p>Name: {{recipe.name}}</p>
+
+    <center ng-repeat="recipe in recipes">
+        <h4>Name: {{recipe.name}}</h4>
+        <b>Ingredients:</b> 
+        <div ng-repeat="ingredient in recipe.ingredients">
+            <div>{{ingredient.name}}</div>
+            <div>{{ingredient.quantity}} {{ingredient.units}}</div>
+            <br>
+        </div>
+        <button class="btn btn-danger" ng-click="vm.deleteRec(recipe)">Remove Recipe</button>
         <hr>
-    </div>
+    </center>
 </section>

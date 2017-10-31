@@ -266,17 +266,6 @@ exports.add = function(req, res) {
   });
 }
 
-exports.usda = function(req, res) {
-  // $http.get(path.resolve('./modules/users/server/food_alternatives.json'))
-  //   .then( (response) => {
-  //     res.json(response);
-  //   });
-
-  var body = req.body;
-
-  res.json(body);
-}
-
 exports.myRecipes = function(req, res) {
   var user = req.user;
 
@@ -289,4 +278,15 @@ exports.alternatives = function(req, res) {
   var alternativeData = req.body.response;
 
   res.json(searchFood);
+}
+
+exports.deleteRecipe = function(req, res) {
+  var recipe = req.model;
+
+  // recipe.remove(function(err) {
+  //   if(err) res.status(500).send(err);
+  //   else res.json(recipe);
+  // });
+
+  res.json(recipe);
 }

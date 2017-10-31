@@ -79,10 +79,6 @@
         method: 'POST',
         url: '/api/users/add'
       },
-      usda: {
-        method: 'POST',
-        url: '/api/users/usda'
-      },
       myRecipes: {
         method: 'GET',
         url: '/api/users/myRecipes'
@@ -90,6 +86,10 @@
       alternatives: {
         method: 'POST',
         url: '/api/users/alternatives'
+      },
+      deleteRecipe: {
+        method: 'POST',
+        url: '/api/users/deleteRecipe'
       }
     });
 
@@ -119,14 +119,14 @@
       addRecipe: function(param) {
         return this.add(param).$promise;
       },
-      usdaAlternatives: function(param) {
-        return this.usda(param).$promise;
-      },
       getMyRecipes: function() {
         return this.myRecipes().$promise;
       },
       getAlternatives: function(search) {
         return this.alternatives(search).$promise;
+      },
+      deleteThisRecipe: function(recipe) {
+        return this.deleteRecipe(recipe).$promise;
       }
     });
 
