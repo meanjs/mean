@@ -12,9 +12,9 @@ angular.module('core').controller('DashboardController', ['$scope', '$compile', 
 
 
     /*
-      Function to set the active tab
+     Function to set the active tab
      */
-    $scope.setActiveTab = function(value) {
+    $scope.setActiveTab = function (value) {
       $scope.activeTab = value;
     };
 
@@ -47,7 +47,7 @@ angular.module('core').controller('DashboardController', ['$scope', '$compile', 
       }];
 
     /* add custom event*/
-    $scope.addEvent = function(title) {
+    $scope.addEvent = function (title) {
       $scope.events.push({
         title: title,
         start: new Date(2017, 10, 30)
@@ -170,7 +170,7 @@ angular.module('core').controller('DashboardController', ['$scope', '$compile', 
       });
 
       console.log($scope.eventList[0].name);
-      for (var i = 0; i < $scope.eventList.length-1; i++) {
+      for (var i = 0; i < $scope.eventList.length - 1; i++) {
         $scope.addEvent($scope.eventList[i].name);
       }
     };
@@ -215,12 +215,12 @@ angular.module('core').controller('DashboardController', ['$scope', '$compile', 
       });
 
 
-       $scope.name = null;
-       $scope.date = null;
-       $scope.sTime = null;
-       $scope.eTime = null;
-       $scope.location = null;
-       $scope.requireTax = null;
+      $scope.name = null;
+      $scope.date = null;
+      $scope.sTime = null;
+      $scope.eTime = null;
+      $scope.location = null;
+      $scope.requireTax = null;
 
     };
 
@@ -268,11 +268,11 @@ angular.module('core').controller('DashboardController', ['$scope', '$compile', 
     /* event source that contains custom events on the scope */
 
 
-      // { title: 'Long Event', start: new Date(y, m, d - 5), end: new Date(y, m, d - 2) },
-      // { id: 999, title: 'Repeating Event', start: new Date(y, m, d - 3, 16, 0), allDay: false },
-      // { id: 999, title: 'Repeating Event', start: new Date(y, m, d + 4, 16, 0), allDay: false },
-      // { title: 'Birthday Party', start: new Date(y, m, d + 1, 19, 0), end: new Date(y, m, d + 1, 22, 30), allDay: false },
-      // { title: 'Click for Google', start: new Date(y, m, 28), end: new Date(y, m, 29), url: 'http://google.com/'}
+    // { title: 'Long Event', start: new Date(y, m, d - 5), end: new Date(y, m, d - 2) },
+    // { id: 999, title: 'Repeating Event', start: new Date(y, m, d - 3, 16, 0), allDay: false },
+    // { id: 999, title: 'Repeating Event', start: new Date(y, m, d + 4, 16, 0), allDay: false },
+    // { title: 'Birthday Party', start: new Date(y, m, d + 1, 19, 0), end: new Date(y, m, d + 1, 22, 30), allDay: false },
+    // { title: 'Click for Google', start: new Date(y, m, 28), end: new Date(y, m, 29), url: 'http://google.com/'}
     /* event source that calls a function on every view switch */
 
 
