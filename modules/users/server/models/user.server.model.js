@@ -175,20 +175,7 @@ var UserSchema = new Schema({
     islam: Boolean,
     kosher: Boolean
   },
-  recipes: [{
-    name: String,
-    image: { 
-        type: String,
-        default: 'modules/users/client/img/profile/default.png'
-    },
-    directions: String,
-    cookingStyle: String,
-    ingredients: [{
-        name: String,
-        quantity: Number,
-        units: String
-    }]
-  }], 
+  recipes: [RecipeSchema], 
   test: {
     type: String
   },

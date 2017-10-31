@@ -1,6 +1,41 @@
 (function () {
   'use strict';
 
+  angular
+    .module('users.services')
+    .factory('TransferService', TransferService);
+
+  TransferService.$inject = ['$resource'];
+
+  // This transfers data from one page to another
+  function TransferService() {
+    var savedAlternativeData = {};
+    var savedRecipeData = {};
+
+    function setAlternatives(data) {
+      savedAlternativeData = data;
+    }
+
+    function getAlternatives() {
+      return savedAlternativeData;
+    }
+
+    function setRecipe(data) {
+      savedRecipeData = data;
+    }
+
+    function getRecipe() {
+      return savedRecipeData;
+    }
+
+    return {
+      setAlternatives: setAlternatives,
+      getAlternatives: getAlternatives,
+      setRecipe: setRecipe,
+      getRecipe: getRecipe
+    }
+  }
+
   // Users service used for communicating with the users REST endpoint
   angular
     .module('users.services')
@@ -44,13 +79,17 @@
         method: 'POST',
         url: '/api/users/add'
       },
-      usda: {
-        method: 'POST',
-        url: '/api/users/usda'
-      },
       myRecipes: {
         method: 'GET',
         url: '/api/users/myRecipes'
+      },
+      alternatives: {
+        method: 'POST',
+        url: '/api/users/alternatives'
+      },
+      deleteRecipe: {
+        method: 'POST',
+        url: '/api/users/deleteRecipe'
       }
     });
 
@@ -77,14 +116,17 @@
       userSignin: function (credentials) {
         return this.signin(credentials).$promise;
       },
-      adding: function(param) {
+      addRecipe: function(param) {
         return this.add(param).$promise;
-      },
-      usdaAlternatives: function(param) {
-        return this.usda(param).$promise;
       },
       getMyRecipes: function() {
         return this.myRecipes().$promise;
+      },
+      getAlternatives: function(search) {
+        return this.alternatives(search).$promise;
+      },
+      deleteThisRecipe: function(recipe) {
+        return this.deleteRecipe(recipe).$promise;
       }
     });
 

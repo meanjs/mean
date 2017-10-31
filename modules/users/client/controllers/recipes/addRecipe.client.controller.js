@@ -5,50 +5,59 @@
     .module('users')
     .controller('AddRecipeController', AddRecipeController);
 
-  AddRecipeController.$inject = ['UsersService', '$scope', '$http','Authentication','Notification'];
+  AddRecipeController.$inject = ['UsersService', 'TransferService', '$scope', '$http', 
+      'Authentication', 'Notification', '$location'];
 
-  function AddRecipeController(UsersService, $scope, $http,Authentication,Notification) {
+  function AddRecipeController(UsersService, TransferService, $scope, $http, 
+      Authentication, Notification, $location) {
     var vm = this;
 
     vm.user = Authentication.user;
-    vm.updateUserProfile = updateUserProfile;
+    vm.updateMyRecipes = updateMyRecipes;
 
-    function updateUserProfile(isValid) {
+    $scope.recipe = {
+      'name' : '',
+      'directions' : '',
+      'cookingStyle' : '',
+      'ingredients' : [{
+        'name' : '',
+        'quantity' : '',
+        'units' : ''
+      }]
+    };
 
-      if (!isValid) {
-        $scope.$broadcast('show-errors-check-validity', 'vm.userForm');
+    function updateMyRecipes(isValid) {
+      var recipe = $scope.recipe;
+      getAlternatives();
 
+      if(!isValid) {
+        $scope.$broadcast('show-errors-check-validity', 'vm.addRecipeForm');
         return false;
       }
 
-      var user = new UsersService(vm.user);
+      //var user = new UsersService(vm.user);
+      //console.log("User ", user);
 
-      user.$update(function (response) {
-        $scope.$broadcast('show-errors-reset', 'vm.userForm');
+      UsersService.addRecipe(recipe)
+        .then(success)
+        .catch(failure);
 
-        Notification.success({ message: '<i class="glyphicon glyphicon-ok"></i> Edit profile successful!' });
-        Authentication.user = response;
-      }, function (response) {
-        Notification.error({ message: response.data.message, title: '<i class="glyphicon glyphicon-remove"></i> Edit profile failed!' });
-      });
+      function success(response) {
+        Notification.success({ message: '<i class="glyphicon glyphicon-ok"></i> Add recipe successful!' })
+        console.log("Recipes success: ", response);
+        //$scope.recipes = response.recipes;
+      }
+
+      function failure(response) {
+        Notification.error({ message: '<i class="glyphicon glyphicon-remove"></i> Add recipe failed!' })
+        console.log("Failure: ", response);
+      }
+
+      TransferService.setRecipe(recipe);
+      $location.path('/alternatives');
     }
 
-    // var alternative = {
-    //   'hello' : 'world'
-    // }
-
-    // API KEY
-		var apiKey = 'YAJ2M9l67OaqNMPCEfBcoccVtQDY5LPUR20rFzP8';
-
-		// FOR REPORT
-		var type = "b";
-		var format = "json";
-
-		// FOR INDIVIDUAL SEARCHES
-		var sort = "n";
-		var max = "200";
-		var ds = 'Standard Reference';
-
+    // GET ALTERNATIVES FROM RECIPE
     $scope.map = [];
 		$scope.in_food_group;
 		$scope.orig_nutrient_amount;
@@ -57,7 +66,11 @@
 		$scope.c_method = "baked";
     $scope.search = "butter";
 
+    // TODO: Group alternatives to each ingredient in recipe
     function getAlternatives() {
+      $scope.map = [];
+      $scope.orig_nutrient_amount = 0;
+
       $http.get('./modules/users/client/controllers/recipes/food_alternatives.json')
         .then( (response) => {
           response.data.cooking_methods.forEach( (cooking_method, i) => {
@@ -86,54 +99,10 @@
 						});
 					});
         });
-      $scope.orig_nutrient_amount = 0;
-			$scope.map = [];
+        TransferService.setAlternatives($scope.map);
     }
 
-    $scope.getReport = (searchedItem) => {
-			var reportURL = 
-			  	"http://api.nal.usda.gov/ndb/reports/" + 
-			  	"?ndbno=" + searchedItem + 
-          "&type=" + type + 
-          "&format=" + format + 
-          "&api_key=" + apiKey; 
-
-        getURL(reportURL)
-          .then( (results) => {
-            $scope.searched = results.data;
-            assignFood();
-          });
-		}
-
-    function assignFood() {
-			$scope.food = $scope.searched.report.food.name.toLowerCase();
-			// $scope.ingredients = $scope.searched.report.food.ing.desc.toLowerCase();
-			$scope.nutrients = $scope.searched.report.food.nutrients;
-		}
-
-    function getURL(url) {
-			return $http.get(url);
-		}
-
-    getAlternatives();
-    console.log($scope.map);
-
-
-    // UsersService.usdaAlternatives(alternative)
-    //   .then(success)
-    //   .catch(failure)
-
-    // function success(response) {
-    //   console.log('worked!');
-    //   console.log(response);
-    // }
-
-    // function failure(response) {
-    //   console.log('sadness')
-    //   console.log(response);
-    // }
-
-    //DO YOUR FRONTEND JS CODE HERE
+    // Add to ingredient list
     $scope.recipeList = [{}];
 
     $scope.recipeAdd = function() {
