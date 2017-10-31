@@ -10,7 +10,7 @@ Thumbs.db
 .nodemonignore
 .sass-cache/
 node_modules/
-public/lib/
+#public/lib/
 app/tests/coverage/
 .bower-*/
 .idea/
@@ -18,7 +18,7 @@ coverage/
 
 # MEAN.js app and assets
 # ======================
-public/dist/
+#public/dist/
 uploads
 modules/users/client/img/profile/uploads
 config/env/local.js
