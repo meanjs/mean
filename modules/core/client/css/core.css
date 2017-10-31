@@ -85,7 +85,7 @@ a:hover .header-profile-image {
   border-color: transparent;
 }
 .navbar-inverse .navbar-brand:hover, .navbar-inverse .navbar-brand:focus {
-    /* color: #fff; */
+     color: rgb(249,192,120); 
     background-color: transparent;
 }
 
@@ -109,6 +109,13 @@ a:hover .header-profile-image {
 .lo:hover{
   color: rgba(249,192,120, 0.8) !important;
 }
+
+/*user name hover*/
+.navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus {
+    color: #000;
+    background-color: #fff !important;
+}
+
 
 
 /*body*/
