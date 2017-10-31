@@ -66,6 +66,7 @@
 		$scope.c_method = "baked";
     $scope.search = "butter";
 
+    // TODO: Group alternatives to each ingredient in recipe
     function getAlternatives() {
       $scope.map = [];
       $scope.orig_nutrient_amount = 0;

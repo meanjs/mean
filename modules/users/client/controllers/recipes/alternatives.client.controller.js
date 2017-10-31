@@ -17,6 +17,13 @@
 
     $scope.ingredients = $scope.recipe.ingredients;
 
+    // TODO: Sort through alternatives and get healthiest and truest to taste
+    // $scope.ingredients.forEach( (ingredient, i) => {
+    //   $scope.alternatives.forEach( (alternative, j) => {
+        
+    //   });
+    // });
+
     // API KEY
 		var apiKey = 'YAJ2M9l67OaqNMPCEfBcoccVtQDY5LPUR20rFzP8';
 
