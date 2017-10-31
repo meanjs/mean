@@ -2,36 +2,36 @@
   'use strict';
 
   angular
-    .module('items')
-    .controller('ModsController', ModsController);
+    .module('items.admin')
+    .controller('CatsController', CatsController);
 
-  ModsController.$inject = ['$scope', '$state', '$window', 'modResolve', 'Authentication', 'Notification'];
+  CatsController.$inject = ['$scope', '$state', '$window', 'catResolve', 'Authentication', 'Notification'];
 
-  function ModsController($scope, $state, $window, mod, Authentication, Notification) {
+  function CatsController($scope, $state, $window, cat, Authentication, Notification) {
     var vm = this;
 
-    vm.item = item;
+    vm.cat = cat;
     vm.authentication = Authentication;
     vm.form = {};
     vm.remove = remove;
     vm.create = create;
     vm.list = list;
 
-   	// Remove existing Item
+    // Remove existing Item
     function remove() {
       if ($window.confirm('Are you sure you want to delete?')) {
-        vm.item.$remove(function () {
-          $state.go('items.list');
+        vm.cat.$remove(function () {
+          $state.go('admin.items.categories');
           Notification.success({ message: '<i class="glyphicon glyphicon-ok"></i> Item deleted successfully!' });
         });
       }
     }
     // Remove existing Item
     function create() {
-      if ($window.confirm('Are you sure you want to delete?')) {
-        vm.item.$remove(function () {
-          $state.go('items.list');
-          Notification.success({ message: '<i class="glyphicon glyphicon-ok"></i> Item deleted successfully!' });
+      if ($window.confirm('Are you sure you want to create?')) {
+        vm.cat.$new(function () {
+          $state.go('admin.items.categories');
+          Notification.success({ message: '<i class="glyphicon glyphicon-ok"></i> Item created successfully!' });
         });
       }
     }
@@ -39,8 +39,8 @@
     // Remove existing Item
     function list() {
       if ($window.confirm('Are you sure you want to delete?')) {
-        vm.item.$remove(function () {
-          $state.go('items.list');
+        vm.cat.$list(function () {
+          $state.go('admin.items.categories');
           Notification.success({ message: '<i class="glyphicon glyphicon-ok"></i> Item deleted successfully!' });
         });
       }

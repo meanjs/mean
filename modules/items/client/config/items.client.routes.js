@@ -20,9 +20,9 @@
         controller: 'ItemsListController',
         controllerAs: 'vm'
       })
-      .state('items.cats', {
+      .state('items.addCats', {
         url: '/categories',
-        templateUrl: '/modules/items/client/views/categories.html',
+        templateUrl: '/modules/items/client/views/admin/add-delete-categories.view.html',
         controller: 'CatsController',
         controllerAs: 'vm',
         resolve: {

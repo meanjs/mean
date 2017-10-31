@@ -36,7 +36,7 @@ var ItemSchema = new Schema({
     type: Schema.ObjectId,
     ref: 'Category'
   },
-  module: {
+  modules: {
     type: Schema.ObjectId,
     ref: 'Module'
   }

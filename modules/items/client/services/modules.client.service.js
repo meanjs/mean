@@ -5,25 +5,20 @@
     .module('items.services')
     .factory('ModulesService', ModulesService);
 
-  ItemsService.$inject = ['$resource', '$log'];
+  ModulesService.$inject = ['$resource', '$log'];
 
   function ModulesService($resource, $log) {
     var Module = $resource('/api/modules', {}, 
     {
       list: {
         method: 'GET'
-      }
-    },
-    {
+      },
       new:{
         method: 'POST'
-      }
-    },
-    {
+      },
       rem:{
         method: 'DELETE'
       }
-    }
     });
 
     angular.extend(Module, {

@@ -5,25 +5,20 @@
     .module('items.services')
     .factory('CategoriesService', CategoriesService);
 
-  ItemsService.$inject = ['$resource', '$log'];
+  CategoriesService.$inject = ['$resource', '$log'];
 
   function CategoriesService($resource, $log) {
-    var Category = $resource('/api/categories', {}, 
+    var Category = $resource('/api/categories', {},
     {
       list: {
         method: 'GET'
-      }
-    },
-    {
+      },
       new:{
         method: 'POST'
-      }
-    },
-    {
+      },
       rem:{
         method: 'DELETE'
       }
-    }
     });
 
     angular.extend(Category, {

@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('items')
+    .module('items.admin')
     .controller('ModsController', ModsController);
 
   ModsController.$inject = ['$scope', '$state', '$window', 'modResolve', 'Authentication', 'Notification'];
@@ -10,7 +10,7 @@
   function ModsController($scope, $state, $window, mod, Authentication, Notification) {
     var vm = this;
 
-    vm.item = item;
+    vm.mod = mod;
     vm.authentication = Authentication;
     vm.form = {};
     vm.remove = remove;
@@ -20,18 +20,18 @@
    	// Remove existing Item
     function remove() {
       if ($window.confirm('Are you sure you want to delete?')) {
-        vm.item.$remove(function () {
-          $state.go('items.list');
+        vm.mod.$remove(function () {
+          $state.go('admin.items.modules');
           Notification.success({ message: '<i class="glyphicon glyphicon-ok"></i> Item deleted successfully!' });
         });
       }
     }
     // Remove existing Item
     function create() {
-      if ($window.confirm('Are you sure you want to delete?')) {
-        vm.item.$remove(function () {
-          $state.go('items.list');
-          Notification.success({ message: '<i class="glyphicon glyphicon-ok"></i> Item deleted successfully!' });
+      if ($window.confirm('Are you sure you want to create?')) {
+        vm.mod.$new(function () {
+          $state.go('admin.items.modules');
+          Notification.success({ message: '<i class="glyphicon glyphicon-ok"></i> Item created successfully!' });
         });
       }
     }
@@ -39,8 +39,8 @@
     // Remove existing Item
     function list() {
       if ($window.confirm('Are you sure you want to delete?')) {
-        vm.item.$remove(function () {
-          $state.go('items.list');
+        vm.mod.$list(function () {
+          $state.go('admin.items.modules');
           Notification.success({ message: '<i class="glyphicon glyphicon-ok"></i> Item deleted successfully!' });
         });
       }

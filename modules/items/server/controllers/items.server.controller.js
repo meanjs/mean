@@ -130,6 +130,8 @@ exports.update = function (req, res) {
 
   item.title = req.body.title;
   item.content = req.body.content;
+  item.categories = req.body.categories;
+  item.modules = req.body.modules;
 
   item.save(function (err) {
     if (err) {
