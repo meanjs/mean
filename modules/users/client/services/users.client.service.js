@@ -10,8 +10,6 @@ angular.module('users').factory('Users', ['$resource',
     });
   }
 ]);
-
-
 //TODO this should be Users service
 angular.module('users.admin').factory('Admin', ['$resource',
   function ($resource) {

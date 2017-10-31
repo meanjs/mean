@@ -1,6 +1,7 @@
 <section ng-controller="SettingsController">
+  <div class="settings-container">
   <div class="page-header">
-    <h1>Settings</h1>
+    <h1>Account Settings</h1>
   </div>
   <div class="row">
     <nav class="col-sm-3 col-md-3">
@@ -14,13 +15,14 @@
         <li ui-sref-active="active" ng-show="user.provider === 'local'">
           <a ui-sref="settings.password">Change Password</a>
         </li>
-        <li ui-sref-active="active">
+        <!-- <li ui-sref-active="active">
           <a ui-sref="settings.accounts">Manage Social Accounts</a>
-        </li>
+        </li> -->
       </ul>
     </nav>
     <div class="col-sm-9 col-md-8 settings-view">
       <div ui-view></div>
     </div>
   </div>
+</div>
 </section>
