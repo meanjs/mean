@@ -112,6 +112,7 @@ angular.module('core').controller('DashboardController', ['$scope', '$compile', 
         }
       }).then(function (res) {
         console.log('Successful accept');
+        $scope.loadEventList();
         console.log(index);
         console.log($scope.globalEvent);
         console.log($scope.globalEvent.organizationsPending[index]);
