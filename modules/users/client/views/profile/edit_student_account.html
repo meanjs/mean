@@ -1,32 +1,42 @@
 <!DOCTYPE html>
 <html>
-<link href="../../css/edit_student_profile.css" rel="stylesheet" type="text/css" />
+<head class="center">
+  <title>Edit Student Profile</title>
+  <link href="../../css/edit_student_profile.css" rel="stylesheet" type="text/css" />
+</head>
 <body>
-  <div id = "wrapper" class="center">
-  <form action="/action_page.php">
-    <p>
-    Student Name:
-    <br>
-    <input type="text" name="firstname" placeholder="First Name" required>
-    <br><br>
-    <input type="text" name="lastname" placeholder="Last Name" required>
-    <br><br>
-    Username:
-    <br>
-    <input type="text" name="student_username" placeholder="Username" required>
-    <br><br>
-    Password:
-    <br>
-    <input type="text" name="student_password" placeholder="Password" required>
-    <br><br>
-    <input type="text" name="student_password_repeat" placeholder="Re-Enter Password" required>
-    <br><br>
-    By creating an account you agree to our <a href="#">Terms & Privacy</a>.
+
+  <div id = "wrapper" >
+  <form action="/action_page.php" method="post">
+
+    <div class="form-control">
+      <label class="header">Profile Photo:</label><br>
+      <input id="image" type="file" accept="image/x-png,image/gif,image/jpeg" name="student_profile_photo" placeholder="student_photo" required="" capture><br><br>
+    </div>
+
+    <div class="form-control">
+      <label class="header">Name:</label><br>
+      <input type="text" id="student_firstname" name="student_firstname" placeholder="First Name" required="">
+      <input type="text" id="student_lastname" name="student_lastname" placeholder="Last Name" required=""><br><br>
+    </div>
+
+    <div class="form-control">
+      <label class="header">Contact Number:</label><br>
+      <input type="text" id="student_contact_number" name="student_contact_number" placeholder="Contact Number" required=""><br><br>
+    </div>
+
+    <div class="form-control">
+      <label class="header">Contact Email:</label><br>
+      <input type="email" id="student_contact_email" name="student_contact_email" placeholder="Contact Email" required=""><br><br>
+    </div>
+
+
+
+    <br>By creating an account you agree to our <a href="#">Terms & Privacy</a>.
     <!-- <input type="submit" value="Submit"> -->
     <div class="right">
     <button class = "button" type="submit"><span>Submit</span></button>
     </div>
-    </p>
   </form>
   </div>
 
