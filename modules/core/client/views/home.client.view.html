@@ -1,84 +1,34 @@
 <section>
-  <div class="jumbotron text-center">
-    <div class="row">
-      <div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-12">
-        <img alt="MEAN.JS" class="img-responsive text-center" src="/modules/core/client/img/brand/logo.png" />
-      </div>
+  <div>
+    <link href='http://fonts.googleapis.com/css?family=Exo:100,200,400' rel='stylesheet'>
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:700,400,300' rel='stylesheet'>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewpoint" content="width=device-width, initial-scale=1">
+    <link rel="sytlesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <div class="body"></div>
+    <div class="grad"></div>
+    <div class="header">
+      <div>IPPD <span>Resume Portal </span></div>
     </div>
     <br>
-    <div class="row">
-      <p class="lead">
-        Open-Source Full-Stack Solution For MEAN Applications
-      </p>
-    </div>
-    <div class="row">
-      <p>
-        <a class="btn btn-primary btn-lg" href="http://meanjs.org" target="_blank">Learn more</a>
-      </p>
-    </div>
+    <form name="vm.userForm" ng-submit="vm.signin(vm.userForm.$valid)" class="signin" novalidate autocomplete="off">
+      <div class="login">
+        <fieldset>
+          <label class="customText" for="usernameOrEmail">Username or Email</label>
+          <br>
+          <input type="text" id="usernameOrEmail" name="usernameOrEmail" class="customInputBox" ng-model="vm.credentials.usernameOrEmail" placeholder="Username or Email" required autofocus>
+          <br>
+          <label class="customText" for="password">Password</label>
+          <br>
+          <input type="password" id="password" name="password" class="customInputBox" ng-model="vm.credentials.password" placeholder="Password" required>
+         <br />
+         <input type="checkbox" name="checkbox" value="check"><span>I agree to the <a href="/terms_and_conditions" target="_blank"> terms and conditions</a></span>
+         <br />
+          <input type="submit" value="Sign in" onclick="if(!this.form.checkbox.checked){alert('You must agree to the terms first.');return false}"  />
+        </fieldset>
+      </div>
+    </form>
   </div>
-  <div>
-    <h2>Congrats! You've configured and run the sample application.</h2>
-    <p>MEAN.JS is a web application boilerplate, which means you should start changing everything :-)</p>
-    <p>This sample application tracks users and articles.</p>
-    <ul>
-      <li>
-        Click
-        <em>Sign Up</em> to get started.
-      </li>
-      <li>
-        Configure your app to work with your social accounts, by editing the
-        <em>/config/env/*.js</em> files.
-      </li>
-      <li>
-        Edit your users module.
-      </li>
-      <li>
-        Add new CRUD modules.
-      </li>
-      <li>
-        Have fun...
-      </li>
-    </ul>
-  </div>
-  <div class="row">
-    <div class="col-md-3">
-      <h2><strong>M</strong>ongoDB</h2>
-      <p><a target="_blank" href="http://mongodb.org/">MongoDB</a> is a NoSQL database. MongoDB's <a target="_blank" href="http://docs.mongodb.org/manual/">great manual</a> is the place to get started with NoSQL and MongoDB.</p>
-    </div>
-    <div class="col-md-3">
-      <h2><strong>E</strong>xpress</h2>
-      <p><a target="_blank" href="http://expressjs.com/"> Express</a> is a NodeJS server-side application web framework. Check out <a target="_blank" href="http://expressjs.com/4x/api.html">The ExpressJS API reference for more information</a> or <a target="_blank" href="http://stackoverflow.com/questions/8144214/learning-express-for-node-js">StackOverflow</a> for more info.</p>
-    </div>
-    <div class="col-md-3">
-      <h2><strong>A</strong>ngularJS</h2>
-      <p><a target="_blank" href="http://angularjs.org/">AngularJS</a> is client-side web application framework. The <a target="_blank" href="http://www.thinkster.io/">Thinkster Popular Guide</a> and <a target="_blank" href="https://egghead.io/">Egghead Videos</a> are great resources.</p>
-    </div>
-    <div class="col-md-3">
-      <h2><strong>N</strong>ode.js</h2>
-      <p><a target="_blank" href="http://nodejs.org/">Node.js</a> is a JavaScript run-time, popular for being a web server platform. Node's website and this <a target="_blank" href="http://stackoverflow.com/questions/2353818/how-do-i-get-started-with-node-js">stackOverflow thread</a> offer excellent starting points to get to grasps with node.</p>
-    </div>
-  </div>
-  <div class="well">
-    <h2>MEAN.JS Documentation</h2>
-    <p>
-      Once you're familiar with the foundation technology, check out the MEAN.JS Documentation:
-      <ul>
-        <li><a target="_blank" href="http://meanjs.org/docs.html">MEAN.JS Documentation</a>
-        </li>
-        <!-- <li><a target="_blank" href="http://meanjs.org/generator.html">Yeoman Generator</a>
-				</li> -->
-        <li><a target="_blank" href="http://meanjs.org/modules.html">Modules</a>
-        </li>
-        <li><a target="_blank" href="http://meanjs.org/changelog.html">Changelog</a>
-        </li>
-        <li><a target="_blank" href="http://meanjs.org/community.html">Community</a>
-        </li>
-        <li><a target="_blank" href="http://blog.meanjs.org">Blog</a>
-        </li>
-      </ul>
-    </p>
-  </div>
-  <br>Enjoy &amp; Keep Us Updated,
-  <br>The MEAN.JS Team.
 </section>
+

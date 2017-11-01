@@ -8,7 +8,7 @@
 
   UsersService.$inject = ['$resource'];
 
-  function UsersService($resource) {
+  function UsersService($resource, $http) {
     var Users = $resource('/api/users', {}, {
       update: {
         method: 'PUT'
@@ -85,5 +85,29 @@
         method: 'PUT'
       }
     });
+  }
+
+  angular
+    .module('users.services')
+    .factory('CatalogService', CatalogService);
+
+  CatalogService.$inject = ['$resource'];
+
+  function CatalogService($resource, $http) {
+    var Catalog = $resource('/api/catalog', {}, {
+      getStudents: {
+        method: 'GET',
+        url: '/api/catalog/students',
+        isArray: true
+      }
+    });
+
+    angular.extend(Catalog, {
+      sponsorGetStudents: function () {
+        return this.getStudents().$promise;
+      }
+    });
+
+    return Catalog;
   }
 }());
