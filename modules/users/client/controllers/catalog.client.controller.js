@@ -64,9 +64,9 @@
               filteredSet.add(originalList[i]);
             }
           }
-          if (originalList[i].availabiltyStatus !== null) {
-            var availabiltyStatus = originalList[i].availabiltyStatus;
-            if (availabiltyStatus.toLowerCase().includes($scope.searchValue.toLowerCase())) {
+          if (originalList[i].availabilityStatus !== null) {
+            var availabilityStatus = originalList[i].availabilityStatus;
+            if (availabilityStatus.toLowerCase().includes($scope.searchValue.toLowerCase())) {
               filteredSet.add(originalList[i]);
             }
           }
