@@ -13,6 +13,8 @@
 
     $scope.detailedInfo = null;
     $scope.usersList = [];
+    $scope.filteredUsersList = [];
+    $scope.searchValue = null;
 
     fetchStudents();
 
@@ -20,7 +22,7 @@
       // $http.get('/api/catalog/students').then(function (response) {
       //   onSponsorGetStudentsSuccess(response);
       // }, function (error) {
-      //   onSponsorGetStudentsError(error);
+      //   onSponsorGetStudentsFailure(error);
       // });
       CatalogService.sponsorGetStudents().then(onSponsorGetStudentsSuccess).catch(onSponsorGetStudentsFailure);
     }
@@ -30,15 +32,34 @@
     };
 
     function onSponsorGetStudentsSuccess(response) {
-      console.log('response.data: ' + response);
       $scope.usersList = response;
+      $scope.filteredUsersList = Array.from($scope.usersList);
     }
 
     function onSponsorGetStudentsFailure(response) {
       $scope.usersList = null;
+      $scope.filteredUsersList = null;
     }
-    function onSponsorGetStudentsError(error) {
-      $scope.usersList = null;
-    }
+
+    // filter the current list
+    $scope.filterData = function () {
+      var originalList = Array.from($scope.usersList);
+      var filteredList = [];
+      if ($scope.searchValue == null || $scope.searchValue === '') {
+        $scope.filteredUsersList = originalList;
+      } else {
+        for (var i = 0; i < originalList.length; i++) {
+          if (originalList[i].firstName !== null || originalList[i].lastName !== null) {
+            var firstName = (originalList[i].firstName !== null) ? originalList[i].firstName : '';
+            var lastName = (originalList[i].lastName !== null) ? originalList[i].lastName : '';
+            var userName = firstName + ' ' + lastName;
+            if (userName.toLowerCase().includes($scope.searchValue.toLowerCase())) {
+              filteredList.push(originalList[i]);
+            }
+          }
+        }
+        $scope.filteredUsersList = filteredList;
+      }
+    };
   }
 }());
