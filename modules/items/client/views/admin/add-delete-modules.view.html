@@ -27,7 +27,7 @@
           <tr ng-repeat="module in vm.modules">
             <td class="firstColumn">{{ module.title }}</td>
             <td class="secondColumn">
-              <button class="btn btn-danger dangerButton" type="button" ng-click="vm.deleteModule(module)">-</button>
+              <button class="btn btn-danger dangerButton" type="button" ng-click="vm.remove(module)">-</button>
             </td>
           </tr>
         </tbody>

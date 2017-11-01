@@ -11,15 +11,14 @@
     var vm = this;
 
     vm.categories= CategoriesService.query();
-    vm.remove= remove;
-    function remove(cat) {
+    vm.remove = function(cat) {
       if ($window.confirm('Are you sure you want to create?')) {
+        vm.categories.splice(vm.categories.indexOf(cat), 1);
         cat.$rem(function () {
           $state.go('items.list');
           Notification.success({ message: '<i class="glyphicon glyphicon-ok"></i> Item created successfully!' });
         });
       }
     }
-
   }
 }());
