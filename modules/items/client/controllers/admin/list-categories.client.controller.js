@@ -14,7 +14,7 @@
     vm.remove = function(cat) {
       if ($window.confirm('Are you sure you want to delete?')) {
         vm.categories.splice(vm.categories.indexOf(cat), 1);
-        cat.$rem(function () {
+        cat.$remove(function () {
           $state.go('items.list');
           Notification.success({ message: '<i class="glyphicon glyphicon-ok"></i> Item created successfully!' });
         });

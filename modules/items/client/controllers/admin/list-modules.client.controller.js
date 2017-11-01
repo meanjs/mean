@@ -5,9 +5,9 @@
     .module('items.admin')
     .controller('ItemsAdminModulesController', ItemsAdminModulesController);
 
-  ItemsAdminModulesController.$inject = ['ItemsService', 'ModulesService'];
+  ItemsAdminModulesController.$inject = ['ItemsService', 'ModulesService', '$window', '$state', '$scope', 'Notification'];
 
-  function ItemsAdminModulesController(ItemsService, ModulesService) {
+  function ItemsAdminModulesController(ItemsService, ModulesService, $window, $state, $scope, Notification) {
     var vm = this;
 
     vm.modules = ModulesService.query();
@@ -16,7 +16,7 @@
       if ($window.confirm('Are you sure you want to delete?')) {
         vm.modules.splice(vm.modules.indexOf(module), 1);
         //Call backend delete here.
-        vm.mod.$remove(function () {
+        module.$delete(function () {
           $state.go('admin.items.modules');
           Notification.success({ message: '<i class="glyphicon glyphicon-ok"></i> Item deleted successfully!' });
         });  
