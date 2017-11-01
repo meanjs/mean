@@ -5,43 +5,43 @@
     .module('users')
     .controller('CatalogController', CatalogController);
 
-  CatalogController.$inject = ['$scope', '$state', 'UsersService', '$http'];
+  CatalogController.$inject = ['$scope', '$state', 'UsersService', '$http', 'Notification', '$window', 'Authentication'];
 
-  function CatalogController($scope, $state, UsersService, $http) {
+  function CatalogController($scope, $state, UsersService, $http, Notification, $window, Authentication) {
     var vm = this;
+    vm.authentication = Authentication;
+
     $scope.detailedInfo = null;
     $scope.usersList = [];
 
-    // $http.get('/catalog/catalog.json').then(function (response) {
-    //   $scope.usersList = response.data;
-    // }, function (error) {
-    //   $scope.error = 'Unable to retrieve listings!\n' + error;
-    // });
+    Notification.info({ message: 'Welcome to the catalog page' });
+    fetchStudents();
 
-    $http.get('/api/catalog/students').then(function (response) {
-      $scope.usersList = response.data;
-    }, function (error) {
-      $scope.error = 'Unable to retrieve listings!\n' + error;
-    });
-
-    // UsersService.sponsorGetStudents().then(onSponsorGetStudentsSuccess).catch(onSponsorGetStudentsError);
-
-    // $scope.showDetails = function (index) {
-    //   $scope.detailedInfo = $scope.users[index];
-    //   $scope.names = $scope.users[index].firstName;
-    // };
+    function fetchStudents() {
+      // $http.get('/api/catalog/students').then(function (response) {
+      //   onSponsorGetStudentsSuccess(response);
+      // }, function (error) {
+      //   onSponsorGetStudentsError(error);
+      // });
+      UsersService.sponsorGetStudents().then(onSponsorGetStudentsSuccess).catch(onSponsorGetStudentsFailure);
+    }
 
     $scope.showDetails = function (index) {
       $scope.detailedInfo = $scope.usersList[index];
     };
 
     function onSponsorGetStudentsSuccess(response) {
+      Notification.info({ message: 'Grabbed them all' });
       $scope.usersList = response.data;
     }
 
-    function onSponsorGetStudentsError(response) {
+    function onSponsorGetStudentsFailure(response) {
       $scope.usersList = null;
-      $scope.error = 'Unable to retrieve listings!\n' + response.error;
+      Notification.info({ message: 'Error Grabbing All' });
+    }
+    function onSponsorGetStudentsError(error) {
+      $scope.usersList = null;
+      Notification.info({ message: 'Error Grabbing All' });
     }
   }
 }());

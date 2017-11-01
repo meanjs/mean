@@ -70,7 +70,7 @@
         return this.signin(credentials).$promise;
       },
       sponsorGetStudents: function () {
-        return this.getStudents.$promise;
+        return this.getStudents;
       }
     });
 
