@@ -22,11 +22,10 @@
 
     // If user is signed in then redirect back home
     if (vm.authentication.user) {
-      if (vm.authentication.user.type === 'student'){
+      if (vm.authentication.user.type === 'student') {
         $location.path('/profile');
-      }
-      if(vm.authentication.user.type === 'sponsor'){
-      $location.path('/catalog');
+      } else if (vm.authentication.user.type === 'sponsor' || vm.authentication.user.type === 'admin') {
+        $location.path('/catalog');
       }
     }
 

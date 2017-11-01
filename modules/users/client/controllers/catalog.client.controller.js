@@ -70,6 +70,12 @@
               filteredSet.add(originalList[i]);
             }
           }
+          if (originalList[i].teamName !== null) {
+            var teamName = originalList[i].teamName;
+            if (teamName.toLowerCase().includes($scope.searchValue.toLowerCase())) {
+              filteredSet.add(originalList[i]);
+            }
+          }
         }
 
         $scope.filteredUsersList = Array.from(filteredSet);
