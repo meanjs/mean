@@ -2,6 +2,10 @@
   <div>
     <link href='http://fonts.googleapis.com/css?family=Exo:100,200,400' rel='stylesheet'>
     <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:700,400,300' rel='stylesheet'>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewpoint" content="width=device-width, initial-scale=1">
+    <link rel="sytlesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <div class="body"></div>
     <div class="grad"></div>
     <div class="header">
@@ -18,9 +22,13 @@
           <label class="customText" for="password">Password</label>
           <br>
           <input type="password" id="password" name="password" class="customInputBox" ng-model="vm.credentials.password" placeholder="Password" required>
-          <input type="submit" value="Sign in"/>
+         <br />
+         <input type="checkbox" name="checkbox" value="check"><span>I agree to the <a href="/terms_and_conditions" target="_blank"> terms and conditions</a></span>
+         <br />
+          <input type="submit" value="Sign in" onclick="if(!this.form.checkbox.checked){alert('You must agree to the terms first.');return false}"  />
         </fieldset>
       </div>
     </form>
   </div>
 </section>
+
