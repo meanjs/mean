@@ -162,22 +162,6 @@ ul {
   margin: 5px;
 }
 
-.but {
-    display: block;
-    border-radius: 5px;
-    background-color: #FA4616;
-    transition: all 0.5s;
-    border: none;
-    width: 115px;
-    height: 25px;
-    background: #4E9CAF;
-    padding: 10px;
-    text-align: center;
-    border-radius: 5px;
-    color: white;
-    font-weight: bold;
-}
-
 .button span {
   cursor: pointer;
   display: inline-block;
