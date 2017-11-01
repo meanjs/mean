@@ -12,7 +12,7 @@
 
     vm.categories= CategoriesService.query();
     vm.remove = function(cat) {
-      if ($window.confirm('Are you sure you want to create?')) {
+      if ($window.confirm('Are you sure you want to delete?')) {
         vm.categories.splice(vm.categories.indexOf(cat), 1);
         cat.$rem(function () {
           $state.go('items.list');

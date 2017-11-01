@@ -13,12 +13,14 @@
     vm.modules = ModulesService.query();
 
     vm.remove = function(module){
-      vm.modules.splice(vm.modules.indexOf(module), 1);
-      //Call backend delete here.
-      vm.mod.$remove(function () {
+      if ($window.confirm('Are you sure you want to delete?')) {
+        vm.modules.splice(vm.modules.indexOf(module), 1);
+        //Call backend delete here.
+        vm.mod.$remove(function () {
           $state.go('admin.items.modules');
           Notification.success({ message: '<i class="glyphicon glyphicon-ok"></i> Item deleted successfully!' });
-        });
+        });  
+      }
     }
 
   }
