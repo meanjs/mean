@@ -2,9 +2,21 @@
 
 var path = require('path');
 var mongoose = require('mongoose');
-var Student = require('../models/user.server.model.js');
+var Student = mongoose.model('User');
 
-  /* Create a student */
+/* Retreive all the directory students, sorted alphabetically by student last name */
+exports.students = function (req, res) {
+  Student.find({ type: 'student' }).sort('lastName').exec(function (err, students) {
+    if (err) {
+      console.log(err);
+      res.status(400).send(err);
+    } else {
+      res.send(students);
+    }
+  });
+};
+
+/* Create a student */
 exports.create = function (req, res) {
   var student = new Student(req.body);
 
@@ -64,21 +76,6 @@ exports.delete = function (req, res) {
     }
 
   });
-};
-
-/* Retreive all the directory students, sorted alphabetically by student last name */
-exports.list = function (req, res) {
-
-  Student.find().sort('lastName').exec(function (err, students) {
-    if (err) {
-      console.log(err);
-      res.status(400).send(err);
-    } else {
-      res.send(students);
-    }
-
-  });
-
 };
 
 /*
