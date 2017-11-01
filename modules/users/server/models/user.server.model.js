@@ -87,7 +87,7 @@ var UserSchema = new Schema({
     type: String,
     trim: true
   },
-  availabiltyStatus: {
+  availabilityStatus: {
     type: String,
     trim: true
   },
