@@ -5,9 +5,9 @@
     .module('items.admin')
     .controller('ItemsAdminModulesController', ItemsAdminModulesController);
 
-  ItemsAdminModulesController.$inject = ['ItemsService', 'ModulesService', '$window', '$state', '$scope', 'Notification'];
+  ItemsAdminModulesController.$inject = ['ModulesService', '$window', '$state', '$scope', 'Notification'];
 
-  function ItemsAdminModulesController(ItemsService, ModulesService, $window, $state, $scope, Notification) {
+  function ItemsAdminModulesController(ModulesService, $window, $state, $scope, Notification) {
     var vm = this;
 
     vm.modules = ModulesService.query();
@@ -18,6 +18,5 @@
         ModulesService.rem(module);
       }
     }
-
   }
 }());

@@ -5,9 +5,9 @@
     .module('items.admin')
     .controller('ItemsAdminCategoriesController', ItemsAdminCategoriesController);
 
-  ItemsAdminCategoriesController.$inject = ['ItemsService', 'CategoriesService', '$window', '$state', '$scope', 'Notification'];
+  ItemsAdminCategoriesController.$inject = ['CategoriesService', '$window', '$state', '$scope', 'Notification'];
 
-  function ItemsAdminCategoriesController(ItemsService, CategoriesService, $window, $state, $scope, Notification) {
+  function ItemsAdminCategoriesController(CategoriesService, $window, $state, $scope, Notification) {
     var vm = this;
 
     vm.categories= CategoriesService.query();
