@@ -43,6 +43,10 @@
         method: 'POST',
         url: '/api/auth/signin'
       }
+      // getStudents: {
+      //   method: 'GET',
+      //   url: '/api/users/students'
+      // }
     });
 
     angular.extend(Users, {
