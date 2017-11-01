@@ -15,11 +15,7 @@
     vm.remove = function(module){
       if ($window.confirm('Are you sure you want to delete?')) {
         vm.modules.splice(vm.modules.indexOf(module), 1);
-        //Call backend delete here.
-        module.$delete(function () {
-          $state.go('admin.items.modules');
-          Notification.success({ message: '<i class="glyphicon glyphicon-ok"></i> Item deleted successfully!' });
-        });  
+        ModulesService.rem(module);
       }
     }
 

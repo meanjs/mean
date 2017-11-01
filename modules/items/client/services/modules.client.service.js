@@ -5,8 +5,8 @@
     .module('items.services')
     .factory('ModulesService', ModulesService);
 
-  ModulesService.$inject = ['$resource', '$log'];
 
+  ModulesService.$inject = ['$resource', '$log'];
   function ModulesService($resource, $log) {
     var Module = $resource('/api/modules', {}, 
     {
@@ -26,7 +26,7 @@
         return this.new(mod).$promise;
       },
       delete: function (mod) {
-        return this.del(mod).$promise;
+        return this.rem(mod).$promise;
       },
       getAll: function () {
         return this.list().$promise;

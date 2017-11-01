@@ -5,8 +5,8 @@
     .module('items.services')
     .factory('CategoriesService', CategoriesService);
 
-  CategoriesService.$inject = ['$resource', '$log'];
 
+  CategoriesService.$inject = ['$resource', '$log'];
   function CategoriesService($resource, $log) {
     var Category = $resource('/api/categories', {},
     {
@@ -26,7 +26,7 @@
         return this.new(cat).$promise;
       },
       delete: function (cat) {
-        return this.del(cat).$promise;
+        return this.rem(cat).$promise;
       },
       getAll: function () {
         return this.list().$promise;
