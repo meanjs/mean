@@ -2,7 +2,7 @@
 
 var path = require('path');
 var mongoose = require('mongoose');
-var Student = require('../models/user.server.model.js');
+var Student = mongoose.model('User');
 
 /* Retreive all the directory students, sorted alphabetically by student last name */
 exports.students = function (req, res) {
