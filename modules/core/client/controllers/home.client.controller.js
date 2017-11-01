@@ -20,14 +20,12 @@
       Notification.error({ message: $location.search().err });
     }
 
-
-
     // If user is signed in then redirect back home
-    if (vm.authentication.user ) {
-      if (vm.authentication.user.role === 'student'){
+    if (vm.authentication.user) {
+      if (vm.authentication.user.type === 'student'){
         $location.path('/profile');
       }
-      if(vm.authentication.user.role === 'sponsor'){
+      if(vm.authentication.user.type === 'sponsor'){
       $location.path('/catalog');
       }
     }
@@ -48,7 +46,6 @@
     function onUserSigninSuccess(response) {
       // If successful we assign the response to the global user model
       vm.authentication.user = response;
-      console.log('this is response:' + response);
       Notification.info({ message: 'Welcome ' + response.firstName });
       // And redirect to the previous or home page
       if (vm.authentication.user.type === 'student') {

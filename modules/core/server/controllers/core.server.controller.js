@@ -21,7 +21,7 @@ exports.renderIndex = function (req, res) {
       lastName: validator.escape(req.user.lastName),
       firstName: validator.escape(req.user.firstName),
       additionalProvidersData: req.user.additionalProvidersData,
-      role: req.user.type
+      type: req.user.type
     };
   }
 
