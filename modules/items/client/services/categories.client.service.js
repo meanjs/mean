@@ -8,7 +8,7 @@
 
   CategoriesService.$inject = ['$resource', '$log'];
   function CategoriesService($resource, $log) {
-    var Category = $resource('/api/categories', {},
+    var Category = $resource('/api/categories', {}, 
     {
       list: {
         method: 'GET'

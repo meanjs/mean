@@ -11,6 +11,7 @@
     var vm = this;
 
     vm.categories= CategoriesService.query();
+    
     vm.remove = function(cat) {
       if ($window.confirm('Are you sure you want to delete?')) {
         vm.categories.splice(vm.categories.indexOf(cat), 1);
