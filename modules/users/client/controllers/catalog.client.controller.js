@@ -44,7 +44,8 @@
     // filter the current list
     $scope.filterData = function () {
       var originalList = Array.from($scope.usersList);
-      var filteredList = [];
+      var filteredSet = new Set();
+
       if ($scope.searchValue == null || $scope.searchValue === '') {
         $scope.filteredUsersList = originalList;
       } else {
@@ -54,11 +55,24 @@
             var lastName = (originalList[i].lastName !== null) ? originalList[i].lastName : '';
             var userName = firstName + ' ' + lastName;
             if (userName.toLowerCase().includes($scope.searchValue.toLowerCase())) {
-              filteredList.push(originalList[i]);
+              filteredSet.add(originalList[i]);
+            }
+          }
+          if (originalList[i].major !== null) {
+            var major = originalList[i].major;
+            if (major.toLowerCase().includes($scope.searchValue.toLowerCase())) {
+              filteredSet.add(originalList[i]);
+            }
+          }
+          if (originalList[i].availabiltyStatus !== null) {
+            var availabiltyStatus = originalList[i].availabiltyStatus;
+            if (availabiltyStatus.toLowerCase().includes($scope.searchValue.toLowerCase())) {
+              filteredSet.add(originalList[i]);
             }
           }
         }
-        $scope.filteredUsersList = filteredList;
+
+        $scope.filteredUsersList = Array.from(filteredSet);
       }
     };
   }
