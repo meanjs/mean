@@ -5,16 +5,15 @@
     .module('users')
     .controller('CatalogController', CatalogController);
 
-  CatalogController.$inject = ['$scope', '$state', 'UsersService', '$http', 'Notification', '$window', 'Authentication'];
+  CatalogController.$inject = ['$scope', '$state', 'UsersService', 'CatalogService', '$http', 'Notification', '$window', 'Authentication'];
 
-  function CatalogController($scope, $state, UsersService, $http, Notification, $window, Authentication) {
+  function CatalogController($scope, $state, UsersService, CatalogService, $http, Notification, $window, Authentication) {
     var vm = this;
     vm.authentication = Authentication;
 
     $scope.detailedInfo = null;
     $scope.usersList = [];
 
-    Notification.info({ message: 'Welcome to the catalog page' });
     fetchStudents();
 
     function fetchStudents() {
@@ -23,7 +22,7 @@
       // }, function (error) {
       //   onSponsorGetStudentsError(error);
       // });
-      UsersService.sponsorGetStudents().then(onSponsorGetStudentsSuccess).catch(onSponsorGetStudentsFailure);
+      CatalogService.sponsorGetStudents().then(onSponsorGetStudentsSuccess).catch(onSponsorGetStudentsFailure);
     }
 
     $scope.showDetails = function (index) {
@@ -31,17 +30,15 @@
     };
 
     function onSponsorGetStudentsSuccess(response) {
-      Notification.info({ message: 'Grabbed them all' });
-      $scope.usersList = response.data;
+      console.log('response.data: ' + response);
+      $scope.usersList = response;
     }
 
     function onSponsorGetStudentsFailure(response) {
       $scope.usersList = null;
-      Notification.info({ message: 'Error Grabbing All' });
     }
     function onSponsorGetStudentsError(error) {
       $scope.usersList = null;
-      Notification.info({ message: 'Error Grabbing All' });
     }
   }
 }());

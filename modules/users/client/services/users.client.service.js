@@ -39,10 +39,6 @@
       signin: {
         method: 'POST',
         url: '/api/auth/signin'
-      },
-      getStudents: {
-        method: 'GET',
-        url: '/api/catalog/students'
       }
     });
 
@@ -68,9 +64,6 @@
       },
       userSignin: function (credentials) {
         return this.signin(credentials).$promise;
-      },
-      sponsorGetStudents: function () {
-        return this.getStudents;
       }
     });
 
@@ -92,5 +85,29 @@
         method: 'PUT'
       }
     });
+  }
+
+  angular
+    .module('users.services')
+    .factory('CatalogService', CatalogService);
+
+  CatalogService.$inject = ['$resource'];
+
+  function CatalogService($resource, $http) {
+    var Catalog = $resource('/api/catalog', {}, {
+      getStudents: {
+        method: 'GET',
+        url: '/api/catalog/students',
+        isArray: true
+      }
+    });
+
+    angular.extend(Catalog, {
+      sponsorGetStudents: function () {
+        return this.getStudents().$promise;
+      }
+    });
+
+    return Catalog;
   }
 }());
