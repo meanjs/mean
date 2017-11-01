@@ -12,11 +12,19 @@
     $scope.detailedInfo = null;
     $scope.usersList = [];
 
-    $http.get('/catalog/catalog.json').then(function (response) {
+    // $http.get('/catalog/catalog.json').then(function (response) {
+    //   $scope.usersList = response.data;
+    // }, function (error) {
+    //   $scope.error = 'Unable to retrieve listings!\n' + error;
+    // });
+
+    $http.get('/api/catalog/students').then(function (response) {
       $scope.usersList = response.data;
     }, function (error) {
       $scope.error = 'Unable to retrieve listings!\n' + error;
     });
+
+    // UsersService.sponsorGetStudents().then(onSponsorGetStudentsSuccess).catch(onSponsorGetStudentsError);
 
     // $scope.showDetails = function (index) {
     //   $scope.detailedInfo = $scope.users[index];
@@ -24,14 +32,16 @@
     // };
 
     $scope.showDetails = function (index) {
-      console.log('client showDetails clicked');
-      // $scope.detailedInfo = $scope.users[index];
-      // var detailUser = {
-      //   name: 'Bob test1',
-      //   major: 'Undecided'
-      // };
-      // $scope.detailedInfo = detailUser;
       $scope.detailedInfo = $scope.usersList[index];
     };
+
+    function onSponsorGetStudentsSuccess(response) {
+      $scope.usersList = response.data;
+    }
+
+    function onSponsorGetStudentsError(response) {
+      $scope.usersList = null;
+      $scope.error = 'Unable to retrieve listings!\n' + response.error;
+    }
   }
 }());

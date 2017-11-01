@@ -17,9 +17,6 @@
         method: 'POST',
         url: '/api/users/password'
       },
-      // getList: function () {
-      //   return $http.get('/catalog/catalog.json');
-      // },
       deleteProvider: {
         method: 'DELETE',
         url: '/api/users/accounts',
@@ -42,11 +39,11 @@
       signin: {
         method: 'POST',
         url: '/api/auth/signin'
+      },
+      getStudents: {
+        method: 'GET',
+        url: '/api/catalog/students'
       }
-      // getStudents: {
-      //   method: 'GET',
-      //   url: '/api/users/students'
-      // }
     });
 
     angular.extend(Users, {
@@ -71,6 +68,9 @@
       },
       userSignin: function (credentials) {
         return this.signin(credentials).$promise;
+      },
+      sponsorGetStudents: function () {
+        return this.getStudents.$promise;
       }
     });
 
