@@ -38,7 +38,7 @@ exports.createCategory = function (req, res) {
 };
 
 exports.deleteCategory = function(req, res) {
-  var toDelete = req.body;
+  var toDelete = req.query;
   Category.findOneAndRemove({'title' : toDelete.title}, function(err, deleted) {
     if (err) {
       return res.status(422).send({
@@ -79,7 +79,7 @@ exports.createModule = function (req, res) {
 
 
 exports.deleteModule = function(req, res) {
-  var toDelete = req.body;
+  var toDelete = req.query;
   Module.findOneAndRemove({'title' : toDelete.title}, function(err, deleted) {
     if (err) {
       return res.status(422).send({
