@@ -53,8 +53,8 @@
               Select a student to learn more!
             </li>
             <div ng-if="detailedInfo">
-            	<li ng-if="detailedInfo.availability" class="rightText">
-                	<i>Status: {{detailedInfo.availability}}</i>
+            	<li ng-if="detailedInfo.availabilityStatus" class="rightText">
+                	<i>Status: {{detailedInfo.availabilityStatus}}</i>
               	</li>
               	<li ng-if="detailedInfo.firstName">
                 	Name: {{detailedInfo.firstName}}
@@ -62,10 +62,10 @@
 	             <li ng-if="detailedInfo.major">
 	                Major: {{detailedInfo.major}}
 	            </li>
-	            <li ng-if="detailedInfo.team">
+	            <li ng-if="detailedInfo.teamName">
 	                Team: {{detailedInfo.teamName}}
 	            </li>
-	            <li ng-if="detailedInfo.coordinates.longitude">
+	            <li ng-if="detailedInfo.bio">
 	                Bio: {{detailedInfo.bio}}
 	            </li>
 	            <div id="addCart" class="rightText">
