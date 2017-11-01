@@ -47,15 +47,14 @@
 	        <h4 class="leftText"><i class="glyphicon glyphicon-shopping-cart" style="font-size: 25px;"></i>  Cart</h4>
 	      </div>
 	      <div class="jumbotron">
+	      	<p ng-if="detailedInfo.availabilityStatus" class="rightText">
+               	<i>Status: {{detailedInfo.availabilityStatus}}</i>
+            </p>
 	      	<h2>Detailed Information</h2>
-
             <li ng-if="!detailedInfo">
               Select a student to learn more!
             </li>
             <div ng-if="detailedInfo">
-            	<li ng-if="detailedInfo.availabilityStatus" class="rightText">
-                	<i>Status: {{detailedInfo.availabilityStatus}}</i>
-              	</li>
               	<li ng-if="detailedInfo.firstName">
                 	Name: {{detailedInfo.firstName}}
               	</li>
