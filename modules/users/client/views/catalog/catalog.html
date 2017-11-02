@@ -10,12 +10,12 @@
 	  </div>
 	  <div class="row" ng-controller="CatalogController">
 	    <div class="col-md-6">
-	      	<div class="input-group" id="searchBar">
+	      	<div class="input-group catalog-search" id="searchBar">
 	        	<span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-search"></span></span>
 	        	<input type="text" class="form-control" placeholder="Search" ng-model="searchValue" ng-keyup="filterData()" />
-	        	<span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-search"></span></span>
+	        	<span class="input-group-addon" id="sizing-addon2" ng-click="toggleFilterOptions()"><span class="glyphicon glyphicon-filter"></span></span>
 	      	</div>
-	      	<div>
+	      	<div ng-if="shouldShowFilters">
 	      		<form class="filter-form">
 			      	<fieldset class="filter-fieldset">
 					  	<legend class="filter-legend">Filter By:</legend>

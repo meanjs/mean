@@ -15,6 +15,7 @@
     $scope.usersList = [];
     $scope.filteredUsersList = [];
     $scope.searchValue = null;
+    $scope.shouldShowFilters = false;
 
     if (vm.authentication.user === null) {
       $state.go('authentication.signin');
@@ -47,6 +48,10 @@
       $scope.usersList = null;
       $scope.filteredUsersList = null;
     }
+
+    $scope.toggleFilterOptions = function () {
+      $scope.shouldShowFilters = !$scope.shouldShowFilters;
+    };
 
     // filter the current list
     $scope.filterData = function () {
