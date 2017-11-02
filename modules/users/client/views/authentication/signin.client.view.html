@@ -1,24 +1,30 @@
-<div>
-  <link href='http://fonts.googleapis.com/css?family=Exo:100,200,400' rel='stylesheet'>
-  <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:700,400,300' rel='stylesheet'>
-  <div class="body"></div>
-  <div class="grad"></div>
-  <div class="header">
-    <div>IPPD <span>Resume Portal </span></div>
-  </div>
-  <br>
-  <form name="vm.userForm" ng-submit="vm.signin(vm.userForm.$valid)" class="signin" novalidate autocomplete="off">
-    <div class="login">
-      <fieldset>
-        <label class="customText" for="usernameOrEmail">Username or Email</label>
-        <br>
-        <input type="text" id="usernameOrEmail" name="usernameOrEmail" class="customInputBox" ng-model="vm.credentials.usernameOrEmail" placeholder="Username or Email" required autofocus>
-        <br>
-        <label class="customText" for="password">Password</label>
-        <br>
-        <input type="password" id="password" name="password" class="customInputBox" ng-model="vm.credentials.password" placeholder="Password" required>
-        <input type="submit" value="Sign in"/>
-      </fieldset>
+<section>
+  <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/core.css">
+    <link href='http://fonts.googleapis.com/css?family=Exo:100,200,400' rel='stylesheet'>
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:700,400,300' rel='stylesheet'>
+  </head>
+  <div>
+    <div class="body"></div>
+    <div class="grad"></div>
+    <div class="header">
+      <div>IPPD <span>Resume Portal </span></div>
     </div>
-  </form>
-</div>
+    <br>
+    <form name="vm.userForm" ng-submit="vm.signin(vm.userForm.$valid)" class="signin" novalidate autocomplete="off">
+      <div class="login">
+        <fieldset>
+          <label class="customText" for="usernameOrEmail">Username or Email</label>
+          <br>
+          <input type="text" id="usernameOrEmail" name="usernameOrEmail" class="customInputBox" ng-model="vm.credentials.usernameOrEmail" placeholder="Username or Email" required autofocus>
+          <br>
+          <label class="customText" for="password">Password</label>
+          <br>
+          <input type="password" id="password" name="password" class="customInputBox" ng-model="vm.credentials.password" placeholder="Password" required>
+          <input type="submit" value="Sign in"/>
+        </fieldset>
+      </div>
+    </form>
+  </div>
+</section>

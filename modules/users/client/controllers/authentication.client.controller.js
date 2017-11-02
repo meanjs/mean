@@ -82,7 +82,21 @@
       vm.authentication.user = response;
       Notification.info({ message: 'Welcome ' + response.firstName });
       // And redirect to the previous or home page
-      $state.go($state.previous.state.name || 'home', $state.previous.params);
+      console.log('Previous state name: ' + $state.previous.state.name);
+      if (vm.authentication.user.type === 'student') {
+        if ($state.previous.state.name === 'home') {
+          $state.go('profile', $state.previous.params);
+        } else {
+          $state.go($state.previous.state.name || 'profile', $state.previous.params);
+        }
+      }
+      if (vm.authentication.user.type === 'sponsor') {
+        if ($state.previous.state.name === 'home') {
+          $state.go('catalog', $state.previous.params);
+        } else {
+          $state.go($state.previous.state.name || 'catalog', $state.previous.params);
+        }
+      }
     }
 
     function onUserSigninError(response) {
