@@ -20,12 +20,12 @@
       Notification.error({ message: $location.search().err });
     }
 
-    // If user is signed in then redirect back home
+    // If user is signed in then redirect to appropriate location
     if (vm.authentication.user) {
       if (vm.authentication.user.type === 'student') {
-        $location.path('/profile');
+        $state.go($state.previous.state.name || 'profile', $state.previous.params);
       } else if (vm.authentication.user.type === 'sponsor' || vm.authentication.user.type === 'admin') {
-        $location.path('/catalog');
+        $state.go($state.previous.state.name || 'catalog', $state.previous.params);
       }
     }
 
