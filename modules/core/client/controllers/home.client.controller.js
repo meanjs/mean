@@ -20,7 +20,7 @@
       Notification.error({ message: $location.search().err });
     }
 
-    // If user is signed in then redirect back home
+    // If user is signed in then redirect to appropriate location
     if (vm.authentication.user) {
       if (vm.authentication.user.type === 'student') {
         $state.go($state.previous.state.name || 'profile', $state.previous.params);
