@@ -32,7 +32,7 @@
   display: inline;
 }
 
-.body{
+.signin-uf-body{
   background-image: url(http://training.health.ufl.edu/handouts/Templates/UF_background_orange_right_button.jpg);
   background-size: cover;
   bottom: -40px;
@@ -45,19 +45,20 @@
   width: auto;
   /*-webkit-filter: blur(0px);*/
 }
-.header{
+
+.signin-header{
   left: calc(50% - 420px);
   position: absolute;
   top: calc(50% - 120px);
 }
-.header div{
+.signin-header div{
   color: #fff;
   float: left;
   font-family: 'Exo', sans-serif;
   font-size: 40px;
   font-weight: 200;
 }
-.header div span{
+.signin-header div span{
   color: #015496 !important;
 }
 .login{
