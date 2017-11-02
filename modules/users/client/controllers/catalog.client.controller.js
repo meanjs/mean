@@ -53,6 +53,36 @@
       $scope.shouldShowFilters = !$scope.shouldShowFilters;
     };
 
+    $scope.filterOnForm = function () {
+      var formElements = document.getElementById('filterOptions').getElementsByTagName('input');
+      var originalList = Array.from($scope.usersList);
+      var filteredSet = new Set();
+
+      var didFilter = false;
+      for (var i = 0; i < formElements.length; i++) {
+        if (formElements[i].checked) {
+          didFilter = true;
+          filterOnName(formElements[i].value, originalList, filteredSet);
+        }
+      }
+
+      $scope.filteredUsersList = (didFilter) ? Array.from(filteredSet) : originalList;
+    };
+
+    function filterOnName(name, originalList, filteredSet) {
+      for (var i = 0; i < originalList.length; i++) {
+        if (name.toLowerCase() === 'availability') {
+          if (originalList[i].availabilityStatus !== null && originalList[i].availabilityStatus.toLowerCase() === ('available')) {
+            filteredSet.add(originalList[i]);
+          }
+        } else if (name.toLowerCase() === 'computer-science') {
+          if (originalList[i].major !== null && originalList[i].major.toLowerCase().includes('computer science')) {
+            filteredSet.add(originalList[i]);
+          }
+        }
+      }
+    }
+
     // filter the current list
     $scope.filterData = function () {
       var originalList = Array.from($scope.usersList);

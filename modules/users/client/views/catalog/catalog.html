@@ -16,16 +16,17 @@
 	        	<span class="input-group-addon" id="sizing-addon2" ng-click="toggleFilterOptions()"><span class="glyphicon glyphicon-filter"></span></span>
 	      	</div>
 	      	<div ng-if="shouldShowFilters">
-	      		<form class="filter-form">
+	      		<form id="filterOptions" name="filterOptions" class="filter-form" ng-submit="filterFromForm(filterOptions)">
 			      	<fieldset class="filter-fieldset">
 					  	<legend class="filter-legend">Filter By:</legend>
 					  	<div class="filter-div">
-					    	<input type="checkbox" id="availability" name="filter" value="availability">
+					    	<input type="checkbox" id="availability" name="filter" value="availability" ng-click="filterOnForm()">
 					    	<label for="availability">Availability</label>
 					  	</div>
 					  	<div class="filter-div">
-					      	<button class="filter-center" type="submit">Done</button>
-					    </div>
+					    	<input type="checkbox" id="computer-science" name="filter" value="computer-science" ng-click="filterOnForm()">
+					    	<label for="computer-science">Computer Science</label>
+					  	</div>
 					</fieldset>
 				</form>
 	      	</div>
