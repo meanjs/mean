@@ -3,7 +3,6 @@
 <section>
 	<head>
 	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-	  <link rel="stylesheet" href="style.css">
 	</head>
 	<div class="container">
 	  <div class="row">
@@ -16,17 +15,21 @@
 	        	<input type="text" class="form-control" placeholder="Search" ng-model="searchValue" ng-keyup="filterData()" />
 	        	<span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-search"></span></span>
 	      	</div>
-	      	<fieldset>
-			  	<legend>Filter By:</legend>
-			  	<div>
-			    	<input type="checkbox" id="availability" name="filter" value="availability">
-			    	<label for="availability">Availability</label>
-			  	</div>
-			  	<div>
-			      	<button type="submit">Done</button>
-			    </div>
-			</fieldset>
-	      <div class="tableWrapper">
+	      	<div>
+	      		<form class="filter-form">
+			      	<fieldset class="filter-fieldset">
+					  	<legend class="filter-legend">Filter By:</legend>
+					  	<div class="filter-div">
+					    	<input type="checkbox" id="availability" name="filter" value="availability">
+					    	<label for="availability">Availability</label>
+					  	</div>
+					  	<div class="filter-div">
+					      	<button class="filter-center" type="submit">Done</button>
+					    </div>
+					</fieldset>
+				</form>
+	      	</div>
+	    <div class="tableWrapper">
 	        <table class="table table-striped table-hover">
 	            <tbody class="container">
 	                <tr ng-repeat="user in filteredUsersList" ng-click="showDetails($index)">
