@@ -61,7 +61,7 @@
 
     menuService.addSubMenuItem('admin-account', 'settings', {
       title: 'Add User',
-      state: 'settings.password'
+      state: 'create_user'
     });
 
     menuService.addSubMenuItem('admin-account', 'settings', {

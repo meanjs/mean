@@ -11,14 +11,14 @@ var path = require('path'),
 
 // URLs for which user can't be redirected on signin
 var noReturnUrls = [
-  '/authentication/signin',
-  '/authentication/signup'
+  '/authentication/signin'
 ];
 
 /**
  * Signup
  */
 exports.signup = function (req, res) {
+  console.log('mama i made it');
   // For security measurement we remove the roles from the req.body object
   delete req.body.roles;
 
