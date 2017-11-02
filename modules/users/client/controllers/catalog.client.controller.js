@@ -20,7 +20,7 @@
       $state.go('authentication.signin');
     }
     if (vm.authentication.user.type !== 'sponsor' && vm.authentication.user.type !== 'admin') {
-      $state.go('profile');
+      $state.go($state.previous.state.name || 'home', $state.previous.params);
     }
 
     fetchStudents();

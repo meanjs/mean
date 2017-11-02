@@ -20,9 +20,9 @@
     // If user is signed in then redirect to appropriate location
     if (vm.authentication.user) {
       if (vm.authentication.user.type === 'student') {
-        $state.go($state.previous.state.name || 'profile', $state.previous.params);
+        $state.go('profile');
       } else if (vm.authentication.user.type === 'sponsor' || vm.authentication.user.type === 'admin') {
-        $state.go($state.previous.state.name || 'catalog', $state.previous.params);
+        $state.go('catalog');
       }
     } else {
       $state.go($state.previous.state.name || 'authentication.signin', $state.previous.params);
