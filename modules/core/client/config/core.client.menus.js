@@ -9,7 +9,8 @@
 
   function menuConfig(menuService) {
     menuService.addMenu('account', {
-      roles: ['user']
+      roles: ['user'],
+      type: 'student'
     });
 
     menuService.addMenuItem('account', {
@@ -22,6 +23,11 @@
     menuService.addSubMenuItem('account', 'settings', {
       title: 'Edit Profile',
       state: 'profile'
+    });
+
+    menuService.addSubMenuItem('account', 'settings', {
+      title: 'Change Password',
+      state: 'settings.password'
     });
   }
 }());
