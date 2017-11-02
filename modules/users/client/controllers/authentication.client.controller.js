@@ -81,8 +81,8 @@
       // If successful we assign the response to the global user model
       vm.authentication.user = response;
       Notification.info({ message: 'Welcome ' + response.firstName });
+
       // And redirect to the previous or home page
-      console.log('Previous state name: ' + $state.previous.state.name);
       if (vm.authentication.user.type === 'student') {
         if ($state.previous.state.name === 'home') {
           $state.go('profile', $state.previous.params);

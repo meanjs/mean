@@ -16,6 +16,13 @@
     $scope.filteredUsersList = [];
     $scope.searchValue = null;
 
+    if (vm.authentication.user === null) {
+      $state.go('authentication.signin');
+    }
+    if (vm.authentication.user.type !== 'sponsor' && vm.authentication.user.type !== 'admin') {
+      $state.go('profile');
+    }
+
     fetchStudents();
 
     function fetchStudents() {
