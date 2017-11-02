@@ -78,8 +78,6 @@
           if (firstFilter) {
             firstFilter = false;
           }
-          console.log('filteredSet after check: ');
-          console.log(filteredSet);
         }
       }
 
