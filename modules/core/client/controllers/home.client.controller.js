@@ -5,15 +5,12 @@
     .module('core')
     .controller('HomeController', HomeController);
 
-  HomeController.$inject = ['$scope', '$state', 'UsersService', '$location', '$window', 'Authentication', 'PasswordValidator', 'Notification'];
+  HomeController.$inject = ['$scope', '$state', '$location', 'Authentication', 'Notification'];
 
-  function HomeController($scope, $state, UsersService, $location, $window, Authentication, PasswordValidator, Notification) {
+  function HomeController($scope, $state, $location, Authentication, Notification) {
     var vm = this;
 
     vm.authentication = Authentication;
-    vm.signin = signin;
-    vm.getPopoverMsg = PasswordValidator.getPopoverMsg;
-    vm.usernameRegex = /^(?=[\w.-]+$)(?!.*[._-]{2})(?!\.)(?!.*\.$).{3,34}$/;
 
     // Get an eventual error defined in the URL query string:
     if ($location.search().err) {
@@ -23,40 +20,12 @@
     // If user is signed in then redirect to appropriate location
     if (vm.authentication.user) {
       if (vm.authentication.user.type === 'student') {
-        $state.go($state.previous.state.name || 'profile', $state.previous.params);
+        $state.go('profile');
       } else if (vm.authentication.user.type === 'sponsor' || vm.authentication.user.type === 'admin') {
-        $state.go($state.previous.state.name || 'catalog', $state.previous.params);
+        $state.go('catalog');
       }
-    }
-
-    function signin(isValid) {
-
-      if (!isValid) {
-        $scope.$broadcast('show-errors-check-validity', 'vm.userForm');
-
-        return false;
-      }
-
-      UsersService.userSignin(vm.credentials)
-        .then(onUserSigninSuccess)
-        .catch(onUserSigninError);
-    }
-
-    function onUserSigninSuccess(response) {
-      // If successful we assign the response to the global user model
-      vm.authentication.user = response;
-      Notification.info({ message: 'Welcome ' + response.firstName });
-      // And redirect to the previous or home page
-      if (vm.authentication.user.type === 'student') {
-        $state.go($state.previous.state.name || 'profile', $state.previous.params);
-      }
-      if (vm.authentication.user.type === 'sponsor') {
-        $state.go($state.previous.state.name || 'catalog', $state.previous.params);
-      }
-    }
-
-    function onUserSigninError(response) {
-      Notification.error({ message: response.data.message, title: '<i class="glyphicon glyphicon-remove"></i> Signin Error!', delay: 6000 });
+    } else {
+      $state.go($state.previous.state.name || 'authentication.signin', $state.previous.params);
     }
   }
 }());

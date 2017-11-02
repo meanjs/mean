@@ -1,0 +1,28 @@
+html {
+  font-family: 'Exo', sans-serif;
+}
+
+.filter-form {
+  margin: 0 auto;
+  margin-bottom: 20px;
+  width: auto;
+}
+
+.filter-fieldset {
+  border: 1px solid black;
+}
+
+.filter-legend {
+  	padding: 10px;
+}
+
+.filter-div {
+	margin-bottom: 10px;
+	margin-left: 10px;
+}
+
+.filter-center {
+    display: block;
+    margin: auto;
+    width: 50%;
+}

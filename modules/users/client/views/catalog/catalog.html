@@ -3,7 +3,6 @@
 <section>
 	<head>
 	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-	  <link rel="stylesheet" href="style.css">
 	</head>
 	<div class="container">
 	  <div class="row">
@@ -11,11 +10,28 @@
 	  </div>
 	  <div class="row" ng-controller="CatalogController">
 	    <div class="col-md-6">
-	      <div class="input-group" id="searchBar">
-	        <span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-search"></span></span>
-	        <input type="text" class="form-control" placeholder="Search" ng-model="searchValue" ng-keyup="filterData()" />
-	      </div>
-	      <div class="tableWrapper">
+	      	<div class="input-group catalog-search" id="searchBar">
+	        	<span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-search"></span></span>
+	        	<input type="text" class="form-control" placeholder="Search" ng-model="searchValue" ng-keyup="filterData()" />
+	        	<span class="input-group-addon" id="sizing-addon2" ng-show="!shouldShowFilters" ng-hide="shouldShowFilters" ng-click="toggleFilterOptions()"><span class="glyphicon glyphicon-chevron-down"></span></span>
+	        	<span class="input-group-addon" id="sizing-addon2" ng-show="shouldShowFilters" ng-hide="!shouldShowFilters" ng-click="toggleFilterOptions()"><span class="glyphicon glyphicon-chevron-up"></span></span>
+	      	</div>
+	      	<div ng-if="shouldShowFilters">
+	      		<form id="filterOptions" name="filterOptions" class="filter-form" ng-submit="filterFromForm(filterOptions)">
+			      	<fieldset class="filter-fieldset">
+					  	<legend class="filter-legend">Filter By:</legend>
+					  	<div class="filter-div">
+					    	<input type="checkbox" id="availability" name="filter" value="availability" ng-click="filterOnForm()" ng-model="availabilityOption">
+					    	<label for="availability">Availability</label>
+					  	</div>
+					  	<div class="filter-div">
+					    	<input type="checkbox" id="computer-science" name="filter" value="computer-science" ng-click="filterOnForm()" ng-model="csOption">
+					    	<label for="computer-science">Computer Science</label>
+					  	</div>
+					</fieldset>
+				</form>
+	      	</div>
+	    <div class="tableWrapper">
 	        <table class="table table-striped table-hover">
 	            <tbody class="container">
 	                <tr ng-repeat="user in filteredUsersList" ng-click="showDetails($index)">
