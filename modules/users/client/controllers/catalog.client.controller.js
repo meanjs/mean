@@ -16,10 +16,13 @@
     $scope.filteredStudentsList = [];
     $scope.sponsorsList = [];
     $scope.filteredSponsorsList = [];
+    $scope.usersList = [];
+    $scope.filteredUsersList = [];
     $scope.searchValue = null;
     $scope.shouldShowFilters = false;
     $scope.availabilityOption = false;
     $scope.csOption = false;
+
 
     if (vm.authentication.user === null) {
       $state.go('authentication.signin');
@@ -54,6 +57,7 @@
     function onSponsorGetStudentsSuccess(response) {
       $scope.studentsList = response;
       $scope.filteredStudentsList = Array.from($scope.studentsList);
+      $scope.filteredUsersList = Array.from($scope.filteredStudentsList);
     }
 
     function onSponsorGetStudentsFailure(response) {
@@ -64,6 +68,9 @@
     function onAdminGetSponsorsSuccess(response) {
       $scope.sponsorsList = response;
       $scope.filteredSponsorsList = Array.from($scope.sponsorsList);
+      $scope.filteredUsersList = Array.from($scope.filteredSponsorsList);
+      console.log('loaded sponsors');
+      console.log($scope.filteredSponsorsList);
     }
 
     function onAdminGetSponsorsFailure(response) {
@@ -138,6 +145,28 @@
       }
 
     }
+
+    $scope.switchList = function () {
+      var showStudentList = document.getElementById('showStudentList');
+      var showSponsorList = document.getElementById('showSponsorList');
+      console.log(showStudentList);
+      console.log(showStudentList.checked);
+      console.log(showSponsorList);
+      console.log(showSponsorList.checked);
+      console.log('switched lists');
+
+      if (showStudentList.checked) {
+        $scope.filteredUsersList = Array.from($scope.filteredStudentsList);
+        console.log('THIS IS THE FILTERED USER LIST FOR STUDENTS');
+        console.log($scope.filteredUsersList);
+      } else if (showSponsorList.checked) {
+        $scope.filteredUsersList = Array.from($scope.filteredSponsorsList);
+        console.log('THIS IS THE FILTERED USER LIST FOR STUDENTS');
+        console.log($scope.filteredUsersList);
+
+      }
+    };
+
     // filter the current list
     $scope.filterData = function () {
       var originalList = Array.from($scope.studentsList);
