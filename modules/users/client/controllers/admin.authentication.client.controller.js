@@ -45,8 +45,7 @@
       var userType = 'student';
       if ($scope.isSponsorRole) {
         userType = 'sponsor';
-      }
-      if ($scope.isAdminRole) {
+      } else if ($scope.isAdminRole) {
         userType = 'admin';
       }
 
