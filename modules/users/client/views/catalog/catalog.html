@@ -12,6 +12,16 @@
 		    	<i class="glyphicon glyphicon-shopping-cart cart"></i><i>Cart</i>
 		    </h4>
 	  	</div>
+	  	<!-- <div ng-if="vm.authentication.user.type === 'admin'">
+			  <div class="filter-div">
+                <input type="radio" id="showStudentList" name="roles" value="showStudentList" checked="true" ng-click="switchList()">
+                <label for="showStudentList">Student</label>
+              </div>
+              <div class="filter-div">
+                <input type="radio" id="showSponsorList" name="roles" value="showSponsorList" ng-click="switchList()">
+                <label for="showSponsorList">Sponsor</label>
+              </div>
+	  	</div> -->
 	  </div>
 	  <div class="row" ng-controller="CatalogController">
 	    <div class="col-md-6">
@@ -25,6 +35,10 @@
 	      		<form id="filterOptions" name="filterOptions" class="filter-form" ng-submit="filterFromForm(filterOptions)">
 			      	<fieldset class="filter-fieldset">
 					  	<legend class="filter-legend">Filter By:</legend>
+					  	<div class="filter-div" ng-if="vm.authentication.user.type === 'admin'">
+					    	<input type="checkbox" id="" name="filter" value="availability" ng-click="filterOnForm()" ng-model="availabilityOption">
+					    	<label for="availability">Available</label>
+					  	</div>
 					  	<div class="filter-div">
 					    	<input type="checkbox" id="availability" name="filter" value="availability" ng-click="filterOnForm()" ng-model="availabilityOption">
 					    	<label for="availability">Available</label>
@@ -39,7 +53,7 @@
 	    <div class="tableWrapper">
 	        <table class="table table-striped table-hover">
 	            <tbody class="container">
-	                <tr ng-repeat="user in filteredUsersList" ng-click="showDetails($index)">
+	                <tr ng-repeat="user in filteredStudentsList" ng-click="showDetails($index)">
 	                  <div>
 	                    <td>
 	                      <img class="centerText" src="profilePic.png" height=50 width=50></img>

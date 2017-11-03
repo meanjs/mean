@@ -99,12 +99,20 @@
         method: 'GET',
         url: '/api/catalog/students',
         isArray: true
+      },
+      getSponsors: {
+        method: 'GET',
+        url: '/api/catalog/sponsors',
+        isArray: true
       }
     });
 
     angular.extend(Catalog, {
       sponsorGetStudents: function () {
         return this.getStudents().$promise;
+      },
+      adminGetSponsors: function () {
+        return this.getSponsors().$promise;
       }
     });
 

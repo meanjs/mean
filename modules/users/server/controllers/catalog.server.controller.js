@@ -16,6 +16,18 @@ exports.students = function (req, res) {
   });
 };
 
+/* Retreive all the directory sponsors, sorted alphabetically by student last name */
+exports.sponsors = function (req, res) {
+  Student.find({ type: 'sponsor' }).sort('lastName').exec(function (err, sponsors) {
+    if (err) {
+      console.log(err);
+      res.status(400).send(err);
+    } else {
+      res.send(sponsors);
+    }
+  });
+};
+
 /* Create a student */
 exports.create = function (req, res) {
   var student = new Student(req.body);
