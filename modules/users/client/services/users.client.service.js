@@ -93,7 +93,7 @@
 
   CatalogService.$inject = ['$resource'];
 
-  function CatalogService($resource, $http) {
+  function CatalogService($resource) {
     var Catalog = $resource('/api/catalog', {}, {
       getStudents: {
         method: 'GET',
