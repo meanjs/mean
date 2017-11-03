@@ -1,17 +1,70 @@
-
+html *{
+   font-size: 1em !important;
+   color: #000 !important;
+   font-family: Arial !important;
+}
 #wrapper {
   width: 70%;
   margin: 0 auto; /*CENTERS IT*/
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
 }
+
+input[type=text], select {
+    width: 49.6%;
+    padding: 6px 8px;
+    margin: 2px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+input[type=text]:focus {
+    background-color: lightblue;
+    border: 3px solid #555555;
+}
+
+input[type=email], select {
+    width: 49.6%;
+    padding: 6px 8px;
+    margin: 2px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+input[type=email]:focus {
+    background-color: lightblue;
+    border: 3px solid #555555;
+}
+
+input[type=date], select {
+    width: 50%;
+    padding: 6px 8px;
+    margin: 2px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
 .center {
     text-align: center;
 }
 
-.right {
-    position: absolute;
-    right: 0px;
-    width: 300px;
-    padding: 10px;
+form label {
+  font-weight:bold
+}
+
+input {
+  margin: 5px;
+  padding: 5px;
+  /*width: 100%;*/
+}
+
+input:placeholder-shown {
+  border: 2px solid orange;
 }
 
 /*FOR THE FANCY BUTTON*/
