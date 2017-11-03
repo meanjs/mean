@@ -5,9 +5,9 @@
     .module('users')
     .controller('CatalogController', CatalogController);
 
-  CatalogController.$inject = ['$scope', '$state', 'UsersService', 'CatalogService', '$http', 'Notification', '$window', 'Authentication'];
+  CatalogController.$inject = ['$scope', '$state', 'UsersService', 'CatalogService', 'Notification', '$window', 'Authentication'];
 
-  function CatalogController($scope, $state, UsersService, CatalogService, $http, Notification, $window, Authentication) {
+  function CatalogController($scope, $state, UsersService, CatalogService, Notification, $window, Authentication) {
     var vm = this;
     vm.authentication = Authentication;
 
