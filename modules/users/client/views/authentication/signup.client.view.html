@@ -47,6 +47,21 @@
           <label>Password Requirements</label>
           <uib-progressbar value="requirementsProgress" type="{{requirementsColor}}"><span style="color:white; white-space:nowrap;">{{requirementsProgress}}%</span></uib-progressbar>
         </div>
+        <div class="form-group" show-errors>
+          <form id="roleOptions" name="roleOptions" class="filter-form">
+            <fieldset class="filter-fieldset">
+              <legend class="filter-legend">Role:</legend>
+              <div class="filter-div">
+                <input type="checkbox" id="studentRole" name="roles" value="studentRole" checked="true" ng-click="switchRoles()">
+                <label for="student">Student</label>
+              </div>
+              <div class="filter-div">
+                <input type="checkbox" id="sponsorRole" name="roles" value="sponsorRole" ng-click="switchRoles()">
+                <label for="sponsor">Sponsor</label>
+              </div>
+            </fieldset>
+          </form>
+        </div>
         <div class="text-center form-group">
           <button type="submit" class="btn btn-primary">Sign up</button>
         </div>
