@@ -88,12 +88,12 @@
       var currentFilteredSet = new Set();
 
       for (var i = 0; i < originalList.length; i++) {
-        if (name.toLowerCase() === 'availability') {
-          if (originalList[i].availabilityStatus !== null && originalList[i].availabilityStatus.toLowerCase() === ('available')) {
+        if (name.toLowerCase() === 'availability' && originalList[i].availabilityStatus !== null && originalList[i].availabilityStatus !== undefined) {
+          if (originalList[i].availabilityStatus.toLowerCase() === ('available')) {
             currentFilteredSet.add(originalList[i]);
           }
-        } else if (name.toLowerCase() === 'computer-science') {
-          if (originalList[i].major !== null && originalList[i].major.toLowerCase().includes('computer science')) {
+        } else if (name.toLowerCase() === 'computer-science' && originalList[i].major !== null && originalList[i].major !== undefined) {
+          if (originalList[i].major.toLowerCase() === ('computer science')) {
             currentFilteredSet.add(originalList[i]);
           }
         }
