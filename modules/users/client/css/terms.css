@@ -1,0 +1,22 @@
+
+.content {
+  margin-top: 50px;
+}
+
+.bodyTerms{
+  background-image: url(http://cdn2-www.dogtime.com/assets/uploads/gallery/30-impossibly-cute-puppies/impossibly-cute-puppy-8.jpg);
+  background-size: cover;
+  bottom: -40px;
+  height: auto;
+  left: -20px;
+  overflow-y: scroll;
+  position: fixed;
+  right: -40px;
+  top: -20px;
+  width: auto;
+}
+.headerTerms{
+  left: calc(50% - 420px);
+  position: absolute;
+  top: calc(50% - 120px);
+}
