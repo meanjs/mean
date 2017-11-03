@@ -25,10 +25,6 @@
 	      		<form id="filterOptions" name="filterOptions" class="filter-form" ng-submit="filterFromForm(filterOptions)">
 			      	<fieldset class="filter-fieldset">
 					  	<legend class="filter-legend">Filter By:</legend>
-					  	<div class="filter-div" ng-if="vm.authentication.user.type === 'admin'">
-					    	<input type="checkbox" id="" name="filter" value="availability" ng-click="filterOnForm()" ng-model="availabilityOption">
-					    	<label for="availability">Available</label>
-					  	</div>
 					  	<div class="filter-div">
 					    	<input type="checkbox" id="availability" name="filter" value="availability" ng-click="filterOnForm()" ng-model="availabilityOption">
 					    	<label for="availability">Available</label>
