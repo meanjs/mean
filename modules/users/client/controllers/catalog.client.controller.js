@@ -136,19 +136,19 @@
               filteredSet.add(originalList[i]);
             }
           }
-          if (originalList[i].major !== null) {
+          if (originalList[i].major !== null && originalList[i].major !== undefined) {
             var major = originalList[i].major;
             if (major.toLowerCase().includes($scope.searchValue.toLowerCase())) {
               filteredSet.add(originalList[i]);
             }
           }
-          if (originalList[i].availabilityStatus !== null) {
+          if (originalList[i].availabilityStatus !== null && originalList[i].availabilityStatus !== undefined) {
             var availabilityStatus = originalList[i].availabilityStatus;
             if (availabilityStatus.toLowerCase().includes($scope.searchValue.toLowerCase())) {
               filteredSet.add(originalList[i]);
             }
           }
-          if (originalList[i].teamName !== null) {
+          if (originalList[i].teamName !== null && originalList[i].availabilityStatus !== undefined) {
             var teamName = originalList[i].teamName;
             if (teamName.toLowerCase().includes($scope.searchValue.toLowerCase())) {
               filteredSet.add(originalList[i]);
