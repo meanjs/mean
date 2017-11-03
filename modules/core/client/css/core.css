@@ -1,3 +1,4 @@
+
 .content {
   margin-top: 50px;
 }
@@ -10,17 +11,6 @@
 .ng-cloak,
 .x-ng-cloak {
   display: none !important;
-}
-.header-profile-image {
-  border-radius: 50%;
-  height: 28px;
-  margin-right: 5px;
-  opacity: 0.8;
-  width: 28px;
-}
-.open .header-profile-image,
-a:hover .header-profile-image {
-  opacity: 1;
 }
 .user-header-dropdown-toggle {
   padding-bottom: 11px !important;
@@ -40,4 +30,42 @@ a:hover .header-profile-image {
 }
 .has-error .help-inline.error-text {
   display: inline;
+}
+
+.core-body{
+  background-image: url(http://training.health.ufl.edu/handouts/Templates/UF_background_orange_right_button.jpg);
+  background-size: cover;
+  bottom: -40px;
+  height: auto;
+  left: -20px;
+  overflow-y: scroll;
+  position: fixed;
+  right: -40px;
+  top: -20px;
+  width: auto;
+  /*-webkit-filter: blur(0px);*/
+}
+.core-header{
+  left: calc(50% - 420px);
+  position: absolute;
+  top: calc(50% - 120px);
+}
+.core-header div{
+  color: #fff;
+  float: left;
+  font-family: 'Exo', sans-serif;
+  font-size: 40px;
+  font-weight: 200;
+}
+.core-header div span{
+  color: #015496 !important;
+}
+
+::-webkit-input-placeholder{
+  color: white;
+  color: rgba(255,255,255,0.6);
+}
+::-moz-input-placeholder{
+  color: white;
+  color: rgba(255,255,255,0.6);
 }

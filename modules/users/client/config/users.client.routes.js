@@ -30,6 +30,10 @@
           pageTitle: 'Settings'
         }
       })
+      .state('terms', {
+        url: '/terms_and_conditions',
+        templateUrl: '/modules/users/client/views/authentication/terms.html'
+      })
       .state('settings.password', {
         url: '/password',
         templateUrl: '/modules/users/client/views/settings/change-password.client.view.html',
@@ -37,15 +41,6 @@
         controllerAs: 'vm',
         data: {
           pageTitle: 'Settings password'
-        }
-      })
-      .state('settings.accounts', {
-        url: '/accounts',
-        templateUrl: '/modules/users/client/views/settings/manage-social-accounts.client.view.html',
-        controller: 'SocialAccountsController',
-        controllerAs: 'vm',
-        data: {
-          pageTitle: 'Settings accounts'
         }
       })
       .state('settings.picture', {
@@ -57,21 +52,33 @@
           pageTitle: 'Settings picture'
         }
       })
+      .state('profile', {
+        url: '/profile',
+        templateUrl: '/modules/users/client/views/profile/profile.html',
+        controller: 'EditProfileController',
+        controllerAs: 'vm'
+      })
+      .state('catalog', {
+        url: '/catalog',
+        templateUrl: '/modules/users/client/views/catalog/catalog.html',
+        controller: 'CatalogController',
+        controllerAs: 'vm'
+      })
+      .state('create_user', {
+        url: '/create_user',
+        templateUrl: '/modules/users/client/views/authentication/signup.client.view.html',
+        controller: 'AdminAuthenticationController',
+        controllerAs: 'vm',
+        data: {
+          pageTitle: 'Signup'
+        }
+      })
       .state('authentication', {
         abstract: true,
         url: '/authentication',
         templateUrl: '/modules/users/client/views/authentication/authentication.client.view.html',
         controller: 'AuthenticationController',
         controllerAs: 'vm'
-      })
-      .state('authentication.signup', {
-        url: '/signup',
-        templateUrl: '/modules/users/client/views/authentication/signup.client.view.html',
-        controller: 'AuthenticationController',
-        controllerAs: 'vm',
-        data: {
-          pageTitle: 'Signup'
-        }
       })
       .state('authentication.signin', {
         url: '/signin?err',

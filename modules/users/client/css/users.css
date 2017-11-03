@@ -3,26 +3,36 @@
     position: fixed;
   }
 }
-.social-account-container {
-  display: inline-block;
-  position: relative;
+
+.content {
+  margin-top: 50px;
 }
-.btn-add-remove-account {
-  pointer-events: none;
+.undecorated-link:hover {
+  text-decoration: none;
+}
+[ng\:cloak],
+[ng-cloak],
+[x-ng-cloak],
+.ng-cloak,
+.x-ng-cloak {
+  display: none !important;
+}
+.user-header-dropdown-toggle {
+  padding-bottom: 11px !important;
+  padding-top: 11px !important;
+}
+.user-primary-account {
+  font-size: 30px;
   position: absolute;
   right: 10px;
   top: 10px;
 }
-.user-profile-picture {
-  max-height: 150px;
-  min-height: 150px;
+.error-text {
+  display: none;
 }
-.social-button {
-  -webkit-transition-duration: 0.4s;
-  -moz-transition-duration: 0.4s;
-  -o-transition-duration: 0.4s;
-  transition-duration: 0.4s;
+.has-error .help-block.error-text {
+  display: block;
 }
-.social-button:hover {
-  opacity: 0.65;
+.has-error .help-inline.error-text {
+  display: inline;
 }
