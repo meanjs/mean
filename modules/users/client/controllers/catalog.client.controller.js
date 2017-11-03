@@ -16,6 +16,7 @@
     $scope.filteredStudentsList = [];
     $scope.sponsorsList = [];
     $scope.filteredSponsorsList = [];
+    $scope.isEditable = false;
     $scope.searchValue = null;
     $scope.shouldShowFilters = false;
     $scope.availabilityOption = false;
@@ -32,6 +33,7 @@
 
     if (vm.authentication.user.type === 'admin') {
       fetchSponsors();
+      $scope.isEditable = true;
     }
 
     function fetchStudents() {
@@ -70,6 +72,13 @@
       $scope.sponsorList = null;
       $scope.filteredSponsorsList = null;
     }
+
+    $scope.editClicked = function (user) {
+      if (vm.authentication.user.type === 'admin') {
+        console.log(user);
+        // $state.go('authentication.signin');
+      }
+    };
 
     $scope.toggleFilterOptions = function () {
       $scope.shouldShowFilters = !$scope.shouldShowFilters;

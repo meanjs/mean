@@ -1,5 +1,3 @@
-<!-- sponsors and admins should be able to see this -->
-
 <section>
 	<head>
 	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -39,7 +37,7 @@
 	    <div class="tableWrapper">
 	        <table class="table table-striped table-hover">
 	            <tbody class="container">
-	                <tr ng-repeat="user in filteredStudentsList" ng-click="showDetails($index)">
+	                <tr ng-repeat="user in filteredUsersList" ng-click="showDetails($index)">
 	                  <div>
 	                    <td>
 	                      <img class="centerText" src="profilePic.png" height=50 width=50></img>
@@ -56,9 +54,6 @@
 	                    </td>
 	                    <td>
 	                      <br><i class="actionButton glyphicon glyphicon-circle-arrow-down" style="font-size: 25px;"></i>
-	                    </td>
-	                    <td ng-if="isEditable">
-	                    	<br><button type="button" ng-click="editClicked(user)">Edit</button>
 	                    </td>
 	                  </div>
 	                </tr>
