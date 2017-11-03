@@ -1,3 +1,8 @@
+@media (min-width: 992px) {
+  .nav-users {
+    position: fixed;
+  }
+}
 
 .content {
   margin-top: 50px;

@@ -8,7 +8,7 @@
 
   UsersService.$inject = ['$resource'];
 
-  function UsersService($resource, $http) {
+  function UsersService($resource) {
     var Users = $resource('/api/users', {}, {
       update: {
         method: 'PUT'
@@ -93,7 +93,7 @@
 
   CatalogService.$inject = ['$resource'];
 
-  function CatalogService($resource, $http) {
+  function CatalogService($resource) {
     var Catalog = $resource('/api/catalog', {}, {
       getStudents: {
         method: 'GET',
