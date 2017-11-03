@@ -21,6 +21,7 @@
     $scope.newPassword = null;
     $scope.isStudentRole = true;
     $scope.isSponsorRole = false;
+    $scope.isAdminRole = false;
 
     // Get an eventual error defined in the URL query string:
     if ($location.search().err) {
@@ -44,6 +45,9 @@
       var userType = 'student';
       if ($scope.isSponsorRole) {
         userType = 'sponsor';
+      }
+      if ($scope.isAdminRole) {
+        userType = 'admin';
       }
 
       var credentials = {
@@ -80,20 +84,54 @@
     $scope.switchRoles = function () {
       var studentRole = document.getElementById('studentRole');
       var sponsorRole = document.getElementById('sponsorRole');
+      var adminRole = document.getElementById('adminRole');
 
-      if ($scope.isStudentRole && sponsorRole.checked) {
+      if ($scope.isStudentRole && (sponsorRole.checked || adminRole.checked)) {
         $scope.isStudentRole = false;
         studentRole.checked = false;
-        $scope.isSponsorRole = true;
-        sponsorRole.checked = true;
-      } else if ($scope.isSponsorRole && studentRole.checked) {
-        $scope.isStudentRole = true;
-        studentRole.checked = true;
+        if (sponsorRole.checked) {
+          $scope.isSponsorRole = true;
+          sponsorRole.checked = true;
+          $scope.isAdminRole = false;
+          adminRole.checked = false;
+        } else if (adminRole.checked) {
+          $scope.isAdminRole = true;
+          adminRole.checked = true;
+          $scope.isSponsorRole = false;
+          sponsorRole.checked = false;
+        }
+      } else if ($scope.isSponsorRole && (studentRole.checked || adminRole.checked)) {
         $scope.isSponsorRole = false;
         sponsorRole.checked = false;
+        if (studentRole.checked) {
+          $scope.isStudentRole = true;
+          studentRole.checked = true;
+          $scope.isAdminRole = false;
+          adminRole.checked = false;
+        } else if (adminRole.checked) {
+          $scope.isAdminRole = true;
+          adminRole.checked = true;
+          $scope.isStudentRole = false;
+          studentRole.checked = false;
+        }
+      } else if ($scope.isAdminRole && (studentRole.checked || sponsorRole.checked)) {
+        $scope.isAdminRole = false;
+        adminRole.checked = false;
+        if (studentRole.checked) {
+          $scope.isStudentRole = true;
+          studentRole.checked = true;
+          $scope.isAdminRole = false;
+          adminRole.checked = false;
+        } else if (sponsorRole.checked) {
+          $scope.isSponsorRole = true;
+          sponsorRole.checked = true;
+          $scope.isAdminRole = false;
+          adminRole.checked = false;
+        }
       } else {
         studentRole.checked = $scope.isStudentRole;
         sponsorRole.checked = $scope.isSponsorRole;
+        adminRole.checked = $scope.isAdminRole;
       }
     };
   }
