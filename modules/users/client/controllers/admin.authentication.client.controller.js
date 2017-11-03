@@ -33,8 +33,6 @@
     }
 
     $scope.signup = function (isValid) {
-      console.log('in signup');
-
       if (!isValid) {
         $scope.$broadcast('show-errors-check-validity', 'vm.userForm');
 
@@ -56,11 +54,9 @@
 
     // Authentication Callbacks
     function onUserSignupSuccess(response) {
-      console.log('I got a successful response');
       // If successful we do nothing
       Notification.success({ message: '<i class="glyphicon glyphicon-ok"></i> Signup successful!' });
       // should not redirect either
-      console.log(vm.authentication.user);
     }
 
     function onUserSignupError(response) {

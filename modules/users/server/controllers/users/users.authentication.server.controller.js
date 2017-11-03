@@ -19,7 +19,6 @@ var noReturnUrls = [
  * Signup
  */
 exports.signup = function (req, res) {
-  console.log('mama i made it');
   // For security measurement we remove the roles from the req.body object
   delete req.body.roles;
 
@@ -35,17 +34,7 @@ exports.signup = function (req, res) {
         message: errorHandler.getErrorMessage(err)
       });
     } else {
-      // Remove sensitive data before login
-      user.password = undefined;
-      user.salt = undefined;
-
-      req.login(user, function (err) {
-        if (err) {
-          res.status(400).send(err);
-        } else {
-          res.json(user);
-        }
-      });
+      res.json(user);
     }
   });
 };
