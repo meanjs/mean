@@ -5,12 +5,11 @@
     <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:700,400,300' rel='stylesheet'>
     <link rel="sytlesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-
   </head>
   <div>
-    <div class="core-body"></div>
-    <div class="core-grad"></div>
-    <div class="core-header">
+    <div class="signin-uf-body"></div>
+    <div class="signin-grad"></div>
+    <div class="signin-header">
       <div>IPPD <span>Resume Portal </span></div>
     </div>
     <br>
@@ -24,9 +23,9 @@
           <label class="customText" for="password">Password</label>
           <br>
           <input type="password" id="password" name="password" class="customInputBox" ng-model="vm.credentials.password" placeholder="Password" required>
-         <br />
+         <br>
          <input type="checkbox" name="checkbox" value="check"><span>I agree to the <a href="/terms_and_conditions" target="_blank"> terms and conditions</a></span>
-         <br />
+         <br>
           <input type="submit" value="Sign in" onclick="if(!this.form.checkbox.checked){alert('You must agree to the terms first.');return false}"  />
         </fieldset>
       </div>
