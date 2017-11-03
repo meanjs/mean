@@ -90,10 +90,10 @@
             $state = _$state_;
             $state.previous = {
               state: {
-                name: 'articles.create'
+                name: 'items.create'
               },
               params: {},
-              href: '/articles/create'
+              href: '/items/create'
             };
 
             spyOn($state, 'transitionTo');
@@ -184,7 +184,7 @@
         // Mock logged in user
         _Authentication_.user = {
           username: 'test',
-          roles: ['user']
+          roles: ['ta']
         };
 
         AuthenticationController = $controller('AuthenticationController as vm', {

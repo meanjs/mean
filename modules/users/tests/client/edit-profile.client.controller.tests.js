@@ -59,10 +59,10 @@
       Authentication.user = {
         _id: '525a8422f6d0f87f0e407a33',
         username: 'test',
-        roles: ['user']
+        roles: ['ta']
       };
 
-      // Initialize the Articles controller.
+      // Initialize the Items controller.
       EditProfileController = $controller('EditProfileController as vm', {
         $scope: $scope
       });

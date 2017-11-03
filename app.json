@@ -1,0 +1,19 @@
+{
+    "name": "mean",
+    "scripts": {},
+    "env": {
+        "MONGOLAB_URI": {
+            "required": true
+        },
+        "NODE_ENV": {
+            "required": true
+        }
+    },
+    "formation": {},
+    "addons": [],
+    "buildpacks": [
+        {
+            "url": "heroku/nodejs"
+        }
+    ]
+}

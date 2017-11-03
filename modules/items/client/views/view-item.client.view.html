@@ -1,0 +1,18 @@
+<section>
+  <div class="page-header">
+    <h1 ng-bind="vm.item.title"></h1>
+  </div>
+  <small>
+    <em class="text-muted">
+      Posted on
+      <span ng-bind="vm.item.created | date:'mediumDate'"></span>
+      by
+      <span ng-if="vm.item.user" ng-bind="vm.item.user.displayName"></span>
+      <span ng-if="!vm.item.user">Deleted User</span>
+    </em>
+  </small>
+  <span data-ng-bind="item.categories"></span>
+      <span data-ng-bind="item.modules"></span>
+     <b> Categories, Modules would go here </b>
+  <p class="lead" ng-bind="vm.item.content"></p>
+</section>

@@ -12,4 +12,7 @@ module.exports = function (app) {
 
   // Define application route
   app.route('/*').get(core.renderIndex);
+  app.route('/public/apply')
+    .get(core.renderIndex)
+    .post(core.apply); //For adding user applications
 };

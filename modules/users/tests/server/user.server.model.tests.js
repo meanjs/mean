@@ -94,7 +94,7 @@ describe('User Model Unit Tests:', function () {
 
       _user1.save(function (err) {
         should.not.exist(err);
-        _user1.roles = ['user', 'admin'];
+        _user1.roles = ['admin'];
         _user1.save(function (err) {
           should.not.exist(err);
           _user1.remove(function (err) {

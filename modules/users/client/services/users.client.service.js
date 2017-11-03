@@ -24,6 +24,10 @@
           provider: '@provider'
         }
       },
+      getUnapprovedUsers: {
+        method: 'GET',
+        url: '/api/users/unapproved'
+      },
       sendPasswordResetToken: {
         method: 'POST',
         url: '/api/auth/forgot'
@@ -64,10 +68,42 @@
       },
       userSignin: function (credentials) {
         return this.signin(credentials).$promise;
+      },
+      getAllUnapprovedUsers: function () {
+        return this.getUnapprovedUsers().$promise;
       }
     });
 
     return Users;
+  }
+
+  angular
+    .module('users.admin.services')
+    .factory('ApplicantsService', ApplicantsService);
+
+  ApplicantsService.$inject = ['$resource'];
+
+  function ApplicantsService($resource) {
+    var Applicants = $resource('/api/unapproved', {}, {
+      delete: {
+        method: 'DELETE',
+        url: '/api/admin/unapproved'
+      },
+      changeToAccepted: {
+        method: 'POST',
+        url: '/api/unapproved'
+      }
+    });
+
+    angular.extend(Applicants, {
+      deleteApplicant: function () {
+        return this.delete().$promise;
+      },
+      approveUser: function () {
+        return this.changeToAccepted().$promise;
+      }
+    });
+    return Applicants;
   }
 
   // TODO this should be Users service
@@ -77,6 +113,7 @@
 
   AdminService.$inject = ['$resource'];
 
+  //Try angular.extending a new thing onto the user prototype so we can approve or disapprove
   function AdminService($resource) {
     return $resource('/api/users/:userId', {
       userId: '@_id'
