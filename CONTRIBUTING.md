@@ -57,7 +57,7 @@ Fixes #82
   * doc - Changes to the Documentation and doesn't actually touch any code.
 * Scope:
   * The scope should be where the change took place.
-  * Examples: users, core, config, items
+  * Examples: users, core, config, articles
 * Subject:
   * The subject line should be clear and concise as to what is being accomplished in the commit.
 * General Rules:

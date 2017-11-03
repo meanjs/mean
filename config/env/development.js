@@ -74,7 +74,7 @@ module.exports = {
     },
     // Order of collections in configuration will determine order of seeding.
     // i.e. given these settings, the User seeds will be complete before
-    // Item seed is performed.
+    // Article seed is performed.
     collections: [{
       model: 'User',
       docs: [{
@@ -100,7 +100,7 @@ module.exports = {
         }
       }]
     }, {
-      model: 'Item',
+      model: 'Article',
       options: {
         // Override log results setting at the
         // collection level.
@@ -113,8 +113,8 @@ module.exports = {
       },
       docs: [{
         data: {
-          title: 'First Item',
-          content: 'This is a seeded Item for the development environment'
+          title: 'First Article',
+          content: 'This is a seeded Article for the development environment'
         }
       }]
     }]

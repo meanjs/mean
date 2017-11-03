@@ -46,7 +46,7 @@
         // Mock logged in user
         _Authentication_.user = {
           username: 'test',
-          roles: ['ta']
+          roles: ['user']
         };
 
         // Initialize the Authentication controller

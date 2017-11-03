@@ -14,7 +14,7 @@ var _ = require('lodash'),
   logger = require(path.resolve('./config/lib/logger')),
   seed = require(path.resolve('./config/lib/mongo-seed')),
   express = require(path.resolve('./config/lib/express')),
-  Item = mongoose.model('Item');
+  Article = mongoose.model('Article');
 
 /**
  * Globals
@@ -31,11 +31,11 @@ describe('Configuration Tests:', function () {
 
   describe('Testing Mongo Seed', function () {
     var _seedConfig = _.clone(config.seedDB, true);
-    var itemSeedConfig;
+    var articleSeedConfig;
     var userSeedConfig;
     var _admin;
     var _user;
-    var _item;
+    var _article;
 
     before(function (done) {
       _admin = {
@@ -43,7 +43,7 @@ describe('Configuration Tests:', function () {
         email: 'test-admin@localhost.com',
         firstName: 'Admin',
         lastName: 'Test',
-        roles: ['admin']
+        roles: ['admin', 'user']
       };
 
       _user = {
@@ -51,20 +51,20 @@ describe('Configuration Tests:', function () {
         email: 'test-user@localhost.com',
         firstName: 'User',
         lastName: 'Test',
-        roles: ['ta']
+        roles: ['user']
       };
 
-      _item = {
-        title: 'Testing Database Seed Item',
-        content: 'Testing Item Seed right now!'
+      _article = {
+        title: 'Testing Database Seed Article',
+        content: 'Testing Article Seed right now!'
       };
 
-      var itemCollections = _.filter(_seedConfig.collections, function (collection) {
-        return collection.model === 'Item';
+      var articleCollections = _.filter(_seedConfig.collections, function (collection) {
+        return collection.model === 'Article';
       });
 
-      // itemCollections.should.be.instanceof(Array).and.have.lengthOf(1);
-      itemSeedConfig = itemCollections[0];
+      // articleCollections.should.be.instanceof(Array).and.have.lengthOf(1);
+      articleSeedConfig = articleCollections[0];
 
       var userCollections = _.filter(_seedConfig.collections, function (collection) {
         return collection.model === 'User';
@@ -77,7 +77,7 @@ describe('Configuration Tests:', function () {
     });
 
     afterEach(function (done) {
-      Item.remove().exec()
+      Article.remove().exec()
         .then(function () {
           return User.remove().exec();
         })
@@ -89,11 +89,11 @@ describe('Configuration Tests:', function () {
         });
     });
 
-    it('should have default seed configuration set for items', function (done) {
-      itemSeedConfig.should.be.instanceof(Object);
-      itemSeedConfig.docs.should.be.instanceof(Array).and.have.lengthOf(1);
-      should.exist(itemSeedConfig.docs[0].data.title);
-      should.exist(itemSeedConfig.docs[0].data.content);
+    it('should have default seed configuration set for articles', function (done) {
+      articleSeedConfig.should.be.instanceof(Object);
+      articleSeedConfig.docs.should.be.instanceof(Array).and.have.lengthOf(1);
+      should.exist(articleSeedConfig.docs[0].data.title);
+      should.exist(articleSeedConfig.docs[0].data.content);
 
       return done();
     });
@@ -121,11 +121,11 @@ describe('Configuration Tests:', function () {
 
       seed.start()
         .then(function () {
-          // Check Items Seed
-          return Item.find().exec();
+          // Check Articles Seed
+          return Article.find().exec();
         })
-        .then(function (items) {
-          items.should.be.instanceof(Array).and.have.lengthOf(itemSeedConfig.docs.length);
+        .then(function (articles) {
+          articles.should.be.instanceof(Array).and.have.lengthOf(articleSeedConfig.docs.length);
           // Check Users Seed
           return User.find().exec();
         })
@@ -136,26 +136,26 @@ describe('Configuration Tests:', function () {
         .catch(done);
     });
 
-    it('should overwrite existing item by default', function (done) {
-      itemSeedConfig.docs.should.be.instanceof(Array).and.have.lengthOf(1);
+    it('should overwrite existing article by default', function (done) {
+      articleSeedConfig.docs.should.be.instanceof(Array).and.have.lengthOf(1);
 
-      var item = new Item(itemSeedConfig.docs[0].data);
-      item.content = '_temp_test_item_';
+      var article = new Article(articleSeedConfig.docs[0].data);
+      article.content = '_temp_test_article_';
 
-      // save temp item
-      item.save()
+      // save temp article
+      article.save()
         .then(function () {
           return seed.start();
         })
         .then(function () {
-          return Item.find().exec();
+          return Article.find().exec();
         })
-        .then(function (items) {
-          items.should.be.instanceof(Array).and.have.lengthOf(1);
+        .then(function (articles) {
+          articles.should.be.instanceof(Array).and.have.lengthOf(1);
 
-          var newItem = items.pop();
-          itemSeedConfig.docs[0].data.title.should.equal(newItem.title);
-          itemSeedConfig.docs[0].data.content.should.equal(newItem.content);
+          var newArticle = articles.pop();
+          articleSeedConfig.docs[0].data.title.should.equal(newArticle.title);
+          articleSeedConfig.docs[0].data.content.should.equal(newArticle.content);
 
           return done();
         })
@@ -216,33 +216,33 @@ describe('Configuration Tests:', function () {
         .catch(done);
     });
 
-    it('should seed single item with custom options', function (done) {
+    it('should seed single article with custom options', function (done) {
       seed
         .start({
           collections: [{
-            model: 'Item',
+            model: 'Article',
             docs: [{
               overwrite: true,
-              data: _item
+              data: _article
             }]
           }]
         })
         .then(function () {
-          return Item.find().exec();
+          return Article.find().exec();
         })
-        .then(function (items) {
-          items.should.be.instanceof(Array).and.have.lengthOf(1);
+        .then(function (articles) {
+          articles.should.be.instanceof(Array).and.have.lengthOf(1);
 
-          var newItem = items.pop();
-          _item.title.should.equal(newItem.title);
-          _item.content.should.equal(newItem.content);
+          var newArticle = articles.pop();
+          _article.title.should.equal(newArticle.title);
+          _article.content.should.equal(newArticle.content);
 
           return done();
         })
         .catch(done);
     });
 
-    it('should seed single item with user set to custom seeded admin user', function (done) {
+    it('should seed single article with user set to custom seeded admin user', function (done) {
       seed
         .start({
           collections: [{
@@ -251,10 +251,10 @@ describe('Configuration Tests:', function () {
               data: _admin
             }]
           }, {
-            model: 'Item',
+            model: 'Article',
             docs: [{
               overwrite: true,
-              data: _item
+              data: _article
             }]
           }]
         })
@@ -264,42 +264,42 @@ describe('Configuration Tests:', function () {
         .then(function (users) {
           users.should.be.instanceof(Array).and.have.lengthOf(1);
 
-          return Item
+          return Article
             .find()
             .populate('user', 'firstName lastName username email roles')
             .exec();
         })
-        .then(function (items) {
-          items.should.be.instanceof(Array).and.have.lengthOf(1);
+        .then(function (articles) {
+          articles.should.be.instanceof(Array).and.have.lengthOf(1);
 
-          var newItem = items.pop();
-          _item.title.should.equal(newItem.title);
-          _item.content.should.equal(newItem.content);
+          var newArticle = articles.pop();
+          _article.title.should.equal(newArticle.title);
+          _article.content.should.equal(newArticle.content);
 
-          should.exist(newItem.user);
-          should.exist(newItem.user._id);
+          should.exist(newArticle.user);
+          should.exist(newArticle.user._id);
 
-          _admin.username.should.equal(newItem.user.username);
-          _admin.email.should.equal(newItem.user.email);
-          _admin.firstName.should.equal(newItem.user.firstName);
-          _admin.lastName.should.equal(newItem.user.lastName);
+          _admin.username.should.equal(newArticle.user.username);
+          _admin.email.should.equal(newArticle.user.email);
+          _admin.firstName.should.equal(newArticle.user.firstName);
+          _admin.lastName.should.equal(newArticle.user.lastName);
 
-          should.exist(newItem.user.roles);
-          newItem.user.roles.indexOf('admin').should.equal(_admin.roles.indexOf('admin'));
+          should.exist(newArticle.user.roles);
+          newArticle.user.roles.indexOf('admin').should.equal(_admin.roles.indexOf('admin'));
 
           return done();
         })
         .catch(done);
     });
 
-    it('should seed single item with NO user set due to seed order', function (done) {
+    it('should seed single article with NO user set due to seed order', function (done) {
       seed
         .start({
           collections: [{
-            model: 'Item',
+            model: 'Article',
             docs: [{
               overwrite: true,
-              data: _item
+              data: _article
             }]
           }, {
             model: 'User',
@@ -314,19 +314,19 @@ describe('Configuration Tests:', function () {
         .then(function (users) {
           users.should.be.instanceof(Array).and.have.lengthOf(1);
 
-          return Item
+          return Article
             .find()
             .populate('user', 'firstName lastName username email roles')
             .exec();
         })
-        .then(function (items) {
-          items.should.be.instanceof(Array).and.have.lengthOf(1);
+        .then(function (articles) {
+          articles.should.be.instanceof(Array).and.have.lengthOf(1);
 
-          var newItem = items.pop();
-          _item.title.should.equal(newItem.title);
-          _item.content.should.equal(newItem.content);
+          var newArticle = articles.pop();
+          _article.title.should.equal(newArticle.title);
+          _article.content.should.equal(newArticle.content);
 
-          should.not.exist(newItem.user);
+          should.not.exist(newArticle.user);
 
           return done();
         })
@@ -373,32 +373,32 @@ describe('Configuration Tests:', function () {
         .catch(done);
     });
 
-    it('should NOT overwrite existing item with custom options', function (done) {
+    it('should NOT overwrite existing article with custom options', function (done) {
 
-      var item = new Item(_item);
-      item.content = '_temp_item_content_';
+      var article = new Article(_article);
+      article.content = '_temp_article_content_';
 
-      item.save()
+      article.save()
         .then(function () {
           return seed.start({
             collections: [{
-              model: 'Item',
+              model: 'Article',
               docs: [{
                 overwrite: false,
-                data: _item
+                data: _article
               }]
             }]
           });
         })
         .then(function () {
-          return Item.find().exec();
+          return Article.find().exec();
         })
-        .then(function (items) {
-          items.should.be.instanceof(Array).and.have.lengthOf(1);
+        .then(function (articles) {
+          articles.should.be.instanceof(Array).and.have.lengthOf(1);
 
-          var existingItem = items.pop();
-          item.title.should.equal(existingItem.title);
-          item.content.should.equal(existingItem.content);
+          var existingArticle = articles.pop();
+          article.title.should.equal(existingArticle.title);
+          article.content.should.equal(existingArticle.content);
 
           return done();
         })
@@ -437,15 +437,15 @@ describe('Configuration Tests:', function () {
         .catch(done);
     });
 
-    it('should NOT seed item when missing title with custom options', function (done) {
+    it('should NOT seed article when missing title with custom options', function (done) {
       var invalid = {
-        content: '_temp_item_content_'
+        content: '_temp_article_content_'
       };
 
       seed
         .start({
           collections: [{
-            model: 'Item',
+            model: 'Article',
             docs: [{
               data: invalid
             }]
@@ -459,7 +459,7 @@ describe('Configuration Tests:', function () {
         })
         .catch(function (err) {
           should.exist(err);
-          err.message.should.equal('Item validation failed: title: Title cannot be blank');
+          err.message.should.equal('Article validation failed: title: Title cannot be blank');
 
           return done();
         });
@@ -552,10 +552,10 @@ describe('Configuration Tests:', function () {
           collections: []
         })
         .then(function () {
-          return Item.find().exec();
+          return Article.find().exec();
         })
-        .then(function (items) {
-          items.should.be.instanceof(Array).and.have.lengthOf(0);
+        .then(function (articles) {
+          articles.should.be.instanceof(Array).and.have.lengthOf(0);
 
           return User.find().exec();
         })
@@ -571,15 +571,15 @@ describe('Configuration Tests:', function () {
       seed
         .start({
           collections: [{
-            model: 'Item',
+            model: 'Article',
             docs: []
           }]
         })
         .then(function () {
-          return Item.find().exec();
+          return Article.find().exec();
         })
-        .then(function (items) {
-          items.should.be.instanceof(Array).and.have.lengthOf(0);
+        .then(function (articles) {
+          articles.should.be.instanceof(Array).and.have.lengthOf(0);
 
           return User.find().exec();
         })
@@ -591,28 +591,28 @@ describe('Configuration Tests:', function () {
         .catch(done);
     });
 
-    it('should seed item with custom options & skip.when results are empty', function (done) {
+    it('should seed article with custom options & skip.when results are empty', function (done) {
       seed
         .start({
           collections: [{
-            model: 'Item',
+            model: 'Article',
             skip: {
               when: { title: 'should-not-find-this-title' }
             },
             docs: [{
-              data: _item
+              data: _article
             }]
           }]
         })
         .then(function () {
-          return Item.find().exec();
+          return Article.find().exec();
         })
-        .then(function (items) {
-          items.should.be.instanceof(Array).and.have.lengthOf(1);
+        .then(function (articles) {
+          articles.should.be.instanceof(Array).and.have.lengthOf(1);
 
-          var newItem = items.pop();
-          _item.title.should.be.equal(newItem.title);
-          _item.content.should.be.equal(newItem.content);
+          var newArticle = articles.pop();
+          _article.title.should.be.equal(newArticle.title);
+          _article.content.should.be.equal(newArticle.content);
 
           return done();
         })
@@ -620,45 +620,45 @@ describe('Configuration Tests:', function () {
     });
 
     it('should skip seed on collection with custom options & skip.when has results', function (done) {
-      var item = new Item({
-        title: 'temp-item-title',
-        content: 'temp-item-content'
+      var article = new Article({
+        title: 'temp-article-title',
+        content: 'temp-article-content'
       });
 
-      item
+      article
         .save()
         .then(function () {
-          return Item.find().exec();
+          return Article.find().exec();
         })
-        .then(function (items) {
-          items.should.be.instanceof(Array).and.have.lengthOf(1);
+        .then(function (articles) {
+          articles.should.be.instanceof(Array).and.have.lengthOf(1);
 
-          var newItem = items.pop();
-          item.title.should.equal(newItem.title);
-          item.content.should.equal(newItem.content);
+          var newArticle = articles.pop();
+          article.title.should.equal(newArticle.title);
+          article.content.should.equal(newArticle.content);
 
           return seed.start({
             collections: [{
-              model: 'Item',
+              model: 'Article',
               skip: {
-                when: { title: newItem.title }
+                when: { title: newArticle.title }
               },
               docs: [{
-                data: _item
+                data: _article
               }]
             }]
           });
         })
         .then(function () {
-          return Item.find().exec();
+          return Article.find().exec();
         })
-        .then(function (items) {
-          // We should have the same item added at start of this unit test.
-          items.should.be.instanceof(Array).and.have.lengthOf(1);
+        .then(function (articles) {
+          // We should have the same article added at start of this unit test.
+          articles.should.be.instanceof(Array).and.have.lengthOf(1);
 
-          var existingItem = items.pop();
-          item.title.should.equal(existingItem.title);
-          item.content.should.equal(existingItem.content);
+          var existingArticle = articles.pop();
+          article.title.should.equal(existingArticle.title);
+          article.content.should.equal(existingArticle.content);
 
           return done();
         })
@@ -669,12 +669,12 @@ describe('Configuration Tests:', function () {
       seed
         .start({
           collections: [{
-            model: 'Item',
+            model: 'Article',
             skip: {
               when: { created: 'not-a-valid-date' }
             },
             docs: [{
-              data: _item
+              data: _article
             }]
           }]
         })
@@ -820,4 +820,35 @@ describe('Configuration Tests:', function () {
       fileTransport.should.be.false();
     });
   });
+
+  describe('Testing exposing environment as a variable to layout', function () {
+
+    ['development', 'production', 'test'].forEach(function (env) {
+      it('should expose environment set to ' + env, function (done) {
+        // Set env to development for this test
+        process.env.NODE_ENV = env;
+
+        // Gget application
+        app = express.init(mongoose.connection.db);
+        agent = request.agent(app);
+
+        // Get rendered layout
+        agent.get('/')
+          .expect('Content-Type', 'text/html; charset=utf-8')
+          .expect(200)
+          .end(function (err, res) {
+            // Set env back to test
+            process.env.NODE_ENV = 'test';
+            // Handle errors
+            if (err) {
+              return done(err);
+            }
+            res.text.should.containEql('env = "' + env + '"');
+            return done();
+          });
+      });
+    });
+
+  });
+
 });

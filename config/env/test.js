@@ -92,7 +92,7 @@ module.exports = {
           email: 'admin@localhost.com',
           firstName: 'Admin',
           lastName: 'Local',
-          roles: ['admin']
+          roles: ['admin', 'user']
         }
       }, {
         overwrite: true,
@@ -101,16 +101,16 @@ module.exports = {
           email: 'user@localhost.com',
           firstName: 'User',
           lastName: 'Local',
-          roles: ['ta']
+          roles: ['user']
         }
       }]
     }, {
-      model: 'Item',
+      model: 'Article',
       docs: [{
         overwrite: true,
         data: {
-          title: 'Test Item',
-          content: 'Code coverage test item!'
+          title: 'Test Article',
+          content: 'Code coverage test article!'
         }
       }]
     }]
