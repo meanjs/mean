@@ -1,9 +1,4 @@
-html *{
-   font-size: 1em !important;
-   color: #000 !important;
-   font-family: Arial !important;
-}
-#wrapper {
+#wrapper_for_student_edit {
   width: 70%;
   margin: 0 auto; /*CENTERS IT*/
   border-radius: 5px;
@@ -11,8 +6,9 @@ html *{
   padding: 20px;
 }
 
-input[type=text], select {
-    width: 49.6%;
+.student_edit[type=text],
+.student_edit [type=email], select {
+    width: 49.4%;
     padding: 6px 8px;
     margin: 2px 0;
     display: inline-block;
@@ -20,26 +16,14 @@ input[type=text], select {
     border-radius: 4px;
     box-sizing: border-box;
 }
-input[type=text]:focus {
+
+.student_edit[type=text]:focus,
+.student_edit [type=email]:focus {
     background-color: lightblue;
     border: 3px solid #555555;
 }
 
-input[type=email], select {
-    width: 49.6%;
-    padding: 6px 8px;
-    margin: 2px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-}
-input[type=email]:focus {
-    background-color: lightblue;
-    border: 3px solid #555555;
-}
-
-input[type=date], select {
+.student_edit [type=date], select {
     width: 50%;
     padding: 6px 8px;
     margin: 2px 0;
@@ -49,7 +33,7 @@ input[type=date], select {
     box-sizing: border-box;
 }
 
-.center {
+.center_for_student_edit {
     text-align: center;
 }
 
@@ -57,18 +41,18 @@ form label {
   font-weight:bold
 }
 
-input {
+.student_edit  {
   margin: 5px;
   padding: 5px;
   /*width: 100%;*/
 }
 
-input:placeholder-shown {
+.student_edit :placeholder-shown {
   border: 2px solid orange;
 }
 
 /*FOR THE FANCY BUTTON*/
-.button {
+.button_for_student_edit {
   border-radius: 5px;
   background-color: #FA4616;
   border: none;
@@ -82,14 +66,14 @@ input:placeholder-shown {
   margin: 5px;
 }
 
-.button span {
+.button_for_student_edit span {
   cursor: pointer;
   display: inline-block;
   position: relative;
   transition: 0.5s;
 }
 
-.button span:after {
+.button_for_student_edit span:after {
   content: '\00bb';
   position: absolute;
   opacity: 0;
@@ -98,11 +82,11 @@ input:placeholder-shown {
   transition: 0.5s;
 }
 
-.button:hover span {
+.button_for_student_edit:hover span {
   padding-right: 25px;
 }
 
-.button:hover span:after {
+.button_for_student_edit:hover span:after {
   opacity: 1;
   right: 0;
 }
