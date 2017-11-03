@@ -30,6 +30,10 @@
           pageTitle: 'Settings'
         }
       })
+      .state('terms', {
+        url: '/terms_and_conditions',
+        templateUrl: '/modules/users/client/views/authentication/terms.html'
+      })
       .state('settings.password', {
         url: '/password',
         templateUrl: '/modules/users/client/views/settings/change-password.client.view.html',
