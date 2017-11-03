@@ -5,6 +5,12 @@
   <div class="row">
     <nav class="col-sm-3 col-md-3">
       <ul class="nav nav-pills nav-stacked">
+        <li ui-sref-active="active" ng-show="vm.user.type === 'student'">
+          <a ui-sref="settings.profile">Edit Profile</a>
+        </li>
+        <li ui-sref-active="active" ng-show="vm.user.provider === 'local'">
+          <a ui-sref="settings.password">Change Password</a>
+        </li>
       </ul>
     </nav>
     <div class="col-sm-9 col-md-8 settings-view">

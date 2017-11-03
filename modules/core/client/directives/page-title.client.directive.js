@@ -18,7 +18,7 @@
       $rootScope.$on('$stateChangeSuccess', listener);
 
       function listener(event, toState) {
-        var applicationCoreTitle = 'MEAN.js',
+        var applicationCoreTitle = 'IPPD Portal',
           separator = ' - ',
           stateTitle = applicationCoreTitle + separator;
 

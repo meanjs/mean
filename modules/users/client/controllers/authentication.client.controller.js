@@ -93,8 +93,7 @@
         } else {
           $state.go($state.previous.state.name || 'profile', $state.previous.params);
         }
-      }
-      if (vm.authentication.user.type === 'sponsor') {
+      } else if (vm.authentication.user.type === 'sponsor' || vm.authentication.user.type === 'admin') {
         if ($state.previous.state.name === 'home') {
           $state.go('catalog', $state.previous.params);
         } else {

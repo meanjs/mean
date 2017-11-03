@@ -6,7 +6,12 @@
 	</head>
 	<div class="container">
 	  <div class="row">
-	    <h1 class="title">Resume Portal</h1>
+	  	<div class="col-md-6 headers">
+	  		<h1 class="catalog-title image-left">Resume Portal</h1>
+	  		<h4 id="cart" class="image-right vertical-bottom">
+		    	<i class="glyphicon glyphicon-shopping-cart cart"></i><i>Cart</i>
+		    </h4>
+	  	</div>
 	  </div>
 	  <div class="row" ng-controller="CatalogController">
 	    <div class="col-md-6">
@@ -22,7 +27,7 @@
 					  	<legend class="filter-legend">Filter By:</legend>
 					  	<div class="filter-div">
 					    	<input type="checkbox" id="availability" name="filter" value="availability" ng-click="filterOnForm()" ng-model="availabilityOption">
-					    	<label for="availability">Availability</label>
+					    	<label for="availability">Available</label>
 					  	</div>
 					  	<div class="filter-div">
 					    	<input type="checkbox" id="computer-science" name="filter" value="computer-science" ng-click="filterOnForm()" ng-model="csOption">
@@ -59,13 +64,10 @@
 	      </div>
 	    </div>
 	    <div class="col-md-6">
-	      <div id="cart">
-	        <h4 class="leftText"><i class="glyphicon glyphicon-shopping-cart" style="font-size: 25px;"></i>  Cart</h4>
-	      </div>
 	      <div class="jumbotron">
-	      	<p ng-if="detailedInfo.availabilityStatus" class="rightText">
+	      	<div ng-if="detailedInfo.availabilityStatus" class="image-right availbility-status">
                	<i>Status: {{detailedInfo.availabilityStatus}}</i>
-            </p>
+            </div>
 	      	<h2>Detailed Information</h2>
             <li ng-if="!detailedInfo">
               Select a student to learn more!
