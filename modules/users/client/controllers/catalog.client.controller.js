@@ -138,11 +138,7 @@
       }
 
     }
-
-    // $scope.switchList = function () {
-
-    // };
-
+    
     // filter the current list
     $scope.filterData = function () {
       var originalList = Array.from($scope.studentsList);
