@@ -23,9 +23,9 @@
           <label class="customText" for="password">Password</label>
           <br>
           <input type="password" id="password" name="password" class="customInputBox" ng-model="vm.credentials.password" placeholder="Password" required>
-         <br>
-         <input type="checkbox" name="checkbox" value="check"><span>I agree to the <a href="/terms_and_conditions" target="_blank"> terms and conditions</a></span>
-         <br>
+          <br>
+          <input type="checkbox" name="checkbox" value="check"><span>I agree to the <a href="/terms_and_conditions" target="_blank"> terms and conditions</a></span>
+          <br>
           <input type="submit" value="Sign in" onclick="if(!this.form.checkbox.checked){alert('You must agree to the terms first.');return false}"  />
         </fieldset>
       </div>
