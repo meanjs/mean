@@ -77,11 +77,11 @@
             $scope.searched = results.data;
             assignFood();
           });
-		}
+    }
 
     function assignFood() {
 			$scope.food = $scope.searched.report.food.name.toLowerCase();
-			$scope.nutrients = [];
+      $scope.nutrients = [];
 
       $scope.searched.report.food.nutrients.forEach( (nutrient, i) => {
         if(nutrient.name == 'Protein') $scope.nutrients.push(nutrient);
