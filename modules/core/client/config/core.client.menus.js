@@ -22,7 +22,7 @@
 
     menuService.addSubMenuItem('account', 'settings', {
       title: 'Edit Profile',
-      state: 'profile'
+      state: 'settings.profile'
     });
 
     menuService.addSubMenuItem('account', 'settings', {

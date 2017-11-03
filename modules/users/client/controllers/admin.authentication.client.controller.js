@@ -11,9 +11,14 @@
     var vm = this;
 
     vm.authentication = Authentication;
-    vm.signup = signup;
     vm.getPopoverMsg = PasswordValidator.getPopoverMsg;
-    vm.usernameRegex = /^(?=[\w.-]+$)(?!.*[._-]{2})(?!\.)(?!.*\.$).{3,34}$/;
+
+    $scope.usernameRegex = /^(?=[\w.-]+$)(?!.*[._-]{2})(?!\.)(?!.*\.$).{3,34}$/;
+    $scope.newFirstName = null;
+    $scope.newLastName = null;
+    $scope.newEmail = null;
+    $scope.newUsername = null;
+    $scope.newPassword = null;
 
     // Get an eventual error defined in the URL query string:
     if ($location.search().err) {
@@ -27,8 +32,7 @@
       $state.go('home');
     }
 
-    function signup(isValid) {
-
+    $scope.signup = function (isValid) {
       console.log('in signup');
 
       if (!isValid) {
@@ -37,16 +41,26 @@
         return false;
       }
 
-      UsersService.userSignup(vm.credentials)
+      var credentials = {
+        firstName: $scope.newFirstName,
+        lastName: $scope.newLastName,
+        email: $scope.newEmail,
+        username: $scope.newUsername,
+        password: $scope.newPassword
+      };
+
+      UsersService.userSignup(credentials)
         .then(onUserSignupSuccess)
         .catch(onUserSignupError);
-    }
+    };
 
     // Authentication Callbacks
     function onUserSignupSuccess(response) {
+      console.log('I got a successful response');
       // If successful we do nothing
       Notification.success({ message: '<i class="glyphicon glyphicon-ok"></i> Signup successful!' });
       // should not redirect either
+      console.log(vm.authentication.user);
     }
 
     function onUserSignupError(response) {
