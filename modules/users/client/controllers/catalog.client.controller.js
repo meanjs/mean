@@ -68,9 +68,7 @@
     function onAdminGetSponsorsSuccess(response) {
       $scope.sponsorsList = response;
       $scope.filteredSponsorsList = Array.from($scope.sponsorsList);
-      $scope.filteredUsersList = Array.from($scope.filteredSponsorsList);
-      console.log('loaded sponsors');
-      console.log($scope.filteredSponsorsList);
+      //$scope.filteredUsersList = Array.from($scope.filteredSponsorsList);
     }
 
     function onAdminGetSponsorsFailure(response) {
@@ -165,6 +163,7 @@
         console.log($scope.filteredUsersList);
 
       }
+      $scope.$apply(switchList());
     };
 
     // filter the current list
