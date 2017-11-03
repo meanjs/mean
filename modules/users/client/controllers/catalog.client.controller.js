@@ -148,7 +148,7 @@
               filteredSet.add(originalList[i]);
             }
           }
-          if (originalList[i].teamName !== null && originalList[i].availabilityStatus !== undefined) {
+          if (originalList[i].teamName !== null && originalList[i].teamName !== undefined) {
             var teamName = originalList[i].teamName;
             if (teamName.toLowerCase().includes($scope.searchValue.toLowerCase())) {
               filteredSet.add(originalList[i]);
