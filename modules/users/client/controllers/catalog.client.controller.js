@@ -26,7 +26,11 @@
       $state.go('authentication.signin');
     }
     if (vm.authentication.user.type !== 'sponsor' && vm.authentication.user.type !== 'admin') {
-      $state.go($state.previous.state.name || 'home', $state.previous.params);
+      if (vm.authentication.type === 'student') {
+        $state.go('profile');
+      } else {
+        $state.go('home');
+      }
     }
 
     fetchStudents();
@@ -75,8 +79,9 @@
 
     $scope.editClicked = function (user) {
       if (vm.authentication.user.type === 'admin') {
-        console.log(user);
-        // $state.go('authentication.signin');
+        vm.user = user;
+        // $state.go('edit_user');
+        $state.go('edit_user', $state.previous.params);
       }
     };
 

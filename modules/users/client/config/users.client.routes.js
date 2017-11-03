@@ -73,6 +73,12 @@
           pageTitle: 'Signup'
         }
       })
+      .state('edit_user', {
+        url: '/edit_user',
+        templateUrl: '/modules/users/client/views/adminPowers/admin.edit-user.client.view.html',
+        controller: 'EditUserController',
+        controllerAs: 'vm'
+      })
       .state('authentication', {
         abstract: true,
         url: '/authentication',
