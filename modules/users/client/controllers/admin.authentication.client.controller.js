@@ -65,6 +65,12 @@
       // If successful we do nothing
       Notification.success({ message: '<i class="glyphicon glyphicon-ok"></i> Signup successful!' });
       // should not redirect either to allow for mass signups
+      // should clear fields
+      $scope.newFirstName = null;
+      $scope.newLastName = null;
+      $scope.newEmail = null;
+      $scope.newUsername = null;
+      $scope.newPassword = null;
     }
 
     function onUserSignupError(response) {
