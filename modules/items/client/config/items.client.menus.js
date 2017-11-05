@@ -21,5 +21,15 @@
       state: 'items.list',
       roles: ['admin', 'superta', 'ta', 'technician']
     });
+    menuService.addSubMenuItem('topbar', 'items', {
+      title: 'Modify Modules',
+      state: 'items.mods',
+      roles: ['admin', 'superta', 'ta', 'technician']
+    });
+    menuService.addSubMenuItem('topbar', 'items', {
+      title: 'Modify Categories',
+      state: 'items.cats',
+      roles: ['admin', 'superta', 'ta', 'technician']
+    });
   }
 }());

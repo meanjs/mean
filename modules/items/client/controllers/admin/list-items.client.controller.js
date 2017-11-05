@@ -5,11 +5,12 @@
     .module('items.admin')
     .controller('ItemsAdminListController', ItemsAdminListController);
 
-  ItemsAdminListController.$inject = ['ItemsService'];
+  ItemsAdminListController.$inject = ['ItemsService', 'CategoriesService'];
 
-  function ItemsAdminListController(ItemsService) {
+  function ItemsAdminListController(ItemsService, CategoriesService) {
     var vm = this;
 
     vm.items = ItemsService.query();
+    vm.categories = CategoriesService.query();
   }
 }());

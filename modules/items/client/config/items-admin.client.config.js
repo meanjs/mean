@@ -13,5 +13,13 @@
       title: 'Manage Items',
       state: 'admin.items.list'
     });
+    Menus.addSubMenuItem('topbar', 'admin', {
+      title: 'Manage Categories',
+      state: 'admin.items.categories'
+    });
+    Menus.addSubMenuItem('topbar', 'admin', {
+      title: 'Manage Modules',
+      state: 'admin.items.modules'
+    });
   }
 }());

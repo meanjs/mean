@@ -2,52 +2,37 @@
   'use strict';
 
   angular
-    .module('modules.services')
+    .module('items.services')
     .factory('ModulesService', ModulesService);
 
   ModulesService.$inject = ['$resource', '$log'];
 
   function ModulesService($resource, $log) {
-    var Module = $resource('/api/modules/:moduleId', {
-      moduleId: '@_id'
-    }, {
-      update: {
-        method: 'PUT'
+    var Module = $resource('/api/modules', {}, 
+    {
+      list: {
+        method: 'GET'
+      },
+      new:{
+        method: 'POST'
+      },
+      rem:{
+        method: 'DELETE'
       }
     });
 
-    angular.extend(Module.prototype, {
-      createOrUpdate: function () {
-        var module = this;
-        return createOrUpdate(module);
+    angular.extend(Module, {
+      create: function (mod) {
+        return this.new(mod).$promise;
+      },
+      delete: function (mod) {
+        return this.del(mod).$promise;
+      },
+      getAll: function () {
+        return this.list().$promise;
       }
     });
 
     return Module;
-
-    function createOrUpdate(module) {
-      if (module._id) {
-        return module.$update(onSuccess, onError);
-      } else {
-        return module.$save(onSuccess, onError);
-      }
-
-      // Handle successful response
-      function onSuccess(module) {
-        // Any required internal processing from inside the service, goes here.
-      }
-
-      // Handle error response
-      function onError(errorResponse) {
-        var error = errorResponse.data;
-        // Handle error internally
-        handleError(error);
-      }
-    }
-
-    function handleError(error) {
-      // Log error
-      $log.error(error);
-    }
   }
 }());

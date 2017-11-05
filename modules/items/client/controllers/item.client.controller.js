@@ -2,17 +2,15 @@
   'use strict';
 
   angular
-    .module('items.admin')
-    .controller('ItemsAdminController', ItemsAdminController);
+    .module('items')
+    .controller('ItemsController', ItemsController);
 
-    ItemsAdminController.$inject = ['$scope', '$state', '$window', 'itemResolve', 'CategoriesService', 'ModulesService', 'Authentication', 'Notification'];
+  ItemsController.$inject = ['$scope', '$state', '$window', 'itemResolve', 'Authentication', 'Notification'];
 
-  function ItemsAdminController($scope, $state, $window, item, CategoriesService, ModulesService, Authentication, Notification) {
+  function ItemsController($scope, $state, $window, item, Authentication, Notification) {
     var vm = this;
 
     vm.item = item;
-    vm.cats = CategoriesService.query();
-    vm.mods = ModulesService.query();
     vm.authentication = Authentication;
     vm.form = {};
     vm.remove = remove;
@@ -22,12 +20,12 @@
     function remove() {
       if ($window.confirm('Are you sure you want to delete?')) {
         vm.item.$remove(function () {
-          $state.go('admin.items.list');
+          $state.go('items.list');
           Notification.success({ message: '<i class="glyphicon glyphicon-ok"></i> Item deleted successfully!' });
         });
       }
     }
-    
+
     // Save Item
     function save(isValid) {
       if (!isValid) {
@@ -41,7 +39,7 @@
         .catch(errorCallback);
 
       function successCallback(res) {
-        $state.go('admin.items.list'); // should we send the User to the list or the updated Item's view?
+        $state.go('items.list'); // should we send the User to the list or the updated Item's view?
         Notification.success({ message: '<i class="glyphicon glyphicon-ok"></i> Item saved successfully!' });
       }
 
