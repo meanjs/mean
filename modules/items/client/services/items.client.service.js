@@ -26,8 +26,6 @@
     return Item;
 
     function createOrUpdate(item) {
-      console.log("calling createOrUpdate");
-      console.log(item);
       if (item._id) {
         return item.$update(onSuccess, onError);
       } else {

@@ -9,9 +9,7 @@
 
   function ItemsAdminController($scope, $state, $window, item, CategoriesService, ModulesService, Authentication, Notification) {
     var vm = this;
-    console.log("items admin controller");
     vm.item = item;
-    //debugger;
     vm.cats = CategoriesService.query();
     vm.mods = ModulesService.query();
     vm.authentication = Authentication;

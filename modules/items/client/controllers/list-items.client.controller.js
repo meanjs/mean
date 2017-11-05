@@ -11,7 +11,5 @@
     var vm = this;
 
     vm.items = ItemsService.query();
-    console.log("Logging items");
-    console.log(vm.items);
   }
 }());
