@@ -10,11 +10,13 @@
   </div>
   <nav class="navbar-collapse" uib-collapse="!vm.isCollapsed" role="navigation">
     <ul class="nav navbar-nav" ng-if="vm.menu.shouldRender(vm.authentication.user);">
-      <li ng-repeat="item in vm.menu.items | orderBy: 'position'" ng-if="item.shouldRender(vm.authentication.user);" ng-switch="item.type" ng-class="{ dropdown: item.type === 'dropdown' }" ui-sref-active="active" class="{{item.class}}" uib-dropdown="item.type === 'dropdown'">
-        <a ng-switch-when="dropdown" class="dropdown-toggle" uib-dropdown-toggle role="button">{{::item.title}}&nbsp;<span class="caret"></span></a>
+      <li ng-repeat="item in vm.menu.items | orderBy: 'position'" ng-if="item.shouldRender(vm.authentication.user);" ng-switch="item.type" ng-class="{ dropdown: item.type === 'dropdown' }"
+       ui-sref-active="active" class="{{item.class}}" uib-dropdown="item.type === 'dropdown'">
+        <a ng-switch-when="dropdown" class="dropdown-toggle"
+        uib-dropdown-toggle role="button">{{::item.title}}&nbsp;<span class="caret"></span></a>
         <ul ng-switch-when="dropdown" class="dropdown-menu">
           <li ng-repeat="subitem in item.items | orderBy: 'position'" ng-if="subitem.shouldRender(vm.authentication.user);">
-            <a ui-sref="{{subitem.state}}({{subitem.params}})" ng-bind="subitem.title"></a>
+            <a ui-sref="{{subitem.state}}({{subitem.params}})" ng-bind="subitem.title" onMouseOver="this.style.color='#00F'" onMouseOut="this.style.color='#999999'"></a>
           </li>
         </ul>
         <a ng-switch-default ui-sref="{{item.state}}" ng-bind="item.title"></a>
