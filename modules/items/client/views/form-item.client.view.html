@@ -17,7 +17,40 @@
             <p class="help-block error-text" ng-message="required">Item title is required.</p>
           </div>
         </div>
+        <div class = "module-group">
+        <label for="modules">Modules</label>
+          <select name="module" id="module" class="form-control" ng-model="vm.item.modules" placeholder="module">
+            <option ng-repeat="x in vm.mods" value="{{x._id}}">{{x.title}}</option>
+          </select>
+         <a ng-show="vm.item._id" class="btn btn-primary" ng-click="vm.addModule()">
+          <i class="glyphicon glyphicon-plus"></i>
+        </a>
+        <div class = "category-group">
+        <label for="category">Categories</label>
+          <select name="category" id="category" class="form-control" ng-model="vm.item.categories" placeholder="category">
+            <option ng-repeat="x in vm.cats" value="{{x._id}}">{{x.title}}</option>
+          </select>
+         <a ng-show="vm.item._id" class="btn btn-primary" ng-click="vm.addCat()">
+          <i class="glyphicon glyphicon-plus"></i>
+        </a>
+          </div>
+          <div class = "workingStatus-group">
+        <label for="workingStatus">Working Status</label>
+          <select name="workingStatus" id="workingStatus" class="form-control" ng-model="vm.item.workingStatus" placeholder="Working Status">
+            <option value="Working">Working</option>
+            <option value="In Need Of Inspection">In Need Of Inspection</option>
+            <option value="Broken">Broken</option>
+          </select>
+         <a ng-show="vm.item._id" class="btn btn-primary" ng-click="vm.addCat()">
+          <i class="glyphicon glyphicon-plus"></i>
+        </a>
+          </div>
+
         <div class="form-group">
+          <label class="control-label" for="title">Count</label>
+          <input name="count" type="text" ng-model="vm.item.count" id="count" class="form-control" placeholder="Count" required autofocus>
+          <label class="control-label" for="title">Restock Threshold (Sends email when count drops below this)</label>
+          <input name="restockThreshold" type="text" ng-model="vm.item.restockThreshold" id="restockThreshold" class="form-control" placeholder="Restock Threshold" required autofocus>
           <label class="control-label" for="content">Content</label>
           <textarea name="content" data-ng-model="vm.item.content" id="content" class="form-control" cols="30" rows="10" placeholder="Content"></textarea>
         </div>

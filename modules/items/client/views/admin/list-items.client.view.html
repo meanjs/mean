@@ -18,10 +18,14 @@
       </small>
       <h4 class="list-group-item-heading" data-ng-bind="item.title"></h4>
       <p class="list-group-item-text" data-ng-bind="item.content"></p>
-      <b> Category: </b>
+      <b> Count:</b>
+      <span ng-if="item.count" ng-bind="item.count"></span>
+      <b> Category:</b>
       <span ng-if="item.categories" data-ng-bind="item.categories.title"></span>
-     <b> Module: </b>
+     <b> Module:</b>
       <span ng-if="item.modules" data-ng-bind="item.modules.title"></span>
+      <b> Status:</b>
+      <span ng-if="item.workingStatus" data-ng-bind="item.modules.workingStatus"></span>
     </a>
   </div>
   <div class="alert alert-warning text-center" data-ng-if="items.$resolved && !items.length">
