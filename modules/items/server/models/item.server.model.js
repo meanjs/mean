@@ -32,6 +32,14 @@ var ItemSchema = new Schema({
     type: Schema.ObjectId,
     ref: 'User'
   },
+  count:{
+    type: Number,
+    default: '1'
+  },
+  workingStatus:{
+    type: String,
+    default: 'Working'
+  },
   categories: {
     type: Schema.ObjectId,
     ref: 'Category'
