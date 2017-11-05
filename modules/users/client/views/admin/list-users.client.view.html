@@ -11,20 +11,18 @@
   </div>
   <div class="list-group">
     <a ng-repeat="user in vm.pagedItems" ui-sref="admin.user({userId: user._id})" class="list-group-item">
-      <h4 class="list-group-item-heading" ng-bind="user.username"></h4>
-      <p class="list-group-item-text pull-right small" ng-bind="user.roles"></p>
+      <h4 class="list-group-item-heading">{{user.firstName}} {{user.lastName}}</h4>
+      <p class="list-group-item-text pull-right small"> {{vm.modifyRoles(user)}}</p>
       <p class="list-group-item-text" ng-bind="user.email"></p>
     </a>
   </div>
 
-  <div class="col-md-4">
-      <a class="btn btn-primary" ui-sref="admin.add-user">
-          Add New User
-      </a>
-  </div>
 
   <uib-pagination boundary-links="true" max-size="8" items-per-page="vm.itemsPerPage" total-items="vm.filterLength" ng-model="vm.currentPage" ng-change="vm.pageChanged()"></uib-pagination>
   <div class="col-md-4">
+        <a class="btn btn-primary" ui-sref="admin.add-user">
+          Add New User
+        </a>
         <a class="btn btn-primary" ui-sref="admin.user-view-applicants">
           View Pending Applicants
         </a>

@@ -35,6 +35,18 @@
       vm.pagedItems = vm.filteredItems.slice(begin, end);
     }
 
+    vm.modifyRoles = function(user) {
+      if (user.roles.indexOf('admin') != -1)
+          return 'Admin';
+      if (user.roles.indexOf('superta') != -1 )
+        return 'Super TA';
+      if (user.roles.indexOf('technician') != -1 )
+        return 'Technician';
+      if (user.roles.indexOf('ta') != -1 )
+        return 'TA';
+      return 'User';
+
+    }
     function pageChanged() {
       vm.figureOutItemsToDisplay();
     }
