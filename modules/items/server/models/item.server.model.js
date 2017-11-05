@@ -9,6 +9,8 @@ var mongoose = require('mongoose'),
   config = require(path.resolve('./config/config')),
   chalk = require('chalk');
 
+var cat = require('./category.server.model.js');
+
 /**
  * Item Schema
  */
@@ -32,6 +34,9 @@ var ItemSchema = new Schema({
     type: Schema.ObjectId,
     ref: 'User'
   },
+  //count:{
+  //  type: Number
+  //},
   categories: {
     type: Schema.ObjectId,
     ref: 'Category'
