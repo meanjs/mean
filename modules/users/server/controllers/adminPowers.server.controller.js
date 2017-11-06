@@ -46,14 +46,13 @@ exports.deleteUser = function (req, res) {
   var user = req.user;
 
   /* Remove the user */
-  user.remove(function(err) {
+  user.remove(function (err) {
     if (err) {
       res.status(400).send(err);
-    }
-    else {
+    } else {
       res.end();
     }
-  })
+  });
 };
 
 /**

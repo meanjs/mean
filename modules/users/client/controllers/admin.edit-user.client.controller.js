@@ -66,7 +66,7 @@
     }
 
     function onUserUpdateFailure(response) {
-      Notification.error({ message: errorResponse.data.message, title: '<i class="glyphicon glyphicon-remove"></i> User update error!' });
+      Notification.error({ message: response.data.message, title: '<i class="glyphicon glyphicon-remove"></i> User update error!' });
     }
   }
 }());
