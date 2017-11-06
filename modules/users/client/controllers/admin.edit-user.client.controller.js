@@ -43,8 +43,6 @@
     }
 
     $scope.update = function (isValid) {
-      console.log('top of update');
-
       if (!isValid) {
         $scope.$broadcast('show-errors-check-validity', 'vm.userForm');
 
@@ -52,8 +50,6 @@
       }
 
       var user = $scope.user;
-
-      console.log('in update');
 
       // CatalogService.sponsorGetStudents().then(onUserUpdateSuccess).catch(onUserUpdateFailure);
       // AdminPowers.adminUpdateUser(user).then(onUserUpdateSuccess).catch(onUserUpdateFailure);
@@ -63,23 +59,14 @@
       }, function (error) {
         onUserUpdateFailure(error);
       });
-
-      // user.$update(function () {
-      //   // $state.go('admin.user', {
-      //   //   userId: user._id
-      //   // });
-      //   Notification.success({ message: '<i class="glyphicon glyphicon-ok"></i> User saved successfully!' });
-      // }, function (errorResponse) {
-      //   Notification.error({ message: errorResponse.data.message, title: '<i class="glyphicon glyphicon-remove"></i> User update error!' });
-      // });
     };
 
     function onUserUpdateSuccess(response) {
-      console.log('successfully updated');
+      Notification.success({ message: '<i class="glyphicon glyphicon-ok"></i> User saved successfully!' });
     }
 
     function onUserUpdateFailure(response) {
-      console.log('failure to update');
+      Notification.error({ message: errorResponse.data.message, title: '<i class="glyphicon glyphicon-remove"></i> User update error!' });
     }
   }
 }());
