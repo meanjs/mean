@@ -5,13 +5,13 @@
     .module('users')
     .controller('EditUserController', EditUserController);
 
-  EditUserController.$inject = ['$scope', '$state', '$stateParams', '$window', 'Authentication', 'Notification'];
+  EditUserController.$inject = ['$scope', '$state', '$stateParams', '$window', 'Authentication', 'Notification', 'AdminPowers', '$http'];
 
-  function EditUserController($scope, $state, $stateParams, $window, Authentication, Notification) {
+  function EditUserController($scope, $state, $stateParams, $window, Authentication, Notification, AdminPowers, $http) {
     var vm = this;
 
     vm.authentication = Authentication;
-    vm.userToEdit = $stateParams.user;
+    $scope.user = $stateParams.user;
 
     if (vm.authentication.user === null) {
       $state.go('authentication.signin');
@@ -42,23 +42,44 @@
       }
     }
 
-    function update(isValid) {
+    $scope.update = function (isValid) {
+      console.log('top of update');
+
       if (!isValid) {
         $scope.$broadcast('show-errors-check-validity', 'vm.userForm');
 
         return false;
       }
 
-      var user = vm.userToEdit;
+      var user = $scope.user;
 
-      user.$update(function () {
-        // $state.go('admin.user', {
-        //   userId: user._id
-        // });
-        Notification.success({ message: '<i class="glyphicon glyphicon-ok"></i> User saved successfully!' });
-      }, function (errorResponse) {
-        Notification.error({ message: errorResponse.data.message, title: '<i class="glyphicon glyphicon-remove"></i> User update error!' });
+      console.log('in update');
+
+      // CatalogService.sponsorGetStudents().then(onUserUpdateSuccess).catch(onUserUpdateFailure);
+      // AdminPowers.adminUpdateUser(user).then(onUserUpdateSuccess).catch(onUserUpdateFailure);
+
+      $http.put('/api/admin/updateUser/' + user._id, user).then(function (response) {
+        onUserUpdateSuccess(response);
+      }, function (error) {
+        onUserUpdateFailure(error);
       });
+
+      // user.$update(function () {
+      //   // $state.go('admin.user', {
+      //   //   userId: user._id
+      //   // });
+      //   Notification.success({ message: '<i class="glyphicon glyphicon-ok"></i> User saved successfully!' });
+      // }, function (errorResponse) {
+      //   Notification.error({ message: errorResponse.data.message, title: '<i class="glyphicon glyphicon-remove"></i> User update error!' });
+      // });
+    };
+
+    function onUserUpdateSuccess(response) {
+      console.log('successfully updated');
+    }
+
+    function onUserUpdateFailure(response) {
+      console.log('failure to update');
     }
   }
 }());
