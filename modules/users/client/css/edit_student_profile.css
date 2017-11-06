@@ -6,8 +6,7 @@
   padding: 20px;
 }
 
-.student_edit[type=text],
-.student_edit [type=email], select {
+.student_edit[type=text], select {
     width: 49.4%;
     padding: 6px 8px;
     margin: 2px 0;
@@ -17,14 +16,28 @@
     box-sizing: border-box;
 }
 
-.student_edit[type=text]:focus,
-.student_edit [type=email]:focus {
+.student_edit[type=text]:focus {
     background-color: lightblue;
     border: 3px solid #555555;
 }
 
-.student_edit [type=date], select {
-    width: 50%;
+.student_edit[type=email], select {
+    width: 49.4%;
+    padding: 6px 8px;
+    margin: 2px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.student_edit[type=email]:focus {
+    background-color: lightblue;
+    border: 3px solid #555555;
+}
+
+.student_edit[type=date], select {
+    width: 49.4%;
     padding: 6px 8px;
     margin: 2px 0;
     display: inline-block;
@@ -35,10 +48,6 @@
 
 .center_for_student_edit {
     text-align: center;
-}
-
-form label {
-  font-weight:bold
 }
 
 .student_edit  {

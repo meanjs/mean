@@ -1,5 +1,5 @@
 /*Profile*/
-body {
+.student-profile body {
   font:normal 12px/1.6em Arial, Helvetica, sans-serif;
   color:#2a3845;
   margin:0;
@@ -7,48 +7,48 @@ body {
   background:#FFFFFF;
 }
 
-p {
+.student-profile-p p {
   margin:0;
   padding:0;
 }
 
 /* rectangle block that has the home button */
-#wrapper {
+#wrapper-student-profile {
   margin:0 auto;
   width:632px;
   /*border-left:1px solid #f0e9eb;
   border-right:1px solid #f0e9eb;*/
 }
 
-#header {
+#header-student-profile {
   margin:0 1px;
 }
 
-#bg {
+#bg-student-profile {
   height:36px;
   /*background:url('http://img840.imageshack.us/img840/9886/87926428.gif') repeat-x;*/
 }
 
-#main-content {
+#main-content-student-profile {
   margin:0 auto;
 }
 
-#main-image {
+#main-image-student-profile {
   text-align:center;
 }
 
-#left-column {
+#left-column-student-profile {
   width:270px;
   float:left;
 }
 
-#right-column {
+#right-column-student-profile {
   width:300px;
   padding:0 30px 30px;
   float:right;
 }
 
-.sidebar {
+.sidebar-student-profile {
   width:218px;
   margin:0 auto;
   padding:10px 25px;
@@ -57,19 +57,19 @@ p {
 
 /* Global Styling */
 
-a:visited, a:link {
+.student-profile-a a:visited, a:link {
   color:#a43b55;
   text-decoration:underline;
   background:none;
 }
 
-a:hover {
+.student-profile-a a:hover {
   color:#a43b55;
   text-decoration:none;
   background:none;
 }
 
-h1 {
+.student-profile-h1 h1 {
   color:#7a2e40;
   margin:0 0 10px;
   padding-bottom:10px;
@@ -77,7 +77,7 @@ h1 {
   border-bottom:1px solid #efece7;
 }
 
-h2 {
+.student-profile-h2 h2 {
   color:#7a2e40;
   margin:20px 0 10px;
   padding-bottom:10px;
@@ -85,7 +85,7 @@ h2 {
   border-bottom:1px solid #efece7;
 }
 
-h3 {
+.student-profile-h3 h3 {
   color:#7a2e40;
   margin:10px 0;
   padding-bottom:10px;
@@ -93,32 +93,32 @@ h3 {
   border-bottom:1px solid #efece7;
 }
 
-h4 {
+.student-profile-h4 h4 {
   color: white;
   margin:10px 0;
   font:bold 30px Arial, Helvetica, sans-serif;
 }
 
-h5 {
+.student-profile-h5 h5 {
   color: white;
   margin:10px 0;
   font:bold 14px Arial, Helvetica, sans-serif;
 }
 
-ul {
+.student-profile-ul ul {
   padding:0;
   margin:0 0 0 17px;
   list-style:square url('http://img525.imageshack.us/img525/1890/bulletr.gif');
 }
 
-.box {
+.box-student-profile {
   background:#f7f7f7;
   border:1px solid #f0e9eb;
   padding:15px;
 }
 
 /*specifics of the blue rectangle block */
-#nav {
+#nav-student-profile {
   background:#06a;
   padding:10px 10px;
   text-align:left;
@@ -126,29 +126,29 @@ ul {
   color:#FFFFFF;
 }
 
-#nav a {
+#nav-student-profile a {
   margin: 0 10px;
 }
 
 /*the links to homepage, account, add to cart*/
-#nav a:visited, #nav a:link {
+#nav-student-profile a:visited, #nav a:link {
   text-decoration:none;
   /*color of text for homepage and login*/
   color: white;
 }
 
-#nav a:hover {
+#nav-student-profile a:hover {
   text-decoration:underline;
   color:black;
 }
 
-#student_name {
+#student_name-student-profile {
   margin-bottom:20px;
   font:normal 18px Georgia, serif;
   color:#000000;
 }
 
-.button {
+.button-student-profile {
   border-radius: 5px;
   background-color: #FA4616;
   border: none;
@@ -162,14 +162,14 @@ ul {
   margin: 5px;
 }
 
-.button span {
+.button-student-profile span {
   cursor: pointer;
   display: inline-block;
   position: relative;
   transition: 0.5s;
 }
 
-.button span:after {
+.button-student-profile span:after {
   content: '\00bb';
   position: absolute;
   opacity: 0;
@@ -178,17 +178,17 @@ ul {
   transition: 0.5s;
 }
 
-.button:hover span {
+.button-student-profile:hover span {
   padding-right: 25px;
 }
 
-.button:hover span:after {
+.button-student-profile:hover span:after {
   opacity: 1;
   right: 0;
 }
 
 /* The Modal (background) */
-.modal {
+.modal-student-profile {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
@@ -203,7 +203,7 @@ ul {
 }
 
 /* Modal Content */
-.modal-content {
+.modal-content-student-profile {
     position: relative;
     background-color: white;
     margin: auto;
@@ -229,29 +229,29 @@ ul {
 }
 
 /* The Close Button */
-.close {
+.close-student-profile {
     color: black;
     float: right;
     font-size: 28px;
     font-weight: bold;
 }
 
-.close:hover,
-.close:focus {
+.close-student-profile:hover,
+.close-student-profile:focus {
     color: red;
     text-decoration: none;
     cursor: pointer;
 }
 
-.modal-header {
+.modal-header-student-profile {
     padding: 2px 16px;
     background-color: #5cb85c;
     color: white;
 }
 
-.modal-body {padding: 2px 16px;}
+.modal-body-student-profile {padding: 2px 16px;}
 
-.modal-footer {
+.modal-footer-student-profile {
     padding: 2px 16px;
     background-color: #5cb85c;
     color: white;
