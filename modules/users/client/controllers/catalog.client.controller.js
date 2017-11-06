@@ -79,9 +79,8 @@
 
     $scope.editClicked = function (user) {
       if (vm.authentication.user.type === 'admin') {
-        vm.user = user;
-        // $state.go('edit_user');
-        $state.go('edit_user', $state.previous.params);
+        $state.go('edit_user', { user: user });
+        // $state.go('admin.user-edit');
       }
     };
 

@@ -5,12 +5,13 @@
     .module('users')
     .controller('EditUserController', EditUserController);
 
-  EditUserController.$inject = ['$scope', '$state', '$window', 'Authentication', 'Notification'];
+  EditUserController.$inject = ['$scope', '$state', '$stateParams', '$window', 'Authentication', 'Notification'];
 
-  function EditUserController($scope, $state, $window, Authentication, Notification) {
+  function EditUserController($scope, $state, $stateParams, $window, Authentication, Notification) {
     var vm = this;
 
     vm.authentication = Authentication;
+    vm.userToEdit = $stateParams.user;
 
     if (vm.authentication.user === null) {
       $state.go('authentication.signin');
@@ -24,9 +25,6 @@
         $state.go('home');
       }
     }
-
-    console.log('The user to edit is: ');
-    console.log(vm.user);
 
     function remove(user) {
       if ($window.confirm('Are you sure you want to delete this user?')) {
@@ -51,12 +49,12 @@
         return false;
       }
 
-      var user = vm.user;
+      var user = vm.userToEdit;
 
       user.$update(function () {
-        $state.go('admin.user', {
-          userId: user._id
-        });
+        // $state.go('admin.user', {
+        //   userId: user._id
+        // });
         Notification.success({ message: '<i class="glyphicon glyphicon-ok"></i> User saved successfully!' });
       }, function (errorResponse) {
         Notification.error({ message: errorResponse.data.message, title: '<i class="glyphicon glyphicon-remove"></i> User update error!' });
