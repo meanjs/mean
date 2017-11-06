@@ -12,8 +12,11 @@
     vm.authentication = Authentication;
 
     $scope.detailedInfo = null;
-    $scope.usersList = [];
-    $scope.filteredUsersList = [];
+    $scope.studentsList = [];
+    $scope.filteredStudentsList = [];
+    $scope.sponsorsList = [];
+    $scope.filteredSponsorsList = [];
+    $scope.isEditable = false;
     $scope.searchValue = null;
     $scope.shouldShowFilters = false;
     $scope.availabilityOption = false;
@@ -23,10 +26,19 @@
       $state.go('authentication.signin');
     }
     if (vm.authentication.user.type !== 'sponsor' && vm.authentication.user.type !== 'admin') {
-      $state.go($state.previous.state.name || 'home', $state.previous.params);
+      if (vm.authentication.type === 'student') {
+        $state.go('profile');
+      } else {
+        $state.go('home');
+      }
     }
 
     fetchStudents();
+
+    if (vm.authentication.user.type === 'admin') {
+      fetchSponsors();
+      $scope.isEditable = true;
+    }
 
     function fetchStudents() {
       // $http.get('/api/catalog/students').then(function (response) {
@@ -37,19 +49,43 @@
       CatalogService.sponsorGetStudents().then(onSponsorGetStudentsSuccess).catch(onSponsorGetStudentsFailure);
     }
 
+    function fetchSponsors() {
+      CatalogService.adminGetSponsors().then(onAdminGetSponsorsSuccess).catch(onAdminGetSponsorsFailure);
+    }
+
     $scope.showDetails = function (index) {
-      $scope.detailedInfo = $scope.usersList[index];
+      $scope.detailedInfo = $scope.studentsList[index];
     };
 
     function onSponsorGetStudentsSuccess(response) {
-      $scope.usersList = response;
-      $scope.filteredUsersList = Array.from($scope.usersList);
+      $scope.studentsList = response;
+      $scope.filteredStudentsList = Array.from($scope.studentsList);
     }
 
     function onSponsorGetStudentsFailure(response) {
-      $scope.usersList = null;
-      $scope.filteredUsersList = null;
+      $scope.studentsList = null;
+      $scope.filteredStudentsList = null;
     }
+
+    function onAdminGetSponsorsSuccess(response) {
+      $scope.sponsorsList = response;
+      $scope.filteredSponsorsList = Array.from($scope.sponsorsList);
+    }
+
+    function onAdminGetSponsorsFailure(response) {
+      $scope.sponsorList = null;
+      $scope.filteredSponsorsList = null;
+    }
+
+    $scope.editClicked = function (user) {
+      if (vm.authentication.user.type === 'admin') {
+        console.log(user);
+        console.log(user.id);
+        console.log(user._id);
+        $state.go('edit_user', { user: user });
+        // $state.go('admin.user-edit');
+      }
+    };
 
     $scope.toggleFilterOptions = function () {
       $scope.shouldShowFilters = !$scope.shouldShowFilters;
@@ -65,7 +101,7 @@
 
     $scope.filterOnForm = function () {
       var formElements = document.getElementById('filterOptions').getElementsByTagName('input');
-      var originalList = Array.from($scope.usersList);
+      var originalList = Array.from($scope.studentsList);
       var filteredSet = new Set();
 
       var didFilter = false;
@@ -81,7 +117,7 @@
         }
       }
 
-      $scope.filteredUsersList = (didFilter) ? Array.from(filteredSet) : originalList;
+      $scope.filteredStudentsList = (didFilter) ? Array.from(filteredSet) : originalList;
     };
 
     function filterOnName(name, originalList, filteredSet, firstFilter) {
@@ -118,14 +154,13 @@
       }
 
     }
-
     // filter the current list
     $scope.filterData = function () {
-      var originalList = Array.from($scope.usersList);
+      var originalList = Array.from($scope.studentsList);
       var filteredSet = new Set();
 
       if ($scope.searchValue == null || $scope.searchValue === '') {
-        $scope.filteredUsersList = originalList;
+        $scope.filteredStudentsList = originalList;
       } else {
         for (var i = 0; i < originalList.length; i++) {
           if (originalList[i].firstName !== null || originalList[i].lastName !== null) {
@@ -156,7 +191,7 @@
           }
         }
 
-        $scope.filteredUsersList = Array.from(filteredSet);
+        $scope.filteredStudentsList = Array.from(filteredSet);
       }
     };
   }
