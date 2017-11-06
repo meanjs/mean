@@ -28,6 +28,8 @@
         $state.go($state.previous.state.name || 'profile', $state.previous.params);
       } else if (vm.authentication.user.type === 'sponsor' || vm.authentication.user.type === 'admin') {
         $state.go($state.previous.state.name || 'catalog', $state.previous.params);
+      } else {
+        $state.go('home');
       }
     }
 

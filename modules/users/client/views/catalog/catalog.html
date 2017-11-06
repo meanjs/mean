@@ -57,6 +57,9 @@
 	                    <td>
 	                      <br><i class="actionButton glyphicon glyphicon-circle-arrow-down" style="font-size: 25px;"></i>
 	                    </td>
+	                    <td ng-if="isEditable">
+	                    	<br><button type="button" ng-click="editClicked(user)">Edit</button>
+	                    </td>
 	                  </div>
 	                </tr>
 	            </tbody>
