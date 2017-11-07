@@ -1,10 +1,10 @@
 /*Profile*/
 .student-profile body {
-  font:normal 12px/1.6em Arial, Helvetica, sans-serif;
+  background:#FFFFFF;
   color:#2a3845;
+  font:normal 12px/1.6em Arial, Helvetica, sans-serif;
   margin:0;
   padding:0;
-  background:#FFFFFF;
 }
 
 .student-profile-p p {
@@ -35,73 +35,73 @@
 }
 
 .left-column-student-profile {
-  width:35%;
   float:left;
+  width:35%;
 }
 
 .right-column-student-profile {
-  width:65%;
   float:right;
+  width:65%;
 }
 
 .sidebar-student-profile {
-  width:100%;
-  margin:0 auto;
   background:url('http://img404.imageshack.us/img404/3092/shadowh.jpg') no-repeat top;
+  margin:0 auto;
+  width:100%;
 }
 
 .student-profile-a a:visited, a:link {
+  background:none;
   color:#a43b55;
   text-decoration:underline;
-  background:none;
 }
 
 .student-profile-a a:hover {
+  background:none;
   color:#a43b55;
   text-decoration:none;
-  background:none;
 }
 
 .student-profile-h1 {
+  border-bottom:1px solid #efece7;
   color:#7a2e40;
+  font:normal 17px Georgia, serif;
   margin:0 0 10px;
   padding-bottom:10px;
-  font:normal 17px Georgia, serif;
-  border-bottom:1px solid #efece7;
 }
 
 .student-profile-h2 {
+  border-bottom:1px solid #efece7;
   color:#7a2e40;
+  font:normal 17px Georgia, serif;
   margin:20px 0 10px;
   padding-bottom:10px;
-  font:normal 17px Georgia, serif;
-  border-bottom:1px solid #efece7;
 }
 
 .student-profile-h3 {
+  border-bottom:1px solid #efece7;
   color:#7a2e40;
+  font:bold 14px Arial, Helvetica, sans-serif;
   margin:10px 0;
   padding-bottom:10px;
-  font:bold 14px Arial, Helvetica, sans-serif;
-  border-bottom:1px solid #efece7;
 }
 
 .student-profile-h4 {
   color: white;
-  margin:10px 0;
   font:bold 30px Arial, Helvetica, sans-serif;
+  margin:10px 0;
 }
 
 .student-profile-h5 {
   color: white;
-  margin:10px 0;
   font:bold 14px Arial, Helvetica, sans-serif;
+  margin:10px 0;
 }
 
 .student-profile-ul ul {
-  padding:0;
-  margin:0 0 0 17px;
   list-style:square url('http://img525.imageshack.us/img525/1890/bulletr.gif');
+  margin:0 0 0 17px;
+  padding:0;
 }
 
 .box-student-profile {
@@ -113,9 +113,9 @@
 /*specifics of the blue rectangle block */
 .nav-student-profile {
   background:#06a;
+  color:#FFFFFF;
   padding:10px 10px;
   text-align:left;
-  color:#FFFFFF;
 }
 
 .nav-student-profile a {
@@ -124,34 +124,34 @@
 
 /*the links to homepage, account, add to cart*/
 .nav-student-profile a:visited, .nav a:link {
-  text-decoration:none;
   /*color of text for homepage and login*/
   color: white;
+  text-decoration:none;
 }
 
 .nav-student-profile a:hover {
-  text-decoration:underline;
   color:black;
+  text-decoration:underline;
 }
 
 .student_name-student-profile {
-  margin-bottom:20px;
-  font:normal 18px Georgia, serif;
   color:#000000;
+  font:normal 18px Georgia, serif;
+  margin-bottom:20px;
 }
 
 .button-student-profile {
-  border-radius: 5px;
   background-color: #FA4616;
   border: none;
+  border-radius: 5px;
   color: #FFFFFF;
-  text-align: center;
+  cursor: pointer;
   font-size: 15px;
   height: 40px;
-  width: 200px;
-  transition: all 0.5s;
-  cursor: pointer;
   margin: 5px;
+  text-align: center;
+  transition: all 0.5s;
+  width: 200px;
 }
 
 .button-student-profile span {
@@ -163,10 +163,10 @@
 
 .button-student-profile span:after {
   content: '\00bb';
-  position: absolute;
   opacity: 0;
-  top: 0;
+  position: absolute;
   right: -20px;
+  top: 0;
   transition: 0.5s;
 }
 
@@ -181,69 +181,81 @@
 
 /* The Modal (background) */
 .modal-student-profile {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    padding-top: 0; /* Location of the box */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  display: none; /* Hidden by default */
+  height: 100%; /* Full height */
+  left: 0;
+  overflow: auto; /* Enable scroll if needed */
+  padding-top: 0; /* Location of the box */
+  position: fixed; /* Stay in place */
+  top: 0;
+  width: 100%; /* Full width */
+  z-index: 1; /* Sit on top */
 }
 
 /* Modal Content */
 .modal-content-student-profile {
-    position: relative;
-    background-color: white;
-    margin: auto;
-    padding: 0;
-    width: 80%;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
-    -o-webkit-animation-name: animatetop;
-    -o-webkit-animation-duration: 0.4s;
-    animation-name: animatetop;
-    animation-duration: 0.4s
+  animation-duration: 0.4s;
+  animation-name: animatetop;
+  background-color: white;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+  margin: auto;
+  padding: 0;
+  position: relative;
+  width: 80%;
+  -o-webkit-animation-duration: 0.4s;
+  -o-webkit-animation-name: animatetop;
 }
 
 /* Add Animation */
 @-webkit-keyframes animatetop {
-    from {top:-300px; opacity:0}
-    to {top:0; opacity:1}
+  from {
+    opacity:0;
+    top:-300px;
+  }
+  to {
+    opacity:1;
+    top:0;
+  }
 }
 
 @keyframes animatetop {
-    from {top:-300px; opacity:0}
-    to {top:0; opacity:1}
+  from {
+    opacity:0;
+    top:-300px;
+  }
+  to {
+    opacity:1;
+    top:0;
+  }
 }
 
 /* The Close Button */
 .close-student-profile {
-    color: black;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
+  color: black;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
 }
 
 .close-student-profile:hover,
 .close-student-profile:focus {
-    color: red;
-    text-decoration: none;
-    cursor: pointer;
+  color: red;
+  cursor: pointer;
+  text-decoration: none;
 }
 
 .modal-header-student-profile {
-    padding: 2px 16px;
-    background-color: #5cb85c;
-    color: white;
+  background-color: #5cb85c;
+  color: white;
+  padding: 2px 16px;
 }
 
 .modal-body-student-profile {padding: 2px 16px;}
 
 .modal-footer-student-profile {
-    padding: 2px 16px;
-    background-color: #5cb85c;
-    color: white;
+  background-color: #5cb85c;
+  color: white;
+  padding: 2px 16px;
 }
