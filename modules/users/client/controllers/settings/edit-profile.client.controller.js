@@ -14,6 +14,9 @@
     vm.user = Authentication.user;
     vm.updateUserProfile = updateUserProfile;
 
+    console.log('user: ');
+    console.log(vm.user);
+
     if (vm.authentication.user === null) {
       $state.go('authentication.signin');
     }
