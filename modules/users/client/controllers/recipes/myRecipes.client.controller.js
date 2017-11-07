@@ -10,19 +10,29 @@
   function MyRecipesController(UsersService, $scope, user) {
     var vm = this;
 
+    vm.deleteRec = deleteRec;
+
     UsersService.getMyRecipes()
       .then(success)
       .catch(failure)
 
-    function success(response) {
-      console.log('worked!');
-      console.log(response.recipes);
+    function deleteRec(recipe) {
+       UsersService.deleteThisRecipe(recipe)
+        .then(other)
+        .catch(failure)
     }
 
-    function failure(response) {
-      console.log('sadness')
-      console.log(response);
+    function other(response) {
+      console.log("Success", response);
     }
-    //vm.addings = UsersService.query();
+
+    function success(response) {
+      console.log("Recipes success: ", response.recipes);
+      $scope.recipes = response.recipes;
+    }
+
+    function failure(error) {
+      console.log("Failure: ", error);
+    }  
   }
 }());

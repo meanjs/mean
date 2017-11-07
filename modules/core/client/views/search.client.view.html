@@ -3,7 +3,9 @@
     <div class="textLN"><a class=" test left" href="">Popular Recipes</a> <a class="test" href="">My Recipes</a> </div>
   </div>-->
   <center>
-    <text id="title">Healhty Alternatives for "</text><text id="ingredient">{{wholename}}</text><text id="title">"</text>
+    <text id="title">Healthy Alternatives for "</text>
+    <text id="ingredient">{{wholename}}</text>
+    <text id="title">"</text>
   </center>
   </br>
   <div class="lowerNav text-center">
@@ -20,6 +22,24 @@
   </div>
   </br>
   <div ng-show="showItem">
+    <center>
+      <div class="row">
+        <div style="float: left;" class="col-md-4" ng-repeat="alternative in alternatives">
+          <div ng-click="getReport(alternative.map_ndbno)">
+            <h3>{{alternative.map_name.toUpperCase()}}</h3>
+          </div>
+        </div>
+      </div>
+      <div>
+        <h3><strong>Food:</strong> {{food.toUpperCase()}}</h3>
+        <h4><strong>Nutrients: </h4>
+          <div ng-repeat="nutrient in nutrients">
+            <b>{{nutrient.name}}:</b> {{nutrient.value}} {{nutrient.unit}}
+          </div>
+        </div>
+      </div>
+    </center>
+    
     <center>
 
       </br>

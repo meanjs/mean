@@ -17,7 +17,9 @@ var _ = require('lodash'),
   validator = require('validator');
 
 // ADD FIELDS
-var whitelistedFields = ['firstName', 'lastName', 'email', 'username', 'weight', 'allergies', 'dietaryDefinitions', 'preferences', 'religiousRestrictions','recipes'];
+var whitelistedFields = ['firstName', 'lastName', 'email', 'username', 'weight', 
+    'allergies', 'dietaryDefinitions', 'preferences', 'religiousRestrictions', 
+    'recipes'];
 
 var useS3Storage = config.uploads.storage === 's3' && config.aws.s3;
 var s3;
@@ -213,13 +215,15 @@ exports.me = function (req, res) {
       displayName: validator.escape(req.user.displayName),
       provider: validator.escape(req.user.provider),
       username: validator.escape(req.user.username),
-     //======Added other fields
+
+     // Added fields
       weight: validator.escape(req.user.weight),
       allergies: validator.escape(req.user.allergies),
       dietaryDefinitions: validator.escape(req.user.dietaryDefinitions),
       preferences: validator.escape(req.user.preferences),
       religiousRestrictions: validator.escape(req.user.religiousRestrictions),
       recipes: validator.escape(req.user.recipes),
+
       created: req.user.created.toString(),
       roles: req.user.roles,
       profileImageURL: req.user.profileImageURL,
@@ -234,24 +238,55 @@ exports.me = function (req, res) {
 };
 
 exports.add = function(req, res) {
-  var body = req.body.add;
+  var user = req.user;
+  var recipe = req.body;
+  var addedRecipe = {
+    'name' : recipe.name,
+    'directions' : recipe.directions,
+    'cookingStyle' : recipe.cookingStyle,
+    'ingredients' : recipe.ingredients
+  }
 
-  res.json(body);
-}
-
-exports.usda = function(req, res) {
-  // $http.get(path.resolve('./modules/users/server/food_alternatives.json'))
-  //   .then( (response) => {
-  //     res.json(response);
-  //   });
-
-  var body = req.body;
-
-  res.json(body);
+  user.recipes.push(addedRecipe);
+  
+  user.save(function (err) {
+    if (err) {
+      return res.status(422).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    } else {
+      req.login(user, function (err) {
+        if (err) {
+          res.status(400).send(err);
+        } else {
+          res.json(user);
+        }
+      });
+    }
+  });
 }
 
 exports.myRecipes = function(req, res) {
   var user = req.user;
 
   res.json(user);
+}
+
+exports.alternatives = function(req, res) {
+  var searchFood = req.body.food;
+  var cookingStyle = req.body.cookingStyle;
+  var alternativeData = req.body.response;
+
+  res.json(searchFood);
+}
+
+exports.deleteRecipe = function(req, res) {
+  var recipe = req.model;
+
+  // recipe.remove(function(err) {
+  //   if(err) res.status(500).send(err);
+  //   else res.json(recipe);
+  // });
+
+  res.json(recipe);
 }

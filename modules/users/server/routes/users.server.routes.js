@@ -4,8 +4,9 @@ module.exports = function (app) {
   // User Routes
   var users = require('../controllers/users.server.controller');
 
+  app.route('/api/users/deleteRecipe').post(users.deleteRecipe);
+  app.route('/api/users/alternatives').post(users.alternatives);
   app.route('/api/users/add').post(users.add);
-  app.route('/api/users/usda').post(users.usda);
   app.route('/api/users/myRecipes').get(users.myRecipes);
 
   // Setting up the users profile api
