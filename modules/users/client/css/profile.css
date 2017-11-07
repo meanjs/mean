@@ -13,49 +13,42 @@
 }
 
 /* rectangle block that has the home button */
-#wrapper-student-profile {
+.wrapper-student-profile {
   margin:0 auto;
   width:632px;
-  /*border-left:1px solid #f0e9eb;
-  border-right:1px solid #f0e9eb;*/
 }
 
-#header-student-profile {
+.header-student-profile {
   margin:0 1px;
 }
 
-#bg-student-profile {
+.bg-student-profile {
   height:36px;
-  /*background:url('http://img840.imageshack.us/img840/9886/87926428.gif') repeat-x;*/
 }
 
-#main-content-student-profile {
+.main-content-student-profile {
   margin:0 auto;
 }
 
-#main-image-student-profile {
-  text-align:center;
+.main-image-student-profile {
+  text-align:left;
 }
 
-#left-column-student-profile {
-  width:270px;
+.left-column-student-profile {
+  width:35%;
   float:left;
 }
 
-#right-column-student-profile {
-  width:300px;
-  padding:0 30px 30px;
+.right-column-student-profile {
+  width:65%;
   float:right;
 }
 
 .sidebar-student-profile {
-  width:218px;
+  width:100%;
   margin:0 auto;
-  padding:10px 25px;
   background:url('http://img404.imageshack.us/img404/3092/shadowh.jpg') no-repeat top;
 }
-
-/* Global Styling */
 
 .student-profile-a a:visited, a:link {
   color:#a43b55;
@@ -118,31 +111,30 @@
 }
 
 /*specifics of the blue rectangle block */
-#nav-student-profile {
+.nav-student-profile {
   background:#06a;
   padding:10px 10px;
   text-align:left;
-  /*color of " | "*/
   color:#FFFFFF;
 }
 
-#nav-student-profile a {
+.nav-student-profile a {
   margin: 0 10px;
 }
 
 /*the links to homepage, account, add to cart*/
-#nav-student-profile a:visited, #nav a:link {
+.nav-student-profile a:visited, .nav a:link {
   text-decoration:none;
   /*color of text for homepage and login*/
   color: white;
 }
 
-#nav-student-profile a:hover {
+.nav-student-profile a:hover {
   text-decoration:underline;
   color:black;
 }
 
-#student_name-student-profile {
+.student_name-student-profile {
   margin-bottom:20px;
   font:normal 18px Georgia, serif;
   color:#000000;
@@ -155,7 +147,7 @@
   color: #FFFFFF;
   text-align: center;
   font-size: 15px;
-  padding: 10px;
+  height: 40px;
   width: 200px;
   transition: all 0.5s;
   cursor: pointer;
@@ -192,7 +184,7 @@
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
+    padding-top: 0; /* Location of the box */
     left: 0;
     top: 0;
     width: 100%; /* Full width */
@@ -208,11 +200,10 @@
     background-color: white;
     margin: auto;
     padding: 0;
-    border: 1px solid #888;
     width: 80%;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
-    -webkit-animation-name: animatetop;
-    -webkit-animation-duration: 0.4s;
+    -o-webkit-animation-name: animatetop;
+    -o-webkit-animation-duration: 0.4s;
     animation-name: animatetop;
     animation-duration: 0.4s
 }
