@@ -5,13 +5,21 @@
     .module('users')
     .controller('EditProfileController', EditProfileController);
 
-  EditProfileController.$inject = ['$scope', '$http', '$location', 'UsersService', 'Authentication', 'Notification'];
+  EditProfileController.$inject = ['$scope', '$state', '$http', '$location', 'UsersService', 'Authentication', 'Notification'];
 
-  function EditProfileController($scope, $http, $location, UsersService, Authentication, Notification) {
+  function EditProfileController($scope, $state, $http, $location, UsersService, Authentication, Notification) {
     var vm = this;
 
+    vm.authentication = Authentication;
     vm.user = Authentication.user;
     vm.updateUserProfile = updateUserProfile;
+
+    if (vm.authentication.user === null) {
+      $state.go('authentication.signin');
+    }
+    if (vm.authentication.user.type !== 'student') {
+      $state.go('home');
+    }
 
     // Update a user profile
     function updateUserProfile(isValid) {
