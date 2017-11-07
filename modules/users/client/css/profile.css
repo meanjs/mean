@@ -130,7 +130,7 @@
 }
 
 .nav-student-profile a:hover {
-  color: black;
+  color:black;
   text-decoration:underline;
 }
 
@@ -204,8 +204,8 @@
   padding: 0;
   position: relative;
   width: 80%;
-  -o-webkit-animation-name: animatetop;
   -o-webkit-animation-duration: 0.4s;
+  -o-webkit-animation-name: animatetop;
 }
 
 /* Add Animation */
