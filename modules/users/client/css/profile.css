@@ -223,7 +223,7 @@
 @keyframes animatetop {
   from {
     opacity:0;
-    top:-300px; 
+    top:-300px;
   }
   to {
     opacity:1;
