@@ -58,6 +58,7 @@
       $scope.filteredStudentsList = Array.from($scope.studentsList);
       $scope.filteredUsersList = Array.from($scope.filteredStudentsList);
       if (vm.authentication.user.type === 'admin') {
+        $scope.usersList = $scope.studentsList.concat($scope.sponsorsList);
         $scope.filteredUsersList = $scope.filteredStudentsList.concat($scope.filteredSponsorsList);
       }
     }
@@ -70,6 +71,7 @@
     function onAdminGetSponsorsSuccess(response) {
       $scope.sponsorsList = response;
       $scope.filteredSponsorsList = Array.from($scope.sponsorsList);
+      $scope.usersList = $scope.studentsList.concat($scope.sponsorsList);
       $scope.filteredUsersList = $scope.filteredStudentsList.concat($scope.filteredSponsorsList);
     }
 
