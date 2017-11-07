@@ -6,27 +6,23 @@
     </div>
     <div class="main-content-student-profile">
       <div class="right-column-student-profile">
-        <div class="student_name-student-profile">Student's Name</div>
+        <div class="student_name-student-profile">{{vm.user.firstName}} {{vm.user.lastName}}</div>
         <div class="student-profile-h3">Objective</div>
         <p class="student-profile-p">I am searching for an internship/co-op in the coming spring or summer semester.</p>
         <div class="student-profile-h3">Education</div>
         <div class="box-student-profile">
           <p class="student-profile-p">University of Florida, College of Engineering</p>
           <ul class="student-profile-ul" style="margin-top:10px;">
-            <li>Major</li>
-            <li>GPA</li>
-            <li>Graduation Date</li>
-            <li>Employment Status</li>
+            <li><b>Major:</b> {{vm.user.major}}</li>
+            <li><b>GPA:</b> {{vm.user.gpa}}</li>
+            <li><b>Graduation Date:</b> {{vm.user.graduationDate}}</li>
+            <li><b>Employment Status:</b> {{vm.user.availabilityStatus}}</li>
           </ul>
         </div>
         <div class="student-profile-h3">Short Biography</div>
         <div class="box-student-profile">
           <p class="student-profile-p">
-            Trung Tran is currently a 4th year Computer Engineering student attending the University of Florida. In December 2018, he will graduate from the Herbert Wertheim College of Engineering at the University of Florida. Trung is currently a member of the Alpha Upsilon Chapter of Omega Delta Phi (ODPhi), Machen Florida Opportunity Scholarship (MFOS), Gatorship, the Association of Computer Engineers, and the Student Information-Security Team. He is an Ambassador for MFOS here he works directly with donors to create more funds, through organizing fundraiser, to cover tuition for our first-generation students. Alongside this role, he is the Assistant Director for Gatorship, where he will lead group discussions and facilitate dialogues to educate students on issues of socioeconomic status, race, gender identity, sexual orientation, etc..
-          </p><p class="student-profile-p">
-            In the past year, Trung has been a part of the Multi-functional Integrated System Technology (MIST) Makers, a research opportunity to develop a smart system using Internet of Things (IoT), developing a Smart Garden. Through MIST Makers, Trung gained invaluable experience in terms of teamwork, communicating with end-users, and product design implementation. In the meantime, he is studying for the GRE and planning on applying to graduate school. However, he hopes to work for a company after graduating with his bachelors to save for graduate school.
-          </p><p class="student-profile-p">
-            Trung’s passion lies between the striving for social justice and giving back to the community who raised him. He volunteers with the Child Advocacy Center and does his best to educate people on society issues.
+            {{vm.user.bio}}
           </p>
         </div>
       </div>

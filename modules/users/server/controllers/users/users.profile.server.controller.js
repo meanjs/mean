@@ -219,7 +219,11 @@ exports.me = function (req, res) {
       lastName: validator.escape(req.user.lastName),
       firstName: validator.escape(req.user.firstName),
       additionalProvidersData: req.user.additionalProvidersData,
-      type: req.user.type
+      type: req.user.type,
+      major: req.user.major,
+      bio: req.user.bio,
+      graduationDate: req.user.graduationDate,
+      gpa: req.user.gpa
     };
   }
 
