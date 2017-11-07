@@ -1,249 +1,164 @@
 /*Profile*/
 .student-profile body {
-  font:normal 12px/1.6em Arial, Helvetica, sans-serif;
-  color:#2a3845;
-  margin:0;
-  padding:0;
-  background:#FFFFFF;
+	background: #FFFFFF;
+	color: #2a3845;
+	font: normal 12px/1.6em Arial, Helvetica, sans-serif;
+	margin: 0;
+	padding: 0;
 }
 
 .student-profile-p p {
-  margin:0;
-  padding:0;
+	margin: 0;
+	padding: 0;
 }
 
 /* rectangle block that has the home button */
 .wrapper-student-profile {
-  margin:0 auto;
-  width:632px;
+	margin: 0 auto;
+	width: 632px;
 }
 
 .header-student-profile {
-  margin:0 1px;
+	margin: 0 1px;
 }
 
 .bg-student-profile {
-  height:36px;
+	height: 36px;
 }
 
 .main-content-student-profile {
-  margin:0 auto;
+	margin: 0 auto;
 }
 
 .main-image-student-profile {
-  text-align:left;
+	text-align: left;
 }
 
 .left-column-student-profile {
-  width:35%;
-  float:left;
+	float: left;
+	width: 35%;
 }
 
 .right-column-student-profile {
-  width:65%;
-  float:right;
+	float: right;
+	width: 65%;
 }
 
 .sidebar-student-profile {
-  width:100%;
-  margin:0 auto;
-  background:url('http://img404.imageshack.us/img404/3092/shadowh.jpg') no-repeat top;
+	background: url('http://img404.imageshack.us/img404/3092/shadowh.jpg') no-repeat top;
+	margin: 0 auto;
+	width: 100%;
 }
 
 .student-profile-a a:visited, a:link {
-  color:#a43b55;
-  text-decoration:underline;
-  background:none;
+	background: none;
+	color: #a43b55;
+	text-decoration: underline;
 }
 
 .student-profile-a a:hover {
-  color:#a43b55;
-  text-decoration:none;
-  background:none;
+	background: none;
+	color: #a43b55;
+	text-decoration: none;
 }
 
 .student-profile-h1 {
-  color:#7a2e40;
-  margin:0 0 10px;
-  padding-bottom:10px;
-  font:normal 17px Georgia, serif;
-  border-bottom:1px solid #efece7;
+	border-bottom: 1px solid #efece7;
+	color: #7a2e40;
+	font: normal 17px Georgia, serif;
+	margin: 0 0 10px;
+	padding-bottom: 10px;
 }
 
 .student-profile-h2 {
-  color:#7a2e40;
-  margin:20px 0 10px;
-  padding-bottom:10px;
-  font:normal 17px Georgia, serif;
-  border-bottom:1px solid #efece7;
+	border-bottom: 1px solid #efece7;
+	color: #7a2e40;
+	font: normal 17px Georgia, serif;
+	margin: 20px 0 10px;
+	padding-bottom: 10px;
 }
 
 .student-profile-h3 {
-  color:#7a2e40;
-  margin:10px 0;
-  padding-bottom:10px;
-  font:bold 14px Arial, Helvetica, sans-serif;
-  border-bottom:1px solid #efece7;
+	border-bottom: 1px solid #efece7;
+	color: #7a2e40;
+	font: bold 14px Arial, Helvetica, sans-serif;
+	margin: 10px 0;
+	padding-bottom: 10px;
 }
 
 .student-profile-h4 {
-  color: white;
-  margin:10px 0;
-  font:bold 30px Arial, Helvetica, sans-serif;
+	color: white;
+	font: bold 30px Arial, Helvetica, sans-serif;
+	margin: 10px 0;
 }
 
 .student-profile-h5 {
-  color: white;
-  margin:10px 0;
-  font:bold 14px Arial, Helvetica, sans-serif;
+	color: white;
+	font: bold 14px Arial, Helvetica, sans-serif;
+	margin: 10px 0;
 }
 
 .student-profile-ul ul {
-  padding:0;
-  margin:0 0 0 17px;
-  list-style:square url('http://img525.imageshack.us/img525/1890/bulletr.gif');
+	list-style: square url('http://img525.imageshack.us/img525/1890/bulletr.gif');
+	margin: 0 0 0 17px;
+	padding: 0;
 }
 
 .box-student-profile {
-  background:#f7f7f7;
-  border:1px solid #f0e9eb;
-  padding:15px;
+	background: #f7f7f7;
+	border: 1px solid #f0e9eb;
+	padding: 15px;
 }
 
 /*specifics of the blue rectangle block */
 .nav-student-profile {
-  background:#06a;
-  padding:10px 10px;
-  text-align:left;
-  color:#FFFFFF;
+	background: #06a;
+	color: #FFFFFF;
+	padding: 10px 10px;
+	text-align: left;
 }
 
 .nav-student-profile a {
-  margin: 0 10px;
+	margin: 0 10px;
 }
 
 /*the links to homepage, account, add to cart*/
 .nav-student-profile a:visited, .nav a:link {
-  text-decoration:none;
-  /*color of text for homepage and login*/
-  color: white;
+	color: white; /*color of text for homepage and login*/
+	text-decoration: none;
 }
 
 .nav-student-profile a:hover {
-  text-decoration:underline;
-  color:black;
+	color: black;
+	text-decoration: underline;
 }
 
 .student_name-student-profile {
-  margin-bottom:20px;
-  font:normal 18px Georgia, serif;
-  color:#000000;
+	color: #000000;
+	font: normal 18px Georgia, serif;
+	margin-bottom: 20px;
 }
 
 .button-student-profile {
-  border-radius: 5px;
-  background-color: #FA4616;
-  border: none;
-  color: #FFFFFF;
-  text-align: center;
-  font-size: 15px;
-  height: 40px;
-  width: 200px;
-  transition: all 0.5s;
-  cursor: pointer;
-  margin: 5px;
+	background-color: #FA4616;
+	border-radius: 5px;
+	border: none;
+	color: #FFFFFF;
+	cursor: pointer;
+	font-size: 15px;
+	height: 40px;
+	margin: 5px;
+	text-align: center;
+	transition: all 0.5s;
+	width: 200px;
 }
 
 .button-student-profile span {
-  cursor: pointer;
-  display: inline-block;
-  position: relative;
-  transition: 0.5s;
+	cursor: pointer;
+	display: inline-block;
+	position: relative;
+	transition: 0.5s;
 }
 
 .button-student-profile span:after {
-  content: '\00bb';
-  position: absolute;
-  opacity: 0;
-  top: 0;
-  right: -20px;
-  transition: 0.5s;
-}
-
-.button-student-profile:hover span {
-  padding-right: 25px;
-}
-
-.button-student-profile:hover span:after {
-  opacity: 1;
-  right: 0;
-}
-
-/* The Modal (background) */
-.modal-student-profile {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    padding-top: 0; /* Location of the box */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-}
-
-/* Modal Content */
-.modal-content-student-profile {
-    position: relative;
-    background-color: white;
-    margin: auto;
-    padding: 0;
-    width: 80%;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
-    -o-webkit-animation-name: animatetop;
-    -o-webkit-animation-duration: 0.4s;
-    animation-name: animatetop;
-    animation-duration: 0.4s
-}
-
-/* Add Animation */
-@-webkit-keyframes animatetop {
-    from {top:-300px; opacity:0}
-    to {top:0; opacity:1}
-}
-
-@keyframes animatetop {
-    from {top:-300px; opacity:0}
-    to {top:0; opacity:1}
-}
-
-/* The Close Button */
-.close-student-profile {
-    color: black;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-}
-
-.close-student-profile:hover,
-.close-student-profile:focus {
-    color: red;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-.modal-header-student-profile {
-    padding: 2px 16px;
-    background-color: #5cb85c;
-    color: white;
-}
-
-.modal-body-student-profile {padding: 2px 16px;}
-
-.modal-footer-student-profile {
-    padding: 2px 16px;
-    background-color: #5cb85c;
-    color: white;
-}
+	content: '
