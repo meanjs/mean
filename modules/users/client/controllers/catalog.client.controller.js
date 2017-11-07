@@ -68,13 +68,9 @@
     }
 
     function onAdminGetSponsorsSuccess(response) {
-      console.log('Before');
-      console.log($scope.filteredUsersList);
       $scope.sponsorsList = response;
       $scope.filteredSponsorsList = Array.from($scope.sponsorsList);
       $scope.filteredUsersList = $scope.filteredStudentsList.concat($scope.filteredSponsorsList);
-      console.log($scope.filteredUsersList);
-      console.log('After');
     }
 
     function onAdminGetSponsorsFailure(response) {
