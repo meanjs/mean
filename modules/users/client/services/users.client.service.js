@@ -87,6 +87,10 @@
       changeToAccepted: {
         method: 'POST',
         url: '/api/unapproved'
+      },
+      adminSignupUser: {
+        method: 'POST',
+        url: '/api/add'
       }
     });
 
@@ -96,6 +100,9 @@
       },
       approveUser: function () {
         return this.changeToAccepted().$promise;
+      },
+      adminSignup: function (credentials) {
+        return this.adminSignupUser(credentials).$promise;
       }
     });
     return Applicants;
