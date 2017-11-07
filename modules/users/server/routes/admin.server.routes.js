@@ -24,6 +24,10 @@ module.exports = function (app) {
     .get(adminPolicy.isAllowed, admin.read)
     .put(adminPolicy.isAllowed, admin.update)
     .delete(adminPolicy.isAllowed, admin.delete);
+
+  // Admin routes for applying a new user.
+  app.route('/api/add')
+    .post(adminPolicy.isAllowed, admin.adminsignup);
   
   // Finish by binding the user middleware
   app.param('userId', admin.userByID);

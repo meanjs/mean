@@ -25,7 +25,11 @@ exports.invokeRolesPolicies = function () {
     }, {
       resources: '/api/unapproved',
       permissions: '*'
-    }]
+    }, {
+      resources: '/api/add',
+      permissions: '*'
+    }
+    ]
   }]);
 };
 
