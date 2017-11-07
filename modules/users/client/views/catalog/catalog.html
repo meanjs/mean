@@ -50,20 +50,27 @@
 	                <tr ng-repeat="user in filteredUsersList" ng-click="showDetails($index)">
 	                  <div>
 	                    <td>
-	                      <img class="centerText" src="profilePic.png" height=50 width=50></img>
+	                    	<img class="centerText" src="profilePic.png" height=50 width=50></img>
 	                    </td>
 	                    <td class="information leftText">
-	                      <p colspan="100%">
-	                        {{user.firstName}} {{user.lastName}}
-	                        <br> Major: {{user.major}}
-	                        <br> Team: {{user.teamName}}
-	                      </p>
+	                    	<div>
+	                      		{{user.firstName}} {{user.lastName}}
+                      		</div>
+	                      	<div ng-if="user.type === 'student'">
+	                      		Major: {{user.major}}
+	                      	</div>
+	                      	<div ng-if="user.type === 'student'">
+	                      		Team: {{user.teamName}}
+	                      	</div>
+	                      	<div ng-if="user.type === 'sponsor'">
+	                      		<i>sponsor</i>
+	                      	</div>
 	                    </td>
 	                    <td>
-	                      <br><a class="actionButton" ng-click="emailUser(user)">Email</a>
+	                    	<br><a class="actionButton" ng-click="emailUser(user)">Email</a>
 	                    </td>
 	                    <td>
-	                      <br><i class="actionButton glyphicon glyphicon-circle-arrow-down" style="font-size: 25px;"></i>
+	                    	<br><i class="actionButton glyphicon glyphicon-circle-arrow-down" style="font-size: 25px;"></i>
 	                    </td>
 	                    <td ng-if="isEditable">
 	                    	<br><button type="button" ng-click="editClicked(user)">Edit</button>
