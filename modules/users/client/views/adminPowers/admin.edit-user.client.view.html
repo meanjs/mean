@@ -1,7 +1,11 @@
 <section>
-  <div class="page-header">
-    <h1>User <span ng-bind="user.username"></span></h1>
+  <div>
+    <h1 class="image-left vertical-bottom">User <span ng-bind="user.username"></span></h1>
+    <div class="image-right vertical-bottom user-delete-div">
+      <button class="user-delete-button" ng-click="remove()">Delete</button>
+    </div>
   </div>
+  <hr width="100%">
   <div class="col-md-12">
     <form name="userForm" ng-submit="update(userForm.$valid)" novalidate>
       <fieldset>
