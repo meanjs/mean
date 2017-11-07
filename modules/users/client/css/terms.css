@@ -13,10 +13,10 @@
 
 .headerTerms{
     font-size: 40px;
-	left: +30%;
+    left: +30%;
     position: absolute;
     text-align: center;
-	top: calc(50% - 300px);
+    top: calc(50% - 300px);
 }
 
 .paragraphTerms{
