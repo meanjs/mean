@@ -26,23 +26,26 @@
       }
     }
 
-    function remove(user) {
-      if ($window.confirm('Are you sure you want to delete this user?')) {
-        if (user) {
-          user.$remove();
-
-          vm.users.splice(vm.users.indexOf(user), 1);
-          Notification.success('User deleted successfully!');
-        } else {
-          vm.user.$remove(function () {
-            $state.go('admin.users');
-            Notification.success({ message: '<i class="glyphicon glyphicon-ok"></i> User deleted successfully!' });
-          });
-        }
+    $scope.remove = function () {
+      if (vm.authentication.user.type !== 'admin') {
+        $state.go('home');
       }
-    }
+
+      if ($window.confirm('Are you sure you want to delete this user?')) {
+        var user = $scope.user;
+        $http.delete('/api/admin/deleteUser/' + user._id, user).then(function (response) {
+          onUserDeleteSuccess(response);
+        }, function (error) {
+          onUserDeleteFailure(error);
+        });
+      }
+    };
 
     $scope.update = function (isValid) {
+      if (vm.authentication.user.type !== 'admin') {
+        $state.go('home');
+      }
+
       if (!isValid) {
         $scope.$broadcast('show-errors-check-validity', 'vm.userForm');
 
@@ -62,11 +65,20 @@
     };
 
     function onUserUpdateSuccess(response) {
-      Notification.success({ message: '<i class="glyphicon glyphicon-ok"></i> User saved successfully!' });
+      Notification.success({ message: '<i class="glyphicon glyphicon-ok"></i> User Updated successfully!' });
     }
 
     function onUserUpdateFailure(response) {
       Notification.error({ message: response.data.message, title: '<i class="glyphicon glyphicon-remove"></i> User update error!' });
+    }
+
+    function onUserDeleteSuccess(response) {
+      Notification.success({ message: '<i class="glyphicon glyphicon-ok"></i> User Deleted successfully!' });
+      $state.go('catalog');
+    }
+
+    function onUserDeleteFailure(response) {
+      Notification.error({ message: response.data.message, title: '<i class="glyphicon glyphicon-remove"></i> User delete error!' });
     }
   }
 }());
