@@ -23,7 +23,6 @@
     $scope.availabilityOption = false;
     $scope.csOption = false;
 
-
     if (vm.authentication.user === null) {
       $state.go('authentication.signin');
     }
@@ -58,6 +57,9 @@
       $scope.studentsList = response;
       $scope.filteredStudentsList = Array.from($scope.studentsList);
       $scope.filteredUsersList = Array.from($scope.filteredStudentsList);
+      if (vm.authentication.user.type === 'admin') {
+        $scope.filteredUsersList = $scope.filteredStudentsList.concat($scope.filteredSponsorsList);
+      }
     }
 
     function onSponsorGetStudentsFailure(response) {
@@ -66,9 +68,13 @@
     }
 
     function onAdminGetSponsorsSuccess(response) {
+      console.log('Before');
+      console.log($scope.filteredUsersList);
       $scope.sponsorsList = response;
       $scope.filteredSponsorsList = Array.from($scope.sponsorsList);
-      //$scope.filteredUsersList = Array.from($scope.filteredSponsorsList);
+      $scope.filteredUsersList = $scope.filteredStudentsList.concat($scope.filteredSponsorsList);
+      console.log($scope.filteredUsersList);
+      console.log('After');
     }
 
     function onAdminGetSponsorsFailure(response) {
@@ -90,7 +96,7 @@
 
     $scope.filterOnForm = function () {
       var formElements = document.getElementById('filterOptions').getElementsByTagName('input');
-      var originalList = Array.from($scope.studentsList);
+      var originalList = Array.from($scope.usersList);
       var filteredSet = new Set();
 
       var didFilter = false;
@@ -106,7 +112,7 @@
         }
       }
 
-      $scope.filteredStudentsList = (didFilter) ? Array.from(filteredSet) : originalList;
+      $scope.filteredUsersList = (didFilter) ? Array.from(filteredSet) : originalList;
     };
 
     function filterOnName(name, originalList, filteredSet, firstFilter) {
@@ -144,35 +150,13 @@
 
     }
 
-    $scope.switchList = function () {
-      var showStudentList = document.getElementById('showStudentList');
-      var showSponsorList = document.getElementById('showSponsorList');
-      console.log(showStudentList);
-      console.log(showStudentList.checked);
-      console.log(showSponsorList);
-      console.log(showSponsorList.checked);
-      console.log('switched lists');
-
-      if (showStudentList.checked) {
-        $scope.filteredUsersList = Array.from($scope.filteredStudentsList);
-        console.log('THIS IS THE FILTERED USER LIST FOR STUDENTS');
-        console.log($scope.filteredUsersList);
-      } else if (showSponsorList.checked) {
-        $scope.filteredUsersList = Array.from($scope.filteredSponsorsList);
-        console.log('THIS IS THE FILTERED USER LIST FOR STUDENTS');
-        console.log($scope.filteredUsersList);
-
-      }
-      $scope.$apply(switchList());
-    };
-
     // filter the current list
     $scope.filterData = function () {
-      var originalList = Array.from($scope.studentsList);
+      var originalList = Array.from($scope.usersList);
       var filteredSet = new Set();
 
       if ($scope.searchValue == null || $scope.searchValue === '') {
-        $scope.filteredStudentsList = originalList;
+        $scope.filteredUsersList = originalList;
       } else {
         for (var i = 0; i < originalList.length; i++) {
           if (originalList[i].firstName !== null || originalList[i].lastName !== null) {
@@ -203,7 +187,7 @@
           }
         }
 
-        $scope.filteredStudentsList = Array.from(filteredSet);
+        $scope.filteredUsersList = Array.from(filteredSet);
       }
     };
   }
