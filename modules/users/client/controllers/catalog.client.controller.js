@@ -22,6 +22,8 @@
     $scope.shouldShowFilters = false;
     $scope.availabilityOption = false;
     $scope.csOption = false;
+    $scope.sponsorOption = false;
+    $scope.studentOption = false;
 
     if (vm.authentication.user === null) {
       $state.go('authentication.signin');
@@ -91,9 +93,9 @@
       } else if (element.value.toLowerCase() === 'computer-science') {
         $scope.csOption = element.checked;
       } else if (element.value.toLowerCase() === 'sponsor') {
-        $scope.csOption = element.checked;
+        $scope.sponsorOption = element.checked;
       } else if (element.value.toLowerCase() === 'student') {
-        $scope.csOption = element.checked;
+        $scope.studentOption = element.checked;
       }
     }
 
