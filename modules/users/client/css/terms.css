@@ -12,20 +12,18 @@
 }
 
 .headerTerms{
-
+    font-size: 40px;
 	left: +30%;
-	font-size: 40px;
+    position: absolute;
+    text-align: center;
 	top: calc(50% - 300px);
-	text-align: center;
-	position: absolute;
 }
 
 .paragraphTerms{
-    text-align: center;
-    left: +20%;
-    right: +20%;
-    top: calc(50% - 40px);
-    position: absolute;
     border: 2px solid #FA4616;
-    /*border-color: #FA4616;*/
+    left: +20%;
+    position: absolute;
+    right: +20%;
+    text-align: center;
+    top: calc(50% - 40px);
 }
