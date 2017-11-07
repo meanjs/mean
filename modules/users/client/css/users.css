@@ -1,3 +1,8 @@
+@media (min-width: 992px) {
+  .nav-users {
+    position: fixed;
+  }
+}
 
 .content {
   margin-top: 50px;
@@ -30,4 +35,21 @@
 }
 .has-error .help-inline.error-text {
   display: inline;
+}
+
+.user-delete-button {
+  background-color: #FA4616;
+  border: none;
+  border-radius: 5px;
+  color: #FFFFFF;
+  cursor: pointer;
+  font-size: 15px;
+  height: 40px;
+  margin: 5px;
+  text-align: center;
+  width: 200px;
+}
+
+.user-delete-div {
+  padding-top: 16px;
 }

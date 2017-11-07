@@ -12,22 +12,35 @@
   /*-webkit-filter: blur(0px);*/
 }
 
-.signin-header{
+.terms-check-box {
+  margin-bottom: 10px;
+  margin-right: 10px;
+  margin-top: 10px;
+}
+
+.terms-div {
+  margin-bottom: 10px;
+}
+
+.signin-header {
   left: calc(50% - 420px);
   position: absolute;
   top: calc(50% - 120px);
 }
-.signin-header div{
+
+.signin-header div {
   color: #fff;
   float: left;
   font-family: 'Exo', sans-serif;
   font-size: 40px;
   font-weight: 200;
 }
-.signin-header div span{
+
+.signin-header div span {
   color: #015496 !important;
 }
-.login{
+
+.login {
   height: 150px;
   left: calc(50% - 50px);
   padding: 10px;
@@ -56,7 +69,7 @@
   font-family: 'Exo', sans-serif;
 }
 
-.login input[type=submit]{
+.login input[type=submit] {
   background: #fff;
   border: 1px solid white;
   border: 1px solid #fff;
@@ -70,23 +83,28 @@
   padding: 6px;
   width: 260px;
 }
-.login input[type=submit]:hover{
+
+.login input[type=submit]:hover {
   opacity: 0.8;
 }
-.login input[type=submit]:active{
+
+.login input[type=submit]:active {
   opacity: 0.6;
 }
-.login input[type=text]:focus{
+
+.login input[type=text]:focus {
   border: 1px solid white;
   border: 1px solid rgba(255,255,255,0.9);
   outline: none;
 }
-.login input[type=password]:focus{
+
+.login input[type=password]:focus {
   border: 1px solid white;
   border: 1px solid rgba(255,255,255,0.9);
   outline: none;
 }
-.login input[type=submit]:focus{
+
+.login input[type=submit]:focus {
   border: 1px solid white;
   border: 1px solid rgba(255,255,255,0.9);
   outline: none;

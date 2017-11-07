@@ -48,6 +48,10 @@
           pageTitle: 'Settings picture'
         }
       })
+      .state('terms', {
+        url: '/terms_and_conditions',
+        templateUrl: '/modules/users/client/views/authentication/terms.html'
+      })
       .state('profile', {
         url: '/profile',
         templateUrl: '/modules/users/client/views/profile/profile.html',
@@ -67,6 +71,15 @@
         controllerAs: 'vm',
         data: {
           pageTitle: 'Signup'
+        }
+      })
+      .state('edit_user', {
+        url: '/edit_user',
+        templateUrl: '/modules/users/client/views/adminPowers/admin.edit-user.client.view.html',
+        controller: 'EditUserController',
+        controllerAs: 'vm',
+        params: {
+          user: null
         }
       })
       .state('authentication', {

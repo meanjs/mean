@@ -33,6 +33,14 @@
 					    	<input type="checkbox" id="computer-science" name="filter" value="computer-science" ng-click="filterOnForm()" ng-model="csOption">
 					    	<label for="computer-science">Computer Science</label>
 					  	</div>
+					  	<div class="filter-div" ng-if="vm.authentication.user.type === 'admin'">
+					    	<input type="checkbox" id="student" name="filter" value="student" ng-click="filterOnForm()" ng-model="studentOption">
+					    	<label for="student">Student</label>
+					  	</div>
+					  	<div class="filter-div" ng-if="vm.authentication.user.type === 'admin'">
+					    	<input type="checkbox" id="sponsor" name="filter" value="sponsor" ng-click="filterOnForm()" ng-model="sponsorOption">
+					    	<label for="sponsor">Sponsor</label>
+					  	</div>
 					</fieldset>
 				</form>
 	      	</div>
@@ -42,20 +50,30 @@
 	                <tr ng-repeat="user in filteredUsersList" ng-click="showDetails($index)">
 	                  <div>
 	                    <td>
-	                      <img class="centerText" src="profilePic.png" height=50 width=50></img>
+	                    	<img ngf-src="vm.fileSelected ? picFile : user.profileImageURL" alt="{{vm.user.displayName}}" class="img-thumbnail centerText user-profile-picture" ngf-drop height="50px" width="50px">
 	                    </td>
 	                    <td class="information leftText">
-	                      <p colspan="100%">
-	                        {{user.firstName}} {{user.lastName}}
-	                        <br> Major: {{user.major}}
-	                        <br> Team: {{user.teamName}}
-	                      </p>
+	                    	<div>
+	                      		{{user.firstName}} {{user.lastName}}
+                      		</div>
+	                      	<div ng-if="user.type === 'student'">
+	                      		Major: {{user.major}}
+	                      	</div>
+	                      	<div ng-if="user.type === 'student'">
+	                      		Team: {{user.teamName}}
+	                      	</div>
+	                      	<div ng-if="user.type === 'sponsor'">
+	                      		<i>sponsor</i>
+	                      	</div>
 	                    </td>
 	                    <td>
-	                      <br><a class="actionButton" href="mailto:bry3133@ufl.edu?Subject=We%20Should%20Talk">Email</a>
+	                    	<br><a class="actionButton" ng-click="emailUser(user)">Email</a>
 	                    </td>
 	                    <td>
-	                      <br><i class="actionButton glyphicon glyphicon-circle-arrow-down" style="font-size: 25px;"></i>
+	                    	<br><i class="actionButton glyphicon glyphicon-circle-arrow-down" style="font-size: 25px;"></i>
+	                    </td>
+	                    <td ng-if="isEditable">
+	                    	<br><button type="button" ng-click="editClicked(user)">Edit</button>
 	                    </td>
 	                  </div>
 	                </tr>

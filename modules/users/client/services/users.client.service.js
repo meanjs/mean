@@ -8,7 +8,7 @@
 
   UsersService.$inject = ['$resource'];
 
-  function UsersService($resource, $http) {
+  function UsersService($resource) {
     var Users = $resource('/api/users', {}, {
       update: {
         method: 'PUT'
@@ -93,11 +93,16 @@
 
   CatalogService.$inject = ['$resource'];
 
-  function CatalogService($resource, $http) {
+  function CatalogService($resource) {
     var Catalog = $resource('/api/catalog', {}, {
       getStudents: {
         method: 'GET',
         url: '/api/catalog/students',
+        isArray: true
+      },
+      getSponsors: {
+        method: 'GET',
+        url: '/api/catalog/sponsors',
         isArray: true
       }
     });
@@ -105,9 +110,42 @@
     angular.extend(Catalog, {
       sponsorGetStudents: function () {
         return this.getStudents().$promise;
+      },
+      adminGetSponsors: function () {
+        return this.getSponsors().$promise;
       }
     });
 
     return Catalog;
+  }
+
+  angular
+    .module('users.services')
+    .factory('AdminPowers', AdminPowers);
+
+  AdminPowers.$inject = ['$resource'];
+
+  function AdminPowers($resource) {
+    var Admin = $resource('/api/admin', {}, {
+      updateUser: {
+        method: 'PUT',
+        url: '/api/admin/updateUser'
+      },
+      deleteUser: {
+        method: 'DELETE',
+        url: '/api/admin/deleteUser'
+      }
+    });
+
+    angular.extend(Admin, {
+      adminUpdateUser: function (user) {
+        return this.updateUser(user).$promise;
+      },
+      adminDeleteUser: function (user) {
+        return this.deleteUser(user).$promise;
+      }
+    });
+
+    return Admin;
   }
 }());

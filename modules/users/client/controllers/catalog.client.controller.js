@@ -5,28 +5,44 @@
     .module('users')
     .controller('CatalogController', CatalogController);
 
-  CatalogController.$inject = ['$scope', '$state', 'UsersService', 'CatalogService', '$http', 'Notification', '$window', 'Authentication'];
+  CatalogController.$inject = ['$scope', '$state', 'UsersService', 'CatalogService', 'Notification', '$window', 'Authentication'];
 
-  function CatalogController($scope, $state, UsersService, CatalogService, $http, Notification, $window, Authentication) {
+  function CatalogController($scope, $state, UsersService, CatalogService, Notification, $window, Authentication) {
     var vm = this;
     vm.authentication = Authentication;
 
     $scope.detailedInfo = null;
+    $scope.studentsList = [];
+    $scope.filteredStudentsList = [];
+    $scope.sponsorsList = [];
+    $scope.filteredSponsorsList = [];
     $scope.usersList = [];
     $scope.filteredUsersList = [];
+    $scope.isEditable = false;
     $scope.searchValue = null;
     $scope.shouldShowFilters = false;
     $scope.availabilityOption = false;
     $scope.csOption = false;
+    $scope.sponsorOption = false;
+    $scope.studentOption = false;
 
     if (vm.authentication.user === null) {
       $state.go('authentication.signin');
     }
     if (vm.authentication.user.type !== 'sponsor' && vm.authentication.user.type !== 'admin') {
-      $state.go($state.previous.state.name || 'home', $state.previous.params);
+      if (vm.authentication.type === 'student') {
+        $state.go('profile');
+      } else {
+        $state.go('home');
+      }
     }
 
     fetchStudents();
+
+    if (vm.authentication.user.type === 'admin') {
+      fetchSponsors();
+      $scope.isEditable = true;
+    }
 
     function fetchStudents() {
       // $http.get('/api/catalog/students').then(function (response) {
@@ -37,19 +53,52 @@
       CatalogService.sponsorGetStudents().then(onSponsorGetStudentsSuccess).catch(onSponsorGetStudentsFailure);
     }
 
+    function fetchSponsors() {
+      CatalogService.adminGetSponsors().then(onAdminGetSponsorsSuccess).catch(onAdminGetSponsorsFailure);
+    }
+
     $scope.showDetails = function (index) {
-      $scope.detailedInfo = $scope.usersList[index];
+      $scope.detailedInfo = $scope.filteredUsersList[index];
     };
 
     function onSponsorGetStudentsSuccess(response) {
-      $scope.usersList = response;
-      $scope.filteredUsersList = Array.from($scope.usersList);
+      $scope.studentsList = response;
+      $scope.filteredStudentsList = Array.from($scope.studentsList);
+      $scope.filteredUsersList = Array.from($scope.filteredStudentsList);
+      $scope.usersList = Array.from($scope.studentsList);
+      if (vm.authentication.user.type === 'admin') {
+        $scope.usersList = $scope.studentsList.concat($scope.sponsorsList);
+        $scope.filteredUsersList = $scope.filteredStudentsList.concat($scope.filteredSponsorsList);
+      }
     }
 
     function onSponsorGetStudentsFailure(response) {
-      $scope.usersList = null;
-      $scope.filteredUsersList = null;
+      $scope.studentsList = null;
+      $scope.filteredStudentsList = null;
     }
+
+    function onAdminGetSponsorsSuccess(response) {
+      $scope.sponsorsList = response;
+      $scope.filteredSponsorsList = Array.from($scope.sponsorsList);
+      $scope.usersList = $scope.studentsList.concat($scope.sponsorsList);
+      $scope.filteredUsersList = $scope.filteredStudentsList.concat($scope.filteredSponsorsList);
+    }
+
+    function onAdminGetSponsorsFailure(response) {
+      $scope.sponsorList = null;
+      $scope.filteredSponsorsList = null;
+    }
+
+    $scope.editClicked = function (user) {
+      if (vm.authentication.user.type === 'admin') {
+        $state.go('edit_user', { user: user });
+        // $state.go('admin.user-edit');
+      }
+    };
+
+    $scope.emailUser = function (user) {
+      window.location.href = 'mailto:' + user.email;
+    };
 
     $scope.toggleFilterOptions = function () {
       $scope.shouldShowFilters = !$scope.shouldShowFilters;
@@ -60,6 +109,10 @@
         $scope.availabilityOption = element.checked;
       } else if (element.value.toLowerCase() === 'computer-science') {
         $scope.csOption = element.checked;
+      } else if (element.value.toLowerCase() === 'sponsor') {
+        $scope.sponsorOption = element.checked;
+      } else if (element.value.toLowerCase() === 'student') {
+        $scope.studentOption = element.checked;
       }
     }
 
@@ -88,12 +141,20 @@
       var currentFilteredSet = new Set();
 
       for (var i = 0; i < originalList.length; i++) {
-        if (name.toLowerCase() === 'availability') {
-          if (originalList[i].availabilityStatus !== null && originalList[i].availabilityStatus.toLowerCase() === ('available')) {
+        if (name.toLowerCase() === 'availability' && originalList[i].availabilityStatus !== null && originalList[i].availabilityStatus !== undefined) {
+          if (originalList[i].availabilityStatus.toLowerCase() === ('available')) {
             currentFilteredSet.add(originalList[i]);
           }
-        } else if (name.toLowerCase() === 'computer-science') {
-          if (originalList[i].major !== null && originalList[i].major.toLowerCase().includes('computer science')) {
+        } else if (name.toLowerCase() === 'computer-science' && originalList[i].major !== null && originalList[i].major !== undefined) {
+          if (originalList[i].major.toLowerCase() === ('computer science')) {
+            currentFilteredSet.add(originalList[i]);
+          }
+        } else if (name.toLowerCase() === 'sponsor' && originalList[i].type !== null && originalList[i].type !== undefined) {
+          if (originalList[i].type.toLowerCase() === ('sponsor')) {
+            currentFilteredSet.add(originalList[i]);
+          }
+        } else if (name.toLowerCase() === 'student' && originalList[i].type !== null && originalList[i].type !== undefined) {
+          if (originalList[i].type.toLowerCase() === ('student')) {
             currentFilteredSet.add(originalList[i]);
           }
         }
@@ -136,24 +197,31 @@
               filteredSet.add(originalList[i]);
             }
           }
-          if (originalList[i].major !== null) {
+          if (originalList[i].major !== null && originalList[i].major !== undefined) {
             var major = originalList[i].major;
             if (major.toLowerCase().includes($scope.searchValue.toLowerCase())) {
               filteredSet.add(originalList[i]);
             }
           }
-          if (originalList[i].availabilityStatus !== null) {
+          if (originalList[i].availabilityStatus !== null && originalList[i].availabilityStatus !== undefined) {
             var availabilityStatus = originalList[i].availabilityStatus;
             if (availabilityStatus.toLowerCase().includes($scope.searchValue.toLowerCase())) {
               filteredSet.add(originalList[i]);
             }
           }
-          if (originalList[i].teamName !== null) {
+          if (originalList[i].teamName !== null && originalList[i].teamName !== undefined) {
             var teamName = originalList[i].teamName;
             if (teamName.toLowerCase().includes($scope.searchValue.toLowerCase())) {
               filteredSet.add(originalList[i]);
             }
           }
+          if (originalList[i].type !== null && originalList[i].type !== undefined) {
+            var userType = originalList[i].type;
+            if (userType.toLowerCase().includes($scope.searchValue.toLowerCase())) {
+              filteredSet.add(originalList[i]);
+            }
+          }
+
         }
 
         $scope.filteredUsersList = Array.from(filteredSet);

@@ -65,11 +65,6 @@
     });
 
     menuService.addSubMenuItem('admin-account', 'settings', {
-      title: 'Remove User',
-      state: 'settings.password'
-    });
-
-    menuService.addSubMenuItem('admin-account', 'settings', {
       title: 'Change Password',
       state: 'settings.password'
     });

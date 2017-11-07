@@ -1,0 +1,32 @@
+<section>
+  <div>
+    <h1 class="image-left vertical-bottom">User <span ng-bind="user.username"></span></h1>
+    <div class="image-right vertical-bottom user-delete-div">
+      <button class="user-delete-button" ng-click="remove()">Delete</button>
+    </div>
+  </div>
+  <hr width="100%">
+  <div class="col-md-12">
+    <form name="userForm" ng-submit="update(userForm.$valid)" novalidate>
+      <fieldset>
+        <div class="form-group" show-errors>
+          <label for="firstName">First Name</label>
+          <input type="text" id="firstName" name="firstName" class="form-control" ng-model="user.firstName" placeholder="First Name" required autofocus />
+          <div ng-messages="userForm.firstName.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">First name is required.</p>
+          </div>
+        </div>
+        <div class="form-group" show-errors>
+          <label for="lastName">Last Name</label>
+          <input type="text" id="lastName" name="lastName" class="form-control" ng-model="user.lastName" placeholder="Last Name" required />
+          <div ng-messages="userForm.lastName.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Last name is required.</p>
+          </div>
+        </div>
+        <div class="form-group">
+          <input type="submit" value="Update" class="btn btn-default">
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</section>
