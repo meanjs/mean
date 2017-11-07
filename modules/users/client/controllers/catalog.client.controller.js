@@ -57,6 +57,7 @@
       $scope.studentsList = response;
       $scope.filteredStudentsList = Array.from($scope.studentsList);
       $scope.filteredUsersList = Array.from($scope.filteredStudentsList);
+      $scope.usersList = Array.from($scope.studentsList);
       if (vm.authentication.user.type === 'admin') {
         $scope.usersList = $scope.studentsList.concat($scope.sponsorsList);
         $scope.filteredUsersList = $scope.filteredStudentsList.concat($scope.filteredSponsorsList);
@@ -90,6 +91,8 @@
       } else if (element.value.toLowerCase() === 'computer-science') {
         $scope.csOption = element.checked;
       } else if (element.value.toLowerCase() === 'sponsor') {
+        $scope.csOption = element.checked;
+      } else if (element.value.toLowerCase() === 'student') {
         $scope.csOption = element.checked;
       }
     }
@@ -126,10 +129,15 @@
         } else if (name.toLowerCase() === 'computer-science' && originalList[i].major !== null && originalList[i].major !== undefined) {
           if (originalList[i].major.toLowerCase() === ('computer science')) {
             currentFilteredSet.add(originalList[i]);
-          } else if(name.toLowerCase() === 'sponsor' && originalList[i].type !== null && originalList[i].type !== undefined)
-           if (originalList[i].type.toLowerCase() === ('sponsor')){
+          }
+        } else if (name.toLowerCase() === 'sponsor' && originalList[i].type !== null && originalList[i].type !== undefined) {
+          if (originalList[i].type.toLowerCase() === ('sponsor')) {
             currentFilteredSet.add(originalList[i]);
-           }
+          }
+        } else if (name.toLowerCase() === 'student' && originalList[i].type !== null && originalList[i].type !== undefined) {
+          if (originalList[i].type.toLowerCase() === ('student')) {
+            currentFilteredSet.add(originalList[i]);
+          }
         }
       }
 
