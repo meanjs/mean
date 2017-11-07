@@ -60,10 +60,13 @@
 	                      </p>
 	                    </td>
 	                    <td>
-	                      <br><a class="actionButton" href="mailto:bry3133@ufl.edu?Subject=We%20Should%20Talk">Email</a>
+	                      <br><a class="actionButton" ng-click="emailUser(user)">Email</a>
 	                    </td>
 	                    <td>
 	                      <br><i class="actionButton glyphicon glyphicon-circle-arrow-down" style="font-size: 25px;"></i>
+	                    </td>
+	                    <td ng-if="isEditable">
+	                    	<br><button type="button" ng-click="editClicked(user)">Edit</button>
 	                    </td>
 	                  </div>
 	                </tr>

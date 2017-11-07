@@ -1,69 +1,44 @@
 <section>
-  <head>
-      <title>Student Profile</title>
-      <link href="css/main.css" rel="stylesheet" type="text/css" />
-  </head>
-  <body>
-  <div id="wrapper">
-  	<div id="header">
-  		<div id="nav"><a href="index.html">Home</a> | <a href="#">Contact Me</a></div>
-      <div id="bg"></div> <!--spacing between header and info -->
-  	</div>
-  	<div id="main-content">
-  		<div id="right-column">
-  			<div id="student_name">Student's Name</div>
-        <h3>Objective</h3>
-        <p>I am searching for an internship/co-op in the coming spring or summer semester.</p>
-
-        <h3>Education</h3>
-        <div class="box">
-          <p>University of Florida, College of Engineering</p>
-  				<ul style="margin-top:10px;">
-  					<li>Major</li>
-  					<li>GPA</li>
-  					<li>Graduation Date</li>
-  					<li>Employment Status</li>
-  				</ul>
-  			</div>
-  			<h3>Short Biography</h3>
-        <div class="box">
-    			<p>
-            Trung Tran is currently a 4th year Computer Engineering student attending the University of Florida. In December 2018, he will graduate from the Herbert Wertheim College of Engineering at the University of Florida. Trung is currently a member of the Alpha Upsilon Chapter of Omega Delta Phi (ODPhi), Machen Florida Opportunity Scholarship (MFOS), Gatorship, the Association of Computer Engineers, and the Student Information-Security Team. He is an Ambassador for MFOS here he works directly with donors to create more funds, through organizing fundraiser, to cover tuition for our first-generation students. Alongside this role, he is the Assistant Director for Gatorship, where he will lead group discussions and facilitate dialogues to educate students on issues of socioeconomic status, race, gender identity, sexual orientation, etc..
-          </p><p>
-            In the past year, Trung has been a part of the Multi-functional Integrated System Technology (MIST) Makers, a research opportunity to develop a smart system using Internet of Things (IoT), developing a Smart Garden. Through MIST Makers, Trung gained invaluable experience in terms of teamwork, communicating with end-users, and product design implementation. In the meantime, he is studying for the GRE and planning on applying to graduate school. However, he hopes to work for a company after graduating with his bachelors to save for graduate school.
-          </p><p>
-            Trung’s passion lies between the striving for social justice and giving back to the community who raised him. He volunteers with the Child Advocacy Center and does his best to educate people on society issues.
+<body class="student-profile">
+  <div class=""="wrapper-student-profile">
+    <div class=""="header-student-profile">
+      <div class="bg-student-profile"></div>
+    </div>
+    <div class="main-content-student-profile">
+      <div class="right-column-student-profile">
+        <div class="student_name-student-profile">{{vm.user.firstName}} {{vm.user.lastName}}</div>
+        <div class="student-profile-h3">Objective</div>
+        <p class="student-profile-p">I am searching for an internship/co-op in the coming spring or summer semester.</p>
+        <div class="student-profile-h3">Education</div>
+        <div class="box-student-profile">
+          <p class="student-profile-p">University of Florida, College of Engineering</p>
+          <ul class="student-profile-ul" style="margin-top:10px;">
+            <li><b>Major:</b> {{vm.user.major}}</li>
+            <li><b>GPA:</b> {{vm.user.gpa}}</li>
+            <li><b>Graduation Date:</b> {{vm.user.graduationDate}}</li>
+            <li><b>Employment Status:</b> {{vm.user.availabilityStatus}}</li>
+          </ul>
+        </div>
+        <div class="student-profile-h3">Short Biography</div>
+        <div class="box-student-profile">
+          <p class="student-profile-p">
+            {{vm.user.bio}}
           </p>
-  		  </div>
+        </div>
       </div>
-  		<div id="left-column">
-  			<div id="main-image"><img src="Tran_Trung_Headshot.jpg" width="200" height="300" ></div>
-  			<div class="sidebar">
-  			  <div>
-  						<button class = "button"><span>File Name</span></button>
-              <button class = "button"><span>Upload New Resume</span></button>
-              <button class = "button" id = "myBtn"><span>Approval Status</span></button>
-                <!-- The Modal -->
-                <div id="myModal" class="modal">
-                  <!-- Modal content -->
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <span class="close">&times;</span>
-                      <h4>Approval Status</h4>
-                    </div>
-                    <div class="modal-body">
-                      <p>Still pending approval...</p>
-                      <embed src="Trung_Tran_Resume_Summer_2017.pdf" width="400px" height="800px" />
-                    </div>
-                    <div class="modal-footer">
-                      <h5>Updated as of 20 October 2017</h5>
-                    </div>
-                  </div>
-                </div>
-              <button class = "button"><span>Comments</span></button>
-  				</div>
-  			</div>
-  		</div>
-  	</div>
+      <div class="left-column-student-profile">
+        <div class="main-image-student-profile"><img src="../../img/profile/default.png" width="200px" height="200px" ></div>
+        <div class="sidebar-student-profile">
+          <div>
+              <a href="../../img/profile/default.png" target="_blank"><button class = "button-student-profile" target="_blank"><span>Resume</span></button></a>
+              <a href="../../img/profile/default.png" target="_blank"><button class = "button-student-profile" target="_blank"><span>Short Bio</span></button></a>
+              <button class = "button-student-profile"><span>Upload New Resume</span></button>
+              <button class = "button-student-profile"><span>Approval Status</span></button>
+              <button class = "button-student-profile"><span>Comments</span></button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
+</body>
 </section>

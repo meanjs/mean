@@ -30,10 +30,6 @@
           pageTitle: 'Settings'
         }
       })
-      .state('terms', {
-        url: '/terms_and_conditions',
-        templateUrl: '/modules/users/client/views/authentication/terms.html'
-      })
       .state('settings.password', {
         url: '/password',
         templateUrl: '/modules/users/client/views/settings/change-password.client.view.html',
@@ -51,6 +47,10 @@
         data: {
           pageTitle: 'Settings picture'
         }
+      })
+      .state('terms', {
+        url: '/terms_and_conditions',
+        templateUrl: '/modules/users/client/views/authentication/terms.html'
       })
       .state('profile', {
         url: '/profile',
@@ -71,6 +71,15 @@
         controllerAs: 'vm',
         data: {
           pageTitle: 'Signup'
+        }
+      })
+      .state('edit_user', {
+        url: '/edit_user',
+        templateUrl: '/modules/users/client/views/adminPowers/admin.edit-user.client.view.html',
+        controller: 'EditUserController',
+        controllerAs: 'vm',
+        params: {
+          user: null
         }
       })
       .state('authentication', {

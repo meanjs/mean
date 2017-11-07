@@ -18,6 +18,7 @@
     $scope.filteredSponsorsList = [];
     $scope.usersList = [];
     $scope.filteredUsersList = [];
+    $scope.isEditable = false;
     $scope.searchValue = null;
     $scope.shouldShowFilters = false;
     $scope.availabilityOption = false;
@@ -29,13 +30,18 @@
       $state.go('authentication.signin');
     }
     if (vm.authentication.user.type !== 'sponsor' && vm.authentication.user.type !== 'admin') {
-      $state.go($state.previous.state.name || 'home', $state.previous.params);
+      if (vm.authentication.type === 'student') {
+        $state.go('profile');
+      } else {
+        $state.go('home');
+      }
     }
 
     fetchStudents();
 
     if (vm.authentication.user.type === 'admin') {
       fetchSponsors();
+      $scope.isEditable = true;
     }
 
     function fetchStudents() {
@@ -82,6 +88,20 @@
       $scope.sponsorList = null;
       $scope.filteredSponsorsList = null;
     }
+
+    $scope.editClicked = function (user) {
+      if (vm.authentication.user.type === 'admin') {
+        console.log(user);
+        console.log(user.id);
+        console.log(user._id);
+        $state.go('edit_user', { user: user });
+        // $state.go('admin.user-edit');
+      }
+    };
+
+    $scope.emailUser = function (user) {
+      window.location.href = 'mailto:' + user.email;
+    };
 
     $scope.toggleFilterOptions = function () {
       $scope.shouldShowFilters = !$scope.shouldShowFilters;
