@@ -89,6 +89,8 @@
         $scope.availabilityOption = element.checked;
       } else if (element.value.toLowerCase() === 'computer-science') {
         $scope.csOption = element.checked;
+      } else if (element.value.toLowerCase() === 'sponsor') {
+        $scope.csOption = element.checked;
       }
     }
 
@@ -124,7 +126,10 @@
         } else if (name.toLowerCase() === 'computer-science' && originalList[i].major !== null && originalList[i].major !== undefined) {
           if (originalList[i].major.toLowerCase() === ('computer science')) {
             currentFilteredSet.add(originalList[i]);
-          }
+          } else if(name.toLowerCase() === 'sponsor' && originalList[i].type !== null && originalList[i].type !== undefined)
+           if (originalList[i].type.toLowerCase() === ('sponsor')){
+            currentFilteredSet.add(originalList[i]);
+           }
         }
       }
 
@@ -183,6 +188,13 @@
               filteredSet.add(originalList[i]);
             }
           }
+          if (originalList[i].type !== null && originalList[i].type !== undefined) {
+            var userType = originalList[i].type;
+            if (userType.toLowerCase().includes($scope.searchValue.toLowerCase())) {
+              filteredSet.add(originalList[i]);
+            }
+          }
+
         }
 
         $scope.filteredUsersList = Array.from(filteredSet);
