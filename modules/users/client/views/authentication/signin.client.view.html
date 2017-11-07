@@ -1,35 +1,38 @@
-<div>
-  <h3 class="col-xs-12 text-center">Or with your account</h3>
-  <div class="col-xs-offset-2 col-xs-8 col-md-offset-4 col-md-4">
+<section>
+  <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link href='http://fonts.googleapis.com/css?family=Exo:100,200,400' rel='stylesheet'>
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:700,400,300' rel='stylesheet'>
+    <link rel="sytlesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+  </head>
+  <div>
+    <div class="signin-uf-body"></div>
+    <div class="signin-grad"></div>
+    <div class="signin-header">
+      <div>IPPD <span>Resume Portal </span></div>
+    </div>
     <form name="vm.userForm" ng-submit="vm.signin(vm.userForm.$valid)" class="signin" novalidate autocomplete="off">
-      <fieldset>
-        <div class="form-group" show-errors>
-          <uib-alert type="danger" ng-show="vm.error" class="text-center text-danger">
-            <span ng-bind="vm.error"></span>
-          </uib-alert>
-          <label for="usernameOrEmail">Username or Email</label>
-          <input type="text" id="usernameOrEmail" name="usernameOrEmail" class="form-control" ng-model="vm.credentials.usernameOrEmail" placeholder="Username or Email" required autofocus>
-          <div ng-messages="vm.userForm.usernameOrEmail.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">Username or Email is required.</p>
+      <div class="login">
+        <fieldset>
+          <div>
+            <label class="customText" for="usernameOrEmail">Username or Email</label>
           </div>
-        </div>
-        <div class="form-group" show-errors>
-          <label for="password">Password</label>
-          <input type="password" id="password" name="password" class="form-control" ng-model="vm.credentials.password" placeholder="Password" required>
-          <div ng-messages="vm.userForm.password.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">Password is required.</p>
+          <div>
+            <input type="text" id="usernameOrEmail" name="usernameOrEmail" class="customInputBox" ng-model="vm.credentials.usernameOrEmail" placeholder="Username or Email" required autofocus>
           </div>
-        </div>
-        <div class="text-center form-group">
-          <button type="submit" class="btn btn-primary">Sign in</button>
-          &nbsp; or&nbsp;
-          <a ui-sref="authentication.signup">Sign up</a>
-        </div>
-        <div class="text-center forgot-password">
-          <a ui-sref="password.forgot">Forgot your password?</a>
-        </div>
-        <br />
-      </fieldset>
+          <div>
+            <label class="customText" for="password">Password</label>
+          </div>
+          <div>
+            <input type="password" id="password" name="password" class="customInputBox" ng-model="vm.credentials.password" placeholder="Password" required>
+          </div>
+          <div class="terms-div">
+            <input type="checkbox" name="checkbox" value="check" class="terms-check-box"><span> I agree to the <a href="/terms_and_conditions" target="_blank"> terms and conditions</a></span>
+          </div>
+          <input type="submit" value="Sign in" onclick="if(!this.form.checkbox.checked){alert('You must agree to the terms first.');return false}"  />
+        </fieldset>
+      </div>
     </form>
   </div>
-</div>
+</section>

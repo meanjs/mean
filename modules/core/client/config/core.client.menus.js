@@ -8,6 +8,7 @@
   menuConfig.$inject = ['menuService'];
 
   function menuConfig(menuService) {
+    // for the user
     menuService.addMenu('account', {
       roles: ['user']
     });
@@ -25,18 +26,52 @@
     });
 
     menuService.addSubMenuItem('account', 'settings', {
-      title: 'Edit Profile Picture',
-      state: 'settings.picture'
-    });
-
-    menuService.addSubMenuItem('account', 'settings', {
       title: 'Change Password',
       state: 'settings.password'
     });
 
-    menuService.addSubMenuItem('account', 'settings', {
-      title: 'Manage Social Accounts',
-      state: 'settings.accounts'
+    // for the sponsor
+    menuService.addMenu('sponsor-account', {
+      roles: ['user']
+    });
+
+    menuService.addMenuItem('sponsor-account', {
+      title: '',
+      state: 'settings',
+      type: 'dropdown',
+      roles: ['user']
+    });
+
+    menuService.addSubMenuItem('sponsor-account', 'settings', {
+      title: 'Change Password',
+      state: 'settings.password'
+    });
+
+    // for the admin
+    menuService.addMenu('admin-account', {
+      roles: ['user']
+    });
+
+    menuService.addMenuItem('admin-account', {
+      title: '',
+      state: 'settings',
+      type: 'dropdown',
+      roles: ['user']
+    });
+
+    menuService.addSubMenuItem('admin-account', 'settings', {
+      title: 'Add User',
+      state: 'create_user'
+    });
+
+    menuService.addSubMenuItem('admin-account', 'settings', {
+      title: 'Remove User',
+      state: 'settings.password'
+    });
+
+    menuService.addSubMenuItem('admin-account', 'settings', {
+      title: 'Change Password',
+      state: 'settings.password'
     });
   }
 }());
