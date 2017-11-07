@@ -58,7 +58,7 @@
     }
 
     $scope.showDetails = function (index) {
-      $scope.detailedInfo = $scope.studentsList[index];
+      $scope.detailedInfo = $scope.filteredUsersList[index];
     };
 
     function onSponsorGetStudentsSuccess(response) {
@@ -91,9 +91,6 @@
 
     $scope.editClicked = function (user) {
       if (vm.authentication.user.type === 'admin') {
-        console.log(user);
-        console.log(user.id);
-        console.log(user._id);
         $state.go('edit_user', { user: user });
         // $state.go('admin.user-edit');
       }

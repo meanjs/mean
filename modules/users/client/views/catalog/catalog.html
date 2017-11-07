@@ -34,12 +34,12 @@
 					    	<label for="computer-science">Computer Science</label>
 					  	</div>
 					  	<div class="filter-div" ng-if="vm.authentication.user.type === 'admin'">
-					    	<input type="checkbox" id="sponsor" name="filter" value="sponsor" ng-click="filterOnForm()" ng-model="csOption">
-					    	<label for="sponsor">Sponsor</label>
+					    	<input type="checkbox" id="student" name="filter" value="student" ng-click="filterOnForm()" ng-model="studentOption">
+					    	<label for="student">Student</label>
 					  	</div>
 					  	<div class="filter-div" ng-if="vm.authentication.user.type === 'admin'">
-					    	<input type="checkbox" id="student" name="filter" value="student" ng-click="filterOnForm()" ng-model="csOption">
-					    	<label for="student">Student</label>
+					    	<input type="checkbox" id="sponsor" name="filter" value="sponsor" ng-click="filterOnForm()" ng-model="sponsorOption">
+					    	<label for="sponsor">Sponsor</label>
 					  	</div>
 					</fieldset>
 				</form>
