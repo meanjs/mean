@@ -62,7 +62,7 @@
   background:none;
 }
 
-.student-profile-h1 h1 {
+.student-profile-h1 {
   color:#7a2e40;
   margin:0 0 10px;
   padding-bottom:10px;
@@ -70,7 +70,7 @@
   border-bottom:1px solid #efece7;
 }
 
-.student-profile-h2 h2 {
+.student-profile-h2 {
   color:#7a2e40;
   margin:20px 0 10px;
   padding-bottom:10px;
@@ -78,7 +78,7 @@
   border-bottom:1px solid #efece7;
 }
 
-.student-profile-h3 h3 {
+.student-profile-h3 {
   color:#7a2e40;
   margin:10px 0;
   padding-bottom:10px;
@@ -86,13 +86,13 @@
   border-bottom:1px solid #efece7;
 }
 
-.student-profile-h4 h4 {
+.student-profile-h4 {
   color: white;
   margin:10px 0;
   font:bold 30px Arial, Helvetica, sans-serif;
 }
 
-.student-profile-h5 h5 {
+.student-profile-h5 {
   color: white;
   margin:10px 0;
   font:bold 14px Arial, Helvetica, sans-serif;
