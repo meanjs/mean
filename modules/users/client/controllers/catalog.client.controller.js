@@ -87,6 +87,10 @@
       }
     };
 
+    $scope.emailUser = function (user) {
+      window.location.href = 'mailto:' + user.email;
+    };
+
     $scope.toggleFilterOptions = function () {
       $scope.shouldShowFilters = !$scope.shouldShowFilters;
     };
