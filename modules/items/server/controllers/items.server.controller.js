@@ -38,8 +38,6 @@ exports.createCategory = function (req, res) {
 };
 
 exports.deleteCategory = function(req, res) {
-  console.log(req);
-  console.log(res);
   var toDelete = req.query;
   Category.findOneAndRemove({'title' : toDelete.title}, function(err, deleted) {
     if (err) {
