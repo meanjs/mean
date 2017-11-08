@@ -110,6 +110,30 @@
   outline: none;
 }
 
+.login input[type='checkbox'] {
+  -webkit-appearance:none;
+  -moz-appearance:none;
+  background: #D3D3D3;
+  border:2px solid #555;
+  border-radius:5px;
+  height:20px;
+  width:20px;
+}
+
+.login input[type='checkbox']:checked {
+  background: #00FF00;
+}
+
+.login input[type='checkbox']:checked:after{
+  content: '✔';
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%,-50%);
+  -moz-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+}
+
 ::-webkit-input-placeholder{
   color: white;
   color: rgba(255,255,255,0.6);
