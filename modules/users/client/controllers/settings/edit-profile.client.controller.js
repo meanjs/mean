@@ -89,16 +89,11 @@
       var reader = new FileReader();
       reader.onloadend = function () {
         vm.user.base64ProfileImageURL = reader.result;
-        // console.log(vm.user.base64ProfileImageURL);
         var user = new UsersService(vm.user);
-        user.base64ProfileImageURL = reader.result;
         user.$update(function (response) {
-          console.log('updated image');
-          console.log(response);
           Authentication.user = response;
         }, function (response) {
-          console.log('failed to update image');
-          console.log(response.data.message);
+          // do nada
         });
       };
       reader.readAsDataURL($scope.picFile);

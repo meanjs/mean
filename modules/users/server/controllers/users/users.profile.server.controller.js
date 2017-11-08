@@ -16,7 +16,7 @@ var _ = require('lodash'),
   User = mongoose.model('User'),
   validator = require('validator');
 
-var whitelistedFields = ['firstName', 'lastName', 'email', 'username'];
+var whitelistedFields = ['firstName', 'lastName', 'email', 'username', 'major', 'bio', 'base64ProfileImageURL', 'availabilityStatus'];
 
 var useS3Storage = config.uploads.storage === 's3' && config.aws.s3;
 var s3;
@@ -43,9 +43,6 @@ exports.update = function (req, res) {
 
     user.updated = Date.now();
     user.displayName = user.firstName + ' ' + user.lastName;
-    console.log('image: ');
-    console.log(user.base64ProfileImageURL);
-    console.log('\n');
 
     user.save(function (err) {
       if (err) {
