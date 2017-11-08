@@ -50,7 +50,7 @@
 	                <tr ng-repeat="user in filteredUsersList" ng-click="showDetails($index)">
 	                  <div>
 	                    <td>
-	                    	<img ngf-src="vm.fileSelected ? picFile : user.profileImageURL" alt="{{vm.user.displayName}}" class="img-thumbnail centerText user-profile-picture" ngf-drop height="50px" width="50px">
+	                    	<img ngf-src="user.base64ProfileImageURL" alt="{{vm.user.displayName}}" class="img-thumbnail centerText user-profile-picture" ngf-drop height="50px" width="50px">
 	                    </td>
 	                    <td class="information leftText">
 	                    	<div>
