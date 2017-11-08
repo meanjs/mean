@@ -31,3 +31,7 @@
 .vertical-bottom {
   vertical-align: bottom;
 }
+
+.detail-action-buttons-div {
+	margin-top: 16px;
+}

@@ -12,6 +12,7 @@
     vm.authentication = Authentication;
 
     $scope.detailedInfo = null;
+    $scope.lastSelectedIndex = null;
     $scope.studentsList = [];
     $scope.filteredStudentsList = [];
     $scope.sponsorsList = [];
@@ -58,6 +59,7 @@
 
     $scope.showDetails = function (index) {
       $scope.detailedInfo = $scope.filteredUsersList[index];
+      $scope.lastSelectedIndex = index;
     };
 
     function onSponsorGetStudentsSuccess(response) {
@@ -91,6 +93,17 @@
       if (vm.authentication.user.type === 'admin') {
         $state.go('edit_user', { user: user });
         // $state.go('admin.user-edit');
+      }
+    };
+
+    $scope.goToStudentProfile = function () {
+      if (vm.authentication.user.type === 'admin') {
+        // var myWindow = window.open('/student_profile', '_blank');
+        var url = $state.href('student_profile', { student: $scope.filteredUsersList[$scope.lastSelectedIndex] });
+        // var url = $state.href('student_profile', { 'student': $scope.filteredUsersList[$scope.lastSelectedIndex] }, { absolute: true });
+        var myWindow = $window.open(url, '_blank');
+        myWindow.student = $scope.filteredUsersList[$scope.lastSelectedIndex];
+        // $state.go('student_profile', { student: $scope.filteredUsersList[$scope.lastSelectedIndex] });
       }
     };
 

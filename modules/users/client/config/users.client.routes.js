@@ -58,6 +58,15 @@
         controller: 'EditProfileController',
         controllerAs: 'vm'
       })
+      .state('student_profile', {
+        url: '/student',
+        templateUrl: '/modules/users/client/views/profile/profile.html',
+        controller: 'StudentController',
+        controllerAs: 'vm',
+        params: {
+          student: null
+        }
+      })
       .state('catalog', {
         url: '/catalog',
         templateUrl: '/modules/users/client/views/catalog/catalog.html',
