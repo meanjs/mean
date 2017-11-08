@@ -1,5 +1,5 @@
 html * {
-    font-family: 'Source Sans Pro', sans-serif !important;
+    font-family: 'Source Sans Pro', sans-serif ;
 }
 
 body {
@@ -69,10 +69,6 @@ a:hover .header-profile-image {
     display: inline;
 }
 
-.carousel-control{
-    all: default;
-}
-
 h1, h2, th, label {
     color: black;
 }
@@ -80,5 +76,3 @@ h1, h2, th, label {
 #eventData {
     color: white;
 }
-
-
