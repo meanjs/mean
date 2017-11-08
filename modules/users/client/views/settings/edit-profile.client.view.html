@@ -55,6 +55,34 @@
             <p class="help-block error-text" ng-message="required">Username is required.</p>
           </div>
         </div>
+        <div class="form-group" show-errors>
+          <label for="bio">Short Bio</label>
+          <input type="text" id="bio" name="bio" class="form-control" ng-model="vm.user.bio" placeholder="Short Bio" required>
+          <div ng-messages="vm.userForm.bio.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Bio is required.</p>
+          </div>
+        </div>
+        <div class="form-group" show-errors>
+          <label for="major">Major</label>
+          <input type="text" id="major" name="major" class="form-control" ng-model="vm.user.major" placeholder="Major" required>
+          <div ng-messages="vm.userForm.major.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Major is required.</p>
+          </div>
+        </div>
+        <div class="form-group" show-errors>
+          <label for="availabilityStatus">Availability Status</label>
+          <input type="text" id="availability" name="availabilityStatus" class="form-control" ng-model="vm.user.availabilityStatus" placeholder="Availability Status" required>
+          <div ng-messages="vm.userForm.availabilityStatus.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Availabilty Status is required.</p>
+          </div>
+        </div>
+        <div class="form-group" show-errors>
+          <label for="teamName">Team Name</label>
+          <input type="text" id="team" name="teamName" class="form-control" ng-model="vm.user.teamName" placeholder="Team Name" required>
+          <div ng-messages="vm.userForm.teamName.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Team Name is required.</p>
+          </div>
+        </div>
         <div class="text-center form-group">
           <button type="submit" class="btn btn-primary">Save Profile</button>
         </div>

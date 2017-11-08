@@ -66,6 +66,34 @@
             </fieldset>
           </form>
         </div>
+        <div class="form-group" show-errors>
+          <label for="bio">Short Bio</label>
+          <input type="text" id="bio" name="bio" class="form-control" ng-model="newBio" ng-if="isStudentRole" placeholder="Short Bio" required>
+          <div ng-messages="userForm.bio.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Short bio is required.</p>
+          </div>
+        </div>
+        <div class="form-group" show-errors>
+          <label for="major">Major</label>
+          <input type="text" id="major" name="major" class="form-control" ng-model="newMajor" ng-if="isStudentRole" placeholder="Major" required>
+          <div ng-messages="userForm.major.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Major is required.</p>
+          </div>
+        </div>
+        <div class="form-group" show-errors>
+          <label for="availabilityStatus">Availability Status</label>
+          <input type="text" id="availability" name="availabilityStatus" class="form-control" ng-model="newAvailability" ng-if="isStudentRole" placeholder="Availability" required>
+          <div ng-messages="userForm.availabilityStatus.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Availability status is required.</p>
+          </div>
+        </div>
+        <div class="form-group" show-errors>
+          <label for="teamName">Team Name</label>
+          <input type="text" id="team" name="teamName" class="form-control" ng-model="newTeam" ng-if="isStudentRole" placeholder="Team Name" required>
+          <div ng-messages="userForm.teamName.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Team name is required.</p>
+          </div>
+        </div>
         <div class="text-center form-group">
           <input type="checkbox" name="checkbox" value="check"><span>Check this box to confirm.</span>
           <br>
