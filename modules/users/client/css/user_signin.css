@@ -1,0 +1,144 @@
+.signin-uf-body{
+  background-image: url(http://training.health.ufl.edu/handouts/Templates/UF_background_orange_right_button.jpg);
+  background-size: cover;
+  bottom: -40px;
+  height: auto;
+  left: -20px;
+  overflow-y: scroll;
+  position: fixed;
+  right: -40px;
+  top: -20px;
+  width: auto;
+  /*-webkit-filter: blur(0px);*/
+}
+
+.terms-check-box {
+  margin-bottom: 10px;
+  margin-right: 10px;
+  margin-top: 10px;
+}
+
+.terms-div {
+  margin-bottom: 10px;
+}
+
+.signin-header {
+  left: calc(50% - 420px);
+  position: absolute;
+  top: calc(50% - 120px);
+}
+
+.signin-header div {
+  color: #fff;
+  float: left;
+  font-family: 'Exo', sans-serif;
+  font-size: 40px;
+  font-weight: 200;
+}
+
+.signin-header div span {
+  color: #015496 !important;
+}
+
+.login {
+  height: 150px;
+  left: calc(50% - 50px);
+  padding: 10px;
+  position: absolute;
+  top: calc(50% - 150px);
+  width: 350px;
+}
+
+.customInputBox {
+  background: transparent;
+  border: 1px solid white;
+  border: 1px solid rgba(255,255,255,0.6);
+  border-radius: 2px;
+  color: #fff;
+  font-family: 'Exo', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  height: 40px;
+  margin-bottom: 10px;
+  padding: 4px;
+  width: 260px;
+}
+
+.customText {
+  color: #fff;
+  font-family: 'Exo', sans-serif;
+}
+
+.login input[type=submit] {
+  background: #fff;
+  border: 1px solid white;
+  border: 1px solid #fff;
+  border-radius: 2px;
+  color: #a18d6c;
+  cursor: pointer;
+  font-family: 'Exo', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  height: 35px;
+  padding: 6px;
+  width: 260px;
+}
+
+.login input[type=submit]:hover {
+  opacity: 0.8;
+}
+
+.login input[type=submit]:active {
+  opacity: 0.6;
+}
+
+.login input[type=text]:focus {
+  border: 1px solid white;
+  border: 1px solid rgba(255,255,255,0.9);
+  outline: none;
+}
+
+.login input[type=password]:focus {
+  border: 1px solid white;
+  border: 1px solid rgba(255,255,255,0.9);
+  outline: none;
+}
+
+.login input[type=submit]:focus {
+  border: 1px solid white;
+  border: 1px solid rgba(255,255,255,0.9);
+  outline: none;
+}
+
+.login input[type='checkbox'] {
+  -webkit-appearance:none;
+  -moz-appearance:none;
+  background: #D3D3D3;
+  border:2px solid #555;
+  border-radius:5px;
+  height:20px;
+  width:20px;
+}
+
+.login input[type='checkbox']:checked {
+  background: #00FF00;
+}
+
+.login input[type='checkbox']:checked:after{
+  content: '✔';
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%,-50%);
+  -moz-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+}
+
+::-webkit-input-placeholder{
+  color: white;
+  color: rgba(255,255,255,0.6);
+}
+::-moz-input-placeholder{
+  color: white;
+  color: rgba(255,255,255,0.6);
+}
