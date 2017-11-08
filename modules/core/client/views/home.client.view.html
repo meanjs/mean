@@ -3,19 +3,12 @@
   <div id="myCarousel" class="carousel slide" data-ride="carousel" ng-controller="DashboardController" ng-init="loadEventList()">
     <!-- Wrapper for slides -->
     <div class="carousel-inner">
-      <div class="item active" >
-        <img src="https://media1.s-nbcnews.com/j/newscms/2017_29/2076501/170715-chipotle-restaurant-ew-1227p_5fa0d17495b09c2189e8632005bc9e95.nbcnews-ux-2880-1000.jpg" >
+      <div class="item" ng-repeat="event in eventList" ng-class="{active : $first}">
+        <img src="https://media1.s-nbcnews.com/j/newscms/2017_29/2076501/170715-chipotle-restaurant-ew-1227p_5fa0d17495b09c2189e8632005bc9e95.nbcnews-ux-2880-1000.jpg" alt="carousel {{$index}}">
         <div class="carousel-caption">
           <h3>{{event.name}}</h3>
-          <p>{{event.dateOfEvent}} : {{event.startTime}} - {{event.endTime}}</p>
-        </div>
-      </div>
-
-    <div class="item" ng-repeat="event in eventList">
-        <img src="http://www.sarcomastrong.com/wp-content/uploads/2017/03/os-bz-blaze-pizza-20170411.jpg">
-        <div class="carousel-caption">
-          <h3>{{event.name}}</h3>
-          <p id="eventData">{{event.dateOfEvent | date:"MM'/'dd'/'yyyy"}}</p>
+          <h4 id="eventData">{{event.dateOfEvent | date:"MM'/'dd'/'yyyy"}} : {{event.startTime}}</h4>
+          <p id="eventData">{{event.location}}</p>
         </div>
       </div>
     </div>

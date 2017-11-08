@@ -69,6 +69,10 @@ a:hover .header-profile-image {
     display: inline;
 }
 
+.carousel-control{
+    all: default;
+}
+
 h1, h2, th, label {
     color: black;
 }
