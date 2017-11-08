@@ -103,14 +103,11 @@
 	            <li ng-if="detailedInfo.bio">
 	                Bio: {{detailedInfo.bio}}
 	            </li>
-	            <div class="detail-action-buttons-div">
-		        	<div id="addCart" ng-if="vm.authentication.user.type === 'sponsor'">
+	            <div class="detail-action-buttons-div" ng-if="vm.authentication.user.type === 'admin' || vm.authentication.user.type === 'sponsor'">
+		        	<div id="addCart" class="image-left">
 		            	<button type="addButton">Add to Cart</button>
 		        	</div>
-		        	<div id="addCart" class="image-left" ng-if="vm.authentication.user.type === 'admin'">
-		            	<button type="addButton">Add to Cart</button>
-		        	</div>
-		        	<div class="image-right" ng-if="vm.authentication.user.type === 'admin'">	
+		        	<div class="image-right">	
 		        		<button type="button" ng-click="goToStudentProfile()">Go To Profile</button>
 		        	</div>
 	            </div>
