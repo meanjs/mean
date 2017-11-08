@@ -40,7 +40,6 @@
     fetchStudents();
 
     if (vm.authentication.user.type === 'admin') {
-      fetchSponsors();
       $scope.isEditable = true;
     }
 
@@ -67,8 +66,7 @@
       $scope.filteredUsersList = Array.from($scope.filteredStudentsList);
       $scope.usersList = Array.from($scope.studentsList);
       if (vm.authentication.user.type === 'admin') {
-        $scope.usersList = $scope.studentsList.concat($scope.sponsorsList);
-        $scope.filteredUsersList = $scope.filteredStudentsList.concat($scope.filteredSponsorsList);
+        fetchSponsors();
       }
     }
 
