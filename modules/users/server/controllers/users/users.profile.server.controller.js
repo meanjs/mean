@@ -43,6 +43,9 @@ exports.update = function (req, res) {
 
     user.updated = Date.now();
     user.displayName = user.firstName + ' ' + user.lastName;
+    console.log('image: ');
+    console.log(user.base64ProfileImageURL);
+    console.log('\n');
 
     user.save(function (err) {
       if (err) {
@@ -223,7 +226,8 @@ exports.me = function (req, res) {
       major: req.user.major,
       bio: req.user.bio,
       graduationDate: req.user.graduationDate,
-      gpa: req.user.gpa
+      gpa: req.user.gpa,
+      base64ProfileImageURL: req.user.base64ProfileImageURL
     };
   }
 

@@ -44,7 +44,6 @@
     }
 
     vm.upload = function (dataUrl) {
-
       Upload.upload({
         url: '/api/users/picture',
         data: {
@@ -69,6 +68,8 @@
       // Populate user object
       vm.user = Authentication.user = response;
 
+      updateUserWithBase64Image();
+
       // Reset form
       vm.fileSelected = false;
       vm.progress = 0;
@@ -81,6 +82,26 @@
 
       // Show error message
       Notification.error({ message: response.message, title: '<i class="glyphicon glyphicon-remove"></i> Failed to change profile picture' });
+    }
+
+    function updateUserWithBase64Image() {
+      // encode as base 64
+      var reader = new FileReader();
+      reader.onloadend = function () {
+        vm.user.base64ProfileImageURL = reader.result;
+        // console.log(vm.user.base64ProfileImageURL);
+        var user = new UsersService(vm.user);
+        user.base64ProfileImageURL = reader.result;
+        user.$update(function (response) {
+          console.log('updated image');
+          console.log(response);
+          Authentication.user = response;
+        }, function (response) {
+          console.log('failed to update image');
+          console.log(response.data.message);
+        });
+      };
+      reader.readAsDataURL($scope.picFile);
     }
   }
 }());
