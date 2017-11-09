@@ -98,8 +98,8 @@
 
     $scope.goToStudentProfile = function () {
       if (vm.authentication.user.type === 'admin') {
-        var id = $scope.filteredUsersList[$scope.lastSelectedIndex]._id;
-        var stateName = 'student_profile?id=' + id;
+        var username = $scope.filteredUsersList[$scope.lastSelectedIndex].username;
+        var stateName = 'student_profile?username=' + username;
         var myWindow = window.open(stateName, '_blank');
         // var username = $scope.filteredUsersList[$scope.lastSelectedIndex].username;
         // var stateName = 'student_profile?username=' + username;

@@ -87,6 +87,23 @@
     });
   }
 
+  // TODO this should be Users service
+  angular
+    .module('users.services')
+    .factory('ProfileService', ProfileService);
+
+  ProfileService.$inject = ['$resource'];
+
+  function ProfileService($resource) {
+    return $resource('/api/profile/:username', {
+      username: '@username'
+    }, {
+      get: {
+        method: 'GET'
+      }
+    });
+  }
+
   angular
     .module('users.services')
     .factory('CatalogService', CatalogService);

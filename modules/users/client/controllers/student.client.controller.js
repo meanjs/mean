@@ -20,10 +20,10 @@
         vm.user = $stateParams.student;
       } else if ($window.student !== null && $window.student !== undefined) {
         vm.user = $window.student;
-      } else if ($location.search().id) {
-        var id = $location.search().id;
-        $http.get('/api/catalog/student/' + id).then(function (response) {
-          vm.user = response;
+      } else if ($location.search().username) {
+        var username = $location.search().username;
+        $http.get('/api/profile/' + username).then(function (response) {
+          vm.user = response.data;
         }, function (error) {
           // nada
         });
