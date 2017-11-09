@@ -11,7 +11,7 @@
     var vm = this;
 
     vm.items = ItemsService.query();
-    vm.categories = CategoriesService.query();
-  	vm.modules = ModulesService.query();
+    vm.cats = CategoriesService.query();
+  	vm.mods = ModulesService.query();
   }
 }());

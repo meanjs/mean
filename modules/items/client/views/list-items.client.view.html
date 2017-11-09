@@ -8,9 +8,20 @@
         <i class="glyphicon glyphicon-plus"></i>
       </a>
     </span>
+    <div>
     <span>
-      
+      <label for="modules">Module Filter</label>
+        <select name="module" id="module" name="module" class="form-control" ng-model="by_module">
+          <option value=""></option>
+          <option ng-repeat="x in vm.mods" value="{{x.title}}">{{x.title}}</option>
+        </select>
+        <label for="category">Category Filter</label>
+        <select name="category" id="category" name="category" class="form-control" ng-model="by_category">
+          <option value=""></option>
+          <option ng-repeat="x in vm.cats" value="{{x.title}}">{{x.title}}</option>
+        </select>
     </span>
+  </div>
   </div>
   <div class="list-group">
     <a data-ng-repeat="item in vm.items | filter: query | filter:{categories: by_category} | filter: {modules: by_module}" data-ui-sref="admin.items.edit({itemId: item._id})" class="list-group-item">
