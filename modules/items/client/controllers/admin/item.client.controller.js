@@ -9,7 +9,6 @@
 
   function ItemsAdminController($scope, $state, $window, item, CategoriesService, ModulesService, Authentication, Notification) {
     var vm = this;
-
     vm.item = item;
     vm.cats = CategoriesService.query();
     vm.mods = ModulesService.query();
