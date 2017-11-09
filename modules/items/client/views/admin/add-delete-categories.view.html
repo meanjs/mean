@@ -5,7 +5,7 @@
         <h1>Categories</h1>
       </div>
       <div class="col-md-4" style="margin-top: 2em">
-        <input class="form-control col-md-4" type="text" ng-model="vm.search" placeholder="Search" ng-change="vm.figureOutItemsToDisplay()" />
+        <input class="form-control col-md-4" type="text" ng-model="query" placeholder="Search"/>
       </div>
       <div class="col-md-4" style="margin-top: 2em">
         <a class="btn btn-primary pull-right" ui-sref="admin.items.categorycreate">
@@ -23,7 +23,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="category in vm.categories">
+          <tr ng-repeat="category in vm.categories | filter: query">
             <td class="firstColumn">{{ category.title }}</td>
             <td class="secondColumn">
               <button class="btn btn-danger dangerButton" type="button" ng-click=vm.remove()>-</button>
