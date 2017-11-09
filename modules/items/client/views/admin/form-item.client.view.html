@@ -16,30 +16,19 @@
           <div ng-messages="vm.form.itemForm.title.$error" role="alert">
             <p class="help-block error-text" ng-message="required">Item title is required.</p>
           </div>
-        </div>
-        <div class = "module-group">
         <label for="modules">Modules</label>
-          <select name="module" id="module" name="module" class="form-control" ng-model="vm.item.modules" placeholder="module">
-            <option ng-repeat="x in vm.mods" value="{{x._id}}">{{x.title}}</option>
-          </select>
-         <a ng-show="vm.item._id" class="btn btn-primary" ng-click="vm.addModule()">
-          <i class="glyphicon glyphicon-plus"></i>
-        </a>
-        <div class = "category-group">
+        <select name="module" id="module" name="module" class="form-control" ng-model="vm.item.modules">
+          <option ng-repeat="x in vm.mods" value="{{x._id}}">{{x.title}}</option>
+        </select>
         <label for="category">Categories</label>
-          <select name="category" id="category" name="category" class="form-control" ng-model="vm.item.categories" placeholder="category">
-            <option ng-repeat="x in vm.cats" value="{{x._id}}">{{x.title}}</option>
-          </select>
-         <a ng-show="vm.item._id" class="btn btn-primary" ng-click="vm.addCat()">
-          <i class="glyphicon glyphicon-plus"></i>
-        </a>
-          </div>
-        <div class="form-group">
+        <select name="category" id="category" name="category" class="form-control" ng-model="vm.item.categories">
+          <option ng-repeat="x in vm.cats" value="{{x._id}}">{{x.title}}</option>
+        </select>
           <label class="control-label" for="content">Content</label>
           <textarea name="content" data-ng-model="vm.item.content" id="content" class="form-control" cols="30" rows="10" placeholder="Content"></textarea>
-        </div>
         <div class="form-group">
           <button type="submit" class="btn btn-default">{{vm.item._id ? 'Update' : 'Create'}}</button>
+        </div>
         </div>
       </fieldset>
     </form>

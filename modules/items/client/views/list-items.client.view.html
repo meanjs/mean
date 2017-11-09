@@ -8,9 +8,12 @@
         <i class="glyphicon glyphicon-plus"></i>
       </a>
     </span>
+    <span>
+      
+    </span>
   </div>
   <div class="list-group">
-    <a data-ng-repeat="item in vm.items | filter: query" data-ui-sref="admin.items.edit({itemId: item._id})" class="list-group-item">
+    <a data-ng-repeat="item in vm.items | filter: query | filter:{categories: by_category} | filter: {modules: by_module}" data-ui-sref="admin.items.edit({itemId: item._id})" class="list-group-item">
       <small class="list-group-item-text">
         Posted on
         <span data-ng-bind="item.created | date:'mediumDate'"></span>
