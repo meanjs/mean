@@ -22,6 +22,21 @@
       $state.go('home');
     }
 
+    // For some reason it defaults to only a few variables on refresh so refetch self
+    getSelf();
+
+    function getSelf() {
+      UsersService.getMe().then(onGetMeSuccess).catch(onGetMeFailure);
+    }
+
+    function onGetMeSuccess(response) {
+      vm.user = response;
+    }
+
+    function onGetMeFailure(response) {
+      Notification.error({ message: 'Could not load your profile fully' });
+    }
+
     // Update a user profile
     function updateUserProfile(isValid) {
 
