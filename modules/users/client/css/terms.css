@@ -1,22 +1,20 @@
 .bodyTerms{
-	background-image: url(http://elearning.ufl.edu/media/templates/uf2015/img/bg-texture.png);
+	background-image: url(http://www.uflib.ufl.edu/images/tsbackground_body.jpg);
 	background-size: cover;
     bottom: -40px;
-    height: auto;
+    height: 100%;
     left: -20px;
     overflow-y: scroll;
     position: fixed;
     right: -40px;
     top: -20px;
-    width: auto;
 }
-
 .headerTerms{
     font-size: 40px;
-    left: +30%;
     position: absolute;
     text-align: center;
     top: calc(50% - 300px);
+    width: 100%;
 }
 
 .paragraphTerms{
