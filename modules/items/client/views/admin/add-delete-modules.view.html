@@ -8,7 +8,7 @@
         <input class="form-control col-md-4" type="text" ng-model="vm.search" placeholder="Search" ng-change="vm.figureOutItemsToDisplay()" />
       </div>
       <div class="col-md-4" style="margin-top: 2em">
-        <a class="btn btn-primary pull-right" ui-sref="admin.items.modulecreate">
+        <a class="btn btn-primary" ui-sref="admin.items.modulecreate">
           <i class="glyphicon glyphicon-plus"></i>
         </a>
       </div>
@@ -27,7 +27,9 @@
           <tr ng-repeat="module in vm.modules">
             <td class="firstColumn">{{ module.title }}</td>
             <td class="secondColumn">
-              <button class="btn btn-danger dangerButton" type="button" ng-click="vm.deleteModule(module)">-</button>
+              <a class="btn btn-primary" ng-click="vm.deleteModule(module)">
+              <i class="glyphicon glyphicon-minus"></i>
+              </a>  
             </td>
           </tr>
         </tbody>
