@@ -59,7 +59,7 @@
         controllerAs: 'vm'
       })
       .state('student_profile', {
-        url: '/student_profile?id',
+        url: '/student_profile?username',
         templateUrl: '/modules/users/client/views/profile/profile.html',
         controller: 'StudentController',
         controllerAs: 'vm',

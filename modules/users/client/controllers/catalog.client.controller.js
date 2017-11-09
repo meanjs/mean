@@ -101,13 +101,6 @@
         var username = $scope.filteredUsersList[$scope.lastSelectedIndex].username;
         var stateName = 'student_profile?username=' + username;
         var myWindow = window.open(stateName, '_blank');
-        // var username = $scope.filteredUsersList[$scope.lastSelectedIndex].username;
-        // var stateName = 'student_profile?username=' + username;
-        // var url = $state.href(stateName, { student: $scope.filteredUsersList[$scope.lastSelectedIndex] });
-        // var url = $state.href('student_profile', { 'student': $scope.filteredUsersList[$scope.lastSelectedIndex] }, { absolute: true });
-        // var myWindow = $window.open(url, '_blank');
-        // myWindow.student = $scope.filteredUsersList[$scope.lastSelectedIndex];
-        // $state.go('student_profile', { student: $scope.filteredUsersList[$scope.lastSelectedIndex] });
       }
     };
 

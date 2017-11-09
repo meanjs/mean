@@ -95,13 +95,28 @@
   ProfileService.$inject = ['$resource'];
 
   function ProfileService($resource) {
-    return $resource('/api/profile/:username', {
-      username: '@username'
-    }, {
-      get: {
-        method: 'GET'
+    // return $resource('/api/profile/:username', {
+    //   username: '@username'
+    // }, {
+    //   get: {
+    //     method: 'GET'
+    //   }
+    // });
+
+    var Profile = $resource('/api/profile', {}, {
+      profileWithUsername: {
+        method: 'GET',
+        url: '/api/profile/:username'
       }
     });
+
+    angular.extend(Profile, {
+      getProfileWithUsername: function (username) {
+        return this.profileWithUsername({ username: username }).$promise;
+      }
+    });
+
+    return Profile;
   }
 
   angular

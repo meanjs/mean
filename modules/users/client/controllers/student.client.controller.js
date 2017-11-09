@@ -5,29 +5,45 @@
     .module('users')
     .controller('StudentController', StudentController);
 
-  StudentController.$inject = ['$scope', '$state', '$http', '$stateParams', 'Authentication', '$window', '$location'];
+  StudentController.$inject = ['$scope', '$state', '$http', '$stateParams', 'Authentication', '$window', '$location', 'ProfileService', 'Notification'];
 
-  function StudentController($scope, $state, $http, $stateParams, Authentication, $window, $location) {
+  function StudentController($scope, $state, $http, $stateParams, Authentication, $window, $location, ProfileService, Notification) {
     var vm = this;
 
     vm.authentication = Authentication;
 
+    if (vm.authentication.user === null) {
+      $state.go('authentication.signin');
+    }
+    if (vm.authentication.user.type !== 'sponsor' && vm.authentication.user.type !== 'admin') {
+      if (vm.authentication.type === 'student') {
+        $state.go('profile');
+      } else {
+        $state.go('home');
+      }
+    }
+
     loadUser();
 
     function loadUser() {
-      // Get an eventual error defined in the URL query string:
       if ($stateParams.student !== null && $stateParams.student !== undefined) {
         vm.user = $stateParams.student;
       } else if ($window.student !== null && $window.student !== undefined) {
         vm.user = $window.student;
       } else if ($location.search().username) {
         var username = $location.search().username;
-        $http.get('/api/profile/' + username).then(function (response) {
-          vm.user = response.data;
-        }, function (error) {
-          // nada
-        });
+        ProfileService.getProfileWithUsername(username).then(onGetProfileSuccess).catch(onGetProfileFailure);
+      } else {
+        Notification.error({ message: 'Could not load student profile' });
       }
+    }
+
+    function onGetProfileSuccess(response) {
+      vm.user = response;
+    }
+
+    function onGetProfileFailure(response) {
+      Notification.error({ message: 'Could not load student profile' });
     }
   }
 }());
