@@ -50,7 +50,7 @@
 	                <tr ng-repeat="user in filteredUsersList" ng-click="showDetails($index)">
 	                  <div>
 	                    <td>
-	                    	<img ngf-src="vm.fileSelected ? picFile : user.profileImageURL" alt="{{vm.user.displayName}}" class="img-thumbnail centerText user-profile-picture" ngf-drop height="50px" width="50px">
+	                    	<img ngf-src="user.base64ProfileImageURL" alt="{{vm.user.displayName}}" class="img-thumbnail centerText user-profile-picture" ngf-drop height="50px" width="50px">
 	                    </td>
 	                    <td class="information leftText">
 	                    	<div>
@@ -72,7 +72,7 @@
 	                    <td>
 	                    	<br><i class="actionButton glyphicon glyphicon-circle-arrow-down" style="font-size: 25px;"></i>
 	                    </td>
-	                    <td ng-if="isEditable">
+	                    <td ng-if="isEditable && vm.authentication.user.type === 'admin'">
 	                    	<br><button type="button" ng-click="editClicked(user)">Edit</button>
 	                    </td>
 	                  </div>
@@ -103,9 +103,14 @@
 	            <li ng-if="detailedInfo.bio">
 	                Bio: {{detailedInfo.bio}}
 	            </li>
-	            <div id="addCart" class="rightText">
-		            <button type="addButton">Add to Cart</button>
-		        </div>
+	            <div class="detail-action-buttons-div" ng-if="vm.authentication.user.type === 'admin' || vm.authentication.user.type === 'sponsor'">
+		        	<div id="addCart" class="image-left">
+		            	<button type="addButton">Add to Cart</button>
+		        	</div>
+		        	<div class="image-right">	
+		        		<button type="button" ng-click="goToStudentProfile()">Go To Profile</button>
+		        	</div>
+	            </div>
             </div>
 	      </div>
 	    </div>

@@ -5,13 +5,13 @@
     .module('users')
     .controller('EditUserController', EditUserController);
 
-  EditUserController.$inject = ['$scope', '$state', '$stateParams', '$window', 'Authentication', 'Notification', 'AdminPowers', '$http'];
+  EditUserController.$inject = ['$scope', '$state', '$stateParams', '$window', 'Authentication', 'Notification', 'AdminPowers', '$http', '$location', 'ProfileService'];
 
-  function EditUserController($scope, $state, $stateParams, $window, Authentication, Notification, AdminPowers, $http) {
+  function EditUserController($scope, $state, $stateParams, $window, Authentication, Notification, AdminPowers, $http, $location, ProfileService) {
     var vm = this;
 
     vm.authentication = Authentication;
-    $scope.user = $stateParams.user;
+    vm.user = $stateParams.user;
 
     if (vm.authentication.user === null) {
       $state.go('authentication.signin');
@@ -26,13 +26,34 @@
       }
     }
 
+    if (vm.user === null) {
+      loadUserFromURL();
+    }
+
+    function loadUserFromURL() {
+      if ($location.search().username) {
+        var username = $location.search().username;
+        ProfileService.getProfileWithUsername(username).then(onGetProfileSuccess).catch(onGetProfileFailure);
+      } else {
+        Notification.error({ message: 'Could not load student profile' });
+      }
+    }
+
+    function onGetProfileSuccess(response) {
+      vm.user = response;
+    }
+
+    function onGetProfileFailure(response) {
+      Notification.error({ message: 'Could not load student profile' });
+    }
+
     $scope.remove = function () {
       if (vm.authentication.user.type !== 'admin') {
         $state.go('home');
       }
 
       if ($window.confirm('Are you sure you want to delete this user?')) {
-        var user = $scope.user;
+        var user = vm.user;
         $http.delete('/api/admin/deleteUser/' + user._id, user).then(function (response) {
           onUserDeleteSuccess(response);
         }, function (error) {
@@ -52,7 +73,7 @@
         return false;
       }
 
-      var user = $scope.user;
+      var user = vm.user;
 
       // CatalogService.sponsorGetStudents().then(onUserUpdateSuccess).catch(onUserUpdateFailure);
       // AdminPowers.adminUpdateUser(user).then(onUserUpdateSuccess).catch(onUserUpdateFailure);

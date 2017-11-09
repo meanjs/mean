@@ -19,6 +19,10 @@
     $scope.newEmail = null;
     $scope.newUsername = null;
     $scope.newPassword = null;
+    $scope.newBio = null;
+    $scope.newMajor = null;
+    $scope.newAvailability = null;
+    $scope.newTeam = null;
     $scope.isStudentRole = true;
     $scope.isSponsorRole = false;
     $scope.isAdminRole = false;
@@ -55,6 +59,10 @@
         email: $scope.newEmail,
         username: $scope.newUsername,
         password: $scope.newPassword,
+        bio: $scope.newBio,
+        major: $scope.newMajor,
+        availabilityStatus: $scope.newAvailability,
+        teamName: $scope.newTeam,
         type: userType
       };
 
@@ -74,6 +82,10 @@
       $scope.newEmail = null;
       $scope.newUsername = null;
       $scope.newPassword = null;
+      $scope.newBio = null;
+      $scope.newMajor = null;
+      $scope.newAvailability = null;
+      $scope.newTeam = null;
     }
 
     function onUserSignupError(response) {

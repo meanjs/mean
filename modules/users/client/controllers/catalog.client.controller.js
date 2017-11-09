@@ -12,6 +12,7 @@
     vm.authentication = Authentication;
 
     $scope.detailedInfo = null;
+    $scope.lastSelectedIndex = null;
     $scope.studentsList = [];
     $scope.filteredStudentsList = [];
     $scope.sponsorsList = [];
@@ -40,7 +41,6 @@
     fetchStudents();
 
     if (vm.authentication.user.type === 'admin') {
-      fetchSponsors();
       $scope.isEditable = true;
     }
 
@@ -59,6 +59,7 @@
 
     $scope.showDetails = function (index) {
       $scope.detailedInfo = $scope.filteredUsersList[index];
+      $scope.lastSelectedIndex = index;
     };
 
     function onSponsorGetStudentsSuccess(response) {
@@ -67,8 +68,7 @@
       $scope.filteredUsersList = Array.from($scope.filteredStudentsList);
       $scope.usersList = Array.from($scope.studentsList);
       if (vm.authentication.user.type === 'admin') {
-        $scope.usersList = $scope.studentsList.concat($scope.sponsorsList);
-        $scope.filteredUsersList = $scope.filteredStudentsList.concat($scope.filteredSponsorsList);
+        fetchSponsors();
       }
     }
 
@@ -91,8 +91,17 @@
 
     $scope.editClicked = function (user) {
       if (vm.authentication.user.type === 'admin') {
-        $state.go('edit_user', { user: user });
-        // $state.go('admin.user-edit');
+        var username = user.username;
+        var stateName = 'edit_user?username=' + username;
+        var myWindow = window.open(stateName, '_self');
+      }
+    };
+
+    $scope.goToStudentProfile = function () {
+      if (vm.authentication.user.type === 'admin') {
+        var username = $scope.filteredUsersList[$scope.lastSelectedIndex].username;
+        var stateName = 'student_profile?username=' + username;
+        var myWindow = window.open(stateName, '_blank');
       }
     };
 
