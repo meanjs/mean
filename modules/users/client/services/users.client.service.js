@@ -13,6 +13,10 @@
       update: {
         method: 'PUT'
       },
+      me: {
+        method: 'GET',
+        url: '/api/users/me'
+      },
       updatePassword: {
         method: 'POST',
         url: '/api/users/password'
@@ -43,6 +47,9 @@
     });
 
     angular.extend(Users, {
+      getMe: function () {
+        return this.me().$promise;
+      },
       changePassword: function (passwordDetails) {
         return this.updatePassword(passwordDetails).$promise;
       },

@@ -81,23 +81,28 @@ var UserSchema = new Schema({
   },
   bio: {
     type: String,
-    trim: true
+    trim: true,
+    default: 'Please Update Me'
   },
   major: {
     type: String,
-    trim: true
+    trim: true,
+    default: 'Please Update Me'
   },
   availabilityStatus: {
     type: String,
-    trim: true
+    trim: true,
+    default: 'Please Update Me'
   },
   teamName: {
     type: String,
-    trim: true
+    trim: true,
+    default: 'Please Update Me'
   },
   type: {
     type: String,
-    trim: true
+    trim: true,
+    default: 'student'
   },
   username: {
     type: String,
