@@ -50,6 +50,8 @@
 
       // Ignore parent template get on state transitions
       $httpBackend.whenGET('/modules/core/client/views/home.client.view.html').respond(200, '');
+      $httpBackend.whenGET('/api/categories').respond(200, '');
+      $httpBackend.whenGET('/api/modules').respond(200, '');
 
       // create mock item
       mockItem = new ItemsService({
