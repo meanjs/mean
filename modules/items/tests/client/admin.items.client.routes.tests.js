@@ -77,7 +77,7 @@
         }));
 
         it('Should have the correct URL', function () {
-          expect(createstate.url).toEqual('/create');
+          expect(createstate.url).toEqual('/items/create');
         });
 
         it('Should have a resolve function', function () {
