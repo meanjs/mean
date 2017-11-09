@@ -91,8 +91,10 @@
 
     $scope.editClicked = function (user) {
       if (vm.authentication.user.type === 'admin') {
-        $state.go('edit_user', { user: user });
-        // $state.go('admin.user-edit');
+        var username = user.username;
+        var stateName = 'edit_user?username=' + username;
+        var myWindow = window.open(stateName, '_self');
+        // window.location = stateName;
       }
     };
 
