@@ -8,6 +8,7 @@ module.exports = function (app) {
   app.route('/api/users/alternatives').post(users.alternatives);
   app.route('/api/users/add').post(users.add);
   app.route('/api/users/myRecipes').get(users.myRecipes);
+  app.route('/api/users/community').get(users.listRecipes);
 
   // Setting up the users profile api
   app.route('/api/users/me').get(users.me);
