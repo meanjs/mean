@@ -86,7 +86,7 @@
         });
 
         it('should respond to URL', inject(function ($state) {
-          expect($state.href(createstate)).toEqual('/admin/items/create');
+          expect($state.href(createstate)).toEqual('/admin/items/items/create');
         }));
 
         it('should attach an item to the controller scope', function () {
