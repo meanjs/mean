@@ -1,15 +1,13 @@
 <section>
   <div class="page-header">
-    <div class="input-group" id="searchBar">
-      <span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-search"></span></span>
-      <input type="text" class="form-control" placeholder="Search" ng-model="query">
-    </div>
     <h1>
       Items
-      <a class="btn btn-primary pull-right" data-ui-sref="admin.items.create">
+    </h1>
+      <span><span class="glyphicon glyphicon-search"></span><input type="text" size= "44" placeholder="Search" ng-model="query">
+      <a class="btn btn-primary" data-ui-sref="admin.items.create">
         <i class="glyphicon glyphicon-plus"></i>
       </a>
-    </h1>
+    </span>
   </div>
   <div class="list-group">
     <a data-ng-repeat="item in vm.items | filter: query" data-ui-sref="admin.items.edit({itemId: item._id})" class="list-group-item">
