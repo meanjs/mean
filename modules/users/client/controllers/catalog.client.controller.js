@@ -94,7 +94,6 @@
         var username = user.username;
         var stateName = 'edit_user?username=' + username;
         var myWindow = window.open(stateName, '_self');
-        // window.location = stateName;
       }
     };
 
