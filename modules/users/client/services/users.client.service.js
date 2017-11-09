@@ -95,14 +95,6 @@
   ProfileService.$inject = ['$resource'];
 
   function ProfileService($resource) {
-    // return $resource('/api/profile/:username', {
-    //   username: '@username'
-    // }, {
-    //   get: {
-    //     method: 'GET'
-    //   }
-    // });
-
     var Profile = $resource('/api/profile', {}, {
       profileWithUsername: {
         method: 'GET',
