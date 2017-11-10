@@ -26,7 +26,7 @@
           <tr ng-repeat="module in vm.modules">
             <td class="firstColumn">{{ module.title }}</td>
             <td class="secondColumn">
-              <a class="btn btn-primary" ng-click="vm.deleteModule(module)">
+              <a class="btn btn-primary" ng-click="vm.remove(module)">
               <i class="glyphicon glyphicon-minus"></i>
               </a>  
             </td>
