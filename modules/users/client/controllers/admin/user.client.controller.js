@@ -39,6 +39,7 @@
         return false;
       }
 
+      vm.user.roles = alterRole(vm.user.roles);
       var user = vm.user;
 
       user.$update(function () {
@@ -54,5 +55,15 @@
     function isContextUserSelf() {
       return vm.user.username === vm.authentication.user.username;
     }
+
+    function alterRole (role) {
+      if(role == "TA")
+        return 'ta';
+      if(role == "seniorTA")
+        return 'superta';
+      else
+        return role;
+    }
+
   }
 }());
