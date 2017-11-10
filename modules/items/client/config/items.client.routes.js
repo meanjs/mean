@@ -20,25 +20,6 @@
         controller: 'ItemsListController',
         controllerAs: 'vm'
       })
-      .state('items.addCats', {
-        url: '/categories',
-        templateUrl: '/modules/items/client/views/admin/add-delete-categories.view.html',
-        controller: 'CatsController',
-        controllerAs: 'vm',
-        resolve: {
-          catResolve : newCat
-        }
-      })
-      .state('items.mods', {
-        url: '/modules',
-        templateUrl: '/modules/items/client/views/modules.html',
-        controller: 'ModsController',
-        controllerAs: 'vm',
-        resolve: {
-          modResolve : newMod
-        }
-      })
-
       .state('items.view', {
         url: '/:itemId',
         templateUrl: '/modules/items/client/views/view-item.client.view.html',

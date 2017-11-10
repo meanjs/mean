@@ -8,7 +8,7 @@
         <input class="form-control col-md-4" type="text" ng-model="vm.search" placeholder="Search" ng-change="vm.figureOutItemsToDisplay()" />
       </div>
       <div class="col-md-4" style="margin-top: 2em">
-        <a class="btn btn-primary pull-right" ui-sref="admin.items.categorycreate">
+        <a class="btn btn-primary" ui-sref="admin.items.categorycreate">
           <i class="glyphicon glyphicon-plus"></i>
         </a>
       </div>
@@ -26,7 +26,10 @@
           <tr ng-repeat="category in vm.categories">
             <td class="firstColumn">{{ category.title }}</td>
             <td class="secondColumn">
-              <button class="btn btn-danger dangerButton" type="button" ng-click=vm.remove()>-</button>
+
+              <a class="btn btn-primary" ng-click="vm.remove(category)">
+              <i class="glyphicon glyphicon-minus"></i>
+              </a>  
             </td>
           </tr>
         </tbody>

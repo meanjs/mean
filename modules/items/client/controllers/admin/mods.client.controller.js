@@ -13,19 +13,9 @@
     vm.mod = mod;
     vm.authentication = Authentication;
     vm.form = {};
-    vm.remove = remove;
     vm.create = create;
     vm.list = list;
 
-   	// Remove existing Item
-    function remove() {
-      if ($window.confirm('Are you sure you want to delete?')) {
-        vm.mod.$remove(function () {
-          $state.go('admin.items.modules');
-          Notification.success({ message: '<i class="glyphicon glyphicon-ok"></i> Item deleted successfully!' });
-        });
-      }
-    }
     // Remove existing Item
     function create() {
       if ($window.confirm('Are you sure you want to create?')) {
@@ -38,12 +28,7 @@
 
     // Remove existing Item
     function list() {
-      if ($window.confirm('Are you sure you want to delete?')) {
-        vm.mod.$list(function () {
-          $state.go('admin.items.modules');
-          Notification.success({ message: '<i class="glyphicon glyphicon-ok"></i> Item deleted successfully!' });
-        });
-      }
+      
     }
 
   }

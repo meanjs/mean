@@ -5,16 +5,18 @@
     .module('items.admin')
     .controller('ItemsAdminModulesController', ItemsAdminModulesController);
 
-  ItemsAdminModulesController.$inject = ['ItemsService', 'ModulesService'];
+  ItemsAdminModulesController.$inject = ['ModulesService', '$window', '$state', '$scope', 'Notification'];
 
-  function ItemsAdminModulesController(ItemsService, ModulesService) {
+  function ItemsAdminModulesController(ModulesService, $window, $state, $scope, Notification) {
     var vm = this;
 
     vm.modules = ModulesService.query();
 
-    vm.deleteModule = function(module){
-    	vm.modules.splice(vm.modules.indexOf(module), 1);
+    vm.remove = function(module){
+      if ($window.confirm('Are you sure you want to delete?')) {
+        vm.modules.splice(vm.modules.indexOf(module), 1);
+        ModulesService.rem(module);
+      }
     }
-
   }
 }());
