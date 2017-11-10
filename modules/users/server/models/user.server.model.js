@@ -14,7 +14,6 @@ var mongoose = require('mongoose'),
   chalk = require('chalk');
 
 owasp.config(config.shared.owasp);
-//TODO User schema still needs: modulesAssigned 
 
 /**
  * A Validation function for local strategy properties
