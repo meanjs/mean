@@ -33,8 +33,6 @@
     }
   ];
 
-    vm.defaultRole = {id: "ta", name: "TA"};
-
     vm.removeApplicant = function (user) {
       if ($window.confirm('Are you sure you want to delete this user?')) {
         if (user) {
@@ -49,6 +47,7 @@
       if (user) {
           var newUser = user;
           user.approvedStatus = true;
+          user.roles = user.roles.id;
           ApplicantsService.changeToAccepted(newUser);
           vm.unapprovedUsers.splice(vm.unapprovedUsers.indexOf(user), 1);
           Notification.success('User approved successfully!');
