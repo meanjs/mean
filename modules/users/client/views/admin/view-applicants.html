@@ -4,9 +4,6 @@
       <div class="col-md-4">
         <h1>Users</h1>
       </div>
-      <div class="col-md-4" style="margin-top: 2em">
-        <input class="form-control col-md-4" type="text" ng-model="vm.search" placeholder="Search" ng-change="vm.figureOutItemsToDisplay()" />
-      </div>
     </div>
   </div>
   <div class="list-group">
@@ -15,10 +12,7 @@
     		<tr class="first-row">
     			<td>Name</td>
           <td>
-            <label class="checkAll">
-            <input type="checkbox" class="radio" ng-model="vm.checkAllApproved" ng-click="vm.approveAll()">
-            </label>
-                Approve All Remaining
+            <button class="btn btn-primary" ng-click="vm.approveAll()">Approve All Remaining</button>
           </td>
           <td></td>
             </tr>
