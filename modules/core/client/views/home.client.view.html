@@ -66,40 +66,35 @@
 
       <!-- COMMUNITY RECIPES -->
       <div ng-repeat="userRecipes in communityRecipes.$$state.value">
-          <div class="row row-margin">
-            <div ng-repeat="recipe in userRecipes" class="col-xs-12 col-sm-6 col-md-3 properties">
-              <img class="img-prop" src="http://drpattydental.com/wp-content/uploads/2017/05/placeholder.png">
-              <div class="card-info2"></div>
-              <div class="card-info">
-                <h3 class="card-name">{{recipe.name}}</h3>
-                <div class="card-icon-container">
+        <div class="row row-margin">
+          <div ng-repeat="recipe in userRecipes" class="col-xs-12 col-sm-6 col-md-3 properties">
+            <img class="img-prop" src="http://drpattydental.com/wp-content/uploads/2017/05/placeholder.png">
+            <div class="card-info2"></div>
+            <div class="card-info">
+              <h3 class="card-name">{{recipe.name}}</h3>
+              <div class="card-icon-container">
                 <ul class="nav navbar-nav navbar-right" ng-hide="vm.user">
-                  <img class="card-icon" src="https://manylivescm.com/wp-content/uploads/2014/03/icon-glutenfree.png">
-                  <img class="card-icon" src="http://www.theproteinbakeshop.com/ae/files/icon-no-refined-sugar.png">
+                  <!--<img class="card-icon" src="https://manylivescm.com/wp-content/uploads/2014/03/icon-glutenfree.png">
+                  <img class="card-icon" src="http://www.theproteinbakeshop.com/ae/files/icon-no-refined-sugar.png">-->
                 </ul>
-                <ul class="nav navbar-nav navbar-right" ng-show="vm.user">
-                  <img class="card-icon" src="https://manylivescm.com/wp-content/uploads/2014/03/icon-glutenfree.png">
-                  <img class="card-icon" src="http://www.theproteinbakeshop.com/ae/files/icon-no-refined-sugar.png">
-                    <a><span class="glyphicon glyphicon-plus"></span></a>
-                </ul>
-                  <a onclick="alert('Recipe has been added')" class="head" ui-sref="add">
-                      <span class="glyphicon glyphicon-plus"></span>
-                    <div class="ui-notification ng-scope info clickable killed" style="botton: 20px; right: 10px;">
-                      <h3 ng-show="title" ng-bind-html="title" class="ng-binding ng-hide" style></h3>
-                      <div class="message ng-binding" ng-bind-html="message">Recipe has been added!</div>
-                    </div>
-                  </a>
-                  <div id="stars">
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star"></span>
-                    <span class="fa fa-star"></span>
-                  </div>
+                <div id="stars">
+                  <span class="fa fa-star checked"></span>
+                  <span class="fa fa-star checked"></span>
+                  <span class="fa fa-star checked"></span>
+                  <span class="fa fa-star"></span>
+                  <span class="fa fa-star"></span>
                 </div>
+                <ul class="nav navbar-nav navbar-right">
+                  <img class="card-icon" src="https://manylivescm.com/wp-content/uploads/2014/03/icon-glutenfree.png">
+                  <img class="card-icon" src="http://www.theproteinbakeshop.com/ae/files/icon-no-refined-sugar.png">
+                  <a ng-show="vm.authentication.user">
+                    <span class="glyphicon glyphicon-plus"></span>
+                  </a>
+                </ul>
               </div>
             </div>
           </div>
+        </div>
       </div>
     </div>
 

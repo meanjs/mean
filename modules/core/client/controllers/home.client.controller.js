@@ -10,6 +10,8 @@
   function HomeController($scope, Authentication, Notification, CommunityService) {
     var vm = this;
 
+    vm.authentication = Authentication;
+
     //vm.user = Authentication.user;
     //vm.updateUserProfile = updateUserProfile;
 
