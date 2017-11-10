@@ -44,21 +44,16 @@ exports.listRecipes = function (req, res) {
       });
     }
 
-    var userMap = {};
+    var recipeMap = {};
+    var count = 0;
 
     users.forEach(function(user) {
-      userMap[user._id] = user;
+      recipeMap[count] = user.recipes;
+      count++;
     });
 
-    res.send(userMap);  
-
-    //res.json(users);
+    res.send(recipeMap);  
   });
-  // var test = {
-  //   "hello" : "world"
-  // };
-
-  //res.json(test);
 };
 
 /**

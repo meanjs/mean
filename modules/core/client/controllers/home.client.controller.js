@@ -23,10 +23,11 @@
     }
 
     //var test = CommunityService.getCommunityRecipes();
-    var test = CommunityService.getList();
-    console.log(test);
+    $scope.communityRecipes = CommunityService.getList();
+    console.log($scope.communityRecipes.$$state);
     
 
+    //$scope.communityRecipes.push({'name': 'Pasta'});
 
 
 
