@@ -25,6 +25,7 @@
     $scope.csOption = false;
     $scope.sponsorOption = false;
     $scope.studentOption = false;
+    $scope.cartList = [];
 
     if (vm.authentication.user === null) {
       $state.go('authentication.signin');
@@ -225,6 +226,50 @@
         }
 
         $scope.filteredUsersList = Array.from(filteredSet);
+      }
+    };
+    function updateSponsorCart() {
+      var user = new UsersService(vm.authentication.user);
+
+      user.$update(function (response) {
+        $scope.$broadcast('show-errors-reset', 'vm.userForm');
+
+        Notification.success({ message: '<i class="glyphicon glyphicon-ok"></i> Cart save successful!' });
+        Authentication.user = response;
+      }, function (response) {
+        Notification.error({ message: response.data.message, title: '<i class="glyphicon glyphicon-remove"></i> Cart save failed!' });
+      });
+    }
+    $scope.isInCart = function (A, B) {
+      if (vm.authentication.user.cartData !== undefined) {
+        if (A.indexOf(B) === -1) {
+          return false;
+        } else {
+          return true;
+        }
+      }
+    };
+    $scope.toggleCartTable = function () {
+      updateSponsorCart();
+      console.log(vm.authentication.user.cartData);
+      $scope.filteredUsersList = Array.from(vm.authentication.user.cartData);
+      console.log($scope.filteredUsersList);
+      $scope.$apply();
+    };
+    $scope.addToCart = function () {
+      if (vm.authentication.user.cartData === undefined) {
+        vm.authentication.user.cartData = [];
+      }
+      $scope.cartList = vm.authentication.user.cartData;
+      if ($scope.isInCart($scope.cartList, $scope.detailedInfo) === false) {
+        $scope.cartList.push($scope.detailedInfo);
+        console.log(vm.authentication.user.cartData);
+      }
+    };
+    $scope.deleteFromCart = function () {
+      var index = vm.authentication.user.cartData.indexOf($scope.detailedInfo);
+      if (index !== -1) {
+        vm.authentication.user.cartData.splice(index, 1);
       }
     };
   }

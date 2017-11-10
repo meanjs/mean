@@ -145,6 +145,9 @@ var UserSchema = new Schema({
   },
   resetPasswordExpires: {
     type: Date
+  },
+  cartData: {
+    type: Array
   }
 });
 
