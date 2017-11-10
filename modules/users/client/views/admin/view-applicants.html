@@ -14,20 +14,22 @@
     	<thead>
     		<tr class="first-row">
     			<td>Name</td>
-    			<td>Role</td>
-               	<td>
-                	<label class="checkAll">
-                		<input type="checkbox" class="radio" ng-model="vm.checkAllApproved" ng-click="vm.approveAll()">
-                	</label>
-                	Approve All Remaining
-                </td>
-                <td></td>
+          <td>
+            <label class="checkAll">
+            <input type="checkbox" class="radio" ng-model="vm.checkAllApproved" ng-click="vm.approveAll()">
+            </label>
+                Approve All Remaining
+          </td>
+          <td></td>
             </tr>
         </thead>
         <tbody>
             <tr class="applicant-rows" ng-repeat="applicant in vm.unapprovedUsers">
              	<td>{{ applicant.firstName }} {{ applicant.lastName }}</td>
-             	<td>{{ vm.modifyRoles(applicant) }}</td>
+             	<td><select name="roles" id="roles" name="roles" class="form-control" ng-model="applicant.roles">
+                  <option ng-repeat="roleOption in vm.roleOptions" value="{{roleOption.id}}">{{roleOption.name}}</option>
+                </select>
+              </td>
                 <td class="btn btn-success" ng-click="vm.approveUser(applicant)">APPROVE</td>
                 <td class="btn btn-danger" ng-click="vm.removeApplicant(applicant)">DENY</td>
             </tr>

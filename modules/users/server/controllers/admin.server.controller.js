@@ -113,7 +113,7 @@ exports.unapprovedList = function(req, res) {
 
 exports.changeToAccepted = function (req, res) {
   var unapprovedUser = req.body;
-  User.findOneAndUpdate({'username' : unapprovedUser.username}, {$set: {'approvedStatus' : true}}, function(err, changedUser) {
+  User.findOneAndUpdate({'username' : unapprovedUser.username}, {$set: {'approvedStatus' : true, 'roles': unapprovedUser.roles}}, function(err, changedUser) {
     if (err) {
       return res.status(422).send({
         message: errorHandler.getErrorMessage(err)

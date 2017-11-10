@@ -15,6 +15,25 @@
         vm.unapprovedUsers = data;
       });
 
+    vm.roleOptions = [{
+      id: "ta",
+      name: "TA"
+    },
+    {
+      id: "technician",
+      name: "Technician"
+    },
+    {
+      id: "superta",
+      name: "Super-TA"
+    },
+    {
+      id: "admin",
+      name: "Admin"
+    }
+  ];
+
+    vm.defaultRole = {id: "ta", name: "TA"};
 
     vm.removeApplicant = function (user) {
       if ($window.confirm('Are you sure you want to delete this user?')) {
