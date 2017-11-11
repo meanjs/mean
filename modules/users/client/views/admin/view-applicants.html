@@ -10,23 +10,24 @@
     <table class="table table-hover applicantsTable">
     	<thead>
     		<tr class="first-row">
-    			<td>Name</td>
+    			<td class="applicant-name-col">Name</td>
+    			<td class="applicant-roles-col">Role</td>
           <td>
             <button class="btn btn-primary" ng-click="vm.approveAll()">Approve All Remaining</button>
           </td>
           <td></td>
-            </tr>
-        </thead>
-        <tbody>
-            <tr class="applicant-rows" ng-repeat="applicant in vm.unapprovedUsers">
-             	<td>{{ applicant.firstName }} {{ applicant.lastName }}</td>
-             	<td><select ng-init="applicant.roles = vm.roleOptions[0]" name="name" id="id" class="form-control" ng-model="applicant.roles" ng-options="option.name for option in vm.roleOptions">
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="applicant-rows" ng-repeat="applicant in vm.unapprovedUsers">
+          <td class="applicant-name-col">{{ applicant.firstName }} {{ applicant.lastName }}</td>
+          <td class="applicant-roles-col">{{ vm.modifyRoles(applicant) }}</td>
                 </select>
               </td>
-                <td class="btn btn-success" ng-click="vm.approveUser(applicant)">APPROVE</td>
-                <td class="btn btn-danger" ng-click="vm.removeApplicant(applicant)">DENY</td>
-            </tr>
-        </tbody>
+          <td class="btn btn-success" ng-click="vm.approveUser(applicant)">APPROVE</td>
+          <td class="btn btn-danger" ng-click="vm.removeApplicant(applicant)">DENY</td>
+        </tr>
+      </tbody>
     </table>
   </div>
   <uib-pagination boundary-links="true" max-size="8" items-per-page="vm.itemsPerPage" total-items="vm.filterLength" ng-model="vm.currentPage" ng-change="vm.pageChanged()"></uib-pagination>
