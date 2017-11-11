@@ -77,6 +77,44 @@
         });
       });
 
+      describe('Approving Route', function () {
+        var applicantsstate;
+        beforeEach(inject (function ($state) {
+          applicantsstate = $state.get('admin.user-view-applicants');
+        }));
+
+        it('Should have the correct URL', function() {
+          expect(applicantsstate.url).toEqual('/unapproved');
+        });
+
+        it('Should not be abstract', function () {
+          expect(applicantsstate.abstract).toBe(undefined);
+        });
+
+        it('Should have templateUrl', function () {
+          expect(applicantsstate.templateUrl).toBe('/modules/users/client/views/admin/view-applicants.html');
+        });
+      });
+
+      describe('Add User Route', function () {
+        var adduserstate;
+        beforeEach(inject (function ($state) {
+          adduserstate = $state.get('/add');
+        }));
+
+        it('Should have the correct URL', function () {
+          expect(adduserstate.url).toEqual('/add');
+        });
+
+        it('Should not be abstract', function () {
+          expect(adduserstate.abstract).toBe(undefined);
+        });
+
+        it('Should have templateUrl', function() {
+          expect(adduserstate.templateUrl).toBe('/modules/users/client/views/admin/add-user.client.view.html');
+        });
+      });
+
       describe('Handle Trailing Slash', function () {
         beforeEach(inject(function ($state, $rootScope, _Authentication_, _$httpBackend_) {
           Authentication.user = {
