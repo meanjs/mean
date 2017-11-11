@@ -7,30 +7,8 @@ angular
 
   CommunityService.$inject = ['$resource'];
 
-  // This transfers data from one page to another
-   function CommunityService($resource) {
-  //   return $resource('/api/community', {}, {
-  //     communityRecipes: {
-  //       method: 'GET'
-  //     }
-  //   });
-  // }
-  
-    // var Community = $resource('/api/community', {}, {
-    //   communityRecipes: {
-    //     method: 'GET',
-    //     url: '/api/community'
-    //   }
-    // });
-
-    // angular.extend(Community, {
-    //   getCommunityRecipes: function () {
-    //     return this.communityRecipes().$promise;
-    //   }
-    // });
-
-    // return Community;
-
+  // This calls APIs to get community and my recipes
+  function CommunityService($resource) {
     var Community = $resource('/api/users/community', {}, {
       listRecipes: {
         method: 'GET',

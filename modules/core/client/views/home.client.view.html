@@ -12,13 +12,15 @@
 
     <div class="dropMenu">
       <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle btn-prop" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="filterSelection('calories')">
+        Filter by:
+        <button class="btn btn-secondary dropdown-toggle btn-prop" type="button" id="dropdownMenuButton" data-toggle="dropdown" 
+            aria-haspopup="true" aria-expanded="false" onclick="filterSelection('calories')">
           Calories
           <span class="caret"></span></a>
         </button>
         <div class="dropdown-menu filter-dropdown" aria-labelledby="dropdownMenuButton">
           <input type="range" min="0" max="1000" value="500" class="slider" id="calories">
-          <span id="calVal"></span>
+          <center><span id="calVal"></span> Calories</center>
         </div>
       </div>
       <div class="dropdown">
@@ -27,11 +29,11 @@
           <span class="caret"></span></a>
         </button>
         <div class="dropdown-menu filter-dropdown" aria-labelledby="dropdownMenuButton">
-          <li><a href="#" class="small" data-value="option1" tabIndex="-1"><input type="checkbox"/>&nbsp;Vegan</a></li>
-          <li><a href="#" class="small" data-value="option1" tabIndex="-1"><input type="checkbox"/>&nbsp;Pescetarian</a></li>
-          <li><a href="#" class="small" data-value="option1" tabIndex="-1"><input type="checkbox"/>&nbsp;Ovo Vegetarian</a></li>
-          <li><a href="#" class="small" data-value="option1" tabIndex="-1"><input type="checkbox"/>&nbsp;Lacto-Vegetarian </a></li>
-          <li><a href="#" class="small" data-value="option1" tabIndex="-1"><input type="checkbox"/>&nbsp;Lacto-Ovo-Vegetarian</a></li>
+          <li><a href="" class="small" data-value="vegan" tabIndex="-1"><input type="checkbox"/>&nbsp;Vegan</a></li>
+          <li><a href="" class="small" data-value="pescetarian" tabIndex="-1"><input type="checkbox"/>&nbsp;Pescetarian</a></li>
+          <li><a href="" class="small" data-value="ovo-vegetarian" tabIndex="-1"><input type="checkbox"/>&nbsp;Ovo Vegetarian</a></li>
+          <li><a href="" class="small" data-value="lacto-vegetarian" tabIndex="-1"><input type="checkbox"/>&nbsp;Lacto-Vegetarian </a></li>
+          <li><a href="" class="small" data-value="lacto-ovo-vegetarian" tabIndex="-1"><input type="checkbox"/>&nbsp;Lacto-Ovo-Vegetarian</a></li>
         </div>
       </div>
       <div class="dropdown">
@@ -40,9 +42,9 @@
           <span class="caret"></span></a>
         </button>
         <div class="dropdown-menu filter-dropdown" aria-labelledby="dropdownMenuButton">
-          <li><a href="#" class="small" data-value="option1" tabIndex="-1"><input type="checkbox"/>&nbsp;Fried</a></li>
-          <li><a href="#" class="small" data-value="option1" tabIndex="-1"><input type="checkbox"/>&nbsp;Grilled</a></li>
-          <li><a href="#" class="small" data-value="option1" tabIndex="-1"><input type="checkbox"/>&nbsp;Baked</a></li>
+          <li><a href="#" class="small" data-value="fried" tabIndex="-1"><input type="checkbox"/>&nbsp;Fried</a></li>
+          <li><a href="#" class="small" data-value="grilled" tabIndex="-1"><input type="checkbox"/>&nbsp;Grilled</a></li>
+          <li><a href="#" class="small" data-value="baked" tabIndex="-1"><input type="checkbox"/>&nbsp;Baked</a></li>
         </div>
       </div>
       <div class="dropdown">

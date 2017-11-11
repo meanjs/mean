@@ -21,6 +21,7 @@
         output.innerHTML = this.value;
     }
 
+    // Showing community or my recipes
     $scope.showCommunity = true;
 
     $scope.showPopular = () => {
