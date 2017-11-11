@@ -16,7 +16,7 @@
       });
 
     vm.roleOptions = [{
-      id: "ta",
+      id: "ta", //Name will be displayed in the html, id will be used on the database.
       name: "TA"
     },
     {
@@ -47,7 +47,7 @@
       if (user) {
           var newUser = user;
           user.approvedStatus = true;
-          user.roles = user.roles.id;
+          user.roles = user.roles.id; //We want to drop the user.roles.name contents and just use the db-friendly variable.
           ApplicantsService.changeToAccepted(newUser);
           vm.unapprovedUsers.splice(vm.unapprovedUsers.indexOf(user), 1);
           Notification.success('User approved successfully!');
