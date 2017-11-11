@@ -48,7 +48,7 @@
 
     function MyRecipeSuccess(response) {
       console.log("My recipes success: ", response.recipes);
-      $scope.recipes = response.recipes;
+      $scope.myRecipes = response.recipes;
     }
 
     function failure(error) {
