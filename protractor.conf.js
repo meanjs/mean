@@ -3,7 +3,7 @@
 // Protractor configuration
 var config = {
   specs: ['modules/*/tests/e2e/*.js'],
-  directConnect: true;
+  directConnect: true
 };
 
 exports.config = config;
