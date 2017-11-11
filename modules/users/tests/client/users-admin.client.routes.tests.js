@@ -99,7 +99,7 @@
       describe('Add User Route', function () {
         var adduserstate;
         beforeEach(inject (function ($state) {
-          adduserstate = $state.get('/add');
+          adduserstate = $state.get('admin.add-user');
         }));
 
         it('Should have the correct URL', function () {
@@ -110,7 +110,7 @@
           expect(adduserstate.abstract).toBe(undefined);
         });
 
-        it('Should have templateUrl', function() {
+        it('Should have templateUrl', function () {
           expect(adduserstate.templateUrl).toBe('/modules/users/client/views/admin/add-user.client.view.html');
         });
       });
