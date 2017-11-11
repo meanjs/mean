@@ -35,12 +35,19 @@ angular
       listRecipes: {
         method: 'GET',
         url: '/api/users/community'
+      },
+      myRecipes: {
+        method: 'GET',
+        url: '/api/users/myRecipes'
       }
     });
 
     angular.extend(Community, {
       getList: function () {
         return this.listRecipes().$promise;
+      },
+      getMyRecipes: function () {
+        return this.myRecipes().$promise;
       }
     });
 

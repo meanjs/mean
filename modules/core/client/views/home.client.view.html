@@ -1,16 +1,15 @@
 <div class="container">
     <div class="lowerNav text-center">
       <div class="textLN">
-        <a class="left" href="">Popular Recipes</a>
-        <a class="" ui-sref="my-recipes">My Recipes</a> </div>
+        <a ng-click="showPopular()" class="left" href="">Popular Recipes</a>
+        <!--<a class="" ui-sref="my-recipes">My Recipes</a> -->
+        <a ng-click="showMyRecipes" href="">My Recipes</a>
+      </div>
     </div>
 
     <div ui-view></div>
 
     <div class="dropMenu">
-      <!--<button class="btn btn-primary" type="button" id="dropdownMenuButton" onclick="filterSelection(' all ')">
-        Show All
-      </button>-->
       <div class="dropdown">
         <button class="btn btn-secondary dropdown-toggle btn-prop" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="filterSelection('calories')">
           Calories
@@ -64,64 +63,67 @@
       </div>
     </div>
 
-      <!-- COMMUNITY RECIPES -->
-      <div ng-repeat="userRecipes in communityRecipes.$$state.value">
-        <div class="row row-margin">
-          <div ng-repeat="recipe in userRecipes" class="col-xs-12 col-sm-6 col-md-3 properties">
-            <img class="img-prop" src="http://drpattydental.com/wp-content/uploads/2017/05/placeholder.png">
-            <div class="card-info2"></div>
-            <div class="card-info">
-              <h3 class="card-name">{{recipe.name}}</h3>
-              <div class="card-icon-container">
-                <ul class="nav navbar-nav navbar-right" ng-hide="vm.user">
-                  <!--<img class="card-icon" src="https://manylivescm.com/wp-content/uploads/2014/03/icon-glutenfree.png">
-                  <img class="card-icon" src="http://www.theproteinbakeshop.com/ae/files/icon-no-refined-sugar.png">-->
-                </ul>
-                <div id="stars">
-                  <span class="fa fa-star checked"></span>
-                  <span class="fa fa-star checked"></span>
-                  <span class="fa fa-star checked"></span>
-                  <span class="fa fa-star"></span>
-                  <span class="fa fa-star"></span>
-                </div>
-                <ul class="nav navbar-nav navbar-right">
-                  <img class="card-icon" src="https://manylivescm.com/wp-content/uploads/2014/03/icon-glutenfree.png">
-                  <img class="card-icon" src="http://www.theproteinbakeshop.com/ae/files/icon-no-refined-sugar.png">
-                  <a ng-show="vm.authentication.user">
-                    <span class="glyphicon glyphicon-plus"></span>
-                  </a>
-                </ul>
+    <!-- COMMUNITY RECIPES -->
+    <div ng-show="showCommunity" ng-repeat="userRecipes in communityRecipes">
+      <div class="row row-margin">
+        <div ng-repeat="recipe in userRecipes" class="col-xs-12 col-sm-6 col-md-3 properties">
+          <img class="img-prop" src="http://drpattydental.com/wp-content/uploads/2017/05/placeholder.png">
+          <div class="card-info2"></div>
+          <div class="card-info">
+            <h3 class="card-name">{{recipe.name}}</h3>
+            <div class="card-icon-container">
+              <ul class="nav navbar-nav navbar-right" ng-hide="vm.user">
+                <!--<img class="card-icon" src="https://manylivescm.com/wp-content/uploads/2014/03/icon-glutenfree.png">
+                <img class="card-icon" src="http://www.theproteinbakeshop.com/ae/files/icon-no-refined-sugar.png">-->
+              </ul>
+              <div id="stars">
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star"></span>
               </div>
+              <ul class="nav navbar-nav navbar-right">
+                <img class="card-icon" src="https://manylivescm.com/wp-content/uploads/2014/03/icon-glutenfree.png">
+                <img class="card-icon" src="http://www.theproteinbakeshop.com/ae/files/icon-no-refined-sugar.png">
+                <a ng-show="vm.authentication.user">
+                  <span class="glyphicon glyphicon-plus"></span>
+                </a>
+              </ul>
             </div>
           </div>
         </div>
       </div>
     </div>
 
+    <!--MY RECIPES-->
+    <div ng-hide="showCommunity">
+      <h1>My recipess</h1>
+    </div>
   </div>
 
 
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-
-   <script type="text/javascript">
-
-     var options = [];
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script type="text/javascript">
+  var options = [];
   $( '.dropdown-menu a' ).on( 'click', function( event ) {
-     var $target = $( event.currentTarget ),
-         val = $target.attr( 'data-value' ),
-         $inp = $target.find( 'input' ),
-         idx;
-     if ( ( idx = options.indexOf( val ) ) > -1 ) {
+    var $target = $( event.currentTarget ),
+        val = $target.attr( 'data-value' ),
+        $inp = $target.find( 'input' ),
+        idx;
+
+    if ( ( idx = options.indexOf( val ) ) > -1 ) {
         options.splice( idx, 1 );
         setTimeout( function() { $inp.prop( 'checked', false ) }, 0);
-     } else {
+    } 
+    else {
         options.push( val );
         setTimeout( function() { $inp.prop( 'checked', true ) }, 0);
-     }
-     $( event.target ).blur();
+    }
+    
+    $( event.target ).blur();
 
-     console.log( options );
-     return false;
+    console.log( options );
+    return false;
   });
-   </script>
+</script>
