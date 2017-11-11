@@ -1,3 +1,11 @@
+.underline {
+  text-decoration: underline;
+}
+
+.no-underline {
+  text-decoration: none;
+}
+
 .content {
   margin-top: 52px ;
 }
