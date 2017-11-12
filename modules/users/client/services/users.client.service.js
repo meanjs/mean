@@ -90,7 +90,7 @@
       },
       adminSignupUser: {
         method: 'POST',
-        url: '/api/add'
+        url: '/api/users/add'
       }
     });
 

@@ -26,7 +26,7 @@ exports.invokeRolesPolicies = function () {
       resources: '/api/unapproved',
       permissions: '*'
     }, {
-      resources: '/api/add',
+      resources: '/api/users/add',
       permissions: '*'
     }
     ]

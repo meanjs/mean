@@ -26,7 +26,7 @@ module.exports = function (app) {
     .delete(adminPolicy.isAllowed, admin.delete);
 
   // Admin routes for applying a new user.
-  app.route('/api/add')
+  app.route('/api/users/add')
     .post(adminPolicy.isAllowed, admin.adminsignup);
   
   // Finish by binding the user middleware
