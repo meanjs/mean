@@ -73,7 +73,11 @@
           <img class="img-prop" src="http://drpattydental.com/wp-content/uploads/2017/05/placeholder.png">
           <div class="card-info2"></div>
           <div class="card-info">
-            <h3 class="card-name">{{recipe.name}}</h3>
+            <h3 class="card-name">
+              <a ui-sref="details({recipeDetails: recipe})" href="">
+                {{recipe.name}}
+              </a>
+            </h3>
             <div class="card-icon-container">
               <ul class="nav navbar-nav navbar-right" ng-hide="vm.user">
                 <!--<img class="card-icon" src="https://manylivescm.com/wp-content/uploads/2014/03/icon-glutenfree.png">

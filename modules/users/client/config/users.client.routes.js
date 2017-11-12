@@ -42,6 +42,7 @@
       .state('details', { // RECIPE DETAILS
         url: '/recipe-details',
         templateUrl: 'modules/users/client/views/recipes/recipeDetails.client.view.html',
+        params: {recipeDetails : null},
         controller: 'RecipeDetailsController',
         controllerAs: 'vm',
         data: {

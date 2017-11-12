@@ -5,9 +5,9 @@
     .module('core')
     .controller('HomeController', HomeController);
 
-  HomeController.$inject = ['$scope', 'Authentication', 'Notification', 'CommunityService'];
+  HomeController.$inject = ['$scope', 'Authentication', 'Notification', 'TransferService', 'CommunityService', '$state'];
 
-  function HomeController($scope, Authentication, Notification, CommunityService) {
+  function HomeController($scope, Authentication, Notification, TransferService, CommunityService, $state) {
     var vm = this;
 
     vm.authentication = Authentication;
@@ -16,6 +16,7 @@
     var slider = document.getElementById("calories");
     var output = document.getElementById("calVal");
     output.innerHTML = slider.value; // Display the default slider value
+
     // Update the current slider value (each time you drag the slider handle)
     slider.oninput = function() {
         output.innerHTML = this.value;
