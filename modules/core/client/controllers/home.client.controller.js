@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('core').controller('HomeController', ['$scope', '$http', 'Authentication',
-	function ($scope, $http, Authentication) {
+angular.module('core').controller('HomeController', ['$scope', '$state', '$http', 'Authentication',
+	function ($scope, $state, $http, Authentication) {
     // This provides Authentication context.
     $scope.authentication = Authentication;
 
@@ -208,27 +208,12 @@ angular.module('core').controller('HomeController', ['$scope', '$http', 'Authent
       $scope.globalEvent = event;
     }
 
-    //More initializations
-    $scope.isOrg = false;
-    $scope.isBiz = false;
-
-    if($scope.authentication.user === ""){
-      $scope.isOrg = false;
-    }else if($scope.authentication.user.roles.indexOf("Organization") >= 0){
-      $scope.isOrg = true;
-    }else{
-      $scope.isOrg = false;
+    $scope.refreshHandler = function(){
+      console.log('refresh');
+      if($scope.authentication.user.roles.indexOf("Organization") >= 0){
+        $state.go('home.orgDash.eventList');
+      }
     }
 
-    if($scope.authentication.user === ""){
-      $scope.isBiz = false;
-    }else if($scope.authentication.user.roles.indexOf("Business") >= 0){
-      $scope.isBiz = true;
-    }else{
-      $scope.isBiz = false;
-    }
-      //console.log($scope.signedIn);
-      console.log($scope.isBiz);
-      console.log($scope.isOrg);
-    }
-    ]);
+  }
+  ]);
