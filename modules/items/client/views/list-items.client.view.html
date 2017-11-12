@@ -2,8 +2,6 @@
   <div class="page-header">
     <h1>
       Items
-        <i class="glyphicon glyphicon-plus"></i>
-      </a>          
     </h1>
       <span><span class="glyphicon glyphicon-search"></span><input type="text" size= "44" placeholder="Search by name, content, category or module" ng-model="query">
       <a class="btn btn-primary pull-right" data-ui-sref="items.create">
@@ -16,6 +14,7 @@
       <h4 class="list-group-item-heading" data-ng-bind="item.title"></h4>
       <p class="list-group-item-text item-content" data-ng-bind="item.content"></p>
         <div ng-if="item.categories" class="list-group-item-text">
+        <div ng-if="item.categories" class="list-group-item-text">
           Category:&nbsp;
           <span data-ng-bind="item.categories.title"></span>
         </div>
@@ -23,7 +22,6 @@
           Module:&nbsp;
           <span data-ng-bind="item.modules.title"></span>
         </div>
-        <div>
           Count:&nbsp;
           <span ng-if="item.count" ng-bind="item.count"></span>
         </div>
@@ -35,10 +33,10 @@
           Posted on
           <span data-ng-bind="item.created | date:'mediumDate'"></span>
           by
-          <b>
-            <span ng-if="item.user" ng-bind="item.user.displayName"></span>
-            <span ng-if="!item.user">Deleted User</span>
-          </b>
+        <b>
+          <span ng-if="item.user" ng-bind="item.user.displayName"></span>
+          <span ng-if="!item.user">Deleted User</span>
+        </b>
         </div>
     </a>
   </div>
