@@ -19,6 +19,13 @@
       'name' : '',
       'directions' : '',
       'cookingStyle' : '',
+      'healthClassifications' : {
+        'glutenFree' : false,
+        'noSugar' : false,
+        'lowFat' : false,
+        'vegan' : false,
+        'lowCalorie' : false
+      },
       'ingredients' : [{
         'name' : '',
         'quantity' : '',
