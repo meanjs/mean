@@ -11,5 +11,6 @@
     var vm = this;
 
     $scope.recipe = $stateParams.recipeDetails;
+    console.log($scope.recipe);
   }
 }());
