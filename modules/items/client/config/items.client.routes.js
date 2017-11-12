@@ -18,7 +18,8 @@
         url: '',
         templateUrl: '/modules/items/client/views/list-items.client.view.html',
         controller: 'ItemsListController',
-        controllerAs: 'vm'
+        controllerAs: 'vm',
+        css: 'css/list-items.css',
       })
       .state('items.create', {
         url: '/create',
