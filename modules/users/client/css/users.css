@@ -75,3 +75,29 @@
     margin-bottom: -3px;
     margin-top: 3px;
 }
+
+.signup-container{
+padding: 15px;
+padding-bottom: 1px;
+border-width:1px;
+border-color: black;
+border-radius: 5px;
+border-style: solid;
+background-color:rgba(137, 137, 137, 0.68)
+}
+.settings-container{
+padding: 5px;
+border-width:1px;
+border-color: black;
+border-radius: 5px;
+border-style: solid;
+background-color:rgba(137, 137, 137, 0.3)
+}
+.signin-container{
+padding: 15px;
+border-width:1px;
+border-color: black;
+border-style: solid;
+border-radius: 5px;
+background-color:rgba(137, 137, 137, 0.3)
+}
