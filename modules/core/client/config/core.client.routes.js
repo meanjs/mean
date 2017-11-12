@@ -18,44 +18,40 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
       templateUrl: 'modules/core/client/views/home.client.view.html'
     })
     .state('home.orgDash', {
-      url: '/orgDashboard',
+      url: 'orgDashboard',
       templateUrl: 'modules/core/client/views/orgDash.client.view.html'
     })
     .state('home.orgDash.eventList', {
-      url: '/',
+      url: '/eventList',
       templateUrl: 'modules/core/client/views/orgDash.eventList.client.view.html'
     })
     .state('home.orgDash.calendar', {
-      url: '/',
+      url: '/calendar',
       templateUrl: 'modules/core/client/views/orgDash.calendar.client.view.html'
     })
     .state('home.orgDash.pastEvents', {
-      url: '/',
+      url: '/pastEvents',
       templateUrl: 'modules/core/client/views/orgDash.pastEvents.client.view.html'
     })
     .state('home.requestEvent', {
-      url: '/requestEvent',
+      url: 'requestEvent',
       templateUrl: 'modules/core/client/views/orgDash.requestEvent.client.view.html'
     })
     .state('home.bizDash', {
-      url: '/bizDashboard',
+      url: 'bizDashboard',
       templateUrl: 'modules/core/client/views/bizDash.client.view.html'
     })
     .state('home.bizDash.eventList', {
-      url: '/',
+      url: '/eventList',
       templateUrl: 'modules/core/client/views/bizDash.eventList.client.view.html'
     })
     .state('home.bizDash.calendar', {
-      url: '/',
+      url: '/calendar',
       templateUrl: 'modules/core/client/views/bizDash.calendar.client.view.html'
     })
     .state('home.bizDash.pastEvents', {
-      url: '/',
+      url: '/pastEvents',
       templateUrl: 'modules/core/client/views/bizDash.pastEvents.client.view.html'
-    })
-    .state('home.createEvent', {
-      url: '/createEvent',
-      templateUrl: 'modules/core/client/views/bizDash.createEvent.client.view.html'
     })
     .state('not-found', {
       url: '/not-found',

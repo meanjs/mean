@@ -22,8 +22,8 @@
           <td>{{event.name}}</td>
           <td>{{event.organizationConfirmed}}</td>
           <td>
-            <button class="btn" style="display: inline-block; margin:auto;background-color: forestgreen; border: solid 1px darkgreen; color:white" ng-click="$parent.setGlobalEvent(event)">Accept</button>
-            <button class="btn" style="display: inline-block; margin:auto;background-color: #F5A623;border: solid 1px #D38401; color:white" ng-click="">Edit</button>
+            <button class="btn" style="display: inline-block; margin:auto;background-color: forestgreen; border: solid 1px darkgreen; color:white" ng-click="$parent.setGlobalEvent(event)">Manage requests</button>
+            <button class="btn" style="display: inline-block; margin:auto;background-color: #F5A623;border: solid 1px #D38401; color:white" ui-sref="events.edit({ eventId: event._id })">Edit</button>
             <button class="btn" style="display: inline-block; margin:auto;background-color: red;border: solid 1px firebrick; color:white" ng-click="deleteEvent(event);loadEventList()">Cancel</button>
           </td>
         </tr>
@@ -32,6 +32,6 @@
   </div>
   <!-- ADD EVENT BUTTON -->
   <div class="row" style="justify-content: center">
-    <button class="btn" style="display: block; margin:auto; margin-bottom:6px; color: white; background-color: #F5A623;border: solid 1px #D38401" ui-sref="home.createEvent">Create Event</button>
+    <button class="btn" style="display: block; margin:auto; margin-bottom:6px; color: white; background-color: #F5A623;border: solid 1px #D38401" ui-sref="events.create">Create Event</button>
   </div>
 </div>

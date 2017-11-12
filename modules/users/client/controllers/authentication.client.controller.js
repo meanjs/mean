@@ -27,13 +27,13 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$stat
         $scope.authentication.user = response;
 
         // And redirect to the previous or home page
-        if($scope.authentication.user.roles.indexOf("Organization") >=0){
+        if ($scope.authentication.user.roles.indexOf('Organization') >= 0) {
           $state.go('home.orgDash.eventList');
-          console.log($state.current)
+          console.log($state.current);
         }
-        if($scope.authentication.user.roles.indexOf("Business") >=0){
+        if ($scope.authentication.user.roles.indexOf('Business') >= 0) {
           $state.go('home.bizDash.eventList');
-          console.log($state.current)
+          console.log($state.current);
         }
       }).error(function (response) {
         $scope.error = response.message;
@@ -55,13 +55,13 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$stat
         //$scope.signedIn = 1;
 
         // And redirect to the previous or home page
-        if($scope.authentication.user.roles.indexOf("Organization") >=0){
+        if ($scope.authentication.user.roles.indexOf('Organization') >= 0) {
           $state.go('home.orgDash.eventList');
-          console.log($state.current)
+          console.log($state.current);
         }
-        if($scope.authentication.user.roles.indexOf("Business") >=0){
+        if ($scope.authentication.user.roles.indexOf('Business') >= 0) {
           $state.go('home.bizDash.eventList');
-          console.log($state.current)
+          console.log($state.current);
         }
       }).error(function (response) {
         $scope.error = response.message;
