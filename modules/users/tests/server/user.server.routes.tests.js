@@ -312,6 +312,35 @@ describe('User CRUD tests', function () {
     });
   });
 
+  it('should be able to retrieve a list applicants if admin', function (done) {
+    user.roles = ['admin'];
+
+    user.save(function (err) {
+      should.not.exist(err);
+      agent.post('/api/auth/signin')
+        .send(credentials)
+        .expect(200)
+        .end(function (signinErr, signinRes) {
+          // Handle signin error
+          if (signinErr) {
+            return done(signinErr);
+          }
+
+          // Request list of users
+          agent.get('/api/unapproved')
+            .expect(200)
+            .end(function (applicantsGetErr, applicantsGetRes) {
+              if (applicantsGetErr) {
+                return done(applicantsGetErr);
+              }
+
+              // Call the assertion callback
+              return done();
+            });
+        });
+    });
+  });
+
   it('forgot password should return 400 for non-existent username', function (done) {
     user.roles = ['ta'];
 
