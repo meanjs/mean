@@ -15,6 +15,7 @@
         template: '<ui-view/>'
       })
         css: 'css/list-items.css',
+        css: 'css/list-items.css',
       .state('admin.items.modules', {
         url: '/modules',
         templateUrl: '/modules/items/client/views/admin/add-delete-modules.view.html',
