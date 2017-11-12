@@ -37,5 +37,10 @@
   },
   "_source": "https://github.com/angular-ui/ui-calendar.git",
   "_target": "^1.0.2",
+<<<<<<< HEAD
   "_originalSource": "angular-ui-calendar"
+=======
+  "_originalSource": "angular-ui-calendar",
+  "_direct": true
+>>>>>>> 43afb8129de74465fc646f47d0c6d9335e69d4ed
 }
