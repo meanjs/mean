@@ -1,0 +1,30 @@
+{
+  "name": "owasp-password-strength-test",
+  "version": "1.3.0",
+  "description": "A password-strength tester based upon the OWASP guidelines for enforcing strong passwords.",
+  "main": "owasp-password-strength-test.js",
+  "devDependencies": {
+    "jshint": "2.6.3",
+    "mocha": "2.2.4",
+    "should": "3.1.2"
+  },
+  "jshintConfig": {
+    "expr": true,
+    "laxbreak": true
+   },
+  "scripts": {
+    "test": "mocha --recursive --reporter spec test.js",
+    "lint": "jshint *.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nowsecure/owasp-password-strength-test.git"
+  },
+  "keywords": [
+    "security",
+    "password",
+    "owasp"
+  ],
+  "author": "Chris Allen Lane",
+  "license": "MIT"
+}
