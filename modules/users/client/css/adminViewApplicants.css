@@ -7,6 +7,10 @@
 	font-weight: bold;
 }
 
+#applicant-rows > td {
+	vertical-align: middle;
+}
+
 .applicant-name-col {
 	width: 25%;
 }
@@ -23,6 +27,6 @@
 	vertical-align: middle;
 }
 
-.btn {
+.approval-action-btn {
 	font-size: 10px;
 }

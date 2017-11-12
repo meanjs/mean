@@ -19,13 +19,13 @@
         </tr>
       </thead>
       <tbody>
-        <tr class="applicant-rows" ng-repeat="applicant in vm.unapprovedUsers">
+        <tr id="applicant-rows" ng-repeat="applicant in vm.unapprovedUsers">
           <td class="applicant-name-col">{{ applicant.firstName }} {{ applicant.lastName }}</td>
           <td class="applicant-roles-col">{{ vm.modifyRoles(applicant) }}</td>
-                </select>
-              </td>
-          <td class="btn btn-success" ng-click="vm.approveUser(applicant)">APPROVE</td>
-          <td class="btn btn-danger" ng-click="vm.removeApplicant(applicant)">DENY</td>
+          <td>
+            <button class="btn btn-success approval-action-btn" ng-click="vm.approveUser(applicant)">APPROVE</button>
+            <button class="btn btn-danger" ng-click="vm.removeApplicant(applicant)">DENY</button>
+          </td>
         </tr>
       </tbody>
     </table>
