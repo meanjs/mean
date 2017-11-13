@@ -63,16 +63,19 @@
     }
 
     function addRecipeSuccess(response) {
-      Notification.success({ message: '<i class="glyphicon glyphicon-ok"></i> Add recipe successful!' })
+      Notification.success({ message: '<i class="glyphicon glyphicon-ok"></i> Add recipe successful!' });
+
+      CommunityService.getMyRecipes()
+        .then(MyRecipeSuccess)
+        .catch(failure)
     }
 
     function addRecipeFailure(response) {
-      Notification.error({ message: '<i class="glyphicon glyphicon-remove"></i> Add recipe failed!' })
+      Notification.error({ message: '<i class="glyphicon glyphicon-remove"></i> Add recipe failed!' });
     }
 
     // DELETE RECIPE
     $scope.delete = (myRecipe) => {
-      console.log(myRecipe);
       CommunityService.deleteThisRecipe(myRecipe)
         .then(deleteRecipeSuccess)
         .catch(deleteRecipeFailure);
@@ -80,10 +83,19 @@
 
     function deleteRecipeSuccess(response) {
       Notification.success({ message: '<i class="glyphicon glyphicon-ok"></i> Delete recipe successful!' });
+
+      // Get updated community and my recipes
+      CommunityService.getList()
+        .then(CommunityRecipeSuccess)
+        .catch(failure)
+
+      CommunityService.getMyRecipes()
+        .then(MyRecipeSuccess)
+        .catch(failure)
     }
 
     function deleteRecipeFailure(response) {
-      Notification.error({ message: '<i class="glyphicon glyphicon-remove"></i> Delete recipe failed!' })
+      Notification.error({ message: '<i class="glyphicon glyphicon-remove"></i> Delete recipe failed!' });
     }
 
   }
