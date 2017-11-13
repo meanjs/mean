@@ -7,17 +7,17 @@
         <img src="https://media1.s-nbcnews.com/j/newscms/2017_29/2076501/170715-chipotle-restaurant-ew-1227p_5fa0d17495b09c2189e8632005bc9e95.nbcnews-ux-2880-1000.jpg" alt="carousel {{$index}}">
         <div class="carousel-caption">
           <h3>{{event.name}}</h3>
-          <h4 id="eventData">{{event.dateOfEvent | date:"MM'/'dd'/'yyyy"}} : {{event.startTime}}</h4>
+          <h4 id="eventData">{{event.dateOfEvent | date:"MM'/'dd'/'yyyy"}} : {{event.startTime | date:"hh:mm a"}} - {{event.endTime | date:"hh:mm a"}}</h4>
           <p id="eventData">{{event.location}}</p>
         </div>
       </div>
     </div>
     <!-- Left and right controls -->
-    <a class="left carousel-control" href="#myCarousel" data-slide="prev" style="font-family:'Times Roman', serif !important">
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev" style="font-family:'', serif !important">
       <span class="glyphicon glyphicon-chevron-left"></span>
       <span class="sr-only">Previous</span>
     </a>
-    <a class="right carousel-control" href="#myCarousel" data-slide="next" style="font-family:'Times Roman', serif !important">
+    <a class="right carousel-control" href="#myCarousel" data-slide="next" style="font-family:'', serif !important">
       <span class="glyphicon glyphicon-chevron-right"></span>
       <span class="sr-only">Next</span>
     </a>
