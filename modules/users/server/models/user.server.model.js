@@ -62,7 +62,7 @@ var ReviewSchema = new Schema({
 
 var RecipeSchema = new Schema({
   name: String,
-  image: { 
+  image: {
     type: String,
     default: 'modules/users/client/img/profile/default.png'
   },
@@ -181,7 +181,7 @@ var UserSchema = new Schema({
     lowSalt: Boolean,
     lowFat: Boolean,
     lowCalorie: Boolean, // less than 400 calories/meal
-    bland: Boolean,
+    bland: Boolean
   },
   religiousRestrictions: {
     hinduism: Boolean,
