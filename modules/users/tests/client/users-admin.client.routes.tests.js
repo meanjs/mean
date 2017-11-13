@@ -79,7 +79,7 @@
 
       describe('Approving Route', function () {
         var applicantsstate;
-        beforeEach(inject (function ($state) {
+        beforeEach(inject(function ($state) {
           applicantsstate = $state.get('admin.user-view-applicants');
         }));
 
@@ -98,7 +98,7 @@
 
       describe('Add User Route', function () {
         var adduserstate;
-        beforeEach(inject (function ($state) {
+        beforeEach(inject(function ($state) {
           adduserstate = $state.get('admin.add-user');
         }));
 

@@ -47,10 +47,10 @@
         return 'TA';
       return 'User';
 
-    }
+    };
 
     vm.approveAll = function () {
-      for(var i=0; i<vm.unapprovedUsers.length; i++){
+      for(var i = 0; i < vm.unapprovedUsers.length; i++) {
         vm.approveUser(vm.unapprovedUsers[i]);
       }
     };

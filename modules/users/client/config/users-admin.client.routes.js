@@ -51,7 +51,7 @@
         templateUrl: '/modules/users/client/views/admin/view-applicants.html',
         controller: 'ViewApplicantsController',
         controllerAs: 'vm',
-        css: "css/adminViewApplicants.css"
+        css: 'css/adminViewApplicants.css'
       });
 
     getUser.$inject = ['$stateParams', 'AdminService'];

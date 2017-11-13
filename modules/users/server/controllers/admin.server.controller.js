@@ -109,7 +109,7 @@ exports.unapprovedList = function(req, res) {
 
       res.json(unapprovedUsers);
     });
-}
+};
 
 exports.changeToAccepted = function (req, res) {
   var unapprovedUser = req.body;
@@ -121,7 +121,7 @@ exports.changeToAccepted = function (req, res) {
     }
     res.json(changedUser);
   });
-}
+};
 
 
 exports.deleteApplicant = function (req, res) {
@@ -132,7 +132,7 @@ exports.deleteApplicant = function (req, res) {
       console.log(unapprovedUser.approvedStatus);
     });
   }
-}
+};
 
 /**
  * User middleware

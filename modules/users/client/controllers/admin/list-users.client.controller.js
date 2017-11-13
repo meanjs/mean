@@ -46,7 +46,7 @@
         return 'TA';
       return 'User';
 
-    }
+    };
     function pageChanged() {
       vm.figureOutItemsToDisplay();
     }

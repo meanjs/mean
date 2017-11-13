@@ -30,7 +30,7 @@
         controllerAs: 'vm',
         css: 'css/add-delete-categories-module.css'
       })
-      .state('admin.items.modulecreate',{
+      .state('admin.items.modulecreate', {
         url: '/modules/create',
         controller: 'ModsController',
         controllerAs: 'vm',
@@ -46,7 +46,7 @@
         controllerAs: 'vm',
         css: 'css/add-delete-categories-module.css'
       })
-      .state('admin.items.categorycreate',{
+      .state('admin.items.categorycreate', {
         url: '/categories/create',
         templateUrl: '/modules/items/client/views/admin/form-category.client.view.html',
         controller: 'CatsController',
