@@ -3,7 +3,7 @@
     <h1>{{vm.item._id ? 'Edit Item' : 'New Item'}}</h1>
   </div>
   <div class="pull-right">
-    <a ng-show="vm.item._id" class="btn btn-primary" ng-click="vm.remove()">
+    <a ng-show="vm.item._id" class="btn btn-primary" ng-if="vm.authentication.user.roles != 'ta'" ng-click="vm.remove()">
       <i class="glyphicon glyphicon-trash"></i>
     </a>
   </div>
