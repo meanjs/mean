@@ -39,19 +39,10 @@
         },
         css: 'modules/users/client/css/recipes/addRecipe.css'
       })
-      .state('my-recipes', { // MY RECIPES
-        url: '/my-recipes',
-        templateUrl: 'modules/users/client/views/recipes/myRecipes.client.view.html',
-        controller: 'MyRecipesController',
-        controllerAs: 'vm',
-        data: {
-          pageTitle: 'My Recipes'
-        },
-        css: 'modules/users/client/css/recipes/myRecipes.css'
-      })
       .state('details', { // RECIPE DETAILS
         url: '/recipe-details',
         templateUrl: 'modules/users/client/views/recipes/recipeDetails.client.view.html',
+        params: {recipeDetails : null},
         controller: 'RecipeDetailsController',
         controllerAs: 'vm',
         data: {

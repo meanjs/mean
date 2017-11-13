@@ -1,38 +1,42 @@
 <div>
-  <h3 class="col-xs-12 text-center"><b>Sign up</b></h3>
+  
+  <div class="text-center logo-margin">
+    <img src="../modules/users/client/img/logoHT.png" class="logo-img" alt="">
+  </div>
+
+  <h3 class="col-xs-12 text-center"><b>Create a New Account</b></h3>
   <div class="col-xs-offset-2 col-xs-8 col-md-offset-4 col-md-4">
     <form name="vm.userForm" ng-submit="vm.signup(vm.userForm.$valid)" class="signin" novalidate autocomplete="off">
       <fieldset>
         
         <div class="form-group" show-errors>
-          <label for="firstName">First Name</label>
-          <input type="text" id="firstName" name="firstName" class="form-control" ng-model="vm.credentials.firstName" placeholder="First Name" required autofocus>
+          <!-- <label for="firstName">First Name</label> -->
+          <input type="text" id="firstName" name="firstName" class="form-control box-field" ng-model="vm.credentials.firstName" placeholder="First Name" required autofocus>
           <div ng-messages="vm.userForm.firstName.$error" role="alert">
             <p class="help-block error-text" ng-message="required">First name is required.</p>
           </div>
         </div>
         
-
-<!--         <div class="form-group" show-errors>
-          <label for="Name">Name</label>
-          <input type="text" id="Name" name="Name" class="form-control" ng-model="vm.credentials.Name" placeholder="Name" required autofocus>
-          <div ng-messages="vm.userForm.Name.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">Name is required.</p>
-          </div>
-        </div> -->
-
-        
         <div class="form-group" show-errors>
-          <label for="lastName">Last Name</label>
-          <input type="text" id="lastName" name="lastName" class="form-control" ng-model="vm.credentials.lastName" placeholder="Last Name" required>
+          <!-- <label for="lastName">Last Name</label> -->
+          <input type="text" id="lastName" name="lastName" class="form-control box-field" ng-model="vm.credentials.lastName" placeholder="Last Name" required>
           <div ng-messages="vm.userForm.lastName.$error" role="alert">
             <p class="help-block error-text" ng-message="required">Last name is required.</p>
           </div>
         </div>
-      
+
         <div class="form-group" show-errors>
-          <label for="email">Email</label>
-          <input type="email" id="email" name="email" class="form-control" ng-model="vm.credentials.email" placeholder="Email" lowercase required>
+          <!-- <label for="username">Username</label> -->
+          <input type="text" id="username" name="username" class="form-control box-field" ng-model="vm.credentials.username" ng-pattern="vm.usernameRegex" placeholder="Username" lowercase required>
+          <div ng-messages="vm.userForm.username.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Username is required.</p>
+            <p class="help-block error-text" ng-message="pattern">Please enter a valid username: 3+ characters long, non restricted word, characters "_-.", no consecutive dots, does not begin or end with dots, letters a-z and numbers 0-9.</p>
+          </div>
+        </div>
+
+        <div class="form-group" show-errors>
+          <!-- <label for="email">Email</label> -->
+          <input type="email" id="email" name="email" class="form-control box-field" ng-model="vm.credentials.email" placeholder="Email" lowercase required>
           <div ng-messages="vm.userForm.email.$error" role="alert">
             <p class="help-block error-text" ng-message="required">Email address is required.</p>
             <p class="help-block error-text" ng-message="Email">Email address is invalid.</p>
@@ -40,8 +44,8 @@
         </div>
 
         <div class="form-group" show-errors>
-          <label for="password">Password</label>
-            <input type="password" id="password" name="password" class="form-control" ng-model="vm.credentials.password" placeholder="Password" uib-popover="{{vm.getPopoverMsg()}}" popover-trigger="outsideClick" password-validator required>
+          <!-- <label for="password">Password</label> -->
+            <input type="password" id="password" name="password" class="form-control box-field" ng-model="vm.credentials.password" placeholder="Password" uib-popover="{{vm.getPopoverMsg()}}" popover-trigger="outsideClick" password-validator required>
           <div ng-messages="vm.userForm.password.$error" role="alert">
             <p class="help-block error-text" ng-message="required">Password is required.</p>
             <div ng-repeat="passwordError in passwordErrors">
@@ -51,14 +55,7 @@
         </div>
 
         
-        <div class="form-group" show-errors>
-          <label for="username">Username</label>
-          <input type="text" id="username" name="username" class="form-control" ng-model="vm.credentials.username" ng-pattern="vm.usernameRegex" placeholder="Username" lowercase required>
-          <div ng-messages="vm.userForm.username.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">Username is required.</p>
-            <p class="help-block error-text" ng-message="pattern">Please enter a valid username: 3+ characters long, non restricted word, characters "_-.", no consecutive dots, does not begin or end with dots, letters a-z and numbers 0-9.</p>
-          </div>
-        </div>
+        
         
 
  <!--        <div class="form-group" show-errors>
@@ -76,12 +73,12 @@
           <label>Password Requirements</label>
           <uib-progressbar value="requirementsProgress" type="{{requirementsColor}}"><span style="color:white; white-space:nowrap;">{{requirementsProgress}}%</span></uib-progressbar>
         </div>
-        <div class="text-center form-group">
-          <button type="submit" class="btn btn-primary">Sign up</button>
-      <!--    &nbsp; or&nbsp;     -->
-          <br></br>
-          <br></br>
-          <a ui-sref="authentication.signin" class="show-signin"><u>Already have an account?</u></a>
+        <div class="text-center">
+          <button type="submit" class="htb htb-primary btn-lg sharp">Create Account</button>
+          <div class="link-margin">
+            Already a member? <a ui-sref="authentication.signin" class="show-signin propertiesA">Log in</a>
+          </div>
+          
         </div>
       </fieldset>
     </form>

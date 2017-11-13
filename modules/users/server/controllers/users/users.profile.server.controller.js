@@ -34,6 +34,29 @@ if (useS3Storage) {
 }
 
 /**
+ * List of Community Recipes
+ */
+exports.listRecipes = function (req, res) {
+  User.find({}, '-salt -password -providerData').sort('-created').populate('user', 'displayName').exec(function (err, users) {
+    if (err) {
+      return res.status(422).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    }
+
+    var recipeMap = {};
+    var count = 0;
+
+    users.forEach(function(user) {
+      recipeMap[count] = user.recipes;
+      count++;
+    });
+
+    res.send(recipeMap);  
+  });
+};
+
+/**
  * Update user details
  */
 exports.update = function (req, res) {
