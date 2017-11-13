@@ -4,8 +4,13 @@
   </div>-->
   <center>
     <text id="title">Healthy Alternatives for "</text>
-    <text id="ingredient">{{wholename}}</text>
+    <text id="ingredient">{{firstUpper(wholename)}}</text>
     <text id="title">"</text>
+
+    <text id = "alternativeIDtest"> {{alternatives[1].map_ndbno}} </text>
+
+    <text id = "alternativeNutrienttest"></text>
+
   </center>
   </br>
   <div class="lowerNav text-center">
@@ -22,7 +27,8 @@
   </div>
   </br>
   <div ng-show="showItem">
-    <center>
+  
+    <!-- <center>
       <div class="row">
         <div style="float: left;" class="col-md-4" ng-repeat="alternative in alternatives">
           <div ng-click="getReport(alternative.map_ndbno)">
@@ -39,24 +45,26 @@
         </div>
       </div>
     </center>
-    
+     -->
     <center>
 
       </br>
-      
+    
       <div class="col-md-3">
         <div class="boxed">
+
           <div ng-hide="flipped" ng-click="flip()">
             </br>
-            <text>{{wholename}}</text>
+            <text>{{firstUpper(wholename)}}</text>
             </br>
             <img src="http://www.nextavenue.org/wp-content/uploads/2016/01/Are-Whole-Milk-Dairy-Products-Making-a-Comeback-534741081.jpg" alt="Whole Milk" width="250" height="200">
             </br>
             </br>
           </div>
+
           <div ng-show="flipped" ng-click="flip()">
             </br>
-            <text>{{wholename}}</text>
+            <text>{{firstUpper(wholename)}}</text>
             </br>
             </br>
             <table id="flipTable">
@@ -77,11 +85,12 @@
           </div>
         </div>
       </div>
+      
       <div class="col-md-3">
-        <div class="boxed">
-          <div ng-hide="flipped" ng-click="flip()">
+        <div class="boxed" ng-repeat="alternative in alternatives">
+          <div ng-hide="flipped" ng-click="flip();getReport(alternative.map_ndbno)">
             </br>
-            <text>Soy Milk</text>
+            <text>{{alternative.map_name.toUpperCase()}}</text>
             </br>
             <img src="http://www.newhealthadvisor.com/images/1HT19198/soy%20milk.jpg" alt="Soy Milk" width="250" height="200">
             </br>
@@ -89,28 +98,24 @@
           </div>
           <div ng-show="flipped" ng-click="flip()">
             </br>
-            <text>Soy Milk</text>
+            <text>{{alternative.map_name.toUpperCase()}}</text>
             </br>
             </br>
-            <table id="flipTable">
+            <table id="flipTable" ng-repeat="nutrient in nutrients">
               <tr>
-                <th>Calories</th>
-                <th>Fat</th>
-                <th>Sugar</th>
-                <th>Protein</th>
+                <th>{{nutrient.name}}</th>
               </tr>
               <tr>
-                <td>130</td>
-                <td>4.5</td>
-                <td>10</td>
-                <td>8</td>
+                <td>{{nutrient.value}} {{nutrient.unit}}</td>
               </tr>
             </table>
             </br>
           </div>
         </div>
       </div>
-      <div class="col-md-3">
+
+     
+      <!-- <div class="col-md-3">
         <div class="boxed">
           <div ng-hide="flipped" ng-click="flip()">
             </br>
@@ -142,8 +147,9 @@
             </br>
           </div>
         </div>
-      </div>
-      <div class="col-md-3">
+      </div> -->
+
+      <!-- <div class="col-md-3">
         <div class="boxed">
           <div ng-hide="flipped" ng-click="flip()">
             </br>
@@ -175,7 +181,8 @@
             </br>
           </div>
         </div>
-      </div>
+      </div> -->
+
     </center>
   </div>
   <div ng-show="showComparison">

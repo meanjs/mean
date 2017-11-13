@@ -173,7 +173,6 @@
   float: right;
 }
 
-
 /*SIGN UP & SIGN IN*/
 .box-field{
   border-radius: 0;
@@ -198,8 +197,88 @@
 }
 
 
+/* RECIPE DETAILS CSS */
+.heroimage {
+  width:100%;
+  height:500px;
+  background: url('http://www.seriouseats.com/images/2015/09/20150914-pressure-cooker-recipes-roundup-09.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size:cover;
+  background-attachment: fixed;
+}
+.heroimage h5 {
+  color:white;
+  text-shadow:2px 2px #333;
+  text-align: center;
+  padding-top: 250px;
+  font-size: 30px;
 
-
+}
+.savebtn{
+	width: 150px;
+	height: 50px;
+	background-color: red;
+	float: right;
+	margin-right: 10%;
+}
+.recipeDetail{
+	text-align: center;
+	margin-top: 5%;
+}
+.heading{
+	font-size: 20px;
+	margin-right: 45%;
+}
+.text{
+	font-size: 15px;
+	/*margin-right: 45%;*/
+	display: inline-block;
+    text-align: left;
+    line-height: 230%;
+    margin-top: 10px;
+}
+hr{
+	width: 60%;
+	border-width: 1.5px;
+	margin-top: 10px;
+}
+.directions{
+	margin-top: 15px;
+}
+.direction-list{
+	margin-top: 10px;
+}
+span.glyphicon-time {
+    font-size: 1.3em;
+}
+.verticalLine {
+  	/*border-right: 2px solid #ff0000;*/
+  	width: 70px;
+}
+.list{
+	list-style-type: none;
+}
+.glyphicon-ring {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1px solid white;
+  color: white;
+  display: inline-table;
+  text-align: center;
+}
+.glyphicon-white {
+  background: white;
+  color: black;
+  border: 1px solid black;
+}
+.review-containter{
+	height: 200px;
+	text-align: center;
+	margin-top: 3%;
+	background-color: grey;
+}
 
 
 

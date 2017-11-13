@@ -5,6 +5,13 @@ h3{
   margin-top: 10px;
 }
 
+.underline {
+  text-decoration: underline;
+}
+
+.no-underline {
+  text-decoration: none;
+}
 
 .content {
   margin-top: 52px ;

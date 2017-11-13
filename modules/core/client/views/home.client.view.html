@@ -1,24 +1,26 @@
 <div class="container">
     <div class="lowerNav text-center">
       <div class="textLN">
-        <a class="left" href="">Popular Recipes</a>
-        <a class="" ui-sref="my-recipes">My Recipes</a> </div>
+        <a ng-click="showPopular()" class="left" 
+            ng-class="showCommunity ? underline : no-underline" href="">Popular Recipes</a>
+        <a ng-click="showMyRecipes()" ng-show="vm.authentication.user"
+            ng-class="showCommunity ? no-underline : underline" href="">My Recipes</a>
+      </div>
     </div>
 
     <div ui-view></div>
 
     <div class="dropMenu">
-      <!--<button class="btn btn-primary" type="button" id="dropdownMenuButton" onclick="filterSelection(' all ')">
-        Show All
-      </button>-->
       <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle btn-prop" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="filterSelection('calories')">
+        Filter by:
+        <button class="btn btn-secondary dropdown-toggle btn-prop" type="button" id="dropdownMenuButton" data-toggle="dropdown" 
+            aria-haspopup="true" aria-expanded="false" onclick="filterSelection('calories')">
           Calories
           <span class="caret"></span></a>
         </button>
         <div class="dropdown-menu filter-dropdown" aria-labelledby="dropdownMenuButton">
           <input type="range" min="0" max="1000" value="500" class="slider" id="calories">
-          <span id="calVal"></span>
+          <center><span id="calVal"></span> Calories</center>
         </div>
       </div>
       <div class="dropdown">
@@ -27,35 +29,22 @@
           <span class="caret"></span></a>
         </button>
         <div class="dropdown-menu filter-dropdown" aria-labelledby="dropdownMenuButton">
-          <li><a href="#" class="small" data-value="option1" tabIndex="-1"><input type="checkbox"/>&nbsp;Vegan</a></li>
-          <li><a href="#" class="small" data-value="option1" tabIndex="-1"><input type="checkbox"/>&nbsp;Pescetarian</a></li>
-          <li><a href="#" class="small" data-value="option1" tabIndex="-1"><input type="checkbox"/>&nbsp;Ovo Vegetarian</a></li>
-          <li><a href="#" class="small" data-value="option1" tabIndex="-1"><input type="checkbox"/>&nbsp;Lacto-Vegetarian </a></li>
-          <li><a href="#" class="small" data-value="option1" tabIndex="-1"><input type="checkbox"/>&nbsp;Lacto-Ovo-Vegetarian</a></li>
+          <li><a href="" class="small" data-value="vegan" tabIndex="-1"><input type="checkbox"/>&nbsp;Vegan</a></li>
+          <li><a href="" class="small" data-value="pescetarian" tabIndex="-1"><input type="checkbox"/>&nbsp;Pescetarian</a></li>
+          <li><a href="" class="small" data-value="ovo-vegetarian" tabIndex="-1"><input type="checkbox"/>&nbsp;Ovo Vegetarian</a></li>
+          <li><a href="" class="small" data-value="lacto-vegetarian" tabIndex="-1"><input type="checkbox"/>&nbsp;Lacto-Vegetarian </a></li>
+          <li><a href="" class="small" data-value="lacto-ovo-vegetarian" tabIndex="-1"><input type="checkbox"/>&nbsp;Lacto-Ovo-Vegetarian</a></li>
         </div>
       </div>
-      <!--<div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle btn-prop" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Carbs
-          <span class="caret"></span></a>
-        </button>
-        <div class="dropdown-menu filter-dropdown" aria-labelledby="dropdownMenuButton">
-          <li><a href="#" class="small" data-value="option1" tabIndex="-1"><input type="checkbox"/>&nbsp;Option 1</a></li>
-          <li><a href="#" class="small" data-value="option1" tabIndex="-1"><input type="checkbox"/>&nbsp;Option 1</a></li>
-          <li><a href="#" class="small" data-value="option1" tabIndex="-1"><input type="checkbox"/>&nbsp;Option 1</a></li>
-          <li><a href="#" class="small" data-value="option1" tabIndex="-1"><input type="checkbox"/>&nbsp;Option 1</a></li>
-          <li><a href="#" class="small" data-value="option1" tabIndex="-1"><input type="checkbox"/>&nbsp;Option 1</a></li>
-        </div>
-      </div>-->
       <div class="dropdown">
         <button class="btn btn-secondary dropdown-toggle btn-prop" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Cooking Style
           <span class="caret"></span></a>
         </button>
         <div class="dropdown-menu filter-dropdown" aria-labelledby="dropdownMenuButton">
-          <li><a href="#" class="small" data-value="option1" tabIndex="-1"><input type="checkbox"/>&nbsp;Fried</a></li>
-          <li><a href="#" class="small" data-value="option1" tabIndex="-1"><input type="checkbox"/>&nbsp;Grilled</a></li>
-          <li><a href="#" class="small" data-value="option1" tabIndex="-1"><input type="checkbox"/>&nbsp;Baked</a></li>
+          <li><a href="#" class="small" data-value="fried" tabIndex="-1"><input type="checkbox"/>&nbsp;Fried</a></li>
+          <li><a href="#" class="small" data-value="grilled" tabIndex="-1"><input type="checkbox"/>&nbsp;Grilled</a></li>
+          <li><a href="#" class="small" data-value="baked" tabIndex="-1"><input type="checkbox"/>&nbsp;Baked</a></li>
         </div>
       </div>
       <div class="dropdown">
@@ -72,231 +61,27 @@
                 <input type="radio" name="group-1" id="group-1-3" value="2" /><label for="group-1-3"></label>
                 <input type="radio" name="group-1" id="group-1-4" value="1" /><label for="group-1-4"></label>
             </form>
-        </div>
+          </div>
         </div>
       </div>
-
     </div>
-    <!-- <div> -->
-      <!-- <div class="row row-margin"> -->
-        <!-- <form name="vm.userForm" ng-submit="vm.updateUserProfile(vm.userForm.$valid)" 
-              class="addRecipe" novalidate> -->
-        <!-- <div class="col-md-3 properties"> -->
-          <!--<div class="filterDiv calories">-->
-        <!-- <div class="col-xs-12 col-sm-6 col-md-3 properties">
-          <img class="img-prop" src="http://drpattydental.com/wp-content/uploads/2017/05/placeholder.png">
-          <div class="card-info2"></div>
-          <div class="card-info">
-            <h3 class="card-name">Name of Recipe</h3>
-            <div class="card-icon-container">
-              <ul class="nav navbar-nav navbar-right" ng-hide="vm.authentication.user"> -->
-              <!-- <li ui-sref-active="active"> -->
-<!--                 <img class="card-icon" src="https://manylivescm.com/wp-content/uploads/2014/03/icon-glutenfree.png"> -->
-                <!-- <a ui-sref="authentication.signup">Sign Up</a> -->
-              <!-- </li> -->
-                <!-- <li class="divider-vertical"></li>  -->
-              <!-- <li ui-sref-active="active"> -->
-                <!-- <img class="card-icon" src="http://www.theproteinbakeshop.com/ae/files/icon-no-refined-sugar.png"> -->
-                <!-- <a ui-sref="authentication.signin">Sign In</a> -->
-              <!-- </li> -->
-            <!-- </ul>
-              <div id="stars">
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star"></span>
-                <span class="fa fa-star"></span>
-              </div>
 
-              <ul class="nav navbar-nav navbar-right" ng-show="vm.authentication.user"> -->
-              <!-- <li ui-sref-active="active"> -->
-               <!--  <img class="card-icon" src="https://manylivescm.com/wp-content/uploads/2014/03/icon-glutenfree.png"> -->
-                <!-- <a ui-sref="authentication.signup">Sign Up</a> -->
-              <!-- </li> -->
-                <!-- <li class="divider-vertical"></li>  -->
-              <!-- <li ui-sref-active="active"> -->
-                <!-- <img class="card-icon" src="http://www.theproteinbakeshop.com/ae/files/icon-no-refined-sugar.png"> -->
-                <!-- <a ui-sref="authentication.signin">Sign In</a> -->
-              <!-- </li> -->
-               <!--  <a><span class="glyphicon glyphicon-plus"></span></a>
-            </ul> -->
-              <!-- <div id="stars">
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star"></span>
-                <span class="fa fa-star"></span>
-              </div> -->
-
-            <!-- <div class="card-icon-container"> -->
-              <!-- <ul class="nav navbar-nav navbar-right" ng-show="vm.authentication.user"> -->
-              <!-- <li ui-sref-active="active">
-                <img class="card-icon" src="https://manylivescm.com/wp-content/uploads/2014/03/icon-glutenfree.png"> -->
-                <!-- <a ui-sref="authentication.signup">Sign Up</a> -->
-              <!-- </li> -->
-               <!-- <li class="divider-vertical"></li> -->
-             <!--  <li ui-sref-active="active">
-                <img class="card-icon" src="http://www.theproteinbakeshop.com/ae/files/icon-no-refined-sugar.png"> -->
-                <!-- <a ui-sref="authentication.signin">Sign In</a> -->
-              <!-- </li> -->
-              <!-- <li ui-sref-active="active">
-                <a><span class="glyphicon glyphicon-plus"></span></a>
-              </li>
-            </ul>
-              <div id="stars">
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star"></span>
-                <span class="fa fa-star"></span>
-              </div> -->
-            <!-- </div> -->
-            <!-- </ul> -->
-            <!-- <ul class="nav navbar-nav navbar-right" ng-show="vm.authentication.user">
-              <li>
-                <a class="head">
-                <span class="glyphicon glyphicon-plus"></span>
-              </a></li>
- -->
-              <!-- <img class="card-icon" src="https://manylivescm.com/wp-content/uploads/2014/03/icon-glutenfree.png">
-              <img class="card-icon" src="http://www.theproteinbakeshop.com/ae/files/icon-no-refined-sugar.png">
-              
-                <a><span class="glyphicon glyphicon-plus"></span></a> -->
-              
-      <!-- </form> -->
-      <!-- </div> -->
-    
-        <!--</div>-->
-        <!-- </div> -->
+    <!-- COMMUNITY RECIPES -->
+    <div ng-show="showCommunity" ng-repeat="userRecipes in communityRecipes">
       <div class="row row-margin">
-        <div class="col-xs-12 col-sm-6 col-md-3 properties">
+        <div ng-repeat="recipe in userRecipes" class="col-xs-12 col-sm-6 col-md-3 properties">
           <img class="img-prop" src="http://drpattydental.com/wp-content/uploads/2017/05/placeholder.png">
           <div class="card-info2"></div>
           <div class="card-info">
-            <h3 class="card-name">Name of Recipe</h3>
-            <div class="card-icon-container">
-             <ul class="nav navbar-nav navbar-right" ng-hide="vm.user">
-              <img class="card-icon" src="https://manylivescm.com/wp-content/uploads/2014/03/icon-glutenfree.png">
-              <img class="card-icon" src="http://www.theproteinbakeshop.com/ae/files/icon-no-refined-sugar.png">
-             </ul>
-             <ul class="nav navbar-nav navbar-right" ng-show="vm.user">
-              <img class="card-icon" src="https://manylivescm.com/wp-content/uploads/2014/03/icon-glutenfree.png">
-              <img class="card-icon" src="http://www.theproteinbakeshop.com/ae/files/icon-no-refined-sugar.png">
-                <a><span class="glyphicon glyphicon-plus"></span></a>
-             </ul>
-              <a onclick="alert('Recipe has been added')" class="head" ui-sref="add">
-                  <span class="glyphicon glyphicon-plus"></span>
-                <div class="ui-notification ng-scope info clickable killed" style="botton: 20px; right: 10px;">
-                  <h3 ng-show="title" ng-bind-html="title" class="ng-binding ng-hide" style></h3>
-                  <div class="message ng-binding" ng-bind-html="message">Recipe has been added!</div>
-                </div>
+            <h3 class="card-name">
+              <a ui-sref="details({recipeDetails: recipe})" style="text-decoration: none">
+                {{recipe.name}}
               </a>
-              <div id="stars">
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star"></span>
-                <span class="fa fa-star"></span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-xs-12 col-sm-6 col-md-3 properties">
-          <img class="img-prop" src="http://drpattydental.com/wp-content/uploads/2017/05/placeholder.png">
-          <div class="card-info2"></div>
-          <div class="card-info">
-            <h3 class="card-name">Name of Recipe</h3>
+            </h3>
             <div class="card-icon-container">
-             <ul class="nav navbar-nav navbar-right" ng-hide="vm.user">
-              <img class="card-icon" src="https://manylivescm.com/wp-content/uploads/2014/03/icon-glutenfree.png">
-              <img class="card-icon" src="http://www.theproteinbakeshop.com/ae/files/icon-no-refined-sugar.png">
-             </ul>
-             <ul class="nav navbar-nav navbar-right" ng-show="vm.user">
-              <img class="card-icon" src="https://manylivescm.com/wp-content/uploads/2014/03/icon-glutenfree.png">
-              <img class="card-icon" src="http://www.theproteinbakeshop.com/ae/files/icon-no-refined-sugar.png">
-                <a><span class="glyphicon glyphicon-plus"></span></a>
-             </ul>
-
-              <div id="stars">
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star"></span>
-                <span class="fa fa-star"></span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-xs-12 col-sm-6 col-md-3 properties">
-          <img class="img-prop" src="http://drpattydental.com/wp-content/uploads/2017/05/placeholder.png">
-          <div class="card-info2"></div>
-          <div class="card-info">
-            <h3 class="card-name">Name of Recipe</h3>
-            <div class="card-icon-container">
-             <ul class="nav navbar-nav navbar-right" ng-hide="vm.user">
-              <img class="card-icon" src="https://manylivescm.com/wp-content/uploads/2014/03/icon-glutenfree.png">
-              <img class="card-icon" src="http://www.theproteinbakeshop.com/ae/files/icon-no-refined-sugar.png">
-             </ul>
-             <ul class="nav navbar-nav navbar-right" ng-show="vm.user">
-              <img class="card-icon" src="https://manylivescm.com/wp-content/uploads/2014/03/icon-glutenfree.png">
-              <img class="card-icon" src="http://www.theproteinbakeshop.com/ae/files/icon-no-refined-sugar.png">
-                <a><span class="glyphicon glyphicon-plus"></span></a>
-             </ul>
-              <div id="stars">
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star"></span>
-                <span class="fa fa-star"></span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-xs-12 col-sm-6 col-md-3 properties">
-          <img class="img-prop" src="http://drpattydental.com/wp-content/uploads/2017/05/placeholder.png">
-          <div class="card-info2"></div>
-          <div class="card-info">
-            <h3 class="card-name">Name of Recipe</h3>
-            <div class="card-icon-container">
-              <!-- <img class="card-icon" src="https://manylivescm.com/wp-content/uploads/2014/03/icon-glutenfree.png">
-              <img class="card-icon" src="http://www.theproteinbakeshop.com/ae/files/icon-no-refined-sugar.png"> -->
               <ul class="nav navbar-nav navbar-right" ng-hide="vm.user">
-               <img class="card-icon" src="https://manylivescm.com/wp-content/uploads/2014/03/icon-glutenfree.png">
-               <img class="card-icon" src="http://www.theproteinbakeshop.com/ae/files/icon-no-refined-sugar.png">
-              </ul>
-             <ul class="nav navbar-nav navbar-right" ng-show="vm.user">
-              <img class="card-icon" src="https://manylivescm.com/wp-content/uploads/2014/03/icon-glutenfree.png">
-              <img class="card-icon" src="http://www.theproteinbakeshop.com/ae/files/icon-no-refined-sugar.png">
-                <a><span class="glyphicon glyphicon-plus"></span></a>
-             </ul>
-              <div id="stars">
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star"></span>
-                <span class="fa fa-star"></span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="row row-margin">
-        <div class="col-xs-12 col-sm-6 col-md-3 properties">
-          <img class="img-prop" src="http://drpattydental.com/wp-content/uploads/2017/05/placeholder.png">
-          <div class="card-info2"></div>
-          <div class="card-info">
-            <h3 class="card-name">Name of Recipe</h3>
-            <div class="card-icon-container">
-              <!-- <img class="card-icon" src="https://manylivescm.com/wp-content/uploads/2014/03/icon-glutenfree.png">
-              <img class="card-icon" src="http://www.theproteinbakeshop.com/ae/files/icon-no-refined-sugar.png"> -->
-              <ul class="nav navbar-nav navbar-right" ng-hide="vm.user">
-               <img class="card-icon" src="https://manylivescm.com/wp-content/uploads/2014/03/icon-glutenfree.png">
-               <img class="card-icon" src="http://www.theproteinbakeshop.com/ae/files/icon-no-refined-sugar.png">
-              </ul>
-              <ul class="nav navbar-nav navbar-right" ng-show="vm.user">
-               <img class="card-icon" src="https://manylivescm.com/wp-content/uploads/2014/03/icon-glutenfree.png">
-               <img class="card-icon" src="http://www.theproteinbakeshop.com/ae/files/icon-no-refined-sugar.png">
-                <a><span class="glyphicon glyphicon-plus"></span></a>
+                <!--<img class="card-icon" src="https://manylivescm.com/wp-content/uploads/2014/03/icon-glutenfree.png">
+                <img class="card-icon" src="http://www.theproteinbakeshop.com/ae/files/icon-no-refined-sugar.png">-->
               </ul>
               <div id="stars">
                 <span class="fa fa-star checked"></span>
@@ -305,323 +90,75 @@
                 <span class="fa fa-star"></span>
                 <span class="fa fa-star"></span>
               </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-xs-12 col-sm-6 col-md-3 properties">
-          <img class="img-prop" src="http://drpattydental.com/wp-content/uploads/2017/05/placeholder.png">
-          <div class="card-info2"></div>
-          <div class="card-info">
-            <h3 class="card-name">Name of Recipe</h3>
-            <div class="card-icon-container">
-              <!-- <img class="card-icon" src="https://manylivescm.com/wp-content/uploads/2014/03/icon-glutenfree.png">
-              <img class="card-icon" src="http://www.theproteinbakeshop.com/ae/files/icon-no-refined-sugar.png"> -->
-             <ul class="nav navbar-nav navbar-right" ng-hide="vm.user">
-              <img class="card-icon" src="https://manylivescm.com/wp-content/uploads/2014/03/icon-glutenfree.png">
-              <img class="card-icon" src="http://www.theproteinbakeshop.com/ae/files/icon-no-refined-sugar.png">
-             </ul>
-             <ul class="nav navbar-nav navbar-right" ng-show="vm.user">
-              <img class="card-icon" src="https://manylivescm.com/wp-content/uploads/2014/03/icon-glutenfree.png">
-              <img class="card-icon" src="http://www.theproteinbakeshop.com/ae/files/icon-no-refined-sugar.png">
-                <a><span class="glyphicon glyphicon-plus"></span></a>
-             </ul>
-              <div id="stars">
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star"></span>
-                <span class="fa fa-star"></span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-xs-12 col-sm-6 col-md-3 properties">
-          <img class="img-prop" src="http://drpattydental.com/wp-content/uploads/2017/05/placeholder.png">
-          <div class="card-info2"></div>
-          <div class="card-info">
-            <h3 class="card-name">Name of Recipe</h3>
-            <div class="card-icon-container">
-              <!-- <img class="card-icon" src="https://manylivescm.com/wp-content/uploads/2014/03/icon-glutenfree.png">
-              <img class="card-icon" src="http://www.theproteinbakeshop.com/ae/files/icon-no-refined-sugar.png"> -->
-             <ul class="nav navbar-nav navbar-right" ng-hide="vm.user">
-               <img class="card-icon" src="https://manylivescm.com/wp-content/uploads/2014/03/icon-glutenfree.png">
-               <img class="card-icon" src="http://www.theproteinbakeshop.com/ae/files/icon-no-refined-sugar.png">
-             </ul>
-             <ul class="nav navbar-nav navbar-right" ng-show="vm.user">
-               <img class="card-icon" src="https://manylivescm.com/wp-content/uploads/2014/03/icon-glutenfree.png">
-               <img class="card-icon" src="http://www.theproteinbakeshop.com/ae/files/icon-no-refined-sugar.png">
-                <a><span class="glyphicon glyphicon-plus"></span></a>
-             </ul>
-              <div id="stars">
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star"></span>
-                <span class="fa fa-star"></span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-xs-12 col-sm-6 col-md-3 properties">
-          <img class="img-prop" src="http://drpattydental.com/wp-content/uploads/2017/05/placeholder.png">
-          <div class="card-info2"></div>
-          <div class="card-info">
-            <h3 class="card-name">Name of Recipe</h3>
-            <div class="card-icon-container">
-              <!-- <img class="card-icon" src="https://manylivescm.com/wp-content/uploads/2014/03/icon-glutenfree.png">
-              <img class="card-icon" src="http://www.theproteinbakeshop.com/ae/files/icon-no-refined-sugar.png"> -->
-             <ul class="nav navbar-nav navbar-right" ng-hide="vm.user">
-               <img class="card-icon" src="https://manylivescm.com/wp-content/uploads/2014/03/icon-glutenfree.png">
-               <img class="card-icon" src="http://www.theproteinbakeshop.com/ae/files/icon-no-refined-sugar.png">
+              <ul class="nav navbar-nav navbar-right">
+                <img class="card-icon" src="https://manylivescm.com/wp-content/uploads/2014/03/icon-glutenfree.png">
+                <img class="card-icon" src="http://www.theproteinbakeshop.com/ae/files/icon-no-refined-sugar.png">
+                <a ng-show="vm.authentication.user">
+                  <span class="glyphicon glyphicon-plus"></span>
+                </a>
               </ul>
-             <ul class="nav navbar-nav navbar-right" ng-show="vm.user">
-               <img class="card-icon" src="https://manylivescm.com/wp-content/uploads/2014/03/icon-glutenfree.png">
-               <img class="card-icon" src="http://www.theproteinbakeshop.com/ae/files/icon-no-refined-sugar.png">
-                <a><span class="glyphicon glyphicon-plus"></span></a>
-             </ul>
-              <div id="stars">
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star"></span>
-                <span class="fa fa-star"></span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="row row-margin">
-        <div class="col-xs-12 col-sm-6 col-md-3 properties">
-          <img class="img-prop" src="http://drpattydental.com/wp-content/uploads/2017/05/placeholder.png">
-          <div class="card-info2"></div>
-          <div class="card-info">
-            <h3 class="card-name">Name of Recipe</h3>
-            <div class="card-icon-container">
-              <!-- <img class="card-icon" src="https://manylivescm.com/wp-content/uploads/2014/03/icon-glutenfree.png">
-              <img class="card-icon" src="http://www.theproteinbakeshop.com/ae/files/icon-no-refined-sugar.png"> -->
-             <ul class="nav navbar-nav navbar-right" ng-hide="vm.user">
-               <img class="card-icon" src="https://manylivescm.com/wp-content/uploads/2014/03/icon-glutenfree.png">
-               <img class="card-icon" src="http://www.theproteinbakeshop.com/ae/files/icon-no-refined-sugar.png">
-             </ul>
-             <ul class="nav navbar-nav navbar-right" ng-show="vm.user">
-               <img class="card-icon" src="https://manylivescm.com/wp-content/uploads/2014/03/icon-glutenfree.png">
-               <img class="card-icon" src="http://www.theproteinbakeshop.com/ae/files/icon-no-refined-sugar.png">
-                <a><span class="glyphicon glyphicon-plus"></span></a>
-             </ul>
-              <div id="stars">
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star"></span>
-                <span class="fa fa-star"></span>
-              </div>
-            </div>
-
-          </div>
-        </div>
-        <div class="col-xs-12 col-sm-6 col-md-3 properties">
-          <img class="img-prop" src="http://drpattydental.com/wp-content/uploads/2017/05/placeholder.png">
-          <div class="card-info2"></div>
-          <div class="card-info">
-            <h3 class="card-name">Name of Recipe</h3>
-            <div class="card-icon-container">
-              <!-- <img class="card-icon" src="https://manylivescm.com/wp-content/uploads/2014/03/icon-glutenfree.png">
-              <img class="card-icon" src="http://www.theproteinbakeshop.com/ae/files/icon-no-refined-sugar.png"> -->
-             <ul class="nav navbar-nav navbar-right" ng-hide="vm.user">
-               <img class="card-icon" src="https://manylivescm.com/wp-content/uploads/2014/03/icon-glutenfree.png">
-               <img class="card-icon" src="http://www.theproteinbakeshop.com/ae/files/icon-no-refined-sugar.png">
-             </ul>
-             <ul class="nav navbar-nav navbar-right" ng-show="vm.user">
-               <img class="card-icon" src="https://manylivescm.com/wp-content/uploads/2014/03/icon-glutenfree.png">
-               <img class="card-icon" src="http://www.theproteinbakeshop.com/ae/files/icon-no-refined-sugar.png">
-                <a><span class="glyphicon glyphicon-plus"></span></a>
-             </ul>
-              <div id="stars">
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star"></span>
-                <span class="fa fa-star"></span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-xs-12 col-sm-6 col-md-3 properties">
-          <img class="img-prop" src="http://drpattydental.com/wp-content/uploads/2017/05/placeholder.png">
-          <div class="card-info2"></div>
-          <div class="card-info">
-            <h3 class="card-name">Name of Recipe</h3>
-            <div class="card-icon-container">
-              <!-- <img class="card-icon" src="https://manylivescm.com/wp-content/uploads/2014/03/icon-glutenfree.png">
-              <img class="card-icon" src="http://www.theproteinbakeshop.com/ae/files/icon-no-refined-sugar.png"> -->
-             <ul class="nav navbar-nav navbar-right" ng-hide="vm.user">
-               <img class="card-icon" src="https://manylivescm.com/wp-content/uploads/2014/03/icon-glutenfree.png">
-               <img class="card-icon" src="http://www.theproteinbakeshop.com/ae/files/icon-no-refined-sugar.png">
-             </ul>
-             <ul class="nav navbar-nav navbar-right" ng-show="vm.user">
-               <img class="card-icon" src="https://manylivescm.com/wp-content/uploads/2014/03/icon-glutenfree.png">
-               <img class="card-icon" src="http://www.theproteinbakeshop.com/ae/files/icon-no-refined-sugar.png">
-                <a><span class="glyphicon glyphicon-plus"></span></a>
-             </ul>
-              <div id="stars">
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star"></span>
-                <span class="fa fa-star"></span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-xs-12 col-sm-6 col-md-3 properties">
-          <img class="img-prop" src="http://drpattydental.com/wp-content/uploads/2017/05/placeholder.png">
-          <div class="card-info2"></div>
-          <div class="card-info">
-            <h3 class="card-name">Name of Recipe</h3>
-            <div class="card-icon-container">
-              <!-- <img class="card-icon" src="https://manylivescm.com/wp-content/uploads/2014/03/icon-glutenfree.png">
-              <img class="card-icon" src="http://www.theproteinbakeshop.com/ae/files/icon-no-refined-sugar.png"> -->
-             <ul class="nav navbar-nav navbar-right" ng-hide="vm.user">
-               <img class="card-icon" src="https://manylivescm.com/wp-content/uploads/2014/03/icon-glutenfree.png">
-               <img class="card-icon" src="http://www.theproteinbakeshop.com/ae/files/icon-no-refined-sugar.png">
-             </ul>
-             <ul class="nav navbar-nav navbar-right" ng-show="vm.user">
-               <img class="card-icon" src="https://manylivescm.com/wp-content/uploads/2014/03/icon-glutenfree.png">
-               <img class="card-icon" src="http://www.theproteinbakeshop.com/ae/files/icon-no-refined-sugar.png">
-                <a><span class="glyphicon glyphicon-plus"></span></a>
-             </ul>
-              <div id="stars">
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star"></span>
-                <span class="fa fa-star"></span>
-              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
 
+    <!--MY RECIPES-->
+    <div ng-hide="showCommunity">
+      <div class="row row-margin">
+        <div ng-repeat="myRecipe in myRecipes" class="col-xs-12 col-sm-6 col-md-3 properties">
+          <img class="img-prop" src="http://drpattydental.com/wp-content/uploads/2017/05/placeholder.png">
+          <div class="card-info2"></div>
+          <div class="card-info">
+            <h3 class="card-name">{{myRecipe.name}}</h3>
+            <div class="card-icon-container">
+              <ul class="nav navbar-nav navbar-right" ng-hide="vm.authentication.user">
+                <!--<img class="card-icon" src="https://manylivescm.com/wp-content/uploads/2014/03/icon-glutenfree.png">
+                <img class="card-icon" src="http://www.theproteinbakeshop.com/ae/files/icon-no-refined-sugar.png">-->
+              </ul>
+              <div id="stars">
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star"></span>
+              </div>
+              <ul class="nav navbar-nav navbar-right">
+                <img class="card-icon" src="https://manylivescm.com/wp-content/uploads/2014/03/icon-glutenfree.png">
+                <img class="card-icon" src="http://www.theproteinbakeshop.com/ae/files/icon-no-refined-sugar.png">
+                <a ng-show="vm.authentication.user">
+                  <span class="glyphicon glyphicon-plus"></span>
+                </a>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
 
-
-
-
-  <!-- Old home view -->
-
-  <!-- <section>
-    <div class="jumbotron text-center">
-      <div class="row">
-        <div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-12">
-          <img alt="MEAN.JS" class="img-responsive text-center" src="/modules/core/client/img/brand/logo.png" />
-        </div>
-      </div>
-      <br>
-      <div class="row">
-        <p class="lead">
-          Open-Source Full-Stack Solution For MEAN Applications
-        </p>
-      </div>
-      <div class="row">
-        <p>
-          <a class="btn btn-primary btn-lg" href="http://meanjs.org" target="_blank">Learn more</a>
-        </p>
-      </div>
-    </div>
-    <div>
-      <h2>Congrats! You've configured and run the sample application.</h2>
-    <h5>Zach was also here!</h5>
-    <p>Joseph was here!</p>
-    <p>Liliana was here!</p>
-    <p>Cristo was NOT here (jk)</p>
-    <p>Ming was maybe here</p>
-    <p>Himal was here!</p>
-
-      <p>MEAN.JS is a web application boilerplate, which means you should start changing everything :-)</p>
-      <p>This sample application tracks users and articles.</p>
-      <ul>
-        <li>
-          Click
-          <em>Sign Up</em> to get started.
-        </li>
-        <li>
-          Configure your app to work with your social accounts, by editing the
-          <em>/config/env/*.js</em> files.
-        </li>
-        <li>
-          Edit your users module.
-        </li>
-        <li>
-          Add new CRUD modules.
-        </li>
-        <li>
-          Have fun...
-        </li>
-      </ul>
-    </div>
-    <div class="row">
-      <div class="col-md-3">
-        <h2><strong>M</strong>ongoDB</h2>
-        <p><a target="_blank" href="http://mongodb.org/">MongoDB</a> is a NoSQL database. MongoDB's <a target="_blank" href="http://docs.mongodb.org/manual/">great manual</a> is the place to get started with NoSQL and MongoDB.</p>
-      </div>
-      <div class="col-md-3">
-        <h2><strong>E</strong>xpress</h2>
-        <p><a target="_blank" href="http://expressjs.com/"> Express</a> is a NodeJS server-side application web framework. Check out <a target="_blank" href="http://expressjs.com/4x/api.html">The ExpressJS API reference for more information</a> or <a target="_blank" href="http://stackoverflow.com/questions/8144214/learning-express-for-node-js">StackOverflow</a> for more info.</p>
-      </div>
-      <div class="col-md-3">
-        <h2><strong>A</strong>ngularJS</h2>
-        <p><a target="_blank" href="http://angularjs.org/">AngularJS</a> is client-side web application framework. The <a target="_blank" href="http://www.thinkster.io/">Thinkster Popular Guide</a> and <a target="_blank" href="https://egghead.io/">Egghead Videos</a> are great resources.</p>
-      </div>
-      <div class="col-md-3">
-        <h2><strong>N</strong>ode.js</h2>
-        <p><a target="_blank" href="http://nodejs.org/">Node.js</a> is a JavaScript run-time, popular for being a web server platform. Node's website and this <a target="_blank" href="http://stackoverflow.com/questions/2353818/how-do-i-get-started-with-node-js">stackOverflow thread</a> offer excellent starting points to get to grasps with node.</p>
-      </div>
-    </div>
-    <div class="well">
-      <h2>MEAN.JS Documentation</h2>
-      <p>
-        Once you're familiar with the foundation technology, check out the MEAN.JS Documentation:
-        <ul>
-          <li><a target="_blank" href="http://meanjs.org/docs.html">MEAN.JS Documentation</a>
-          </li>
-          <li><a target="_blank" href="http://meanjs.org/modules.html">Modules</a>
-          </li>
-          <li><a target="_blank" href="http://meanjs.org/changelog.html">Changelog</a>
-          </li>
-          <li><a target="_blank" href="http://meanjs.org/community.html">Community</a>
-          </li>
-          <li><a target="_blank" href="http://blog.meanjs.org">Blog</a>
-          </li>
-        </ul>
-      </p>
-    </div>
-    <br>Enjoy &amp; Keep Us Updated,
-    <br>The MEAN.JS Team.
-  </section>
-   -->
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-
-   <script type="text/javascript">
-
-     var options = [];
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script type="text/javascript">
+  var options = [];
   $( '.dropdown-menu a' ).on( 'click', function( event ) {
-     var $target = $( event.currentTarget ),
-         val = $target.attr( 'data-value' ),
-         $inp = $target.find( 'input' ),
-         idx;
-     if ( ( idx = options.indexOf( val ) ) > -1 ) {
+    var $target = $( event.currentTarget ),
+        val = $target.attr( 'data-value' ),
+        $inp = $target.find( 'input' ),
+        idx;
+
+    if ( ( idx = options.indexOf( val ) ) > -1 ) {
         options.splice( idx, 1 );
         setTimeout( function() { $inp.prop( 'checked', false ) }, 0);
-     } else {
+    } 
+    else {
         options.push( val );
         setTimeout( function() { $inp.prop( 'checked', true ) }, 0);
-     }
-     $( event.target ).blur();
+    }
+    
+    $( event.target ).blur();
 
-     console.log( options );
-     return false;
+    console.log( options );
+    return false;
   });
-   </script>
+</script>

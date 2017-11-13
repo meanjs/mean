@@ -5,11 +5,12 @@
     .module('users')
     .controller('RecipeDetailsController', RecipeDetailsController);
 
-  RecipeDetailsController.$inject = ['UsersService'];
+  RecipeDetailsController.$inject = ['UsersService', '$stateParams', '$scope'];
 
-  function RecipeDetailsController(UsersService) {
+  function RecipeDetailsController(UsersService, $stateParams, $scope) {
     var vm = this;
 
-    // vm.recipedetails = UsersService.query();
+    $scope.recipe = $stateParams.recipeDetails;
+    console.log($scope.recipe);
   }
 }());
