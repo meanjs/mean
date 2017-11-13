@@ -265,10 +265,12 @@ exports.add = function (req, res) {
     'name': recipe.name,
     'directions': recipe.directions,
     'cookingStyle': recipe.cookingStyle,
-    'ingredients': recipe.ingredients
+    'ingredients': recipe.ingredients,
+    'healthClassifications': recipe.healthClassifications
   };
 
   user.recipes.push(addedRecipe);
+
   user.save(function (err) {
     if (err) {
       return res.status(422).send({
@@ -302,11 +304,24 @@ exports.alternatives = function (req, res) {
 
 exports.deleteRecipe = function (req, res) {
   var recipe = req.model;
+  var user = req.user;
 
-  // recipe.remove(function(err) {
-  //   if(err) res.status(500).send(err);
-  //   else res.json(recipe);
-  // });
+  var index = user.recipes.indexOf(recipe);
+  user.recipes.splice(index, 1);
 
-  res.json(recipe);
+  user.save(function (err) {
+    if (err) {
+      return res.status(422).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    } else {
+      req.login(user, function (err) {
+        if (err) {
+          res.status(400).send(err);
+        } else {
+          res.json(user);
+        }
+      });
+    }
+  });
 };

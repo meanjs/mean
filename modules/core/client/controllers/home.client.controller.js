@@ -39,22 +39,64 @@
       .catch(failure)
 
     function CommunityRecipeSuccess(response) {
-      console.log("Community recipes success: ", response);
       $scope.communityRecipes = response;
-    }  
-    
+    }
+
     // GET MY RECIPES
     CommunityService.getMyRecipes()
       .then(MyRecipeSuccess)
       .catch(failure)
 
     function MyRecipeSuccess(response) {
-      console.log("My recipes success: ", response.recipes);
       $scope.myRecipes = response.recipes;
     }
 
     function failure(error) {
       console.log("Failure: ", error);
-    }  
+    } 
+
+    // ADD A RECIPE
+    $scope.add = (recipe) => {
+      CommunityService.addRecipe(recipe)
+        .then(addRecipeSuccess)
+        .catch(addRecipeFailure);
+    }
+
+    function addRecipeSuccess(response) {
+      Notification.success({ message: '<i class="glyphicon glyphicon-ok"></i> Add recipe successful!' });
+
+      CommunityService.getMyRecipes()
+        .then(MyRecipeSuccess)
+        .catch(failure)
+    }
+
+    function addRecipeFailure(response) {
+      Notification.error({ message: '<i class="glyphicon glyphicon-remove"></i> Add recipe failed!' });
+    }
+
+    // DELETE RECIPE
+    $scope.delete = (myRecipe) => {
+      CommunityService.deleteThisRecipe(myRecipe)
+        .then(deleteRecipeSuccess)
+        .catch(deleteRecipeFailure);
+    }
+
+    function deleteRecipeSuccess(response) {
+      Notification.success({ message: '<i class="glyphicon glyphicon-ok"></i> Delete recipe successful!' });
+
+      // Get updated community and my recipes
+      CommunityService.getList()
+        .then(CommunityRecipeSuccess)
+        .catch(failure)
+
+      CommunityService.getMyRecipes()
+        .then(MyRecipeSuccess)
+        .catch(failure)
+    }
+
+    function deleteRecipeFailure(response) {
+      Notification.error({ message: '<i class="glyphicon glyphicon-remove"></i> Delete recipe failed!' });
+    }
+
   }
 }());
