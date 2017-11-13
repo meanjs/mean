@@ -17,6 +17,10 @@ angular
       myRecipes: {
         method: 'GET',
         url: '/api/users/myRecipes'
+      },
+      add: {
+        method: 'POST',
+        url: '/api/users/add'
       }
     });
 
@@ -26,6 +30,9 @@ angular
       },
       getMyRecipes: function () {
         return this.myRecipes().$promise;
+      },
+      addRecipe: function(param) {
+        return this.add(param).$promise;
       }
     });
 

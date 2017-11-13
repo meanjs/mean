@@ -265,7 +265,8 @@ exports.add = function (req, res) {
     'name': recipe.name,
     'directions': recipe.directions,
     'cookingStyle': recipe.cookingStyle,
-    'ingredients': recipe.ingredients
+    'ingredients': recipe.ingredients,
+    'healthClassifications': recipe.healthClassifications
   };
 
   user.recipes.push(addedRecipe);
