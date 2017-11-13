@@ -9,7 +9,7 @@
 
   function HomeController($scope, Authentication, Notification) {
     var vm = this;
-
+    // vm.authentication = Authentication;
     vm.user = Authentication.user;
     vm.updateUserProfile = updateUserProfile;
 
