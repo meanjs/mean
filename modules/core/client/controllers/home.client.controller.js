@@ -40,8 +40,8 @@
 
     function CommunityRecipeSuccess(response) {
       $scope.communityRecipes = response;
-    }  
-    
+    }
+
     // GET MY RECIPES
     CommunityService.getMyRecipes()
       .then(MyRecipeSuccess)
@@ -72,6 +72,7 @@
 
     // DELETE RECIPE
     $scope.delete = (myRecipe) => {
+      console.log(myRecipe);
       CommunityService.deleteThisRecipe(myRecipe)
         .then(deleteRecipeSuccess)
         .catch(deleteRecipeFailure);
@@ -79,7 +80,6 @@
 
     function deleteRecipeSuccess(response) {
       Notification.success({ message: '<i class="glyphicon glyphicon-ok"></i> Delete recipe successful!' });
-      console.log(response);
     }
 
     function deleteRecipeFailure(response) {
