@@ -232,7 +232,6 @@
       var user = new UsersService(vm.authentication.user);
 
       user.$update(function (response) {
-        $scope.$broadcast('show-errors-reset', 'vm.userForm');
 
         Notification.success({ message: '<i class="glyphicon glyphicon-ok"></i> Cart save successful!' });
         Authentication.user = response;
@@ -250,6 +249,7 @@
       }
     };
     $scope.toggleCartTable = function () {
+      console.log(vm.authentication.user.cartData);
       updateSponsorCart();
       console.log(vm.authentication.user.cartData);
       $scope.filteredUsersList = Array.from(vm.authentication.user.cartData);
@@ -257,12 +257,11 @@
       $scope.$apply();
     };
     $scope.addToCart = function () {
-      if (vm.authentication.user.cartData === undefined) {
+      if (vm.authentication.user.cartData === undefined || vm.authentication.user.cartData === null) {
         vm.authentication.user.cartData = [];
       }
-      $scope.cartList = vm.authentication.user.cartData;
-      if ($scope.isInCart($scope.cartList, $scope.detailedInfo) === false) {
-        $scope.cartList.push($scope.detailedInfo);
+      if ($scope.isInCart(vm.authentication.user.cartData, $scope.detailedInfo) === false) {
+        vm.authentication.user.cartData.push($scope.detailedInfo);
         console.log(vm.authentication.user.cartData);
       }
     };
