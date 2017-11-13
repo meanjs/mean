@@ -14,6 +14,7 @@
 
     vm.user = Authentication.user;
     vm.updateMyRecipes = updateMyRecipes;
+    vm.getImage = getImage;
 
     $scope.recipe = {
       'name' : '',
@@ -33,17 +34,29 @@
       }]
     };
 
+    // GET IMAGE
+    function getImage() {
+      var API_KEY = '7037424-d8d152ee054b794ca03e6e03e';
+      var imageUrl = "https://pixabay.com/api/?key="+API_KEY+
+          "&q="+encodeURIComponent($scope.recipe.name)+"&category=food";
+      
+      $http.get(imageUrl)
+        .then( function(response) {
+          $scope.image = response.data.hits[0].userImageURL;
+          console.log($scope.image);
+        });
+    }
+
+    // Add the recipe
     function updateMyRecipes(isValid) {
       var recipe = $scope.recipe;
+      recipe.image = $scope.image;
       getAlternatives();
 
       if(!isValid) {
         $scope.$broadcast('show-errors-check-validity', 'vm.addRecipeForm');
         return false;
       }
-
-      //var user = new UsersService(vm.user);
-      //console.log("User ", user);
 
       UsersService.addRecipe(recipe)
         .then(success)

@@ -111,7 +111,7 @@
     <div ng-hide="showCommunity">
       <div class="row row-margin">
         <div ng-repeat="myRecipe in myRecipes" class="col-xs-12 col-sm-6 col-md-3 properties">
-          <img class="img-prop" src="http://drpattydental.com/wp-content/uploads/2017/05/placeholder.png">
+          <img class="img-prop" ng-src="{{myRecipe.image}}" style="height: 80%">
           <div class="card-info2"></div>
           <div class="card-info">
             <h3 class="card-name">

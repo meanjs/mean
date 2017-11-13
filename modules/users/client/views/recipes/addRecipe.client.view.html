@@ -12,7 +12,7 @@
               <div class="form-group" show-errors>
                 <h3 id="recipeNameHeader">Recipe Name</h3>
                   <input name="name" type="text" ng-model="recipe.name" style="width: 50%"
-                    id="name" class="form-control" placeholder="Recipe Name" required>
+                    id="name" class="form-control" placeholder="Recipe Name" required ng-change="vm.getImage()">
                 <h3 id="recipeNameHeader">Cooking Style</h3>
                   <select style = "width: 15%" class="form-control"
                     ng-model="recipe.cookingStyle">

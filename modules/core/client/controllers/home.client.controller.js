@@ -38,8 +38,10 @@
       .then(CommunityRecipeSuccess)
       .catch(failure)
 
-    function CommunityRecipeSuccess(response) {
-      $scope.communityRecipes = response;
+    async function CommunityRecipeSuccess(response) {
+      $scope.communityRecipes = await response;
+
+      console.log($scope.communityRecipes);
     }
 
     // GET MY RECIPES
