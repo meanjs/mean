@@ -304,10 +304,10 @@ exports.alternatives = function (req, res) {
 exports.deleteRecipe = function (req, res) {
   var recipe = req.model;
 
-  // recipe.remove(function(err) {
-  //   if(err) res.status(500).send(err);
-  //   else res.json(recipe);
-  // });
+  User.remove({'recipes': recipe}, function(err) {
+    if(err) res.status(500).send(err);
+    else res.json(recipe);
+  });
 
-  res.json(recipe);
+  // res.json(recipe);
 };

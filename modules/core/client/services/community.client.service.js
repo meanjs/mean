@@ -21,6 +21,10 @@ angular
       add: {
         method: 'POST',
         url: '/api/users/add'
+      },
+      deleteRecipe: {
+        method: 'POST',
+        url: '/api/users/deleteRecipe'
       }
     });
 
@@ -33,6 +37,9 @@ angular
       },
       addRecipe: function(param) {
         return this.add(param).$promise;
+      },
+      deleteThisRecipe: function(recipe) {
+        return this.deleteRecipe(recipe).$promise;
       }
     });
 
