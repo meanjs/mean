@@ -10,10 +10,6 @@
 
   function menuConfig(Menus) {
     Menus.addSubMenuItem('topbar', 'admin', {
-      title: 'Manage Items',
-      state: 'admin.items.list'
-    });
-    Menus.addSubMenuItem('topbar', 'admin', {
       title: 'Manage Categories',
       state: 'admin.items.categories'
     });
