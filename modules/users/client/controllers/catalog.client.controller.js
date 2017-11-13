@@ -249,11 +249,8 @@
       }
     };
     $scope.toggleCartTable = function () {
-      console.log(vm.authentication.user.cartData);
       updateSponsorCart();
-      console.log(vm.authentication.user.cartData);
       $scope.filteredUsersList = Array.from(vm.authentication.user.cartData);
-      console.log($scope.filteredUsersList);
       $scope.$apply();
     };
     $scope.addToCart = function () {
@@ -262,7 +259,6 @@
       }
       if ($scope.isInCart(vm.authentication.user.cartData, $scope.detailedInfo) === false) {
         vm.authentication.user.cartData.push($scope.detailedInfo);
-        console.log(vm.authentication.user.cartData);
       }
     };
     $scope.deleteFromCart = function () {
