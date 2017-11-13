@@ -4,7 +4,7 @@
     <img src="../modules/users/client/img/logoHT.png" class="logo-img" alt="">
   </div>
 
-  <h2 class="col-xs-12 text-center"><b>Create a New Account</b></h2>
+  <h3 class="col-xs-12 text-center"><b>Create a New Account</b></h3>
   <div class="col-xs-offset-2 col-xs-8 col-md-offset-4 col-md-4">
     <form name="vm.userForm" ng-submit="vm.signup(vm.userForm.$valid)" class="signin" novalidate autocomplete="off">
       <fieldset>
@@ -73,12 +73,12 @@
           <label>Password Requirements</label>
           <uib-progressbar value="requirementsProgress" type="{{requirementsColor}}"><span style="color:white; white-space:nowrap;">{{requirementsProgress}}%</span></uib-progressbar>
         </div>
-        <div class="text-center form-group">
-          <button type="submit" class="btn btn-primary">Sign up</button>
-      <!--    &nbsp; or&nbsp;     -->
-          <br></br>
-          <br></br>
-          <a ui-sref="authentication.signin" class="show-signin"><u>Already have an account?</u></a>
+        <div class="text-center">
+          <button type="submit" class="htb htb-primary btn-lg sharp">Create Account</button>
+          <div class="link-margin">
+            Already a member? <a ui-sref="authentication.signin" class="show-signin propertiesA">Log in</a>
+          </div>
+          
         </div>
       </fieldset>
     </form>

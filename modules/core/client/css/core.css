@@ -1,3 +1,11 @@
+/*Classes used for the entire */
+h3{
+  color: rgb(78,78,78);
+  margin-bottom: 20px;
+  margin-top: 10px;
+}
+
+
 .content {
   margin-top: 52px ;
 }
@@ -101,15 +109,23 @@ a:hover .header-profile-image {
 }
 .logo{
   margin-left: 15px !important;
+
 }  
+.HTlogo{
+  width: 180px;
+  height: 80px;
+}
 .logo-color{
-  font-weight: bolder;
-  text-shadow: 0px 1px 0px rgba(0,0,0,0.3) !important
+/*  font-weight: bolder;
+  text-shadow: 0px 1px 0px rgba(0,0,0,0.3) !important*/
+  padding: 0;
+  margin-top: 10px;
 
 }
+/*
 .lo:hover{
   color: rgba(249,192,120, 0.8) !important;
-}
+}*/
 
 /*user name hover*/
 .navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus {
