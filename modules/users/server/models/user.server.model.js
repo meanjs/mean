@@ -99,6 +99,16 @@ var UserSchema = new Schema({
     trim: true,
     default: ''
   },
+  gpa: {
+    type: String,
+    trim: true,
+    default: ''
+  },
+  graduationDate: {
+    type: String,
+    trim: true,
+    default: ''
+  },
   type: {
     type: String,
     trim: true,

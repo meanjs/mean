@@ -83,6 +83,20 @@
             <p class="help-block error-text" ng-message="required">Team Name is required.</p>
           </div>
         </div>
+        <div class="form-group" show-errors>
+          <label for="gpa">GPA</label>
+          <input type="text" id="gpa" name="gpa" class="form-control" ng-model="vm.user.gpa" placeholder="GPA" required>
+          <div ng-messages="vm.userForm.gpa.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">GPA is required.</p>
+          </div>
+        </div>
+        <div class="form-group" show-errors>
+          <label for="graduationDate">Graduation Date</label>
+          <input type="text" id="graduationDate" name="graduationDate" class="form-control" ng-model="vm.user.graduationDate" placeholder="Graduation Date" required>
+          <div ng-messages="vm.userForm.graduationDate.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Graduation Date is required.</p>
+          </div>
+        </div>
         <div class="text-center form-group">
           <button type="submit" class="btn btn-primary">Save Profile</button>
         </div>
