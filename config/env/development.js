@@ -4,9 +4,9 @@ var defaultEnvConfig = require('./default');
 
 module.exports = {
   db: {
-    uri: process.env.MONGOHQ_URL || process.env.MONGODB_URI || 
-    'mongodb://general:health@ds121495.mlab.com:21495/health_tracker_testing',
-    options: {},
+    uri: process.env.MONGOHQ_URL || process.env.MONGODB_URI || 'mongodb://general:health@ds121495.mlab.com:21495/health_tracker_testing',
+    skipBlankLines: false,                      //white spaces can be picked up by source control and flagged as diffs so remove them to avoid frustration. Don't allow white spaces
+    options: {},      
     // Enable mongoose debug mode
     debug: process.env.MONGODB_DEBUG || false
   },
