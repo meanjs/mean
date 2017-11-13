@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <h5>Recipe Name</h5>
+        <h5>{{recipe.name}}</h5>
       </div>
     </div>
   </div>
@@ -18,10 +18,9 @@
     <hr>
     <div class="text">
       <ul class="list">
-        <li>Ingredient 1</li>
-        <li>Ingredient 2</li>
-        <li>Ingredient 3</li>
-        <li>Ingredient 4</li>
+        <li ng-repeat="ingredient in recipe.ingredients">
+          {{ingredient.name}}
+        </li>
       </ul>
       
     </div>

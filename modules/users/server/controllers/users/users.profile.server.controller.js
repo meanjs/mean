@@ -17,9 +17,7 @@ var _ = require('lodash'),
   validator = require('validator');
 
 // ADD FIELDS
-var whitelistedFields = ['firstName', 'lastName', 'email', 'username', 'weight', 
-    'allergies', 'dietaryDefinitions', 'preferences', 'religiousRestrictions', 
-    'recipes'];
+var whitelistedFields = ['firstName', 'lastName', 'email', 'username', 'weight', 'allergies', 'dietaryDefinitions', 'preferences', 'religiousRestrictions', 'recipes'];
 
 var useS3Storage = config.uploads.storage === 's3' && config.aws.s3;
 var s3;
@@ -32,6 +30,29 @@ if (useS3Storage) {
 
   s3 = new aws.S3();
 }
+
+/**
+ * List of Community Recipes
+ */
+exports.listRecipes = function (req, res) {
+  User.find({}, '-salt -password -providerData').sort('-created').populate('user', 'displayName').exec(function (err, users) {
+    if (err) {
+      return res.status(422).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    }
+
+    var recipeMap = {};
+    var count = 0;
+
+    users.forEach(function (user) {
+      recipeMap[count] = user.recipes;
+      count++;
+    });
+
+    res.send(recipeMap);
+  });
+};
 
 /**
  * Update user details
@@ -237,18 +258,19 @@ exports.me = function (req, res) {
   res.json(safeUserObject || null);
 };
 
-exports.add = function(req, res) {
+exports.add = function (req, res) {
   var user = req.user;
   var recipe = req.body;
   var addedRecipe = {
-    'name' : recipe.name,
-    'directions' : recipe.directions,
-    'cookingStyle' : recipe.cookingStyle,
-    'ingredients' : recipe.ingredients
-  }
+    'name': recipe.name,
+    'directions': recipe.directions,
+    'cookingStyle': recipe.cookingStyle,
+    'ingredients': recipe.ingredients,
+    'healthClassifications': recipe.healthClassifications
+  };
 
   user.recipes.push(addedRecipe);
-  
+
   user.save(function (err) {
     if (err) {
       return res.status(422).send({
@@ -264,29 +286,42 @@ exports.add = function(req, res) {
       });
     }
   });
-}
+};
 
-exports.myRecipes = function(req, res) {
+exports.myRecipes = function (req, res) {
   var user = req.user;
 
   res.json(user);
-}
+};
 
-exports.alternatives = function(req, res) {
+exports.alternatives = function (req, res) {
   var searchFood = req.body.food;
   var cookingStyle = req.body.cookingStyle;
   var alternativeData = req.body.response;
 
   res.json(searchFood);
-}
+};
 
-exports.deleteRecipe = function(req, res) {
+exports.deleteRecipe = function (req, res) {
   var recipe = req.model;
+  var user = req.user;
 
-  // recipe.remove(function(err) {
-  //   if(err) res.status(500).send(err);
-  //   else res.json(recipe);
-  // });
+  var index = user.recipes.indexOf(recipe);
+  user.recipes.splice(index, 1);
 
-  res.json(recipe);
-}
+  user.save(function (err) {
+    if (err) {
+      return res.status(422).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    } else {
+      req.login(user, function (err) {
+        if (err) {
+          res.status(400).send(err);
+        } else {
+          res.json(user);
+        }
+      });
+    }
+  });
+};

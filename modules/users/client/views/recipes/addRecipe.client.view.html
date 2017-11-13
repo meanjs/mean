@@ -11,14 +11,15 @@
             <center>
               <div class="form-group" show-errors>
                 <h3 id="recipeNameHeader">Recipe Name</h3>
-                <input name="name" type="text" ng-model="recipe.name" 
+                  <input name="name" type="text" ng-model="recipe.name" style="width: 50%"
                     id="name" class="form-control" placeholder="Recipe Name" required>
-                <select style = "width: 15%" class="form-control"
-                  ng-model="recipe.cookingStyle">
-                      <option>Baked</option>
-                      <option>Fried</option>
-                      <option>Grilled</option>
-                </select>
+                <h3 id="recipeNameHeader">Cooking Style</h3>
+                  <select style = "width: 15%" class="form-control"
+                    ng-model="recipe.cookingStyle">
+                        <option>Baked</option>
+                        <option>Fried</option>
+                        <option>Grilled</option>
+                  </select>
               </div>
             </center>
             <br>
@@ -38,14 +39,14 @@
                   </td>
                   <td id="units">
                     <select class="form-control" ng-model="recipe.ingredients[$index].units">
-                      <option>Cups</option>
+                      <option>Pinch</option>
+                      <option>Dash</option>
                       <option>Ounces</option>
+                      <option>Tsp</option>
                       <option>Tbs</option>
-                      <option>tsp</option>
+                      <option>Cups</option>
                       <option>Quarts</option>
                       <option>Gallons</option>
-                      <option>pinch</option>
-                      <option>dash</option>
                     </select>
                   </td>
                 </tr>
@@ -67,6 +68,29 @@
               <h3 id="directionsHeader">Recipe Directions</h3>
               <textarea id="directions" class="form-control" rows="5" 
                 ng-model="recipe.directions" placeholder="Enter Directions Here"></textarea>
+            </div>
+            <div class="form-group">
+              <h3 id="directionsHeader">Health Classifications</h3>
+              <div class="form-group">
+                <label for="glutenFree">Gluten Free</label>
+                <input type="checkbox" ng-model="recipe.healthClassifications.glutenFree">
+              </div>
+              <div class="form-group">
+                <label for="noSugar">No Sugar</label>
+                <input type="checkbox" ng-model="recipe.healthClassifications.noSugar">
+              </div>
+              <div class="form-group">
+                <label for="lowFat">Low Fat</label>
+                <input type="checkbox" ng-model="recipe.healthClassifications.lowFat">
+              </div>
+              <div class="form-group">
+                <label for="vegan">Vegan</label>
+                <input type="checkbox" ng-model="recipe.healthClassifications.vegan">
+              </div>
+              <div class="form-group">
+                <label for="lowCalorie">Low Calorie</label>
+                <input type="checkbox" ng-model="recipe.healthClassifications.lowCalorie">
+              </div>
             </div>
           </center>
           </br>

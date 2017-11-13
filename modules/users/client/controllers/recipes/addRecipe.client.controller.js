@@ -19,6 +19,13 @@
       'name' : '',
       'directions' : '',
       'cookingStyle' : '',
+      'healthClassifications' : {
+        'glutenFree' : false,
+        'noSugar' : false,
+        'lowFat' : false,
+        'vegan' : false,
+        'lowCalorie' : false
+      },
       'ingredients' : [{
         'name' : '',
         'quantity' : '',
@@ -44,13 +51,10 @@
 
       function success(response) {
         Notification.success({ message: '<i class="glyphicon glyphicon-ok"></i> Add recipe successful!' })
-        console.log("Recipes success: ", response);
-        //$scope.recipes = response.recipes;
       }
 
       function failure(response) {
         Notification.error({ message: '<i class="glyphicon glyphicon-remove"></i> Add recipe failed!' })
-        console.log("Failure: ", response);
       }
 
       TransferService.setRecipe(recipe);

@@ -8,10 +8,10 @@
   SearchController.$inject = ['$scope', 'menuService', 'TransferService', '$http'];
 
   function SearchController($scope, menuService, TransferService, $http) {
-    $scope.pages = [{name:"Whole Milk", calories:"105", protein:"8", sugar:"13", fat:"2.5"},
-                    {name:"Comparison View", show: false}
-    ]
-    $scope.wholename = "Whole Milk";
+    // $scope.pages = [{name:"Whole Milk", calories:"105", protein:"8", sugar:"13", fat:"2.5"},
+    //                 {name:"Comparison View", show: false}
+    // ]
+   
     $scope.wholeCal = "105";
     $scope.wholePro = "8";
     $scope.wholeSug = "13";
@@ -46,11 +46,19 @@
     $scope.flip = function() {
       $scope.flipped = !$scope.flipped;
     }
+    //function to uppercase the first letter
+    $scope.firstUpper = function(string) {
+    	return string.charAt(0).toUpperCase() + string.slice(1);
+	}
 
     // FIRST ITME IS ORIGINAL INGREDIENT
     $scope.alternatives = TransferService.getAlternatives();
     console.log("Here are alternatives: ", $scope.alternatives);
-
+    //wholename = searched item
+ 	$scope.wholename = $scope.alternatives[0];
+ 	//alternative1's report
+ 	//$scope.alternative1 = getReport($scope.alternatives[1].map_ndbno);
+ 	//console.log("alternative # 1: ",$scope.alternatives[1].map_ndbno);
 
     // API KEY
 		var apiKey = 'YAJ2M9l67OaqNMPCEfBcoccVtQDY5LPUR20rFzP8';
@@ -91,7 +99,11 @@
         else if(nutrient.name == 'Sugars, total') $scope.nutrients.push(nutrient);
         else if(nutrient.name == 'Cholesterol') $scope.nutrients.push(nutrient);
       });
+
+      console.log("nutrients: ", $scope.nutrients);
+
 		}
+	
 
     function getURL(url) {
 			return $http.get(url);

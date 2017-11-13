@@ -1,10 +1,17 @@
 <link rel="stylesheet" href="../css/core.css">
 <div class="container" ng-controller="HeaderController as vm">
   <!-- HEADER -->
-  <div class="navbar-header logo">
-    <a ui-sref="home" class="navbar-brand lo logo-color">HEALTH TRACKER</a>
-  </div>
+
+
   <nav class="navbar-collapse" uib-collapse="!vm.isCollapsed" role="navigation">
+    <div class="navbar-header logo">
+      <a ui-sref="home" class="navbar-brand lo logo-color">HEALTH TRACKER</a>
+    </div>
+<!--     <div class="navbar-header logo">
+      <a ui-sref="home" class="navbar-brand lo logo-color">
+        <img class="HTlogo" alt="Brand" src="../modules/core/client/img/brand/logoHT.png">
+      </a>
+    </div> -->
     <!-- SEARCH BAR -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <div class="col-sm-3 col-md-3">
@@ -43,7 +50,7 @@
         </a>
         <ul class="dropdown-menu" role="menu">
           <li>
-            <a ui-sref="profile.picture">My Profile</a>
+            <a ui-sref="profile">My Profile</a>
           </li>
           <li>
             <a ui-sref="settings">Settings</a>
