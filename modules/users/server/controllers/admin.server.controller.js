@@ -8,6 +8,7 @@ var path = require('path'),
   User = mongoose.model('User'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller'));
 
+const mailer = require('./mailer.js');
 /**
  * Show the current user
  */
@@ -56,9 +57,10 @@ exports.adminsignup = function (req, res) {
       });
     } else {
       // Remove sensitive data before login
-      user.password = undefined;
+      user.password = 'Password123!';
       user.salt = undefined;
       res.status(200).send();
+      mailer.sendCreation(user.email, user.firstName);
     }
   });
 };
@@ -120,6 +122,7 @@ exports.changeToAccepted = function (req, res) {
       });
     }
     res.json(changedUser);
+    mailer.sendAcceptance(unapprovedUser.email, unapprovedUser.firstName, unapprovedUser.username);
   });
 };
 
