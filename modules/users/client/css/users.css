@@ -195,6 +195,23 @@
 .propertiesA:hover{
   color: rgb(174,200,107);
 }
+.inner-addon {
+  position: relative;
+}
+
+/* style glyph */
+.inner-addon .glyphicon {
+  position: absolute;
+  padding: 10px;
+  pointer-events: none;
+  font-size: 17px;
+}
+
+/* align glyph */
+.left-addon .glyphicon  { left:  0px;}
+
+/* add padding  */
+.left-addon input  { padding-left:  38px; }
 
 
 /* RECIPE DETAILS CSS */
