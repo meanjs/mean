@@ -53,7 +53,7 @@
       // create mock item
       mockUser = new ApplicantsService({
         roles: ['ta'],
-        approvedStatus: true
+        approvedStatus: false
       });
 
       // Mock logged in user
@@ -91,6 +91,43 @@
         expect($scope.vm.unapprovedUsers[1]).toEqual(mockUser);
 
       }));
+    });
+    describe('vm.approveUser() as update', function () {
+      var sampleUserPostData;
+      var mockUserList;
+
+      beforeEach(function () {
+        // Create a sample item object
+        sampleUserPostData = new ApplicantsService({
+          roles: ['ta'],
+          approvedStatus: false
+        });
+        mockUserList = [mockUser, mockUser];
+
+      });
+
+      it('should send a POST request with the form input values and then locate to new object URL', inject(function (ItemsService) {
+        //expect the initial get request
+        $httpBackend.expectGET('/api/unapproved').respond(mockUserList);
+        // Set POST response
+        $httpBackend.expectPOST('/api/unapproved', sampleUserPostData).respond(mockUser);
+
+        // Run controller functionality
+        $scope.vm.approveUser(sampleUserPostData);
+        $httpBackend.flush();
+      }));
+
+      it('should call Notification.error if error', function () {
+        var errorMessage = 'this is an error message';
+        $httpBackend.expectPOST('/api/items', sampleItemPostData).respond(400, {
+          message: errorMessage
+        });
+
+        $scope.vm.save(true);
+        $httpBackend.flush();
+
+        expect(Notification.error).toHaveBeenCalledWith({ message: errorMessage, title: '<i class="glyphicon glyphicon-remove"></i> Item save error!' });
+      });
     });
   });
 }());

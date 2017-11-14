@@ -19,7 +19,6 @@
     vm.removeApplicant = function (user) {
       if ($window.confirm('Are you sure you want to delete this user?')) {
         if (user) {
-          vm.unapprovedUsers.splice(vm.unapprovedUsers.indexOf(user), 1);
           ApplicantsService.remove(user);
           Notification.success('User deleted successfully!');
         }
@@ -31,7 +30,6 @@
           var newUser = user;
           user.approvedStatus = true;
           ApplicantsService.changeToAccepted(newUser);
-          vm.unapprovedUsers.splice(vm.unapprovedUsers.indexOf(user), 1);
           Notification.success('User approved successfully!');
       }
     };
