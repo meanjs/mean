@@ -261,12 +261,14 @@ exports.me = function (req, res) {
 exports.add = function (req, res) {
   var user = req.user;
   var recipe = req.body;
+
   var addedRecipe = {
     'name': recipe.name,
     'directions': recipe.directions,
     'cookingStyle': recipe.cookingStyle,
     'ingredients': recipe.ingredients,
-    'healthClassifications': recipe.healthClassifications
+    'healthClassifications': recipe.healthClassifications,
+    'image': recipe.image
   };
 
   user.recipes.push(addedRecipe);
@@ -303,11 +305,10 @@ exports.alternatives = function (req, res) {
 };
 
 exports.deleteRecipe = function (req, res) {
-  var recipe = req.model;
+  var myRecipeIndex = req.model;
   var user = req.user;
 
-  var index = user.recipes.indexOf(recipe);
-  user.recipes.splice(index, 1);
+  user.recipes.splice(myRecipeIndex, 1);
 
   user.save(function (err) {
     if (err) {

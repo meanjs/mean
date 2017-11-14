@@ -43,7 +43,7 @@
       //$scope.showItem = !$scope.showItem;
     }
 
-    $scope.flip = function() {
+    $scope.flip = function(alternative) {
       $scope.flipped = !$scope.flipped;
     }
     //function to uppercase the first letter
