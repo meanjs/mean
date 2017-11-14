@@ -57,10 +57,10 @@
 
     //vm.customizings = UserssService.query();
 
-
-        function setFood(food) {
-          searchFood = food;
-        }
+      function searchAssign(food){
+        vm.searchFood = food;
+      }
+        
 
         // GET ALTERNATIVES FROM RECIPE
         $scope.map = [];
