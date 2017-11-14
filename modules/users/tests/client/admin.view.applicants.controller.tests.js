@@ -9,7 +9,8 @@
       $state,
       Authentication,
       ApplicantsService,
-      mockUser;
+      mockUser,
+      newlyApproved;
 
     // The $resource service augments the response object with methods for updating and deleting the resource.
     // If we were to use the standard toEqual matcher, our tests would fail because the test values would not match
@@ -55,6 +56,10 @@
         roles: ['ta'],
         approvedStatus: false
       });
+      newlyApproved = new ApplicantsService({
+        roles: ['ta'],
+        approvedStatus: true
+      });
 
       // Mock logged in user
       Authentication.user = {
@@ -94,6 +99,7 @@
     });
     describe('vm.approveUser() as update', function () {
       var sampleUserPostData;
+      var newlyApproved;
       var mockUserList;
 
       beforeEach(function () {
@@ -103,17 +109,19 @@
           approvedStatus: false
         });
         mockUserList = [mockUser, mockUser];
+        //expect the get request before each of these
+        $httpBackend.expectGET('/api/unapproved').respond(mockUserList);
+        $httpBackend.flush()
 
       });
 
       it('should send a POST request with the form input values and then locate to new object URL', inject(function (ItemsService) {
         //expect the initial get request
-        $httpBackend.expectGET('/api/unapproved').respond(mockUserList);
         // Set POST response
-        $httpBackend.expectPOST('/api/unapproved', sampleUserPostData).respond(mockUser);
+        $httpBackend.expectPOST('/api/unapproved', newlyApproved).respond(mockUser);
 
         // Run controller functionality
-        $scope.vm.approveUser(sampleUserPostData);
+        $scope.vm.approveUser(mockUser);
         $httpBackend.flush();
       }));
 
