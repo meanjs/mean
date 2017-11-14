@@ -14,26 +14,23 @@
       </div>
     </div>
   </div>
-  <div class="list-group">
-    <table class="table table-hover applicantsTable">
-      <thead>
-          <tr class="first-row">
-            <td class="firstColumn">Category</td>
-            <td class="secondColumn"></td>
-          </tr>
-        </thead>
-        <tbody>
-          <tr ng-repeat="category in vm.categories | filter: query">
-            <td class="firstColumn">{{ category.title }}</td>
-            <td class="secondColumn">
-
-              <a class="btn btn-primary" ng-click="vm.remove(category)">
-              <i class="glyphicon glyphicon-minus"></i>
-              </a>  
-            </td>
-          </tr>
-        </tbody>
-    </table>
-  </div>
+  <table class="table table-hover applicantsTable">
+    <thead>
+      <tr class="first-row">
+        <td class="firstColumn">Category</td>
+        <td class="secondColumn"></td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="category in vm.categories | filter: query">
+        <td class="firstColumn">{{ category.title }}</td>
+        <td class="secondColumn">
+          <a class="btn btn-primary" ng-click="vm.remove(category)">
+            <i class="glyphicon glyphicon-minus"></i>
+          </a>  
+        </td>
+      </tr>
+    </tbody>
+  </table>
   <uib-pagination boundary-links="true" max-size="8" items-per-page="vm.itemsPerPage" total-items="vm.filterLength" ng-model="vm.currentPage" ng-change="vm.pageChanged()"></uib-pagination>
 </section>
