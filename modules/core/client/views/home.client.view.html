@@ -70,7 +70,7 @@
     <div ng-show="showCommunity" ng-repeat="userRecipes in communityRecipes">
       <div class="row row-margin">
         <div ng-repeat="recipe in userRecipes" class="col-xs-12 col-sm-6 col-md-3 properties">
-          <img class="img-prop" src="http://drpattydental.com/wp-content/uploads/2017/05/placeholder.png">
+          <img class="img-prop" ng-src="{{recipe.image}}" style="height: 80%">
           <div class="card-info2"></div>
           <div class="card-info">
             <h3 class="card-name">
@@ -111,7 +111,7 @@
     <div ng-hide="showCommunity">
       <div class="row row-margin">
         <div ng-repeat="myRecipe in myRecipes" class="col-xs-12 col-sm-6 col-md-3 properties">
-          <img class="img-prop" src="http://drpattydental.com/wp-content/uploads/2017/05/placeholder.png">
+          <img class="img-prop" ng-src="{{myRecipe.image}}" style="height: 80%">
           <div class="card-info2"></div>
           <div class="card-info">
             <h3 class="card-name">
@@ -138,7 +138,7 @@
                 <img class="card-icon" ng-show="myRecipe.healthClassifications.vegan" src="./modules/core/client/img/healthClassifications/vegan.png">
                 <img class="card-icon" ng-show="myRecipe.healthClassifications.lowCalorie" src="./modules/core/client/img/healthClassifications/lowCalorie.png">
                 <a ng-show="vm.authentication.user" href="">
-                  <span class="glyphicon glyphicon-minus" ng-click="delete(myRecipe)" style="color:red"></span>
+                  <span class="glyphicon glyphicon-remove" ng-click="delete(myRecipe)" style="color:red"></span>
                 </a>
               </ul>
             </div>

@@ -64,7 +64,7 @@ var RecipeSchema = new Schema({
   name: String,
   image: {
     type: String,
-    default: 'modules/users/client/img/profile/default.png'
+    default: 'modules/core/client/img/no-image.jpg'
   },
   directions: String,
   cookingStyle: String,

@@ -14,6 +14,7 @@
 
     vm.user = Authentication.user;
     vm.updateMyRecipes = updateMyRecipes;
+    vm.getImage = getImage;
 
     $scope.recipe = {
       'name' : '',
@@ -33,17 +34,28 @@
       }]
     };
 
+    // GET IMAGE = qwant, can only get a certain amount of requests
+    function getImage() {
+      const proxyurl = "https://cors-anywhere.herokuapp.com/"; // Fixes CORS permissions issue
+      var imageUrl = "https://api.qwant.com/api/search/images?"+ // Gets image
+        "count=10&offset=1&q="+$scope.recipe.name+"food";
+      
+      $http.get(proxyurl + imageUrl)
+        .then( function(response) {
+          $scope.image = response.data.data.result.items[0].media;
+        });
+    }
+
+    // Add the recipe
     function updateMyRecipes(isValid) {
       var recipe = $scope.recipe;
+      recipe.image = $scope.image;
       getAlternatives();
 
       if(!isValid) {
         $scope.$broadcast('show-errors-check-validity', 'vm.addRecipeForm');
         return false;
       }
-
-      //var user = new UsersService(vm.user);
-      //console.log("User ", user);
 
       UsersService.addRecipe(recipe)
         .then(success)
