@@ -40,8 +40,6 @@
 
     async function CommunityRecipeSuccess(response) {
       $scope.communityRecipes = await response;
-
-      console.log($scope.communityRecipes);
     }
 
     // GET MY RECIPES
@@ -82,9 +80,11 @@
 
     // DELETE RECIPE
     $scope.delete = (myRecipe) => {
-      console.log(myRecipe);
-
-      CommunityService.deleteThisRecipe(myRecipe)
+      var myRecipeIndex = {
+        "index": $scope.myRecipes.indexOf(myRecipe)
+      };
+      
+      CommunityService.deleteThisRecipe(myRecipeIndex)
         .then(deleteRecipeSuccess)
         .catch(deleteRecipeFailure);
     }
@@ -92,6 +92,7 @@
     function deleteRecipeSuccess(response) {
       Notification.success({ message: '<i class="glyphicon glyphicon-ok"></i> Delete recipe successful!' });
 
+      console.log(response);
       // Get updated community and my recipes
       CommunityService.getList()
         .then(CommunityRecipeSuccess)

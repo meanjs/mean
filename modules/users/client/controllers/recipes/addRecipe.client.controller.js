@@ -34,22 +34,7 @@
       }]
     };
 
-    // Google search API key = AIzaSyCBaUk7j6MRsQ1NJvJlB7QaOPqP8DSN40A
-
-    // GET IMAGE = pixabay
-    // function getImage() {
-    //   var API_KEY = '7037424-d8d152ee054b794ca03e6e03e';
-    //   var imageUrl = "https://pixabay.com/api/?key="+API_KEY+
-    //       "&q="+encodeURIComponent($scope.recipe.name)+"&category=food";
-      
-    //   $http.get(imageUrl)
-    //     .then( function(response) {
-    //       $scope.image = response.data.hits[0].userImageURL;
-    //       console.log($scope.image);
-    //     });
-    // }
-
-    // GET IMAGE = qwant
+    // GET IMAGE = qwant, can only get a certain amount of requests
     function getImage() {
       const proxyurl = "https://cors-anywhere.herokuapp.com/"; // Fixes CORS permissions issue
       var imageUrl = "https://api.qwant.com/api/search/images?"+ // Gets image

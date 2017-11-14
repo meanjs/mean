@@ -305,11 +305,10 @@ exports.alternatives = function (req, res) {
 };
 
 exports.deleteRecipe = function (req, res) {
-  var recipe = req.model;
+  var myRecipeIndex = req.model;
   var user = req.user;
 
-  var index = user.recipes.indexOf(recipe);
-  user.recipes.splice(index, 1);
+  user.recipes.splice(myRecipeIndex, 1);
 
   user.save(function (err) {
     if (err) {
