@@ -22,7 +22,11 @@
         </div>
         <div class="form-group" show-errors>
           <!-- <label for="password">Password</label> -->
-          <input type="password" id="password" name="password" class="form-control box-field" ng-model="vm.credentials.password" placeholder="Password" required>
+          <div class="inner-addon left-addon">
+            <i class="glyphicon glyphicon-lock"></i>      
+            <input type="password" id="password" name="password" class="form-control box-field" ng-model="vm.credentials.password" placeholder="Password" required>
+          </div>
+          
           <div ng-messages="vm.userForm.password.$error" role="alert">
             <p class="help-block error-text" ng-message="required">Password is required.</p>
           </div>
