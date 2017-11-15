@@ -25,7 +25,7 @@ module.exports = {
     title: defaultEnvConfig.app.title + ' - Development Environment'
   },
   mailer: {
-    from: process.env.MAILER_FROM || 'Dmitry Kopelevich',
+    from: process.env.MAILER_FROM || 'Lab Inventory Web App',
     options: {
       service: process.env.MAILER_SERVICE_PROVIDER || 'smtp.gmail.com',
       host: 'smtp.gmail.com',
