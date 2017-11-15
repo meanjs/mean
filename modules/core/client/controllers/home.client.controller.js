@@ -54,44 +54,37 @@
     function failure(error) {
       console.log('Failure: ', error);
     }  
-
-
-
     // ======== ADD A RECIPE ===========
     $scope.add = (recipe) => {
       CommunityService.addRecipe(recipe)
         .then(addRecipeSuccess)
         .catch(addRecipeFailure);
-    }
+    };
 
     function addRecipeSuccess(response) {
       Notification.success({ message: '<i class="glyphicon glyphicon-ok"></i> Add recipe successful!' });
 
       CommunityService.getList()
         .then(CommunityRecipeSuccess)
-        .catch(failure)
+        .catch(failure);
 
       CommunityService.getMyRecipes()
         .then(MyRecipeSuccess)
-        .catch(failure)
+        .catch(failure);
     }
 
     function addRecipeFailure(response) {
       Notification.error({ message: '<i class="glyphicon glyphicon-remove"></i> Add recipe failed!' });
     }
-
-
-
     // ========= DELETE RECIPE ============
     $scope.delete = (myRecipe) => {
       var myRecipeIndex = {
-        "index": $scope.myRecipes.indexOf(myRecipe)
+        'index': $scope.myRecipes.indexOf(myRecipe)
       };
-      
       CommunityService.deleteThisRecipe(myRecipeIndex)
         .then(deleteRecipeSuccess)
         .catch(deleteRecipeFailure);
-    }
+    };
 
     function deleteRecipeSuccess(response) {
       Notification.success({ message: '<i class="glyphicon glyphicon-ok"></i> Delete recipe successful!' });
@@ -99,11 +92,11 @@
       // Get updated community and my recipes
       CommunityService.getList()
         .then(CommunityRecipeSuccess)
-        .catch(failure)
+        .catch(failure);
 
       CommunityService.getMyRecipes()
         .then(MyRecipeSuccess)
-        .catch(failure)
+        .catch(failure);
     }
 
     function deleteRecipeFailure(response) {
