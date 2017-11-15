@@ -54,7 +54,7 @@
     function getURL(url) {
 			return $http.get(url);
 		}
-
+ 
     //vm.customizings = UserssService.query();
 
       function searchAssign(food){
@@ -62,7 +62,7 @@
       }
       
 
-      /*
+      
         // GET ALTERNATIVES FROM RECIPE
         $scope.map = [];
         $scope.in_food_group;
@@ -110,6 +110,6 @@
             //TransferService.setAlternatives($scope.map);
     
             //$state.go('search');
-        }*/
+        }/**/
   }
 }());
