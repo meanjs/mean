@@ -40,6 +40,17 @@
 
     async function CommunityRecipeSuccess(response) {
       $scope.communityRecipes = await response;
+      $scope.communityRecipesFiltered = [];
+
+      for(var recipe in $scope.communityRecipes) { // Filter through all recipes and put them in one array
+        for(var rec in $scope.communityRecipes[recipe]) {
+          if($scope.communityRecipes[recipe][rec]._id) { // Directions means its a recipe
+            $scope.communityRecipesFiltered.push($scope.communityRecipes[recipe][rec]); 
+          };
+        }
+      }
+
+      console.log($scope.communityRecipesFiltered);
     }
 
     // ======== GET MY RECIPES =========
