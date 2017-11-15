@@ -33,7 +33,7 @@
       getAlternatives: getAlternatives,
       setRecipe: setRecipe,
       getRecipe: getRecipe
-    }
+    };
   }
 
   // Users service used for communicating with the users REST endpoint
@@ -116,16 +116,16 @@
       userSignin: function (credentials) {
         return this.signin(credentials).$promise;
       },
-      addRecipe: function(param) {
+      addRecipe: function (param) {
         return this.add(param).$promise;
       },
-      getMyRecipes: function() {
+      getMyRecipes: function () {
         return this.myRecipes().$promise;
       },
-      getAlternatives: function(search) {
+      getAlternatives: function (search) {
         return this.alternatives(search).$promise;
       },
-      deleteThisRecipe: function(recipe) {
+      deleteThisRecipe: function (recipe) {
         return this.deleteRecipe(recipe).$promise;
       }
     });

@@ -11,14 +11,22 @@
             <span ng-bind="vm.error"></span>
           </uib-alert>
           <!-- <label for="usernameOrEmail">Username or Email</label> -->
-          <input type="text" id="usernameOrEmail" name="usernameOrEmail" class="form-control box-field" ng-model="vm.credentials.usernameOrEmail" placeholder="Username or Email" required autofocus>
+          <div class="inner-addon left-addon">
+            <i class="glyphicon glyphicon-user"></i>      
+            <input type="text" id="usernameOrEmail" name="usernameOrEmail" class="form-control box-field" ng-model="vm.credentials.usernameOrEmail" placeholder="Username or Email" required autofocus>
+          </div>
+          
           <div ng-messages="vm.userForm.usernameOrEmail.$error" role="alert">
             <p class="help-block error-text" ng-message="required">Username or Email is required.</p>
           </div>
         </div>
         <div class="form-group" show-errors>
           <!-- <label for="password">Password</label> -->
-          <input type="password" id="password" name="password" class="form-control box-field" ng-model="vm.credentials.password" placeholder="Password" required>
+          <div class="inner-addon left-addon">
+            <i class="glyphicon glyphicon-lock"></i>      
+            <input type="password" id="password" name="password" class="form-control box-field" ng-model="vm.credentials.password" placeholder="Password" required>
+          </div>
+          
           <div ng-messages="vm.userForm.password.$error" role="alert">
             <p class="help-block error-text" ng-message="required">Password is required.</p>
           </div>
