@@ -60,8 +60,9 @@
       function searchAssign(food){
         vm.searchFood = food;
       }
-        
+      
 
+      /*
         // GET ALTERNATIVES FROM RECIPE
         $scope.map = [];
         $scope.in_food_group;
@@ -109,6 +110,6 @@
             //TransferService.setAlternatives($scope.map);
     
             //$state.go('search');
-        }
+        }*/
   }
 }());
