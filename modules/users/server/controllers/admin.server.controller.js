@@ -60,7 +60,7 @@ exports.adminsignup = function (req, res) {
       user.password = 'Password123!';
       user.salt = undefined;
       res.status(200).send();
-      mailer.sendCreation(user.email, user.firstName);
+      mailer.sendCreation(user.email, user.firstName, unapprovedUser.username);
     }
   });
 };
@@ -122,7 +122,7 @@ exports.changeToAccepted = function (req, res) {
       });
     }
     res.json(changedUser);
-    mailer.sendAcceptance(unapprovedUser.email, unapprovedUser.firstName, unapprovedUser.username);
+    mailer.sendAcceptance(unapprovedUser.email, unapprovedUser.firstName);
   });
 };
 
