@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-angular
+  angular
     .module('core')
     .factory('CommunityService', CommunityService);
 
