@@ -1,5 +1,5 @@
 html * {
-    font-family: 'Source Sans Pro', sans-serif !important;
+    font-family: 'Source Sans Pro', sans-serif ;
 }
 
 body {
@@ -9,13 +9,17 @@ body {
     background-size: cover;
     position: relative;
     background-repeat: no-repeat;
+
 }
 
 .content {
     margin-top: 50px;
+    margin-bottom: 50px;
 }
 
 .jumbotron {
+    height: 100%;
+    overflow: scroll;
     padding: 5px;
     border-width: 1px;
     border-color: black;
@@ -69,6 +73,13 @@ a:hover .header-profile-image {
     display: inline;
 }
 
+.carousel {
+    height: 100%;
+    border-width: 3px;
+    border-color: white;
+    border-style: solid;
+}
+
 h1, h2, th, label {
     color: black;
 }
@@ -76,4 +87,3 @@ h1, h2, th, label {
 #eventData {
     color: white;
 }
-
