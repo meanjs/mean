@@ -84,21 +84,6 @@
             $scope.searched = results.data;
             assignFood();
           });
-<<<<<<< HEAD
-    }
-
-    function assignFood() {
-			$scope.food = $scope.searched.report.food.name.toLowerCase();
-      $scope.nutrients = [];
-
-      $scope.searched.report.food.nutrients.forEach( (nutrient, i) => {
-        if(nutrient.name == 'Protein') $scope.nutrients.push(nutrient);
-        else if(nutrient.name == 'Total lipid (fat)') $scope.nutrients.push(nutrient);
-        else if(nutrient.name == 'Carbohydrate, by difference') $scope.nutrients.push(nutrient);
-        else if(nutrient.name == 'Fiber, total dietary') $scope.nutrients.push(nutrient);
-        else if(nutrient.name == 'Sugars, total') $scope.nutrients.push(nutrient);
-        else if(nutrient.name == 'Cholesterol') $scope.nutrients.push(nutrient);
-=======
     };
 
     function assignFood() {
@@ -112,7 +97,6 @@
         else if (nutrient.name === 'Fiber, total dietary') $scope.nutrients.push(nutrient);
         else if (nutrient.name === 'Sugars, total') $scope.nutrients.push(nutrient);
         else if (nutrient.name === 'Cholesterol') $scope.nutrients.push(nutrient);
->>>>>>> master
       });
 
       console.log('nutrients: ', $scope.nutrients);
