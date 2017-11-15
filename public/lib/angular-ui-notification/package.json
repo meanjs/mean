@@ -1,0 +1,45 @@
+{
+  "name": "angular-ui-notification",
+  "version": "0.2.0",
+  "description": "Angular.js service providing simple notifications using Bootstrap 3 styles with css transitions for animating",
+  "main": "index.js",
+  "scripts": {
+    "update-chromedriver": "./node_modules/protractor/bin/webdriver-manager update",
+    "test": "gulp tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alexcrack/angular-ui-notification.git"
+  },
+  "keywords": [
+    "angular",
+    "notification",
+    "notify",
+    "bootstrap"
+  ],
+  "author": "Alex_Crack",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/alexcrack/angular-ui-notification/issues"
+  },
+  "homepage": "https://github.com/alexcrack/angular-ui-notification",
+  "devDependencies": {
+    "chromedriver": "^2.14.1",
+    "gulp": "^3.8.11",
+    "gulp-add-src": "^0.2.0",
+    "gulp-angular-templatecache": "^1.5.0",
+    "gulp-concat": "^2.5.2",
+    "gulp-csscomb": "^3.0.3",
+    "gulp-header": "^1.2.2",
+    "gulp-jshint": "^1.9.2",
+    "gulp-less": "^3.0.1",
+    "gulp-minify-css": "^0.5.1",
+    "gulp-minify-html": "^1.0.0",
+    "gulp-ng-annotate": "^0.5.2",
+    "gulp-order": "^1.1.1",
+    "gulp-protractor": "0.0.12",
+    "gulp-rename": "^1.2.0",
+    "gulp-uglify": "^1.1.0",
+    "protractor": "^1.8.0"
+  }
+}

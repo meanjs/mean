@@ -1,24 +1,64 @@
 <section>
+      <div class="col-sm-2 col-2">
+      </div>
+      <div class="col-sm-8 col-8">
   <div class="page-header">
     <h1>{{vm.event._id ? 'Edit Event' : 'New Event'}}</h1>
   </div>
-  <div class="col-md-12">
+      <div class="col-md-12">
     <form name="vm.form.eventForm" class="form-horizontal" ng-submit="vm.save(vm.form.eventForm.$valid)" novalidate>
       <fieldset>
         <div class="form-group" show-errors>
-          <label class="control-label" for="name">Name</label>
+          <label class="control-label" for="name">Event Name</label>
           <input name="name" type="text" ng-model="vm.event.name" id="name" class="form-control" placeholder="Name" required>
           <div ng-messages="vm.form.eventForm.name.$error" role="alert">
             <p class="help-block error-text" ng-message="required">Event name is required.</p>
           </div>
         </div>
+        <div class="form-group" show-errors>
+          <label class="control-label" for="location">Location</label>
+          <input name="location" type="text" ng-model="vm.event.location" id="location" class="form-control" placeholder="Location" required>
+          <div ng-messages="vm.form.eventForm.location.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Location is required.</p>
+          </div>
+        </div>
+        <div class="form-group" show-errors>
+          <label class="control-label" for="date">Event Date (Use dropdown arrow on the right to choose from calendar)</label>
+          <input name="date" type="date" ng-model="vm.event.dateOfEvent" id="date" class="form-control" placeholder="Date of Event" required>
+          <div ng-messages="vm.form.eventForm.dateOfEvent.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Date is required.</p>
+          </div>
+        </div>
+        <div class="form-group" show-errors>
+          <label class="control-label" for="startTime">Start time</label>
+          <input name="startTime" type="time" ng-model="vm.event.startTime" id="startTime" class="form-control" placeholder="Start time" required>
+          <div ng-messages="vm.form.eventForm.startTime.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Start time is required.</p>
+          </div>
+        </div>
+        <div class="form-group" show-errors>
+          <label class="control-label" for="endTime">End time</label>
+          <input name="endTime" type="time" ng-model="vm.event.endTime" id="endTime" class="form-control" placeholder="End time" required>
+          <div ng-messages="vm.form.eventForm.endTime.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">End time is required.</p>
+          </div>
+        </div>
+        <div class="form-group" show-errors>
+          <label class="control-label" for="taxIdRequired">Require tax ID?</label>
+          <input type="checkbox" name="taxIdRequired" type="text" ng-model="vm.event.taxIdRequired" id="taxIdRequired" class="form-control">
+          <div ng-messages="vm.form.eventForm.taxIdRequired.$error" role="alert">
+          </div>
+        </div>
         <div class="form-group">
-          <button type="submit" class="btn btn-default">{{vm.event._id ? 'Update' : 'Create'}}</button>
+          <button type="submit" class="btn btn-default">{{vm.event._id ? 'Update' : 'Create'}} </button>
         </div>
         <div ng-show="vm.error" class="text-danger">
           <strong ng-bind="vm.error"></strong>
         </div>
       </fieldset>
     </form>
+  </div>
+    <div class="col-sm-2 col-2">
+    </div>
   </div>
 </section>
