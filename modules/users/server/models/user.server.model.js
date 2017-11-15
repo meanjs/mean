@@ -62,6 +62,7 @@ var ReviewSchema = new Schema({
 
 var RecipeSchema = new Schema({
   name: String,
+  time: Number,
   image: {
     type: String,
     default: 'modules/core/client/img/no-image.jpg'
