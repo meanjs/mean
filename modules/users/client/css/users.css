@@ -33,10 +33,10 @@
 }
 
 /* ADD RECIPE STYLING */
-#directionsHeader, #recipeNameHeader {
+/*#directionsHeader, #recipeNameHeader {
   color: #8CD4C9;
 }
-
+*/
 
 
 
@@ -297,5 +297,13 @@ span.glyphicon-time {
 	background-color: grey;
 }
 
+
+/*ADD RECIPE*/
+.recipeName{
+  color: #737373;
+  margin-top: 36px;
+  margin-bottom: 36px;
+  font-size: 30px;
+}
 
 

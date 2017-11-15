@@ -31,7 +31,9 @@ table {
   font-family: arial, sans-serif;
   border-collapse: collapse;
   width: 100%;
-  border: 2px solid #AEC86B;
+  border: 2px solid #737373;
+  /*background-color: #B2B2B2;*/
+  box-shadow: 3px 3px 5px #888888;
 }
 
 td{
@@ -57,7 +59,8 @@ th{
 }
 
 tr:nth-child(even) {
-  background-color: #8CD4C9;
+  /*background-color: rgba(223,93,74,0.2);*/
+  background-color: rgba(174,200,107,0.2);
   /*border: 2px solid #AEC86B;*/
 }
 
