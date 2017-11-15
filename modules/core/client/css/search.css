@@ -72,7 +72,8 @@ text{
 }
 
 #flipTable{
-  margin-left: 10px;
+  margin-left: -1px;
+  width: 101%;
 }
 
 

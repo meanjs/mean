@@ -6,9 +6,6 @@
     <text id="title">Healthy Alternatives for "</text>
     <text id="ingredient">{{firstUpper(wholename)}}</text>
     <text id="title">"</text>
-
-    <text id = "alternativeIDtest"> {{alternatives[1].map_ndbno}} </text>
-
     <text id = "alternativeNutrienttest"></text>
 
   </center>
@@ -48,8 +45,8 @@
      -->
     <center>
 
-      </br>
-    
+<!--       </br>
+    <div class="row">
       <div class="col-md-3">
         <div class="boxed">
 
@@ -84,11 +81,11 @@
             </br>
           </div>
         </div>
-      </div>
+      </div> -->
       
-      <div class="col-md-3">
-        <div class="boxed" ng-repeat="alternative in alternatives">
-          <div ng-hide="flipped" ng-click="flip();getReport(alternative.map_ndbno)">
+      <div class="col-md-3" ng-repeat="alternative in alternatives">
+        <div class="boxed">
+          <div ng-hide="flipped" ng-click="flip($alternative);getReport(alternative.map_ndbno)">
             </br>
             <text>{{alternative.map_name.toUpperCase()}}</text>
             </br>
@@ -96,7 +93,7 @@
             </br>
             </br>
           </div>
-          <div ng-show="flipped" ng-click="flip()">
+          <div ng-show="flipped" ng-click="flip($alternative)">
             </br>
             <text>{{alternative.map_name.toUpperCase()}}</text>
             </br>
@@ -113,6 +110,8 @@
           </div>
         </div>
       </div>
+    </div>
+
 
      
       <!-- <div class="col-md-3">
