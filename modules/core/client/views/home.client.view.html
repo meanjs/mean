@@ -1,6 +1,6 @@
 <body>
-<section>
-  <div id="myCarousel" class="carousel slide" data-ride="carousel" ng-controller="DashboardController" ng-init="loadEventList()">
+<section ng-controller="HomeController" ng-init="refreshHandler()">
+  <div id="myCarousel" class="carousel slide" data-ride="carousel">
     <!-- Wrapper for slides -->
     <div class="carousel-inner">
       <div class="item" ng-repeat="event in eventList" ng-class="{active : $first}">
@@ -21,6 +21,7 @@
       <span class="glyphicon glyphicon-chevron-right"></span>
       <span class="sr-only">Next</span>
     </a>
-  </div>
+
+  <div ui-view>
+    </div>
 </section>
-</body>

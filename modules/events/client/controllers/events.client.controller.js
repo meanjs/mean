@@ -21,7 +21,7 @@
     // Remove existing Event
     function remove() {
       if ($window.confirm('Are you sure you want to delete?')) {
-        vm.event.$remove($state.go('events.list'));
+        vm.event.$remove($state.go('home.bizDash.eventList'));
       }
     }
 
@@ -39,12 +39,14 @@
         vm.event.$save(successCallback, errorCallback);
       }
 
+      // On success creation of an event, route back to the event list page
       function successCallback(res) {
-        $state.go('events.view', {
+        $state.go('home.bizDash.eventList', {
           eventId: res._id
         });
       }
 
+      // if there is an error, send the message !!
       function errorCallback(res) {
         vm.error = res.data.message;
       }
