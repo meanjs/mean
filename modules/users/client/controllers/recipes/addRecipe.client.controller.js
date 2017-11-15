@@ -20,6 +20,7 @@
       'name': '',
       'directions': '',
       'cookingStyle': '',
+      'time':'',
       'healthClassifications': {
         'glutenFree': false,
         'noSugar': false,

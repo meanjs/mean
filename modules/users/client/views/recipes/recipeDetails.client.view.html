@@ -32,10 +32,11 @@
     </div>
     <hr>
     <div style="margin-left: 29%;">
-      <div class="verticalLine"><span class="glyphicon glyphicon-time" aria-hidden="true"></span>15 min | Total</div>
+      <div class="verticalLine"><span class="glyphicon glyphicon-time" aria-hidden="true"></span> {{recipe.time}} min | Total</div>
     </div>
     <div class="text">
       <ul class="list">
+        <li class="direction-list"> <u>{{recipe.cookingStyle}}</u> </li>
         <li class="direction-list"><div class="glyphicon-ring glyphicon-white"> 1  </div> {{recipe.directions}} </li>
         <!-- <li class="direction-list"><div class="glyphicon-ring glyphicon-white"> 2  </div> Drain and rinse chickpeas. Place on paper towels and pat dry. Transfer to a sheet pan.</li>
         <li class="direction-list"><div class="glyphicon-ring glyphicon-white"> 3  </div> Drizzle chickpeas with oil and season with cumin, salt, and pepper. Toss to coat.</li>
