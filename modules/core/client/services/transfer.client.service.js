@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-angular
+  angular
     .module('core')
     .factory('TransferService', TransferService);
 
@@ -20,6 +20,6 @@ angular
     return {
       setAlternatives: setAlternatives,
       getAlternatives: getAlternatives
-    }
+    };
   }
 }());
