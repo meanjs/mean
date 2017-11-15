@@ -28,11 +28,11 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$stat
 
         // And redirect to the previous or home page
         if ($scope.authentication.user.roles.indexOf('Organization') >= 0) {
-          $state.go('home.orgDash.eventList');
+          $state.go('orgDash.eventList');
           console.log($state.current);
         }
         if ($scope.authentication.user.roles.indexOf('Business') >= 0) {
-          $state.go('home.bizDash.eventList');
+          $state.go('bizDash.eventList');
           console.log($state.current);
         }
       }).error(function (response) {
@@ -56,11 +56,11 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$stat
 
         // And redirect to the previous or home page
         if ($scope.authentication.user.roles.indexOf('Organization') >= 0) {
-          $state.go('home.orgDash.eventList');
+          $state.go('orgDash.eventList');
           console.log($state.current);
         }
         if ($scope.authentication.user.roles.indexOf('Business') >= 0) {
-          $state.go('home.bizDash.eventList');
+          $state.go('bizDash.eventList');
           console.log($state.current);
         }
       }).error(function (response) {
