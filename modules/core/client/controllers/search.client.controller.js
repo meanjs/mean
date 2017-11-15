@@ -27,6 +27,7 @@
     $scope.showComparison = false;
     $scope.flipped = false;
 
+
     $scope.showI = function() {
       if($scope.showItem==false){
         $scope.showItem = true;
@@ -44,7 +45,7 @@
     }
 
     $scope.flip = function(alternative) {
-      $scope.flipped = !$scope.flipped;
+      $scope.flipped = !$scope.flipped[alternative];
     }
     //function to uppercase the first letter
     $scope.firstUpper = function(string) {
@@ -103,7 +104,7 @@
       console.log("nutrients: ", $scope.nutrients);
 
 		}
-	
+	 
 
     function getURL(url) {
 			return $http.get(url);
