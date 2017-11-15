@@ -12,31 +12,31 @@
 
     vm.authentication = Authentication;
 
-    //CALORIE SLIDER
-    var slider = document.getElementById("calories");
-    var output = document.getElementById("calVal");
+    // CALORIE SLIDER
+    var slider = document.getElementById('calories');
+    var output = document.getElementById('calVal');
     output.innerHTML = slider.value; // Display the default slider value
 
     // Update the current slider value (each time you drag the slider handle)
-    slider.oninput = function() {
-        output.innerHTML = this.value;
-    }
+    slider.oninput = function () {
+      output.innerHTML = this.value;
+    };
 
     // ========= SHOW COMMUNITY OR MY RECIPES ========
     $scope.showCommunity = true;
 
     $scope.showPopular = () => {
       $scope.showCommunity = true;
-    }
+    };
 
     $scope.showMyRecipes = () => {
       $scope.showCommunity = false;
-    }
+    };
 
     // =========== GET COMMUNITY RECIPES ============
     CommunityService.getList()
       .then(CommunityRecipeSuccess)
-      .catch(failure)
+      .catch(failure);
 
     async function CommunityRecipeSuccess(response) {
       $scope.communityRecipes = await response;
@@ -45,15 +45,15 @@
     // ======== GET MY RECIPES =========
     CommunityService.getMyRecipes()
       .then(MyRecipeSuccess)
-      .catch(failure)
+      .catch(failure);
 
     function MyRecipeSuccess(response) {
       $scope.myRecipes = response.recipes;
     }
 
     function failure(error) {
-      console.log("Failure: ", error);
-    } 
+      console.log('Failure: ', error);
+    }  
 
 
 
@@ -109,6 +109,5 @@
     function deleteRecipeFailure(response) {
       Notification.error({ message: '<i class="glyphicon glyphicon-remove"></i> Delete recipe failed!' });
     }
-
   }
 }());
