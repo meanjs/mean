@@ -33,10 +33,10 @@
 }
 
 /* ADD RECIPE STYLING */
-#directionsHeader, #recipeNameHeader {
+/*#directionsHeader, #recipeNameHeader {
   color: #8CD4C9;
 }
-
+*/
 
 
 
@@ -195,6 +195,23 @@
 .propertiesA:hover{
   color: rgb(174,200,107);
 }
+.inner-addon {
+  position: relative;
+}
+
+/* style glyph */
+.inner-addon .glyphicon {
+  position: absolute;
+  padding: 10px;
+  pointer-events: none;
+  font-size: 17px;
+}
+
+/* align glyph */
+.left-addon .glyphicon  { left:  0px;}
+
+/* add padding  */
+.left-addon input  { padding-left:  38px; }
 
 
 /* RECIPE DETAILS CSS */
@@ -280,5 +297,13 @@ span.glyphicon-time {
 	background-color: grey;
 }
 
+
+/*ADD RECIPE*/
+.recipeName{
+  color: #737373;
+  margin-top: 36px;
+  margin-bottom: 36px;
+  font-size: 30px;
+}
 
 

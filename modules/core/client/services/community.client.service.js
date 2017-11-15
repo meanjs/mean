@@ -17,6 +17,14 @@
       myRecipes: {
         method: 'GET',
         url: '/api/users/myRecipes'
+      },
+      add: {
+        method: 'POST',
+        url: '/api/users/add'
+      },
+      deleteRecipe: {
+        method: 'POST',
+        url: '/api/users/deleteRecipe'
       }
     });
 
@@ -26,6 +34,12 @@
       },
       getMyRecipes: function () {
         return this.myRecipes().$promise;
+      },
+      addRecipe: function(param) {
+        return this.add(param).$promise;
+      },
+      deleteThisRecipe: function(recipe) {
+        return this.deleteRecipe(recipe).$promise;
       }
     });
 

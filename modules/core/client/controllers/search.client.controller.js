@@ -42,13 +42,13 @@
       // $scope.showItem = !$scope.showItem;
     };
 
-    $scope.flip = function () {
-      $scope.flipped = !$scope.flipped;
-    };
-    // function to uppercase the first letter
-    $scope.firstUpper = function (string) {
-      return string.charAt(0).toUpperCase() + string.slice(1);
-    };
+    $scope.flip = function(alternative) {
+      $scope.flipped = !$scope.flipped[alternative];
+    }
+    //function to uppercase the first letter
+    $scope.firstUpper = function(string) {
+    	return string.charAt(0).toUpperCase() + string.slice(1);
+	}
 
     // FIRST ITME IS ORIGINAL INGREDIENT
     $scope.alternatives = TransferService.getAlternatives();
@@ -100,7 +100,6 @@
       });
 
       console.log('nutrients: ', $scope.nutrients);
-
     }
 
     function getURL(url) {
