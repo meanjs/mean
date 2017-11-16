@@ -145,9 +145,10 @@
 
       });
 
-      it('should send a Delete request with the form input values and then locate to new object URL', inject(function (ItemsService) {
+      it('should send a Delete request with the applicants values', inject(function (ItemsService) {
         //expect the initial get request
         // expect a delte from the user with the approved status of false and a ta role
+        spyOn(window, 'confirm').and.returnValue(true);
         $httpBackend.expectDELETE('/api/unapproved?approvedStatus=false&roles=ta').respond(204);
 
         // Run controller functionality
