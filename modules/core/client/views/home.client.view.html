@@ -67,9 +67,9 @@
     </div>
 
     <!-- COMMUNITY RECIPES -->
-    <div ng-show="showCommunity" ng-repeat="userRecipes in communityRecipes">
+    <div ng-show="showCommunity">
       <div class="row row-margin">
-        <div ng-repeat="recipe in userRecipes" class="col-xs-12 col-sm-6 col-md-3 properties">
+        <div ng-repeat="recipe in communityRecipesFiltered" class="col-xs-12 col-sm-6 col-md-3 properties">
           <img class="img-prop" ng-src="{{recipe.image}}" style="height: 80%">
           <div class="card-info2"></div>
           <div class="card-info">
