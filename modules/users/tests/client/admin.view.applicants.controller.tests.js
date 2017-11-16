@@ -115,7 +115,7 @@
 
       });
 
-      it('should send a POST request with the form input values and then locate to new object URL', inject(function (ItemsService) {
+      it('should send a POST request and end up with the same user with an approved value of true', inject(function (ItemsService) {
         //expect the initial get request
         // Set POST response
         $httpBackend.expectPOST('/api/unapproved', newlyApproved).respond(mockUser);
@@ -125,17 +125,35 @@
         $httpBackend.flush();
       }));
 
-      it('should call Notification.error if error', function () {
-        var errorMessage = 'this is an error message';
-        $httpBackend.expectPOST('/api/items', sampleItemPostData).respond(400, {
-          message: errorMessage
+      
+    });
+    describe('vm.denyUser() as delete', function () {
+      var sampleUserPostData;
+      var newlyApproved;
+      var mockUserList;
+
+      beforeEach(function () {
+        // Create a sample item object
+        sampleUserPostData = new ApplicantsService({
+          roles: ['ta'],
+          approvedStatus: false
         });
+        mockUserList = [mockUser, mockUser];
+        //expect the get request before each of these
+        $httpBackend.expectGET('/api/unapproved').respond(mockUserList);
+        $httpBackend.flush()
 
-        $scope.vm.save(true);
-        $httpBackend.flush();
-
-        expect(Notification.error).toHaveBeenCalledWith({ message: errorMessage, title: '<i class="glyphicon glyphicon-remove"></i> Item save error!' });
       });
+
+      it('should send a Delete request with the form input values and then locate to new object URL', inject(function (ItemsService) {
+        //expect the initial get request
+        // expect a delte from the user with the approved status of false and a ta role
+        $httpBackend.expectDELETE('/api/unapproved?approvedStatus=false&roles=ta').respond(204);
+
+        // Run controller functionality
+        $scope.vm.removeApplicant(mockUser);
+        $httpBackend.flush();
+      }));
     });
   });
 }());
