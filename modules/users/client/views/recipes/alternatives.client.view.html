@@ -1,4 +1,4 @@
-<!-- <div> -->
+<!-- <div>
 	<div class="row al-row">
 		<div class="col-md-6 al-containerPaddingL">
 			<h1 class="al-h1L text-center">{{recipe.name}}</h1>
@@ -9,7 +9,7 @@
 				<!--<li><div class="al-list-measureL">0 cups</div>Ingredient 2</li>
 				<li><div class="al-list-measureL">0 cups</div>Ingredient 3</li>
 				<li><div class="al-list-measureL">0 cups</div>Ingredient 4</li>
-				<li><div class="al-list-measureL">0 cups</div>Ingredient 5</li>-->
+				<li><div class="al-list-measureL">0 cups</div>Ingredient 5</li>
 			</div>
 			<button type="button" class="htb htb-primary btn-lg sharp">Edit</button>
 		</div>
@@ -25,7 +25,7 @@
 				<!--<li><div class="al-list-measureR">0 cups</div>Ingredient 2</li>
 				<li><div class="al-list-measureR">0 cups</div>Ingredient 3</li>
 				<li><div class="al-list-measureR">0 cups</div>Ingredient 4</li>
-				<li><div class="al-list-measureR">0 cups</div>Ingredient 5</li>-->
+				<li><div class="al-list-measureR">0 cups</div>Ingredient 5</li>
 			</div>
 			<button type="button" class="htb htb-primary btn-lg sharp al-btnR"
 				ui-sref="customize">Customize</button>
@@ -34,3 +34,31 @@
 
 <!-- </div> -->
 
+<div class="row al-row">
+	<div class="col-md-6 al-containerPaddingL">
+		<div class="ingredient-containerL al-list" ng-repeat="ingredient in ingredients" ng-click="getReport(ingredient.map_ndbno)">
+			<h1 class="al-h1L text-center">{{recipe.name}}</h1>
+			<li><div class="al-list-measureL">
+				{{ingredient.quantity}} {{ingredient.units}}
+			</div>{{ingredient.name}}</li>
+			<h1 class="al-h1 text-center">Alternative Recipe</h1>
+			<li><div class="al-list-measureR">{{alternative.map_name}} {{ingredient.units}}</div>{{alternative.map_name}}</li>
+			
+		
+		
+		
+		</div>
+		<!--<button type="button" class="htb htb-primary btn-lg sharp">Edit</button>
+	</div>
+	<div class="col-md-6 al-containerPaddingR">
+		<div class="al-tabs">
+			<div class="al-tabMargin"><a class="tabA" href="">Healthiest</a> </div>
+			<div class=""><a class="tabA" href="">Truest to Taste</a></div>
+		</div>
+		<div class="ingredient-containerR al-list" ng-repeat="alternative in alternatives" 
+				ng-click="getReport(alternative.map_ndbno)">
+			</div>
+		<button type="button" class="htb htb-primary btn-lg sharp al-btnR"
+			ui-sref="customize">Customize</button>
+	</div>
+</div>-->
