@@ -134,34 +134,37 @@
         });
       });
     
-      if($scope.alt_request == 0){
-        var alt_item = $scope.all_alt_in_group[$scope.all_alt_in_group.length-1];
-        $scope.map.push({"map_ndbno": alt_item.db_ndbno, "map_name": alt_item.db_name, "nutrient": alt_item.db_main_nutrient.db_amount, "flipped": false});
-      }
-      else if($scope.alt_request == 1){
-        var alt_item = $scope.all_alt_in_group[0];
-        $scope.map.push({"map_ndbno": alt_item.db_ndbno, "map_name": alt_item.db_name, "nutrient": alt_item.db_main_nutrient.db_amount, "flipped": false});
-      }
-      else if($scope.alt_request == 2){
-        if($scope.all_alt_in_group.length < $scope.top_alt_count){
-          $scope.all_alt_in_group.forEach((alt_item, i) => {
-            $scope.map.push({"map_ndbno": alt_item.db_ndbno, "map_name": alt_item.db_name, "nutrient": alt_item.db_main_nutrient.db_amount, "flipped": false});
-          });
+      if($scope.all_alt_in_group.length > 0) {
+        if($scope.alt_request == 0){
+          var alt_item = $scope.all_alt_in_group[$scope.all_alt_in_group.length-1];
+          $scope.map.push({"map_ndbno": alt_item.db_ndbno, "map_name": alt_item.db_name, "nutrient": alt_item.db_main_nutrient.db_amount, "flipped": false});
         }
-        else{
-          // Control what alt we give
-          mid_ind = $scope.all_alt_in_group.length/2;
-          // Index is not whole number
-          if(mid_ind % 1 != 0){
-            mid_ind = mid_ind - 0.5;
-          }
-          $scope.all_alt_in_group.forEach((alt_item, i) => {
-            if(i==0 || i==mid_ind || i==$scope.all_alt_in_group.length-1){
+        else if($scope.alt_request == 1){
+          var alt_item = $scope.all_alt_in_group[0];
+          $scope.map.push({"map_ndbno": alt_item.db_ndbno, "map_name": alt_item.db_name, "nutrient": alt_item.db_main_nutrient.db_amount, "flipped": false});
+        }
+        else if($scope.alt_request == 2){
+          if($scope.all_alt_in_group.length < $scope.top_alt_count){
+            $scope.all_alt_in_group.forEach((alt_item, i) => {
               $scope.map.push({"map_ndbno": alt_item.db_ndbno, "map_name": alt_item.db_name, "nutrient": alt_item.db_main_nutrient.db_amount, "flipped": false});
+            });
+          }
+          else{
+            // Control what alt we give
+            mid_ind = $scope.all_alt_in_group.length/2;
+            // Index is not whole number
+            if(mid_ind % 1 != 0){
+              mid_ind = mid_ind - 0.5;
             }
-          });
-        }		
+            $scope.all_alt_in_group.forEach((alt_item, i) => {
+              if(i==0 || i==mid_ind || i==$scope.all_alt_in_group.length-1){
+                $scope.map.push({"map_ndbno": alt_item.db_ndbno, "map_name": alt_item.db_name, "nutrient": alt_item.db_main_nutrient.db_amount, "flipped": false});
+              }
+            });
+          }		
+        }
       }
+      else $scope.map.push({"map_name": 'No alternatives available'});
 
       console.log($scope.map);
       TransferService.setAlternatives($scope.map);
@@ -172,6 +175,14 @@
 
     $scope.recipeAdd = function () {
       $scope.recipeList.push({});
+    };
+    $scope.removeRow = function (ingredient) {
+      // $scope.ingredient.splice(idx, 1);
+      var index = $scope.recipe.ingredients.indexOf(ingredient);
+      $scope.recipe.ingredients.splice(index, 1);
+      $scope.recipeList.splice(index,1);
+      // $scope.customers.splice($index, 1);
+      $scope.$emit('customerDeleted', ingredient); 
     };
   }
 }());

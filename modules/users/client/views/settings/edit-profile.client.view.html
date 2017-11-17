@@ -32,31 +32,27 @@
       <!--TODO: PUT THE PICTURE HERE. DO NOT LINK TO ANOTHER VIEW, JUST PUT THE HTML HERE.-->
       <!--<div style="background: gray; height: 300px;">Profile Picture Goes Here</div>-->
       <form class="signin form-horizontal">
-        <fieldset>
-          <div class="form-group text-center">
-            <img ngf-src="vm.fileSelected ? picFile : vm.user.profileImageURL" 
-                alt="{{vm.user.displayName}}" class="img-rounded user-profile-picture" 
-                ngf-drop>
+      <fieldset>
+        <div class="form-group text-center">
+          <img ngf-src="vm.fileSelected ? picFile : vm.user.profileImageURL" alt="{{vm.user.displayName}}" class="img-thumbnail user-profile-picture" ngf-drop>
+        </div>
+        <div ng-show="vm.loading" class="form-group text-center">
+          <img ng-src="/modules/core/client/img/loaders/loader.gif" height="50" width="50" alt="Loading image...">
+        </div>
+        <div ng-show="!vm.fileSelected" class="text-center form-group">
+          <button class="btn btn-default btn-file" ngf-select="(vm.fileSelected = true) && (vm.loading = false)" ng-model="picFile" accept="image/*" ngf-before-model-change="vm.loading = true" ngf-resize="{width: 400}" ngf-resize-if="$width > 400 || $height > 400">Select Picture</button>
+        </div>
+        <div ng-show="vm.fileSelected" class="text-center form-group">
+          <button class="btn btn-primary" ng-click="vm.upload(picFile)">Use This Picture</button>
+          <button class="btn btn-default" ng-click="vm.fileSelected = false">Cancel</button>
+        </div>
+        <div ng-show="vm.fileSelected" class="progress text-center">
+          <div class="progress-bar" role="progressbar" aria-valuenow="{{vm.progress}}" aria-valuemin="0" aria-valuemax="100" style="width:{{vm.progress}}%" ng-bind="vm.progress + '%'">
+            <span class="sr-only">{{vm.progress}}% Complete</span>
           </div>
-          <div ng-show="vm.loading" class="form-group text-center">
-            <img ng-src="/modules/core/client/img/loaders/loader.gif" height="50" width="50" alt="Loading image...">
-          </div>
-          <div ng-show="!vm.fileSelected" class="text-center form-group">
-            <button class="btn btn-default btn-file" ngf-select="(vm.fileSelected = true) && (vm.loading = false)" 
-                ng-model="picFile" accept="image/*" ngf-before-model-change="vm.loading = true" 
-                ngf-resize="{width: 400}" ngf-resize-if="$width > 400 || $height > 400">Change Picture</button>
-          </div>
-          <div ng-show="vm.fileSelected" class="text-center form-group">
-            <button class="btn btn-primary" ng-click="vm.upload(picFile)">Use This Picture</button>
-            <button class="btn btn-default" ng-click="vm.fileSelected = false">Cancel</button>
-          </div>
-          <div ng-show="vm.fileSelected" class="progress text-center">
-            <div class="progress-bar" role="progressbar" aria-valuenow="{{vm.progress}}" aria-valuemin="0" aria-valuemax="100" style="width:{{vm.progress}}%" ng-bind="vm.progress + '%'">
-              <span class="sr-only">{{vm.progress}}% Complete</span>
-            </div>
-          </div>
-        </fieldset>
-      </form>
+        </div>
+      </fieldset>
+    </form>
     </center>
     <!--END PROFILE PICTURE 
 

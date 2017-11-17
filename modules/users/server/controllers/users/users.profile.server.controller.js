@@ -306,7 +306,7 @@ exports.alternatives = function (req, res) {
 };
 
 exports.deleteRecipe = function (req, res) {
-  var myRecipeIndex = req.model;
+  var myRecipeIndex = req.body.index;
   var user = req.user;
 
   user.recipes.splice(myRecipeIndex, 1);
