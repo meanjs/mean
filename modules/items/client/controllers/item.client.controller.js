@@ -19,6 +19,7 @@
 
     // Remove existing Item
     function remove() {
+      //console.log(vm.authentication.user.roles);
       if ($window.confirm('Are you sure you want to delete?')) {
         vm.item.$remove(function () {
           $state.go('admin.items.list');
