@@ -36,8 +36,9 @@
 
 <div class="row al-row">
 	<div class="col-md-6 al-containerPaddingL">
+		<h1 class="al-h1L text-center">{{recipe.name}}</h1>
 		<div class="ingredient-containerL al-list" ng-repeat="ingredient in ingredients" ng-click="getReport(ingredient.map_ndbno)">
-			<h1 class="al-h1L text-center">{{recipe.name}}</h1>
+			
 			<li><div class="al-list-measureL">
 				{{ingredient.quantity}} {{ingredient.units}}
 			</div>{{ingredient.name}}</li>
@@ -48,6 +49,8 @@
 		
 		
 		</div>
+	</div>
+</div>
 		<!--<button type="button" class="htb htb-primary btn-lg sharp">Edit</button>
 	</div>
 	<div class="col-md-6 al-containerPaddingR">
