@@ -17,6 +17,9 @@
             <li><b>GPA:</b> {{vm.user.gpa}}</li>
             <li><b>Graduation Date:</b> {{vm.user.graduationDate}}</li>
             <li><b>Employment Status:</b> {{vm.user.availabilityStatus}}</li>
+            <li ng-if="vm.user.approve === false" style="color:red;"><b>Approval Status:</b> No</li>
+            <li ng-if="vm.user.approve === true" style="color:green;"><b>Approval Status:</b> Yes</li>
+            <li><b>Comments:</b> {{vm.user.comments}}</li>
           </ul>
         </div>
         <div class="student-profile-h3">Short Biography</div>

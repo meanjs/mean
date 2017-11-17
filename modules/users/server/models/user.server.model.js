@@ -109,6 +109,16 @@ var UserSchema = new Schema({
     trim: true,
     default: ''
   },
+  comments: {
+    type: String,
+    trim: true,
+    default: ''
+  },
+  approve: {
+    type: Boolean,
+    trim: true,
+    default: false
+  },
   type: {
     type: String,
     trim: true,

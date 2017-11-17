@@ -62,8 +62,14 @@
 	                      	<div ng-if="user.type === 'student'">
 	                      		Team: {{user.teamName}}
 	                      	</div>
+													<div style="color:red;" ng-if="user.type === 'student' && vm.authentication.user.type === 'admin' && user.approve === false">
+	                      		Disapprove
+	                      	</div>
+													<div style="color:green;" ng-if="user.type === 'student' && vm.authentication.user.type === 'admin' && user.approve === true">
+	                      		Approve
+	                      	</div>
 	                      	<div ng-if="user.type === 'sponsor'">
-	                      		<i>sponsor</i>
+	                      		<i>Sponsor</i>
 	                      	</div>
 	                    </td>
 	                    <td>
@@ -107,7 +113,7 @@
 		        	<div id="addCart" class="image-left">
 		            	<button type="addButton">Add to Cart</button>
 		        	</div>
-		        	<div class="image-right">	
+		        	<div class="image-right">
 		        		<button type="button" ng-click="goToStudentProfile()">Go To Profile</button>
 		        	</div>
 	            </div>

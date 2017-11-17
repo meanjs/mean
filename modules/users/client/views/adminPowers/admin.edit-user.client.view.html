@@ -23,6 +23,27 @@
             <p class="help-block error-text" ng-message="required">Last name is required.</p>
           </div>
         </div>
+        <div class="form-group" show-errors>
+          <label for="comments">Comments</label>
+          <textarea id="comments" name="comments" class="form-control" ng-model="vm.user.comments" placeholder="Comments" style="height: 150px; margin: 1px; padding: 1px; resize: none;"></textarea>
+          <div ng-messages="userForm.comments.$error" role="alert">
+          </div>
+        </div>
+        <div class="form-group" show-errors>
+          <form id="approvalOptions" name="approvalOptions" class="filter-form">
+            <fieldset class="filter-fieldset">
+              <legend class="filter-legend">Do you approve?</legend>
+              <div class="filter-div">
+                <input type="radio" id="yes" name= "approval" value="yes" ng-click="switchApproval()">
+                <label for="yes">Yes</label>
+              </div>
+              <div class="filter-div">
+                <input type="radio" id="no" name= "approval" value="no" ng-click="switchApproval()">
+                <label for="no">No</label>
+              </div>
+            </fieldset>
+          </form>
+        </div>
         <div class="form-group">
           <input type="submit" value="Update" class="btn btn-default">
         </div>

@@ -85,6 +85,21 @@
       });
     };
 
+    $scope.switchApproval = function () {
+      var yes = document.getElementById('yes');
+      var no = document.getElementById('no');
+
+      if (no.checked) {
+        yes.checked = false;
+        no.checked = true;
+        vm.user.approve = false;
+      } else if (yes.checked) {
+        no.checked = false;
+        yes.checked = true;
+        vm.user.approve = true;
+      }
+    };
+
     function onUserUpdateSuccess(response) {
       Notification.success({ message: '<i class="glyphicon glyphicon-ok"></i> User Updated successfully!' });
     }

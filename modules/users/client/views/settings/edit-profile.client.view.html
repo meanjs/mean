@@ -57,7 +57,7 @@
         </div>
         <div class="form-group" show-errors>
           <label for="bio">Short Bio</label>
-          <input type="text" id="bio" name="bio" class="form-control" ng-model="vm.user.bio" placeholder="Short Bio" required>
+          <textarea type="text" id="bio" name="bio" class="form-control" ng-model="vm.user.bio" placeholder="Short Bio" required style="height: 150px; margin: 1px; padding: 1px; resize: none;"></textarea>
           <div ng-messages="vm.userForm.bio.$error" role="alert">
             <p class="help-block error-text" ng-message="required">Bio is required.</p>
           </div>
