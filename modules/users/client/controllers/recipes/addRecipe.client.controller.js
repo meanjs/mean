@@ -119,14 +119,15 @@
       // 2 - want 3 alts for ingredients
 
       // Get alternatives
+      $scope.recipe.ingredients.forEach( (ingredient, x) => {
       $scope.alt_food_object.cooking_methods.forEach( (cooking_method, i) => {
         cooking_method.food_groups.forEach( (food_group, j) => {
           food_group.food_alts.forEach( (food_alt, k) => {
               
-            if((food_alt.db_name == $scope.recipe.name) && ($scope.recipe.cookingStyle == cooking_method.method_name)){
+            if((food_alt.db_name == ingredient.name) && ($scope.recipe.cookingStyle == cooking_method.method_name)){
               $scope.have_match = 1;
             }
-            else if ((food_alt.db_name != $scope.recipe.name) && ($scope.have_match == 1)){
+            else if ((food_alt.db_name != ingredient.name) && ($scope.have_match == 1)){
               $scope.all_alt_in_group.push(food_alt);
             }			
           });
@@ -165,7 +166,7 @@
         }
       }
       else $scope.map.push({"map_name": 'No alternatives available'});
-
+    });
       console.log($scope.map);
       TransferService.setAlternatives($scope.map);
     }
