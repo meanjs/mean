@@ -124,10 +124,10 @@
         cooking_method.food_groups.forEach( (food_group, j) => {
           food_group.food_alts.forEach( (food_alt, k) => {
               
-            console.log("Ingredient", ingredient.name);
-            console.log("Alt name", food_alt.db_name);
-            console.log($scope.recipe.cookingStyle);
-            console.log("Cooking Method", cooking_method.method_name);
+            //console.log("Ingredient", ingredient.name);
+            //console.log("Alt name", food_alt.db_name);
+            //console.log($scope.recipe.cookingStyle);
+            //console.log("Cooking Method", cooking_method.method_name);
             if((food_alt.db_name == ingredient.name) && ($scope.recipe.cookingStyle == cooking_method.method_name)){
               $scope.have_match = 1;
               console.log(food_alt);
@@ -141,8 +141,8 @@
         });
       });
 
+      console.log(all_alt_in_group);
       if($scope.all_alt_in_group.length > 0) {
-        
         if($scope.alt_request == 0){
           var alt_item = $scope.all_alt_in_group[$scope.all_alt_in_group.length-1];
           console.log(alt_item);

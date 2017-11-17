@@ -23,7 +23,7 @@
         
     //   });
     // });
-
+    /*
     //Alternative Getter
 		var apiKey = 'YAJ2M9l67OaqNMPCEfBcoccVtQDY5LPUR20rFzP8';
 		var type = "b";
@@ -59,7 +59,7 @@
 
       function searchAssign(food){
         vm.searchFood = food;
-      }
+      }*/
       
   }
 }());
