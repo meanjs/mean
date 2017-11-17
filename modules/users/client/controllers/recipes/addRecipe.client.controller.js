@@ -176,5 +176,13 @@
     $scope.recipeAdd = function () {
       $scope.recipeList.push({});
     };
+    $scope.removeRow = function (ingredient) {
+      // $scope.ingredient.splice(idx, 1);
+      var index = $scope.recipe.ingredients.indexOf(ingredient);
+      $scope.recipe.ingredients.splice(index, 1);
+      $scope.recipeList.splice(index,1);
+      // $scope.customers.splice($index, 1);
+      $scope.$emit('customerDeleted', ingredient); 
+    };
   }
 }());
