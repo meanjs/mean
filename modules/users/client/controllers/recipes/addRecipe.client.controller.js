@@ -124,20 +124,28 @@
         cooking_method.food_groups.forEach( (food_group, j) => {
           food_group.food_alts.forEach( (food_alt, k) => {
               
+            console.log("Ingredient", ingredient.name);
+            console.log("Alt name", food_alt.db_name);
+            console.log($scope.recipe.cookingStyle);
+            console.log("Cooking Method", cooking_method.method_name);
             if((food_alt.db_name == ingredient.name) && ($scope.recipe.cookingStyle == cooking_method.method_name)){
               $scope.have_match = 1;
+              console.log(food_alt);
             }
             else if ((food_alt.db_name != ingredient.name) && ($scope.have_match == 1)){
               $scope.all_alt_in_group.push(food_alt);
+              console.log(food_alt);
             }			
           });
           $scope.have_match = 0;
         });
       });
-    
+
       if($scope.all_alt_in_group.length > 0) {
+        
         if($scope.alt_request == 0){
           var alt_item = $scope.all_alt_in_group[$scope.all_alt_in_group.length-1];
+          console.log(alt_item);
           $scope.map.push({"map_ndbno": alt_item.db_ndbno, "map_name": alt_item.db_name, "nutrient": alt_item.db_main_nutrient.db_amount, "flipped": false});
         }
         else if($scope.alt_request == 1){
