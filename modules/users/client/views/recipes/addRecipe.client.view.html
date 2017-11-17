@@ -1,8 +1,8 @@
-<div class="text-center" style="margin-top:50px">
+<div class="text-center" style="margin-top:50px; margin-bottom:60px">
   <div class="row">
     <div class="col-md-6 col-md-offset-3">
-        <div style="width: 100%; height: 17px; border-bottom: 1px solid #AEC86B; text-align: center">
-      <span style="font-size: 20px; background-color: #fff; padding: 0 10px; color: #AEC86B">
+        <div style="width: 100%; height: 14px; border-bottom: 1px solid #AEC86B; text-align: center">
+      <span style="font-size: 17px; background-color: #fff; padding: 0 10px; color: #AEC86B">
         New Recipe <!--Padding is optional-->
       </span>
     </div>
@@ -12,42 +12,78 @@
   <form name="vm.addRecipeForm" ng-submit="vm.updateMyRecipes(vm.addRecipeForm.$valid)" novalidate>
     <fieldset>
       <div class="row recipeName">
-        <input name="name" type="text" ng-model="recipe.name" style="width: 50%; text-align:center; border:none; text-transform: uppercase; " id="name" class="" placeholder="Enter Recipe Name" required>
+        <input name="name" type="text" ng-model="recipe.name" style="width: 50%; text-align:center; border:none; text-transform: uppercase; " id="name" class="" placeholder="Enter Recipe Name..." required>
       </div>
       <hr>
-      <div class="row">
-        <div class="col-md-6">
-          <div style="float:right; margin-top: -9px;">
-            <img src="../modules/users/client/img/addRecipe/cooking-style.png" style="height: 50px; width: 50px ">
-            <div style="font-weight:bold">Method</div>
+      <div class="container-fluid" style="padding-left: 50px;">
+        <div class="col-md-2 col-md-offset-2">
+          <div style="float:right">  
+            <img src="../modules/users/client/img/addRecipe/cooking-style.png" style="height: 45px; width: 45px ">  
+            <div style="font-weight:bold; margin-top: 0px; margin-bottom: 5px">Method</div>
             <select style= "    border-radius: 0px;" class="" ng-model="recipe.cookingStyle">
               <option>Baked</option>
               <option>Fried</option>
               <option>Grilled</option>
-            </select>
+            </select>                       
           </div>
         </div>
-        <div class="col-md-6" style="float: left">
-          <div style="float:left">
-            <img src="../modules/users/client/img/addRecipe/timer.png" style="height: 40px; width: 40px ">
-            <div style="font-weight:bold">Minutes</div>
-            <input name="time" type="number" ng-model="recipe.time" placeholder="0" style="width: 30%; text-align: center;" />
+        <div class="col-md-2">
+          <div>   
+            <img src="../modules/users/client/img/addRecipe/timer.png" style="height: 40px; width: 40px ">              
+            <div style="font-weight:bold; margin-top: 5px; margin-bottom: 5px">Prep Time</div>
+            <input name="time" type="number" ng-model="recipe.ingredients[$index].quantity" placeholder="0 min" style="width: 30%; text-align: center;" />                       
+          </div>
+        </div>
+        <div class="col-md-2" style="margin-left: -28px;">
+          <div style="float:left">      
+            <img src="../modules/users/client/img/addRecipe/plates.png" style="height: 45px; width: 45px ">              
+            <div style="font-weight:bold; margin-top: 0px; margin-bottom: 5px">Diet</div> 
+            <div class="dropdown" style="margin-top: -7px;">
+              <button class="btn btn-secondary dropdown-toggle btn-prop" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Classifications
+                <span class="caret"></span></a>
+              </button>
+              <div class="dropdown-menu filter-dropdown" aria-labelledby="dropdownMenuButton">
+                <li><a href="" class="small" data-value="vegan" tabIndex="-1"><input ng-model="recipe.healthClassifications.glutenFree" type="checkbox"/>&nbsp;Gluten Free</a></li>
+                <li><a href="" class="small" data-value="pescetarian" tabIndex="-1"><input ng-model="recipe.healthClassifications.noSugar" type="checkbox"/>&nbsp;No Sugar</a></li>
+                <li><a href="" class="small" data-value="ovo-vegetarian" tabIndex="-1"><input ng-model="recipe.healthClassifications.lowFat" type="checkbox"/>&nbsp;Low Fat</a></li>
+                <li><a href="" class="small" data-value="lacto-vegetarian" tabIndex="-1"><input ng-model="recipe.healthClassifications.vegan" type="checkbox"/>&nbsp;Vegan </a></li>
+                <li><a href="" class="small" data-value="lacto-ovo-vegetarian" tabIndex="-1"><input ng-model="recipe.healthClassifications.lowCalorie" type="checkbox"/>&nbsp;Low Calorie</a></li>
+              </div>
+            </div>                    
+          </div>
+        </div>
+        <div class="col-md-2">
+          <div style="float:left; margin-left: -24%;">   
+            <img src="../modules/users/client/img/addRecipe/rate.png" style="height: 40px; width: 40px ">              
+            <div style="font-weight:bold; margin-top: 5px; margin-bottom: 5px">Rate</div>
+            <div class="acidjs-rating-stars">
+              <form id="rating">
+                  <input type="radio" name="group-1" id="group-1-0" value="5" /><label for="group-1-0"></label>
+                  <input type="radio" name="group-1" id="group-1-1" value="4" /><label for="group-1-1"></label>
+                  <input type="radio" name="group-1" id="group-1-2" value="3" /><label for="group-1-2"></label>
+                  <input type="radio" name="group-1" id="group-1-3" value="2" /><label for="group-1-3"></label>
+                  <input type="radio" name="group-1" id="group-1-4" value="1" /><label for="group-1-4"></label>
+              </form>
+            </div>                    
           </div>
         </div>
       </div>
-      <hr>
-      <div class="row">
+      <hr style="margin-top: 18px;">
+      <div class="row" style="margin-top:20px">
         <div class="col-md-6">
           <div style="float:right">
-            <h4>Ingredients</h4>
+            <h4 style="margin-bottom:18px; font-size:18px">Ingredients</h4>
             <table class="table" style="margin: 0">
               <thead>
                   <th class="">Ingredient Name</th>
                   <th class="">Quantity</th>
                   <th class="">Units</th>
+                  <th></th>
               </thead>
               <tbody>
-                <tr ng-repeat="ingredient in recipeList">
+                <tr ng-repeat="ingredient in recipeList" >
+
                   <td id="ing">
                     <input name="ingredient" type="text" ng-model="recipe.ingredients[$index].name" placeholder="Ingredient Name" style="width: 185px;"/>
                   </td>
@@ -66,10 +102,16 @@
                       <option>Gallons</option>
                     </select>
                   </td>
+                  <td style="padding-top:11px">
+                    <a type="button" style="color:#DF5D4A" aria-label="Left Align" data-ng-click="removeRow($index)">
+                      <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                    </a>
+                  </td>
                 </tr>
-                <tr style ="background-color: #C7C7C7;">
-                  <td align="center" colspan="3">
-                    <a href="" ng-click="recipeAdd()">
+                
+                <tr style ="background-color: #E3E3E3;">
+                  <td align="center" colspan="4">
+                    <a href="" ng-click="recipeAdd()" style="color:#DF5D4A">
                       <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                       Add More
                     </a>
@@ -77,27 +119,53 @@
                 </tr>
               </tbody>
             </table>
-<!--             <div class="form-group">
-              <a  class="" ng-click="recipeAdd()">
-                Add More Ingredients 
-                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-              </a>
-            </div> -->
           </div>
         </div>
         <div class="col-md-6">
           <div class="form-group" style="width:60%">
-            <h4>Recipe Directions</h4>
-            <textarea id="directions" class="form-control" rows="5" 
-                ng-model="recipe.directions" placeholder="Enter Directions Here"></textarea>
+            <h4 style="margin-bottom:18px; font-size:18px" >Recipe Directions</h4>
+            <!-- <textarea id="directions" class="form-control" rows="5" ng-model="recipe.directions" placeholder="Enter Directions Here"></textarea> -->
+            <table class="table" style="margin: 0">
+              <thead>
+                  <th class="">Steps</th>
+                  <th></th>
+              </thead>
+              <tbody>
+                <tr ng-repeat="ingredient in recipeList" >
+
+                  <td id="ing">
+                    <input name="ingredient" type="text" ng-model="recipe.ingredients[$index].name" placeholder="Direction" style="width: 100%;"/>
+                  </td>
+                  <td style="padding-top:11px">
+                    <a type="button" style="color:#DF5D4A" aria-label="Left Align" data-ng-click="removeRow($index)">
+                      <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                    </a>
+                  </td>
+                </tr>
+                <tr style ="background-color: #E3E3E3;">
+                  <td align="center" colspan="4">
+                    <a href="" ng-click="recipeAdd()" style="color:#DF5D4A">
+                      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                      Add More
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
           <div class="form-group">
             <button type="submit" class="htb htb-primary btn-lg sharp">Healthify</button>
           </div>
+          <div ng-show="vm.error" class="alert alert-warning alert-dismissible" role="alert" id="warn">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <strong>Please enter a recipe name!</strong>
+          </div>
         </div>
        
       </div>
-
+      <div ng-show="vm.error" class="text-danger">
+          <strong ng-bind="vm.error"></strong>
+      </div>
     </fieldset>
    </form> 
 </div>
