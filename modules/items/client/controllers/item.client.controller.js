@@ -2,15 +2,16 @@
   'use strict';
 
   angular
-    .module('items')
-    .controller('ItemsController', ItemsController);
+    .module('items.admin')
+    .controller('ItemsAdminController', ItemsAdminController);
 
-  ItemsController.$inject = ['$scope', '$state', '$window', 'itemResolve', 'Authentication', 'Notification'];
+    ItemsAdminController.$inject = ['$scope', '$state', '$window', 'itemResolve', 'CategoriesService', 'ModulesService', 'Authentication', 'Notification'];
 
-  function ItemsController($scope, $state, $window, item, Authentication, Notification) {
+  function ItemsAdminController($scope, $state, $window, item, CategoriesService, ModulesService, Authentication, Notification) {
     var vm = this;
-
     vm.item = item;
+    vm.cats = CategoriesService.query();
+    vm.mods = ModulesService.query();
     vm.authentication = Authentication;
     vm.form = {};
     vm.remove = remove;
@@ -18,15 +19,14 @@
 
     // Remove existing Item
     function remove() {
-      //console.log(vm.authentication.user.roles);
       if ($window.confirm('Are you sure you want to delete?')) {
         vm.item.$remove(function () {
-          $state.go('items.list');
+          $state.go('admin.items.list');
           Notification.success({ message: '<i class="glyphicon glyphicon-ok"></i> Item deleted successfully!' });
         });
       }
     }
-
+    
     // Save Item
     function save(isValid) {
       if (!isValid) {

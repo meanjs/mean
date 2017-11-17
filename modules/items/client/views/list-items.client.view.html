@@ -20,9 +20,9 @@
       <p class="list-group-item-text" data-ng-bind="item.content"></p>
       <b> Count:</b>
       <span ng-if="item.count" ng-bind="item.count"></span>
-      <b> Category:</b>
+      <b ng-if="item.categories"> Category:</b>
       <span ng-if="item.categories" data-ng-bind="item.categories.title"></span>
-     <b> Module:</b>
+     <b ng-if="item.modules"> Module:</b>
       <span ng-if="item.modules" ng-bind="item.modules.title"></span>
       <b> Status:</b>
       <span ng-if="item.workingStatus" data-ng-bind="item.workingStatus"></span>
