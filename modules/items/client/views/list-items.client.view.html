@@ -2,13 +2,13 @@
   <div class="page-header">
     <h1>
       Items
-      <a class="btn btn-primary pull-right" data-ui-sref="admin.items.create">
+      <a class="btn btn-primary pull-right" data-ui-sref="items.create">
         <i class="glyphicon glyphicon-plus"></i>
       </a>
     </h1>
   </div>
   <div class="list-group">
-    <a data-ng-repeat="item in vm.items" data-ui-sref="admin.items.edit({itemId: item._id})" class="list-group-item">
+    <a data-ng-repeat="item in vm.items" data-ui-sref="items.edit({itemId: item._id})" class="list-group-item">
       <small class="list-group-item-text">
         Posted on
         <span data-ng-bind="item.created | date:'mediumDate'"></span>
@@ -20,12 +20,12 @@
       <p class="list-group-item-text" data-ng-bind="item.content"></p>
       <b> Count:</b>
       <span ng-if="item.count" ng-bind="item.count"></span>
-      <b> Category:</b>
+      <b ng-if="item.categories"> Category:</b>
       <span ng-if="item.categories" data-ng-bind="item.categories.title"></span>
-     <b> Module:</b>
+     <b ng-if="item.modules"> Module:</b>
       <span ng-if="item.modules" ng-bind="item.modules.title"></span>
       <b> Status:</b>
-      <span ng-if="item.workingStatus" data-ng-bind="item.modules.workingStatus"></span>
+      <span ng-if="item.workingStatus" data-ng-bind="item.workingStatus"></span>
     </a>
   </div>
   <div class="alert alert-warning text-center" data-ng-if="items.$resolved && !items.length">
