@@ -60,7 +60,7 @@ exports.adminsignup = function (req, res) {
       user.password = 'Password123!';
       user.salt = undefined;
       res.status(200).send();
-      mailer.sendCreation(user.email, user.firstName, unapprovedUser.username);
+      mailer.sendCreation(user.email, user.firstName, user.username);
     }
   });
 };
