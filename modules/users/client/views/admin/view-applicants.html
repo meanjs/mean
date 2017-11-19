@@ -4,9 +4,6 @@
       <div class="col-md-4">
         <h1>Users</h1>
       </div>
-      <div class="col-md-4" style="margin-top: 2em">
-        <input class="form-control col-md-4" type="text" ng-model="vm.search" placeholder="Search" ng-change="vm.figureOutItemsToDisplay()" />
-      </div>
     </div>
   </div>
   <div class="list-group">
@@ -14,20 +11,18 @@
     	<thead>
     		<tr class="first-row">
     			<td>Name</td>
-    			<td>Role</td>
-               	<td>
-                	<label class="checkAll">
-                		<input type="checkbox" class="radio" ng-model="vm.checkAllApproved" ng-click="vm.approveAll()">
-                	</label>
-                	Approve All Remaining
-                </td>
-                <td></td>
+          <td>
+            <button class="btn btn-primary" ng-click="vm.approveAll()">Approve All Remaining</button>
+          </td>
+          <td></td>
             </tr>
         </thead>
         <tbody>
             <tr class="applicant-rows" ng-repeat="applicant in vm.unapprovedUsers">
              	<td>{{ applicant.firstName }} {{ applicant.lastName }}</td>
-             	<td>{{ vm.modifyRoles(applicant) }}</td>
+             	<td><select ng-init="applicant.roles = vm.roleOptions[0]" name="name" id="id" class="form-control" ng-model="applicant.roles" ng-options="option.name for option in vm.roleOptions">
+                </select>
+              </td>
                 <td class="btn btn-success" ng-click="vm.approveUser(applicant)">APPROVE</td>
                 <td class="btn btn-danger" ng-click="vm.removeApplicant(applicant)">DENY</td>
             </tr>
