@@ -23,7 +23,7 @@
       .state('items.create', {
         url: '/create',
         templateUrl: '/modules/items/client/views/form-item.client.view.html',
-        controller: 'ItemsAdminController',
+        controller: 'ItemsController',
         controllerAs: 'vm',
         data: {
           roles: ['ta', 'technician', 'superta', 'admin']
@@ -35,7 +35,7 @@
       .state('items.edit', {
         url: '/:itemId/edit',
         templateUrl: '/modules/items/client/views/form-item.client.view.html',
-        controller: 'ItemsAdminController',
+        controller: 'ItemsController',
         controllerAs: 'vm',
         data: {
           roles: ['ta', 'technician', 'superta', 'admin'],

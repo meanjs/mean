@@ -12,7 +12,7 @@
 
     vm.items = ItemsService.query();
     vm.cats = CategoriesService.query();
-  	vm.mods = ModulesService.query();
+    vm.mods = ModulesService.query();
 
   
   }

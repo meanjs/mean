@@ -16,20 +16,20 @@
       });
 
     vm.roleOptions = [{
-      id: "ta", //Name will be displayed in the html, id will be used on the database.
-      name: "TA"
+      id: 'ta', //Name will be displayed in the html, id will be used on the database.
+      name: 'TA'
     },
     {
-      id: "technician",
-      name: "Technician"
+      id: 'technician',
+      name: 'Technician'
     },
     {
-      id: "superta",
-      name: "Super-TA"
+      id: 'superta',
+      name: 'Super-TA'
     },
     {
-      id: "admin",
-      name: "Admin"
+      id: 'admin',
+      name: 'Admin'
     }
   ];
 
@@ -55,7 +55,7 @@
     };
 
     vm.approveAll = function () {
-      for(var i=vm.unapprovedUsers.length-1; i>=-1; i--){ //This indexing might look a little weird but it wasn't working without it, so idk.
+      for(var i = vm.unapprovedUsers.length - 1; i >= -1; i--) { //This indexing might look a little weird but it wasn't working without it, so idk.
         vm.approveUser(vm.unapprovedUsers[i]);
       }
     };

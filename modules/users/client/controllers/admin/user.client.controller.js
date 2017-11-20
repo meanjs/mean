@@ -19,20 +19,20 @@
     vm.role = null;
 
     $scope.roleOptions = [{
-      id: "ta", //Name will be displayed in the html, id will be used on the database.
-      name: "TA"
+      id: 'ta', //Name will be displayed in the html, id will be used on the database.
+      name: 'TA'
     },
     {
-      id: "technician",
-      name: "Technician"
+      id: 'technician',
+      name: 'Technician'
     },
     {
-      id: "superta",
-      name: "Super-TA"
+      id: 'superta',
+      name: 'Super-TA'
     },
     {
-      id: "admin",
-      name: "Admin"
+      id: 'admin',
+      name: 'Admin'
     }
   ];
 
