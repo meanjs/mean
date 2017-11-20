@@ -14,15 +14,6 @@
         url: '/items',
         template: '<ui-view/>'
       })
-      .state('admin.items.list', {
-        url: '',
-        templateUrl: '/modules/items/client/views/admin/list-items.client.view.html',
-        controller: 'ItemsAdminListController',
-        controllerAs: 'vm',
-        data: {
-          roles: ['ta', 'technician', 'superta', 'admin']
-        }
-      })
       .state('admin.items.modules', {
         url: '/modules',
         templateUrl: '/modules/items/client/views/admin/add-delete-modules.view.html',
@@ -53,31 +44,6 @@
         controllerAs: 'vm',
         resolve: {
           catResolve: newCat
-        }
-      })
-      .state('admin.items.create', {
-        url: '/items/create',
-        templateUrl: '/modules/items/client/views/admin/form-item.client.view.html',
-        controller: 'ItemsAdminController',
-        controllerAs: 'vm',
-        data: {
-          roles: ['ta', 'technician', 'superta', 'admin']
-        },
-        resolve: {
-          itemResolve: newItem
-        }
-      })
-      .state('admin.items.edit', {
-        url: '/:itemId/edit',
-        templateUrl: '/modules/items/client/views/admin/form-item.client.view.html',
-        controller: 'ItemsAdminController',
-        controllerAs: 'vm',
-        data: {
-          roles: ['ta', 'technician', 'superta', 'admin'],
-          pageTitle: '{{ itemResolve.title }}'
-        },
-        resolve: {
-          itemResolve: getItem
         }
       });
   }

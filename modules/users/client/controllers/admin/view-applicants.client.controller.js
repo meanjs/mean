@@ -15,6 +15,23 @@
         vm.unapprovedUsers = data;
       });
 
+    vm.roleOptions = [{
+      id: "ta", //Name will be displayed in the html, id will be used on the database.
+      name: "TA"
+    },
+    {
+      id: "technician",
+      name: "Technician"
+    },
+    {
+      id: "superta",
+      name: "Super-TA"
+    },
+    {
+      id: "admin",
+      name: "Admin"
+    }
+  ];
 
     vm.removeApplicant = function (user) {
       if ($window.confirm('Are you sure you want to delete this user?')) {
@@ -30,27 +47,15 @@
       if (user) {
           var newUser = user;
           user.approvedStatus = true;
+          user.roles = user.roles.id; //We want to drop the user.roles.name contents and just use the db-friendly variable.
           ApplicantsService.changeToAccepted(newUser);
           vm.unapprovedUsers.splice(vm.unapprovedUsers.indexOf(user), 1);
           Notification.success('User approved successfully!');
       }
     };
 
-    vm.modifyRoles = function(applicant) {
-      if (applicant.roles.indexOf('admin') != -1)
-          return 'Admin';
-      if (applicant.roles.indexOf('superta') != -1 )
-        return 'Super TA';
-      if (applicant.roles.indexOf('technician') != -1 )
-        return 'Technician';
-      if (applicant.roles.indexOf('ta') != -1 )
-        return 'TA';
-      return 'User';
-
-    };
-
     vm.approveAll = function () {
-      for(var i = 0; i < vm.unapprovedUsers.length; i++) {
+      for(var i=vm.unapprovedUsers.length-1; i>=-1; i--){ //This indexing might look a little weird but it wasn't working without it, so idk.
         vm.approveUser(vm.unapprovedUsers[i]);
       }
     };
