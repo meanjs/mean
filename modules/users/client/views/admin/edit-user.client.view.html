@@ -22,10 +22,8 @@
         <div class="form-group" show-errors>
           <label class="control-label" for="roles">Roles</label>
           <div class="controls">
-            <input class="form-control" type="text" name="roles" ng-model="vm.user.roles" id="roles" ng-list required />
-            <div ng-messages="vm.userForm.roles.$error" role="alert">
-              <p class="help-block error-text" ng-message="required">At least one role is required.</p>
-            </div>
+            <select ng-model="userRole" name="name" ng-change="vm.changeRole(userRole)" ng-options="roleOption.name for roleOption in roleOptions" class="form-control">
+            </select>
           </div>
         </div>
         <div class="form-group">
