@@ -57,6 +57,7 @@ describe('Users E2E Tests:', function () {
       element(by.css('button[type="submit"]')).click();
       expect(browser.getCurrentUrl()).toEqual('http://localhost:3001/');
   };
+
   describe('AddUsers Tests', function () {
 
     it('Should report missing first name', function () {
@@ -245,7 +246,7 @@ describe('Users E2E Tests:', function () {
       expect(element.all(by.css('.error-text')).get(0).getText()).toBe('Please enter a valid username: 3+ characters long, non restricted word, characters "_-.", no consecutive dots, does not begin or end with dots, letters a-z and numbers 0-9.');
     });
 
-    it('Should admin/add username with . - "log.in2"', function () {
+    it('Should admin/add username with . - "2log.in2"', function () {
       browser.get('http://localhost:3001/admin/add');
       // Enter First Name
       element(by.model('vm.credentials.firstName')).sendKeys(user4.firstName);
@@ -254,7 +255,7 @@ describe('Users E2E Tests:', function () {
       // Enter Email
       element(by.model('vm.credentials.email')).sendKeys('someemail@meanjs.com');
       // Enter Username
-      element(by.model('vm.credentials.username')).sendKeys('log.in2');
+      element(by.model('vm.credentials.username')).sendKeys('2log.in2');
       // Enter roles
       element(by.model('vm.credentials.roles')).sendKeys(user4.roles);
       //Enter Additional Elements
@@ -536,7 +537,7 @@ describe('Users E2E Tests:', function () {
       // Enter Last Name
       element(by.model('vm.credentials.lastName')).sendKeys(user2.lastName);
       // Enter Email
-      element(by.model('vm.credentials.email')).sendKeys('someemail@meanjs.com');
+      element(by.model('vm.credentials.email')).sendKeys('someemail2@meanjs.com');
       // Enter Username
       element(by.model('vm.credentials.username')).sendKeys('log.in');
       // Enter Password
@@ -742,7 +743,6 @@ describe('Users E2E Tests:', function () {
     });
 
   });
-
   describe('Signin Validation', function () {
 
     it('Should report missing credentials', function () {
