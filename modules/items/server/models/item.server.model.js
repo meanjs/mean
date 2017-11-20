@@ -51,7 +51,7 @@ var ItemSchema = new Schema({
   modules: {
     type: Schema.ObjectId,
     ref: 'Module'
-  }
+  },
 });
 
 ItemSchema.statics.seed = seed;

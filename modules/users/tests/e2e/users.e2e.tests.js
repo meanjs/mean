@@ -16,6 +16,10 @@ describe('Users E2E Tests:', function () {
     username: 'testUser2',
     password: 'P@$$w0rd!!'
   };
+  var admin = {
+    username: 'seedadmintest',
+    password: 'P@$$w0rd!!'
+  };
 
   var signout = function () {
     // Make sure user is signed out first
@@ -24,8 +28,57 @@ describe('Users E2E Tests:', function () {
     browser.driver.manage().deleteAllCookies();
   };
 
+  var signin = function() {
+    signout();
+    browser.get('http://localhost:3001/signin');
+      // Enter UserName
+      element(by.model('vm.credentials.usernameOrEmail')).sendKeys(admin.username);
+      // Enter Password
+      element(by.model('vm.credentials.password')).sendKeys(admin.password);
+      // Click Submit button
+      element(by.css('button[type="submit"]')).click();
+      expect(browser.getCurrentUrl()).toEqual('http://localhost:3001/');
+  };
+  describe('AddUsers Tests', function () {
+
+    it('Should report missing first name', function () {
+      // Sign in
+      signin();
+      browser.get('http://localhost:3001/admin/add');
+      // Enter Last Name
+      element(by.model('vm.credentials.lastName')).sendKeys(user1.lastName);
+      // Enter Email
+      element(by.model('vm.credentials.email')).sendKeys(user1.email);
+      //Enter Additional Elements
+      // Enter Username
+      element(by.model('vm.credentials.username')).sendKeys(user1.username);
+      // Enter Password
+      element(by.model('vm.credentials.password')).sendKeys(user1.password);
+      // Click Submit button
+      element(by.css('button[type=submit]')).click();
+      // First Name Error
+      expect(element.all(by.css('.error-text')).get(0).getText()).toBe('First name is required.');
+    });
+    it('Should report missing last name', function () {
+      browser.get('http://localhost:3001/admin/add');
+      // Enter First Name
+      element(by.model('vm.credentials.firstName')).sendKeys(user1.firstName);
+      // Enter Email
+      element(by.model('vm.credentials.email')).sendKeys(user1.email);
+      // Enter Username
+      element(by.model('vm.credentials.username')).sendKeys(user1.username);
+      // Enter Password
+      element(by.model('vm.credentials.password')).sendKeys(user1.password);
+      // Click Submit button
+      element(by.css('button[type=submit]')).click();
+      // Last Name Error
+      expect(element.all(by.css('.error-text')).get(0).getText()).toBe('Last name is required.');
+    });
+
+  });
   describe('Signup Validation', function () {
     it('Should report missing first name', function () {
+      signout();
       browser.get('http://localhost:3001/signup');
       // Enter Last Name
       element(by.model('vm.credentials.lastName')).sendKeys(user1.lastName);
