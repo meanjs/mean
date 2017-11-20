@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('items.admin')
+    .module('items')
     .controller('ItemsAdminController', ItemsAdminController);
 
     ItemsAdminController.$inject = ['$scope', '$state', '$window', 'itemResolve', 'CategoriesService', 'ModulesService', 'Authentication', 'Notification'];
@@ -22,7 +22,7 @@
       //console.log(vm.authentication.user.roles);
       if ($window.confirm('Are you sure you want to delete?')) {
         vm.item.$remove(function () {
-          $state.go('admin.items.list');
+          $state.go('items.list');
           Notification.success({ message: '<i class="glyphicon glyphicon-ok"></i> Item deleted successfully!' });
         });
       }
