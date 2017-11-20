@@ -34,6 +34,10 @@
           <i class="glyphicon glyphicon-plus"></i>
         </a>
           </div>
+          <div class="form-group" show-errors>
+          <label class="control-label" for="pdf">PDF</label>
+          <input name="pdf" type="text" ng-model="vm.item.pdf" id="pdf" class="form-control" placeholder="PDF" required autofocus>  
+          </div>
           <div class = "workingStatus-group">
         <label for="workingStatus">Working Status</label>
           <select name="workingStatus" id="workingStatus" class="form-control" ng-model="vm.item.workingStatus" placeholder="Working Status">

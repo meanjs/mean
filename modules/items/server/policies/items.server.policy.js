@@ -31,6 +31,10 @@ exports.invokeRolesPolicies = function () {
       permissions: '*'
     },
     {
+        resources: '/api/pdf',
+        permissions: '*'
+    },
+    {
       resources: '/api/modules',
       permissions: '*'
     }]
