@@ -2,6 +2,8 @@
   <div class="page-header">
     <h1>
       Items
+        <i class="glyphicon glyphicon-plus"></i>
+      </a>          
     </h1>
       <span><span class="glyphicon glyphicon-search"></span><input type="text" size= "44" placeholder="Search by name, content, category or module" ng-model="query">
       <a class="btn btn-primary pull-right" data-ui-sref="items.create">
@@ -21,17 +23,23 @@
           Module:&nbsp;
           <span data-ng-bind="item.modules.title"></span>
         </div>
-        <b>
-          <span ng-if="item.user" ng-bind="item.user.displayName"></span>
-          <span ng-if="!item.user">Deleted User</span>
-        </b>
-      <b> Count:</b>
-      <span ng-if="item.count" ng-bind="item.count"></span>
-      <b ng-if="item.categories"> Category:</b>
-     <b ng-if="item.modules"> Module:</b>
-      <span ng-if="item.modules" ng-bind="item.modules.title"></span>
-      <b> Status:</b>
-      <span ng-if="item.workingStatus" data-ng-bind="item.workingStatus"></span>
+        <div>
+          Count:&nbsp;
+          <span ng-if="item.count" ng-bind="item.count"></span>
+        </div>
+        <div>
+          Status:&nbsp;
+          <span ng-if="item.workingStatus" data-ng-bind="item.workingStatus"></span>
+        </div>
+        <div>
+          Posted on
+          <span data-ng-bind="item.created | date:'mediumDate'"></span>
+          by
+          <b>
+            <span ng-if="item.user" ng-bind="item.user.displayName"></span>
+            <span ng-if="!item.user">Deleted User</span>
+          </b>
+        </div>
     </a>
   </div>
   <div class="alert alert-warning text-center" data-ng-if="items.$resolved && !items.length">
