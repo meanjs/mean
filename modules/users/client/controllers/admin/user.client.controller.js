@@ -14,7 +14,27 @@
     vm.user = user;
     vm.remove = remove;
     vm.update = update;
+    vm.changeRole = changeRole;
     vm.isContextUserSelf = isContextUserSelf;
+    vm.role = null;
+
+    $scope.roleOptions = [{
+      id: "ta", //Name will be displayed in the html, id will be used on the database.
+      name: "TA"
+    },
+    {
+      id: "technician",
+      name: "Technician"
+    },
+    {
+      id: "superta",
+      name: "Super-TA"
+    },
+    {
+      id: "admin",
+      name: "Admin"
+    }
+  ];
 
     function remove(user) {
       if ($window.confirm('Are you sure you want to delete this user?')) {
@@ -39,6 +59,7 @@
         return false;
       }
       var user = vm.user;
+      user.roles = vm.role;
 
       user.$update(function () {
         $state.go('admin.user', {
@@ -48,6 +69,10 @@
       }, function (errorResponse) {
         Notification.error({ message: errorResponse.data.message, title: '<i class="glyphicon glyphicon-remove"></i> User update error!' });
       });
+    }
+
+    function changeRole(roleChange) {
+      vm.role = roleChange.id;
     }
 
     function isContextUserSelf() {
