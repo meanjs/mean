@@ -25,6 +25,7 @@
         templateUrl: '/modules/items/client/views/form-item.client.view.html',
         controller: 'ItemsController',
         controllerAs: 'vm',
+        css: 'css/form-item.css',
         data: {
           roles: ['ta', 'technician', 'superta', 'admin']
         },
@@ -37,6 +38,7 @@
         templateUrl: '/modules/items/client/views/form-item.client.view.html',
         controller: 'ItemsController',
         controllerAs: 'vm',
+        css: 'css/form-item.css',
         data: {
           roles: ['ta', 'technician', 'superta', 'admin'],
           pageTitle: '{{ itemResolve.title }}'

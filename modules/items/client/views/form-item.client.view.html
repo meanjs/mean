@@ -1,11 +1,15 @@
 <section>
   <div class="page-header">
-    <h1>{{vm.item._id ? 'Edit Item' : 'New Item'}}</h1>
-  </div>
-  <div class="pull-right">
-    <a ng-show="vm.item._id" class="btn btn-primary" ng-if="vm.authentication.user.roles != 'ta'" ng-click="vm.remove()">
-      <i class="glyphicon glyphicon-trash"></i>
-    </a>
+    <div class="row">
+        <div class="col-xs-8">
+            <h1>{{vm.item._id ? 'Edit Item' : 'New Item'}}</h1>
+        </div>
+        <div class="col-xs-4 pull-right">
+          <a id="item-delete-btn" ng-show="vm.item._id" class="btn btn-primary" ng-if="vm.authentication.user.roles != 'ta'" ng-click="vm.remove()">
+            <i class="glyphicon glyphicon-trash"></i>
+          </a>
+        </div>
+    </div>
   </div>
   <div class="col-md-12">
     <form name="vm.form.itemForm" class="form-horizontal" ng-submit="vm.save(vm.form.itemForm.$valid)" novalidate>
@@ -17,35 +21,49 @@
             <p class="help-block error-text" ng-message="required">Item title is required.</p>
           </div>
         </div>
-        <div class = "module-group">
-        <label for="modules">Modules</label>
-          <select name="module" id="module" class="form-control" ng-model="vm.item.modules" placeholder="module">
-            <option ng-repeat="x in vm.mods" value="{{x._id}}">{{x.title}}</option>
-          </select>
-         <a ng-show="vm.item._id" class="btn btn-primary" ng-click="vm.addModule()">
-          <i class="glyphicon glyphicon-plus"></i>
-        </a>
-        <div class = "category-group">
-        <label for="category">Categories</label>
-          <select name="category" id="category" class="form-control" ng-model="vm.item.categories" placeholder="category">
-            <option ng-repeat="x in vm.cats" value="{{x._id}}">{{x.title}}</option>
-          </select>
-         <a ng-show="vm.item._id" class="btn btn-primary" ng-click="vm.addCat()">
-          <i class="glyphicon glyphicon-plus"></i>
-        </a>
+        <div class="row">
+          <div class="col-xs-5">
+            <div class="form-group dropdown-group">
+              <label for="modules">Modules</label>
+              <div class="dropdown-flex-box">
+                <select name="module" id="module" class="form-control" ng-model="vm.item.modules" placeholder="module">
+                  <option ng-repeat="x in vm.mods" value="{{x._id}}">{{x.title}}</option>
+                </select>
+                <a ng-show="vm.item._id" class="btn btn-primary" ng-click="vm.addModule()">
+                  <i class="glyphicon glyphicon-plus"></i>
+                </a>
+              </div>
+            </div>
           </div>
-          <div class = "workingStatus-group">
-        <label for="workingStatus">Working Status</label>
-          <select name="workingStatus" id="workingStatus" class="form-control" ng-model="vm.item.workingStatus" placeholder="Working Status">
-            <option value="Working">Working</option>
-            <option value="In Need Of Inspection">In Need Of Inspection</option>
-            <option value="Broken">Broken</option>
-          </select>
-         <a ng-show="vm.item._id" class="btn btn-primary" ng-click="vm.addCat()">
-          <i class="glyphicon glyphicon-plus"></i>
-        </a>
+          <div class="col-xs-offset-1 col-xs-5">
+            <div class="form-group dropdown-group">
+              <label for="category">Categories</label>
+              <div class="dropdown-flex-box">
+                <select name="category" id="category" class="form-control" ng-model="vm.item.categories" placeholder="category">
+                  <option ng-repeat="x in vm.cats" value="{{x._id}}">{{x.title}}</option>
+                </select>
+                <a ng-show="vm.item._id" class="btn btn-primary" ng-click="vm.addCat()">
+                  <i class="glyphicon glyphicon-plus"></i>
+                </a>
+              </div>
+            </div>
           </div>
-
+          <div class="col-xs-5">
+            <div class="form-group dropdown-group">
+              <label for="workingStatus">Working Status</label>
+              <div class="dropdown-flex-box">
+                <select name="workingStatus" id="workingStatus" class="form-control" ng-model="vm.item.workingStatus" placeholder="Working Status">
+                  <option value="Working">Working</option>
+                  <option value="In Need Of Inspection">In Need Of Inspection</option>
+                  <option value="Broken">Broken</option>
+                </select>
+                <a ng-show="vm.item._id" class="btn btn-primary" ng-click="vm.addCat()">
+                  <i class="glyphicon glyphicon-plus"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
         <div class="form-group">
           <label class="control-label" for="title">Count</label>
           <input name="count" type="text" ng-model="vm.item.count" id="count" class="form-control" placeholder="Count">
