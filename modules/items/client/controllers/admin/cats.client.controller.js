@@ -14,7 +14,6 @@
     vm.authentication = Authentication;
     vm.form = {};
     vm.create = create;
-    vm.list = list;
     
     function create() {
       if ($window.confirm('Are you sure you want to create?')) {

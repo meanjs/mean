@@ -38,9 +38,9 @@
     }
 
     function alterRole (role) {
-      if(role == "TA")
+      if(role == 'TA')
         return 'ta';
-      if(role == "seniorTA")
+      if(role == 'seniorTA')
         return 'superta';
       else
         return role;

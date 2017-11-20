@@ -173,7 +173,6 @@ exports.list = function (req, res) {
   .populate('modules', 'title')
   .exec(function (err, items) {
     if (err) {
-      throw err;
       return res.status(422).send({
         message: errorHandler.getErrorMessage(err)
       });
@@ -196,7 +195,6 @@ exports.itemByID = function (req, res, next, id) {
 
   Item.findById(id).populate('user', 'displayName').populate('categories', 'title').populate('modules', 'title').exec(function (err, item) {
     if (err) {
-      throw err;
       return next(err);
     } else if (!item) {
       return res.status(404).send({
