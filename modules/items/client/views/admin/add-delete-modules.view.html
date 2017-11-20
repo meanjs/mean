@@ -8,12 +8,11 @@
         <input class="form-control col-md-4" type="text" ng-model="query" placeholder="Search"/>
       </div>
       <div class="col-md-4" style="margin-top: 2em">
-        <a class="btn btn-primary pull-right" ui-sref="admin.items.modulecreate">
+        <a class="btn btn-primary" ui-sref="admin.items.modulecreate">
           <i class="glyphicon glyphicon-plus"></i>
         </a>
       </div>
     </div>
-
   </div>
   <div class="list-group">
     <table class="table table-hover applicantsTable">
@@ -27,7 +26,9 @@
           <tr ng-repeat="module in vm.modules | filter: query">
             <td class="firstColumn">{{ module.title }}</td>
             <td class="secondColumn">
-              <button class="btn btn-danger dangerButton" type="button" ng-click="vm.deleteModule(module)">-</button>
+              <a class="btn btn-primary" ng-click="vm.remove(module)">
+              <i class="glyphicon glyphicon-minus"></i>
+              </a>  
             </td>
           </tr>
         </tbody>

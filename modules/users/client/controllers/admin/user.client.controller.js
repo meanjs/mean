@@ -38,7 +38,6 @@
 
         return false;
       }
-
       var user = vm.user;
 
       user.$update(function () {

@@ -47,7 +47,8 @@ describe('Item CRUD tests', function () {
       username: credentials.usernameOrEmail,
       password: credentials.password,
       provider: 'local',
-      approvedStatus: true
+      approvedStatus: true,
+      role: ['ta']
     });
 
     // Save a user to the test db and create new item
@@ -63,7 +64,7 @@ describe('Item CRUD tests', function () {
       .catch(done);
   });
 
-  it('should not be able to save an item if logged in without the "admin" role', function (done) {
+  it('should be able to save an item if logged in with the "ta" role', function (done) {
     agent.post('/api/auth/signin')
       .send(credentials)
       .expect(200)
@@ -75,7 +76,7 @@ describe('Item CRUD tests', function () {
 
         agent.post('/api/items')
           .send(item)
-          .expect(403)
+          .expect(200)
           .end(function (itemSaveErr, itemSaveRes) {
             // Call the assertion callback
             done(itemSaveErr);
@@ -94,7 +95,7 @@ describe('Item CRUD tests', function () {
       });
   });
 
-  it('should not be able to update an item if signed in without the "admin" role', function (done) {
+  it('should be able to update an item if signed in without the "admin" role', function (done) {
     agent.post('/api/auth/signin')
       .send(credentials)
       .expect(200)
@@ -106,7 +107,7 @@ describe('Item CRUD tests', function () {
 
         agent.post('/api/items')
           .send(item)
-          .expect(403)
+          .expect(200)
           .end(function (itemSaveErr, itemSaveRes) {
             // Call the assertion callback
             done(itemSaveErr);
@@ -137,26 +138,7 @@ describe('Item CRUD tests', function () {
         done();
       });
   });
-
-  it('should not be able to delete an item if signed in without the "admin" role', function (done) {
-    agent.post('/api/auth/signin')
-      .send(credentials)
-      .expect(200)
-      .end(function (signinErr, signinRes) {
-        // Handle signin error
-        if (signinErr) {
-          return done(signinErr);
-        }
-
-        agent.post('/api/items')
-          .send(item)
-          .expect(403)
-          .end(function (itemSaveErr, itemSaveRes) {
-            // Call the assertion callback
-            done(itemSaveErr);
-          });
-      });
-  });
+   //test for TA not being able to delete should go here
 
   it('should not be able to delete an item if not signed in', function (done) {
     // Set item user

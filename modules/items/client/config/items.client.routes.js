@@ -20,41 +20,10 @@
         controller: 'ItemsListController',
         controllerAs: 'vm'
       })
-      .state('items.addCats', {
-        url: '/categories',
-        templateUrl: '/modules/items/client/views/admin/add-delete-categories.view.html',
-        controller: 'CatsController',
-        controllerAs: 'vm',
-        resolve: {
-          catResolve : newCat
-        }
-      })
-      .state('items.mods', {
-        url: '/modules',
-        templateUrl: '/modules/items/client/views/modules.html',
-        controller: 'ModsController',
-        controllerAs: 'vm',
-        resolve: {
-          modResolve : newMod
-        }
-      })
-
-      .state('items.view', {
-        url: '/:itemId',
-        templateUrl: '/modules/items/client/views/view-item.client.view.html',
-        controller: 'ItemsController',
-        controllerAs: 'vm',
-        resolve: {
-          itemResolve: getItem
-        },
-        data: {
-          pageTitle: '{{ itemResolve.title }}'
-        }
-      })
       .state('items.create', {
         url: '/create',
         templateUrl: '/modules/items/client/views/form-item.client.view.html',
-        controller: 'ItemsController',
+        controller: 'ItemsAdminController',
         controllerAs: 'vm',
         data: {
           roles: ['ta', 'technician', 'superta', 'admin']
@@ -66,7 +35,7 @@
       .state('items.edit', {
         url: '/:itemId/edit',
         templateUrl: '/modules/items/client/views/form-item.client.view.html',
-        controller: 'ItemsController',
+        controller: 'ItemsAdminController',
         controllerAs: 'vm',
         data: {
           roles: ['ta', 'technician', 'superta', 'admin'],

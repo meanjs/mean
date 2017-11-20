@@ -39,6 +39,31 @@ exports.update = function (req, res) {
 };
 
 /**
+ * Admin creates user
+ */
+exports.adminsignup = function (req, res) {
+  // For security measurement we remove the roles from the req.body object
+  //delete req.body.roles;
+
+  var user = new User(req.body);
+  user.provider = 'local';
+  user.approvedStatus = true;
+
+  user.save(function (err) {
+    if (err) {
+      return res.status(422).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    } else {
+      // Remove sensitive data before login
+      user.password = undefined;
+      user.salt = undefined;
+      res.status(200).send();
+    }
+  });
+};
+
+/**
  * Delete a user
  */
 exports.delete = function (req, res) {
@@ -88,7 +113,7 @@ exports.unapprovedList = function(req, res) {
 
 exports.changeToAccepted = function (req, res) {
   var unapprovedUser = req.body;
-  User.findOneAndUpdate({'username' : unapprovedUser.username}, {$set: {'approvedStatus' : true}}, function(err, changedUser) {
+  User.findOneAndUpdate({'username' : unapprovedUser.username}, {$set: {'approvedStatus' : true, 'roles': unapprovedUser.roles}}, function(err, changedUser) {
     if (err) {
       return res.status(422).send({
         message: errorHandler.getErrorMessage(err)
