@@ -6,7 +6,8 @@ describe('Users E2E Tests:', function () {
     lastName: 'user',
     email: 'test.user@meanjs.com',
     username: 'testUser',
-    password: 'P@$$w0rd!!'
+    password: 'P@$$w0rd!!',
+    role: 'TA'
   };
 
   var user2 = {
@@ -14,7 +15,8 @@ describe('Users E2E Tests:', function () {
     lastName: 'user2',
     email: 'test.user2@meanjs.com',
     username: 'testUser2',
-    password: 'P@$$w0rd!!'
+    password: 'P@$$w0rd!!',
+    role: 'TA'
   };
   var admin = {
     username: 'seedadmintest',
@@ -53,7 +55,7 @@ describe('Users E2E Tests:', function () {
       // Enter Username
       element(by.model('vm.credentials.username')).sendKeys(user1.username);
       // Enter Password
-      element(by.model('vm.credentials.password')).sendKeys(user1.password);
+      element(by.model('vm.credentials.roles')).sendKeys(user1.role);
       // Click Submit button
       element(by.css('button[type=submit]')).click();
       // First Name Error
@@ -68,7 +70,7 @@ describe('Users E2E Tests:', function () {
       // Enter Username
       element(by.model('vm.credentials.username')).sendKeys(user1.username);
       // Enter Password
-      element(by.model('vm.credentials.password')).sendKeys(user1.password);
+      element(by.model('vm.credentials.roles')).sendKeys(user1.role);
       // Click Submit button
       element(by.css('button[type=submit]')).click();
       // Last Name Error
