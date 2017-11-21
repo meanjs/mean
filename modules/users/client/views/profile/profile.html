@@ -8,7 +8,7 @@
       <div class="right-column-student-profile">
         <div class="student_name-student-profile">{{vm.user.firstName}} {{vm.user.lastName}}</div>
         <div class="student-profile-h3">Objective</div>
-        <p class="student-profile-p">I am searching for an internship/co-op in the coming spring or summer semester.</p>
+          <p class="student-profile-p">I am searching for an internship/co-op in the coming spring or summer semester.</p>
         <div class="student-profile-h3">Education</div>
         <div class="box-student-profile">
           <p class="student-profile-p">University of Florida, College of Engineering</p>
@@ -17,15 +17,20 @@
             <li><b>GPA:</b> {{vm.user.gpa}}</li>
             <li><b>Graduation Date:</b> {{vm.user.graduationDate}}</li>
             <li><b>Employment Status:</b> {{vm.user.availabilityStatus}}</li>
-            <li ng-if="vm.user.approve === false && (vm.authentication.user.type === 'student' || vm.authentication.user.type === 'admin')" style="color:red;"><b>Approval Status:</b> No</li>
-            <li ng-if="vm.user.approve === true && (vm.authentication.user.type === 'student' || vm.authentication.user.type === 'admin')" style="color:green;"><b>Approval Status:</b> Yes</li>
-            <li ng-if="vm.authentication.user.type === 'student' || vm.authentication.user.type === 'admin'"><b>Comments:</b> {{vm.user.comments}}</li>
           </ul>
         </div>
         <div class="student-profile-h3">Short Biography</div>
         <div class="box-student-profile">
           <p class="student-profile-p">
             {{vm.user.bio}}
+          </p>
+        </div>
+        <div class="student-profile-h3" ng-if="vm.authentication.user.type === 'student' || vm.authentication.user.type === 'admin'">Admin Approval Status</div>
+        <div class="box-student-profile" style="margin-bottom: 20px;" ng-if="vm.authentication.user.type === 'student' || vm.authentication.user.type === 'admin'">
+          <p class="student-profile-p">
+            <p ng-if="vm.user.approve === false" style="color:red;"><b>Approval Status:</b> No</p>
+            <p ng-if="vm.user.approve === true" style="color:green;"><b>Approval Status:</b> Yes</p>
+            <p><b>Comments:</b> {{vm.user.comments}}</p>
           </p>
         </div>
       </div>
@@ -37,8 +42,8 @@
           <div>
               <a href="../../img/profile/default.png" target="_blank"><button class = "button-student-profile" target="_blank"><span>Resume</span></button></a>
               <a href="../../img/profile/default.png" target="_blank"><button class = "button-student-profile" target="_blank"><span>Short Bio</span></button></a>
-              <button class = "button-student-profile" type="button" data-toggle="modal" data-target="#statusModal"><span>Approval Status</span></button>
-              <button class = "button-student-profile"><span>Comments</span></button>
+              <!--<button class = "button-student-profile" type="button" data-toggle="modal" data-target="#statusModal"><span>Approval Status</span></button>
+              <button class = "button-student-profile"><span>Comments</span></button>-->
           </div>
         </div>
       </div>
