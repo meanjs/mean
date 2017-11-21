@@ -304,7 +304,13 @@ function seed(doc, options) {
 
             user.provider = 'local';
             user.displayName = user.firstName + ' ' + user.lastName;
-            user.password = passphrase;
+            if (user.username == 'seedadmintest')
+            {
+              user.password = 'P@$$w0rd!!';
+            }
+            else{
+              user.password = passphrase;
+            }
 
             user.save(function (err) {
               if (err) {

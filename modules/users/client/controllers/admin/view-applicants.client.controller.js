@@ -36,8 +36,8 @@
     vm.removeApplicant = function (user) {
       if ($window.confirm('Are you sure you want to delete this user?')) {
         if (user) {
-          vm.unapprovedUsers.splice(vm.unapprovedUsers.indexOf(user), 1);
           ApplicantsService.remove(user);
+          vm.unapprovedUsers.splice(vm.unapprovedUsers.indexOf(user), 1);
           Notification.success('User deleted successfully!');
         }
       }

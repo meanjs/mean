@@ -454,7 +454,7 @@ gulp.task('build', function (done) {
 
 // Run the project tests
 gulp.task('test', function (done) {
-  runSequence('env:test', 'test:server', 'karma', 'nodemon', 'protractor', done);
+  runSequence('env:test', 'test:server', 'karma', 'dropdb', 'mongo-seed', 'nodemon', 'protractor', done);
 });
 
 gulp.task('test:server', function (done) {
@@ -471,7 +471,7 @@ gulp.task('test:client', function (done) {
 });
 
 gulp.task('test:e2e', function (done) {
-  runSequence('env:test', 'lint', 'dropdb', 'nodemon', 'protractor', done);
+  runSequence('env:test', 'lint', 'dropdb', 'mongo-seed', 'nodemon', 'protractor', done);
 });
 
 gulp.task('test:coverage', function (done) {

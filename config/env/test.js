@@ -56,11 +56,12 @@ module.exports = {
       docs: [{
         overwrite: true,
         data: {
-          username: 'seedadmin',
+          username: 'seedadmintest',
           email: 'admin@localhost.com',
           firstName: 'Admin',
           lastName: 'Local',
-          roles: ['admin']
+          roles: ['admin'],
+          approvedStatus: true
         }
       }, {
         overwrite: true,
