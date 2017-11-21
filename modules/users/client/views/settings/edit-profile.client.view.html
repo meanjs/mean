@@ -1,8 +1,10 @@
+<!--HTML for when the student wants to edit their profile with all of the infomation -->
 <section class="row">
   <div class="col-xs-offset-1 col-xs-10 col-md-offset-3 col-md-4">
     <form class="signin">
       <fieldset>
         <div class="form-group text-center">
+          <!--HTML to upload a profile pic to the database -->
           <img ngf-src="vm.fileSelected ? picFile : vm.user.profileImageURL" alt="{{vm.user.displayName}}" class="img-thumbnail user-profile-picture" ngf-drop>
         </div>
         <div ng-show="vm.loading" class="form-group text-center">
@@ -24,6 +26,8 @@
     </form>
   </div>
   <div class="col-xs-offset-1 col-xs-10 col-md-offset-4 col-md-4">
+    <!--Form to update the user profile and when submitting go to the updateUserProfile in the controller side -->
+    <!--Look through the html and see the differnet attributes that the student can edit. -->
     <form name="vm.userForm" ng-submit="vm.updateUserProfile(vm.userForm.$valid)" class="signin" novalidate autocomplete="off">
       <fieldset>
         <div class="form-group" show-errors>
@@ -99,6 +103,7 @@
         </div>
         <div class="text-center form-group">
           <button type="submit" class="btn btn-primary">Save Profile</button>
+          <!--When submitted, the approval status will go back ot false so that the admin can check if the edits are fine -->
         </div>
       </fieldset>
     </form>

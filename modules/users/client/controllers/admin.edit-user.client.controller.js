@@ -1,3 +1,4 @@
+// Controller for when the admin edits an indiviual user and wants to add comments and approve of the page
 (function () {
   'use strict';
 
@@ -16,6 +17,7 @@
     if (vm.authentication.user === null) {
       $state.go('authentication.signin');
     }
+    // Change the area that the user is in if they are not an admin
     if (vm.authentication.user.type !== 'admin') {
       if (vm.authentication.type === 'sponsor') {
         $state.go('catalog');
@@ -30,6 +32,7 @@
       loadUserFromURL();
     }
 
+// Download the infomation of the user
     function loadUserFromURL() {
       if ($location.search().username) {
         var username = $location.search().username;
@@ -47,6 +50,7 @@
       Notification.error({ message: 'Could not load student profile' });
     }
 
+// Function that allows the admin ot delete a user in the database
     $scope.remove = function () {
       if (vm.authentication.user.type !== 'admin') {
         $state.go('home');
@@ -62,6 +66,7 @@
       }
     };
 
+// Function to update infomaion for the user like their name or approval status
     $scope.update = function (isValid) {
       if (vm.authentication.user.type !== 'admin') {
         $state.go('home');
@@ -85,6 +90,7 @@
       });
     };
 
+// Function that changes the approval status of a user in the database depending on what the admin selects
     $scope.switchApproval = function () {
       var yes = document.getElementById('yes');
       var no = document.getElementById('no');

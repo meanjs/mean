@@ -1,3 +1,4 @@
+// Controller for when admin addes new users ot the databases
 (function () {
   'use strict';
 
@@ -13,6 +14,7 @@
     vm.authentication = Authentication;
     vm.getPopoverMsg = PasswordValidator.getPopoverMsg;
 
+// Defines the variables that will go in to the user schema
     $scope.usernameRegex = /^(?=[\w.-]+$)(?!.*[._-]{2})(?!\.)(?!.*\.$).{3,34}$/;
     $scope.newFirstName = null;
     $scope.newLastName = null;
@@ -80,6 +82,7 @@
       Notification.error({ message: response.data.message, title: '<i class="glyphicon glyphicon-remove"></i> Signup Error!', delay: 6000 });
     }
 
+// Function that changes the type of user the added user will be depending on the chekced box in the html
     $scope.switchRoles = function () {
       var studentRole = document.getElementById('studentRole');
       var sponsorRole = document.getElementById('sponsorRole');
