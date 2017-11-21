@@ -17,9 +17,9 @@
             <li><b>GPA:</b> {{vm.user.gpa}}</li>
             <li><b>Graduation Date:</b> {{vm.user.graduationDate}}</li>
             <li><b>Employment Status:</b> {{vm.user.availabilityStatus}}</li>
-            <li ng-if="vm.user.approve === false" style="color:red;"><b>Approval Status:</b> No</li>
-            <li ng-if="vm.user.approve === true" style="color:green;"><b>Approval Status:</b> Yes</li>
-            <li><b>Comments:</b> {{vm.user.comments}}</li>
+            <li ng-if="vm.user.approve === false && (vm.authentication.user.type === 'student' || vm.authentication.user.type === 'admin')" style="color:red;"><b>Approval Status:</b> No</li>
+            <li ng-if="vm.user.approve === true && (vm.authentication.user.type === 'student' || vm.authentication.user.type === 'admin')" style="color:green;"><b>Approval Status:</b> Yes</li>
+            <li ng-if="vm.authentication.user.type === 'student' || vm.authentication.user.type === 'admin'"><b>Comments:</b> {{vm.user.comments}}</li>
           </ul>
         </div>
         <div class="student-profile-h3">Short Biography</div>
@@ -37,11 +37,28 @@
           <div>
               <a href="../../img/profile/default.png" target="_blank"><button class = "button-student-profile" target="_blank"><span>Resume</span></button></a>
               <a href="../../img/profile/default.png" target="_blank"><button class = "button-student-profile" target="_blank"><span>Short Bio</span></button></a>
-              <button class = "button-student-profile"><span>Approval Status</span></button>
+              <button class = "button-student-profile" type="button" data-toggle="modal" data-target="#statusModal"><span>Approval Status</span></button>
               <button class = "button-student-profile"><span>Comments</span></button>
           </div>
         </div>
       </div>
+
+      <div class="modal fade" id="statusModal" role="dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Approval Status</h4>
+            </div>
+            <div class="modal-main">
+              <p ng-if="vm.user.approve === false && vm.authentication.user.type === 'admin'" style="color:red;"><b>Approval Status:</b> No</p>
+              <p ng-if="vm.user.approve === true && vm.authentication.user.type === 'admin'" style="color:green;"><b>Approval Status:</b> Yes</p>
+              <p ng-if="vm.authentication.user.type === 'admin'"><b>Comments:</b> {{vm.user.comments}}</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" data-dismiss="modal">Exit</button>
+            </div>
+          </div>
+        </div>
+
     </div>
   </div>
 </body>

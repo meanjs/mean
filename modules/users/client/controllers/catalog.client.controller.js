@@ -64,10 +64,25 @@
 
     function onSponsorGetStudentsSuccess(response) {
       $scope.studentsList = response;
-      $scope.filteredStudentsList = Array.from($scope.studentsList);
-      $scope.filteredUsersList = Array.from($scope.filteredStudentsList);
-      $scope.usersList = Array.from($scope.studentsList);
+
+      if (vm.authentication.user.type === 'sponsor') {
+        var originalList = Array.from($scope.studentsList);
+        var approvedList = new Set();
+
+        for (var i = 0; i < originalList.length; i++) {
+          if (originalList[i].approve === (true)) {
+            approvedList.add(originalList[i]);
+          }
+        }
+        $scope.filteredStudentsList = Array.from(approvedList);
+        $scope.filteredUsersList = Array.from($scope.filteredStudentsList);
+        $scope.usersList = Array.from(approvedList);
+      }
+
       if (vm.authentication.user.type === 'admin') {
+        $scope.filteredStudentsList = Array.from($scope.studentsList);
+        $scope.filteredUsersList = Array.from($scope.filteredStudentsList);
+        $scope.usersList = Array.from($scope.studentsList);
         fetchSponsors();
       }
     }
