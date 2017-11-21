@@ -45,7 +45,7 @@
         resolve: {
           catResolve: newCat
         }
-      });
+        });
   }
 
   getItem.$inject = ['$stateParams', 'ItemsService'];

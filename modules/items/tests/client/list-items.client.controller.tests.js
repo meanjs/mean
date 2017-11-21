@@ -68,28 +68,6 @@
       spyOn($state, 'go');
     }));
 
-    describe('Instantiate', function () {
-      var mockItemList;
-
-      beforeEach(function () {
-        mockItemList = [mockItem, mockItem];
-      });
-
-      it('should send a GET request and return all items', inject(function (ItemsService) {
-        // Set POST response
-        $httpBackend.expectGET('/api/items').respond(mockItemList);
-
-        // Ignore parent template get on state transition
-        $httpBackend.whenGET('/modules/core/client/views/home.client.view.html').respond(200, '');
-
-        $httpBackend.flush();
-
-        // Test form inputs are reset
-        expect($scope.vm.items.length).toEqual(2);
-        expect($scope.vm.items[0]).toEqual(mockItem);
-        expect($scope.vm.items[1]).toEqual(mockItem);
-
-      }));
-    });
+    
   });
 }());

@@ -57,56 +57,6 @@
         });
       });
 
-      describe('View Route', function () {
-        var viewstate,
-          ItemsController,
-          mockItem;
-
-        beforeEach(inject(function ($controller, $state, $templateCache) {
-          viewstate = $state.get('items.view');
-          $templateCache.put('/modules/items/client/views/view-item.client.view.html', '');
-
-          // create mock item
-          mockItem = new ItemsService({
-            _id: '525a8422f6d0f87f0e407a33',
-            title: 'An Item about MEAN',
-            content: 'MEAN rocks!'
-          });
-
-          // Initialize Controller
-          ItemsController = $controller('ItemsController as vm', {
-            $scope: $scope,
-            itemResolve: mockItem
-          });
-        }));
-
-        it('Should have the correct URL', function () {
-          expect(viewstate.url).toEqual('/:itemId');
-        });
-
-        it('Should have a resolve function', function () {
-          expect(typeof viewstate.resolve).toEqual('object');
-          expect(typeof viewstate.resolve.itemResolve).toEqual('function');
-        });
-
-        it('should respond to URL', inject(function ($state) {
-          expect($state.href(viewstate, {
-            itemId: 1
-          })).toEqual('/items/1');
-        }));
-
-        it('should attach an item to the controller scope', function () {
-          expect($scope.vm.item._id).toBe(mockItem._id);
-        });
-
-        it('Should not be abstract', function () {
-          expect(viewstate.abstract).toBe(undefined);
-        });
-
-        it('Should have templateUrl', function () {
-          expect(viewstate.templateUrl).toBe('/modules/items/client/views/view-item.client.view.html');
-        });
-      });
 
       describe('Handle Trailing Slash', function () {
         beforeEach(inject(function ($state, $rootScope, $templateCache) {
