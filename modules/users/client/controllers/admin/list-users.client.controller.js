@@ -12,6 +12,7 @@
     vm.buildPager = buildPager;
     vm.figureOutItemsToDisplay = figureOutItemsToDisplay;
     vm.pageChanged = pageChanged;
+    vm.modifyRoles = modifyRoles;
     vm.countApplicants = countApplicants;
 
     AdminService.query(function (data) {
@@ -40,7 +41,7 @@
       vm.pagedItems = vm.filteredItems.slice(begin, end);
     }
 
-    vm.modifyRoles = function(user) {
+    function modifyRoles(user) {
       if (user.roles.indexOf('admin') != -1)
           return 'Admin';
       if (user.roles.indexOf('superta') != -1 )
@@ -50,7 +51,7 @@
       if (user.roles.indexOf('ta') != -1 )
         return 'TA';
       return 'User';
-    };
+    }
 
     function pageChanged() {
       vm.figureOutItemsToDisplay();
