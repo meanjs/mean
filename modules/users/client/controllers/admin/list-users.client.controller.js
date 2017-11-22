@@ -12,6 +12,7 @@
     vm.buildPager = buildPager;
     vm.figureOutItemsToDisplay = figureOutItemsToDisplay;
     vm.pageChanged = pageChanged;
+    vm.countApplicants = countApplicants;
 
     AdminService.query(function (data) {
       vm.users = data;
@@ -20,7 +21,7 @@
 
     ApplicantsService.query(function (data) {
       vm.applicants = data;
-    })
+    });
 
     function buildPager() {
       vm.pagedItems = [];
@@ -53,6 +54,10 @@
 
     function pageChanged() {
       vm.figureOutItemsToDisplay();
+    }
+
+    function countApplicants() {
+      return vm.applicants.length;
     }
 
   }
