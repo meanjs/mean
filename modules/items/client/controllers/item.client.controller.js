@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('items')
+    .module('items.admin')
     .controller('ItemsController', ItemsController);
 
     ItemsController.$inject = ['$scope', '$state', '$window', 'itemResolve', 'CategoriesService', 'ModulesService', 'Authentication', 'Notification'];

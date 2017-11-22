@@ -13,7 +13,7 @@ acl = new acl(new acl.memoryBackend());
  */
 exports.invokeRolesPolicies = function () {
   acl.allow([{
-    roles: ['admin', 'superta', 'technician'], //All should be able to create, read, update, and delete items.
+    roles: ['admin', 'superta', 'technician', 'ta'], //All should be able to create, read, update, and delete items.
     allows: [{
       resources: '/api/items',
       permissions: '*'
@@ -34,22 +34,7 @@ exports.invokeRolesPolicies = function () {
       resources: '/api/modules',
       permissions: '*'
     }]
-  }, 
-  {
-    roles: ['ta'],
-    allows: [{
-      resources: '/api/items',
-      permissions: ['get', 'put', 'post']
-    },
-    {
-      resources: '/api/items/create',
-      permissions: ['get', 'put', 'post']
-    },
-    {
-      resources: '/api/items/:itemId',
-      permissions: ['get', 'post', 'put'] //TA's can modify and create items but not delete them from the database.
-    }]
-  }
+  } 
   ]);
 };
 
