@@ -7,3 +7,8 @@
     border-bottom: 0.5px solid #000 !important;
     border-top: 0.5px solid #000 !important;
 }
+
+#add-item-btn {
+    float: right;
+    margin-top: 21px;
+}

@@ -16,6 +16,11 @@
   min-height: 150px;
 }
 
+.user-box {
+    border-bottom: 0.5px solid #000 !important;
+    border-top: 0.5px solid #000 !important;
+}
+
 .users-header-item {
   margin-top: 10px;
 }

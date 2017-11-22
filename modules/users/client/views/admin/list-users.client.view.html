@@ -23,7 +23,7 @@
   <div class="row">
     <div class="col-xs-12">
       <div class="list-group">
-        <a ng-repeat="user in vm.pagedItems" ui-sref="admin.user({userId: user._id})" class="list-group-item">
+        <a ng-repeat="user in vm.pagedItems" ui-sref="admin.user({userId: user._id})" class="list-group-item user-box">
           <h4 class="list-group-item-heading">{{user.firstName}} {{user.lastName}}</h4>
           <p class="list-group-item-text pull-right small"> {{vm.modifyRoles(user)}}</p>
           <p class="list-group-item-text" ng-bind="user.email"></p>
