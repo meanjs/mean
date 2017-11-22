@@ -43,27 +43,56 @@ exports.update = function (req, res) {
  * Admin creates user
  */
 exports.adminsignup = function (req, res) {
-  // For security measurement we remove the roles from the req.body object
-  //delete req.body.roles;
-
   var user = new User(req.body);
   user.provider = 'local';
   user.approvedStatus = true;
-
+  var genHexPassword = function(length){
+        var str="Pa";
+        for(var i=0; i<length; i++){
+          var toAdd = Math.floor(Math.random()*16.0);
+          if(toAdd < 10){
+            str+=toAdd;  
+          }
+          if(toAdd == 10){
+            str+="A"; 
+          }
+          if(toAdd == 11){
+            str+="B"; 
+          }
+          if(toAdd == 12){
+            str+="C"; 
+          }
+          if(toAdd == 13){
+            str+="D"; 
+          }
+          if(toAdd == 14){
+            str+="E"; 
+          }
+          if(toAdd == 15){
+            str+="F"; 
+          }
+        }
+        return str+"!";
+  };
+  var tempUnhashed = genHexPassword(7);
+  user.password = tempUnhashed;
   user.save(function (err) {
     if (err) {
+      tempUnhashed="";
       return res.status(422).send({
         message: errorHandler.getErrorMessage(err)
+        
       });
     } else {
       // Remove sensitive data before login
-      user.password = 'Password123!';
-      user.salt = undefined;
       res.status(200).send();
-      mailer.sendCreation(user.email, user.firstName, user.username);
+      mailer.sendCreation(user.email, user.firstName, user.username, tempUnhashed);
+      tempUnhashed="";
     }
   });
 };
+
+
 
 /**
  * Delete a user
