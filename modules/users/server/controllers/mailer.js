@@ -18,7 +18,7 @@ let Mailer = new function() {
 	this.sendAcceptance = function(email, firstname) {
 		console.log('message sending in process');
 		let mailOptions = {
-			from: '"Dmitry Kopelevich" <XXXX@ufl.edu>',
+			from: '"Lab Inventory Web App" <XXXX@ufl.edu>',
 			to: email,
 			subject: 'Accepted Application for Laboratory Inventory Web App',
 			text: firstname + ', the admin has approved your account. You may now sign in.'
