@@ -5,9 +5,9 @@
     .module('users.admin')
     .controller('UserListController', UserListController);
 
-  UserListController.$inject = ['$scope', '$filter', 'AdminService'];
+  UserListController.$inject = ['$scope', '$filter', 'AdminService', 'ApplicantsService'];
 
-  function UserListController($scope, $filter, AdminService) {
+  function UserListController($scope, $filter, AdminService, ApplicantsService) {
     var vm = this;
     vm.buildPager = buildPager;
     vm.figureOutItemsToDisplay = figureOutItemsToDisplay;
@@ -17,6 +17,10 @@
       vm.users = data;
       vm.buildPager();
     });
+
+    ApplicantsService.query(function (data) {
+      vm.applicants = data;
+    })
 
     function buildPager() {
       vm.pagedItems = [];
@@ -46,8 +50,10 @@
         return 'TA';
       return 'User';
     };
+
     function pageChanged() {
       vm.figureOutItemsToDisplay();
     }
+
   }
 }());
