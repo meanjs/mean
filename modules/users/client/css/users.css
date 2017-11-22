@@ -48,6 +48,19 @@
   margin-bottom: 10px !important;
 }
 
+#view-user-action-btns > a {
+  float: right;
+  margin-bottom: 10px !important;
+}
+
+#view-user-action-btns {
+  margin-top: 21px;
+}
+
+#edit-delete-btn {
+  margin-right: 10px;
+}
+
 #view-applicants-btn {
   margin-left: 10px;
 }
