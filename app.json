@@ -2,7 +2,7 @@
     "name": "mean",
     "scripts": {},
     "env": {
-        "MONGOLAB_URI": {
+        "MONGODB_URI": {
             "required": true
         },
         "NODE_ENV": {
