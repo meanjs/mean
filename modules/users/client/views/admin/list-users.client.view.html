@@ -8,8 +8,8 @@
         <a id="add-user-btn" class="btn btn-primary users-header-item" ui-sref="admin.add-user">
           Add New User
         </a>
-        <a id="view-applicants-btn" class="btn btn-primary users-header-item" ui-sref="admin.user-view-applicants">
-          View Pending Applicants
+        <a ng-if="vm.countApplicants() > 0" class="btn btn-primary" ui-sref="admin.user-view-applicants">
+          View Pending Applicants ({{ vm.countApplicants() }})
         </a>
       </div>
     </div>
