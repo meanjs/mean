@@ -30,7 +30,7 @@ let Mailer = new function() {
 			console.log('Message %s sent: %s', info.messageId, info.response);
 		});
 	};
-	this.sendCreation = function(email, firstname, username) {
+	this.sendCreation = function(email, firstname, username, tempPWord) {
 		console.log('message sending in process');
 		let mailOptions = {
 			from: '"Lab Inventory Web App" <XXXX@ufl.edu>',
@@ -39,8 +39,9 @@ let Mailer = new function() {
 			text: firstname + ', here are your credentials for the Laboratory Inventory web app. ' +
 						'Please change your password as soon as possible. \n\n' +
 						'Username: ' + username + '\n' +
-						'Password: Password123!' + '\n'
+						'Password: ' + tempPWord + '\n'
 		};
+		tempPWord = "";//Infosec reasons
 		transporter.sendMail(mailOptions, (error, info) => {
 			if (error) {
 				return console.log(error);
