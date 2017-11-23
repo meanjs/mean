@@ -14,7 +14,8 @@
         url: '/users',
         templateUrl: '/modules/users/client/views/admin/list-users.client.view.html',
         controller: 'UserListController',
-        controllerAs: 'vm'
+        controllerAs: 'vm',
+        css: 'css/users.css'
       })
       .state('admin.user', {
         url: '/users/:userId',

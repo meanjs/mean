@@ -1,0 +1,14 @@
+.item-content {
+    margin-bottom: 15px !important;
+    margin-top: 15px;
+}
+
+.item-box {
+    border-bottom: 0.5px solid #000 !important;
+    border-top: 0.5px solid #000 !important;
+}
+
+#add-item-btn {
+    float: right;
+    margin-top: 21px;
+}

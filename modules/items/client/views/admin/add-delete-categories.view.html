@@ -1,39 +1,40 @@
 <section>
   <div class="page-header">
     <div class="row">
-      <div class="col-md-4">
-        <h1>Categories</h1>
+      <div class="col-xs-4">
+        <h1>
+          Categories
+        </h1>
       </div>
-      <div class="col-md-4" style="margin-top: 2em">
-        <input class="form-control col-md-4" type="text" ng-model="query" placeholder="Search"/>
-      </div>
-      <div class="col-md-4" style="margin-top: 2em">
-        <a class="btn btn-primary" ui-sref="admin.items.categorycreate">
+      <div class="col-xs-4 pull-right">
+        <a id="add-category-btn" class="btn btn-primary" ui-sref="admin.items.categorycreate">
           <i class="glyphicon glyphicon-plus"></i>
         </a>
       </div>
     </div>
+    <div class="row">
+      <div class="col-xs-12">
+          <input class="form-control" type="text" ng-model="query" placeholder="Search"/>
+      </div>
+    </div>
   </div>
-  <div class="list-group">
-    <table class="table table-hover applicantsTable">
-      <thead>
-          <tr class="first-row">
-            <td class="firstColumn">Category</td>
-            <td class="secondColumn"></td>
-          </tr>
-        </thead>
-        <tbody>
-          <tr ng-repeat="category in vm.categories | filter: query">
-            <td class="firstColumn">{{ category.title }}</td>
-            <td class="secondColumn">
-
-              <a class="btn btn-primary" ng-click="vm.remove(category)">
-              <i class="glyphicon glyphicon-minus"></i>
-              </a>  
-            </td>
-          </tr>
-        </tbody>
-    </table>
-  </div>
+  <table class="table table-hover applicantsTable">
+    <thead>
+      <tr class="first-row">
+        <td class="firstColumn">Category</td>
+        <td class="secondColumn"></td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="category in vm.categories | filter: query">
+        <td class="firstColumn">{{ category.title }}</td>
+        <td class="secondColumn">
+          <a class="btn btn-primary" ng-click="vm.remove(category)">
+            <i class="glyphicon glyphicon-minus"></i>
+          </a>  
+        </td>
+      </tr>
+    </tbody>
+  </table>
   <uib-pagination boundary-links="true" max-size="8" items-per-page="vm.itemsPerPage" total-items="vm.filterLength" ng-model="vm.currentPage" ng-change="vm.pageChanged()"></uib-pagination>
 </section>

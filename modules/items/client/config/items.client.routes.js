@@ -18,13 +18,15 @@
         url: '',
         templateUrl: '/modules/items/client/views/list-items.client.view.html',
         controller: 'ItemsListController',
-        controllerAs: 'vm'
+        controllerAs: 'vm',
+        css: 'css/list-items.css',
       })
       .state('items.create', {
         url: '/create',
         templateUrl: '/modules/items/client/views/form-item.client.view.html',
         controller: 'ItemsController',
         controllerAs: 'vm',
+        css: 'css/form-item.css',
         data: {
           roles: ['ta', 'technician', 'superta', 'admin']
         },
@@ -37,6 +39,7 @@
         templateUrl: '/modules/items/client/views/form-item.client.view.html',
         controller: 'ItemsController',
         controllerAs: 'vm',
+        css: 'css/form-item.css',
         data: {
           roles: ['ta', 'technician', 'superta', 'admin'],
           pageTitle: '{{ itemResolve.title }}'
