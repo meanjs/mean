@@ -7,3 +7,7 @@
     display: flex;
     flex-direction: row;
 }
+
+.dropdown-group {
+    width: 100%;
+}
