@@ -3,13 +3,64 @@
     position: fixed;
   }
 }
+
 .btn-add-remove-account {
   pointer-events: none;
   position: absolute;
   right: 10px;
   top: 10px;
 }
+
 .user-profile-picture {
   max-height: 150px;
   min-height: 150px;
+}
+
+.user-box {
+    border-bottom: 0.5px solid #000 !important;
+    border-top: 0.5px solid #000 !important;
+}
+
+.users-header-item {
+  margin-top: 10px;
+}
+
+#users-header {
+  margin-bottom: 0;
+}
+
+@media (min-width: 768px) {
+  #users-nav-buttons > a {
+    float: right !important;
+  }
+  
+  #view-applicants-btn {
+    margin-left: 0 !important;
+  }
+  
+  #add-user-btn {
+    margin-left: 10px;
+  }
+}
+
+#users-nav-buttons > a {
+  float: left;
+  margin-bottom: 10px !important;
+}
+
+#view-user-action-btns > a {
+  float: right;
+  margin-bottom: 10px !important;
+}
+
+#view-user-action-btns {
+  margin-top: 21px;
+}
+
+#edit-delete-btn {
+  margin-right: 10px;
+}
+
+#view-applicants-btn {
+  margin-left: 10px;
 }
