@@ -5,13 +5,14 @@
     .module('users')
     .controller('AddUserController', AddUserController);
 
-  AddUserController.$inject = ['$scope', '$state', 'UsersService', '$location', '$window', 'Notification', 'ApplicantsService'];
+  AddUserController.$inject = ['$scope', '$state', 'UsersService', '$location', '$window', 'Notification', 'ApplicantsService', 'AdminModulesService'];
 
-  function AddUserController($scope, $state, UsersService, $location, $window, Notification, ApplicantsService) {
+  function AddUserController($scope, $state, UsersService, $location, $window, Notification, ApplicantsService, AdminModulesService) {
     var vm = this;
 
     vm.signup = signup;
     vm.usernameRegex = /^(?=[\w.-]+$)(?!.*[._-]{2})(?!\.)(?!.*\.$).{3,34}$/;
+    $scope.modules = AdminModulesService.query();
 
     function signup(isValid) {
 
@@ -44,6 +45,10 @@
         return 'superta';
       else
         return role;
+    }
+
+    vm.printModules = function () {
+      console.log($scope.modules);
     }
 
   }

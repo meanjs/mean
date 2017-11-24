@@ -132,7 +132,7 @@ var UserSchema = new Schema({
   },
   modulesTaught: {
     type: [String],
-    defualt: ["None"]
+    default: []
   }
 });
 

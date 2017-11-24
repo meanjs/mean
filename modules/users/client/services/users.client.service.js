@@ -108,6 +108,17 @@
     return Applicants;
   }
 
+  angular
+    .module('users.admin.services')
+    .factory('AdminModulesService', AdminModulesService);
+
+  AdminModulesService.$inject = ['$resource'];
+
+  function AdminModulesService($resource) {
+    var Modules = $resource('/api/modules', {}, {});
+    return Modules;
+  }
+
   // TODO this should be Users service
   angular
     .module('users.admin.services')
