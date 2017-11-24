@@ -46,6 +46,17 @@
         <div class="col-xs-6" ng-bind="vm.user.roles"></div>
       </div>
       <hr/>
+      <div ng-if="vm.user.roles == 'ta' || vm.user.roles == 'superta'">
+        <div class="row">
+          <div class="col-xs-3"><strong>Modules</strong></div>
+          <div class="col-xs-6">
+            <ul>
+              <li style="display:inline" ng-repeat="module in vm.user.modulesTaught"> {{ module }} </li>
+            </ul>
+          </div>
+        </div>
+        <hr/>
+      </div>
     </div>
   </div>
 </section>
