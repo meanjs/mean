@@ -27,7 +27,6 @@ exports.update = function (req, res) {
   user.lastName = req.body.lastName;
   user.displayName = user.firstName + ' ' + user.lastName;
   user.roles = req.body.roles;
-  user.modulesTaught = req.body.modulesTaught;
 
   user.save(function (err) {
     if (err) {
@@ -37,7 +36,6 @@ exports.update = function (req, res) {
     }
 
     res.json(user);
-    console.log(user);
   });
 };
 
@@ -48,6 +46,7 @@ exports.adminsignup = function (req, res) {
   var user = new User(req.body);
   user.provider = 'local';
   user.approvedStatus = true;
+  user.modulesTaught = req.body.modulesTaught;
   var genHexPassword = function(length){
         var str="Pa";
         for(var i=0; i<length; i++){
@@ -83,7 +82,6 @@ exports.adminsignup = function (req, res) {
       tempUnhashed="";
       return res.status(422).send({
         message: errorHandler.getErrorMessage(err)
-        
       });
     } else {
       // Remove sensitive data before login
