@@ -129,6 +129,10 @@ var UserSchema = new Schema({
   },
   resetPasswordExpires: {
     type: Date
+  },
+  modulesTaught: {
+    type: [String],
+    defualt: ["None"]
   }
 });
 
