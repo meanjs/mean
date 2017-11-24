@@ -1,9 +1,9 @@
 (function () {
   'use strict';
 
-  describe('List Categories Controller Tests', function () {
+  describe('Categories Controller Tests', function () {
     // Initialize global variables
-    var ItemsAdminCategoriesController,
+    var CatsController,
       $scope,
       $httpBackend,
       $state,
@@ -48,7 +48,7 @@
       CategoriesService = _CategoriesService_;
 
       // Ignore parent template get on state transitions
-      $httpBackend.whenGET('/modules/users/client/views/admin/view-categories.html').respond(200, '');
+      $httpBackend.whenGET('/modules/users/client/views/admin/form-categories.html').respond(200, '');
       $httpBackend.whenGET('/modules/core/client/views/home.client.view.html').respond(200, '');
 
       // create mock category
@@ -63,57 +63,29 @@
       };
 
       // Initialize the Items Category List controller.
-      ItemsAdminCategoriesController = $controller('ItemsAdminCategoriesController as vm', {
-        $scope: $scope
+      CatsController = $controller('CatsController as vm', {
+        $scope: $scope,
+        catResolve: {},
+        cat: mockCat
       });
+       $scope.vm.cat = mockCat;
 
       // Spy on state go
       spyOn($state, 'go');
     }));
 
-    describe('Instantiate', function () {
-      var mockCatList;
-
-      beforeEach(function () {
-        mockCatList = [mockCat, mockCat];
-      });
-
-      it('should send a GET request and return all users', inject(function (ItemsService) {
-        // Set POST response
-        $httpBackend.expectGET('/api/categories').respond(mockCatList);
-
-
-        $httpBackend.flush();
-
-        // Test form inputs are reset
-        expect($scope.vm.categories.length).toEqual(2);
-        expect($scope.vm.categories[0]).toEqual(mockCat);
-        expect($scope.vm.categories[1]).toEqual(mockCat);
-
-      }));
-    });
-    describe('vm.remove() as delete', function () {
-      var sampleUserPostData;
+    describe('vm.create() as create', function () {
+      var sampleCatPostData;
       var newlyApproved;
       var mockCatList;
-
-      beforeEach(function () {
-        // Create a sample item object
-        mockCatList = [mockCat, mockCat];
-        //expect the get request before each of these
-        $httpBackend.expectGET('/api/categories').respond(mockCatList);
-        $httpBackend.flush()
-
-      });
-
-      it('should send a Delete request with the Categories values', inject(function (ItemsService) {
+      it('should send a POST request with the Categories values', inject(function (ItemsService) {
         //expect the initial get request
         // expect a delte from the user with the title of TestCat
         spyOn(window, 'confirm').and.returnValue(true);
-        $httpBackend.expectDELETE('/api/categories?title=TestCat').respond(204);
+        $httpBackend.expectPOST('/api/categories').respond(204);
 
         // Run controller functionality
-        $scope.vm.remove(mockCat);
+        $scope.vm.create();
         $httpBackend.flush();
       }));
     });
