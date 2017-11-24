@@ -12,6 +12,7 @@
 
     vm.signup = signup;
     vm.usernameRegex = /^(?=[\w.-]+$)(?!.*[._-]{2})(?!\.)(?!.*\.$).{3,34}$/;
+    vm.modulesTA = [];
     $scope.modules = AdminModulesService.query();
 
     function signup(isValid) {
@@ -23,6 +24,7 @@
       }
 
       vm.credentials.roles = alterRole(vm.credentials.roles);
+      vm.credentials.modulesTaught = vm.modulesTA;
 
       ApplicantsService.adminSignup(vm.credentials)
         .then(onAddUserSuccess)
@@ -47,8 +49,16 @@
         return role;
     }
 
-    vm.printModules = function () {
-      console.log($scope.modules);
+    vm.modifyTAModules = function(module, checked){
+      if(checked){
+        vm.modulesTA.push(module.title);
+      }
+      else{
+        var index = vm.modulesTA.indexOf(module.title);
+        if(index > -1)
+          vm.modulesTA.splice(index, 1);
+      }
+      console.log(vm.modulesTA);
     }
 
   }

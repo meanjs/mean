@@ -37,6 +37,7 @@ exports.update = function (req, res) {
     }
 
     res.json(user);
+    console.log(user);
   });
 };
 

@@ -43,7 +43,7 @@
           <label for="modules">Modules Taught</label>
           <div ng-repeat="module in modules">
             <label>
-              <input type="checkbox" name="{{module.title}}" ng-checked="isChecked" ng-click="vm.addTAModule(module, isChecked)"> {{ module.title }}
+              <input type="checkbox" name="{{module.title}}" ng-model="isChecked" ng-click="vm.modifyTAModules(module, isChecked)"> {{ module.title }}
             </label>
           </div>
         </div>
