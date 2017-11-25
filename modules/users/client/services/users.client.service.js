@@ -1,3 +1,4 @@
+// Service that works with the APIs to do get and post requests to the database
 (function () {
   'use strict';
 
@@ -8,6 +9,7 @@
 
   UsersService.$inject = ['$resource'];
 
+// Function to allow the user to recieve info for sign up, reset, adn more for all the users
   function UsersService($resource) {
     var Users = $resource('/api/users', {}, {
       update: {
@@ -124,6 +126,7 @@
 
   CatalogService.$inject = ['$resource'];
 
+// functio nto allow the user ot get all the studnets and sponsors in the database to the controller
   function CatalogService($resource) {
     var Catalog = $resource('/api/catalog', {}, {
       getStudents: {
@@ -156,6 +159,7 @@
 
   AdminPowers.$inject = ['$resource'];
 
+// Works wit hte edit-user.controller to delete and update the users in the database for the admin
   function AdminPowers($resource) {
     var Admin = $resource('/api/admin', {}, {
       updateUser: {

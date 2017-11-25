@@ -47,6 +47,7 @@
       }
 
       var user = new UsersService(vm.user);
+      user.approve = false;
 
       user.$update(function (response) {
         $scope.$broadcast('show-errors-reset', 'vm.userForm');

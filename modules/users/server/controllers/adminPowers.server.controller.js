@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * Module dependencies
+ * Module dependencies that sends the info from the clinet controller to the database in mlab
  */
 var path = require('path'),
   mongoose = require('mongoose'),
@@ -16,7 +16,7 @@ exports.read = function (req, res) {
 };
 
 /**
- * Update a User
+ * Update a User that is edited by the admin in the client side edit-user controller to the mLab
  */
 exports.updateUser = function (req, res) {
   var user = req.user;
@@ -26,6 +26,8 @@ exports.updateUser = function (req, res) {
     user.lastName = req.body.lastName;
     user.displayName = user.firstName + ' ' + user.lastName;
     user.roles = req.body.roles;
+    user.comments = req.body.comments;
+    user.approve = req.body.approve;
   }
 
   /* Save the user */
@@ -40,7 +42,7 @@ exports.updateUser = function (req, res) {
 };
 
 /**
- * Delete a user
+ * Delete a user that is edited by the admin in the client side edit-user controller to the mLab
  */
 exports.deleteUser = function (req, res) {
   var user = req.user;
