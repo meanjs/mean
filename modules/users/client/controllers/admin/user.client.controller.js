@@ -5,9 +5,9 @@
     .module('users.admin')
     .controller('UserController', UserController);
 
-  UserController.$inject = ['$scope', '$state', '$window', 'Authentication', 'userResolve', 'Notification'];
+  UserController.$inject = ['$scope', '$state', '$window', 'Authentication', 'userResolve', 'Notification', 'AdminModulesService'];
 
-  function UserController($scope, $state, $window, Authentication, user, Notification) {
+  function UserController($scope, $state, $window, Authentication, user, Notification, AdminModulesService) {
     var vm = this;
 
     vm.authentication = Authentication;
@@ -17,6 +17,8 @@
     vm.changeRole = changeRole;
     vm.isContextUserSelf = isContextUserSelf;
     vm.role = null;
+
+    $scope.modules = AdminModulesService.query();
 
     $scope.roleOptions = [{
       id: 'ta', //Name will be displayed in the html, id will be used on the database.

@@ -26,6 +26,14 @@
             </select>
           </div>
         </div>
+        <div class="form-group" ng-if="userRole.id == 'ta' || userRole.id == 'superta'" show-error>
+          <label for="modulesTaught"> Modules </label>
+          <div ng-repeat="module in modules">
+            <label>
+              <input type="checkbox" name="{{module.title}}" ng-model="isChecked" ng-click="vm.modifyTAModules(module, isChecked)"> {{ module.title }}
+            </label>
+          </div>
+        </div>
         <div class="form-group">
           <input type="submit" value="Update" class="btn btn-default">
         </div>
