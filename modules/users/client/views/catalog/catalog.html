@@ -1,27 +1,24 @@
-<!-- HTML file for the sponsors and admins should be able to see students in the database -->
+<!-- sponsors and admins should be able to see this -->
+
 <section>
 	<head>
 	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 	</head>
-	<div class="row">
-  		<div class="col-md-6 headers">
-    		<!--Create the headers on the right side like the title and the cart-->
-    		<h1 class="catalog-title image-left">Resume Portal</h1>
-    		<h4 id="cart" class="image-right vertical-bottom">
-    			<button type="button" ng-click = "toggleCartTable()">
-        			<i class="glyphicon glyphicon-shopping-cart cart"></i><i>Cart</i>
-      			</button>
-    		</h4>
-  		</div>
- 	</div>
-    <div class="row">
+	<div class="container">
+	  <div class="row">
+	  	<div class="col-md-6 headers">
+	  		<h1 class="catalog-title image-left">Resume Portal</h1>
+	  		<h4 id="cart" class="image-right vertical-bottom">
+		    	<i class="glyphicon glyphicon-shopping-cart cart"></i><i>Cart</i>
+		    </h4>
+	  	</div>
+	  </div>
+	  <div class="row" ng-controller="CatalogController">
 	    <div class="col-md-6">
-				<!--Crate the search bar feature that will allow user sto search the students-->
 	      	<div class="input-group catalog-search" id="searchBar">
 	        	<span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-search"></span></span>
 	        	<input type="text" class="form-control" placeholder="Search" ng-model="searchValue" ng-keyup="filterData()" />
-						<!--Add a filter for certain types to the search bar-->
-						<span class="input-group-addon" id="sizing-addon2" ng-show="!shouldShowFilters" ng-hide="shouldShowFilters" ng-click="toggleFilterOptions()"><span class="glyphicon glyphicon-chevron-down"></span></span>
+	        	<span class="input-group-addon" id="sizing-addon2" ng-show="!shouldShowFilters" ng-hide="shouldShowFilters" ng-click="toggleFilterOptions()"><span class="glyphicon glyphicon-chevron-down"></span></span>
 	        	<span class="input-group-addon" id="sizing-addon2" ng-show="shouldShowFilters" ng-hide="!shouldShowFilters" ng-click="toggleFilterOptions()"><span class="glyphicon glyphicon-chevron-up"></span></span>
 	      	</div>
 	      	<div ng-if="shouldShowFilters">
@@ -29,18 +26,87 @@
 			      	<fieldset class="filter-fieldset">
 					  	<legend class="filter-legend">Filter By:</legend>
 					  	<div class="filter-div">
+					  		<label>Status</label>
+					  		<br>
 					    	<input type="checkbox" id="availability" name="filter" value="availability" ng-click="filterOnForm()" ng-model="availabilityOption">
 					    	<label for="availability">Available</label>
 					  	</div>
 					  	<div class="filter-div">
-					    	<input type="checkbox" id="computer-science" name="filter" value="computer-science" ng-click="filterOnForm()" ng-model="csOption">
-					    	<label for="computer-science">Computer Science</label>
+					  		<label>Major</label>
+					  		<br>
+					    	<input type="checkbox" id="agricultural and biological engineering" name="filter" value="agricultural and biological engineering" ng-click="filterOnForm()" ng-model="ABEOption">
+					    	<label for="agricultural and biological engineering">Agricultural and Biological Engineering</label>
+					    	<br>
+					    	<input type="checkbox" id="aerospace engineering" name="filter" value="aerospace engineering" ng-click="filterOnForm()" ng-model="ASEOption">
+					    	<label for="aerospace engineering">Aerospace Engineering</label>
+					    	<br>
+					    	<input type="checkbox" id="biological engineering" name="filter" value="biological engineering" ng-click="filterOnForm()" ng-model="BEOption">
+					    	<label for="biological engineering">Biological Engineering</label>
+					    	<br>
+					    	<input type="checkbox" id="business administration" name="filter" value="business administration" ng-click="filterOnForm()" ng-model="BAOption">
+					    	<label for="business administration">Business Administration</label>
+					    	<br>
+					    	<input type="checkbox" id="biomedical engineering" name="filter" value="biomedical engineering" ng-click="filterOnForm()" ng-model="BMEOption">
+					    	<label for="biomedical engineering">Biomedical Engineering</label>
+					    	<br>
+					    	<input type="checkbox" id="chemical engineering" name="filter" value="chemical engineering" ng-click="filterOnForm()" ng-model="CHEOption">
+					    	<label for="chemical engineering">Chemical Engineering</label>
+					    	<br>
+					    	<input type="checkbox" id="civil engineering" name="filter" value="civil engineering" ng-click="filterOnForm()" ng-model="CIVOption">
+					    	<label for="civil engineering">Civil Engineering</label>
+					    	<br>
+					    	<input type="checkbox" id="computer and information science engineering" name="filter" value="computer and information science engineering" ng-click="filterOnForm()" ng-model="CISEOption">
+					    	<label for="computer and information science engineering">Computer and Information Science Engineering</label>
+					    	<br>
+					    	<input type="checkbox" id="computer engineering" name="filter" value="computer engineering" ng-click="filterOnForm()" ng-model="CPEOption">
+					    	<label for="computer engineering">Computer Engineering</label>
+					    	<br>
+					    	<input type="checkbox" id="computer science - engineering" name="filter" value="computer science - engineering" ng-click="filterOnForm()" ng-model="CSEOption">
+					    	<label for="computer science - engineering">Computer Science - Engineering</label>
+					    	<br>
+					    	<input type="checkbox" id="computer science - liberal arts" name="filter" value="computer science - liberal arts" ng-click="filterOnForm()" ng-model="CSCOption">
+					    	<label for="computer science - liberal arts">Computer Science - Liberal Arts</label>
+					    	<br>
+					    	<input type="checkbox" id="digital arts and sciences" name="filter" value="digital arts and sciences" ng-click="filterOnForm()" ng-model="DASOption">
+					    	<label for="digital arts and sciences">Digital Arts and Sciences</label>
+					    	<br>
+					    	<input type="checkbox" id="electrical and computer engineering" name="filter" value="electrical and computer engineering" ng-click="filterOnForm()" ng-model="ECEOption">
+					    	<label for="electrical and computer engineering">Electrical and Computer Engineering</label>
+					    	<br>
+					    	<input type="checkbox" id="electrical engineering" name="filter" value="electrical engineering" ng-click="filterOnForm()" ng-model="EEOption">
+					    	<label for="electrial engineering">Electrical Engineering</label>
+					    	<br>
+					    	<input type="checkbox" id="environmental engineering" name="filter" value="environmental engineering" ng-click="filterOnForm()" ng-model="ENEOption">
+					    	<label for="environmental engineering">Environmental Engineering</label>
+					    	<br>
+					    	<input type="checkbox" id="environmental engineering science" name="filter" value="environmental engineering science" ng-click="filterOnForm()" ng-model="EESOption">
+					    	<label for="environmental engineering science">Environmental Engineering Science</label>
+					    	<br>
+					    	<input type="checkbox" id="engineering school for sustainable infrastructure and the environment" name="filter" value="engineering school for sustainable infrastructure and the environment" ng-click="filterOnForm()" ng-model="ESSIEOption">
+					    	<label for="engineering school for sustainable infrastructure and the environment">Engineering School for Sustainable Infrastructure and the Environment</label>
+					    	<br>
+					    	<input type="checkbox" id="industrial and systems engineering" name="filter" value="industrial and systems engineering" ng-click="filterOnForm()" ng-model="ISEOption">
+					    	<label for="industrial and systems engineering">Industrial and Systems Engineering</label>
+					    	<br>
+					    	<input type="checkbox" id="materials science and aerospace engineering" name="filter" value="materials science and aerospace engineering" ng-click="filterOnForm()" ng-model="MSEOption">
+					    	<label for="materials science and aerospace engineering">Materials Science and Aerospace Engineering</label>
+					    	<br>
+					    	<input type="checkbox" id="mechanical and aerospace engineering" name="filter" value="mechanical and aerospace engineering" ng-click="filterOnForm()" ng-model="MAEOption">
+					    	<label for="mechanical and aerospace engineering">Mechanical and Aerospace Engineering</label>
+					    	<br>
+					    	<input type="checkbox" id="mechanical engineering" name="filter" value="mechanical engineering" ng-click="filterOnForm()" ng-model="MEOption">
+					    	<label for="mechanical engineering">Mechanical Engineering</label>
+					    	<br>
+					    	<input type="checkbox" id="packaging sciences" name="filter" value="packaging sciences" ng-click="filterOnForm()" ng-model="PKGOption">
+					    	<label for="packaging sciences">Packaging Sciences</label>
+					  		<br>
 					  	</div>
 					  	<div class="filter-div" ng-if="vm.authentication.user.type === 'admin'">
+					    	<label>User Type</label>
+					    	<br>
 					    	<input type="checkbox" id="student" name="filter" value="student" ng-click="filterOnForm()" ng-model="studentOption">
 					    	<label for="student">Student</label>
-					  	</div>
-					  	<div class="filter-div" ng-if="vm.authentication.user.type === 'admin'">
+					    	<br>
 					    	<input type="checkbox" id="sponsor" name="filter" value="sponsor" ng-click="filterOnForm()" ng-model="sponsorOption">
 					    	<label for="sponsor">Sponsor</label>
 					  	</div>
@@ -50,14 +116,11 @@
 	    <div class="tableWrapper">
 	        <table class="table table-striped table-hover">
 	            <tbody class="container">
-								<!--Add all the user in the filteredUsersList to the table of users-->
 	                <tr ng-repeat="user in filteredUsersList" ng-click="showDetails($index)">
 	                  <div>
 	                    <td>
-												<!--Add the profile pic of each user-->
 	                    	<img ngf-src="user.base64ProfileImageURL" alt="{{vm.user.displayName}}" class="img-thumbnail centerText user-profile-picture" ngf-drop height="50px" width="50px">
 	                    </td>
-											<!--add all the basic infomation for each of the user like name and major if student-->
 	                    <td class="information leftText">
 	                    	<div>
 	                      		{{user.firstName}} {{user.lastName}}
@@ -68,15 +131,8 @@
 	                      	<div ng-if="user.type === 'student'">
 	                      		Team: {{user.teamName}}
 	                      	</div>
-													<!--If the user is an admin than show the appproval status-->
-													<div style="color:red;" ng-if="user.type === 'student' && vm.authentication.user.type === 'admin' && user.approve === false">
-	                      		Disapprove
-	                      	</div>
-													<div style="color:green;" ng-if="user.type === 'student' && vm.authentication.user.type === 'admin' && user.approve === true">
-	                      		Approve
-	                      	</div>
 	                      	<div ng-if="user.type === 'sponsor'">
-	                      		<i>Sponsor</i>
+	                      		<i>sponsor</i>
 	                      	</div>
 	                    </td>
 	                    <td>
@@ -85,7 +141,6 @@
 	                    <td>
 	                    	<br><i class="actionButton glyphicon glyphicon-circle-arrow-down" style="font-size: 25px;"></i>
 	                    </td>
-											<!--add the edit button to the display if the user is an admin -->
 	                    <td ng-if="isEditable && vm.authentication.user.type === 'admin'">
 	                    	<br><button type="button" ng-click="editClicked(user)">Edit</button>
 	                    </td>
@@ -100,7 +155,6 @@
 	      	<div ng-if="detailedInfo.availabilityStatus" class="image-right availbility-status">
                	<i>Status: {{detailedInfo.availabilityStatus}}</i>
             </div>
-						<!-- deta is the selected user on the left that will have their info on the right side-->
 	      	<h2>Detailed Information</h2>
             <li ng-if="!detailedInfo">
               Select a student to learn more!
@@ -118,19 +172,14 @@
 	            <li ng-if="detailedInfo.bio">
 	                Bio: {{detailedInfo.bio}}
 	            </li>
-							<!--If the user is a admin or sponser than add the cart button-->
 	            <div class="detail-action-buttons-div" ng-if="vm.authentication.user.type === 'admin' || vm.authentication.user.type === 'sponsor'">
 		        	<div id="addCart" class="image-left">
-		            	<button type="addButton" ng-click="addToCart()">Add to Cart</button>
+		            	<button type="addButton">Add to Cart</button>
 		        	</div>
-		        	<div id="delete1Cart" class="leftText" ng-if="isInCart(detailedInfo.username)">
-		        		<button type="button" ng-click="deleteFromCart()">Delete from Cart</button>
+		        	<div class="image-right">	
+		        		<button type="button" ng-click="goToStudentProfile()">Go To Profile</button>
 		        	</div>
-		          	<!--Add the go to profile button to all the student detailed infomation-->
-		        	<div class="image-right">
-		        		<button type="button" ng-click="goToStudentProfile()" ng-if="detailedInfo.type === 'student'">Go To Profile</button>
-		        	</div>
-		        </div>
+	            </div>
             </div>
 	      </div>
 	    </div>
