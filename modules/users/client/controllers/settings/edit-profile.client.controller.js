@@ -5,13 +5,16 @@
     .module('users')
     .controller('EditProfileController', EditProfileController);
 
-  EditProfileController.$inject = ['$scope', '$http', '$location', 'UsersService', 'Authentication', 'Notification'];
+  EditProfileController.$inject = ['$scope', '$http', '$location', 'UsersService', 'Authentication', 'Notification', 'AdminModulesService'];
 
-  function EditProfileController($scope, $http, $location, UsersService, Authentication, Notification) {
+  function EditProfileController($scope, $http, $location, UsersService, Authentication, Notification, AdminModulesService) {
     var vm = this;
 
     vm.user = Authentication.user;
     vm.updateUserProfile = updateUserProfile;
+    vm.modifyTAModules = modifyTAModules;
+    vm.modulesTA = [];
+    $scope.modules = AdminModulesService.query();
 
     // Update a user profile
     function updateUserProfile(isValid) {
@@ -32,6 +35,12 @@
       }, function (response) {
         Notification.error({ message: response.data.message, title: '<i class="glyphicon glyphicon-remove"></i> Edit profile failed!' });
       });
+    }
+
+    function modifyTAModules(module, checked) {
+           if(checked) {
+             vm.modulesTA.push(module.title);
+           }
     }
   }
 }());

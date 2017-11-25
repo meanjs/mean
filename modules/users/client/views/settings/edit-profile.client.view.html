@@ -31,6 +31,14 @@
             <p class="help-block error-text" ng-message="required">Username is required.</p>
           </div>
         </div>
+        <div class="form-group" show-errors>
+          <label for="modulesTaught"> Modules </label>
+          <div ng-repeat="module in modules">
+            <label>
+              <input type="checkbox" name="{{module.title}}" ng-model="isChecked" ng-click="vm.modifyTAModules(module, isChecked)"> {{ module.title }}
+            </label>
+          </div>
+        </div>
         <div class="text-center form-group">
           <button type="submit" class="btn btn-primary">Save Profile</button>
         </div>
