@@ -12,6 +12,7 @@
 
     vm.signup = signup;
     vm.usernameRegex = /^(?=[\w.-]+$)(?!.*[._-]{2})(?!\.)(?!.*\.$).{3,34}$/;
+    vm.modifyTAModules = modifyTAModules;
     vm.modulesTA = [];
     $scope.modules = AdminModulesService.query();
 
@@ -49,7 +50,7 @@
         return role;
     }
 
-    vm.modifyTAModules = function(module, checked){
+    function modifyTAModules(module, checked){
       if(checked){
         vm.modulesTA.push(module.title);
       }
@@ -58,7 +59,6 @@
         if(index > -1)
           vm.modulesTA.splice(index, 1);
       }
-      console.log(vm.modulesTA);
     }
 
   }

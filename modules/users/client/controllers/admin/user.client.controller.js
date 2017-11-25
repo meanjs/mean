@@ -88,7 +88,6 @@
         if(index > -1)
           vm.modulesTA.splice(index, 1);
       }
-      console.log(vm.modulesTA);
     }
 
     function isContextUserSelf() {
