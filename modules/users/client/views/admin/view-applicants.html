@@ -18,14 +18,14 @@
         </tr>
       </thead>
       <tbody>
-        <tr id="applicant-rows" ng-repeat="applicant in vm.unapprovedUsers">
-          <td class="applicant-name-col">{{ applicant.firstName }} {{ applicant.lastName }}</td>
-          <td class="applicant-roles-col">{{ vm.modifyRoles(applicant) }}</td>
-          <td>
-            <button class="btn btn-success approval-action-btn" ng-click="vm.approveUser(applicant)">APPROVE</button>
-            <button class="btn btn-danger" ng-click="vm.removeApplicant(applicant)">DENY</button>
-          </td>
-        </tr>
+        <tr class="applicant-rows" ng-repeat="applicant in vm.unapprovedUsers">
+              <td>{{ applicant.firstName }} {{ applicant.lastName }}</td>
+              <td><select ng-init="applicant.roles = vm.roleOptions[0]" name="name" id="id" class="form-control" ng-model="applicant.roles" ng-options="option.name for option in vm.roleOptions">
+                </select>
+              </td>
+                <td class="btn btn-success" ng-click="vm.approveUser(applicant)">APPROVE</td>
+                <td class="btn btn-danger" ng-click="vm.removeApplicant(applicant)">DENY</td>
+            </tr>
       </tbody>
     </table>
   </div>
