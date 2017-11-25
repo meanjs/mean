@@ -1,26 +1,26 @@
-<!-- sponsors and admins should be able to see this -->
-
+<!-- HTML file for the sponsors and admins should be able to see students in the database -->
 <section>
 	<head>
 	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 	</head>
 	<div class="container">
-	  <div class="row" ng-controller="CatalogController">
-	  	<div class="row">
-		  	<div class="col-md-6 headers">
-		  		<h1 class="catalog-title image-left">Resume Portal</h1>
-		  		<h4 id="cart" class="image-right vertical-bottom">
-			    	<button type="button" ng-click = "toggleCartTable()">
-			    		<i class="glyphicon glyphicon-shopping-cart cart"></i><i>Cart</i>
-			    	</button>
-			    </h4>
-		  	</div>
-	  	</div>
+    <div class="row">
+      <div class="col-md-6 headers">
+        <!--Create the headers on the right side like the title and the cart-->
+        <h1 class="catalog-title image-left">Resume Portal</h1>
+        <h4 id="cart" class="image-right vertical-bottom">
+          <button type="button" ng-click = "toggleCartTable()">
+            <i class="glyphicon glyphicon-shopping-cart cart"></i><i>Cart</i>
+          </button>
+        </h4>
+      </div>
 	    <div class="col-md-6">
+				<!--Crate the search bar feature that will allow user sto search the students-->
 	      	<div class="input-group catalog-search" id="searchBar">
 	        	<span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-search"></span></span>
 	        	<input type="text" class="form-control" placeholder="Search" ng-model="searchValue" ng-keyup="filterData()" />
-	        	<span class="input-group-addon" id="sizing-addon2" ng-show="!shouldShowFilters" ng-hide="shouldShowFilters" ng-click="toggleFilterOptions()"><span class="glyphicon glyphicon-chevron-down"></span></span>
+						<!--Add a filter for certain types to the search bar-->
+						<span class="input-group-addon" id="sizing-addon2" ng-show="!shouldShowFilters" ng-hide="shouldShowFilters" ng-click="toggleFilterOptions()"><span class="glyphicon glyphicon-chevron-down"></span></span>
 	        	<span class="input-group-addon" id="sizing-addon2" ng-show="shouldShowFilters" ng-hide="!shouldShowFilters" ng-click="toggleFilterOptions()"><span class="glyphicon glyphicon-chevron-up"></span></span>
 	      	</div>
 	      	<div ng-if="shouldShowFilters">
@@ -49,11 +49,14 @@
 	    <div class="tableWrapper">
 	        <table class="table table-striped table-hover">
 	            <tbody class="container">
+								<!--Add all the user in the filteredUsersList to the table of users-->
 	                <tr ng-repeat="user in filteredUsersList" ng-click="showDetails($index)">
 	                  <div>
 	                    <td>
+												<!--Add the profile pic of each user-->
 	                    	<img ngf-src="user.base64ProfileImageURL" alt="{{vm.user.displayName}}" class="img-thumbnail centerText user-profile-picture" ngf-drop height="50px" width="50px">
 	                    </td>
+											<!--add all the basic infomation for each of the user like name and major if student-->
 	                    <td class="information leftText">
 	                    	<div>
 	                      		{{user.firstName}} {{user.lastName}}
@@ -64,8 +67,15 @@
 	                      	<div ng-if="user.type === 'student'">
 	                      		Team: {{user.teamName}}
 	                      	</div>
+													<!--If the user is an admin than show the appproval status-->
+													<div style="color:red;" ng-if="user.type === 'student' && vm.authentication.user.type === 'admin' && user.approve === false">
+	                      		Disapprove
+	                      	</div>
+													<div style="color:green;" ng-if="user.type === 'student' && vm.authentication.user.type === 'admin' && user.approve === true">
+	                      		Approve
+	                      	</div>
 	                      	<div ng-if="user.type === 'sponsor'">
-	                      		<i>sponsor</i>
+	                      		<i>Sponsor</i>
 	                      	</div>
 	                    </td>
 	                    <td>
@@ -74,6 +84,7 @@
 	                    <td>
 	                    	<br><i class="actionButton glyphicon glyphicon-circle-arrow-down" style="font-size: 25px;"></i>
 	                    </td>
+											<!--add the edit button to the display if the user is an admin -->
 	                    <td ng-if="isEditable && vm.authentication.user.type === 'admin'">
 	                    	<br><button type="button" ng-click="editClicked(user)">Edit</button>
 	                    </td>
@@ -88,6 +99,7 @@
 	      	<div ng-if="detailedInfo.availabilityStatus" class="image-right availbility-status">
                	<i>Status: {{detailedInfo.availabilityStatus}}</i>
             </div>
+						<!-- deta is the selected user on the left that will have their info on the right side-->
 	      	<h2>Detailed Information</h2>
             <li ng-if="!detailedInfo">
               Select a student to learn more!
@@ -105,17 +117,17 @@
 	            <li ng-if="detailedInfo.bio">
 	                Bio: {{detailedInfo.bio}}
 	            </li>
+							<!--If the user is a admin or sponser than add the cart button-->
 	            <div class="detail-action-buttons-div" ng-if="vm.authentication.user.type === 'admin' || vm.authentication.user.type === 'sponsor'">
 		        	<div id="addCart" class="image-left">
 		            	<button type="addButton" ng-click="addToCart()">Add to Cart</button>
 		        	</div>
 		        	<div id="delete1Cart" class="leftText" ng-if="isInCart(detailedInfo.username)">
 		        	<button type="button" ng-click="deleteFromCart()">Delete from Cart</button>
-		        </div>
-		        	<div class="image-right">	
-		        		<button type="button" ng-click="goToStudentProfile()">Go To Profile</button>
+		          <!--Add the go to profile button to all the student detailed infomation-->
+		        	<div class="image-right">
+		        		<button type="button" ng-click="goToStudentProfile()" ng-if="detailedInfo.type === 'student'">Go To Profile</button>
 		        	</div>
-	            </div>
             </div>
 	      </div>
 	    </div>

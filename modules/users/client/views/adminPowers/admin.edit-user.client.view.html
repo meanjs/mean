@@ -1,3 +1,4 @@
+<!--html doc for the admin to edit a user attibutes-->
 <section>
   <div>
     <h1 class="image-left vertical-bottom">Username: <span ng-bind="vm.user.username"></span></h1>
@@ -7,6 +8,7 @@
   </div>
   <hr width="100%">
   <div class="col-md-12">
+    <!--Call on the update function in the edit user contorller when the user submits this form-->
     <form name="userForm" ng-submit="update(userForm.$valid)" novalidate>
       <fieldset>
         <div class="form-group" show-errors>
@@ -23,6 +25,31 @@
             <p class="help-block error-text" ng-message="required">Last name is required.</p>
           </div>
         </div>
+        <!--A field for the user to add comment about the user's profile and will be displayed on the student's profile-->
+        <div class="form-group" show-errors>
+          <label for="comments">Comments</label>
+          <textarea id="comments" name="comments" class="form-control" ng-model="vm.user.comments" placeholder="Comments" style="height: 150px; margin: 1px; padding: 1px; resize: none;"></textarea>
+          <div ng-messages="userForm.comments.$error" role="alert">
+          </div>
+        </div>
+        <div class="form-group" show-errors>
+          <!--Create rabio attoms for the admin to approve or disapprove the user's bio-->
+          <form id="approvalOptions" name="approvalOptions" class="filter-form">
+            <fieldset class="filter-fieldset">
+              <legend class="filter-legend">Do you approve?</legend>
+              <div class="filter-div">
+                <!--Depending on the radio button that they push, go ot the swithcApproval function to change the attribute on the database-->
+                <input type="radio" id="yes" name= "approval" value="yes" ng-click="switchApproval()">
+                <label for="yes">Yes</label>
+              </div>
+              <div class="filter-div">
+                <input type="radio" id="no" name= "approval" value="no" ng-click="switchApproval()">
+                <label for="no">No</label>
+              </div>
+            </fieldset>
+          </form>
+        </div>
+        <!--Save the form and call the update function in the controller-->
         <div class="form-group">
           <input type="submit" value="Update" class="btn btn-default">
         </div>

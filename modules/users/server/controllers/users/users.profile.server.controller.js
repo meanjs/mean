@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * Module dependencies
+ * Module dependencies for when the user profile is edited on the client side and wants to be updated in the server and mLab
  */
 var _ = require('lodash'),
   fs = require('fs'),
@@ -16,7 +16,8 @@ var _ = require('lodash'),
   User = mongoose.model('User'),
   validator = require('validator');
 
-var whitelistedFields = ['firstName', 'lastName', 'email', 'username', 'major', 'bio', 'base64ProfileImageURL', 'availabilityStatus', 'cartData'];
+// Update the whitelsit fields every time you add a new attribute to the user schema and edit profile
+var whitelistedFields = ['firstName', 'lastName', 'email', 'username', 'major', 'bio', 'base64ProfileImageURL', 'availabilityStatus', 'teamName', 'gpa', 'graduationDate', 'comments', 'approve', 'cartData'];
 
 var useS3Storage = config.uploads.storage === 's3' && config.aws.s3;
 var s3;
@@ -201,7 +202,7 @@ exports.changeProfilePicture = function (req, res) {
 };
 
 /**
- * Send User
+ * Send User to the mLab so that it can be quickly updated on the back end
  */
 exports.me = function (req, res) {
   // Sanitize the user - short term solution. Copied from core.server.controller.js
@@ -225,6 +226,10 @@ exports.me = function (req, res) {
       graduationDate: req.user.graduationDate,
       gpa: req.user.gpa,
       base64ProfileImageURL: req.user.base64ProfileImageURL,
+      teamName: req.user.teamName,
+      availabilityStatus: req.user.availabilityStatus,
+      comments: req.user.comments,
+      approve: req.user.approve,
       cartData: req.user.cartData
     };
   }

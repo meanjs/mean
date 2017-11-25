@@ -1,3 +1,4 @@
+<!--HTML for the studnet profile page -->
 <section>
 <body class="student-profile">
   <div class=""="wrapper-student-profile">
@@ -6,39 +7,70 @@
     </div>
     <div class="main-content-student-profile">
       <div class="right-column-student-profile">
+        <!--Start out with the user name and their objective -->
         <div class="student_name-student-profile">{{vm.user.firstName}} {{vm.user.lastName}}</div>
         <div class="student-profile-h3">Objective</div>
-        <p class="student-profile-p">I am searching for an internship/co-op in the coming spring or summer semester.</p>
+          <p class="student-profile-p">I am searching for an internship/co-op in the coming spring or summer semester.</p>
         <div class="student-profile-h3">Education</div>
         <div class="box-student-profile">
           <p class="student-profile-p">University of Florida, College of Engineering</p>
           <ul class="student-profile-ul" style="margin-top:10px;">
+            <!--Display all the attributes of the user like Graduation Date and GPA -->
             <li><b>Major:</b> {{vm.user.major}}</li>
             <li><b>GPA:</b> {{vm.user.gpa}}</li>
             <li><b>Graduation Date:</b> {{vm.user.graduationDate}}</li>
             <li><b>Employment Status:</b> {{vm.user.availabilityStatus}}</li>
           </ul>
         </div>
+        <!--Display the shirt bio that the student will make -->
         <div class="student-profile-h3">Short Biography</div>
         <div class="box-student-profile">
           <p class="student-profile-p">
             {{vm.user.bio}}
           </p>
         </div>
+        <!--Dispaly the apporval status of the studnet if the user lookign is a admin or student -->
+        <div class="student-profile-h3" ng-if="vm.authentication.user.type === 'student' || vm.authentication.user.type === 'admin'">Admin Approval Status</div>
+        <div class="box-student-profile" style="margin-bottom: 20px;" ng-if="vm.authentication.user.type === 'student' || vm.authentication.user.type === 'admin'">
+          <p class="student-profile-p">
+            <p ng-if="vm.user.approve === false" style="color:red;"><b>Approval Status:</b> No</p>
+            <p ng-if="vm.user.approve === true" style="color:green;"><b>Approval Status:</b> Yes</p>
+            <p><b>Comments:</b> {{vm.user.comments}}</p>
+          </p>
+        </div>
       </div>
+      <!--Display the studnet profile on the left side -->
       <div class="left-column-student-profile">
         <div class="main-image-student-profile">
           <img ngf-src="vm.user.base64ProfileImageURL" alt="{{vm.user.displayName}}" class="img-thumbnail user-profile-picture" ngf-drop width="200px" height="200px">
         </div>
         <div class="sidebar-student-profile">
           <div>
+            <!--Buttons for the resume and short bio -->
               <a href="../../img/profile/default.png" target="_blank"><button class = "button-student-profile" target="_blank"><span>Resume</span></button></a>
               <a href="../../img/profile/default.png" target="_blank"><button class = "button-student-profile" target="_blank"><span>Short Bio</span></button></a>
-              <button class = "button-student-profile"><span>Approval Status</span></button>
-              <button class = "button-student-profile"><span>Comments</span></button>
+              <!--<button class = "button-student-profile" type="button" data-toggle="modal" data-target="#statusModal"><span>Approval Status</span></button>
+              <button class = "button-student-profile"><span>Comments</span></button>-->
           </div>
         </div>
       </div>
+      <!--Testing to see if we can make a modal for when the user clicks on the resume buttons  -->
+      <div class="modal fade" id="statusModal" role="dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Approval Status</h4>
+            </div>
+            <div class="modal-main">
+              <p ng-if="vm.user.approve === false && vm.authentication.user.type === 'admin'" style="color:red;"><b>Approval Status:</b> No</p>
+              <p ng-if="vm.user.approve === true && vm.authentication.user.type === 'admin'" style="color:green;"><b>Approval Status:</b> Yes</p>
+              <p ng-if="vm.authentication.user.type === 'admin'"><b>Comments:</b> {{vm.user.comments}}</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" data-dismiss="modal">Exit</button>
+            </div>
+          </div>
+        </div>
+
     </div>
   </div>
 </body>

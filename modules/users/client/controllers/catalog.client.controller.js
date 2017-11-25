@@ -1,3 +1,4 @@
+// Controller to change what is updates and viewed in the html when interacting with the catalog
 (function () {
   'use strict';
 
@@ -11,6 +12,7 @@
     var vm = this;
     vm.authentication = Authentication;
 
+// Defining the variable that will be changes within the controller
     $scope.detailedInfo = null;
     $scope.lastSelectedIndex = null;
     $scope.studentsList = [];
@@ -30,6 +32,7 @@
     if (vm.authentication.user === null) {
       $state.go('authentication.signin');
     }
+    // Change were the type of user goes to if they are not in the correct screen
     if (vm.authentication.user.type !== 'sponsor' && vm.authentication.user.type !== 'admin') {
       if (vm.authentication.type === 'student') {
         $state.go('profile');
@@ -38,8 +41,10 @@
       }
     }
 
+// Call the fucntion to ge tthe students in the database
     fetchStudents();
 
+// Show the edit button for the user if they are admin
     if (vm.authentication.user.type === 'admin') {
       $scope.isEditable = true;
     }
@@ -50,10 +55,12 @@
       // }, function (error) {
       //   onSponsorGetStudentsFailure(error);
       // });
+      // The then and catch function for when the sponsor and admin want to see the students in the database
       CatalogService.sponsorGetStudents().then(onSponsorGetStudentsSuccess).catch(onSponsorGetStudentsFailure);
     }
 
     function fetchSponsors() {
+      // The then and catch function for when the admin want to see the sponsors in the database
       CatalogService.adminGetSponsors().then(onAdminGetSponsorsSuccess).catch(onAdminGetSponsorsFailure);
     }
 
@@ -78,21 +85,43 @@
     };
 
     function onSponsorGetStudentsSuccess(response) {
+      // Fucntion for when the fetching was a success. An array called studentsList is created
       $scope.studentsList = response;
-      $scope.filteredStudentsList = Array.from($scope.studentsList);
-      $scope.filteredUsersList = Array.from($scope.filteredStudentsList);
-      $scope.usersList = Array.from($scope.studentsList);
+
+// If the logged in user is a sponsor then you must filter through the studentsList for approved students
+      if (vm.authentication.user.type === 'sponsor') {
+        var originalList = Array.from($scope.studentsList);
+        var approvedList = new Set();
+
+        for (var i = 0; i < originalList.length; i++) {
+          if (originalList[i].approve === (true)) {
+            approvedList.add(originalList[i]);
+          }
+        }
+        // Add all the students that are approved to the filteredStudnetsList and usersList
+        $scope.filteredStudentsList = Array.from(approvedList);
+        $scope.filteredUsersList = Array.from($scope.filteredStudentsList);
+        $scope.usersList = Array.from(approvedList);
+      }
+
+// If the logged in user is a admin then jsut add all the students from the database to the usersList
       if (vm.authentication.user.type === 'admin') {
+        $scope.filteredStudentsList = Array.from($scope.studentsList);
+        $scope.filteredUsersList = Array.from($scope.filteredStudentsList);
+        $scope.usersList = Array.from($scope.studentsList);
         fetchSponsors();
       }
     }
 
+// Set the studnetList to null if the fetching was unsucessful
     function onSponsorGetStudentsFailure(response) {
       $scope.studentsList = null;
       $scope.filteredStudentsList = null;
     }
 
+// Fucntion for when the admin wants to fetch sponsors was a success
     function onAdminGetSponsorsSuccess(response) {
+      // add all the user with a type sponsors to the userList for the admin
       $scope.sponsorsList = response;
       $scope.filteredSponsorsList = Array.from($scope.sponsorsList);
       $scope.usersList = $scope.studentsList.concat($scope.sponsorsList);
@@ -104,6 +133,7 @@
       $scope.filteredSponsorsList = null;
     }
 
+// Function for when the admin clicked on the edit button so they can go edit and approve of users.
     $scope.editClicked = function (user) {
       if (vm.authentication.user.type === 'admin') {
         var username = user.username;
@@ -112,6 +142,7 @@
       }
     };
 
+// Fucntion for when the user clicked on go to the studnt profile so they cna see the students profile page.
     $scope.goToStudentProfile = function () {
       if (vm.authentication.user.type === 'admin' || vm.authentication.user.type === 'sponsor') {
         var username = $scope.filteredUsersList[$scope.lastSelectedIndex].username;
@@ -120,6 +151,7 @@
       }
     };
 
+// Functio for when the admin or sponsor wants to email a certain user
     $scope.emailUser = function (user) {
       window.location.href = 'mailto:' + user.email;
     };
@@ -161,6 +193,7 @@
       $scope.filteredUsersList = (didFilter) ? Array.from(filteredSet) : originalList;
     };
 
+// Fucntion for the search dar that allows the user to filter through the database depending on the major, availablity and type of user
     function filterOnName(name, originalList, filteredSet, firstFilter) {
       var currentFilteredSet = new Set();
 
@@ -204,7 +237,7 @@
 
     }
 
-    // filter the current list
+    // Function that allows you to filter thorugh the current lsit that is dispalyed
     $scope.filterData = function () {
       var originalList = Array.from($scope.usersList);
       var filteredSet = new Set();

@@ -1,8 +1,10 @@
+<!--HTML for when the student wants to edit their profile with all of the infomation -->
 <section class="row">
   <div class="col-xs-offset-1 col-xs-10 col-md-offset-3 col-md-4">
     <form class="signin">
       <fieldset>
         <div class="form-group text-center">
+          <!--HTML to upload a profile pic to the database -->
           <img ngf-src="vm.fileSelected ? picFile : vm.user.profileImageURL" alt="{{vm.user.displayName}}" class="img-thumbnail user-profile-picture" ngf-drop>
         </div>
         <div ng-show="vm.loading" class="form-group text-center">
@@ -24,6 +26,8 @@
     </form>
   </div>
   <div class="col-xs-offset-1 col-xs-10 col-md-offset-4 col-md-4">
+    <!--Form to update the user profile and when submitting go to the updateUserProfile in the controller side -->
+    <!--Look through the html and see the differnet attributes that the student can edit. -->
     <form name="vm.userForm" ng-submit="vm.updateUserProfile(vm.userForm.$valid)" class="signin" novalidate autocomplete="off">
       <fieldset>
         <div class="form-group" show-errors>
@@ -57,7 +61,7 @@
         </div>
         <div class="form-group" show-errors>
           <label for="bio">Short Bio</label>
-          <input type="text" id="bio" name="bio" class="form-control" ng-model="vm.user.bio" placeholder="Short Bio" required>
+          <textarea type="text" id="bio" name="bio" class="form-control" ng-model="vm.user.bio" placeholder="Short Bio" required style="height: 150px; margin: 1px; padding: 1px; resize: none;"></textarea>
           <div ng-messages="vm.userForm.bio.$error" role="alert">
             <p class="help-block error-text" ng-message="required">Bio is required.</p>
           </div>
@@ -83,8 +87,23 @@
             <p class="help-block error-text" ng-message="required">Team Name is required.</p>
           </div>
         </div>
+        <div class="form-group" show-errors>
+          <label for="gpa">GPA</label>
+          <input type="text" id="gpa" name="gpa" class="form-control" ng-model="vm.user.gpa" placeholder="GPA" required>
+          <div ng-messages="vm.userForm.gpa.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">GPA is required.</p>
+          </div>
+        </div>
+        <div class="form-group" show-errors>
+          <label for="graduationDate">Graduation Date</label>
+          <input type="text" id="graduationDate" name="graduationDate" class="form-control" ng-model="vm.user.graduationDate" placeholder="Graduation Date" required>
+          <div ng-messages="vm.userForm.graduationDate.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Graduation Date is required.</p>
+          </div>
+        </div>
         <div class="text-center form-group">
           <button type="submit" class="btn btn-primary">Save Profile</button>
+          <!--When submitted, the approval status will go back ot false so that the admin can check if the edits are fine -->
         </div>
       </fieldset>
     </form>

@@ -1,3 +1,4 @@
+// Controller for when admin addes new users ot the databases
 (function () {
   'use strict';
 
@@ -13,16 +14,13 @@
     vm.authentication = Authentication;
     vm.getPopoverMsg = PasswordValidator.getPopoverMsg;
 
+// Defines the variables that will go in to the user schema
     $scope.usernameRegex = /^(?=[\w.-]+$)(?!.*[._-]{2})(?!\.)(?!.*\.$).{3,34}$/;
     $scope.newFirstName = null;
     $scope.newLastName = null;
     $scope.newEmail = null;
     $scope.newUsername = null;
     $scope.newPassword = null;
-    $scope.newBio = null;
-    $scope.newMajor = null;
-    $scope.newAvailability = null;
-    $scope.newTeam = null;
     $scope.isStudentRole = true;
     $scope.isSponsorRole = false;
     $scope.isAdminRole = false;
@@ -59,10 +57,6 @@
         email: $scope.newEmail,
         username: $scope.newUsername,
         password: $scope.newPassword,
-        bio: $scope.newBio,
-        major: $scope.newMajor,
-        availabilityStatus: $scope.newAvailability,
-        teamName: $scope.newTeam,
         type: userType
       };
 
@@ -82,16 +76,13 @@
       $scope.newEmail = null;
       $scope.newUsername = null;
       $scope.newPassword = null;
-      $scope.newBio = null;
-      $scope.newMajor = null;
-      $scope.newAvailability = null;
-      $scope.newTeam = null;
     }
 
     function onUserSignupError(response) {
       Notification.error({ message: response.data.message, title: '<i class="glyphicon glyphicon-remove"></i> Signup Error!', delay: 6000 });
     }
 
+// Function that changes the type of user the added user will be depending on the chekced box in the html
     $scope.switchRoles = function () {
       var studentRole = document.getElementById('studentRole');
       var sponsorRole = document.getElementById('sponsorRole');
