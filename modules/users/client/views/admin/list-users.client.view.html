@@ -4,11 +4,11 @@
       <div class="col-xs-4">
         <h1 id="users-header" class="users-header-item">Users</h1>
       </div>
-      <div id="users-nav-buttons" class="col-xs-12 col-sm-6 pull-right">
+      <div id="users-nav-buttons" class="col-xs-12 col-sm-8 pull-right">
         <a id="add-user-btn" class="btn btn-primary users-header-item" ui-sref="admin.add-user">
           Add New User
         </a>
-        <a ng-if="vm.countApplicants() > 0" class="btn btn-primary" ui-sref="admin.user-view-applicants">
+        <a id="view-applicants-btn" class="btn btn-primary users-header-item" ui-sref="admin.user-view-applicants">
           View Pending Applicants ({{ vm.countApplicants() }})
         </a>
       </div>

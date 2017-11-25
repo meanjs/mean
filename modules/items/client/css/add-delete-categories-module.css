@@ -12,3 +12,7 @@
     float: right;
     margin-top: 21px;
 }
+
+.categories-table, .modules-table {
+    border: 1.5px solid #222 !important;
+}
