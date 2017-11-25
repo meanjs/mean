@@ -13,6 +13,10 @@
       update: {
         method: 'PUT'
       },
+      me: {
+        method: 'GET',
+        url: '/api/users/me'
+      },
       updatePassword: {
         method: 'POST',
         url: '/api/users/password'
@@ -43,6 +47,9 @@
     });
 
     angular.extend(Users, {
+      getMe: function () {
+        return this.me().$promise;
+      },
       changePassword: function (passwordDetails) {
         return this.updatePassword(passwordDetails).$promise;
       },
@@ -85,6 +92,30 @@
         method: 'PUT'
       }
     });
+  }
+
+  // TODO this should be Users service
+  angular
+    .module('users.services')
+    .factory('ProfileService', ProfileService);
+
+  ProfileService.$inject = ['$resource'];
+
+  function ProfileService($resource) {
+    var Profile = $resource('/api/profile', {}, {
+      profileWithUsername: {
+        method: 'GET',
+        url: '/api/profile/:username'
+      }
+    });
+
+    angular.extend(Profile, {
+      getProfileWithUsername: function (username) {
+        return this.profileWithUsername({ username: username }).$promise;
+      }
+    });
+
+    return Profile;
   }
 
   angular

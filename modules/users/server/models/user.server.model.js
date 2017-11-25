@@ -81,23 +81,28 @@ var UserSchema = new Schema({
   },
   bio: {
     type: String,
-    trim: true
+    trim: true,
+    default: ''
   },
   major: {
     type: String,
-    trim: true
+    trim: true,
+    default: ''
   },
   availabilityStatus: {
     type: String,
-    trim: true
+    trim: true,
+    default: ''
   },
   teamName: {
     type: String,
-    trim: true
+    trim: true,
+    default: ''
   },
   type: {
     type: String,
-    trim: true
+    trim: true,
+    default: 'student'
   },
   username: {
     type: String,
@@ -115,6 +120,10 @@ var UserSchema = new Schema({
     type: String
   },
   profileImageURL: {
+    type: String,
+    default: '/modules/users/client/img/profile/default.png'
+  },
+  base64ProfileImageURL: {
     type: String,
     default: '/modules/users/client/img/profile/default.png'
   },

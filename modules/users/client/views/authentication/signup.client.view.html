@@ -66,9 +66,10 @@
             </fieldset>
           </form>
         </div>
+        <div class="text-center form-group signup-checkbox-div">
+          <input type="checkbox" name="checkbox" value="check"><span> Check this box to confirm.</span>
+        </div>
         <div class="text-center form-group">
-          <input type="checkbox" name="checkbox" value="check"><span>Check this box to confirm.</span>
-          <br>
           <button type="submit" class="btn btn-primary" onclick="if(!this.form.checkbox.checked){alert('You must confirm first.');return false}"  />Sign up</button>
         </div>
       </fieldset>

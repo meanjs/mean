@@ -45,7 +45,6 @@
 }
 
 .sidebar-student-profile {
-  background:url('http://img404.imageshack.us/img404/3092/shadowh.jpg') no-repeat top;
   margin:0 auto;
   width:100%;
 }
@@ -196,16 +195,14 @@
 
 /* Modal Content */
 .modal-content-student-profile {
-  animation-duration: 0.4s;
-  animation-name: animatetop;
   background-color: white;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
   margin: auto;
   padding: 0;
   position: relative;
-  width: 80%;
   -o-webkit-animation-duration: 0.4s;
   -o-webkit-animation-name: animatetop;
+  width: 80%;
 }
 
 /* Add Animation */

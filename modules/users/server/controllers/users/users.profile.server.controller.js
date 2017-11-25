@@ -16,7 +16,7 @@ var _ = require('lodash'),
   User = mongoose.model('User'),
   validator = require('validator');
 
-var whitelistedFields = ['firstName', 'lastName', 'email', 'username', 'cartData'];
+var whitelistedFields = ['firstName', 'lastName', 'email', 'username', 'major', 'bio', 'base64ProfileImageURL', 'availabilityStatus', 'cartData'];
 
 var useS3Storage = config.uploads.storage === 's3' && config.aws.s3;
 var s3;
@@ -223,7 +223,8 @@ exports.me = function (req, res) {
       major: req.user.major,
       bio: req.user.bio,
       graduationDate: req.user.graduationDate,
-      gpa: req.user.gpa
+      gpa: req.user.gpa,
+      base64ProfileImageURL: req.user.base64ProfileImageURL
     };
   }
 

@@ -5,13 +5,14 @@
     .module('users')
     .controller('CatalogController', CatalogController);
 
-  CatalogController.$inject = ['$scope', '$state', 'UsersService', 'CatalogService', 'Notification', '$window', 'Authentication'];
+  CatalogController.$inject = ['$scope', '$state', 'UsersService', 'CatalogService', 'Notification', '$window', 'Authentication', '$timeout'];
 
-  function CatalogController($scope, $state, UsersService, CatalogService, Notification, $window, Authentication) {
+  function CatalogController($scope, $state, UsersService, CatalogService, Notification, $window, Authentication, $timeout) {
     var vm = this;
     vm.authentication = Authentication;
 
     $scope.detailedInfo = null;
+    $scope.lastSelectedIndex = null;
     $scope.studentsList = [];
     $scope.filteredStudentsList = [];
     $scope.sponsorsList = [];
@@ -41,7 +42,6 @@
     fetchStudents();
 
     if (vm.authentication.user.type === 'admin') {
-      fetchSponsors();
       $scope.isEditable = true;
     }
 
@@ -60,6 +60,7 @@
 
     $scope.showDetails = function (index) {
       $scope.detailedInfo = $scope.filteredUsersList[index];
+      $scope.lastSelectedIndex = index;
     };
 
     function onSponsorGetStudentsSuccess(response) {
@@ -68,8 +69,7 @@
       $scope.filteredUsersList = Array.from($scope.filteredStudentsList);
       $scope.usersList = Array.from($scope.studentsList);
       if (vm.authentication.user.type === 'admin') {
-        $scope.usersList = $scope.studentsList.concat($scope.sponsorsList);
-        $scope.filteredUsersList = $scope.filteredStudentsList.concat($scope.filteredSponsorsList);
+        fetchSponsors();
       }
     }
 
@@ -92,8 +92,17 @@
 
     $scope.editClicked = function (user) {
       if (vm.authentication.user.type === 'admin') {
-        $state.go('edit_user', { user: user });
-        // $state.go('admin.user-edit');
+        var username = user.username;
+        var stateName = 'edit_user?username=' + username;
+        var myWindow = window.open(stateName, '_self');
+      }
+    };
+
+    $scope.goToStudentProfile = function () {
+      if (vm.authentication.user.type === 'admin' || vm.authentication.user.type === 'sponsor') {
+        var username = $scope.filteredUsersList[$scope.lastSelectedIndex].username;
+        var stateName = 'student_profile?username=' + username;
+        var myWindow = window.open(stateName, '_blank');
       }
     };
 
@@ -230,7 +239,6 @@
     };
     function updateSponsorCart() {
       var user = new UsersService(vm.authentication.user);
-
       user.$update(function (response) {
 
         Notification.success({ message: '<i class="glyphicon glyphicon-ok"></i> Cart save successful!' });
@@ -239,9 +247,10 @@
         Notification.error({ message: response.data.message, title: '<i class="glyphicon glyphicon-remove"></i> Cart save failed!' });
       });
     }
-    $scope.isInCart = function (A, B) {
+    $scope.isInCart = function (B) {
+      console.log(vm.authentication.user);
       if (vm.authentication.user.cartData !== undefined) {
-        if (A.indexOf(B) === -1) {
+        if (vm.authentication.user.cartData.indexOf(B) === -1) {
           return false;
         } else {
           return true;
@@ -249,20 +258,34 @@
       }
     };
     $scope.toggleCartTable = function () {
+      if (vm.authentication.user.cartData === undefined || vm.authentication.user.cartData === null) {
+        vm.authentication.user.cartData = [];
+      }
       updateSponsorCart();
-      $scope.filteredUsersList = Array.from(vm.authentication.user.cartData);
-      $scope.$apply();
+      $timeout(function () {
+        var originalList = Array.from($scope.usersList);
+        var filteredSet = new Set();
+        for (var i = 0; i < originalList.length; i++) {
+          if (originalList[i].username !== null && originalList[i].username !== undefined) {
+            var username = originalList[i].username;
+            if ($scope.isInCart(username)) {
+              filteredSet.add(originalList[i]);
+            }
+          }
+        }
+        $scope.filteredUsersList = Array.from(filteredSet);
+      });
     };
     $scope.addToCart = function () {
       if (vm.authentication.user.cartData === undefined || vm.authentication.user.cartData === null) {
         vm.authentication.user.cartData = [];
       }
-      if ($scope.isInCart(vm.authentication.user.cartData, $scope.detailedInfo) === false) {
-        vm.authentication.user.cartData.push($scope.detailedInfo);
+      if ($scope.isInCart($scope.detailedInfo.username) === false) {
+        vm.authentication.user.cartData.push($scope.detailedInfo.username);
       }
     };
     $scope.deleteFromCart = function () {
-      var index = vm.authentication.user.cartData.indexOf($scope.detailedInfo);
+      var index = vm.authentication.user.cartData.indexOf($scope.detailedInfo.username);
       if (index !== -1) {
         vm.authentication.user.cartData.splice(index, 1);
       }
