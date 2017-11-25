@@ -5,13 +5,16 @@
     .module('users')
     .controller('AddUserController', AddUserController);
 
-  AddUserController.$inject = ['$scope', '$state', 'UsersService', '$location', '$window', 'Notification', 'ApplicantsService'];
+  AddUserController.$inject = ['$scope', '$state', 'UsersService', '$location', '$window', 'Notification', 'ApplicantsService', 'AdminModulesService'];
 
-  function AddUserController($scope, $state, UsersService, $location, $window, Notification, ApplicantsService) {
+  function AddUserController($scope, $state, UsersService, $location, $window, Notification, ApplicantsService, AdminModulesService) {
     var vm = this;
 
     vm.signup = signup;
     vm.usernameRegex = /^(?=[\w.-]+$)(?!.*[._-]{2})(?!\.)(?!.*\.$).{3,34}$/;
+    vm.modifyTAModules = modifyTAModules;
+    vm.modulesTA = [];
+    $scope.modules = AdminModulesService.query();
 
     function signup(isValid) {
 
@@ -22,6 +25,7 @@
       }
 
       vm.credentials.roles = alterRole(vm.credentials.roles);
+      vm.credentials.modulesTaught = vm.modulesTA;
 
       ApplicantsService.adminSignup(vm.credentials)
         .then(onAddUserSuccess)
@@ -44,6 +48,17 @@
         return 'superta';
       else
         return role;
+    }
+
+    function modifyTAModules(module, checked){
+      if(checked){
+        vm.modulesTA.push(module.title);
+      }
+      else{
+        var index = vm.modulesTA.indexOf(module.title);
+        if(index > -1)
+          vm.modulesTA.splice(index, 1);
+      }
     }
 
   }

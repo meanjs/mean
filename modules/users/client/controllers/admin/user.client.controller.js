@@ -5,9 +5,9 @@
     .module('users.admin')
     .controller('UserController', UserController);
 
-  UserController.$inject = ['$scope', '$state', '$window', 'Authentication', 'userResolve', 'Notification'];
+  UserController.$inject = ['$scope', '$state', '$window', 'Authentication', 'userResolve', 'Notification', 'AdminModulesService'];
 
-  function UserController($scope, $state, $window, Authentication, user, Notification) {
+  function UserController($scope, $state, $window, Authentication, user, Notification, AdminModulesService) {
     var vm = this;
 
     vm.authentication = Authentication;
@@ -16,8 +16,11 @@
     vm.update = update;
     vm.changeRole = changeRole;
     vm.isContextUserSelf = isContextUserSelf;
+    vm.modifyTAModules = modifyTAModules;
     vm.role = null;
+    vm.modulesTA = [];
 
+    $scope.modules = AdminModulesService.query();
     $scope.roleOptions = [{
       id: 'ta', //Name will be displayed in the html, id will be used on the database.
       name: 'TA'
@@ -60,6 +63,7 @@
       }
       var user = vm.user;
       user.roles = vm.role;
+      user.modulesTaught = vm.modulesTA;
 
       user.$update(function () {
         $state.go('admin.user', {
@@ -73,6 +77,17 @@
 
     function changeRole(roleChange) {
       vm.role = roleChange.id;
+    }
+
+    function modifyTAModules(module, checked) {
+      if(checked) {
+        vm.modulesTA.push(module.title);
+      }
+      else {
+        var index = vm.modulesTA.indexOf(module.title);
+        if(index > -1)
+          vm.modulesTA.splice(index, 1);
+      }
     }
 
     function isContextUserSelf() {

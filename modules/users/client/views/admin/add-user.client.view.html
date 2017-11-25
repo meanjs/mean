@@ -25,7 +25,7 @@
             <p class="help-block error-text" ng-message="email">Email address is invalid.</p>
           </div>
         </div>
-        
+
         <div class="form-group" show-errors>
           <label for="roles">Role</label>
           <select name="roles" id="roles" name="roles" class="form-control" ng-model="vm.credentials.roles" placeholder="TA" required>
@@ -37,6 +37,17 @@
           <div ng-messages="vm.userForm.roles.$error" role="alert">
             <p class="help-block error-text" ng-message="required">Role is required.</p>
           </div>
+        </div>
+
+        <div class="form-group" ng-if="vm.credentials.roles == 'ta' || vm.credentials.roles == 'superta'">
+          <label for="modules">Modules Taught</label>
+          <div ng-repeat="module in modules">
+            <label>
+              <input type="checkbox" name="{{module.title}}" ng-model="isChecked" ng-click="vm.modifyTAModules(module, isChecked)"> {{ module.title }}
+            </label>
+          </div>
+        </div>
+
         <div class="form-group" show-errors>
           <label for="username">Username</label>
           <input type="text" id="username" name="username" class="form-control" ng-model="vm.credentials.username" ng-pattern="vm.usernameRegex" placeholder="Username" lowercase required>
@@ -45,7 +56,7 @@
             <p class="help-block error-text" ng-message="pattern">Please enter a valid username: 3+ characters long, non restricted word, characters "_-.", no consecutive dots, does not begin or end with dots, letters a-z and numbers 0-9.</p>
           </div>
         </div>
-        
+
         <div class="text-center form-group">
           <button type="submit" class="btn btn-primary">Submit</button>
           &nbsp;
