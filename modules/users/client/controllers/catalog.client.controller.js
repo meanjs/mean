@@ -6,9 +6,9 @@
     .module('users')
     .controller('CatalogController', CatalogController);
 
-  CatalogController.$inject = ['$scope', '$state', 'UsersService', 'CatalogService', 'Notification', '$window', 'Authentication'];
+  CatalogController.$inject = ['$scope', '$state', 'UsersService', 'CatalogService', 'Notification', '$window', 'Authentication', '$timeout'];
 
-  function CatalogController($scope, $state, UsersService, CatalogService, Notification, $window, Authentication) {
+  function CatalogController($scope, $state, UsersService, CatalogService, Notification, $window, Authentication, $timeout) {
     var vm = this;
     vm.authentication = Authentication;
 
@@ -62,6 +62,21 @@
     function fetchSponsors() {
       // The then and catch function for when the admin want to see the sponsors in the database
       CatalogService.adminGetSponsors().then(onAdminGetSponsorsSuccess).catch(onAdminGetSponsorsFailure);
+    }
+
+    // For some reason it defaults to only a few variables on refresh so refetch self
+    getSelf();
+
+    function getSelf() {
+      UsersService.getMe().then(onGetMeSuccess).catch(onGetMeFailure);
+    }
+
+    function onGetMeSuccess(response) {
+      vm.authentication.user = response;
+    }
+
+    function onGetMeFailure(response) {
+      Notification.error({ message: 'Could not load your profile fully' });
     }
 
     $scope.showDetails = function (index) {
@@ -267,6 +282,58 @@
         }
 
         $scope.filteredUsersList = Array.from(filteredSet);
+      }
+    };
+    function updateSponsorCart() {
+      var user = new UsersService(vm.authentication.user);
+      user.$update(function (response) {
+
+        Notification.success({ message: '<i class="glyphicon glyphicon-ok"></i> Cart save successful!' });
+        Authentication.user = response;
+      }, function (response) {
+        Notification.error({ message: response.data.message, title: '<i class="glyphicon glyphicon-remove"></i> Cart save failed!' });
+      });
+    }
+    $scope.isInCart = function (B) {
+      if (vm.authentication.user.cartData !== undefined) {
+        if (vm.authentication.user.cartData.indexOf(B) === -1) {
+          return false;
+        } else {
+          return true;
+        }
+      }
+    };
+    $scope.toggleCartTable = function () {
+      if (vm.authentication.user.cartData === undefined || vm.authentication.user.cartData === null) {
+        vm.authentication.user.cartData = [];
+      }
+      updateSponsorCart();
+      $timeout(function () {
+        var originalList = Array.from($scope.usersList);
+        var filteredSet = new Set();
+        for (var i = 0; i < originalList.length; i++) {
+          if (originalList[i].username !== null && originalList[i].username !== undefined) {
+            var username = originalList[i].username;
+            if ($scope.isInCart(username)) {
+              filteredSet.add(originalList[i]);
+            }
+          }
+        }
+        $scope.filteredUsersList = Array.from(filteredSet);
+      });
+    };
+    $scope.addToCart = function () {
+      if (vm.authentication.user.cartData === undefined || vm.authentication.user.cartData === null) {
+        vm.authentication.user.cartData = [];
+      }
+      if ($scope.isInCart($scope.detailedInfo.username) === false) {
+        vm.authentication.user.cartData.push($scope.detailedInfo.username);
+      }
+    };
+    $scope.deleteFromCart = function () {
+      var index = vm.authentication.user.cartData.indexOf($scope.detailedInfo.username);
+      if (index !== -1) {
+        vm.authentication.user.cartData.splice(index, 1);
       }
     };
   }

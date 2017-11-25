@@ -17,7 +17,7 @@ var _ = require('lodash'),
   validator = require('validator');
 
 // Update the whitelsit fields every time you add a new attribute to the user schema and edit profile
-var whitelistedFields = ['firstName', 'lastName', 'email', 'username', 'major', 'bio', 'base64ProfileImageURL', 'availabilityStatus', 'teamName', 'gpa', 'graduationDate', 'comments', 'approve'];
+var whitelistedFields = ['firstName', 'lastName', 'email', 'username', 'major', 'bio', 'base64ProfileImageURL', 'availabilityStatus', 'teamName', 'gpa', 'graduationDate', 'comments', 'approve', 'cartData'];
 
 var useS3Storage = config.uploads.storage === 's3' && config.aws.s3;
 var s3;
@@ -229,7 +229,8 @@ exports.me = function (req, res) {
       teamName: req.user.teamName,
       availabilityStatus: req.user.availabilityStatus,
       comments: req.user.comments,
-      approve: req.user.approve
+      approve: req.user.approve,
+      cartData: req.user.cartData
     };
   }
 

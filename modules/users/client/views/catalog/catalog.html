@@ -4,16 +4,16 @@
 	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 	</head>
 	<div class="container">
-	  <div class="row">
-	  	<div class="col-md-6 headers">
-				<!--Create the headers on the right side like the title and the cart-->
-	  		<h1 class="catalog-title image-left">Resume Portal</h1>
-	  		<h4 id="cart" class="image-right vertical-bottom">
-		    	<i class="glyphicon glyphicon-shopping-cart cart"></i><i>Cart</i>
-		    </h4>
-	  	</div>
-	  </div>
-	  <div class="row" ng-controller="CatalogController">
+    <div class="row">
+      <div class="col-md-6 headers">
+        <!--Create the headers on the right side like the title and the cart-->
+        <h1 class="catalog-title image-left">Resume Portal</h1>
+        <h4 id="cart" class="image-right vertical-bottom">
+          <button type="button" ng-click = "toggleCartTable()">
+            <i class="glyphicon glyphicon-shopping-cart cart"></i><i>Cart</i>
+          </button>
+        </h4>
+      </div>
 	    <div class="col-md-6">
 				<!--Crate the search bar feature that will allow user sto search the students-->
 	      	<div class="input-group catalog-search" id="searchBar">
@@ -120,13 +120,14 @@
 							<!--If the user is a admin or sponser than add the cart button-->
 	            <div class="detail-action-buttons-div" ng-if="vm.authentication.user.type === 'admin' || vm.authentication.user.type === 'sponsor'">
 		        	<div id="addCart" class="image-left">
-		            	<button type="addButton">Add to Cart</button>
+		            	<button type="addButton" ng-click="addToCart()">Add to Cart</button>
 		        	</div>
-							<!--Add the go to profile button to all the student detailed infomation-->
+		        	<div id="delete1Cart" class="leftText" ng-if="isInCart(detailedInfo.username)">
+		        	<button type="button" ng-click="deleteFromCart()">Delete from Cart</button>
+		          <!--Add the go to profile button to all the student detailed infomation-->
 		        	<div class="image-right">
 		        		<button type="button" ng-click="goToStudentProfile()" ng-if="detailedInfo.type === 'student'">Go To Profile</button>
 		        	</div>
-	            </div>
             </div>
 	      </div>
 	    </div>
