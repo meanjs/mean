@@ -15,6 +15,7 @@
     vm.modifyTAModules = modifyTAModules;
     vm.modulesTA = [];
     $scope.modules = AdminModulesService.query();
+    
 
     // Update a user profile
     function updateUserProfile(isValid) {
@@ -29,7 +30,7 @@
 
       user.$update(function (response) {
         $scope.$broadcast('show-errors-reset', 'vm.userForm');
-
+        user.modulesTaught = vm.modulesTA;
         Notification.success({ message: '<i class="glyphicon glyphicon-ok"></i> Edit profile successful!' });
         Authentication.user = response;
       }, function (response) {
@@ -39,7 +40,11 @@
 
     function modifyTAModules(module, checked) {
            if(checked) {
-             vm.modulesTA.push(module.title);
+              vm.modulesTA.push(module.title);
+           } else {
+              var index = vm.modulesTA.indexOf(module.title);
+            if(index > -1)
+              vm.modulesTA.splice(index, 1);
            }
     }
   }

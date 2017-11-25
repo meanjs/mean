@@ -82,8 +82,7 @@
     function modifyTAModules(module, checked) {
       if(checked) {
         vm.modulesTA.push(module.title);
-      }
-      else {
+      } else {
         var index = vm.modulesTA.indexOf(module.title);
         if(index > -1)
           vm.modulesTA.splice(index, 1);
