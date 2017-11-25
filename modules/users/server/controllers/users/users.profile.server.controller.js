@@ -224,7 +224,8 @@ exports.me = function (req, res) {
       bio: req.user.bio,
       graduationDate: req.user.graduationDate,
       gpa: req.user.gpa,
-      base64ProfileImageURL: req.user.base64ProfileImageURL
+      base64ProfileImageURL: req.user.base64ProfileImageURL,
+      cartData: req.user.cartData
     };
   }
 

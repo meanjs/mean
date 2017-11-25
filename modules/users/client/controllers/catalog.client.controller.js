@@ -26,7 +26,6 @@
     $scope.csOption = false;
     $scope.sponsorOption = false;
     $scope.studentOption = false;
-    $scope.cartList = [];
 
     if (vm.authentication.user === null) {
       $state.go('authentication.signin');
@@ -56,6 +55,21 @@
 
     function fetchSponsors() {
       CatalogService.adminGetSponsors().then(onAdminGetSponsorsSuccess).catch(onAdminGetSponsorsFailure);
+    }
+
+    // For some reason it defaults to only a few variables on refresh so refetch self
+    getSelf();
+
+    function getSelf() {
+      UsersService.getMe().then(onGetMeSuccess).catch(onGetMeFailure);
+    }
+
+    function onGetMeSuccess(response) {
+      vm.authentication.user = response;
+    }
+
+    function onGetMeFailure(response) {
+      Notification.error({ message: 'Could not load your profile fully' });
     }
 
     $scope.showDetails = function (index) {
@@ -248,7 +262,6 @@
       });
     }
     $scope.isInCart = function (B) {
-      console.log(vm.authentication.user);
       if (vm.authentication.user.cartData !== undefined) {
         if (vm.authentication.user.cartData.indexOf(B) === -1) {
           return false;
