@@ -41,7 +41,7 @@ let Mailer = new function() {
 						'Username: ' + username + '\n' +
 						'Password: ' + tempPWord + '\n'
 		};
-		tempPWord = "";//Infosec reasons
+		tempPWord = '';//Infosec reasons
 		transporter.sendMail(mailOptions, (error, info) => {
 			if (error) {
 				return console.log(error);

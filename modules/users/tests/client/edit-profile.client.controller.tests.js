@@ -54,7 +54,7 @@
       // Ignore parent template gets on state transition
       $httpBackend.whenGET('/modules/core/client/views/home.client.view.html').respond(200);
       $httpBackend.whenGET('/modules/core/client/views/400.client.view.html').respond(200);
-
+      $httpBackend.whenGET('/api/modules').respond(200);
       // Mock logged in user
       Authentication.user = {
         _id: '525a8422f6d0f87f0e407a33',

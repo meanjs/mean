@@ -111,7 +111,7 @@
         mockUserList = [mockUser, mockUser];
         //expect the get request before each of these
         $httpBackend.expectGET('/api/unapproved').respond(mockUserList);
-        $httpBackend.flush()
+        $httpBackend.flush();
 
       });
 
@@ -141,7 +141,7 @@
         mockUserList = [mockUser, mockUser];
         //expect the get request before each of these
         $httpBackend.expectGET('/api/unapproved').respond(mockUserList);
-        $httpBackend.flush()
+        $httpBackend.flush();
 
       });
 

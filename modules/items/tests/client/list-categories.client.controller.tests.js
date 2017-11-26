@@ -102,7 +102,7 @@
         mockCatList = [mockCat, mockCat];
         //expect the get request before each of these
         $httpBackend.expectGET('/api/categories').respond(mockCatList);
-        $httpBackend.flush()
+        $httpBackend.flush();
 
       });
 

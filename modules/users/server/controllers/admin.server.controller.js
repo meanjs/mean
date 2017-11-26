@@ -48,39 +48,39 @@ exports.adminsignup = function (req, res) {
   user.provider = 'local';
   user.approvedStatus = true;
   user.modulesTaught = req.body.modulesTaught;
-  var genHexPassword = function(length){
-        var str="Pa";
-        for(var i=0; i<length; i++){
-          var toAdd = Math.floor(Math.random()*16.0);
-          if(toAdd < 10){
-            str+=toAdd;  
+  var genHexPassword = function (length) {
+        var str = 'Pa';
+        for(var i = 0; i < length; i++) {
+          var toAdd = Math.floor(Math.random() * 16.0);
+          if(toAdd < 10) {
+            str += toAdd;  
           }
-          if(toAdd == 10){
-            str+="A"; 
+          if(toAdd == 10) {
+            str += 'A'; 
           }
-          if(toAdd == 11){
-            str+="B"; 
+          if(toAdd == 11) {
+            str += 'B'; 
           }
-          if(toAdd == 12){
-            str+="C"; 
+          if(toAdd == 12) {
+            str += 'C'; 
           }
-          if(toAdd == 13){
-            str+="D"; 
+          if(toAdd == 13) {
+            str += 'D'; 
           }
-          if(toAdd == 14){
-            str+="E"; 
+          if(toAdd == 14) {
+            str += 'E'; 
           }
-          if(toAdd == 15){
-            str+="F"; 
+          if(toAdd == 15) {
+            str += 'F'; 
           }
         }
-        return str+"!";
+        return str + '!';
   };
   var tempUnhashed = genHexPassword(7);
   user.password = tempUnhashed;
   user.save(function (err) {
     if (err) {
-      tempUnhashed="";
+      tempUnhashed = '';
       return res.status(422).send({
         message: errorHandler.getErrorMessage(err)
       });
@@ -88,12 +88,10 @@ exports.adminsignup = function (req, res) {
       // Remove sensitive data before login
       res.status(200).send();
       mailer.sendCreation(user.email, user.firstName, user.username, tempUnhashed);
-      tempUnhashed="";
+      tempUnhashed = '';
     }
   });
 };
-
-
 
 /**
  * Delete a user

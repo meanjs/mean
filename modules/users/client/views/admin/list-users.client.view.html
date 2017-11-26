@@ -27,9 +27,9 @@
           <h4 class="list-group-item-heading">{{user.firstName}} {{user.lastName}}</h4>
           <p class="list-group-item-text pull-right small"> {{vm.modifyRoles(user)}}</p>
           <p class="list-group-item-text" ng-bind="user.email"></p>
-          <div class="list-group-item-text" ng-if="user.roles == 'ta' || user.roles == 'superta'">
-            <strong>Modules:</strong>
-            <span ng-repeat="module in user.modulesTaught">  {{ module }}  </span>
+          <div class="list-group-item-text" ng-if="user.modulesTaught.length">
+            <strong>Modules taught:</strong>
+            <span ng-repeat="module in user.modulesTaught">  {{ module }}{{$last ? '' : ', '}}  </span>
           </div>
         </a>
       </div>

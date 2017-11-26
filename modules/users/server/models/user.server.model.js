@@ -308,11 +308,9 @@ function seed(doc, options) {
 
             user.provider = 'local';
             user.displayName = user.firstName + ' ' + user.lastName;
-            if (user.username == 'seedadmintest')
-            {
+            if (user.username == 'seedadmintest') {
               user.password = 'P@$$w0rd!!';
-            }
-            else{
+            } else {
               user.password = passphrase;
             }
 

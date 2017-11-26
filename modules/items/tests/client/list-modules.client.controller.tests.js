@@ -102,7 +102,7 @@
         mockModList = [mockMod, mockMod];
         //expect the get request before each of these
         $httpBackend.expectGET('/api/modules').respond(mockModList);
-        $httpBackend.flush()
+        $httpBackend.flush();
 
       });
 
