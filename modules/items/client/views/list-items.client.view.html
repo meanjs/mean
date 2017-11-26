@@ -13,9 +13,9 @@
    <div>
     <td span= "1" style="width: 84%;" ui-sref="items.edit({itemId: item._id})">
       <a ui-sref="items.edit({itemId: item._id})"><h4 class="list-group-item-heading" data-ng-bind="item.title"></h4></a>
-      <--I did a uisref on both lines so we can get click-anywhere-to-edit but so the item name link will also highlight. It's a deliberate UX decision -->
+      <!-- I did a uisref on both lines so we can get click-anywhere-to-edit but so the item name link will also highlight. It's a deliberate UX decision -->
       <p class="list-group-item-text" data-ng-bind="item.content"></p>
-      <b> Count:</b>
+      <b ng-if="item.count"> Count:</b>
       <span ng-if="item.count" ng-bind="item.count"></span>
       <b> Category:</b>
       <span ng-if="item.categories" data-ng-bind="item.categories.title"></span>

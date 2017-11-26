@@ -15,20 +15,10 @@
     vm.mods = ModulesService.query();
     vm.increment = function(item, inc){
       item.count+=inc;
-      var flag = false;
-      for(var i=0; i<vm.items.length; i++){
-        var comparator = vm.items[i];
-        if(item.title == comparator.title && item.content == comparator.content && item.created == comparator.created && item.user == comparator.user && item.restockThreshold == comparator.restockThreshold && item.workingStatus == comparator.workingStatus && item.categories == comparator.categories && item.modules == comparator.modules){
-        //In items array, minus some possible change to count.
-         item.createOrUpdate().then(successCallback).catch(errorCallback);
-         flag = true;
-          break;
-        }
+      if(item.count < 0){
+        item.count = 0;
       }
-      if(!flag){
-          console.log("Corrupted item not updated on backend.");
-        }
-    
+      item.createOrUpdate().then(successCallback).catch(errorCallback);
     }
       function successCallback(res) {
         $state.go('items.list'); // should we send the User to the list or the updated Item's view?
