@@ -6,6 +6,8 @@ var should = require('should'),
   mongoose = require('mongoose'),
   User = mongoose.model('User'),
   Item = mongoose.model('Item'),
+  Category = mongoose.model('Category'),
+  Module = mongoose.model('Module'),
   express = require(path.resolve('./config/lib/express'));
 
 /**
@@ -15,7 +17,9 @@ var app,
   agent,
   credentials,
   user,
-  item;
+  item,
+  category,
+  module;
 
 /**
  * Item routes tests
@@ -57,7 +61,13 @@ describe('Item CRUD tests', function () {
         item = {
           title: 'Item Title',
           content: 'Item Content'
-        };
+        }
+        category = {
+          title: 'Category Title'
+        }
+        module = {
+          title: 'Module Title'
+        }
 
         done();
       })
@@ -92,6 +102,24 @@ describe('Item CRUD tests', function () {
       .end(function (itemSaveErr, itemSaveRes) {
         // Call the assertion callback
         done(itemSaveErr);
+      });
+  });
+  it('should not be able to save a category if not logged in', function (done) {
+    agent.post('/api/categories')
+      .send(category)
+      .expect(403)
+      .end(function (categorySaveErr, categorySaveRes) {
+        // Call the assertion callback
+        done(categorySaveErr);
+      });
+  });
+  it('should not be able to save a module if not logged in', function (done) {
+    agent.post('/api/modules')
+      .send(module)
+      .expect(403)
+      .end(function (moduleSaveErr, moduleSaveRes) {
+        // Call the assertion callback
+        done(moduleSaveErr);
       });
   });
 
@@ -151,6 +179,50 @@ describe('Item CRUD tests', function () {
     itemObj.save(function () {
       // Try deleting item
       agent.delete('/api/items/' + itemObj._id)
+        .expect(403)
+        .end(function (itemDeleteErr, itemDeleteRes) {
+          // Set message assertion
+          (itemDeleteRes.body.message).should.match('User is not yet approved for database changes (check attribute approvedStatus)');
+
+          // Handle item error error
+          done(itemDeleteErr);
+        });
+
+    });
+  });
+  it('should not be able to delete an category if not signed in', function (done) {
+    // Set item user
+    category.title = 'user';
+
+    // Create new item model instance
+    var catObj = new Category(category);
+
+    // Save the item
+    catObj.save(function () {
+      // Try deleting item
+      agent.delete('/api/categories')
+        .expect(403)
+        .end(function (itemDeleteErr, itemDeleteRes) {
+          // Set message assertion
+          (itemDeleteRes.body.message).should.match('User is not yet approved for database changes (check attribute approvedStatus)');
+
+          // Handle item error error
+          done(itemDeleteErr);
+        });
+
+    });
+  });
+  it('should not be able to delete an module if not signed in', function (done) {
+    // Set item user
+    module.title = 'user';
+
+    // Create new item model instance
+    var modObj = new Module(module);
+
+    // Save the item
+    modObj.save(function () {
+      // Try deleting item
+      agent.delete('/api/modules')
         .expect(403)
         .end(function (itemDeleteErr, itemDeleteRes) {
           // Set message assertion
