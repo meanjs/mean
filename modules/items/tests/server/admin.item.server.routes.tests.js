@@ -135,7 +135,7 @@ describe('Item Admin CRUD tests', function () {
         agent.post('/api/categories')
           .send(category)
           .expect(200)
-          .end(function (categorySaveErr, cateogrySaveRes) {
+          .end(function (categorySaveErr, categorySaveRes) {
             // Handle item save error
             if (categorySaveErr) {
               return done(categorySaveErr);
@@ -154,6 +154,49 @@ describe('Item Admin CRUD tests', function () {
 
                 // Set assertions
                 (categories[0].title).should.match('Category Title');
+
+                // Call the assertion callback
+                done();
+              });
+          });
+      });
+  });
+  it('should be able to save a module if logged in', function (done) {
+    agent.post('/api/auth/signin')
+      .send(credentials)
+      .expect(200)
+      .end(function (signinErr, signinRes) {
+        // Handle signin error
+        if (signinErr) {
+          return done(signinErr);
+        }
+
+        // Get the userId
+        var userId = user.id;
+
+        // Save a new item
+        agent.post('/api/modules')
+          .send(module)
+          .expect(200)
+          .end(function (moduleSaveErr, moduleSaveRes) {
+            // Handle item save error
+            if (moduleSaveErr) {
+              return done(moduleSaveErr);
+            }
+
+            // Get a list of items
+            agent.get('/api/modules')
+              .end(function (modulesGetErr, modulesGetRes) {
+                // Handle item save error
+                if (modulesGetErr) {
+                  return done(modulesGetErr);
+                }
+
+                // Get items list
+                var modules = modulesGetRes.body;
+
+                // Set assertions
+                (modules[0].title).should.match('Module Title');
 
                 // Call the assertion callback
                 done();
