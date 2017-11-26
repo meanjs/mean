@@ -10,16 +10,10 @@
   <div class="list-group" style="width: 100%">
     <table>
     <tr data-ng-repeat="item in vm.items"> 
+   <div>
     <td span= "1" style="width: 84%;" ui-sref="items.edit({itemId: item._id})">
-    <a class="list-group-item">
-      <small class="list-group-item-text">
-        Posted on
-        <span data-ng-bind="item.created | date:'mediumDate'"></span>
-        by
-        <span ng-if="item.user" ng-bind="item.user.displayName"></span>
-        <span ng-if="!item.user">Deleted User</span>
-      </small>
-      <h4 class="list-group-item-heading" data-ng-bind="item.title"></h4>
+      <a ui-sref="items.edit({itemId: item._id})"><h4 class="list-group-item-heading" data-ng-bind="item.title"></h4></a>
+      <--I did a uisref on both lines so we can get click-anywhere-to-edit but so the item name link will also highlight. It's a deliberate UX decision -->
       <p class="list-group-item-text" data-ng-bind="item.content"></p>
       <b> Count:</b>
       <span ng-if="item.count" ng-bind="item.count"></span>
@@ -29,8 +23,8 @@
       <span ng-if="item.modules" ng-bind="item.modules.title"></span>
       <b> Status:</b>
       <span ng-if="item.workingStatus" data-ng-bind="item.modules.workingStatus"></span>
-    </a>
-  </td>
+      </br>
+    </td>
   <td span= "1" style="width: 4%;">
     <a class="btn btn-danger" ng-click="vm.increment(item, -10)">-10</a>
   </td>
@@ -44,6 +38,7 @@
     <a class="btn btn-success pull-right" ng-click="vm.increment(item, 10)">10</a>
   </td>
   </tr>
+  </div>
   </table>
   </div>
   <div class="alert alert-warning text-center" data-ng-if="items.$resolved && !items.length">
