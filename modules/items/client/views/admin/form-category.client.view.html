@@ -19,10 +19,10 @@
         <div class="row">
           <div class="col-xs-6">
             <div class="form-group" show-errors>
-              <label class="control-label" for="textHex">Text Hex Color</label>
-              <input name="textHex" type="text" ng-model="vm.cat.textHex" id="textHex" class="form-control" placeholder="#0021A5" required autofocus>
-              <div ng-messages="vm.form.catForm.textHex.$error" role="alert">
-                <p class="help-block error-text" ng-message="required">Text hex color is required.</p>
+              <label class="control-label" for="hexColor">Hex Color</label>
+              <input name="hexColor" type="text" ng-model="vm.cat.hexColor" class="form-control" placeholder="#0021A5" required>
+              <div ng-messages="vm.form.catForm.hexColor.$error" role="alert">
+                <p class="help-block error-text" ng-message="required">Hex color is required.</p>
               </div>
             </div>
           </div>

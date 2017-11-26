@@ -12,6 +12,6 @@
     margin-top: 21px;
 }
 
-.category-title {
+.category-title, .module-title {
     border-bottom: 3px solid;
 }
