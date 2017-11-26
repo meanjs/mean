@@ -21,15 +21,21 @@
   <table class="table table-hover table-striped categories-table">
     <thead>
       <tr class="first-row">
-        <td class="firstColumn">Category</td>
-        <td class="secondColumn"></td>
+        <th>Category</th>
+        <th>Hex Color</th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
       <tr ng-repeat="category in vm.categories | filter: query">
-        <td class="firstColumn">{{ category.title }}</td>
-        <td class="secondColumn">
-          <a class="btn btn-primary" ng-click="vm.remove(category)">
+        <td>{{ category.title }}</td>
+        <td>
+          <p class="hex-color" ng-style="{'border-bottom-color': category.hexColor}">
+            {{ category.hexColor }}
+          </p>
+        </td>
+        <td>
+          <a class="btn btn-primary remove-btn" ng-click="vm.remove(category)">
             <i class="glyphicon glyphicon-minus"></i>
           </a>  
         </td>
