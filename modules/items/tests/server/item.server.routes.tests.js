@@ -6,6 +6,8 @@ var should = require('should'),
   mongoose = require('mongoose'),
   User = mongoose.model('User'),
   Item = mongoose.model('Item'),
+  Category = mongoose.model('Category'),
+  Module = mongoose.model('Module'),
   express = require(path.resolve('./config/lib/express'));
 
 /**
@@ -15,7 +17,9 @@ var app,
   agent,
   credentials,
   user,
-  item;
+  item,
+  category,
+  module;
 
 /**
  * Item routes tests
@@ -57,7 +61,13 @@ describe('Item CRUD tests', function () {
         item = {
           title: 'Item Title',
           content: 'Item Content'
-        };
+        }
+        category = {
+          title: 'Category Title'
+        }
+        module = {
+          title: 'Module Title'
+        }
 
         done();
       })
