@@ -104,6 +104,24 @@ describe('Item CRUD tests', function () {
         done(itemSaveErr);
       });
   });
+  it('should not be able to save a category if not logged in', function (done) {
+    agent.post('/api/categories')
+      .send(category)
+      .expect(403)
+      .end(function (categorySaveErr, categorySaveRes) {
+        // Call the assertion callback
+        done(categorySaveErr);
+      });
+  });
+  it('should not be able to save a module if not logged in', function (done) {
+    agent.post('/api/modules')
+      .send(module)
+      .expect(403)
+      .end(function (moduleSaveErr, moduleSaveRes) {
+        // Call the assertion callback
+        done(moduleSaveErr);
+      });
+  });
 
   it('should be able to update an item if signed in without the "admin" role', function (done) {
     agent.post('/api/auth/signin')
