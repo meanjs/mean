@@ -190,6 +190,50 @@ describe('Item CRUD tests', function () {
 
     });
   });
+  it('should not be able to delete an category if not signed in', function (done) {
+    // Set item user
+    category.title = 'user';
+
+    // Create new item model instance
+    var catObj = new Category(category);
+
+    // Save the item
+    catObj.save(function () {
+      // Try deleting item
+      agent.delete('/api/categories')
+        .expect(403)
+        .end(function (itemDeleteErr, itemDeleteRes) {
+          // Set message assertion
+          (itemDeleteRes.body.message).should.match('User is not yet approved for database changes (check attribute approvedStatus)');
+
+          // Handle item error error
+          done(itemDeleteErr);
+        });
+
+    });
+  });
+  it('should not be able to delete an module if not signed in', function (done) {
+    // Set item user
+    module.title = 'user';
+
+    // Create new item model instance
+    var modObj = new Module(module);
+
+    // Save the item
+    modObj.save(function () {
+      // Try deleting item
+      agent.delete('/api/modules')
+        .expect(403)
+        .end(function (itemDeleteErr, itemDeleteRes) {
+          // Set message assertion
+          (itemDeleteRes.body.message).should.match('User is not yet approved for database changes (check attribute approvedStatus)');
+
+          // Handle item error error
+          done(itemDeleteErr);
+        });
+
+    });
+  });
 
   it('should be able to get a single item that has an orphaned user reference', function (done) {
     // Create orphan user creds
