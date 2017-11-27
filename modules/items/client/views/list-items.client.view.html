@@ -2,14 +2,22 @@
   <div class="page-header">
     <h1>
       Items
-      <a class="btn btn-primary pull-right" data-ui-sref="admin.items.create">
+      <a class="btn btn-primary pull-right" data-ui-sref="items.create">
         <i class="glyphicon glyphicon-plus"></i>
       </a>
     </h1>
   </div>
+  <div class="row">   
+       <div class="col-xs-12">   
+         <input class="form-control"   
+           type="text"   
+           placeholder="Search by name, content, category or module"     
+           ng-model="query"/>    
+      </div>    
+   </div>
   <div class="list-group" style="width: 100%">
     <table>
-    <tr data-ng-repeat="item in vm.items"> 
+    <tr data-ng-repeat="item in vm.items | filter: query"> 
    <div>
     <td span= "1" style="width: 84%;" ui-sref="items.edit({itemId: item._id})">
       <a ui-sref="items.edit({itemId: item._id})"><h4 class="list-group-item-heading" data-ng-bind="item.title"></h4></a>
