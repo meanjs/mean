@@ -76,7 +76,7 @@ describe('Items E2E Tests:', function () {
      browser.get('http://localhost:3001/admin/items/categories/create');
      element(by.model('vm.cat.hexColor')).sendKeys(category.hexColor);
      element(by.css('button[type=submit]')).click();
-     expect(alertDialog.getText()).toEqual('Please fill out this field.');
+     expect(element.all(by.css('.error-text')).get(0).getText()).toBe('Category name is required.');
     });
     it('Should create an category with a title', function () {
      browser.get('http://localhost:3001/admin/items/categories/create');
@@ -101,7 +101,7 @@ describe('Items E2E Tests:', function () {
      browser.get('http://localhost:3001/admin/items/modules/create');
      element(by.model('vm.mod.hexColor')).sendKeys(module.hexColor);
      element(by.css('button[type=submit]')).click();
-     expect(alertDialog.getText()).toEqual('Please fill out this field.');
+     expect(element.all(by.css('.error-text')).get(0).getText()).toBe('Module name is required.');
     });
     it('Should create an module with a title', function () {
      browser.get('http://localhost:3001/admin/items/modules/create');
