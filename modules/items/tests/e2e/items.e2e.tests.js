@@ -41,6 +41,9 @@ describe('Items E2E Tests:', function () {
   beforeAll(function() {
   	signin();
   });
+  afterAll(function() {
+  	signout();
+  });
   describe('Test items page', function () {
     it('Should navigate to item page with an admin login', function () {
      browser.get('http://localhost:3001/items');
