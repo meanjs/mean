@@ -12,10 +12,9 @@
 
     vm.cat = cat;
     vm.authentication = Authentication;
-    vm.form = {};
     vm.create = create;
     
-    function create() {
+    function create(valid) {
       if ($window.confirm('Are you sure you want to create?')) {
         vm.cat.$new(function () {
           $state.go('admin.items.categories');

@@ -61,10 +61,10 @@ describe('Item Admin CRUD tests', function () {
         item = {
           title: 'Item Title',
           content: 'Item Content'
-        }
+        };
         category = {
           title: 'Category Title'
-        }
+        };
         module = {
           title: 'Module Title'
         };

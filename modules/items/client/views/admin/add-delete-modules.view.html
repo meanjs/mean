@@ -21,15 +21,21 @@
   <table class="table table-hover table-striped modules-table">
     <thead>
       <tr class="first-row">
-        <th class="firstColumn">Module</td>
-        <th class="secondColumn"></td>
+        <th>Module</th>
+        <th>Hex Color</th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
       <tr ng-repeat="module in vm.modules | filter: query">
-        <td class="firstColumn">{{ module.title }}</td>
-        <td class="secondColumn">
-          <a class="btn btn-primary" ng-click="vm.remove(module)">
+        <td>{{ module.title }}</td>
+        <td>
+          <p class="hex-color" ng-style="{'border-bottom-color': module.hexColor}">
+            {{ module.hexColor }}
+          </p>
+        </td>
+        <td>
+          <a class="btn btn-primary remove-btn" ng-click="vm.remove(module)">
             <i class="glyphicon glyphicon-minus"></i>
           </a>  
         </td>

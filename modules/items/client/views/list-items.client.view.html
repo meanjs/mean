@@ -27,11 +27,11 @@
       <p class="list-group-item-text item-content" data-ng-bind="item.content"></p>
       <div ng-if="item.categories" class="list-group-item-text">
         Category:&nbsp;
-        <span data-ng-bind="item.categories.title"></span>
+        <span class="category-title" data-ng-bind="item.categories.title" ng-style="{'border-bottom-color': item.categories.hexColor}"></span>
       </div>
       <div ng-if="item.modules" class="list-group-item-text">
         Module:&nbsp;
-        <span data-ng-bind="item.modules.title"></span>
+        <span class="module-title" data-ng-bind="item.modules.title" ng-style="{'border-bottom-color': item.modules.hexColor}"></span>
       </div>
       <div>
         Count:&nbsp;
