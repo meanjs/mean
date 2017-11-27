@@ -169,8 +169,8 @@ exports.delete = function (req, res) {
  */
 exports.list = function (req, res) {
   Item.find().sort('-created').populate('user', 'displayName')
-  .populate('categories', 'title')
-  .populate('modules', 'title')
+  .populate('categories')
+  .populate('modules')
   .exec(function (err, items) {
     if (err) {
       return res.status(422).send({
@@ -193,7 +193,7 @@ exports.itemByID = function (req, res, next, id) {
     });
   }
 
-  Item.findById(id).populate('user', 'displayName').populate('categories', 'title').populate('modules', 'title').exec(function (err, item) {
+  Item.findById(id).populate('user', 'displayName').populate('categories').populate('modules').exec(function (err, item) {
     if (err) {
       return next(err);
     } else if (!item) {

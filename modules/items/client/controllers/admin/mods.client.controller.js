@@ -12,11 +12,8 @@
 
     vm.mod = mod;
     vm.authentication = Authentication;
-    vm.form = {};
     vm.create = create;
-    vm.list = list;
 
-    // Remove existing Item
     function create() {
       if ($window.confirm('Are you sure you want to create?')) {
         vm.mod.$new(function () {
@@ -25,11 +22,5 @@
         });
       }
     }
-
-    // Remove existing Item
-    function list() {
-      
-    }
-
   }
 }());

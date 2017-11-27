@@ -26,8 +26,8 @@
             <div class="form-group dropdown-group">
               <label for="modules">Modules</label>
               <div class="dropdown-flex-box">
-                <select name="module" id="module" class="form-control" ng-model="vm.item.modules" placeholder="module">
-                  <option ng-repeat="x in vm.mods" value="{{x._id}}">{{x.title}}</option>
+                <select name="module" id="module" class="form-control" ng-model="vm.item.modules" placeholder="module"
+                  ng-options="mod.title for mod in vm.mods track by mod._id">
                 </select>
               </div>
             </div>
@@ -36,8 +36,8 @@
             <div class="form-group dropdown-group">
               <label for="category">Categories</label>
               <div class="dropdown-flex-box">
-                <select name="category" id="category" class="form-control" ng-model="vm.item.categories" placeholder="category">
-                  <option ng-repeat="x in vm.cats" value="{{x._id}}">{{x.title}}</option>
+                <select name="category" id="category" class="form-control" ng-model="vm.item.categories" placeholder="category"
+                  ng-options="cat.title for cat in vm.cats track by cat._id">
                 </select>
               </div>
             </div>
