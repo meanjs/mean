@@ -3,7 +3,7 @@
     <h1>New Category</h1>
   </div>
   <div class="col-md-12">
-    <form name="vm.form.catForm" class="form-horizontal" ng-submit="vm.create()" novalidate>
+    <form name="vm.catForm" ng-submit="vm.create()" class="form-horizontal">
       <fieldset>
         <div class="row">
           <div class="col-xs-12">
@@ -20,7 +20,7 @@
           <div class="col-xs-6">
             <div class="form-group" show-errors>
               <label class="control-label" for="hexColor">Hex Color</label>
-              <input name="hexColor" type="text" ng-model="vm.cat.hexColor" class="form-control" placeholder="#0021A5" required>
+              <input name="hexColor" type="text" ng-model="vm.cat.hexColor" class="form-control" placeholder="#0021A5" required pattern="#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})">
               <div ng-messages="vm.form.catForm.hexColor.$error" role="alert">
                 <p class="help-block error-text" ng-message="required">Hex color is required.</p>
               </div>

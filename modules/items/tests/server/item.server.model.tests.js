@@ -40,12 +40,12 @@ describe('Item/Category/Module Model Unit Tests:', function () {
           title: 'Item Title',
           content: 'Item Content',
           user: user
-        })
+        });
         category = new Category({
-        title: 'Category Title'
-        })
+          title: 'Category Title'
+        });
         module = new Module({
-        title: 'Module Title'
+          title: 'Module Title'
         });
         done();
       })
