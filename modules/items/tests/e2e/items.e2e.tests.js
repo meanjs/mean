@@ -13,10 +13,12 @@ describe('Items E2E Tests:', function () {
   	content: 'yep'
   };
   var category = {
-  	title: 'title'
+  	title: 'title',
+  	hexColor: '#FAE123'
   };
   var module = {
-  	title: 'title'
+  	title: 'title',
+  	hexColor: '#123FAE'
   };
 
   var signout = function () {
@@ -41,11 +43,6 @@ describe('Items E2E Tests:', function () {
     it('Should navigate to item page with an admin login', function () {
      browser.get('http://localhost:3001/items');
      expect(browser.getCurrentUrl()).toEqual('http://localhost:3001/items');
-    });
-    it('Should navigate to create page upon button click', function () {
-     browser.get('http://localhost:3001/items');
-     element(by.id('add-item-btn')).click();
-     expect(browser.getCurrentUrl()).toEqual('http://localhost:3001/items/create');
     });
     it('Should navigate to create page upon button click', function () {
      browser.get('http://localhost:3001/items');
@@ -77,14 +74,13 @@ describe('Items E2E Tests:', function () {
  });
     it('Should not create an category without a title', function () {
      browser.get('http://localhost:3001/admin/items/categories/create');
+     element(by.model('vm.cat.hexColor')).sendKeys(category.hexColor);
      element(by.css('button[type=submit]')).click();
-     var alertDialog = browser.switchTo().alert();
-     expect(alertDialog.accept).toBeDefined();
-     alertDialog.accept();
-     expect(element.all(by.css('.error-text')).get(0).getText()).toBe('Category name is required.');
+     expect(alertDialog.getText()).toEqual('Please fill out this field.');
     });
     it('Should create an category with a title', function () {
      browser.get('http://localhost:3001/admin/items/categories/create');
+     element(by.model('vm.cat.hexColor')).sendKeys(category.hexColor);
      element(by.model('vm.cat.title')).sendKeys(category.title);
      element(by.css('button[type=submit]')).click();
      var alertDialog = browser.switchTo().alert();
@@ -103,15 +99,14 @@ describe('Items E2E Tests:', function () {
  });
     it('Should not create an module without a title', function () {
      browser.get('http://localhost:3001/admin/items/modules/create');
+     element(by.model('vm.mod.hexColor')).sendKeys(module.hexColor);
      element(by.css('button[type=submit]')).click();
-     var alertDialog = browser.switchTo().alert();
-     expect(alertDialog.accept).toBeDefined();
-     alertDialog.accept();
-     expect(element.all(by.css('.error-text')).get(0).getText()).toBe('Module name is required.');
+     expect(alertDialog.getText()).toEqual('Please fill out this field.');
     });
     it('Should create an module with a title', function () {
      browser.get('http://localhost:3001/admin/items/modules/create');
      element(by.model('vm.mod.title')).sendKeys(module.title);
+     element(by.model('vm.mod.hexColor')).sendKeys(module.hexColor);
      element(by.css('button[type=submit]')).click();
      var alertDialog = browser.switchTo().alert();
      expect(alertDialog.accept).toBeDefined();
