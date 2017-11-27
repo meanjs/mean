@@ -38,8 +38,10 @@ describe('Items E2E Tests:', function () {
       // Click Submit button
       element(by.css('button[type="submit"]')).click();
   };
+  beforeAll(function() {
+  	signin();
+  });
   describe('Test items page', function () {
-    signin();
     it('Should navigate to item page with an admin login', function () {
      browser.get('http://localhost:3001/items');
      expect(browser.getCurrentUrl()).toEqual('http://localhost:3001/items');
@@ -62,7 +64,6 @@ describe('Items E2E Tests:', function () {
     });
   });
   describe('Test Categories, Modules pages', function () {
-    signin();
     it('Should navigate to category page with an admin login', function () {
      browser.get('http://localhost:3001/admin/items/categories');
      expect(browser.getCurrentUrl()).toEqual('http://localhost:3001/admin/items/categories');
