@@ -29,9 +29,6 @@
                 <select name="module" id="module" class="form-control" ng-model="vm.item.modules" placeholder="module">
                   <option ng-repeat="x in vm.mods" value="{{x._id}}">{{x.title}}</option>
                 </select>
-                <a ng-show="vm.item._id" class="btn btn-primary" ng-click="vm.addModule()">
-                  <i class="glyphicon glyphicon-plus"></i>
-                </a>
               </div>
             </div>
           </div>
@@ -42,10 +39,6 @@
                 <select name="category" id="category" class="form-control" ng-model="vm.item.categories" placeholder="category">
                   <option ng-repeat="x in vm.cats" value="{{x._id}}">{{x.title}}</option>
                 </select>
-                <a ng-show="vm.item._id" class="btn btn-primary" ng-click="vm.addCat()">
-                  <i class="glyphicon glyphicon-plus"></i>
-                </a>
-                
               </div>
             </div>
               
@@ -59,9 +52,6 @@
                   <option value="In Need Of Inspection">In Need Of Inspection</option>
                   <option value="Broken">Broken</option>
                 </select>
-                <a ng-show="vm.item._id" class="btn btn-primary" ng-click="vm.addCat()">
-                  <i class="glyphicon glyphicon-plus"></i>
-                </a>
               </div>
             </div>
           </div>
