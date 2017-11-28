@@ -23,15 +23,22 @@
       <a ui-sref="items.edit({itemId: item._id})"><h4 class="list-group-item-heading" data-ng-bind="item.title"></h4></a>
       <!-- I did a uisref on both lines so we can get click-anywhere-to-edit but so the item name link will also highlight. It's a deliberate UX decision -->
       <p class="list-group-item-text" data-ng-bind="item.content"></p>
-      <b ng-if="item.count"> Count:</b>
-      <span ng-if="item.count" ng-bind="item.count"></span>
-      <b> Category:</b>
-      <span ng-if="item.categories" data-ng-bind="item.categories.title"></span>
-     <b> Module:</b>
-      <span ng-if="item.modules" ng-bind="item.modules.title"></span>
-      <b> Status:</b>
-      <span ng-if="item.workingStatus" data-ng-bind="item.modules.workingStatus"></span>
-      </br>
+      <div ng-if="item.categories" class="list-group-item-text">
+        Category:&nbsp;
+        <span class="category-title" data-ng-bind="item.categories.title" ng-style="{'border-bottom-color': item.categories.hexColor}"></span>
+      </div>
+      <div ng-if="item.modules" class="list-group-item-text">
+        Module:&nbsp;
+        <span class="module-title" data-ng-bind="item.modules.title" ng-style="{'border-bottom-color': item.modules.hexColor}"></span>
+      </div>
+      <div ng-if="item.count" class="list-group-item-text">
+        Count:&nbsp;
+        <span class="itemcount" data-ng-bind="item.count"></span>
+      </div>
+      <div>
+        Status:&nbsp;
+        <span ng-if="item.workingStatus" data-ng-bind="item.workingStatus"></span>
+      </div>
     </td>
   <td span= "1" style="width: 4%;">
     <a class="btn btn-danger" ng-click="vm.increment(item, -10)">-10</a>
