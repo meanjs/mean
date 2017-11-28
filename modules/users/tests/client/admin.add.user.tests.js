@@ -3,76 +3,76 @@
 
 	describe('AddUserController', function() {
 		var AuthenticationController,
-      		$scope,
-      		$httpBackend,
-      		$stateParams,
-      		$state,
-      		$location,
-      		mockUser1,
-      		mockUser2,
-      		Notification,
-      		ApplicantsService,
-      		Authentication,
-      		AddUserController;
+			$scope,
+			$httpBackend,
+			$stateParams,
+			$state,
+			$location,
+			mockUser1,
+			mockUser2,
+			Notification,
+			ApplicantsService,
+			Authentication,
+			AddUserController;
 
 		beforeEach(function () {
-	    	jasmine.addMatchers({
-	    		toEqualData: function (util, customEqualityTesters) {
-	        		return {
-	            		compare: function (actual, expected) {
-	              			return {
-	                			pass: angular.equals(actual, expected)
-	              			};
-	           			 }
-	          		};
-	        	}
-	      	});
-	 	});
+			jasmine.addMatchers({
+				toEqualData: function (util, customEqualityTesters) {
+					return {
+						compare: function (actual, expected) {
+							return {
+								pass: angular.equals(actual, expected)
+							};
+						}
+					};
+				}
+			});
+		});
 
-	 	beforeEach(module(ApplicationConfiguration.applicationModuleName));
+		beforeEach(module(ApplicationConfiguration.applicationModuleName));
 
-	 	beforeEach(inject(function ($controller, $rootScope, _$state_, _$httpBackend_, _Authentication_, _ApplicantsService_, _Notification_) {
-	 		$scope = $rootScope.$new();
+		beforeEach(inject(function ($controller, $rootScope, _$state_, _$httpBackend_, _Authentication_, _ApplicantsService_, _Notification_) {
+			$scope = $rootScope.$new();
 
-	 		$httpBackend = _$httpBackend_;
-	 		$state = _$state_;
-      		Authentication = _Authentication_;
+			$httpBackend = _$httpBackend_;
+			$state = _$state_;
+			Authentication = _Authentication_;
 			ApplicantsService = _ApplicantsService_;
 
 			// Spy on Notification
-        	spyOn(Notification, 'error');
-        	spyOn(Notification, 'success');
+			spyOn(Notification, 'error');
+			spyOn(Notification, 'success');
 
-        	// Ignore parent template get on state transitions
-        	$httpBackend.whenGET('/modules/users/client/views/admin/add-user.client.view.html').respond(200);
+			// Ignore parent template get on state transitions
+			$httpBackend.whenGET('/modules/users/client/views/admin/add-user.client.view.html').respond(200);
 
 
-        	mockUser1 = new ApplicantsService({
-        		firstName: 'Bo',
-        		lastName: 'track',
-        		roles: ['ta'],
-        		email: 'bojack@gmail.com',
-        		username: 'bojack',
-        		approvedStatus: true
-        	});
+			mockUser1 = new ApplicantsService({
+				firstName: 'Bo',
+				lastName: 'track',
+				roles: ['ta'],
+				email: 'bojack@gmail.com',
+				username: 'bojack',
+				approvedStatus: true
+			});
 
-        	mockUser2 = new ApplicantsService({});
+			mockUser2 = new ApplicantsService({});
 
-	        Authentication.user = {
-		        roles: ['admin'],
-		        approvedStatus: true
+			Authentication.user = {
+				roles: ['admin'],
+				approvedStatus: true
 			};
 
 
-			AddUserController = $controller ('AddUserController as vm', {
+			AddUserController = $controller('AddUserController as vm', {
 				$scope: $scope
 			});
 
 			// Spy on state go
 			spyOn($state, 'go');
-	 	}));
+		}));
 
-	 	describe('vm.signup() as signup', function () {
+		describe('vm.signup() as signup', function () {
 
 			it('Should not signup with no credentials', inject(function (ApplicantsService) {
 				$httpBackend.when('POST', '/api/users/add').respond(400, {message: 'Missing credentials'});
@@ -191,7 +191,7 @@
 
 			it('Should signup with correct credentials', inject(function (ApplicantsService) {
 				$httpBackend.when('POST', '/api/users/add').respond(200, mockUser1);
-				expect($location.url().toEqual('/admin/users'))
+				expect($location.url().toEqual('/admin/users'));
 			}));
 
 		});
