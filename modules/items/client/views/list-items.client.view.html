@@ -1,30 +1,28 @@
 <section>
   <div class="page-header">
-    <div class="row">
-      <div class="col-xs-4">
-        <h1>
-          Items
-        </h1>
-      </div>
-      <div class="col-xs-4 pull-right">
-        <a id="add-item-btn" class="btn btn-primary pull-right" data-ui-sref="items.create">
-          <i class="glyphicon glyphicon-plus"></i>
-        </a>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-xs-12">
-        <input class="form-control"
-          type="text"
-          placeholder="Search by name, content, category or module" 
-          ng-model="query"/>
-      </div>
-    </div>
+    <h1>
+      Items
+      <a class="btn btn-primary pull-right" data-ui-sref="items.create">
+        <i class="glyphicon glyphicon-plus"></i>
+      </a>
+    </h1>
   </div>
-  <div class="list-group">
-    <a data-ng-repeat="item in vm.items | filter: query" data-ui-sref="items.edit({itemId: item._id})" class="list-group-item item-box">
-      <h4 class="list-group-item-heading" data-ng-bind="item.title"></h4>
-      <p class="list-group-item-text item-content" data-ng-bind="item.content"></p>
+  <div class="row">   
+       <div class="col-xs-12">   
+         <input class="form-control"   
+           type="text"   
+           placeholder="Search by name, content, category or module"     
+           ng-model="query"/>    
+      </div>    
+   </div>
+  <div class="list-group" style="width: 100%">
+    <table>
+    <tr data-ng-repeat="item in vm.items | filter: query"> 
+   <div>
+    <td span= "1" style="width: 84%;" ui-sref="items.edit({itemId: item._id})">
+      <a ui-sref="items.edit({itemId: item._id})"><h4 class="list-group-item-heading" data-ng-bind="item.title"></h4></a>
+      <!-- I did a uisref on both lines so we can get click-anywhere-to-edit but so the item name link will also highlight. It's a deliberate UX decision -->
+      <p class="list-group-item-text" data-ng-bind="item.content"></p>
       <div ng-if="item.categories" class="list-group-item-text">
         Category:&nbsp;
         <span class="category-title" data-ng-bind="item.categories.title" ng-style="{'border-bottom-color': item.categories.hexColor}"></span>
@@ -33,30 +31,32 @@
         Module:&nbsp;
         <span class="module-title" data-ng-bind="item.modules.title" ng-style="{'border-bottom-color': item.modules.hexColor}"></span>
       </div>
-      <div>
+      <div ng-if="item.count!=0" class="list-group-item-text">
         Count:&nbsp;
-        <span ng-if="item.count" ng-bind="item.count"></span>
+        <span class="itemcount" data-ng-bind="item.count"></span>
       </div>
       <div>
         Status:&nbsp;
         <span ng-if="item.workingStatus" data-ng-bind="item.workingStatus"></span>
       </div>
-      <div>
-        Posted on
-        <span data-ng-bind="item.created | date:'mediumDate'"></span>
-        by
-        <b>
-          <span ng-if="item.user" ng-bind="item.user.displayName"></span>
-          <span ng-if="!item.user">Deleted User</span>
-        </b>
-      </div>
-    </a>
+    </td>
+  <td span= "1" style="width: 4%;">
+    <a class="btn btn-danger" ng-click="vm.increment(item, -10)">-10</a>
+  </td>
+  <td span= "1" style="width: 4%;">
+    <a class="btn btn-danger pull-right" ng-click="vm.increment(item, -1)">-1</a>
+  </td>
+  <td span= "1" style="width: 4%;">
+    <a class="btn btn-success pull-right" ng-click="vm.increment(item, 1)">1</a>
+  </td>
+  <td span= "1" style="width: 4%;">
+    <a class="btn btn-success pull-right" ng-click="vm.increment(item, 10)">10</a>
+  </td>
+  </tr>
+  </div>
+  </table>
   </div>
   <div class="alert alert-warning text-center" data-ng-if="items.$resolved && !items.length">
     No items yet, why don't you <a data-ui-sref="items.create">create one</a>?
   </div>
 </section>
-
-<script>
-  var item = $scope;
-</script>
