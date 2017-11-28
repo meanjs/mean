@@ -51,7 +51,12 @@ var ItemSchema = new Schema({
   modules: {
     type: Schema.ObjectId,
     ref: 'Module'
-  }
+  },
+  pdf: {
+    type: String,
+    default: '',
+    trim: true
+  }    
 });
 
 ItemSchema.statics.seed = seed;

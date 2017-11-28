@@ -57,6 +57,11 @@
           <span ng-if="item.user" ng-bind="item.user.displayName"></span>
           <span ng-if="!item.user">Deleted User</span>
         </b>
+        <div ng-if= "item.pdf">
+        <b>PDF Link:&nbsp;
+          <span data-ng-bind="item.pdf"></span>
+        </b>
+      </div>
       </div>
     </div>
   </div>

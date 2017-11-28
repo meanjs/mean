@@ -41,6 +41,7 @@
                 </select>
               </div>
             </div>
+              
           </div>
           <div class="col-xs-6">
             <div class="form-group dropdown-group">
@@ -54,15 +55,18 @@
               </div>
             </div>
           </div>
-        </div>
+        </div>   
         <div class="form-group">
           <label class="control-label" for="title">Count</label>
           <input name="count" type="text" ng-model="vm.item.count" id="count" class="form-control" placeholder="Count">
           <label class="control-label" for="title">Restock Threshold (Sends email when count drops below this)</label>
           <input name="restockThreshold" type="text" ng-model="vm.item.restockThreshold" id="restockThreshold" class="form-control" placeholder="Restock Threshold">
+          <label class="control-label" for="title">PDF Link:</label>  
+          <input name="pdf" type="text" ng-model="vm.item.pdf" id="pdf" class="form-control" placeholder="PDF">
           <label class="control-label" for="content">Content</label>
           <textarea name="content" data-ng-model="vm.item.content" id="content" class="form-control" cols="30" rows="10" placeholder="Content"></textarea>
         </div>
+        
         <div class="form-group">
           <button type="submit" class="btn btn-default">{{vm.item._id ? 'Update' : 'Create'}}</button>
         </div>
