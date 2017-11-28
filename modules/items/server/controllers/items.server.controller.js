@@ -134,6 +134,7 @@ exports.update = function (req, res) {
   item.modules = req.body.modules;
   item.workingStatus = req.body.workingStatus;
   item.count = req.body.count;
+  item.pdf = req.body.pdf;
   item.restockThreshold = req.body.restockThreshold;
 
   item.save(function (err) {
