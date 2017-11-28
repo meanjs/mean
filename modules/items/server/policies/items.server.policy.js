@@ -33,6 +33,11 @@ exports.invokeRolesPolicies = function () {
     {
       resources: '/api/modules',
       permissions: '*'
+    },
+    {
+      resources: 'api/pdf',
+      permissions: '*'
+                
     }]
   } 
   ]);
