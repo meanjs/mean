@@ -5,6 +5,7 @@
 
 .item-box {
     border: 1.5px solid #222 !important;
+    cursor: pointer;
 }
 
 #add-item-btn {
