@@ -6,19 +6,19 @@ describe('Items E2E Tests:', function () {
     password: 'P@$$w0rd!!'
   };
   var testItem = {
-  	title: 'title',
-  	module: 'thermodynamics',
-  	category: 'beaker',
-  	count: '5',
-  	content: 'yep'
+    title: 'title',
+    module: 'thermodynamics',
+    category: 'beaker',
+    count: '5',
+    content: 'yep'
   };
   var category = {
-  	title: 'title',
-  	hexColor: '#FAE123'
+    title: 'title',
+    hexColor: '#FAE123'
   };
   var module = {
-  	title: 'title',
-  	hexColor: '#123FAE'
+    title: 'title',
+    hexColor: '#123FAE'
   };
 
   var signout = function () {
@@ -39,10 +39,10 @@ describe('Items E2E Tests:', function () {
       element(by.css('button[type="submit"]')).click();
   };
   beforeAll(function() {
-  	signin();
+    signin();
   });
   afterAll(function() {
-  	signout();
+    signout();
   });
   describe('Test items page', function () {
     it('Should navigate to item page with an admin login', function () {

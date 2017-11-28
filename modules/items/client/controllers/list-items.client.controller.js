@@ -5,21 +5,21 @@
     .module('items')
     .controller('ItemsListController', ItemsListController);
 
-  ItemsListController.$inject = ['ItemsService', 'CategoriesService', 'ModulesService'];
+  ItemsListController.$inject = ['ItemsService', 'CategoriesService', 'ModulesService', '$state'];
 
-  function ItemsListController(ItemsService, CategoriesService, ModulesService) {
+  function ItemsListController(ItemsService, CategoriesService, ModulesService, $state) {
     var vm = this;
 
     vm.items = ItemsService.query();
     vm.cats = CategoriesService.query();
     vm.mods = ModulesService.query();
-    vm.increment = function(item, inc){
-      item.count+=inc;
-      if(item.count < 0){
+    vm.increment = function(item, inc) {
+      item.count += inc;
+      if(item.count < 0) {
         item.count = 0;
       }
       item.createOrUpdate().then(successCallback).catch(errorCallback);
-    }
+    };
       function successCallback(res) {
         $state.go('items.list'); // should we send the User to the list or the updated Item's view?
         Notification.success({ message: '<i class="glyphicon glyphicon-ok"></i> Item saved successfully!' });
