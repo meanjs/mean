@@ -11,6 +11,13 @@
   function routeConfig($stateProvider) {
     // Users state routing
     $stateProvider
+      .state('users', {
+        url: '/userslist',
+        templateUrl: '/modules/users/client/views/ta-list-users.client.view.html',
+        controller: 'TAUserListController',
+        controllerAs: 'vm',
+        css: 'css/users.css'
+      })
       .state('settings', {
         abstract: true,
         url: '/settings',
