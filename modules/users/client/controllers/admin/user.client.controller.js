@@ -41,6 +41,7 @@
     }
   ];
 
+    //Remove the user by deleting from the DB and the view.
     function remove(user) {
       if ($window.confirm('Are you sure you want to delete this user?')) {
         if (user) {
@@ -57,6 +58,7 @@
       }
     }
 
+    //Update the user's info by updating it in the DB.
     function update(isValid) {
       if (!isValid) {
         $scope.$broadcast('show-errors-check-validity', 'vm.userForm');
