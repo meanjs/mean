@@ -6,6 +6,40 @@
 [![Coverage Status](https://coveralls.io/repos/meanjs/mean/badge.svg?branch=master&service=github)](https://coveralls.io/github/meanjs/mean?branch=master)
 [![Known Vulnerabilities](https://snyk.io/test/github/meanjs/mean/badge.svg)](https://snyk.io/test/github/meanjs/mean)
 
+
+# CEN3031 FINAL PROJECT DOCUMENTATION:
+
+## Link to the deployed page: laboratory-inventory.herokuapp.com
+
+## Credit people/organizations you borrowed code from or APIs you used: Bootstrap, Bootswatch, MEAN.JS, Nodemailer.
+
+## List of all project features implemented and associated screenshots include landing or home page:
+
+## Instructions for how to run the project locally: Clone this github repository.  Navigate to it locally and checkout the branch you wish to run. The first time it is necessary to run npm install to install all the node dependencies.  Then simply run npm start and the project will run locally. 
+
+## How to update database and server connections: For database hosting, we use [mlab](https://mlab.com/home/) and have three databases. One is for testing. One is for development, and one is for production. The uris can be updated to new mLab databases in test.js, development.js, and production.js. Information about our deployment can be found in the deployment.md file in this repository.
+
+<img width="960" alt="tascanview" src="https://user-images.githubusercontent.com/15175123/33533725-02e32f6c-d871-11e7-8233-56cbdf04bb7b.PNG">
+TAs can view the other users to see who teaches what modules.
+<img width="960" alt="taeditprofile" src="https://user-images.githubusercontent.com/15175123/33533736-093bbc4e-d871-11e7-8781-73a0a6d0e1da.PNG">
+TAs can edit their own profiles with what modules they teach.
+<img width="960" alt="taitems" src="https://user-images.githubusercontent.com/15175123/33533737-0b525330-d871-11e7-8f70-b55704ad973b.PNG">
+All users can view the items and easily increment or decrement count. 
+<img width="960" alt="edititem" src="https://user-images.githubusercontent.com/15175123/33533746-0fbfd168-d871-11e7-8430-e65ef54802bc.PNG">
+TAs can create and edit items, but not delete items. SuperTAs, technicians, and admins can delete items as well as the other functionality.
+<img width="960" alt="manageusers" src="https://user-images.githubusercontent.com/15175123/33533733-07b5252c-d871-11e7-8ece-35b3305728f4.PNG">
+Only the admin can manage users, delete or edit users, etc.
+<img width="960" alt="addnewuser" src="https://user-images.githubusercontent.com/15175123/33533740-0ca00ed0-d871-11e7-8d35-a080ad6aff9a.PNG">
+Example of how the admin creates a new user.
+<img width="587" alt="emailexample" src="https://user-images.githubusercontent.com/15175123/33533730-0605bd68-d871-11e7-8112-4bf64bf6f175.PNG">
+When the admin creates a new user, it will send them an email with their credentials.
+<img width="960" alt="approveapplicants" src="https://user-images.githubusercontent.com/15175123/33533741-0da352e2-d871-11e7-8afc-3cc787b7ad93.PNG">
+Additionally, users can sign up and then be approved by the admin.
+<img width="960" alt="categories" src="https://user-images.githubusercontent.com/15175123/33533743-0ea3b63c-d871-11e7-8016-924c62e7a5fd.PNG">
+Admins are also allowed to create new categories (and similarly modules). Each category and module has a color that it is displayed with.
+
+
+
 MEAN.JS is a full-stack JavaScript open-source solution, which provides a solid starting point for [MongoDB](http://www.mongodb.org/), [Node.js](http://www.nodejs.org/), [Express](http://expressjs.com/), and [AngularJS](http://angularjs.org/) based applications. The idea is to solve the common issues with connecting those frameworks, build a robust framework to support daily development needs, and help developers use better practices while working with popular JavaScript components.
 
 ## Before You Begin
