@@ -41,6 +41,7 @@
       Notification.error({ message: response.data.message, title: '<i class="glyphicon glyphicon-remove"></i> Add User Error!', delay: 6000 });
     }
 
+    //Converting roles shown from the front end to the roles shown on the schema.
     function alterRole (role) {
       if(role == 'TA')
         return 'ta';
@@ -50,6 +51,7 @@
         return role;
     }
 
+    //Adding and removing modules that the TAs teach based on the number of checkboxes checked.
     function modifyTAModules(module, checked) {
       if(checked) {
         vm.modulesTA.push(module.title);

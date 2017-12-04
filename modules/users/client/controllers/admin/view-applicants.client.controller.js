@@ -15,8 +15,9 @@
         vm.unapprovedUsers = data;
       });
 
+    //Name will be displayed in the html, id will be used on the database.
     vm.roleOptions = [{
-      id: 'ta', //Name will be displayed in the html, id will be used on the database.
+      id: 'ta',
       name: 'TA'
     },
     {

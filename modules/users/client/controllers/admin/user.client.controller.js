@@ -21,8 +21,10 @@
     vm.modulesTA = [];
 
     $scope.modules = AdminModulesService.query();
+
+    //Name will be displayed in the html, id will be used on the database.
     $scope.roleOptions = [{
-      id: 'ta', //Name will be displayed in the html, id will be used on the database.
+      id: 'ta',
       name: 'TA'
     },
     {
@@ -75,10 +77,12 @@
       });
     }
 
+    //Converting roles shown from the front end to the roles shown on the schema.
     function changeRole(roleChange) {
       vm.role = roleChange.id;
     }
 
+    //Adding and removing modules that the TAs teach based on the number of checkboxes checked.
     function modifyTAModules(module, checked) {
       if(checked) {
         vm.modulesTA.push(module.title);
