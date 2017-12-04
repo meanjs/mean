@@ -20,6 +20,7 @@
       vm.buildPager();
     });
 
+    //Querying applicants for showing the number of pending users in the system.
     ApplicantsService.query(function (data) {
       vm.applicants = data;
     });
@@ -41,6 +42,7 @@
       vm.pagedItems = vm.filteredItems.slice(begin, end);
     }
 
+    //Displaying the users' roles to the admin in a more friendly way.
     function modifyRoles(user) {
       if (user.roles.indexOf('admin') != -1)
           return 'Admin';
@@ -57,6 +59,7 @@
       vm.figureOutItemsToDisplay();
     }
 
+    //Returning the number of applicants, so it could be displayed in the View Pending Applicants button.
     function countApplicants() {
       return vm.applicants.length;
     }
