@@ -125,6 +125,9 @@ exports.list = function (req, res) {
   });
 };
 
+/*
+ * List of Unapproved Users
+ */
 exports.unapprovedList = function(req, res) {
   User
     .find({ approvedStatus: false })
@@ -141,6 +144,9 @@ exports.unapprovedList = function(req, res) {
     });
 };
 
+/*
+ * Changing the applicant's status to being approved.
+ */
 exports.changeToAccepted = function (req, res) {
   var unapprovedUser = req.body;
   User.findOneAndUpdate({'username' : unapprovedUser.username}, {$set: {'approvedStatus' : true, 'roles': unapprovedUser.roles}}, function(err, changedUser) {
@@ -155,6 +161,9 @@ exports.changeToAccepted = function (req, res) {
 };
 
 
+/*
+ * Deleting the applicant that admin does not want.
+ */
 exports.deleteApplicant = function (req, res) {
   var unapprovedUser = req.query;
   if (unapprovedUser) {

@@ -25,6 +25,7 @@
       vm.applicants = data;
     });
 
+    //Building a pager would help eliminate the long list (and scrolling) of the users.
     function buildPager() {
       vm.pagedItems = [];
       vm.itemsPerPage = 15;
@@ -32,6 +33,7 @@
       vm.figureOutItemsToDisplay();
     }
 
+    //A helper function for the buildPager method and the pageChanged method.
     function figureOutItemsToDisplay() {
       vm.filteredItems = $filter('filter')(vm.users, {
         $: vm.search
