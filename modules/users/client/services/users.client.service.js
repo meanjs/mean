@@ -8,6 +8,9 @@
 
   UsersService.$inject = ['$resource'];
 
+  /*
+   * A User service for the accessing the server controller from the front end.
+   */
   function UsersService($resource) {
     var Users = $resource('/api/users', {}, {
       update: {
@@ -78,6 +81,9 @@
 
   ApplicantsService.$inject = ['$resource'];
 
+  /*
+   * Accessing the applicants server controller from the Applicants service.
+   */
   function ApplicantsService($resource) {
     var Applicants = $resource('/api/unapproved', {}, {
       delete: {
