@@ -41,3 +41,13 @@ a:hover .header-profile-image {
 .has-error .help-inline.error-text {
   display: inline;
 }
+
+.calendar-class {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.title-class {
+  margin-top: 10px;
+  margin-bottom: 0px;
+}
