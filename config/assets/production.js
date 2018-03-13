@@ -6,14 +6,14 @@ module.exports = {
   client: {
     lib: {
       css: [
-        // bower:css
+        // yarn:css
         'public/lib/angular-ui-notification/dist/angular-ui-notification.min.css',
         'public/lib/bootstrap/dist/css/bootstrap.min.css',
         'public/lib/bootstrap/dist/css/bootstrap-theme.min.css',
-        // endbower
+        // endyarn
       ],
       js: [
-        // bower:js
+        // yarn:js
         'public/lib/angular/angular.min.js',
         'public/lib/angular-animate/angular-animate.min.js',
         'public/lib/angular-bootstrap/ui-bootstrap-tpls.min.js',
@@ -24,7 +24,7 @@ module.exports = {
         'public/lib/angular-ui-router/release/angular-ui-router.min.js',
         'public/lib/ng-file-upload/ng-file-upload.min.js',
         'public/lib/owasp-password-strength-test/owasp-password-strength-test.js',
-        // endbower
+        // endyarn
       ]
     },
     css: 'public/dist/application*.min.css',
