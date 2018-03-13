@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function (app) {
+module.exports = app => {
   // User Routes
   var users = require('../controllers/users.server.controller');
 

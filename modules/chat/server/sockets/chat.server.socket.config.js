@@ -1,7 +1,7 @@
 'use strict';
 
 // Create the chat configuration
-module.exports = function (io, socket) {
+module.exports = (io, socket) => {
   // Emit the status event when a new socket client is connected
   io.emit('chatMessage', {
     type: 'status',
@@ -12,7 +12,7 @@ module.exports = function (io, socket) {
   });
 
   // Send a chat messages to all connected sockets when a message is received
-  socket.on('chatMessage', function (message) {
+  socket.on('chatMessage', message => {
     message.type = 'message';
     message.created = Date.now();
     message.profileImageURL = socket.request.user.profileImageURL;
@@ -23,7 +23,7 @@ module.exports = function (io, socket) {
   });
 
   // Emit the status event when a socket client is disconnected
-  socket.on('disconnect', function () {
+  socket.on('disconnect', () => {
     io.emit('chatMessage', {
       type: 'status',
       text: 'disconnected',

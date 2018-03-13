@@ -7,7 +7,7 @@ var passport = require('passport'),
   GithubStrategy = require('passport-github').Strategy,
   users = require('../../controllers/users.server.controller');
 
-module.exports = function (config) {
+module.exports = config => {
   // Use github strategy
   passport.use(new GithubStrategy({
     clientID: config.github.clientID,
@@ -15,7 +15,7 @@ module.exports = function (config) {
     callbackURL: config.github.callbackURL,
     passReqToCallback: true
   },
-  function (req, accessToken, refreshToken, profile, done) {
+  (req, accessToken, refreshToken, profile, done) => {
     // Set the provider data and include tokens
     var providerData = profile._json;
     providerData.accessToken = accessToken;

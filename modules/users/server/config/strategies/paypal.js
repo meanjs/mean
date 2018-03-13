@@ -7,7 +7,7 @@ var passport = require('passport'),
   PayPalStrategy = require('passport-paypal-openidconnect').Strategy,
   users = require('../../controllers/users.server.controller');
 
-module.exports = function (config) {
+module.exports = config => {
   passport.use(new PayPalStrategy({
     clientID: config.paypal.clientID,
     clientSecret: config.paypal.clientSecret,
@@ -17,7 +17,7 @@ module.exports = function (config) {
     passReqToCallback: true
 
   },
-  function (req, accessToken, refreshToken, profile, done) {
+  (req, accessToken, refreshToken, profile, done) => {
     // Set the provider data and include tokens
     var providerData = profile._json;
     providerData.accessToken = accessToken;

@@ -33,7 +33,7 @@ if (useS3Storage) {
 /**
  * Update user details
  */
-exports.update = function (req, res) {
+exports.update = (req, res) => {
   // Init Variables
   var user = req.user;
 
@@ -44,13 +44,13 @@ exports.update = function (req, res) {
     user.updated = Date.now();
     user.displayName = user.firstName + ' ' + user.lastName;
 
-    user.save(function (err) {
+    user.save(err => {
       if (err) {
         return res.status(422).send({
           message: errorHandler.getErrorMessage(err)
         });
       } else {
-        req.login(user, function (err) {
+        req.login(user, err => {
           if (err) {
             res.status(400).send(err);
           } else {
@@ -69,7 +69,7 @@ exports.update = function (req, res) {
 /**
  * Update profile picture
  */
-exports.changeProfilePicture = function (req, res) {
+exports.changeProfilePicture = (req, res) => {
   var user = req.user;
   var existingImageUrl;
   var multerConfig;
@@ -98,10 +98,10 @@ exports.changeProfilePicture = function (req, res) {
       .then(updateUser)
       .then(deleteOldImage)
       .then(login)
-      .then(function () {
+      .then(() => {
         res.json(user);
       })
-      .catch(function (err) {
+      .catch(err => {
         res.status(422).send(err);
       });
   } else {
@@ -111,8 +111,8 @@ exports.changeProfilePicture = function (req, res) {
   }
 
   function uploadImage() {
-    return new Promise(function (resolve, reject) {
-      upload(req, res, function (uploadError) {
+    return new Promise((resolve, reject) => {
+      upload(req, res, uploadError => {
         if (uploadError) {
           reject(errorHandler.getErrorMessage(uploadError));
         } else {
@@ -123,11 +123,11 @@ exports.changeProfilePicture = function (req, res) {
   }
 
   function updateUser() {
-    return new Promise(function (resolve, reject) {
+    return new Promise((resolve, reject) => {
       user.profileImageURL = config.uploads.storage === 's3' && config.aws.s3 ?
         req.file.location :
         '/' + req.file.path;
-      user.save(function (err, theuser) {
+      user.save((err, theuser) => {
         if (err) {
           reject(err);
         } else {
@@ -138,7 +138,7 @@ exports.changeProfilePicture = function (req, res) {
   }
 
   function deleteOldImage() {
-    return new Promise(function (resolve, reject) {
+    return new Promise((resolve, reject) => {
       if (existingImageUrl !== User.schema.path('profileImageURL').defaultValue) {
         if (useS3Storage) {
           try {
@@ -148,7 +148,7 @@ exports.changeProfilePicture = function (req, res) {
               Key: key
             };
 
-            s3.deleteObject(params, function (err) {
+            s3.deleteObject(params, err => {
               if (err) {
                 console.log('Error occurred while deleting old profile picture.');
                 console.log('Check if you have sufficient permissions : ' + err);
@@ -162,7 +162,7 @@ exports.changeProfilePicture = function (req, res) {
             return resolve();
           }
         } else {
-          fs.unlink(path.resolve('.' + existingImageUrl), function (unlinkError) {
+          fs.unlink(path.resolve('.' + existingImageUrl), unlinkError => {
             if (unlinkError) {
 
               // If file didn't exist, no need to reject promise
@@ -188,8 +188,8 @@ exports.changeProfilePicture = function (req, res) {
   }
 
   function login() {
-    return new Promise(function (resolve, reject) {
-      req.login(user, function (err) {
+    return new Promise((resolve, reject) => {
+      req.login(user, err => {
         if (err) {
           res.status(400).send(err);
         } else {
@@ -203,7 +203,7 @@ exports.changeProfilePicture = function (req, res) {
 /**
  * Send User
  */
-exports.me = function (req, res) {
+exports.me = (req, res) => {
   // Sanitize the user - short term solution. Copied from core.server.controller.js
   // TODO create proper passport mock: See https://gist.github.com/mweibel/5219403
   var safeUserObject = null;

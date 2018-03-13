@@ -9,6 +9,6 @@ var path = require('path'),
 /**
  * Module init function.
  */
-module.exports = function (app) {
+module.exports = app => {
 
 };

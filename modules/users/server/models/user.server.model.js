@@ -182,7 +182,7 @@ UserSchema.statics.findUniqueUsername = function (username, suffix, callback) {
 
   _this.findOne({
     username: possibleUsername
-  }, function (err, user) {
+  }, (err, user) => {
     if (!err) {
       if (!user) {
         callback(possibleUsername);
@@ -200,36 +200,34 @@ UserSchema.statics.findUniqueUsername = function (username, suffix, callback) {
 * Returns a promise that resolves with the generated passphrase, or rejects with an error if something goes wrong.
 * NOTE: Passphrases are only tested against the required owasp strength tests, and not the optional tests.
 */
-UserSchema.statics.generateRandomPassphrase = function () {
-  return new Promise(function (resolve, reject) {
-    var password = '';
-    var repeatingCharacters = new RegExp('(.)\\1{2,}', 'g');
+UserSchema.statics.generateRandomPassphrase = () => new Promise((resolve, reject) => {
+  var password = '';
+  var repeatingCharacters = new RegExp('(.)\\1{2,}', 'g');
 
-    // iterate until the we have a valid passphrase
-    // NOTE: Should rarely iterate more than once, but we need this to ensure no repeating characters are present
-    while (password.length < 20 || repeatingCharacters.test(password)) {
-      // build the random password
-      password = generatePassword.generate({
-        length: Math.floor(Math.random() * (20)) + 20, // randomize length between 20 and 40 characters
-        numbers: true,
-        symbols: false,
-        uppercase: true,
-        excludeSimilarCharacters: true
-      });
+  // iterate until the we have a valid passphrase
+  // NOTE: Should rarely iterate more than once, but we need this to ensure no repeating characters are present
+  while (password.length < 20 || repeatingCharacters.test(password)) {
+    // build the random password
+    password = generatePassword.generate({
+      length: Math.floor(Math.random() * (20)) + 20, // randomize length between 20 and 40 characters
+      numbers: true,
+      symbols: false,
+      uppercase: true,
+      excludeSimilarCharacters: true
+    });
 
-      // check if we need to remove any repeating characters
-      password = password.replace(repeatingCharacters, '');
-    }
+    // check if we need to remove any repeating characters
+    password = password.replace(repeatingCharacters, '');
+  }
 
-    // Send the rejection back if the passphrase fails to pass the strength test
-    if (owasp.test(password).errors.length) {
-      reject(new Error('An unexpected problem occured while generating the random passphrase'));
-    } else {
-      // resolve with the validated passphrase
-      resolve(password);
-    }
-  });
-};
+  // Send the rejection back if the passphrase fails to pass the strength test
+  if (owasp.test(password).errors.length) {
+    reject(new Error('An unexpected problem occured while generating the random passphrase'));
+  } else {
+    // resolve with the validated passphrase
+    resolve(password);
+  }
+});
 
 UserSchema.statics.seed = seed;
 
@@ -242,24 +240,20 @@ mongoose.model('User', UserSchema);
 function seed(doc, options) {
   var User = mongoose.model('User');
 
-  return new Promise(function (resolve, reject) {
+  return new Promise((resolve, reject) => {
 
     skipDocument()
       .then(add)
-      .then(function (response) {
-        return resolve(response);
-      })
-      .catch(function (err) {
-        return reject(err);
-      });
+      .then(response => resolve(response))
+      .catch(err => reject(err));
 
     function skipDocument() {
-      return new Promise(function (resolve, reject) {
+      return new Promise((resolve, reject) => {
         User
           .findOne({
             username: doc.username
           })
-          .exec(function (err, existing) {
+          .exec((err, existing) => {
             if (err) {
               return reject(err);
             }
@@ -274,7 +268,7 @@ function seed(doc, options) {
 
             // Remove User (overwrite)
 
-            existing.remove(function (err) {
+            existing.remove(err => {
               if (err) {
                 return reject(err);
               }
@@ -286,7 +280,7 @@ function seed(doc, options) {
     }
 
     function add(skip) {
-      return new Promise(function (resolve, reject) {
+      return new Promise((resolve, reject) => {
 
         if (skip) {
           return resolve({
@@ -295,14 +289,14 @@ function seed(doc, options) {
         }
 
         User.generateRandomPassphrase()
-          .then(function (passphrase) {
+          .then(passphrase => {
             var user = new User(doc);
 
             user.provider = 'local';
             user.displayName = user.firstName + ' ' + user.lastName;
             user.password = passphrase;
 
-            user.save(function (err) {
+            user.save(err => {
               if (err) {
                 return reject(err);
               }
@@ -312,9 +306,7 @@ function seed(doc, options) {
               });
             });
           })
-          .catch(function (err) {
-            return reject(err);
-          });
+          .catch(err => reject(err));
       });
     }
 

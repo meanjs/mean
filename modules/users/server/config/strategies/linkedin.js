@@ -7,7 +7,7 @@ var passport = require('passport'),
   LinkedInStrategy = require('passport-linkedin').Strategy,
   users = require('../../controllers/users.server.controller');
 
-module.exports = function (config) {
+module.exports = config => {
   // Use linkedin strategy
   passport.use(new LinkedInStrategy({
     consumerKey: config.linkedin.clientID,
@@ -20,7 +20,7 @@ module.exports = function (config) {
       'r_emailaddress'
     ]
   },
-  function (req, accessToken, refreshToken, profile, done) {
+  (req, accessToken, refreshToken, profile, done) => {
     // Set the provider data and include tokens
     var providerData = profile._json;
     providerData.accessToken = accessToken;

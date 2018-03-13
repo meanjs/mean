@@ -27,9 +27,9 @@ var app,
   adminFromSeedConfig,
   originalLogConfig;
 
-describe('Configuration Tests:', function () {
+describe('Configuration Tests:', () => {
 
-  describe('Testing Mongo Seed', function () {
+  describe('Testing Mongo Seed', () => {
     var _seedConfig = _.clone(config.seedDB, true);
     var articleSeedConfig;
     var userSeedConfig;
@@ -37,7 +37,7 @@ describe('Configuration Tests:', function () {
     var _user;
     var _article;
 
-    before(function (done) {
+    before(done => {
       _admin = {
         username: 'test-seed-admin',
         email: 'test-admin@localhost.com',
@@ -59,16 +59,12 @@ describe('Configuration Tests:', function () {
         content: 'Testing Article Seed right now!'
       };
 
-      var articleCollections = _.filter(_seedConfig.collections, function (collection) {
-        return collection.model === 'Article';
-      });
+      var articleCollections = _.filter(_seedConfig.collections, collection => collection.model === 'Article');
 
       // articleCollections.should.be.instanceof(Array).and.have.lengthOf(1);
       articleSeedConfig = articleCollections[0];
 
-      var userCollections = _.filter(_seedConfig.collections, function (collection) {
-        return collection.model === 'User';
-      });
+      var userCollections = _.filter(_seedConfig.collections, collection => collection.model === 'User');
 
       // userCollections.should.be.instanceof(Array).and.have.lengthOf(1);
       userSeedConfig = userCollections[0];
@@ -76,20 +72,14 @@ describe('Configuration Tests:', function () {
       return done();
     });
 
-    afterEach(function (done) {
+    afterEach(done => {
       Article.remove().exec()
-        .then(function () {
-          return User.remove().exec();
-        })
-        .then(function () {
-          return done();
-        })
-        .catch(function (err) {
-          return done(err);
-        });
+        .then(() => User.remove().exec())
+        .then(() => done())
+        .catch(err => done(err));
     });
 
-    it('should have default seed configuration set for articles', function (done) {
+    it('should have default seed configuration set for articles', done => {
       articleSeedConfig.should.be.instanceof(Object);
       articleSeedConfig.docs.should.be.instanceof(Array).and.have.lengthOf(1);
       should.exist(articleSeedConfig.docs[0].data.title);
@@ -98,7 +88,7 @@ describe('Configuration Tests:', function () {
       return done();
     });
 
-    it('should have default seed configuration set for users', function (done) {
+    it('should have default seed configuration set for users', done => {
       userSeedConfig.should.be.instanceof(Object);
       userSeedConfig.docs.should.be.instanceof(Array).and.have.lengthOf(2);
 
@@ -117,26 +107,24 @@ describe('Configuration Tests:', function () {
       return done();
     });
 
-    it('should seed data from default config', function (done) {
+    it('should seed data from default config', done => {
 
       seed.start()
-        .then(function () {
-          // Check Articles Seed
-          return Article.find().exec();
-        })
-        .then(function (articles) {
+        .then(() => // Check Articles Seed
+      Article.find().exec())
+        .then(articles => {
           articles.should.be.instanceof(Array).and.have.lengthOf(articleSeedConfig.docs.length);
           // Check Users Seed
           return User.find().exec();
         })
-        .then(function (users) {
+        .then(users => {
           users.should.be.instanceof(Array).and.have.lengthOf(userSeedConfig.docs.length);
           return done();
         })
         .catch(done);
     });
 
-    it('should overwrite existing article by default', function (done) {
+    it('should overwrite existing article by default', done => {
       articleSeedConfig.docs.should.be.instanceof(Array).and.have.lengthOf(1);
 
       var article = new Article(articleSeedConfig.docs[0].data);
@@ -144,13 +132,9 @@ describe('Configuration Tests:', function () {
 
       // save temp article
       article.save()
-        .then(function () {
-          return seed.start();
-        })
-        .then(function () {
-          return Article.find().exec();
-        })
-        .then(function (articles) {
+        .then(() => seed.start())
+        .then(() => Article.find().exec())
+        .then(articles => {
           articles.should.be.instanceof(Array).and.have.lengthOf(1);
 
           var newArticle = articles.pop();
@@ -162,7 +146,7 @@ describe('Configuration Tests:', function () {
         .catch(done);
     });
 
-    it('should overwrite existing users by default', function (done) {
+    it('should overwrite existing users by default', done => {
       userSeedConfig.docs.should.be.instanceof(Array).and.have.lengthOf(2);
 
       var admin = new User(userSeedConfig.docs[0].data);
@@ -174,28 +158,22 @@ describe('Configuration Tests:', function () {
       user.provider = 'local';
 
       admin.save()
-        .then(function () {
-          return user.save();
-        })
-        .then(function () {
-          return User.find().exec();
-        })
-        .then(function (users) {
+        .then(() => user.save())
+        .then(() => User.find().exec())
+        .then(users => {
           users.should.be.instanceof(Array).and.have.lengthOf(2);
           // Start Seed
           return seed.start();
         })
-        .then(function () {
-          return User.find().exec();
-        })
-        .then(function (users) {
+        .then(() => User.find().exec())
+        .then(users => {
           // Should still only be two users, since we removed
           // the existing users before seeding again.
           users.should.be.instanceof(Array).and.have.lengthOf(2);
 
           return User.find({ username: admin.username }).exec();
         })
-        .then(function (users) {
+        .then(users => {
           users.should.be.instanceof(Array).and.have.lengthOf(1);
 
           var newAdmin = users.pop();
@@ -204,7 +182,7 @@ describe('Configuration Tests:', function () {
 
           return User.find({ username: user.username }).exec();
         })
-        .then(function (users) {
+        .then(users => {
           users.should.be.instanceof(Array).and.have.lengthOf(1);
 
           var newUser = users.pop();
@@ -216,7 +194,7 @@ describe('Configuration Tests:', function () {
         .catch(done);
     });
 
-    it('should seed single article with custom options', function (done) {
+    it('should seed single article with custom options', done => {
       seed
         .start({
           collections: [{
@@ -227,10 +205,8 @@ describe('Configuration Tests:', function () {
             }]
           }]
         })
-        .then(function () {
-          return Article.find().exec();
-        })
-        .then(function (articles) {
+        .then(() => Article.find().exec())
+        .then(articles => {
           articles.should.be.instanceof(Array).and.have.lengthOf(1);
 
           var newArticle = articles.pop();
@@ -242,7 +218,7 @@ describe('Configuration Tests:', function () {
         .catch(done);
     });
 
-    it('should seed single article with user set to custom seeded admin user', function (done) {
+    it('should seed single article with user set to custom seeded admin user', done => {
       seed
         .start({
           collections: [{
@@ -258,10 +234,8 @@ describe('Configuration Tests:', function () {
             }]
           }]
         })
-        .then(function () {
-          return User.find().exec();
-        })
-        .then(function (users) {
+        .then(() => User.find().exec())
+        .then(users => {
           users.should.be.instanceof(Array).and.have.lengthOf(1);
 
           return Article
@@ -269,7 +243,7 @@ describe('Configuration Tests:', function () {
             .populate('user', 'firstName lastName username email roles')
             .exec();
         })
-        .then(function (articles) {
+        .then(articles => {
           articles.should.be.instanceof(Array).and.have.lengthOf(1);
 
           var newArticle = articles.pop();
@@ -292,7 +266,7 @@ describe('Configuration Tests:', function () {
         .catch(done);
     });
 
-    it('should seed single article with NO user set due to seed order', function (done) {
+    it('should seed single article with NO user set due to seed order', done => {
       seed
         .start({
           collections: [{
@@ -308,10 +282,8 @@ describe('Configuration Tests:', function () {
             }]
           }]
         })
-        .then(function () {
-          return User.find().exec();
-        })
-        .then(function (users) {
+        .then(() => User.find().exec())
+        .then(users => {
           users.should.be.instanceof(Array).and.have.lengthOf(1);
 
           return Article
@@ -319,7 +291,7 @@ describe('Configuration Tests:', function () {
             .populate('user', 'firstName lastName username email roles')
             .exec();
         })
-        .then(function (articles) {
+        .then(articles => {
           articles.should.be.instanceof(Array).and.have.lengthOf(1);
 
           var newArticle = articles.pop();
@@ -333,7 +305,7 @@ describe('Configuration Tests:', function () {
         .catch(done);
     });
 
-    it('should seed admin and user accounts with custom options', function (done) {
+    it('should seed admin and user accounts with custom options', done => {
       seed
         .start({
           collections: [{
@@ -345,14 +317,12 @@ describe('Configuration Tests:', function () {
             }]
           }]
         })
-        .then(function () {
-          return User.find().exec();
-        })
-        .then(function (users) {
+        .then(() => User.find().exec())
+        .then(users => {
           users.should.be.instanceof(Array).and.have.lengthOf(2);
           return User.find({ username: _admin.username }).exec();
         })
-        .then(function (users) {
+        .then(users => {
           users.should.be.instanceof(Array).and.have.lengthOf(1);
 
           var newAdmin = users.pop();
@@ -361,7 +331,7 @@ describe('Configuration Tests:', function () {
 
           return User.find({ username: _user.username }).exec();
         })
-        .then(function (users) {
+        .then(users => {
           users.should.be.instanceof(Array).and.have.lengthOf(1);
 
           var newUser = users.pop();
@@ -373,27 +343,23 @@ describe('Configuration Tests:', function () {
         .catch(done);
     });
 
-    it('should NOT overwrite existing article with custom options', function (done) {
+    it('should NOT overwrite existing article with custom options', done => {
 
       var article = new Article(_article);
       article.content = '_temp_article_content_';
 
       article.save()
-        .then(function () {
-          return seed.start({
-            collections: [{
-              model: 'Article',
-              docs: [{
-                overwrite: false,
-                data: _article
-              }]
-            }]
-          });
-        })
-        .then(function () {
-          return Article.find().exec();
-        })
-        .then(function (articles) {
+        .then(() => seed.start({
+        collections: [{
+          model: 'Article',
+          docs: [{
+            overwrite: false,
+            data: _article
+          }]
+        }]
+      }))
+        .then(() => Article.find().exec())
+        .then(articles => {
           articles.should.be.instanceof(Array).and.have.lengthOf(1);
 
           var existingArticle = articles.pop();
@@ -405,27 +371,23 @@ describe('Configuration Tests:', function () {
         .catch(done);
     });
 
-    it('should NOT overwrite existing user with custom options', function (done) {
+    it('should NOT overwrite existing user with custom options', done => {
       var user = new User(_user);
       user.provider = 'local';
       user.email = 'temp-test-user@localhost.com';
 
       user.save()
-        .then(function () {
-          return seed.start({
-            collections: [{
-              model: 'User',
-              docs: [{
-                overwrite: false,
-                data: _user
-              }]
-            }]
-          });
-        })
-        .then(function () {
-          return User.find().exec();
-        })
-        .then(function (users) {
+        .then(() => seed.start({
+        collections: [{
+          model: 'User',
+          docs: [{
+            overwrite: false,
+            data: _user
+          }]
+        }]
+      }))
+        .then(() => User.find().exec())
+        .then(users => {
           users.should.be.instanceof(Array).and.have.lengthOf(1);
 
           var existingUser = users.pop();
@@ -437,7 +399,7 @@ describe('Configuration Tests:', function () {
         .catch(done);
     });
 
-    it('should NOT seed article when missing title with custom options', function (done) {
+    it('should NOT seed article when missing title with custom options', done => {
       var invalid = {
         content: '_temp_article_content_'
       };
@@ -451,13 +413,13 @@ describe('Configuration Tests:', function () {
             }]
           }]
         })
-        .then(function () {
+        .then(() => {
           // We should not make it here so we
           // force an assert failure to prevent hangs.
           should.exist(undefined);
           return done();
         })
-        .catch(function (err) {
+        .catch(err => {
           should.exist(err);
           err.message.should.equal('Article validation failed: title: Title cannot be blank');
 
@@ -465,7 +427,7 @@ describe('Configuration Tests:', function () {
         });
     });
 
-    it('should NOT seed user when missing username with custom options', function (done) {
+    it('should NOT seed user when missing username with custom options', done => {
       var invalid = _.clone(_user, true);
       invalid.username = undefined;
 
@@ -478,13 +440,13 @@ describe('Configuration Tests:', function () {
             }]
           }]
         })
-        .then(function () {
+        .then(() => {
           // We should not make it here so we
           // force an assert failure to prevent hangs.
           should.exist(undefined);
           return done();
         })
-        .catch(function (err) {
+        .catch(err => {
           should.exist(err);
           err.message.should.equal('User validation failed: username: Please fill in a username');
 
@@ -492,7 +454,7 @@ describe('Configuration Tests:', function () {
         });
     });
 
-    it('should NOT seed user when missing email with custom options', function (done) {
+    it('should NOT seed user when missing email with custom options', done => {
       var invalid = _.clone(_user, true);
       invalid.email = undefined;
 
@@ -505,13 +467,13 @@ describe('Configuration Tests:', function () {
             }]
           }]
         })
-        .then(function () {
+        .then(() => {
           // We should not make it here so we
           // force an assert failure to prevent hangs.
           should.exist(undefined);
           return done();
         })
-        .catch(function (err) {
+        .catch(err => {
           should.exist(err);
           err.message.should.equal('User validation failed: email: Please fill a valid email address');
 
@@ -519,7 +481,7 @@ describe('Configuration Tests:', function () {
         });
     });
 
-    it('should NOT seed user with invalid email with custom options', function (done) {
+    it('should NOT seed user with invalid email with custom options', done => {
       var invalid = _.clone(_user, true);
       invalid.email = '...invalid-email...';
 
@@ -532,13 +494,13 @@ describe('Configuration Tests:', function () {
             }]
           }]
         })
-        .then(function () {
+        .then(() => {
           // We should not make it here so we
           // force an assert failure to prevent hangs.
           should.exist(undefined);
           return done();
         })
-        .catch(function (err) {
+        .catch(err => {
           should.exist(err);
           err.message.should.equal('User validation failed: email: Please fill a valid email address');
 
@@ -546,20 +508,18 @@ describe('Configuration Tests:', function () {
         });
     });
 
-    it('should NOT continue seed when empty collections config', function (done) {
+    it('should NOT continue seed when empty collections config', done => {
       seed
         .start({
           collections: []
         })
-        .then(function () {
-          return Article.find().exec();
-        })
-        .then(function (articles) {
+        .then(() => Article.find().exec())
+        .then(articles => {
           articles.should.be.instanceof(Array).and.have.lengthOf(0);
 
           return User.find().exec();
         })
-        .then(function (users) {
+        .then(users => {
           users.should.be.instanceof(Array).and.have.lengthOf(0);
 
           return done();
@@ -567,7 +527,7 @@ describe('Configuration Tests:', function () {
         .catch(done);
     });
 
-    it('should NOT seed any data when empty docs config', function (done) {
+    it('should NOT seed any data when empty docs config', done => {
       seed
         .start({
           collections: [{
@@ -575,15 +535,13 @@ describe('Configuration Tests:', function () {
             docs: []
           }]
         })
-        .then(function () {
-          return Article.find().exec();
-        })
-        .then(function (articles) {
+        .then(() => Article.find().exec())
+        .then(articles => {
           articles.should.be.instanceof(Array).and.have.lengthOf(0);
 
           return User.find().exec();
         })
-        .then(function (users) {
+        .then(users => {
           users.should.be.instanceof(Array).and.have.lengthOf(0);
 
           return done();
@@ -591,7 +549,7 @@ describe('Configuration Tests:', function () {
         .catch(done);
     });
 
-    it('should seed article with custom options & skip.when results are empty', function (done) {
+    it('should seed article with custom options & skip.when results are empty', done => {
       seed
         .start({
           collections: [{
@@ -604,10 +562,8 @@ describe('Configuration Tests:', function () {
             }]
           }]
         })
-        .then(function () {
-          return Article.find().exec();
-        })
-        .then(function (articles) {
+        .then(() => Article.find().exec())
+        .then(articles => {
           articles.should.be.instanceof(Array).and.have.lengthOf(1);
 
           var newArticle = articles.pop();
@@ -619,7 +575,7 @@ describe('Configuration Tests:', function () {
         .catch(done);
     });
 
-    it('should skip seed on collection with custom options & skip.when has results', function (done) {
+    it('should skip seed on collection with custom options & skip.when has results', done => {
       var article = new Article({
         title: 'temp-article-title',
         content: 'temp-article-content'
@@ -627,10 +583,8 @@ describe('Configuration Tests:', function () {
 
       article
         .save()
-        .then(function () {
-          return Article.find().exec();
-        })
-        .then(function (articles) {
+        .then(() => Article.find().exec())
+        .then(articles => {
           articles.should.be.instanceof(Array).and.have.lengthOf(1);
 
           var newArticle = articles.pop();
@@ -649,10 +603,8 @@ describe('Configuration Tests:', function () {
             }]
           });
         })
-        .then(function () {
-          return Article.find().exec();
-        })
-        .then(function (articles) {
+        .then(() => Article.find().exec())
+        .then(articles => {
           // We should have the same article added at start of this unit test.
           articles.should.be.instanceof(Array).and.have.lengthOf(1);
 
@@ -665,7 +617,7 @@ describe('Configuration Tests:', function () {
         .catch(done);
     });
 
-    it('should fail seed with custom options & invalid skip.when query', function (done) {
+    it('should fail seed with custom options & invalid skip.when query', done => {
       seed
         .start({
           collections: [{
@@ -678,12 +630,12 @@ describe('Configuration Tests:', function () {
             }]
           }]
         })
-        .then(function () {
+        .then(() => {
           // We should not get here
           should.exist(undefined);
           return done();
         })
-        .catch(function (err) {
+        .catch(err => {
           should.exist(err);
           // We expect the error message to include
           err.message.indexOf('Cast to date failed').should.equal(0);
@@ -693,8 +645,8 @@ describe('Configuration Tests:', function () {
     });
   });
 
-  describe('Testing Session Secret Configuration', function () {
-    it('should warn if using default session secret when running in production', function (done) {
+  describe('Testing Session Secret Configuration', () => {
+    it('should warn if using default session secret when running in production', done => {
       var conf = { sessionSecret: 'MEAN' };
       // set env to production for this test
       process.env.NODE_ENV = 'production';
@@ -704,7 +656,7 @@ describe('Configuration Tests:', function () {
       return done();
     });
 
-    it('should accept non-default session secret when running in production', function () {
+    it('should accept non-default session secret when running in production', () => {
       var conf = { sessionSecret: 'super amazing secret' };
       // set env to production for this test
       process.env.NODE_ENV = 'production';
@@ -713,7 +665,7 @@ describe('Configuration Tests:', function () {
       process.env.NODE_ENV = 'test';
     });
 
-    it('should accept default session secret when running in development', function () {
+    it('should accept default session secret when running in development', () => {
       var conf = { sessionSecret: 'MEAN' };
       // set env to development for this test
       process.env.NODE_ENV = 'development';
@@ -722,23 +674,23 @@ describe('Configuration Tests:', function () {
       process.env.NODE_ENV = 'test';
     });
 
-    it('should accept default session secret when running in test', function () {
+    it('should accept default session secret when running in test', () => {
       var conf = { sessionSecret: 'MEAN' };
       config.utils.validateSessionSecret(conf, true).should.equal(true);
     });
   });
 
-  describe('Testing Logger Configuration', function () {
+  describe('Testing Logger Configuration', () => {
 
-    beforeEach(function () {
+    beforeEach(() => {
       originalLogConfig = _.clone(config.log, true);
     });
 
-    afterEach(function () {
+    afterEach(() => {
       config.log = originalLogConfig;
     });
 
-    it('should retrieve the log format from the logger configuration', function () {
+    it('should retrieve the log format from the logger configuration', () => {
 
       config.log = {
         format: 'tiny'
@@ -748,7 +700,7 @@ describe('Configuration Tests:', function () {
       format.should.be.equal('tiny');
     });
 
-    it('should retrieve the log options from the logger configuration for a valid stream object', function () {
+    it('should retrieve the log options from the logger configuration for a valid stream object', () => {
 
       var options = logger.getMorganOptions();
 
@@ -757,7 +709,7 @@ describe('Configuration Tests:', function () {
 
     });
 
-    it('should verify that a file logger object was created using the logger configuration', function () {
+    it('should verify that a file logger object was created using the logger configuration', () => {
       var _dir = process.cwd();
       var _filename = 'unit-test-access.log';
 
@@ -773,7 +725,7 @@ describe('Configuration Tests:', function () {
       fileTransport.filename.should.equal(_dir + '/' + _filename);
     });
 
-    it('should use the default log format of "combined" when an invalid format was provided', function () {
+    it('should use the default log format of "combined" when an invalid format was provided', () => {
 
       var _logger = require(path.resolve('./config/lib/logger'));
 
@@ -786,7 +738,7 @@ describe('Configuration Tests:', function () {
       format.should.be.equal('combined');
     });
 
-    it('should not create a file transport object if critical options are missing: filename', function () {
+    it('should not create a file transport object if critical options are missing: filename', () => {
 
       // manually set the config stream fileName option to an empty string
       config.log = {
@@ -803,7 +755,7 @@ describe('Configuration Tests:', function () {
       fileTransport.should.be.false();
     });
 
-    it('should not create a file transport object if critical options are missing: directory', function () {
+    it('should not create a file transport object if critical options are missing: directory', () => {
 
       // manually set the config stream fileName option to an empty string
       config.log = {
@@ -821,10 +773,10 @@ describe('Configuration Tests:', function () {
     });
   });
 
-  describe('Testing exposing environment as a variable to layout', function () {
+  describe('Testing exposing environment as a variable to layout', () => {
 
-    ['development', 'production', 'test'].forEach(function (env) {
-      it('should expose environment set to ' + env, function (done) {
+    ['development', 'production', 'test'].forEach(env => {
+      it('should expose environment set to ' + env, done => {
         // Set env to development for this test
         process.env.NODE_ENV = env;
 
@@ -836,7 +788,7 @@ describe('Configuration Tests:', function () {
         agent.get('/')
           .expect('Content-Type', 'text/html; charset=utf-8')
           .expect(200)
-          .end(function (err, res) {
+          .end((err, res) => {
             // Set env back to test
             process.env.NODE_ENV = 'test';
             // Handle errors
