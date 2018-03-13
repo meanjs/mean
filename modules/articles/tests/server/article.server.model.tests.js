@@ -35,7 +35,7 @@ describe('Article Model Unit Tests:', () => {
         article = new Article({
           title: 'Article Title',
           content: 'Article Content',
-          user: user
+          user
         });
 
         done();

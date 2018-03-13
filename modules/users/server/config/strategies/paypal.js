@@ -32,7 +32,7 @@ module.exports = config => {
       username: profile.username,
       provider: 'paypal',
       providerIdentifierField: 'user_id',
-      providerData: providerData
+      providerData
     };
 
     // Save the user OAuth profile

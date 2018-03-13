@@ -33,7 +33,7 @@ module.exports = config => {
       profileImageURL: (profile.id) ? '//graph.facebook.com/' + profile.id + '/picture?type=large' : undefined,
       provider: 'facebook',
       providerIdentifierField: 'id',
-      providerData: providerData
+      providerData
     };
 
     // Save the user OAuth profile

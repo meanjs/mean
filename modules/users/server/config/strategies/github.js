@@ -28,9 +28,9 @@ module.exports = config => {
     var lastName = iSpace !== -1 ? displayName.substring(iSpace + 1) : '';
 
     var providerUserProfile = {
-      firstName: firstName,
-      lastName: lastName,
-      displayName: displayName,
+      firstName,
+      lastName,
+      displayName,
       email: (profile.emails && profile.emails.length) ? profile.emails[0].value : undefined,
       username: profile.username,
       // jscs:disable requireCamelCaseOrUpperCaseIdentifiers
@@ -38,7 +38,7 @@ module.exports = config => {
       // jscs:enable
       provider: 'github',
       providerIdentifierField: 'id',
-      providerData: providerData
+      providerData
     };
 
     // Save the user OAuth profile

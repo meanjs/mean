@@ -34,7 +34,7 @@ module.exports = config => {
         profileImageURL: (providerData.picture) ? providerData.picture : undefined,
         provider: 'google',
         providerIdentifierField: 'id',
-        providerData: providerData
+        providerData
       };
 
       // Save the user OAuth profile

@@ -28,14 +28,14 @@ module.exports = config => {
     var lastName = iSpace !== -1 ? displayName.substring(iSpace + 1) : '';
 
     var providerUserProfile = {
-      firstName: firstName,
-      lastName: lastName,
-      displayName: displayName,
+      firstName,
+      lastName,
+      displayName,
       username: profile.username,
       profileImageURL: profile.photos[0].value.replace('normal', 'bigger'),
       provider: 'twitter',
       providerIdentifierField: 'id_str',
-      providerData: providerData
+      providerData
     };
 
     // Save the user OAuth profile

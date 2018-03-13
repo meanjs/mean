@@ -78,7 +78,7 @@ exports.changeProfilePicture = (req, res) => {
   if (useS3Storage) {
     multerConfig = {
       storage: multerS3({
-        s3: s3,
+        s3,
         bucket: config.aws.s3.bucket,
         acl: 'public-read'
       })
