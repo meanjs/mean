@@ -1,18 +1,18 @@
 /**
  * Module dependencies.
  */
-var should = require('should');
+const should = require('should');
 
-var mongoose = require('mongoose');
-var User = mongoose.model('User');
-var Article = mongoose.model('Article');
+const mongoose = require('mongoose');
+const User = mongoose.model('User');
+const Article = mongoose.model('Article');
 
 /**
  * Globals
  */
-var user;
+let user;
 
-var article;
+let article;
 
 /**
  * Unit tests

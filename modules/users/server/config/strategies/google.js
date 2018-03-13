@@ -1,10 +1,10 @@
 /**
  * Module dependencies
  */
-var passport = require('passport');
+const passport = require('passport');
 
-var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
-var users = require('../../controllers/users.server.controller');
+const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+const users = require('../../controllers/users.server.controller');
 
 module.exports = config => {
   // Use google strategy
@@ -19,12 +19,12 @@ module.exports = config => {
   },
     (req, accessToken, refreshToken, profile, done) => {
       // Set the provider data and include tokens
-      var providerData = profile._json;
+      const providerData = profile._json;
       providerData.accessToken = accessToken;
       providerData.refreshToken = refreshToken;
 
       // Create the user OAuth profile
-      var providerUserProfile = {
+      const providerUserProfile = {
         firstName: profile.name.givenName,
         lastName: profile.name.familyName,
         displayName: profile.displayName,

@@ -1,24 +1,24 @@
 /**
  * Module dependencies
  */
-var _ = require('lodash');
+const _ = require('lodash');
 
-var fs = require('fs');
-var path = require('path');
-var errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller'));
-var mongoose = require('mongoose');
-var multer = require('multer');
-var multerS3 = require('multer-s3');
-var aws = require('aws-sdk');
-var amazonS3URI = require('amazon-s3-uri');
-var config = require(path.resolve('./config/config'));
-var User = mongoose.model('User');
-var validator = require('validator');
+const fs = require('fs');
+const path = require('path');
+const errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller'));
+const mongoose = require('mongoose');
+const multer = require('multer');
+const multerS3 = require('multer-s3');
+const aws = require('aws-sdk');
+const amazonS3URI = require('amazon-s3-uri');
+const config = require(path.resolve('./config/config'));
+const User = mongoose.model('User');
+const validator = require('validator');
 
-var whitelistedFields = ['firstName', 'lastName', 'email', 'username'];
+const whitelistedFields = ['firstName', 'lastName', 'email', 'username'];
 
-var useS3Storage = config.uploads.storage === 's3' && config.aws.s3;
-var s3;
+const useS3Storage = config.uploads.storage === 's3' && config.aws.s3;
+let s3;
 
 if (useS3Storage) {
   aws.config.update({
@@ -34,7 +34,7 @@ if (useS3Storage) {
  */
 exports.update = (req, res) => {
   // Init Variables
-  var user = req.user;
+  let user = req.user;
 
   if (user) {
     // Update whitelisted fields only
@@ -69,9 +69,9 @@ exports.update = (req, res) => {
  * Update profile picture
  */
 exports.changeProfilePicture = (req, res) => {
-  var user = req.user;
-  var existingImageUrl;
-  var multerConfig;
+  const user = req.user;
+  let existingImageUrl;
+  let multerConfig;
 
 
   if (useS3Storage) {
@@ -89,7 +89,7 @@ exports.changeProfilePicture = (req, res) => {
   // Filtering to upload only images
   multerConfig.fileFilter = require(path.resolve('./config/lib/multer')).imageFileFilter;
 
-  var upload = multer(multerConfig).single('newProfilePicture');
+  const upload = multer(multerConfig).single('newProfilePicture');
 
   if (user) {
     existingImageUrl = user.profileImageURL;
@@ -141,8 +141,8 @@ exports.changeProfilePicture = (req, res) => {
       if (existingImageUrl !== User.schema.path('profileImageURL').defaultValue) {
         if (useS3Storage) {
           try {
-            var { region, bucket, key } = amazonS3URI(existingImageUrl);
-            var params = {
+            const { region, bucket, key } = amazonS3URI(existingImageUrl);
+            const params = {
               Bucket: config.aws.s3.bucket,
               Key: key
             };
@@ -205,7 +205,7 @@ exports.changeProfilePicture = (req, res) => {
 exports.me = (req, res) => {
   // Sanitize the user - short term solution. Copied from core.server.controller.js
   // TODO create proper passport mock: See https://gist.github.com/mweibel/5219403
-  var safeUserObject = null;
+  let safeUserObject = null;
   if (req.user) {
     safeUserObject = {
       displayName: validator.escape(req.user.displayName),

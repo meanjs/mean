@@ -1,17 +1,17 @@
 /**
  * Module dependencies
  */
-var path = require('path');
+const path = require('path');
 
-var config = require(path.resolve('./config/config'));
-var errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller'));
-var mongoose = require('mongoose');
-var User = mongoose.model('User');
-var nodemailer = require('nodemailer');
-var async = require('async');
-var crypto = require('crypto');
+const config = require(path.resolve('./config/config'));
+const errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller'));
+const mongoose = require('mongoose');
+const User = mongoose.model('User');
+const nodemailer = require('nodemailer');
+const async = require('async');
+const crypto = require('crypto');
 
-var smtpTransport = nodemailer.createTransport(config.mailer.options);
+const smtpTransport = nodemailer.createTransport(config.mailer.options);
 
 /**
  * Forgot for reset password (forgot POST)
@@ -20,14 +20,14 @@ exports.forgot = (req, res, next) => {
   async.waterfall([
     done => {
       crypto.randomBytes(20, (err, buffer) => {
-        var token = buffer.toString('hex');
+        const token = buffer.toString('hex');
         done(err, token);
       });
     },
     (token, done) => {
       if (req.body.usernameOrEmail) {
 
-        var usernameOrEmail = String(req.body.usernameOrEmail).toLowerCase();
+        const usernameOrEmail = String(req.body.usernameOrEmail).toLowerCase();
 
         User.findOne({
           $or: [
@@ -60,11 +60,11 @@ exports.forgot = (req, res, next) => {
     },
     (token, user, done) => {
 
-      var httpTransport = 'http://';
+      let httpTransport = 'http://';
       if (config.secure && config.secure.ssl === true) {
         httpTransport = 'https://';
       }
-      var baseUrl = config.domain || httpTransport + req.headers.host;
+      const baseUrl = config.domain || httpTransport + req.headers.host;
       res.render(path.resolve('modules/users/server/templates/reset-password-email'), {
         name: user.displayName,
         appName: config.app.title,
@@ -74,7 +74,7 @@ exports.forgot = (req, res, next) => {
       });
     },
     (emailHTML, user, done) => {
-      var mailOptions = {
+      const mailOptions = {
         to: user.email,
         from: config.mailer.from,
         subject: 'Password Reset',
@@ -124,7 +124,7 @@ exports.validateResetToken = (req, res) => {
  */
 exports.reset = (req, res, next) => {
   // Init Variables
-  var passwordDetails = req.body;
+  const passwordDetails = req.body;
 
   async.waterfall([
 
@@ -183,7 +183,7 @@ exports.reset = (req, res, next) => {
       });
     },
     (emailHTML, user, done) => {
-      var mailOptions = {
+      const mailOptions = {
         to: user.email,
         from: config.mailer.from,
         subject: 'Your password has been changed',
@@ -206,7 +206,7 @@ exports.reset = (req, res, next) => {
  */
 exports.changePassword = (req, res, next) => {
   // Init Variables
-  var passwordDetails = req.body;
+  const passwordDetails = req.body;
 
   if (req.user) {
     if (passwordDetails.newPassword) {

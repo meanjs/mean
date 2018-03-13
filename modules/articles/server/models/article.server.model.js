@@ -1,17 +1,17 @@
 /**
  * Module dependencies
  */
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
-var Schema = mongoose.Schema;
-var path = require('path');
-var config = require(path.resolve('./config/config'));
-var chalk = require('chalk');
+const Schema = mongoose.Schema;
+const path = require('path');
+const config = require(path.resolve('./config/config'));
+const chalk = require('chalk');
 
 /**
  * Article Schema
  */
-var ArticleSchema = new Schema({
+const ArticleSchema = new Schema({
   created: {
     type: Date,
     default: Date.now
@@ -42,7 +42,7 @@ mongoose.model('Article', ArticleSchema);
 * and provided options.
 */
 function seed(doc, options) {
-  var Article = mongoose.model('Article');
+  const Article = mongoose.model('Article');
 
   return new Promise((resolve, reject) => {
 
@@ -53,7 +53,7 @@ function seed(doc, options) {
       .catch(err => reject(err));
 
     function findAdminUser(skip) {
-      var User = mongoose.model('User');
+      const User = mongoose.model('User');
 
       return new Promise((resolve, reject) => {
         if (skip) {
@@ -116,7 +116,7 @@ function seed(doc, options) {
           });
         }
 
-        var article = new Article(doc);
+        const article = new Article(doc);
 
         article.save(err => {
           if (err) {

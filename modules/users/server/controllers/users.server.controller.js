@@ -1,7 +1,7 @@
 /**
  * Module dependencies
  */
-var _ = require('lodash');
+const _ = require('lodash');
 
 /**
  * Extend user's controller

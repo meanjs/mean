@@ -1,9 +1,9 @@
 /**
  * Module dependencies
  */
-var path = require('path');
+const path = require('path');
 
-var config = require(path.resolve('./config/config'));
+const config = require(path.resolve('./config/config'));
 
 /**
  * Module init function.

@@ -1,11 +1,11 @@
 /**
  * Module dependencies
  */
-var path = require('path');
+const path = require('path');
 
-var mongoose = require('mongoose');
-var User = mongoose.model('User');
-var errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller'));
+const mongoose = require('mongoose');
+const User = mongoose.model('User');
+const errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller'));
 
 /**
  * Show the current user
@@ -18,7 +18,7 @@ exports.read = (req, res) => {
  * Update a User
  */
 exports.update = (req, res) => {
-  var user = req.model;
+  const user = req.model;
 
   // For security purposes only merge these parameters
   user.firstName = req.body.firstName;
@@ -41,7 +41,7 @@ exports.update = (req, res) => {
  * Delete a user
  */
 exports.delete = (req, res) => {
-  var user = req.model;
+  const user = req.model;
 
   user.remove(err => {
     if (err) {

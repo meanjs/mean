@@ -1,11 +1,11 @@
 /**
  * Module dependencies
  */
-var passport = require('passport');
+const passport = require('passport');
 
-var User = require('mongoose').model('User');
-var path = require('path');
-var config = require(path.resolve('./config/config'));
+const User = require('mongoose').model('User');
+const path = require('path');
+const config = require(path.resolve('./config/config'));
 
 /**
  * Module init function

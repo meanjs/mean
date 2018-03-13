@@ -1,20 +1,20 @@
-var should = require('should');
-var request = require('supertest');
-var path = require('path');
-var mongoose = require('mongoose');
-var User = mongoose.model('User');
-var Article = mongoose.model('Article');
-var express = require(path.resolve('./config/lib/express'));
+const should = require('should');
+const request = require('supertest');
+const path = require('path');
+const mongoose = require('mongoose');
+const User = mongoose.model('User');
+const Article = mongoose.model('Article');
+const express = require(path.resolve('./config/lib/express'));
 
 /**
  * Globals
  */
-var app;
+let app;
 
-var agent;
-var credentials;
-var user;
-var article;
+let agent;
+let credentials;
+let user;
+let article;
 
 /**
  * Article routes tests
@@ -113,7 +113,7 @@ describe('Article CRUD tests', () => {
 
   it('should be able to get a list of articles if not signed in', done => {
     // Create new article model instance
-    var articleObj = new Article(article);
+    const articleObj = new Article(article);
 
     // Save the article
     articleObj.save(() => {
@@ -132,7 +132,7 @@ describe('Article CRUD tests', () => {
 
   it('should be able to get a single article if not signed in', done => {
     // Create new article model instance
-    var articleObj = new Article(article);
+    const articleObj = new Article(article);
 
     // Save the article
     articleObj.save(() => {
@@ -196,7 +196,7 @@ describe('Article CRUD tests', () => {
     article.user = user;
 
     // Create new article model instance
-    var articleObj = new Article(article);
+    const articleObj = new Article(article);
 
     // Save the article
     articleObj.save(() => {
@@ -216,13 +216,13 @@ describe('Article CRUD tests', () => {
 
   it('should be able to get a single article that has an orphaned user reference', done => {
     // Create orphan user creds
-    var _creds = {
+    const _creds = {
       usernameOrEmail: 'orphan',
       password: 'M3@n.jsI$Aw3$0m3'
     };
 
     // Create orphan user
-    var _orphan = new User({
+    const _orphan = new User({
       firstName: 'Full',
       lastName: 'Name',
       displayName: 'Full Name',
@@ -249,7 +249,7 @@ describe('Article CRUD tests', () => {
           }
 
           // Get the userId
-          var orphanId = orphan._id;
+          const orphanId = orphan._id;
 
           // Save a new article
           agent.post('/api/articles')
@@ -304,7 +304,7 @@ describe('Article CRUD tests', () => {
 
   it('should be able to get a single article if not signed in and verify the custom "isCurrentUserOwner" field is set to "false"', done => {
     // Create new article model instance
-    var articleObj = new Article(article);
+    const articleObj = new Article(article);
 
     // Save the article
     articleObj.save(err => {
@@ -325,13 +325,13 @@ describe('Article CRUD tests', () => {
 
   it('should be able to get single article, that a different user created, if logged in & verify the "isCurrentUserOwner" field is set to "false"', done => {
     // Create temporary user creds
-    var _creds = {
+    const _creds = {
       usernameOrEmail: 'articleowner',
       password: 'M3@n.jsI$Aw3$0m3'
     };
 
     // Create user that will create the Article
-    var _articleOwner = new User({
+    const _articleOwner = new User({
       firstName: 'Full',
       lastName: 'Name',
       displayName: 'Full Name',
@@ -359,7 +359,7 @@ describe('Article CRUD tests', () => {
           }
 
           // Get the userId
-          var userId = _user._id;
+          const userId = _user._id;
 
           // Save a new article
           agent.post('/api/articles')

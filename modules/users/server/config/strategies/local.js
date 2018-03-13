@@ -1,10 +1,10 @@
 /**
  * Module dependencies
  */
-var passport = require('passport');
+const passport = require('passport');
 
-var LocalStrategy = require('passport-local').Strategy;
-var User = require('mongoose').model('User');
+const LocalStrategy = require('passport-local').Strategy;
+const User = require('mongoose').model('User');
 
 module.exports = () => {
   // Use local strategy

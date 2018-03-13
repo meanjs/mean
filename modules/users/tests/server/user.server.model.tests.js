@@ -1,20 +1,20 @@
 /**
  * Module dependencies.
  */
-var should = require('should');
+const should = require('should');
 
-var mongoose = require('mongoose');
-var User = mongoose.model('User');
-var path = require('path');
-var config = require(path.resolve('./config/config'));
+const mongoose = require('mongoose');
+const User = mongoose.model('User');
+const path = require('path');
+const config = require(path.resolve('./config/config'));
 
 /**
  * Globals
  */
-var user1;
+let user1;
 
-var user2;
-var user3;
+let user2;
+let user3;
 
 /**
  * Unit tests
@@ -53,7 +53,7 @@ describe('User Model Unit Tests:', () => {
     });
 
     it('should be able to save without problems', done => {
-      var _user1 = new User(user1);
+      const _user1 = new User(user1);
 
       _user1.save(err => {
         should.not.exist(err);
@@ -65,8 +65,8 @@ describe('User Model Unit Tests:', () => {
     });
 
     it('should fail to save an existing user again', done => {
-      var _user1 = new User(user1);
-      var _user2 = new User(user2);
+      const _user1 = new User(user1);
+      const _user2 = new User(user2);
 
       _user1.save(() => {
         _user2.save(err => {
@@ -80,7 +80,7 @@ describe('User Model Unit Tests:', () => {
     });
 
     it('should be able to show an error when trying to save without first name', done => {
-      var _user1 = new User(user1);
+      const _user1 = new User(user1);
 
       _user1.firstName = '';
       _user1.save(err => {
@@ -90,7 +90,7 @@ describe('User Model Unit Tests:', () => {
     });
 
     it('should be able to update an existing user with valid roles without problems', done => {
-      var _user1 = new User(user1);
+      const _user1 = new User(user1);
 
       _user1.save(err => {
         should.not.exist(err);
@@ -106,7 +106,7 @@ describe('User Model Unit Tests:', () => {
     });
 
     it('should be able to show an error when trying to update an existing user without a role', done => {
-      var _user1 = new User(user1);
+      const _user1 = new User(user1);
 
       _user1.save(err => {
         should.not.exist(err);
@@ -122,7 +122,7 @@ describe('User Model Unit Tests:', () => {
     });
 
     it('should be able to show an error when trying to update an existing user with a invalid role', done => {
-      var _user1 = new User(user1);
+      const _user1 = new User(user1);
 
       _user1.save(err => {
         should.not.exist(err);
@@ -138,14 +138,14 @@ describe('User Model Unit Tests:', () => {
     });
 
     it('should confirm that saving user model doesnt change the password', done => {
-      var _user1 = new User(user1);
+      const _user1 = new User(user1);
 
       _user1.save(err => {
         should.not.exist(err);
-        var passwordBefore = _user1.password;
+        const passwordBefore = _user1.password;
         _user1.firstName = 'test';
         _user1.save(err => {
-          var passwordAfter = _user1.password;
+          const passwordAfter = _user1.password;
           passwordBefore.should.equal(passwordAfter);
           _user1.remove(err => {
             should.not.exist(err);
@@ -156,8 +156,8 @@ describe('User Model Unit Tests:', () => {
     });
 
     it('should be able to save 2 different users', done => {
-      var _user1 = new User(user1);
-      var _user3 = new User(user3);
+      const _user1 = new User(user1);
+      const _user3 = new User(user3);
 
       _user1.save(err => {
         should.not.exist(err);
@@ -178,8 +178,8 @@ describe('User Model Unit Tests:', () => {
       // Test may take some time to complete due to db operations
       this.timeout(10000);
 
-      var _user1 = new User(user1);
-      var _user3 = new User(user3);
+      const _user1 = new User(user1);
+      const _user3 = new User(user3);
 
       _user1.save(err => {
         should.not.exist(err);
@@ -196,10 +196,10 @@ describe('User Model Unit Tests:', () => {
     });
 
     it('should not index missing email field, thus not enforce the model\'s unique index', done => {
-      var _user1 = new User(user1);
+      const _user1 = new User(user1);
       _user1.email = undefined;
 
-      var _user3 = new User(user3);
+      const _user3 = new User(user3);
       _user3.email = undefined;
 
       _user1.save(err => {
@@ -219,8 +219,8 @@ describe('User Model Unit Tests:', () => {
     });
 
     it('should not save the password in plain text', done => {
-      var _user1 = new User(user1);
-      var passwordBeforeSave = _user1.password;
+      const _user1 = new User(user1);
+      const passwordBeforeSave = _user1.password;
       _user1.save(err => {
         should.not.exist(err);
         _user1.password.should.not.equal(passwordBeforeSave);
@@ -232,9 +232,9 @@ describe('User Model Unit Tests:', () => {
     });
 
     it('should not save the passphrase in plain text', done => {
-      var _user1 = new User(user1);
+      const _user1 = new User(user1);
       _user1.password = 'Open-Source Full-Stack Solution for MEAN';
-      var passwordBeforeSave = _user1.password;
+      const passwordBeforeSave = _user1.password;
       _user1.save(err => {
         should.not.exist(err);
         _user1.password.should.not.equal(passwordBeforeSave);
@@ -248,7 +248,7 @@ describe('User Model Unit Tests:', () => {
 
   describe('User Password Validation Tests', () => {
     it('should validate when the password strength passes - "P@$$w0rd!!"', () => {
-      var _user1 = new User(user1);
+      const _user1 = new User(user1);
       _user1.password = 'P@$$w0rd!!';
 
       _user1.validate(err => {
@@ -257,7 +257,7 @@ describe('User Model Unit Tests:', () => {
     });
 
     it('should validate a randomly generated passphrase from the static schema method', () => {
-      var _user1 = new User(user1);
+      const _user1 = new User(user1);
 
       User.generateRandomPassphrase()
       .then(password => {
@@ -273,7 +273,7 @@ describe('User Model Unit Tests:', () => {
     });
 
     it('should validate when the password is undefined', () => {
-      var _user1 = new User(user1);
+      const _user1 = new User(user1);
       _user1.password = undefined;
 
       _user1.validate(err => {
@@ -282,7 +282,7 @@ describe('User Model Unit Tests:', () => {
     });
 
     it('should validate when the passphrase strength passes - "Open-Source Full-Stack Solution For MEAN Applications"', () => {
-      var _user1 = new User(user1);
+      const _user1 = new User(user1);
       _user1.password = 'Open-Source Full-Stack Solution For MEAN Applications';
 
       _user1.validate(err => {
@@ -291,7 +291,7 @@ describe('User Model Unit Tests:', () => {
     });
 
     it('should not allow a password less than 10 characters long - "P@$$w0rd!"', done => {
-      var _user1 = new User(user1);
+      const _user1 = new User(user1);
       _user1.password = 'P@$$w0rd!';
 
       _user1.validate(err => {
@@ -301,7 +301,7 @@ describe('User Model Unit Tests:', () => {
     });
 
     it('should not allow a password greater than 128 characters long.', done => {
-      var _user1 = new User(user1);
+      const _user1 = new User(user1);
       _user1.password = ')!/uLT="lh&:`6X!]|15o!$!TJf,.13l?vG].-j],lFPe/QhwN#{Z<[*1nX@n1^?WW-%_.*D)m$toB+N7z}kcN#B_d(f41h%w@0F!]igtSQ1gl~6sEV&r~}~1ub>If1c+';
 
       _user1.validate(err => {
@@ -311,7 +311,7 @@ describe('User Model Unit Tests:', () => {
     });
 
     it('should not allow a password with 3 or more repeating characters - "P@$$w0rd!!!"', done => {
-      var _user1 = new User(user1);
+      const _user1 = new User(user1);
       _user1.password = 'P@$$w0rd!!!';
 
       _user1.validate(err => {
@@ -321,7 +321,7 @@ describe('User Model Unit Tests:', () => {
     });
 
     it('should not allow a password with no uppercase letters - "p@$$w0rd!!"', done => {
-      var _user1 = new User(user1);
+      const _user1 = new User(user1);
       _user1.password = 'p@$$w0rd!!';
 
       _user1.validate(err => {
@@ -331,7 +331,7 @@ describe('User Model Unit Tests:', () => {
     });
 
     it('should not allow a password with less than one number - "P@$$word!!"', done => {
-      var _user1 = new User(user1);
+      const _user1 = new User(user1);
       _user1.password = 'P@$$word!!';
 
       _user1.validate(err => {
@@ -341,7 +341,7 @@ describe('User Model Unit Tests:', () => {
     });
 
     it('should not allow a password with less than one special character - "Passw0rdss"', done => {
-      var _user1 = new User(user1);
+      const _user1 = new User(user1);
       _user1.password = 'Passw0rdss';
 
       _user1.validate(err => {
@@ -353,7 +353,7 @@ describe('User Model Unit Tests:', () => {
 
   describe('User E-mail Validation Tests', () => {
     it('should not allow invalid email address - "123"', done => {
-      var _user1 = new User(user1);
+      const _user1 = new User(user1);
 
       _user1.email = '123';
       _user1.save(err => {
@@ -372,7 +372,7 @@ describe('User Model Unit Tests:', () => {
     });
 
     it('should not allow invalid email address - "123@123@123"', done => {
-      var _user1 = new User(user1);
+      const _user1 = new User(user1);
 
       _user1.email = '123@123@123';
       _user1.save(err => {
@@ -391,7 +391,7 @@ describe('User Model Unit Tests:', () => {
     });
 
     it('should allow email address - "123@123"', done => {
-      var _user1 = new User(user1);
+      const _user1 = new User(user1);
 
       _user1.email = '123@123';
       _user1.save(err => {
@@ -410,7 +410,7 @@ describe('User Model Unit Tests:', () => {
     });
 
     it('should not allow invalid email address - "123.com"', done => {
-      var _user1 = new User(user1);
+      const _user1 = new User(user1);
 
       _user1.email = '123.com';
       _user1.save(err => {
@@ -429,7 +429,7 @@ describe('User Model Unit Tests:', () => {
     });
 
     it('should not allow invalid email address - "@123.com"', done => {
-      var _user1 = new User(user1);
+      const _user1 = new User(user1);
 
       _user1.email = '@123.com';
       _user1.save(err => {
@@ -447,7 +447,7 @@ describe('User Model Unit Tests:', () => {
     });
 
     it('should not allow invalid email address - "abc@abc@abc.com"', done => {
-      var _user1 = new User(user1);
+      const _user1 = new User(user1);
 
       _user1.email = 'abc@abc@abc.com';
       _user1.save(err => {
@@ -465,7 +465,7 @@ describe('User Model Unit Tests:', () => {
     });
 
     it('should not allow invalid characters in email address - "abc~@#$%^&*()ef=@abc.com"', done => {
-      var _user1 = new User(user1);
+      const _user1 = new User(user1);
 
       _user1.email = 'abc~@#$%^&*()ef=@abc.com';
       _user1.save(err => {
@@ -483,7 +483,7 @@ describe('User Model Unit Tests:', () => {
     });
 
     it('should not allow space characters in email address - "abc def@abc.com"', done => {
-      var _user1 = new User(user1);
+      const _user1 = new User(user1);
 
       _user1.email = 'abc def@abc.com';
       _user1.save(err => {
@@ -501,7 +501,7 @@ describe('User Model Unit Tests:', () => {
     });
 
     it('should not allow doudble quote characters in email address - "abc\"def@abc.com"', done => {
-      var _user1 = new User(user1);
+      const _user1 = new User(user1);
 
       _user1.email = 'abc\"def@abc.com';
       _user1.save(err => {
@@ -519,7 +519,7 @@ describe('User Model Unit Tests:', () => {
     });
 
     it('should not allow double dotted characters in email address - "abcdef@abc..com"', done => {
-      var _user1 = new User(user1);
+      const _user1 = new User(user1);
 
       _user1.email = 'abcdef@abc..com';
       _user1.save(err => {
@@ -537,7 +537,7 @@ describe('User Model Unit Tests:', () => {
     });
 
     it('should allow single quote characters in email address - "abc\'def@abc.com"', done => {
-      var _user1 = new User(user1);
+      const _user1 = new User(user1);
 
       _user1.email = 'abc\'def@abc.com';
       _user1.save(err => {
@@ -555,7 +555,7 @@ describe('User Model Unit Tests:', () => {
     });
 
     it('should allow valid email address - "abc@abc.com"', done => {
-      var _user1 = new User(user1);
+      const _user1 = new User(user1);
 
       _user1.email = 'abc@abc.com';
       _user1.save(err => {
@@ -573,7 +573,7 @@ describe('User Model Unit Tests:', () => {
     });
 
     it('should allow valid email address - "abc+def@abc.com"', done => {
-      var _user1 = new User(user1);
+      const _user1 = new User(user1);
 
       _user1.email = 'abc+def@abc.com';
       _user1.save(err => {
@@ -591,7 +591,7 @@ describe('User Model Unit Tests:', () => {
     });
 
     it('should allow valid email address - "abc.def@abc.com"', done => {
-      var _user1 = new User(user1);
+      const _user1 = new User(user1);
 
       _user1.email = 'abc.def@abc.com';
       _user1.save(err => {
@@ -609,7 +609,7 @@ describe('User Model Unit Tests:', () => {
     });
 
     it('should allow valid email address - "abc.def@abc.def.com"', done => {
-      var _user1 = new User(user1);
+      const _user1 = new User(user1);
 
       _user1.email = 'abc.def@abc.def.com';
       _user1.save(err => {
@@ -627,7 +627,7 @@ describe('User Model Unit Tests:', () => {
     });
 
     it('should allow valid email address - "abc-def@abc.com"', done => {
-      var _user1 = new User(user1);
+      const _user1 = new User(user1);
 
       _user1.email = 'abc-def@abc.com';
       _user1.save(err => {
@@ -647,7 +647,7 @@ describe('User Model Unit Tests:', () => {
 
   describe('Username Validation', () => {
     it('should show error to save username beginning with .', done => {
-      var _user = new User(user1);
+      const _user = new User(user1);
 
       _user.username = '.login';
       _user.save(err => {
@@ -657,7 +657,7 @@ describe('User Model Unit Tests:', () => {
     });
 
     it('should be able to show an error when try to save with not allowed username', done => {
-      var _user = new User(user1);
+      const _user = new User(user1);
 
       _user.username = config.illegalUsernames[Math.floor(Math.random() * config.illegalUsernames.length)];
       _user.save(err => {
@@ -667,7 +667,7 @@ describe('User Model Unit Tests:', () => {
     });
 
     it('should show error to save username end with .', done => {
-      var _user = new User(user1);
+      const _user = new User(user1);
 
       _user.username = 'login.';
       _user.save(err => {
@@ -677,7 +677,7 @@ describe('User Model Unit Tests:', () => {
     });
 
     it('should show error to save username with ..', done => {
-      var _user = new User(user1);
+      const _user = new User(user1);
 
       _user.username = 'log..in';
       _user.save(err => {
@@ -687,7 +687,7 @@ describe('User Model Unit Tests:', () => {
     });
 
     it('should show error to save username shorter than 3 character', done => {
-      var _user = new User(user1);
+      const _user = new User(user1);
 
       _user.username = 'lo';
       _user.save(err => {
@@ -697,7 +697,7 @@ describe('User Model Unit Tests:', () => {
     });
 
     it('should show error saving a username without at least one alphanumeric character', done => {
-      var _user = new User(user1);
+      const _user = new User(user1);
 
       _user.username = '-_-';
       _user.save(err => {
@@ -707,7 +707,7 @@ describe('User Model Unit Tests:', () => {
     });
 
     it('should show error saving a username longer than 34 characters', done => {
-      var _user = new User(user1);
+      const _user = new User(user1);
 
       _user.username = 'l'.repeat(35);
       _user.save(err => {
@@ -717,7 +717,7 @@ describe('User Model Unit Tests:', () => {
     });
 
     it('should save username with dot', done => {
-      var _user = new User(user1);
+      const _user = new User(user1);
 
       _user.username = 'log.in';
       _user.save(err => {

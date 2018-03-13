@@ -1,15 +1,15 @@
 /**
  * Module dependencies
  */
-var path = require('path');
+const path = require('path');
 
-var errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller'));
-var mongoose = require('mongoose');
-var passport = require('passport');
-var User = mongoose.model('User');
+const errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller'));
+const mongoose = require('mongoose');
+const passport = require('passport');
+const User = mongoose.model('User');
 
 // URLs for which user can't be redirected on signin
-var noReturnUrls = [
+const noReturnUrls = [
   '/authentication/signin',
   '/authentication/signup'
 ];
@@ -22,7 +22,7 @@ exports.signup = (req, res) => {
   delete req.body.roles;
 
   // Init user and add missing fields
-  var user = new User(req.body);
+  const user = new User(req.body);
   user.provider = 'local';
   user.displayName = user.firstName + ' ' + user.lastName;
 
@@ -83,7 +83,7 @@ exports.signout = (req, res) => {
  * OAuth provider call
  */
 exports.oauthCall = (req, res, next) => {
-  var strategy = req.params.strategy;
+  const strategy = req.params.strategy;
   // Authenticate
   passport.authenticate(strategy)(req, res, next);
 };
@@ -92,7 +92,7 @@ exports.oauthCall = (req, res, next) => {
  * OAuth callback
  */
 exports.oauthCallback = (req, res, next) => {
-  var strategy = req.params.strategy;
+  const strategy = req.params.strategy;
 
   // info.redirect_to contains inteded redirect path
   passport.authenticate(strategy, (err, user, info) => {
@@ -117,8 +117,8 @@ exports.oauthCallback = (req, res, next) => {
  */
 exports.saveOAuthUserProfile = (req, providerUserProfile, done) => {
   // Setup info and user objects
-  var info = {};
-  var user;
+  const info = {};
+  let user;
 
   // Set redirection path on session.
   // Do not redirect to a signin or signup page
@@ -127,20 +127,20 @@ exports.saveOAuthUserProfile = (req, providerUserProfile, done) => {
   }
 
   // Define a search query fields
-  var searchMainProviderIdentifierField = 'providerData.' + providerUserProfile.providerIdentifierField;
-  var searchAdditionalProviderIdentifierField = 'additionalProvidersData.' + providerUserProfile.provider + '.' + providerUserProfile.providerIdentifierField;
+  const searchMainProviderIdentifierField = 'providerData.' + providerUserProfile.providerIdentifierField;
+  const searchAdditionalProviderIdentifierField = 'additionalProvidersData.' + providerUserProfile.provider + '.' + providerUserProfile.providerIdentifierField;
 
   // Define main provider search query
-  var mainProviderSearchQuery = {};
+  const mainProviderSearchQuery = {};
   mainProviderSearchQuery.provider = providerUserProfile.provider;
   mainProviderSearchQuery[searchMainProviderIdentifierField] = providerUserProfile.providerData[providerUserProfile.providerIdentifierField];
 
   // Define additional provider search query
-  var additionalProviderSearchQuery = {};
+  const additionalProviderSearchQuery = {};
   additionalProviderSearchQuery[searchAdditionalProviderIdentifierField] = providerUserProfile.providerData[providerUserProfile.providerIdentifierField];
 
   // Define a search query to find existing user with current provider profile
-  var searchQuery = {
+  const searchQuery = {
     $or: [mainProviderSearchQuery, additionalProviderSearchQuery]
   };
 
@@ -152,7 +152,7 @@ exports.saveOAuthUserProfile = (req, providerUserProfile, done) => {
 
     if (!req.user) {
       if (!existingUser) {
-        var possibleUsername = providerUserProfile.username || ((providerUserProfile.email) ? providerUserProfile.email.split('@')[0] : '');
+        const possibleUsername = providerUserProfile.username || ((providerUserProfile.email) ? providerUserProfile.email.split('@')[0] : '');
 
         User.findUniqueUsername(possibleUsername, null, availableUsername => {
           user = new User({
@@ -209,8 +209,8 @@ exports.saveOAuthUserProfile = (req, providerUserProfile, done) => {
  * Remove OAuth provider
  */
 exports.removeOAuthProvider = (req, res, next) => {
-  var user = req.user;
-  var provider = req.query.provider;
+  const user = req.user;
+  const provider = req.query.provider;
 
   if (!user) {
     return res.status(401).json({

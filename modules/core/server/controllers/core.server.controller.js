@@ -1,12 +1,12 @@
-var validator = require('validator');
-var path = require('path');
-var config = require(path.resolve('./config/config'));
+const validator = require('validator');
+const path = require('path');
+const config = require(path.resolve('./config/config'));
 
 /**
  * Render the main application page
  */
 exports.renderIndex = (req, res) => {
-  var safeUserObject = null;
+  let safeUserObject = null;
   if (req.user) {
     safeUserObject = {
       displayName: validator.escape(req.user.displayName),

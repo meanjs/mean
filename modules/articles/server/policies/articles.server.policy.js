@@ -1,7 +1,7 @@
 /**
  * Module dependencies
  */
-var acl = require('acl');
+let acl = require('acl');
 
 // Using the memory backend
 acl = new acl(new acl.memoryBackend());
@@ -44,7 +44,7 @@ exports.invokeRolesPolicies = () => {
  * Check If Articles Policy Allows
  */
 exports.isAllowed = (req, res, next) => {
-  var roles = (req.user) ? req.user.roles : ['guest'];
+  const roles = (req.user) ? req.user.roles : ['guest'];
 
   // If an article is being processed and the current user created it then allow any manipulation
   if (req.article && req.user && req.article.user && req.article.user.id === req.user.id) {

@@ -1,20 +1,20 @@
-var should = require('should');
-var request = require('supertest');
-var path = require('path');
-var mongoose = require('mongoose');
-var User = mongoose.model('User');
-var Article = mongoose.model('Article');
-var express = require(path.resolve('./config/lib/express'));
+const should = require('should');
+const request = require('supertest');
+const path = require('path');
+const mongoose = require('mongoose');
+const User = mongoose.model('User');
+const Article = mongoose.model('Article');
+const express = require(path.resolve('./config/lib/express'));
 
 /**
  * Globals
  */
-var app;
+let app;
 
-var agent;
-var credentials;
-var user;
-var article;
+let agent;
+let credentials;
+let user;
+let article;
 
 /**
  * Article routes tests
@@ -71,7 +71,7 @@ describe('Article Admin CRUD tests', () => {
         }
 
         // Get the userId
-        var userId = user.id;
+        const userId = user.id;
 
         // Save a new article
         agent.post('/api/articles')
@@ -92,7 +92,7 @@ describe('Article Admin CRUD tests', () => {
                 }
 
                 // Get articles list
-                var articles = articlesGetRes.body;
+                const articles = articlesGetRes.body;
 
                 // Set assertions
                 (articles[0].user._id).should.equal(userId);
@@ -116,7 +116,7 @@ describe('Article Admin CRUD tests', () => {
         }
 
         // Get the userId
-        var userId = user.id;
+        const userId = user.id;
 
         // Save a new article
         agent.post('/api/articles')
@@ -166,7 +166,7 @@ describe('Article Admin CRUD tests', () => {
         }
 
         // Get the userId
-        var userId = user.id;
+        const userId = user.id;
 
         // Save a new article
         agent.post('/api/articles')
@@ -193,7 +193,7 @@ describe('Article Admin CRUD tests', () => {
         }
 
         // Get the userId
-        var userId = user.id;
+        const userId = user.id;
 
         // Save a new article
         agent.post('/api/articles')
@@ -228,7 +228,7 @@ describe('Article Admin CRUD tests', () => {
   it('should be able to get a single article if signed in and verify the custom "isCurrentUserOwner" field is set to "true"', done => {
     // Create new article model instance
     article.user = user;
-    var articleObj = new Article(article);
+    const articleObj = new Article(article);
 
     agent.post('/api/auth/signin')
       .send(credentials)
@@ -240,7 +240,7 @@ describe('Article Admin CRUD tests', () => {
         }
 
         // Get the userId
-        var userId = user.id;
+        const userId = user.id;
 
         // Save a new article
         agent.post('/api/articles')
