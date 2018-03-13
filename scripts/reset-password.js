@@ -24,10 +24,10 @@ var text = [
 
 mg.loadModels();
 
-mg.connect(function (db) {
+mg.connect(db => {
   var User = mongoose.model('User');
 
-  User.find().exec(function (err, users) {
+  User.find().exec((err, users) => {
     if (err) {
       throw err;
     }
@@ -52,7 +52,7 @@ mg.connect(function (db) {
     }
 
     function emailCallback(user) {
-      return function (err, info) {
+      return (err, info) => {
         processedCount++;
 
         if (err) {

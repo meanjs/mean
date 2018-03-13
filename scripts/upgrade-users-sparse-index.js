@@ -11,7 +11,7 @@ var _indexToRemove = 'email_1',
   errors = [],
   processedCount = 0;
 
-mongoose.connect(function (db) {
+mongoose.connect(db => {
   // get a reference to the User collection
   var userCollection = db.connections[0].collections.users;
 
@@ -21,7 +21,7 @@ mongoose.connect(function (db) {
   console.log();
 
   // Remove the index
-  userCollection.dropIndex(_indexToRemove, function (err, result) {
+  userCollection.dropIndex(_indexToRemove, (err, result) => {
     var message = 'Successfully removed the index "' + _indexToRemove + '".';
 
     if (err) {
