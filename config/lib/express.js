@@ -57,7 +57,7 @@ module.exports.initLocalVariables = app => {
 module.exports.initMiddleware = app => {
   // Should be placed before express.static
   app.use(compress({
-    filter: function (req, res) {
+    filter(req, res) {
       return (/json|text|javascript|css|font|svg/).test(res.getHeader('Content-Type'));
     },
     level: 9
