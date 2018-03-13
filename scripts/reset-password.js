@@ -1,16 +1,16 @@
-var nodemailer = require('nodemailer');
-var mongoose = require('mongoose');
-var chalk = require('chalk');
-var config = require('../config/config');
-var mg = require('../config/lib/mongoose');
+const nodemailer = require('nodemailer');
+const mongoose = require('mongoose');
+const chalk = require('chalk');
+const config = require('../config/config');
+const mg = require('../config/lib/mongoose');
 
-var transporter = nodemailer.createTransport(config.mailer.options);
-var link = 'reset link here'; // PUT reset link here
-var email = {
+const transporter = nodemailer.createTransport(config.mailer.options);
+const link = 'reset link here'; // PUT reset link here
+const email = {
   from: config.mailer.from,
   subject: 'Security update'
 };
-var text = [
+const text = [
   'Dear {{name}},',
   '\n',
   'We have updated our password storage systems to be more secure and more efficient, please click the link below to reset your password so you can login in the future.',
@@ -23,22 +23,22 @@ var text = [
 mg.loadModels();
 
 mg.connect(db => {
-  var User = mongoose.model('User');
+  const User = mongoose.model('User');
 
   User.find().exec((err, users) => {
     if (err) {
       throw err;
     }
 
-    var processedCount = 0;
-    var errorCount = 0;
+    let processedCount = 0;
+    let errorCount = 0;
 
     // report and exit if no users were found
     if (users.length === 0) {
       return reportAndExit(processedCount, errorCount);
     }
 
-    for (var i = 0; i < users.length; i++) {
+    for (let i = 0; i < users.length; i++) {
       sendEmail(users[i]);
     }
 
@@ -72,14 +72,14 @@ mg.connect(db => {
 
     // report the processing results and exit
     function reportAndExit(processedCount, errorCount) {
-      var successCount = processedCount - errorCount;
+      const successCount = processedCount - errorCount;
 
       console.log();
 
       if (processedCount === 0) {
         console.log(chalk.yellow('No users were found.'));
       } else {
-        var alert;
+        let alert;
         if (!errorCount) {
           alert = chalk.green;
         } else if ((successCount / processedCount) < 0.8) {
