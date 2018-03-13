@@ -10,7 +10,7 @@ var _ = require('lodash'),
   karmaReporters = ['mocha'];
 
 // Karma configuration
-module.exports = function (karmaConfig) {
+module.exports = karmaConfig => {
   var configuration = {
     frameworks: ['jasmine'],
 
