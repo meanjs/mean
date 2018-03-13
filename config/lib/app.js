@@ -17,7 +17,7 @@ function seedDB() {
 }
 
 module.exports.init = function init(callback) {
-  mongooseService.connect(function (db) {
+  mongooseService.connect(db => {
     // Initialize Models
     mongooseService.loadModels(seedDB);
 
@@ -31,10 +31,10 @@ module.exports.init = function init(callback) {
 module.exports.start = function start(callback) {
   var _this = this;
 
-  _this.init(function (app, db, config) {
+  _this.init((app, db, config) => {
 
     // Start the app by listening on <port> at <host>
-    app.listen(config.port, config.host, function () {
+    app.listen(config.port, config.host, () => {
       // Create server URL
       var server = (process.env.NODE_ENV === 'secure' ? 'https://' : 'http://') + config.host + ':' + config.port;
       // Logging initialization
