@@ -1,5 +1,3 @@
-'use strict';
-
 var defaultEnvConfig = require('./default');
 
 module.exports = {

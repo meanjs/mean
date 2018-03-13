@@ -1,5 +1,3 @@
-﻿'use strict';
-
 var _ = require('lodash'),
   config = require('../config'),
   mongoose = require('mongoose'),

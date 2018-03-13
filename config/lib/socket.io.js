@@ -1,5 +1,3 @@
-'use strict';
-
 // Load the module dependencies
 var config = require('../config'),
   path = require('path'),

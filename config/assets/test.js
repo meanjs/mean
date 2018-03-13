@@ -1,5 +1,3 @@
-'use strict';
-
 module.exports = {
   tests: {
     client: ['modules/*/tests/client/**/*.js'],
