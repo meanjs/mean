@@ -1,8 +1,8 @@
-var nodemailer = require('nodemailer'),
-  mongoose = require('mongoose'),
-  chalk = require('chalk'),
-  config = require('../config/config'),
-  mg = require('../config/lib/mongoose');
+var nodemailer = require('nodemailer');
+var mongoose = require('mongoose');
+var chalk = require('chalk');
+var config = require('../config/config');
+var mg = require('../config/lib/mongoose');
 
 var transporter = nodemailer.createTransport(config.mailer.options);
 var link = 'reset link here'; // PUT reset link here
@@ -30,8 +30,8 @@ mg.connect(db => {
       throw err;
     }
 
-    var processedCount = 0,
-      errorCount = 0;
+    var processedCount = 0;
+    var errorCount = 0;
 
     // report and exit if no users were found
     if (users.length === 0) {

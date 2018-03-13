@@ -1,14 +1,14 @@
 // Set the Node ENV
 process.env.NODE_ENV = 'development';
 
-var chalk = require('chalk'),
-  mongoose = require('../config/lib/mongoose');
+var chalk = require('chalk');
+var mongoose = require('../config/lib/mongoose');
 
 mongoose.loadModels();
 
-var _indexToRemove = 'email_1',
-  errors = [],
-  processedCount = 0;
+var _indexToRemove = 'email_1';
+var errors = [];
+var processedCount = 0;
 
 mongoose.connect(db => {
   // get a reference to the User collection
