@@ -1,11 +1,12 @@
 /**
  * Module dependencies.
  */
-var _ = require('lodash'),
-  chalk = require('chalk'),
-  glob = require('glob'),
-  fs = require('fs'),
-  path = require('path');
+var _ = require('lodash');
+
+var chalk = require('chalk');
+var glob = require('glob');
+var fs = require('fs');
+var path = require('path');
 
 /**
  * Get files by glob patterns

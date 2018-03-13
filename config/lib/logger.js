@@ -1,8 +1,8 @@
-var _ = require('lodash'),
-  config = require('../config'),
-  chalk = require('chalk'),
-  fs = require('fs'),
-  winston = require('winston');
+var _ = require('lodash');
+var config = require('../config');
+var chalk = require('chalk');
+var fs = require('fs');
+var winston = require('winston');
 
 // list of valid formats for the logging
 var validFormats = ['combined', 'common', 'dev', 'short', 'tiny'];

@@ -1,11 +1,12 @@
 /**
  * Module dependencies.
  */
-var config = require('../config'),
-  mongooseService = require('./mongoose'),
-  express = require('./express'),
-  chalk = require('chalk'),
-  seed = require('./mongo-seed');
+var config = require('../config');
+
+var mongooseService = require('./mongoose');
+var express = require('./express');
+var chalk = require('chalk');
+var seed = require('./mongo-seed');
 
 function seedDB() {
   if (config.seedDB && config.seedDB.seed) {

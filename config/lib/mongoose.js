@@ -1,11 +1,12 @@
 /**
  * Module dependencies.
  */
-var _ = require('lodash'),
-  config = require('../config'),
-  chalk = require('chalk'),
-  path = require('path'),
-  mongoose = require('mongoose');
+var _ = require('lodash');
+
+var config = require('../config');
+var chalk = require('chalk');
+var path = require('path');
+var mongoose = require('mongoose');
 
 // Load the mongoose models
 module.exports.loadModels = callback => {

@@ -1,14 +1,15 @@
 // Load the module dependencies
-var config = require('../config'),
-  path = require('path'),
-  fs = require('fs'),
-  http = require('http'),
-  https = require('https'),
-  cookieParser = require('cookie-parser'),
-  passport = require('passport'),
-  socketio = require('socket.io'),
-  session = require('express-session'),
-  MongoStore = require('connect-mongo')(session);
+var config = require('../config');
+
+var path = require('path');
+var fs = require('fs');
+var http = require('http');
+var https = require('https');
+var cookieParser = require('cookie-parser');
+var passport = require('passport');
+var socketio = require('socket.io');
+var session = require('express-session');
+var MongoStore = require('connect-mongo')(session);
 
 // Define the Socket.io configuration method
 module.exports = (app, db) => {

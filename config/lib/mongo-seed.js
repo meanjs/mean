@@ -1,7 +1,7 @@
-var _ = require('lodash'),
-  config = require('../config'),
-  mongoose = require('mongoose'),
-  chalk = require('chalk');
+var _ = require('lodash');
+var config = require('../config');
+var mongoose = require('mongoose');
+var chalk = require('chalk');
 
 exports.start = start;
 
