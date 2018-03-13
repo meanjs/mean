@@ -1,18 +1,19 @@
 /**
  * Module dependencies
  */
-var _ = require('lodash'),
-  fs = require('fs'),
-  path = require('path'),
-  errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
-  mongoose = require('mongoose'),
-  multer = require('multer'),
-  multerS3 = require('multer-s3'),
-  aws = require('aws-sdk'),
-  amazonS3URI = require('amazon-s3-uri'),
-  config = require(path.resolve('./config/config')),
-  User = mongoose.model('User'),
-  validator = require('validator');
+var _ = require('lodash');
+
+var fs = require('fs');
+var path = require('path');
+var errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller'));
+var mongoose = require('mongoose');
+var multer = require('multer');
+var multerS3 = require('multer-s3');
+var aws = require('aws-sdk');
+var amazonS3URI = require('amazon-s3-uri');
+var config = require(path.resolve('./config/config'));
+var User = mongoose.model('User');
+var validator = require('validator');
 
 var whitelistedFields = ['firstName', 'lastName', 'email', 'username'];
 

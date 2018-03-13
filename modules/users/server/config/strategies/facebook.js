@@ -1,9 +1,10 @@
 /**
  * Module dependencies
  */
-var passport = require('passport'),
-  FacebookStrategy = require('passport-facebook').Strategy,
-  users = require('../../controllers/users.server.controller');
+var passport = require('passport');
+
+var FacebookStrategy = require('passport-facebook').Strategy;
+var users = require('../../controllers/users.server.controller');
 
 module.exports = config => {
   // Use facebook strategy

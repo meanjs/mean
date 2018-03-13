@@ -1,15 +1,16 @@
 /**
  * Module dependencies
  */
-var mongoose = require('mongoose'),
-  path = require('path'),
-  config = require(path.resolve('./config/config')),
-  Schema = mongoose.Schema,
-  crypto = require('crypto'),
-  validator = require('validator'),
-  generatePassword = require('generate-password'),
-  owasp = require('owasp-password-strength-test'),
-  chalk = require('chalk');
+var mongoose = require('mongoose');
+
+var path = require('path');
+var config = require(path.resolve('./config/config'));
+var Schema = mongoose.Schema;
+var crypto = require('crypto');
+var validator = require('validator');
+var generatePassword = require('generate-password');
+var owasp = require('owasp-password-strength-test');
+var chalk = require('chalk');
 
 owasp.config(config.shared.owasp);
 

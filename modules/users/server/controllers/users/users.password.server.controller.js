@@ -1,14 +1,15 @@
 /**
  * Module dependencies
  */
-var path = require('path'),
-  config = require(path.resolve('./config/config')),
-  errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
-  mongoose = require('mongoose'),
-  User = mongoose.model('User'),
-  nodemailer = require('nodemailer'),
-  async = require('async'),
-  crypto = require('crypto');
+var path = require('path');
+
+var config = require(path.resolve('./config/config'));
+var errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller'));
+var mongoose = require('mongoose');
+var User = mongoose.model('User');
+var nodemailer = require('nodemailer');
+var async = require('async');
+var crypto = require('crypto');
 
 var smtpTransport = nodemailer.createTransport(config.mailer.options);
 

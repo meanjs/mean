@@ -1,9 +1,10 @@
 /**
  * Module dependencies
  */
-var passport = require('passport'),
-  PayPalStrategy = require('passport-paypal-openidconnect').Strategy,
-  users = require('../../controllers/users.server.controller');
+var passport = require('passport');
+
+var PayPalStrategy = require('passport-paypal-openidconnect').Strategy;
+var users = require('../../controllers/users.server.controller');
 
 module.exports = config => {
   passport.use(new PayPalStrategy({

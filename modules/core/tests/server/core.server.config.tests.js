@@ -1,29 +1,31 @@
 /**
  * Module dependencies.
  */
-var _ = require('lodash'),
-  should = require('should'),
-  mongoose = require('mongoose'),
-  User = mongoose.model('User'),
-  path = require('path'),
-  fs = require('fs'),
-  request = require('supertest'),
-  config = require(path.resolve('./config/config')),
-  logger = require(path.resolve('./config/lib/logger')),
-  seed = require(path.resolve('./config/lib/mongo-seed')),
-  express = require(path.resolve('./config/lib/express')),
-  Article = mongoose.model('Article');
+var _ = require('lodash');
+
+var should = require('should');
+var mongoose = require('mongoose');
+var User = mongoose.model('User');
+var path = require('path');
+var fs = require('fs');
+var request = require('supertest');
+var config = require(path.resolve('./config/config'));
+var logger = require(path.resolve('./config/lib/logger'));
+var seed = require(path.resolve('./config/lib/mongo-seed'));
+var express = require(path.resolve('./config/lib/express'));
+var Article = mongoose.model('Article');
 
 /**
  * Globals
  */
-var app,
-  agent,
-  user1,
-  admin1,
-  userFromSeedConfig,
-  adminFromSeedConfig,
-  originalLogConfig;
+var app;
+
+var agent;
+var user1;
+var admin1;
+var userFromSeedConfig;
+var adminFromSeedConfig;
+var originalLogConfig;
 
 describe('Configuration Tests:', () => {
 

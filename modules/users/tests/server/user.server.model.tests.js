@@ -1,18 +1,20 @@
 /**
  * Module dependencies.
  */
-var should = require('should'),
-  mongoose = require('mongoose'),
-  User = mongoose.model('User'),
-  path = require('path'),
-  config = require(path.resolve('./config/config'));
+var should = require('should');
+
+var mongoose = require('mongoose');
+var User = mongoose.model('User');
+var path = require('path');
+var config = require(path.resolve('./config/config'));
 
 /**
  * Globals
  */
-var user1,
-  user2,
-  user3;
+var user1;
+
+var user2;
+var user3;
 
 /**
  * Unit tests

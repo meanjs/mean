@@ -1,22 +1,23 @@
-var semver = require('semver'),
-  should = require('should'),
-  request = require('supertest'),
-  path = require('path'),
-  mongoose = require('mongoose'),
-  User = mongoose.model('User'),
-  config = require(path.resolve('./config/config')),
-  express = require(path.resolve('./config/lib/express'));
+var semver = require('semver');
+var should = require('should');
+var request = require('supertest');
+var path = require('path');
+var mongoose = require('mongoose');
+var User = mongoose.model('User');
+var config = require(path.resolve('./config/config'));
+var express = require(path.resolve('./config/lib/express'));
 
 /**
  * Globals
  */
-var app,
-  agent,
-  credentials,
-  credentialsEmail,
-  user,
-  _user,
-  admin;
+var app;
+
+var agent;
+var credentials;
+var credentialsEmail;
+var user;
+var _user;
+var admin;
 
 /**
  * User routes tests

@@ -1,8 +1,9 @@
 /**
  * Module dependencies
  */
-var articlesPolicy = require('../policies/articles.server.policy'),
-  articles = require('../controllers/articles.server.controller');
+var articlesPolicy = require('../policies/articles.server.policy');
+
+var articles = require('../controllers/articles.server.controller');
 
 module.exports = app => {
   // Articles collection routes

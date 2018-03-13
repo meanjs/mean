@@ -1,9 +1,10 @@
 /**
  * Module dependencies
  */
-var _ = require('lodash'),
-  mongoose = require('mongoose'),
-  User = mongoose.model('User');
+var _ = require('lodash');
+
+var mongoose = require('mongoose');
+var User = mongoose.model('User');
 
 /**
  * User middleware

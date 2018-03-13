@@ -1,19 +1,20 @@
-var should = require('should'),
-  request = require('supertest'),
-  path = require('path'),
-  mongoose = require('mongoose'),
-  User = mongoose.model('User'),
-  Article = mongoose.model('Article'),
-  express = require(path.resolve('./config/lib/express'));
+var should = require('should');
+var request = require('supertest');
+var path = require('path');
+var mongoose = require('mongoose');
+var User = mongoose.model('User');
+var Article = mongoose.model('Article');
+var express = require(path.resolve('./config/lib/express'));
 
 /**
  * Globals
  */
-var app,
-  agent,
-  credentials,
-  user,
-  article;
+var app;
+
+var agent;
+var credentials;
+var user;
+var article;
 
 /**
  * Article routes tests

@@ -1,10 +1,11 @@
 /**
  * Module dependencies
  */
-var path = require('path'),
-  mongoose = require('mongoose'),
-  Article = mongoose.model('Article'),
-  errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller'));
+var path = require('path');
+
+var mongoose = require('mongoose');
+var Article = mongoose.model('Article');
+var errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller'));
 
 /**
  * Create an article

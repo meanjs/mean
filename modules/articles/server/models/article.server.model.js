@@ -1,11 +1,12 @@
 /**
  * Module dependencies
  */
-var mongoose = require('mongoose'),
-  Schema = mongoose.Schema,
-  path = require('path'),
-  config = require(path.resolve('./config/config')),
-  chalk = require('chalk');
+var mongoose = require('mongoose');
+
+var Schema = mongoose.Schema;
+var path = require('path');
+var config = require(path.resolve('./config/config'));
+var chalk = require('chalk');
 
 /**
  * Article Schema

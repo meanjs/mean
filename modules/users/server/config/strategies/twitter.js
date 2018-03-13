@@ -1,9 +1,10 @@
 /**
  * Module dependencies
  */
-var passport = require('passport'),
-  TwitterStrategy = require('passport-twitter').Strategy,
-  users = require('../../controllers/users.server.controller');
+var passport = require('passport');
+
+var TwitterStrategy = require('passport-twitter').Strategy;
+var users = require('../../controllers/users.server.controller');
 
 module.exports = config => {
   // Use twitter strategy

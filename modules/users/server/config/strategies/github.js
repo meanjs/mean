@@ -1,9 +1,10 @@
 /**
  * Module dependencies
  */
-var passport = require('passport'),
-  GithubStrategy = require('passport-github').Strategy,
-  users = require('../../controllers/users.server.controller');
+var passport = require('passport');
+
+var GithubStrategy = require('passport-github').Strategy;
+var users = require('../../controllers/users.server.controller');
 
 module.exports = config => {
   // Use github strategy
