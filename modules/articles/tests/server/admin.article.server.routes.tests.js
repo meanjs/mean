@@ -1,5 +1,3 @@
-﻿'use strict';
-
 var should = require('should'),
   request = require('supertest'),
   path = require('path'),

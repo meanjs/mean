@@ -1,5 +1,3 @@
-'use strict';
-
 // Create the chat configuration
 module.exports = (io, socket) => {
   // Emit the status event when a new socket client is connected

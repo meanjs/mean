@@ -1,5 +1,3 @@
-'use strict';
-
 module.exports = app => {
   // Root routing
   var core = require('../controllers/core.server.controller');
