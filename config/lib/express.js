@@ -1,24 +1,24 @@
 /**
  * Module dependencies.
  */
-var config = require('../config');
+const config = require('../config');
 
-var express = require('express');
-var morgan = require('morgan');
-var logger = require('./logger');
-var bodyParser = require('body-parser');
-var session = require('express-session');
-var MongoStore = require('connect-mongo')(session);
-var favicon = require('serve-favicon');
-var compress = require('compression');
-var methodOverride = require('method-override');
-var cookieParser = require('cookie-parser');
-var helmet = require('helmet');
-var flash = require('connect-flash');
-var hbs = require('express-hbs');
-var path = require('path');
-var _ = require('lodash');
-var lusca = require('lusca');
+const express = require('express');
+const morgan = require('morgan');
+const logger = require('./logger');
+const bodyParser = require('body-parser');
+const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
+const favicon = require('serve-favicon');
+const compress = require('compression');
+const methodOverride = require('method-override');
+const cookieParser = require('cookie-parser');
+const helmet = require('helmet');
+const flash = require('connect-flash');
+const hbs = require('express-hbs');
+const path = require('path');
+const _ = require('lodash');
+const lusca = require('lusca');
 
 /**
  * Initialize local variables
@@ -140,7 +140,7 @@ module.exports.initModulesConfiguration = app => {
  */
 module.exports.initHelmetHeaders = app => {
   // six months expiration period specified in seconds
-  var SIX_MONTHS = 15778476;
+  const SIX_MONTHS = 15778476;
 
   app.use(helmet.frameguard());
   app.use(helmet.xssFilter());
@@ -210,7 +210,7 @@ module.exports.initErrorRoutes = app => {
  */
 module.exports.configureSocketIO = (app, db) => {
   // Load the Socket.io configuration
-  var server = require('./socket.io')(app, db);
+  const server = require('./socket.io')(app, db);
 
   // Return server object
   return server;
@@ -221,7 +221,7 @@ module.exports.configureSocketIO = (app, db) => {
  */
 module.exports.init = function (db) {
   // Initialize express app
-  var app = express();
+  let app = express();
 
   // Initialize local variables
   this.initLocalVariables(app);

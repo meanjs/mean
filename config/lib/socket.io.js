@@ -1,24 +1,24 @@
 // Load the module dependencies
-var config = require('../config');
+const config = require('../config');
 
-var path = require('path');
-var fs = require('fs');
-var http = require('http');
-var https = require('https');
-var cookieParser = require('cookie-parser');
-var passport = require('passport');
-var socketio = require('socket.io');
-var session = require('express-session');
-var MongoStore = require('connect-mongo')(session);
+const path = require('path');
+const fs = require('fs');
+const http = require('http');
+const https = require('https');
+const cookieParser = require('cookie-parser');
+const passport = require('passport');
+const socketio = require('socket.io');
+const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
 
 // Define the Socket.io configuration method
 module.exports = (app, db) => {
-  var server;
+  let server;
   if (config.secure && config.secure.ssl === true) {
     // Load SSL key and certificate
-    var privateKey = fs.readFileSync(path.resolve(config.secure.privateKey), 'utf8');
-    var certificate = fs.readFileSync(path.resolve(config.secure.certificate), 'utf8');
-    var caBundle;
+    const privateKey = fs.readFileSync(path.resolve(config.secure.privateKey), 'utf8');
+    const certificate = fs.readFileSync(path.resolve(config.secure.certificate), 'utf8');
+    let caBundle;
 
     try {
       caBundle = fs.readFileSync(path.resolve(config.secure.caBundle), 'utf8');
@@ -26,7 +26,7 @@ module.exports = (app, db) => {
       console.log('Warning: couldn\'t find or read caBundle file');
     }
 
-    var options = {
+    const options = {
       key: privateKey,
       cert: certificate,
       ca: caBundle,
@@ -66,10 +66,10 @@ module.exports = (app, db) => {
     server = http.createServer(app);
   }
   // Create a new Socket.io server
-  var io = socketio.listen(server);
+  const io = socketio.listen(server);
 
   // Create a MongoDB storage object
-  var mongoStore = new MongoStore({
+  const mongoStore = new MongoStore({
     db,
     collection: config.sessionCollection
   });
@@ -79,7 +79,7 @@ module.exports = (app, db) => {
     // Use the 'cookie-parser' module to parse the request cookies
     cookieParser(config.sessionSecret)(socket.request, {}, err => {
       // Get the session id from the request cookies
-      var sessionId = socket.request.signedCookies ? socket.request.signedCookies[config.sessionKey] : undefined;
+      const sessionId = socket.request.signedCookies ? socket.request.signedCookies[config.sessionKey] : undefined;
 
       if (!sessionId) return next(new Error('sessionId was not found in socket.request'), false);
 

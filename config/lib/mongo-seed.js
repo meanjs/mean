@@ -1,7 +1,7 @@
-var _ = require('lodash');
-var config = require('../config');
-var mongoose = require('mongoose');
-var chalk = require('chalk');
+const _ = require('lodash');
+const config = require('../config');
+const mongoose = require('mongoose');
+const chalk = require('chalk');
 
 exports.start = start;
 
@@ -9,14 +9,14 @@ function start(seedConfig) {
   return new Promise((resolve, reject) => {
     seedConfig = seedConfig || {};
 
-    var options = seedConfig.options || (config.seedDB ? _.clone(config.seedDB.options, true) : {});
-    var collections = seedConfig.collections || (config.seedDB ? _.clone(config.seedDB.collections, true) : []);
+    const options = seedConfig.options || (config.seedDB ? _.clone(config.seedDB.options, true) : {});
+    const collections = seedConfig.collections || (config.seedDB ? _.clone(config.seedDB.collections, true) : []);
 
     if (!collections.length) {
       return resolve();
     }
 
-    var seeds = collections
+    const seeds = collections
       .filter(collection => collection.model);
 
     // Use the reduction pattern to ensure we process seeding in desired order.
@@ -58,7 +58,7 @@ function seed(collection, options) {
     const Model = mongoose.model(collection.model);
     const docs = collection.docs;
 
-    var skipWhen = collection.skip ? collection.skip.when : null;
+    const skipWhen = collection.skip ? collection.skip.when : null;
 
     if (!Model.seed) {
       return reject(new Error('Database Seeding: Invalid Model Configuration - ' + collection.model + '.seed() not implemented'));
@@ -106,7 +106,7 @@ function seed(collection, options) {
           return onComplete([{ message: chalk.yellow('Database Seeding: ' + collection.model + ' collection skipped') }]);
         }
 
-        var workload = docs
+        const workload = docs
           .filter(doc => doc.data)
           .map(doc => Model.seed(doc.data, { overwrite: doc.overwrite }));
 

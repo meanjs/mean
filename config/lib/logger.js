@@ -1,15 +1,15 @@
-var _ = require('lodash');
-var config = require('../config');
-var chalk = require('chalk');
-var fs = require('fs');
-var winston = require('winston');
+const _ = require('lodash');
+const config = require('../config');
+const chalk = require('chalk');
+const fs = require('fs');
+const winston = require('winston');
 
 // list of valid formats for the logging
-var validFormats = ['combined', 'common', 'dev', 'short', 'tiny'];
+const validFormats = ['combined', 'common', 'dev', 'short', 'tiny'];
 
 // Instantiating the default winston application logger with the Console
 // transport
-var logger = new winston.Logger({
+const logger = new winston.Logger({
   transports: [
     new winston.transports.Console({
       level: 'info',
@@ -38,7 +38,7 @@ logger.stream = {
  */
 logger.setupFileLogger = function setupFileLogger() {
 
-  var fileLoggerTransport = this.getLogOptions();
+  const fileLoggerTransport = this.getLogOptions();
   if (!fileLoggerTransport) {
     return false;
   }
@@ -71,15 +71,15 @@ logger.setupFileLogger = function setupFileLogger() {
  */
 logger.getLogOptions = function getLogOptions() {
 
-  var _config = _.clone(config, true);
-  var configFileLogger = _config.log.fileLogger;
+  const _config = _.clone(config, true);
+  const configFileLogger = _config.log.fileLogger;
 
   if (!_.has(_config, 'log.fileLogger.directoryPath') || !_.has(_config, 'log.fileLogger.fileName')) {
     console.log('unable to find logging file configuration');
     return false;
   }
 
-  var logPath = configFileLogger.directoryPath + '/' + configFileLogger.fileName;
+  const logPath = configFileLogger.directoryPath + '/' + configFileLogger.fileName;
 
   return {
     level: 'debug',
@@ -118,7 +118,7 @@ logger.getMorganOptions = function getMorganOptions() {
  * Returns the log.format option set in the current environment configuration
  */
 logger.getLogFormat = function getLogFormat() {
-  var format = config.log && config.log.format ? config.log.format.toString() : 'combined';
+  let format = config.log && config.log.format ? config.log.format.toString() : 'combined';
 
   // make sure we have a valid format
   if (!_.includes(validFormats, format)) {

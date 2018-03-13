@@ -1,12 +1,12 @@
 /**
  * Module dependencies.
  */
-var _ = require('lodash');
+const _ = require('lodash');
 
-var config = require('../config');
-var chalk = require('chalk');
-var path = require('path');
-var mongoose = require('mongoose');
+const config = require('../config');
+const chalk = require('chalk');
+const path = require('path');
+const mongoose = require('mongoose');
 
 // Load the mongoose models
 module.exports.loadModels = callback => {
@@ -22,7 +22,7 @@ module.exports.loadModels = callback => {
 module.exports.connect = callback => {
   mongoose.Promise = config.db.promise;
 
-  var options = _.merge(config.db.options || {}, { useMongoClient: true });
+  const options = _.merge(config.db.options || {}, { useMongoClient: true });
 
   mongoose
     .connect(config.db.uri, options)

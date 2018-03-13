@@ -1,4 +1,4 @@
-var defaultEnvConfig = require('./default');
+const defaultEnvConfig = require('./default');
 
 module.exports = {
   db: {
