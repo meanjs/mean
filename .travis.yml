@@ -24,12 +24,11 @@ addons:
   apt:
     sources:
     - ubuntu-toolchain-r-test
-    - google-chrome
     packages:
     - g++-4.8
     - gcc-4.8
     - clang
-    - google-chrome-stable
+  chrome: stable
 before_install:
   - npm install webdriver-manager -g && webdriver-manager update
   - npm install nsp -g
