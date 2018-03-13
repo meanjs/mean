@@ -195,7 +195,7 @@ gulp.task('wiredep:prod', () => gulp.src('config/assets/production.js')
     fileTypes: {
       js: {
         replace: {
-          css: function (filePath) {
+          css(filePath) {
             var minFilePath = filePath.replace('.css', '.min.css');
             var fullPath = path.join(process.cwd(), minFilePath);
             if (!fs.existsSync(fullPath)) {
@@ -204,7 +204,7 @@ gulp.task('wiredep:prod', () => gulp.src('config/assets/production.js')
               return '\'' + minFilePath + '\',';
             }
           },
-          js: function (filePath) {
+          js(filePath) {
             var minFilePath = filePath.replace('.js', '.min.js');
             var fullPath = path.join(process.cwd(), minFilePath);
             if (!fs.existsSync(fullPath)) {

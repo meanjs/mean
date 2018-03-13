@@ -21,7 +21,7 @@ module.exports = karmaConfig => {
     ngHtml2JsPreprocessor: {
       moduleName: 'mean',
 
-      cacheIdFromPath: function (filepath) {
+      cacheIdFromPath(filepath) {
         return filepath;
       }
     },
