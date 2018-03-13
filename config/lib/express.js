@@ -118,7 +118,7 @@ module.exports.initSession = (app, db) => {
     },
     name: config.sessionKey,
     store: new MongoStore({
-      db: db,
+      db,
       collection: config.sessionCollection
     })
   }));

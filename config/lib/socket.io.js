@@ -71,7 +71,7 @@ module.exports = (app, db) => {
 
   // Create a MongoDB storage object
   var mongoStore = new MongoStore({
-    db: db,
+    db,
     collection: config.sessionCollection
   });
 

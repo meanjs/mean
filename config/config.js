@@ -217,8 +217,8 @@ var initGlobalConfig = () => {
 
   // Expose configuration utilities
   config.utils = {
-    getGlobbedPaths: getGlobbedPaths,
-    validateSessionSecret: validateSessionSecret
+    getGlobbedPaths,
+    validateSessionSecret
   };
 
   return config;
