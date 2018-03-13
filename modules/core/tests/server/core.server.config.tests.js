@@ -111,7 +111,7 @@ describe('Configuration Tests:', () => {
 
       seed.start()
         .then(() => // Check Articles Seed
-      Article.find().exec())
+          Article.find().exec())
         .then(articles => {
           articles.should.be.instanceof(Array).and.have.lengthOf(articleSeedConfig.docs.length);
           // Check Users Seed
@@ -171,7 +171,9 @@ describe('Configuration Tests:', () => {
           // the existing users before seeding again.
           users.should.be.instanceof(Array).and.have.lengthOf(2);
 
-          return User.find({ username: admin.username }).exec();
+          return User.find({
+            username: admin.username
+          }).exec();
         })
         .then(users => {
           users.should.be.instanceof(Array).and.have.lengthOf(1);
@@ -180,7 +182,9 @@ describe('Configuration Tests:', () => {
           userSeedConfig.docs[0].data.username.should.equal(newAdmin.username);
           userSeedConfig.docs[0].data.email.should.equal(newAdmin.email);
 
-          return User.find({ username: user.username }).exec();
+          return User.find({
+            username: user.username
+          }).exec();
         })
         .then(users => {
           users.should.be.instanceof(Array).and.have.lengthOf(1);
@@ -320,7 +324,9 @@ describe('Configuration Tests:', () => {
         .then(() => User.find().exec())
         .then(users => {
           users.should.be.instanceof(Array).and.have.lengthOf(2);
-          return User.find({ username: _admin.username }).exec();
+          return User.find({
+            username: _admin.username
+          }).exec();
         })
         .then(users => {
           users.should.be.instanceof(Array).and.have.lengthOf(1);
@@ -329,7 +335,9 @@ describe('Configuration Tests:', () => {
           _admin.username.should.equal(newAdmin.username);
           _admin.email.should.equal(newAdmin.email);
 
-          return User.find({ username: _user.username }).exec();
+          return User.find({
+            username: _user.username
+          }).exec();
         })
         .then(users => {
           users.should.be.instanceof(Array).and.have.lengthOf(1);
@@ -350,14 +358,14 @@ describe('Configuration Tests:', () => {
 
       article.save()
         .then(() => seed.start({
-        collections: [{
-          model: 'Article',
-          docs: [{
-            overwrite: false,
-            data: _article
+          collections: [{
+            model: 'Article',
+            docs: [{
+              overwrite: false,
+              data: _article
+            }]
           }]
-        }]
-      }))
+        }))
         .then(() => Article.find().exec())
         .then(articles => {
           articles.should.be.instanceof(Array).and.have.lengthOf(1);
@@ -378,14 +386,14 @@ describe('Configuration Tests:', () => {
 
       user.save()
         .then(() => seed.start({
-        collections: [{
-          model: 'User',
-          docs: [{
-            overwrite: false,
-            data: _user
+          collections: [{
+            model: 'User',
+            docs: [{
+              overwrite: false,
+              data: _user
+            }]
           }]
-        }]
-      }))
+        }))
         .then(() => User.find().exec())
         .then(users => {
           users.should.be.instanceof(Array).and.have.lengthOf(1);
@@ -555,7 +563,9 @@ describe('Configuration Tests:', () => {
           collections: [{
             model: 'Article',
             skip: {
-              when: { title: 'should-not-find-this-title' }
+              when: {
+                title: 'should-not-find-this-title'
+              }
             },
             docs: [{
               data: _article
@@ -595,7 +605,9 @@ describe('Configuration Tests:', () => {
             collections: [{
               model: 'Article',
               skip: {
-                when: { title: newArticle.title }
+                when: {
+                  title: newArticle.title
+                }
               },
               docs: [{
                 data: _article
@@ -623,7 +635,9 @@ describe('Configuration Tests:', () => {
           collections: [{
             model: 'Article',
             skip: {
-              when: { created: 'not-a-valid-date' }
+              when: {
+                created: 'not-a-valid-date'
+              }
             },
             docs: [{
               data: _article
@@ -647,7 +661,9 @@ describe('Configuration Tests:', () => {
 
   describe('Testing Session Secret Configuration', () => {
     it('should warn if using default session secret when running in production', done => {
-      const conf = { sessionSecret: 'MEAN' };
+      const conf = {
+        sessionSecret: 'MEAN'
+      };
       // set env to production for this test
       process.env.NODE_ENV = 'production';
       config.utils.validateSessionSecret(conf, true).should.equal(false);
@@ -657,7 +673,9 @@ describe('Configuration Tests:', () => {
     });
 
     it('should accept non-default session secret when running in production', () => {
-      const conf = { sessionSecret: 'super amazing secret' };
+      const conf = {
+        sessionSecret: 'super amazing secret'
+      };
       // set env to production for this test
       process.env.NODE_ENV = 'production';
       config.utils.validateSessionSecret(conf, true).should.equal(true);
@@ -666,7 +684,9 @@ describe('Configuration Tests:', () => {
     });
 
     it('should accept default session secret when running in development', () => {
-      const conf = { sessionSecret: 'MEAN' };
+      const conf = {
+        sessionSecret: 'MEAN'
+      };
       // set env to development for this test
       process.env.NODE_ENV = 'development';
       config.utils.validateSessionSecret(conf, true).should.equal(true);
@@ -675,7 +695,9 @@ describe('Configuration Tests:', () => {
     });
 
     it('should accept default session secret when running in test', () => {
-      const conf = { sessionSecret: 'MEAN' };
+      const conf = {
+        sessionSecret: 'MEAN'
+      };
       config.utils.validateSessionSecret(conf, true).should.equal(true);
     });
   });
