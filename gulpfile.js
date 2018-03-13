@@ -1,32 +1,32 @@
 /**
  * Module dependencies.
  */
-var _ = require('lodash');
+const _ = require('lodash');
 
-var fs = require('fs');
-var defaultAssets = require('./config/assets/default');
-var testAssets = require('./config/assets/test');
-var testConfig = require('./config/env/test');
-var glob = require('glob');
-var gulp = require('gulp');
-var gulpLoadPlugins = require('gulp-load-plugins');
-var runSequence = require('run-sequence');
+const fs = require('fs');
+const defaultAssets = require('./config/assets/default');
+const testAssets = require('./config/assets/test');
+const testConfig = require('./config/env/test');
+const glob = require('glob');
+const gulp = require('gulp');
+const gulpLoadPlugins = require('gulp-load-plugins');
+const runSequence = require('run-sequence');
 
-var plugins = gulpLoadPlugins({
+const plugins = gulpLoadPlugins({
   rename: {
     'gulp-angular-templatecache': 'templateCache'
   }
 });
 
-var pngquant = require('imagemin-pngquant');
-var wiredep = require('wiredep').stream;
-var path = require('path');
-var endOfLine = require('os').EOL;
-var del = require('del');
-var semver = require('semver');
+const pngquant = require('imagemin-pngquant');
+const wiredep = require('wiredep').stream;
+const path = require('path');
+const endOfLine = require('os').EOL;
+const del = require('del');
+const semver = require('semver');
 
 // Local settings
-var changedTestFiles = [];
+let changedTestFiles = [];
 
 // Set NODE_ENV to 'test'
 gulp.task('env:test', () => {
@@ -47,7 +47,7 @@ gulp.task('env:prod', () => {
 gulp.task('nodemon', () => {
 
   // Node.js v7 and newer use different debug argument
-  var debugArgument = semver.satisfies(process.versions.node, '>=7.0.0') ? '--inspect' : '--debug';
+  const debugArgument = semver.satisfies(process.versions.node, '>=7.0.0') ? '--inspect' : '--debug';
 
   return plugins.nodemon({
     script: 'server.js',
@@ -100,7 +100,7 @@ gulp.task('watch:server:run-tests', () => {
     _.forEach(testAssets.tests.server, pattern => {
       // determine if the changed (watched) file is a server test
       _.forEach(glob.sync(pattern), f => {
-        var filePath = path.resolve(f);
+        const filePath = path.resolve(f);
 
         if (filePath === path.resolve(file.path)) {
           changedTestFiles.push(f);
@@ -120,7 +120,7 @@ gulp.src(defaultAssets.client.css)
 
 // ESLint JS linting task
 gulp.task('eslint', () => {
-  var assets = _.union(
+  const assets = _.union(
     defaultAssets.server.gulpConfig,
     defaultAssets.server.allJS,
     defaultAssets.client.js,
@@ -136,7 +136,7 @@ gulp.task('eslint', () => {
 
 // JS minifying task
 gulp.task('uglify', () => {
-  var assets = _.union(
+  const assets = _.union(
     defaultAssets.client.js,
     defaultAssets.client.templates
   );
@@ -197,8 +197,8 @@ gulp.task('wiredep:prod', () => gulp.src('config/assets/production.js')
       js: {
         replace: {
           css(filePath) {
-            var minFilePath = filePath.replace('.css', '.min.css');
-            var fullPath = path.join(process.cwd(), minFilePath);
+            const minFilePath = filePath.replace('.css', '.min.css');
+            const fullPath = path.join(process.cwd(), minFilePath);
             if (!fs.existsSync(fullPath)) {
               return '\'' + filePath + '\',';
             } else {
@@ -206,8 +206,8 @@ gulp.task('wiredep:prod', () => gulp.src('config/assets/production.js')
             }
           },
           js(filePath) {
-            var minFilePath = filePath.replace('.js', '.min.js');
-            var fullPath = path.join(process.cwd(), minFilePath);
+            const minFilePath = filePath.replace('.js', '.min.js');
+            const fullPath = path.join(process.cwd(), minFilePath);
             if (!fs.existsSync(fullPath)) {
               return '\'' + filePath + '\',';
             } else {
@@ -222,8 +222,8 @@ gulp.task('wiredep:prod', () => gulp.src('config/assets/production.js')
 
 // Copy local development environment config example
 gulp.task('copyLocalEnvConfig', () => {
-  var src = [];
-  var renameTo = 'local-development.js';
+  const src = [];
+  const renameTo = 'local-development.js';
 
   // only add the copy source if our destination file doesn't already exist
   if (!fs.existsSync('config/env/' + renameTo)) {
@@ -255,9 +255,9 @@ gulp.task('templatecache', () => gulp.src(defaultAssets.client.views)
 
 // Mocha tests task
 gulp.task('mocha', done => {
-  var mongooseService = require('./config/lib/mongoose');
-  var testSuites = changedTestFiles.length ? changedTestFiles : testAssets.tests.server;
-  var error;
+  const mongooseService = require('./config/lib/mongoose');
+  const testSuites = changedTestFiles.length ? changedTestFiles : testAssets.tests.server;
+  let error;
 
   // Connect mongoose
   mongooseService.connect(db => {
@@ -296,7 +296,7 @@ gulp.src(defaultAssets.server.allJS)
 
 // Run istanbul test and write report
 gulp.task('mocha:coverage', ['pre-test', 'mocha'], () => {
-  var testSuites = changedTestFiles.length ? changedTestFiles : testAssets.tests.server;
+  const testSuites = changedTestFiles.length ? changedTestFiles : testAssets.tests.server;
 
   return gulp.src(testSuites)
     .pipe(plugins.istanbul.writeReports({
@@ -306,7 +306,7 @@ gulp.task('mocha:coverage', ['pre-test', 'mocha'], () => {
 
 // Karma test runner task
 gulp.task('karma', done => {
-  var KarmaServer = require('karma').Server;
+  const KarmaServer = require('karma').Server;
   new KarmaServer({
     configFile: __dirname + '/karma.conf.js'
   }, done).start();
@@ -314,7 +314,7 @@ gulp.task('karma', done => {
 
 // Run karma with coverage options set and write report
 gulp.task('karma:coverage', done => {
-  var KarmaServer = require('karma').Server;
+  const KarmaServer = require('karma').Server;
   new KarmaServer({
     configFile: __dirname + '/karma.conf.js',
     preprocessors: {
@@ -343,7 +343,7 @@ gulp.task('karma:coverage', done => {
 // Drops the MongoDB database, used in e2e testing
 gulp.task('dropdb', done => {
   // Use mongoose configuration
-  var mongooseService = require('./config/lib/mongoose');
+  const mongooseService = require('./config/lib/mongoose');
 
   mongooseService.connect(db => {
     db.dropDatabase(err => {
@@ -360,8 +360,8 @@ gulp.task('dropdb', done => {
 
 // Seed Mongo database based on configuration
 gulp.task('mongo-seed', done => {
-  var db = require('./config/lib/mongoose');
-  var seed = require('./config/lib/mongo-seed');
+  const db = require('./config/lib/mongoose');
+  const seed = require('./config/lib/mongo-seed');
 
   // Open mongoose database connection
   db.connect(() => {
@@ -401,7 +401,7 @@ gulp.task('webdriver_standalone', done => require('gulp-protractor').webdriver_s
 
 // Protractor test runner task
 gulp.task('protractor', ['webdriver_update'], () => {
-  var protractor = require('gulp-protractor').protractor;
+  const protractor = require('gulp-protractor').protractor;
   gulp.src([])
     .pipe(protractor({
       configFile: 'protractor.conf.js'

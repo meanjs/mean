@@ -1,5 +1,5 @@
 // Protractor configuration
-var config = {
+const config = {
   specs: ['modules/*/tests/e2e/*.js']
 };
 

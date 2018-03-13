@@ -1,16 +1,16 @@
 /**
  * Module dependencies.
  */
-var _ = require('lodash');
+const _ = require('lodash');
 
-var defaultAssets = require('./config/assets/default');
-var testAssets = require('./config/assets/test');
-var testConfig = require('./config/env/test');
-var karmaReporters = ['mocha'];
+const defaultAssets = require('./config/assets/default');
+const testAssets = require('./config/assets/test');
+const testConfig = require('./config/env/test');
+const karmaReporters = ['mocha'];
 
 // Karma configuration
 module.exports = karmaConfig => {
-  var configuration = {
+  const configuration = {
     frameworks: ['jasmine'],
 
     preprocessors: {
