@@ -1,26 +1,29 @@
 /**
  * Module dependencies.
  */
-var _ = require('lodash'),
-  fs = require('fs'),
-  defaultAssets = require('./config/assets/default'),
-  testAssets = require('./config/assets/test'),
-  testConfig = require('./config/env/test'),
-  glob = require('glob'),
-  gulp = require('gulp'),
-  gulpLoadPlugins = require('gulp-load-plugins'),
-  runSequence = require('run-sequence'),
-  plugins = gulpLoadPlugins({
-    rename: {
-      'gulp-angular-templatecache': 'templateCache'
-    }
-  }),
-  pngquant = require('imagemin-pngquant'),
-  wiredep = require('wiredep').stream,
-  path = require('path'),
-  endOfLine = require('os').EOL,
-  del = require('del'),
-  semver = require('semver');
+var _ = require('lodash');
+
+var fs = require('fs');
+var defaultAssets = require('./config/assets/default');
+var testAssets = require('./config/assets/test');
+var testConfig = require('./config/env/test');
+var glob = require('glob');
+var gulp = require('gulp');
+var gulpLoadPlugins = require('gulp-load-plugins');
+var runSequence = require('run-sequence');
+
+var plugins = gulpLoadPlugins({
+  rename: {
+    'gulp-angular-templatecache': 'templateCache'
+  }
+});
+
+var pngquant = require('imagemin-pngquant');
+var wiredep = require('wiredep').stream;
+var path = require('path');
+var endOfLine = require('os').EOL;
+var del = require('del');
+var semver = require('semver');
 
 // Local settings
 var changedTestFiles = [];

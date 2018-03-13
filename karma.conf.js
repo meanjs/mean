@@ -1,11 +1,12 @@
 /**
  * Module dependencies.
  */
-var _ = require('lodash'),
-  defaultAssets = require('./config/assets/default'),
-  testAssets = require('./config/assets/test'),
-  testConfig = require('./config/env/test'),
-  karmaReporters = ['mocha'];
+var _ = require('lodash');
+
+var defaultAssets = require('./config/assets/default');
+var testAssets = require('./config/assets/test');
+var testConfig = require('./config/env/test');
+var karmaReporters = ['mocha'];
 
 // Karma configuration
 module.exports = karmaConfig => {
