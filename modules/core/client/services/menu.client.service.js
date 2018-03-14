@@ -8,16 +8,16 @@
   function menuService() {
     var shouldRender;
     var service = {
-      addMenu: addMenu,
-      addMenuItem: addMenuItem,
-      addSubMenuItem: addSubMenuItem,
+      addMenu,
+      addMenuItem,
+      addSubMenuItem,
       defaultRoles: ['user', 'admin'],
-      getMenu: getMenu,
+      getMenu,
       menus: {},
-      removeMenu: removeMenu,
-      removeMenuItem: removeMenuItem,
-      removeSubMenuItem: removeSubMenuItem,
-      validateMenuExistence: validateMenuExistence
+      removeMenu,
+      removeMenuItem,
+      removeSubMenuItem,
+      validateMenuExistence
     };
 
     init();
@@ -32,7 +32,7 @@
       service.menus[menuId] = {
         roles: options.roles || service.defaultRoles,
         items: options.items || [],
-        shouldRender: shouldRender
+        shouldRender
       };
 
       // Return the menu object
@@ -55,7 +55,7 @@
         roles: ((options.roles === null || typeof options.roles === 'undefined') ? service.defaultRoles : options.roles),
         position: options.position || 0,
         items: [],
-        shouldRender: shouldRender
+        shouldRender
       });
 
       // Add submenu items
@@ -84,7 +84,7 @@
           params: options.params || {},
           roles: ((options.roles === null || typeof options.roles === 'undefined') ? item.roles : options.roles),
           position: options.position || 0,
-          shouldRender: shouldRender
+          shouldRender
         });
       });
 

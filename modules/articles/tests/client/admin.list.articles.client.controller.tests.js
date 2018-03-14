@@ -71,7 +71,7 @@
 
       // Initialize the Articles List controller.
       ArticlesAdminListController = $controller('ArticlesAdminListController as vm', {
-        $scope: $scope
+        $scope
       });
 
       // Spy on state go

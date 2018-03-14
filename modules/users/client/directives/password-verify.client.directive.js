@@ -11,7 +11,7 @@
       scope: {
         passwordVerify: '='
       },
-      link: link
+      link
     };
 
     return directive;

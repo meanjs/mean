@@ -67,7 +67,7 @@
 
       // Initialize the Articles List controller.
       ArticlesListController = $controller('ArticlesListController as vm', {
-        $scope: $scope
+        $scope
       });
 
       // Spy on state go

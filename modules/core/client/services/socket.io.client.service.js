@@ -10,10 +10,10 @@
 
   function Socket(Authentication, $state, $timeout) {
     var service = {
-      connect: connect,
-      emit: emit,
-      on: on,
-      removeListener: removeListener,
+      connect,
+      emit,
+      on,
+      removeListener,
       socket: null
     };
 

@@ -10,7 +10,7 @@
   function passwordValidator(PasswordValidator) {
     var directive = {
       require: 'ngModel',
-      link: link
+      link
     };
 
     return directive;

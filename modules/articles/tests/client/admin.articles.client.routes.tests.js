@@ -71,7 +71,7 @@
 
           // Initialize Controller
           ArticlesAdminController = $controller('ArticlesAdminController as vm', {
-            $scope: $scope,
+            $scope,
             articleResolve: mockArticle
           });
         }));
@@ -121,7 +121,7 @@
 
           // Initialize Controller
           ArticlesAdminController = $controller('ArticlesAdminController as vm', {
-            $scope: $scope,
+            $scope,
             articleResolve: mockArticle
           });
         }));

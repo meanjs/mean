@@ -75,7 +75,7 @@
 
           // Initialize Controller
           ArticlesController = $controller('ArticlesController as vm', {
-            $scope: $scope,
+            $scope,
             articleResolve: mockArticle
           });
         }));

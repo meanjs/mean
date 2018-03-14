@@ -12,7 +12,7 @@
   function autofocus($timeout, $window) {
     var directive = {
       restrict: 'A',
-      link: link
+      link
     };
 
     return directive;

@@ -9,7 +9,7 @@
   function pageTitle($rootScope, $interpolate, $state) {
     var directive = {
       restrict: 'A',
-      link: link
+      link
     };
 
     return directive;

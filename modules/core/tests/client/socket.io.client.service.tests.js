@@ -12,10 +12,10 @@
   var mock = () => {
     var io = {
       cbs: {},
-      connect: connect,
-      emit: emit,
-      on: on,
-      removeListener: removeListener
+      connect,
+      emit,
+      on,
+      removeListener
     };
 
     connect();

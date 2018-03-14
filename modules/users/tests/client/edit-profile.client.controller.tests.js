@@ -72,7 +72,7 @@
 
       // Initialize the Articles controller.
       EditProfileController = $controller('EditProfileController as vm', {
-        $scope: $scope
+        $scope
       });
     }));
 

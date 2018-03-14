@@ -30,7 +30,7 @@
         Authentication.user = undefined;
         spyOn($state, 'go');
         ChatController = $controller('ChatController as vm', {
-          $scope: $scope
+          $scope
         });
       }));
 
@@ -60,7 +60,7 @@
         $httpBackend.whenGET('/modules/core/client/views/home.client.view.html').respond(200, '');
 
         ChatController = $controller('ChatController as vm', {
-          $scope: $scope
+          $scope
         });
       }));
 

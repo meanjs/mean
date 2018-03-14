@@ -47,8 +47,8 @@
       // only store this state if it shouldn't be ignored
       if (!state.data || !state.data.ignoreState) {
         $state.previous = {
-          state: state,
-          params: params,
+          state,
+          params,
           href: $state.href(state, params)
         };
       }

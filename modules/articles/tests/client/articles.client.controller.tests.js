@@ -67,7 +67,7 @@
 
       // Initialize the Articles controller.
       ArticlesController = $controller('ArticlesController as vm', {
-        $scope: $scope,
+        $scope,
         articleResolve: {}
       });
 

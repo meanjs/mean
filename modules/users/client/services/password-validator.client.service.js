@@ -12,8 +12,8 @@
     var owaspPasswordStrengthTest = $window.owaspPasswordStrengthTest;
 
     var service = {
-      getResult: getResult,
-      getPopoverMsg: getPopoverMsg
+      getResult,
+      getPopoverMsg
     };
 
     return service;

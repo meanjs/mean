@@ -13,7 +13,7 @@
     var directive = {
       restrict: 'A',
       require: '^form',
-      compile: compile
+      compile
     };
 
     return directive;

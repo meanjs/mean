@@ -9,7 +9,7 @@
 
   function authInterceptor($q, $injector, Authentication) {
     var service = {
-      responseError: responseError
+      responseError
     };
 
     return service;

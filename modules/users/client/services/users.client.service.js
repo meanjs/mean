@@ -48,7 +48,7 @@
       },
       removeSocialAccount(provider) {
         return this.deleteProvider({
-          provider: provider // api expects provider as a querystring parameter
+          provider // api expects provider as a querystring parameter
         }).$promise;
       },
       requestPasswordReset(credentials) {
@@ -56,7 +56,7 @@
       },
       resetPassword(token, passwordDetails) {
         return this.resetPasswordWithToken({
-          token: token // api expects token as a parameter (i.e. /:token)
+          token // api expects token as a parameter (i.e. /:token)
         }, passwordDetails).$promise;
       },
       userSignup(credentials) {
