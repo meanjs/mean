@@ -17,7 +17,7 @@
     });
 
     angular.extend(Article.prototype, {
-      createOrUpdate: function () {
+      createOrUpdate() {
         var article = this;
         return createOrUpdate(article);
       }

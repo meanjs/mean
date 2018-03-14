@@ -18,9 +18,9 @@
     // account and ignores methods.
     beforeEach(() => {
       jasmine.addMatchers({
-        toEqualData: function (util, customEqualityTesters) {
+        toEqualData(util, customEqualityTesters) {
           return {
-            compare: function (actual, expected) {
+            compare(actual, expected) {
               return {
                 pass: angular.equals(actual, expected)
               };

@@ -43,26 +43,26 @@
     });
 
     angular.extend(Users, {
-      changePassword: function (passwordDetails) {
+      changePassword(passwordDetails) {
         return this.updatePassword(passwordDetails).$promise;
       },
-      removeSocialAccount: function (provider) {
+      removeSocialAccount(provider) {
         return this.deleteProvider({
           provider: provider // api expects provider as a querystring parameter
         }).$promise;
       },
-      requestPasswordReset: function (credentials) {
+      requestPasswordReset(credentials) {
         return this.sendPasswordResetToken(credentials).$promise;
       },
-      resetPassword: function (token, passwordDetails) {
+      resetPassword(token, passwordDetails) {
         return this.resetPasswordWithToken({
           token: token // api expects token as a parameter (i.e. /:token)
         }, passwordDetails).$promise;
       },
-      userSignup: function (credentials) {
+      userSignup(credentials) {
         return this.signup(credentials).$promise;
       },
-      userSignin: function (credentials) {
+      userSignin(credentials) {
         return this.signin(credentials).$promise;
       }
     });
