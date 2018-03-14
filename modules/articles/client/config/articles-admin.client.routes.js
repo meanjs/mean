@@ -1,6 +1,4 @@
 ﻿((() => {
-  'use strict';
-
   angular
     .module('articles.admin.routes')
     .config(routeConfig);

@@ -1,6 +1,4 @@
 ﻿((() => {
-  'use strict';
-
   describe('Chat Route Tests', () => {
     // Initialize global variables
     var $scope,

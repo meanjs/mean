@@ -1,5 +1,3 @@
-'use strict';
-
 ((() => {
   // Authentication controller Spec
   describe('AuthenticationController', () => {

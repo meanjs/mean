@@ -1,6 +1,4 @@
 ((() => {
-  'use strict';
-
   // Authentication service for user variables
 
   angular

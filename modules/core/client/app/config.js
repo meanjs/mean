@@ -1,6 +1,4 @@
 ((window => {
-  'use strict';
-
   var applicationModuleName = 'mean';
 
   var service = {

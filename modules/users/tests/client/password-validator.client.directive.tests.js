@@ -1,5 +1,3 @@
-'use strict';
-
 ((() => {
   // Password Validator Directive Spec
   describe('PasswordValidatorDirective', () => {

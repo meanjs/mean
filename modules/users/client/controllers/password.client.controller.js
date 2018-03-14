@@ -1,6 +1,4 @@
 ((() => {
-  'use strict';
-
   angular
     .module('users')
     .controller('PasswordController', PasswordController);

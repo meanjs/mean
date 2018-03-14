@@ -1,6 +1,4 @@
 ((() => {
-  'use strict';
-
   // PasswordValidator service used for testing the password strength
   angular
     .module('users.services')
@@ -29,5 +27,4 @@
       return popoverMsg;
     }
   }
-
 })());

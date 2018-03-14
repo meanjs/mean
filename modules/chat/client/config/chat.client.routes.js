@@ -1,6 +1,4 @@
 ((() => {
-  'use strict';
-
   angular
     .module('chat.routes')
     .config(routeConfig);

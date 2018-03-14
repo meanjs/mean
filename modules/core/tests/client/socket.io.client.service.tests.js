@@ -1,6 +1,4 @@
 ((() => {
-  'use strict';
-
   /* Creates a mock of socket.io for the browser.
    * Functionality of the service is tested through
    * the chat controller tests.

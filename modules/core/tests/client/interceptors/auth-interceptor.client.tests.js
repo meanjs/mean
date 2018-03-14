@@ -1,5 +1,3 @@
-'use strict';
-
 ((() => {
   describe('authInterceptor', () => {
     // Initialize global variables

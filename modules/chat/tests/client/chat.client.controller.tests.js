@@ -2,8 +2,6 @@
  * Chat client controller tests
  */
 ((() => {
-  'use strict';
-
   describe('ChatController', () => {
     // Initialize global variables
     var $scope,

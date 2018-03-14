@@ -1,6 +1,4 @@
 ((app => {
-  'use strict';
-
   app.registerModule('users');
   app.registerModule('users.admin');
   app.registerModule('users.admin.routes', ['ui.router', 'core.routes', 'users.admin.services']);

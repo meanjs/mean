@@ -1,5 +1,3 @@
-'use strict';
-
 ((() => {
   describe('Menus', () => {
     // Initialize global variables

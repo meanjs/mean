@@ -1,6 +1,4 @@
 ﻿((() => {
-  'use strict';
-
   describe('Edit Profile Controller Tests', () => {
     // Initialize global variables
     var EditProfileController,

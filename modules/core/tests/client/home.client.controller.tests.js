@@ -1,5 +1,3 @@
-'use strict';
-
 ((() => {
   describe('HomeController', () => {
     // Initialize global variables

@@ -1,6 +1,4 @@
 ﻿((() => {
-  'use strict';
-
   describe('Admin Articles List Controller Tests', () => {
     // Initialize global variables
     var ArticlesAdminListController,

@@ -1,6 +1,4 @@
 ((() => {
-  'use strict';
-
   angular
     .module('articles.services')
     .factory('ArticlesService', ArticlesService);

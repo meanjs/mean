@@ -1,6 +1,4 @@
 ﻿((() => {
-  'use strict';
-
   // Configuring the Articles Admin module
   angular
     .module('articles.admin')

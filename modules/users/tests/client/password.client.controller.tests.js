@@ -1,5 +1,3 @@
-'use strict';
-
 ((() => {
   // Password controller Spec
   describe('PasswordController', () => {

@@ -1,5 +1,3 @@
-'use strict';
-
 ((() => {
   // Password Verify Directive Spec
   describe('PasswordVerifyDirective', () => {

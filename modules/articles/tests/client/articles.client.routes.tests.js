@@ -1,6 +1,4 @@
 ((() => {
-  'use strict';
-
   describe('Articles Route Tests', () => {
     // Initialize global variables
     var $scope,
