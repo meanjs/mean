@@ -69,8 +69,8 @@
 
     describe('shouldRender', () => {
       const menuOptions = {
-          roles: ['*', 'menurole']
-        };
+        roles: ['*', 'menurole']
+      };
 
       let menu;
       beforeEach(() => {
@@ -282,8 +282,12 @@
 
       beforeEach(() => {
         menuService.addMenu(menuId);
-        menuService.addMenuItem(menuId, { state: menuItemState });
-        menuService.addMenuItem(menuId, { state: menuItemState2 });
+        menuService.addMenuItem(menuId, {
+          state: menuItemState
+        });
+        menuService.addMenuItem(menuId, {
+          state: menuItemState2
+        });
         menuService.validateMenuExistence = jasmine.createSpy();
         menu = menuService.removeMenuItem(menuId, menuItemState);
       });
@@ -306,7 +310,9 @@
       const subItemOptions = {
         title: 'title',
         state: 'sub.state',
-        params: { p1: 'val1' },
+        params: {
+          p1: 'val1'
+        },
         isPublic: false,
         roles: ['a', 'b'],
         position: 4
@@ -338,7 +344,9 @@
         menuService.addMenu(menuId);
         menuService.addMenuItem(menuId, menuItem1Options);
         menuService.addMenuItem(menuId, menuItem2Options);
-        menuService.addMenuItem(menuId, { state: 'something.else' });
+        menuService.addMenuItem(menuId, {
+          state: 'something.else'
+        });
         menuService.addSubMenuItem(menuId, menuItem1Options.state, subItemOptions);
         menu = menuService.addSubMenuItem(menuId, menuItem1Options.state);
         menuItem1 = menu.items[0];
