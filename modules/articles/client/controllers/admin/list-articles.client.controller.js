@@ -1,4 +1,4 @@
-﻿(function () {
+﻿((() => {
   'use strict';
 
   angular
@@ -12,4 +12,4 @@
 
     vm.articles = ArticlesService.query();
   }
-}());
+})());

@@ -1,4 +1,4 @@
-(function () {
+((() => {
   'use strict';
 
   angular
@@ -14,4 +14,4 @@
       state: 'chat'
     });
   }
-}());
+})());

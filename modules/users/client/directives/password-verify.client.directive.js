@@ -1,4 +1,4 @@
-(function () {
+((() => {
   'use strict';
 
   angular
@@ -18,15 +18,15 @@
 
     function link(scope, element, attrs, ngModel) {
       var status = true;
-      scope.$watch(function () {
+      scope.$watch(() => {
         var combined;
         if (scope.passwordVerify || ngModel) {
           combined = scope.passwordVerify + '_' + ngModel;
         }
         return combined;
-      }, function (value) {
+      }, value => {
         if (value) {
-          ngModel.$validators.passwordVerify = function (password) {
+          ngModel.$validators.passwordVerify = password => {
             var origin = scope.passwordVerify;
             return (origin === password);
           };
@@ -34,4 +34,4 @@
       });
     }
   }
-}());
+})());

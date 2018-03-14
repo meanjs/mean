@@ -1,7 +1,7 @@
 'use strict';
 
-(function () {
-  describe('authInterceptor', function () {
+((() => {
+  describe('authInterceptor', () => {
     // Initialize global variables
     var authInterceptor,
       $q,
@@ -13,11 +13,11 @@
     beforeEach(module(ApplicationConfiguration.applicationModuleName));
 
     // Load httpProvider
-    beforeEach(module(function ($httpProvider) {
+    beforeEach(module($httpProvider => {
       httpProvider = $httpProvider;
     }));
 
-    beforeEach(inject(function (_authInterceptor_, _$q_, _$state_, _Authentication_) {
+    beforeEach(inject((_authInterceptor_, _$q_, _$state_, _Authentication_) => {
       authInterceptor = _authInterceptor_;
       $q = _$q_;
       $state = _$state_;
@@ -26,20 +26,20 @@
       spyOn($state, 'transitionTo');
     }));
 
-    it('Auth Interceptor should be object', function () {
+    it('Auth Interceptor should be object', () => {
       expect(typeof authInterceptor).toEqual('object');
     });
 
-    it('Auth Interceptor should contain responseError function', function () {
+    it('Auth Interceptor should contain responseError function', () => {
       expect(typeof authInterceptor.responseError).toEqual('function');
     });
 
-    it('httpProvider Interceptor should have authInterceptor', function () {
+    it('httpProvider Interceptor should have authInterceptor', () => {
       expect(httpProvider.interceptors).toContain('authInterceptor');
     });
 
-    describe('Forbidden Interceptor', function () {
-      it('should redirect to forbidden route', function () {
+    describe('Forbidden Interceptor', () => {
+      it('should redirect to forbidden route', () => {
         var response = {
           status: 403,
           config: {}
@@ -50,8 +50,8 @@
       });
     });
 
-    describe('Authorization Interceptor', function () {
-      it('should redirect to signIn page for unauthorized access', function () {
+    describe('Authorization Interceptor', () => {
+      it('should redirect to signIn page for unauthorized access', () => {
         var response = {
           status: 401,
           config: {}
@@ -63,13 +63,13 @@
       });
     });
 
-    describe('Unresponsive Interceptor', function () {
+    describe('Unresponsive Interceptor', () => {
       var Notification;
-      beforeEach(inject(function (_Notification_) {
+      beforeEach(inject(_Notification_ => {
         Notification = _Notification_;
         spyOn(Notification, 'error');
       }));
-      it('should show error Notification', function () {
+      it('should show error Notification', () => {
         var response = {
           status: -1,
           config: {}
@@ -80,4 +80,4 @@
       });
     });
   });
-}());
+})());

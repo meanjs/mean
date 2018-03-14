@@ -1,4 +1,4 @@
-(function () {
+((() => {
   'use strict';
 
   // Authentication service for user variables
@@ -16,4 +16,4 @@
 
     return auth;
   }
-}());
+})());

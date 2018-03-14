@@ -1,7 +1,7 @@
 'use strict';
 
-(function () {
-  describe('HeaderController', function () {
+((() => {
+  describe('HeaderController', () => {
     // Initialize global variables
     var scope,
       HeaderController,
@@ -11,7 +11,7 @@
     // Load the main application module
     beforeEach(module(ApplicationConfiguration.applicationModuleName));
 
-    beforeEach(inject(function ($controller, $rootScope, _$state_, _Authentication_) {
+    beforeEach(inject(($controller, $rootScope, _$state_, _Authentication_) => {
       scope = $rootScope.$new();
       $state = _$state_;
       Authentication = _Authentication_;
@@ -21,41 +21,41 @@
       });
     }));
 
-    it('should expose the authentication service', function () {
+    it('should expose the authentication service', () => {
       expect(scope.vm.authentication).toBe(Authentication);
     });
 
-    it('should default menu to collapsed', function () {
+    it('should default menu to collapsed', () => {
       expect(scope.vm.isCollapsed).toBeFalsy();
     });
 
-    describe('when toggleCollapsibleMenu', function () {
+    describe('when toggleCollapsibleMenu', () => {
       var defaultCollapse;
-      beforeEach(function () {
+      beforeEach(() => {
         defaultCollapse = scope.vm.isCollapsed;
 
         scope.vm.isCollapsed = !scope.vm.isCollapsed;
       });
 
-      it('should toggle isCollapsed to non default value', function () {
+      it('should toggle isCollapsed to non default value', () => {
         expect(scope.vm.isCollapsed).not.toBe(defaultCollapse);
       });
 
-      it('should then toggle isCollapsed back to default value', function () {
+      it('should then toggle isCollapsed back to default value', () => {
         scope.vm.isCollapsed = !scope.vm.isCollapsed;
         expect(scope.vm.isCollapsed).toBe(defaultCollapse);
       });
     });
 
-    describe('when view state changes', function () {
-      beforeEach(function () {
+    describe('when view state changes', () => {
+      beforeEach(() => {
         scope.vm.isCollapsed = true;
         scope.$broadcast('$stateChangeSuccess');
       });
 
-      it('should set isCollapsed to false', function () {
+      it('should set isCollapsed to false', () => {
         expect(scope.vm.isCollapsed).toBeFalsy();
       });
     });
   });
-}());
+})());

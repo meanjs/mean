@@ -1,4 +1,4 @@
-﻿(function () {
+﻿((() => {
   'use strict';
 
   // Configuring the Articles Admin module
@@ -14,4 +14,4 @@
       state: 'admin.articles.list'
     });
   }
-}());
+})());

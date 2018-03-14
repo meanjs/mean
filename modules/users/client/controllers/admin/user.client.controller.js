@@ -1,4 +1,4 @@
-(function () {
+((() => {
   'use strict';
 
   angular
@@ -24,7 +24,7 @@
           vm.users.splice(vm.users.indexOf(user), 1);
           Notification.success('User deleted successfully!');
         } else {
-          vm.user.$remove(function () {
+          vm.user.$remove(() => {
             $state.go('admin.users');
             Notification.success({ message: '<i class="glyphicon glyphicon-ok"></i> User deleted successfully!' });
           });
@@ -41,12 +41,12 @@
 
       var user = vm.user;
 
-      user.$update(function () {
+      user.$update(() => {
         $state.go('admin.user', {
           userId: user._id
         });
         Notification.success({ message: '<i class="glyphicon glyphicon-ok"></i> User saved successfully!' });
-      }, function (errorResponse) {
+      }, errorResponse => {
         Notification.error({ message: errorResponse.data.message, title: '<i class="glyphicon glyphicon-remove"></i> User update error!' });
       });
     }
@@ -55,4 +55,4 @@
       return vm.user.username === vm.authentication.user.username;
     }
   }
-}());
+})());

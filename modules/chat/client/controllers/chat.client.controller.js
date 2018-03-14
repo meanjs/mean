@@ -1,4 +1,4 @@
-(function () {
+((() => {
   'use strict';
 
   angular
@@ -28,12 +28,12 @@
       }
 
       // Add an event listener to the 'chatMessage' event
-      Socket.on('chatMessage', function (message) {
+      Socket.on('chatMessage', message => {
         vm.messages.unshift(message);
       });
 
       // Remove the event listener when the controller instance is destroyed
-      $scope.$on('$destroy', function () {
+      $scope.$on('$destroy', () => {
         Socket.removeListener('chatMessage');
       });
     }
@@ -52,4 +52,4 @@
       vm.messageText = '';
     }
   }
-}());
+})());

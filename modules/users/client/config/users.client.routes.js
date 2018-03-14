@@ -1,4 +1,4 @@
-(function () {
+((() => {
   'use strict';
 
   // Setting up route
@@ -125,4 +125,4 @@
         }
       });
   }
-}());
+})());

@@ -1,4 +1,4 @@
-(function () {
+((() => {
   'use strict';
 
   angular
@@ -52,4 +52,4 @@
       $window.location.href = url;
     }
   }
-}());
+})());

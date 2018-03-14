@@ -1,4 +1,4 @@
-(function () {
+((() => {
   'use strict';
 
   angular
@@ -60,7 +60,7 @@
 
       // Add submenu items
       if (options.items) {
-        options.items.forEach(function (subMenuItem) {
+        options.items.forEach(subMenuItem => {
           service.addSubMenuItem(menuId, options.state, subMenuItem);
         });
       }
@@ -77,9 +77,7 @@
       service.validateMenuExistence(menuId);
 
       // Search for menu item
-      service.menus[menuId].items.filter(function (item) {
-        return item.state === parentItemState;
-      }).forEach(function (item) {
+      service.menus[menuId].items.filter(item => item.state === parentItemState).forEach(item => {
         item.items.push({
           title: options.title || '',
           state: options.state || '',
@@ -141,9 +139,7 @@
       service.validateMenuExistence(menuId);
 
       // Filter out menu items that do not match the current menu item state.
-      service.menus[menuId].items = service.menus[menuId].items.filter(function (item) {
-        return item.state !== menuItemState;
-      });
+      service.menus[menuId].items = service.menus[menuId].items.filter(item => item.state !== menuItemState);
 
       // Return the menu object
       return service.menus[menuId];
@@ -155,10 +151,8 @@
       service.validateMenuExistence(menuId);
 
       // Filter out sub-menu items that do not match the current subMenuItemState
-      service.menus[menuId].items.forEach(function (parentMenuItem) {
-        parentMenuItem.items = parentMenuItem.items.filter(function (subMenuItem) {
-          return subMenuItem.state !== subMenuItemState;
-        });
+      service.menus[menuId].items.forEach(parentMenuItem => {
+        parentMenuItem.items = parentMenuItem.items.filter(subMenuItem => subMenuItem.state !== subMenuItemState);
       });
 
       // Return the menu object
@@ -176,4 +170,4 @@
       return true;
     }
   }
-}());
+})());

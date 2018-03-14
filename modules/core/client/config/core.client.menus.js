@@ -1,4 +1,4 @@
-(function () {
+((() => {
   'use strict';
 
   angular
@@ -39,4 +39,4 @@
       state: 'settings.accounts'
     });
   }
-}());
+})());

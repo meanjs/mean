@@ -1,4 +1,4 @@
-(function () {
+((() => {
   'use strict';
 
   angular
@@ -28,7 +28,7 @@
           if (Authentication.user !== null && typeof Authentication.user === 'object') {
             $state.transitionTo('forbidden');
           } else {
-            $state.go('authentication.signin').then(function () {
+            $state.go('authentication.signin').then(() => {
               // Record previous state
               storePreviousState(toState, toParams);
             });
@@ -54,4 +54,4 @@
       }
     }
   }
-}());
+})());

@@ -1,4 +1,4 @@
-(function () {
+((() => {
   'use strict';
 
   /* Creates a mock of socket.io for the browser.
@@ -9,7 +9,7 @@
   var ngInjector = angular.injector(['ng']),
     $window = ngInjector.get('$window');
 
-  var mock = function () {
+  var mock = () => {
     var io = {
       cbs: {},
       connect: connect,
@@ -40,4 +40,4 @@
   };
 
   $window.io = mock;
-}());
+})());

@@ -1,4 +1,4 @@
-(function () {
+((() => {
   'use strict';
 
   angular
@@ -50,4 +50,4 @@
       $log.error(error);
     }
   }
-}());
+})());

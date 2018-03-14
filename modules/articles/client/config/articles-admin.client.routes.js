@@ -1,4 +1,4 @@
-﻿(function () {
+﻿((() => {
   'use strict';
 
   angular
@@ -63,4 +63,4 @@
   function newArticle(ArticlesService) {
     return new ArticlesService();
   }
-}());
+})());

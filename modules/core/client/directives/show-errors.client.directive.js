@@ -1,4 +1,4 @@
-(function () {
+((() => {
   'use strict';
 
   // https://gist.github.com/rhutchison/c8c14946e88a1c8f9216
@@ -46,9 +46,7 @@
           throw new Error('show-errors element has no child input elements with a \'name\' attribute class');
         }
 
-        scope.$watch(function () {
-          return formCtrl[inputName] && formCtrl[inputName].$invalid;
-        }, toggleClasses);
+        scope.$watch(() => formCtrl[inputName] && formCtrl[inputName].$invalid, toggleClasses);
 
         scope.$on('show-errors-check-validity', checkValidity);
         scope.$on('show-errors-reset', reset);
@@ -64,7 +62,7 @@
 
         function reset(event, name) {
           if (angular.isUndefined(name) || formCtrl.$name === name) {
-            return $timeout(function () {
+            return $timeout(() => {
               el.removeClass('has-error');
               el.removeClass('has-success');
               showValidationMessages = false;
@@ -82,4 +80,4 @@
       }
     }
   }
-}());
+})());

@@ -1,4 +1,4 @@
-(function () {
+((() => {
   'use strict';
 
   // Create the Socket.io wrapper service
@@ -39,8 +39,8 @@
     // Wrap the Socket.io 'on' method
     function on(eventName, callback) {
       if (service.socket) {
-        service.socket.on(eventName, function (data) {
-          $timeout(function () {
+        service.socket.on(eventName, data => {
+          $timeout(() => {
             callback(data);
           });
         });
@@ -54,4 +54,4 @@
       }
     }
   }
-}());
+})());

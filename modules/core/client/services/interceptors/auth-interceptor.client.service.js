@@ -1,4 +1,4 @@
-(function () {
+((() => {
   'use strict';
 
   angular
@@ -41,4 +41,4 @@
       return $q.reject(rejection);
     }
   }
-}());
+})());

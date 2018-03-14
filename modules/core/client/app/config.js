@@ -1,4 +1,4 @@
-(function (window) {
+((window => {
   'use strict';
 
   var applicationModuleName = 'mean';
@@ -22,7 +22,7 @@
   }
 
   // Angular-ui-notification configuration
-  angular.module('ui-notification').config(function (NotificationProvider) {
+  angular.module('ui-notification').config(NotificationProvider => {
     NotificationProvider.setOptions({
       delay: 2000,
       startTop: 20,
@@ -33,4 +33,4 @@
       positionY: 'bottom'
     });
   });
-}(window));
+})(window));

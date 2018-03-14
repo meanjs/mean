@@ -1,4 +1,4 @@
-(function () {
+((() => {
   'use strict';
 
   angular
@@ -14,5 +14,5 @@
     // Display custom message if it was set
     if ($stateParams.message) vm.errorMessage = $stateParams.message;
   }
-}());
+})());
 

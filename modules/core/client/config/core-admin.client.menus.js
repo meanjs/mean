@@ -1,4 +1,4 @@
-(function () {
+((() => {
   'use strict';
 
   angular
@@ -15,4 +15,4 @@
       roles: ['admin']
     });
   }
-}());
+})());

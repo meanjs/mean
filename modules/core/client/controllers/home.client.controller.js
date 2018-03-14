@@ -1,4 +1,4 @@
-(function () {
+((() => {
   'use strict';
 
   angular
@@ -8,4 +8,4 @@
   function HomeController() {
     var vm = this;
   }
-}());
+})());

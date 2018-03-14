@@ -1,4 +1,4 @@
-(function () {
+((() => {
   'use strict';
 
   // Focus the element on page load
@@ -19,7 +19,7 @@
 
     function link(scope, element, attrs) {
       if ($window.innerWidth >= 800) {
-        $timeout(function () {
+        $timeout(() => {
           var el = element[0];
           el.focus();
           el.selectionStart = el.selectionEnd = el.value.length;
@@ -27,4 +27,4 @@
       }
     }
   }
-}());
+})());

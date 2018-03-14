@@ -1,4 +1,4 @@
-(function () {
+((() => {
   'use strict';
 
   angular
@@ -13,7 +13,7 @@
     vm.figureOutItemsToDisplay = figureOutItemsToDisplay;
     vm.pageChanged = pageChanged;
 
-    AdminService.query(function (data) {
+    AdminService.query(data => {
       vm.users = data;
       vm.buildPager();
     });
@@ -39,4 +39,4 @@
       vm.figureOutItemsToDisplay();
     }
   }
-}());
+})());

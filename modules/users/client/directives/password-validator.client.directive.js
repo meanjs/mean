@@ -1,4 +1,4 @@
-(function () {
+((() => {
   'use strict';
 
   angular
@@ -16,7 +16,7 @@
     return directive;
 
     function link(scope, element, attrs, ngModel) {
-      ngModel.$validators.requirements = function (password) {
+      ngModel.$validators.requirements = password => {
         var status = true;
         if (password) {
           var result = PasswordValidator.getResult(password);
@@ -61,4 +61,4 @@
       };
     }
   }
-}());
+})());

@@ -1,4 +1,4 @@
-(function (app) {
+((app => {
   'use strict';
 
   // Start by defining the main module and adding the module dependencies
@@ -51,4 +51,4 @@
     // Then init the app
     angular.bootstrap(document, [app.applicationModuleName]);
   }
-}(ApplicationConfiguration));
+})(ApplicationConfiguration));
