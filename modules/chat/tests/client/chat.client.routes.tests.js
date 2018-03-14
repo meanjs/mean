@@ -1,10 +1,10 @@
 ﻿((() => {
   describe('Chat Route Tests', () => {
     // Initialize global variables
-    var $scope;
+    let $scope;
 
-    var Authentication;
-    var $httpBackend;
+    let Authentication;
+    let $httpBackend;
 
     // We can start by loading the main application module
     beforeEach(module(ApplicationConfiguration.applicationModuleName));
@@ -20,7 +20,7 @@
 
     describe('Route Config', () => {
       describe('Main Route', () => {
-        var mainstate;
+        let mainstate;
         beforeEach(inject($state => {
           mainstate = $state.get('chat');
         }));

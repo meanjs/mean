@@ -6,7 +6,7 @@
   PasswordController.$inject = ['$scope', '$stateParams', 'UsersService', '$location', 'Authentication', 'PasswordValidator', 'Notification'];
 
   function PasswordController($scope, $stateParams, UsersService, $location, Authentication, PasswordValidator, Notification) {
-    var vm = this;
+    const vm = this;
 
     vm.resetUserPassword = resetUserPassword;
     vm.askForPasswordReset = askForPasswordReset;

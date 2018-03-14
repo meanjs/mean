@@ -1,9 +1,9 @@
 ((() => {
   describe('Articles Route Tests', () => {
     // Initialize global variables
-    var $scope;
+    let $scope;
 
-    var ArticlesService;
+    let ArticlesService;
 
     // We can start by loading the main application module
     beforeEach(module(ApplicationConfiguration.applicationModuleName));
@@ -19,7 +19,7 @@
 
     describe('Route Config', () => {
       describe('Main Route', () => {
-        var mainstate;
+        let mainstate;
         beforeEach(inject($state => {
           mainstate = $state.get('articles');
         }));
@@ -38,7 +38,7 @@
       });
 
       describe('List Route', () => {
-        var liststate;
+        let liststate;
         beforeEach(inject($state => {
           liststate = $state.get('articles.list');
         }));
@@ -57,9 +57,9 @@
       });
 
       describe('View Route', () => {
-        var viewstate;
-        var ArticlesController;
-        var mockArticle;
+        let viewstate;
+        let ArticlesController;
+        let mockArticle;
 
         beforeEach(inject(($controller, $state, $templateCache) => {
           viewstate = $state.get('articles.view');

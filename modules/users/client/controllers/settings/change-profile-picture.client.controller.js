@@ -6,7 +6,7 @@
   ChangeProfilePictureController.$inject = ['$timeout', 'Authentication', 'Upload', 'Notification'];
 
   function ChangeProfilePictureController($timeout, Authentication, Upload, Notification) {
-    var vm = this;
+    const vm = this;
 
     vm.user = Authentication.user;
     vm.progress = 0;

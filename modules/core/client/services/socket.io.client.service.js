@@ -7,7 +7,7 @@
   Socket.$inject = ['Authentication', '$state', '$timeout'];
 
   function Socket(Authentication, $state, $timeout) {
-    var service = {
+    const service = {
       connect,
       emit,
       on,

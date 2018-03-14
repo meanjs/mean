@@ -6,7 +6,7 @@
   ErrorController.$inject = ['$stateParams'];
 
   function ErrorController($stateParams) {
-    var vm = this;
+    const vm = this;
     vm.errorMessage = null;
 
     // Display custom message if it was set

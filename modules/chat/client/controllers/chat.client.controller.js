@@ -6,7 +6,7 @@
   ChatController.$inject = ['$scope', '$state', 'Authentication', 'Socket'];
 
   function ChatController($scope, $state, Authentication, Socket) {
-    var vm = this;
+    const vm = this;
 
     vm.messages = [];
     vm.messageText = '';
@@ -39,7 +39,7 @@
     // Create a controller method for sending messages
     function sendMessage() {
       // Create a new message object
-      var message = {
+      const message = {
         text: vm.messageText
       };
 

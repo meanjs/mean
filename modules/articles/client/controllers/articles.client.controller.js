@@ -6,7 +6,7 @@
   ArticlesController.$inject = ['$scope', 'articleResolve', 'Authentication'];
 
   function ArticlesController($scope, article, Authentication) {
-    var vm = this;
+    const vm = this;
 
     vm.article = article;
     vm.authentication = Authentication;

@@ -1,11 +1,11 @@
 ((() => {
   describe('HeaderController', () => {
     // Initialize global variables
-    var scope;
+    let scope;
 
-    var HeaderController;
-    var $state;
-    var Authentication;
+    let HeaderController;
+    let $state;
+    let Authentication;
 
     // Load the main application module
     beforeEach(module(ApplicationConfiguration.applicationModuleName));
@@ -29,7 +29,7 @@
     });
 
     describe('when toggleCollapsibleMenu', () => {
-      var defaultCollapse;
+      let defaultCollapse;
       beforeEach(() => {
         defaultCollapse = scope.vm.isCollapsed;
 

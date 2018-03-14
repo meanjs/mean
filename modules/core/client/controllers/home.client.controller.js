@@ -4,6 +4,6 @@
     .controller('HomeController', HomeController);
 
   function HomeController() {
-    var vm = this;
+    const vm = this;
   }
 })());

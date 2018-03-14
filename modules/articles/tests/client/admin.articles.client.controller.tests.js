@@ -1,15 +1,15 @@
 ﻿((() => {
   describe('Articles Admin Controller Tests', () => {
     // Initialize global variables
-    var ArticlesAdminController;
+    let ArticlesAdminController;
 
-    var $scope;
-    var $httpBackend;
-    var $state;
-    var Authentication;
-    var ArticlesService;
-    var mockArticle;
-    var Notification;
+    let $scope;
+    let $httpBackend;
+    let $state;
+    let Authentication;
+    let ArticlesService;
+    let mockArticle;
+    let Notification;
 
     // The $resource service augments the response object with methods for updating and deleting the resource.
     // If we were to use the standard toEqual matcher, our tests would fail because the test values would not match
@@ -83,7 +83,7 @@
     }));
 
     describe('vm.save() as create', () => {
-      var sampleArticlePostData;
+      let sampleArticlePostData;
 
       beforeEach(() => {
         // Create a sample article object
@@ -110,7 +110,7 @@
       }));
 
       it('should call Notification.error if error', () => {
-        var errorMessage = 'this is an error message';
+        const errorMessage = 'this is an error message';
         $httpBackend.expectPOST('/api/articles', sampleArticlePostData).respond(400, {
           message: errorMessage
         });
@@ -143,7 +143,7 @@
       }));
 
       it('should  call Notification.error if error', inject(ArticlesService => {
-        var errorMessage = 'error';
+        const errorMessage = 'error';
         $httpBackend.expectPUT(/api\/articles\/([0-9a-fA-F]{24})$/).respond(400, {
           message: errorMessage
         });

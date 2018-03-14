@@ -6,7 +6,7 @@
   EditProfileController.$inject = ['$scope', '$http', '$location', 'UsersService', 'Authentication', 'Notification'];
 
   function EditProfileController($scope, $http, $location, UsersService, Authentication, Notification) {
-    var vm = this;
+    const vm = this;
 
     vm.user = Authentication.user;
     vm.updateUserProfile = updateUserProfile;
@@ -20,7 +20,7 @@
         return false;
       }
 
-      var user = new UsersService(vm.user);
+      const user = new UsersService(vm.user);
 
       user.$update(response => {
         $scope.$broadcast('show-errors-reset', 'vm.userForm');

@@ -6,7 +6,7 @@
   passwordValidator.$inject = ['PasswordValidator'];
 
   function passwordValidator(PasswordValidator) {
-    var directive = {
+    const directive = {
       require: 'ngModel',
       link
     };
@@ -15,13 +15,13 @@
 
     function link(scope, element, attrs, ngModel) {
       ngModel.$validators.requirements = password => {
-        var status = true;
+        let status = true;
         if (password) {
-          var result = PasswordValidator.getResult(password);
-          var requirementsIdx = 0;
+          const result = PasswordValidator.getResult(password);
+          let requirementsIdx = 0;
 
           // Requirements Meter - visual indicator for users
-          var requirementsMeter = [{
+          const requirementsMeter = [{
             color: 'danger',
             progress: '20'
           }, {

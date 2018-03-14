@@ -1,10 +1,10 @@
 ﻿((() => {
   describe('Users Route Tests', () => {
     // Initialize global variables
-    var $scope;
+    let $scope;
 
-    var Authentication;
-    var $httpBackend;
+    let Authentication;
+    let $httpBackend;
 
     // We can start by loading the main application module
     beforeEach(module(ApplicationConfiguration.applicationModuleName));
@@ -20,7 +20,7 @@
 
     describe('Settings Route Config', () => {
       describe('Main Route', () => {
-        var mainstate;
+        let mainstate;
         beforeEach(inject($state => {
           mainstate = $state.get('settings');
         }));
@@ -39,7 +39,7 @@
       });
 
       describe('Profile Route', () => {
-        var profilestate;
+        let profilestate;
         beforeEach(inject($state => {
           profilestate = $state.get('settings.profile');
         }));
@@ -58,7 +58,7 @@
       });
 
       describe('Password Route', () => {
-        var passwordstate;
+        let passwordstate;
         beforeEach(inject($state => {
           passwordstate = $state.get('settings.password');
         }));
@@ -77,7 +77,7 @@
       });
 
       describe('Accounts Route', () => {
-        var accountsstate;
+        let accountsstate;
         beforeEach(inject($state => {
           accountsstate = $state.get('settings.accounts');
         }));
@@ -96,7 +96,7 @@
       });
 
       describe('Picture Route', () => {
-        var picturestate;
+        let picturestate;
         beforeEach(inject($state => {
           picturestate = $state.get('settings.picture');
         }));
@@ -148,7 +148,7 @@
 
     describe('Authentication Route Config', () => {
       describe('Main Route', () => {
-        var mainstate;
+        let mainstate;
         beforeEach(inject($state => {
           mainstate = $state.get('authentication');
         }));
@@ -167,7 +167,7 @@
       });
 
       describe('Signup Route', () => {
-        var signupstate;
+        let signupstate;
         beforeEach(inject($state => {
           signupstate = $state.get('authentication.signup');
         }));
@@ -186,7 +186,7 @@
       });
 
       describe('Signin Route', () => {
-        var signinstate;
+        let signinstate;
         beforeEach(inject($state => {
           signinstate = $state.get('authentication.signin');
         }));
@@ -208,7 +208,7 @@
 
     describe('Password Route Config', () => {
       describe('Main Route', () => {
-        var mainstate;
+        let mainstate;
         beforeEach(inject($state => {
           mainstate = $state.get('password');
         }));
@@ -227,7 +227,7 @@
       });
 
       describe('Forgot Route', () => {
-        var forgotstate;
+        let forgotstate;
         beforeEach(inject($state => {
           forgotstate = $state.get('password.forgot');
         }));
@@ -249,7 +249,7 @@
 
     describe('Password Reset Route Config', () => {
       describe('Main Route', () => {
-        var mainstate;
+        let mainstate;
         beforeEach(inject($state => {
           mainstate = $state.get('password.reset');
         }));
@@ -268,7 +268,7 @@
       });
 
       describe('Invalid Route', () => {
-        var invalidstate;
+        let invalidstate;
         beforeEach(inject($state => {
           invalidstate = $state.get('password.reset.invalid');
         }));
@@ -287,7 +287,7 @@
       });
 
       describe('Success Route', () => {
-        var successstate;
+        let successstate;
         beforeEach(inject($state => {
           successstate = $state.get('password.reset.success');
         }));
@@ -306,7 +306,7 @@
       });
 
       describe('Form Route', () => {
-        var formstate;
+        let formstate;
         beforeEach(inject($state => {
           formstate = $state.get('password.reset.form');
         }));

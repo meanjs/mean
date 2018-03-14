@@ -1,9 +1,9 @@
 ((() => {
   describe('HomeController', () => {
     // Initialize global variables
-    var scope;
+    let scope;
 
-    var HomeController;
+    let HomeController;
 
     // Load the main application module
     beforeEach(module(ApplicationConfiguration.applicationModuleName));

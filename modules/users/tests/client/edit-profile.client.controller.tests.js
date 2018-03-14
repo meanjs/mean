@@ -1,14 +1,14 @@
 ﻿((() => {
   describe('Edit Profile Controller Tests', () => {
     // Initialize global variables
-    var EditProfileController;
+    let EditProfileController;
 
-    var $scope;
-    var $httpBackend;
-    var $location;
-    var Authentication;
-    var UsersService;
-    var Notification;
+    let $scope;
+    let $httpBackend;
+    let $location;
+    let Authentication;
+    let UsersService;
+    let Notification;
 
     // The $resource service augments the response object with methods for updating and deleting the resource.
     // If we were to use the standard toEqual matcher, our tests would fail because the test values would not match
@@ -93,7 +93,7 @@
       }));
 
       it('should call Notification.error if error', inject(UsersService => {
-        var errorMessage = 'error';
+        const errorMessage = 'error';
         $httpBackend.expectPUT(/api\/users/).respond(400, {
           message: errorMessage
         });

@@ -2,14 +2,14 @@
   // Password controller Spec
   describe('PasswordController', () => {
     // Initialize global variables
-    var PasswordController;
+    let PasswordController;
 
-    var scope;
-    var $httpBackend;
-    var $stateParams;
-    var $location;
-    var $window;
-    var Notification;
+    let scope;
+    let $httpBackend;
+    let $stateParams;
+    let $location;
+    let $window;
+    let Notification;
 
     beforeEach(() => {
       jasmine.addMatchers({
@@ -107,7 +107,7 @@
       });
 
       describe('askForPasswordReset', () => {
-        var credentials = {
+        const credentials = {
           username: 'test',
           password: 'P@ssw0rd!!'
         };
@@ -116,7 +116,7 @@
         });
 
         describe('POST error', () => {
-          var errorMessage = 'No account with that username has been found';
+          const errorMessage = 'No account with that username has been found';
           beforeEach(() => {
             $httpBackend.when('POST', '/api/auth/forgot', credentials).respond(400, {
               'message': errorMessage
@@ -136,7 +136,7 @@
         });
 
         describe('POST success', () => {
-          var successMessage = 'An email has been sent to the provided email with further instructions.';
+          const successMessage = 'An email has been sent to the provided email with further instructions.';
           beforeEach(() => {
             $httpBackend.when('POST', '/api/auth/forgot', credentials).respond({
               'message': successMessage
@@ -157,8 +157,8 @@
       });
 
       describe('resetUserPassword', () => {
-        var token = 'testToken';
-        var passwordDetails = {
+        const token = 'testToken';
+        const passwordDetails = {
           password: 'test'
         };
         beforeEach(() => {
@@ -167,7 +167,7 @@
         });
 
         it('POST error should call Notification.error with response message', () => {
-          var errorMessage = 'Passwords do not match';
+          const errorMessage = 'Passwords do not match';
           $httpBackend.when('POST', '/api/auth/reset/' + token, passwordDetails).respond(400, {
             'message': errorMessage
           });
@@ -179,7 +179,7 @@
         });
 
         describe('POST success', () => {
-          var user = {
+          const user = {
             username: 'test'
           };
           beforeEach(() => {

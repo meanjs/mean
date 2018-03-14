@@ -6,7 +6,7 @@
   UserListController.$inject = ['$scope', '$filter', 'AdminService'];
 
   function UserListController($scope, $filter, AdminService) {
-    var vm = this;
+    const vm = this;
     vm.buildPager = buildPager;
     vm.figureOutItemsToDisplay = figureOutItemsToDisplay;
     vm.pageChanged = pageChanged;
@@ -28,8 +28,8 @@
         $: vm.search
       });
       vm.filterLength = vm.filteredItems.length;
-      var begin = ((vm.currentPage - 1) * vm.itemsPerPage);
-      var end = begin + vm.itemsPerPage;
+      const begin = ((vm.currentPage - 1) * vm.itemsPerPage);
+      const end = begin + vm.itemsPerPage;
       vm.pagedItems = vm.filteredItems.slice(begin, end);
     }
 

@@ -6,7 +6,7 @@
   ArticlesAdminController.$inject = ['$scope', '$state', '$window', 'articleResolve', 'Authentication', 'Notification'];
 
   function ArticlesAdminController($scope, $state, $window, article, Authentication, Notification) {
-    var vm = this;
+    const vm = this;
 
     vm.article = article;
     vm.authentication = Authentication;

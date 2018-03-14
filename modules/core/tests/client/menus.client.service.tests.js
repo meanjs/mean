@@ -1,9 +1,9 @@
 ((() => {
   describe('Menus', () => {
     // Initialize global variables
-    var scope;
+    let scope;
 
-    var menuService;
+    let menuService;
 
     // Load the main application module
     beforeEach(module(ApplicationConfiguration.applicationModuleName));
@@ -22,8 +22,8 @@
 
     describe('addMenu', () => {
       describe('with no options', () => {
-        var menuId = 'menu1';
-        var menu;
+        const menuId = 'menu1';
+        let menu;
         beforeEach(() => {
           menu = menuService.addMenu(menuId);
         });
@@ -46,9 +46,9 @@
       });
 
       describe('with options', () => {
-        var menu;
+        let menu;
 
-        var options = {
+        const options = {
           roles: ['a', 'b', 'c'],
           items: ['d', 'e', 'f']
         };
@@ -68,11 +68,11 @@
     });
 
     describe('shouldRender', () => {
-      var menuOptions = {
+      const menuOptions = {
           roles: ['*', 'menurole']
         };
 
-      var menu;
+      let menu;
       beforeEach(() => {
         menu = menuService.addMenu('menu1', menuOptions);
       });
@@ -91,7 +91,7 @@
       });
 
       describe('when logged in', () => {
-        var user = {
+        let user = {
           roles: ['1', 'menurole', '2']
         };
         describe('menu with * role', () => {
@@ -130,7 +130,7 @@
 
       describe('when menu does not exist', () => {
         it('should throw no menu error', () => {
-          var target = () => {
+          const target = () => {
             menuService.validateMenuExistence('noMenuId');
           };
           expect(target).toThrowError('Menu does not exist');
@@ -138,7 +138,7 @@
       });
 
       describe('when menu exists', () => {
-        var menuId = 'menuId';
+        const menuId = 'menuId';
         beforeEach(() => {
           menuService.menus[menuId] = {};
         });
@@ -150,7 +150,7 @@
     });
 
     describe('removeMenu', () => {
-      var menu = {
+      const menu = {
         id: 'menuId'
       };
       beforeEach(() => {
@@ -169,17 +169,17 @@
     });
 
     describe('addMenuItem', () => {
-      var menuId = 'menu1';
+      const menuId = 'menu1';
 
-      var subMenuItem1 = {
+      const subMenuItem1 = {
         title: 'sub1'
       };
 
-      var subMenuItem2 = {
+      const subMenuItem2 = {
         title: 'sub2'
       };
 
-      var menuItemOptions = {
+      const menuItemOptions = {
         title: 'title',
         state: 'state',
         type: 'type',
@@ -190,8 +190,8 @@
         items: [subMenuItem1, subMenuItem2]
       };
 
-      var menu;
-      var menuItem;
+      let menu;
+      let menuItem;
 
       beforeEach(() => {
         menuService.validateMenuExistence = jasmine.createSpy();
@@ -275,10 +275,10 @@
     });
 
     describe('removeMenuItem', () => {
-      var menuId = 'menuId';
-      var menuItemState = 'menu.state1';
-      var menuItemState2 = 'menu.state2';
-      var menu;
+      const menuId = 'menuId';
+      const menuItemState = 'menu.state1';
+      const menuItemState2 = 'menu.state2';
+      let menu;
 
       beforeEach(() => {
         menuService.addMenu(menuId);
@@ -303,7 +303,7 @@
     });
 
     describe('addSubMenuItem', () => {
-      var subItemOptions = {
+      const subItemOptions = {
         title: 'title',
         state: 'sub.state',
         params: { p1: 'val1' },
@@ -311,27 +311,27 @@
         roles: ['a', 'b'],
         position: 4
       };
-      var menuId = 'menu1';
+      const menuId = 'menu1';
 
-      var menuItem1Options = {
+      const menuItem1Options = {
         state: 'item1.state',
         items: [],
         isPublic: false
       };
 
-      var menuItem2Options = {
+      const menuItem2Options = {
         state: 'item2.state2',
         items: [],
         isPublic: true,
         roles: ['a']
       };
 
-      var menuItem1;
-      var menuItem2;
-      var menuItem3;
-      var subItem1;
-      var subItem2;
-      var menu;
+      let menuItem1;
+      let menuItem2;
+      let menuItem3;
+      let subItem1;
+      let subItem2;
+      let menu;
 
       beforeEach(() => {
         menuService.validateMenuExistence = jasmine.createSpy();

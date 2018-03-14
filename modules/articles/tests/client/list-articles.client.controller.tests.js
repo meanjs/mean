@@ -1,14 +1,14 @@
 ((() => {
   describe('Articles List Controller Tests', () => {
     // Initialize global variables
-    var ArticlesListController;
+    let ArticlesListController;
 
-    var $scope;
-    var $httpBackend;
-    var $state;
-    var Authentication;
-    var ArticlesService;
-    var mockArticle;
+    let $scope;
+    let $httpBackend;
+    let $state;
+    let Authentication;
+    let ArticlesService;
+    let mockArticle;
 
     // The $resource service augments the response object with methods for updating and deleting the resource.
     // If we were to use the standard toEqual matcher, our tests would fail because the test values would not match
@@ -74,7 +74,7 @@
     }));
 
     describe('Instantiate', () => {
-      var mockArticleList;
+      let mockArticleList;
 
       beforeEach(() => {
         mockArticleList = [mockArticle, mockArticle];

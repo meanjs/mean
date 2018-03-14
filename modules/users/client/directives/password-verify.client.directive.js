@@ -4,7 +4,7 @@
     .directive('passwordVerify', passwordVerify);
 
   function passwordVerify() {
-    var directive = {
+    const directive = {
       require: 'ngModel',
       scope: {
         passwordVerify: '='
@@ -15,9 +15,9 @@
     return directive;
 
     function link(scope, element, attrs, ngModel) {
-      var status = true;
+      const status = true;
       scope.$watch(() => {
-        var combined;
+        let combined;
         if (scope.passwordVerify || ngModel) {
           combined = scope.passwordVerify + '_' + ngModel;
         }
@@ -25,7 +25,7 @@
       }, value => {
         if (value) {
           ngModel.$validators.passwordVerify = password => {
-            var origin = scope.passwordVerify;
+            const origin = scope.passwordVerify;
             return (origin === password);
           };
         }

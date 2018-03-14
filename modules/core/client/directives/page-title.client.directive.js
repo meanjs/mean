@@ -5,7 +5,7 @@
   pageTitle.$inject = ['$rootScope', '$interpolate', '$state'];
 
   function pageTitle($rootScope, $interpolate, $state) {
-    var directive = {
+    const directive = {
       restrict: 'A',
       link
     };
@@ -16,9 +16,9 @@
       $rootScope.$on('$stateChangeSuccess', listener);
 
       function listener(event, toState) {
-        var applicationCoreTitle = 'MEAN.js';
-        var separator = ' - ';
-        var stateTitle = applicationCoreTitle + separator;
+        const applicationCoreTitle = 'MEAN.js';
+        const separator = ' - ';
+        let stateTitle = applicationCoreTitle + separator;
 
         toState.name.split('.').forEach((value, index) => {
           stateTitle = stateTitle + value.charAt(0).toUpperCase() + value.slice(1) + separator;

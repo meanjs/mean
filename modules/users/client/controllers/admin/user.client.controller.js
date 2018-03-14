@@ -6,7 +6,7 @@
   UserController.$inject = ['$scope', '$state', '$window', 'Authentication', 'userResolve', 'Notification'];
 
   function UserController($scope, $state, $window, Authentication, user, Notification) {
-    var vm = this;
+    const vm = this;
 
     vm.authentication = Authentication;
     vm.user = user;
@@ -37,7 +37,7 @@
         return false;
       }
 
-      var user = vm.user;
+      const user = vm.user;
 
       user.$update(() => {
         $state.go('admin.user', {

@@ -12,9 +12,9 @@
     function stateChangeStart(event, toState, toParams, fromState, fromParams) {
       // Check authentication before changing state
       if (toState.data && toState.data.roles && toState.data.roles.length > 0) {
-        var allowed = false;
+        let allowed = false;
 
-        for (var i = 0, roles = toState.data.roles; i < roles.length; i++) {
+        for (let i = 0, roles = toState.data.roles; i < roles.length; i++) {
           if ((roles[i] === 'guest') || (Authentication.user && Authentication.user.roles !== undefined && Authentication.user.roles.indexOf(roles[i]) !== -1)) {
             allowed = true;
             break;

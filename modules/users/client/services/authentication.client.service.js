@@ -8,7 +8,7 @@
   Authentication.$inject = ['$window'];
 
   function Authentication($window) {
-    var auth = {
+    const auth = {
       user: $window.user
     };
 

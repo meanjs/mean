@@ -1,12 +1,12 @@
 ((() => {
   describe('authInterceptor', () => {
     // Initialize global variables
-    var authInterceptor;
+    let authInterceptor;
 
-    var $q;
-    var $state;
-    var Authentication;
-    var httpProvider;
+    let $q;
+    let $state;
+    let Authentication;
+    let httpProvider;
 
     // Load the main application module
     beforeEach(module(ApplicationConfiguration.applicationModuleName));
@@ -39,11 +39,11 @@
 
     describe('Forbidden Interceptor', () => {
       it('should redirect to forbidden route', () => {
-        var response = {
+        const response = {
           status: 403,
           config: {}
         };
-        var promise = authInterceptor.responseError(response);
+        const promise = authInterceptor.responseError(response);
         expect($q.reject).toHaveBeenCalled();
         expect($state.transitionTo).toHaveBeenCalledWith('forbidden');
       });
@@ -51,11 +51,11 @@
 
     describe('Authorization Interceptor', () => {
       it('should redirect to signIn page for unauthorized access', () => {
-        var response = {
+        const response = {
           status: 401,
           config: {}
         };
-        var promise = authInterceptor.responseError(response);
+        const promise = authInterceptor.responseError(response);
         expect($q.reject).toHaveBeenCalled();
         expect(Authentication.user).toBe(null);
         expect($state.transitionTo).toHaveBeenCalledWith('authentication.signin');
@@ -63,17 +63,17 @@
     });
 
     describe('Unresponsive Interceptor', () => {
-      var Notification;
+      let Notification;
       beforeEach(inject(_Notification_ => {
         Notification = _Notification_;
         spyOn(Notification, 'error');
       }));
       it('should show error Notification', () => {
-        var response = {
+        const response = {
           status: -1,
           config: {}
         };
-        var promise = authInterceptor.responseError(response);
+        const promise = authInterceptor.responseError(response);
         expect($q.reject).toHaveBeenCalled();
         expect(Notification.error).toHaveBeenCalledWith({ message: 'No response received from server. Please try again later.', title: 'Error processing request!', delay: 5000 });
       });

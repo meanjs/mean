@@ -8,7 +8,7 @@
   showErrors.$inject = ['$timeout', '$interpolate'];
 
   function showErrors($timeout, $interpolate) {
-    var directive = {
+    const directive = {
       restrict: 'A',
       require: '^form',
       compile
@@ -26,13 +26,13 @@
       return linkFn;
 
       function linkFn(scope, el, attrs, formCtrl) {
-        var inputEl;
-        var inputName;
-        var inputNgEl;
-        var options;
-        var showSuccess;
-        var initCheck = false;
-        var showValidationMessages = false;
+        let inputEl;
+        let inputName;
+        let inputNgEl;
+        let options;
+        let showSuccess;
+        let initCheck = false;
+        let showValidationMessages = false;
 
         options = scope.$eval(attrs.showErrors) || {};
         showSuccess = options.showSuccess || false;

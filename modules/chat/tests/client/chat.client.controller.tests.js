@@ -4,14 +4,14 @@
 ((() => {
   describe('ChatController', () => {
     // Initialize global variables
-    var $scope;
+    let $scope;
 
-    var Socket;
-    var ChatController;
-    var $timeout;
-    var $state;
-    var Authentication;
-    var $httpBackend;
+    let Socket;
+    let ChatController;
+    let $timeout;
+    let $state;
+    let Authentication;
+    let $httpBackend;
 
     // Load the main application module
     beforeEach(module(ApplicationConfiguration.applicationModuleName));
@@ -73,7 +73,7 @@
       });
 
       describe('sendMessage', () => {
-        var text = 'hello world!';
+        const text = 'hello world!';
         beforeEach(() => {
           $scope.vm.messageText = text;
           $scope.vm.sendMessage();

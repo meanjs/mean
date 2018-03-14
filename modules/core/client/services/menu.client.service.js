@@ -4,8 +4,8 @@
     .factory('menuService', menuService);
 
   function menuService() {
-    var shouldRender;
-    var service = {
+    let shouldRender;
+    const service = {
       addMenu,
       addMenuItem,
       addSubMenuItem,
@@ -110,7 +110,7 @@
           return false;
         }
 
-        var matchingRoles = user.roles.filter(function (userRole) {
+        const matchingRoles = user.roles.filter(function (userRole) {
           return this.roles.indexOf(userRole) !== -1;
         }, this);
 

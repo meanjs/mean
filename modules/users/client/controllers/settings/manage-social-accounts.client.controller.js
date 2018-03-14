@@ -6,7 +6,7 @@
   SocialAccountsController.$inject = ['$state', '$window', 'UsersService', 'Authentication', 'Notification'];
 
   function SocialAccountsController($state, $window, UsersService, Authentication, Notification) {
-    var vm = this;
+    const vm = this;
 
     vm.user = Authentication.user;
     vm.hasConnectedAdditionalSocialAccounts = hasConnectedAdditionalSocialAccounts;

@@ -1,10 +1,10 @@
 ﻿((() => {
   describe('Users Admin Route Tests', () => {
     // Initialize global variables
-    var $scope;
+    let $scope;
 
-    var Authentication;
-    var $httpBackend;
+    let Authentication;
+    let $httpBackend;
 
     // We can start by loading the main application module
     beforeEach(module(ApplicationConfiguration.applicationModuleName));
@@ -20,7 +20,7 @@
 
     describe('Route Config', () => {
       describe('Main Route', () => {
-        var mainstate;
+        let mainstate;
         beforeEach(inject($state => {
           mainstate = $state.get('admin.users');
         }));
@@ -39,7 +39,7 @@
       });
 
       describe('View Route', () => {
-        var viewstate;
+        let viewstate;
         beforeEach(inject($state => {
           viewstate = $state.get('admin.user');
         }));
@@ -58,7 +58,7 @@
       });
 
       describe('Edit Route', () => {
-        var editstate;
+        let editstate;
         beforeEach(inject($state => {
           editstate = $state.get('admin.user-edit');
         }));

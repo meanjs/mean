@@ -7,7 +7,7 @@
   UsersService.$inject = ['$resource'];
 
   function UsersService($resource) {
-    var Users = $resource('/api/users', {}, {
+    const Users = $resource('/api/users', {}, {
       update: {
         method: 'PUT'
       },

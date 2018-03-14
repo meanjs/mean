@@ -6,7 +6,7 @@
   AuthenticationController.$inject = ['$scope', '$state', 'UsersService', '$location', '$window', 'Authentication', 'PasswordValidator', 'Notification'];
 
   function AuthenticationController($scope, $state, UsersService, $location, $window, Authentication, PasswordValidator, Notification) {
-    var vm = this;
+    const vm = this;
 
     vm.authentication = Authentication;
     vm.getPopoverMsg = PasswordValidator.getPopoverMsg;

@@ -1,7 +1,7 @@
 ((window => {
-  var applicationModuleName = 'mean';
+  const applicationModuleName = 'mean';
 
-  var service = {
+  const service = {
     applicationEnvironment: window.env,
     applicationModuleName,
     applicationModuleVendorDependencies: ['ngResource', 'ngAnimate', 'ngMessages', 'ui.router', 'ui.bootstrap', 'ngFileUpload', 'ui-notification'],

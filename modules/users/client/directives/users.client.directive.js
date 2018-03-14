@@ -5,7 +5,7 @@
     .directive('lowercase', lowercase);
 
   function lowercase() {
-    var directive = {
+    const directive = {
       require: 'ngModel',
       link
     };

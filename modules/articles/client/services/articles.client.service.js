@@ -6,7 +6,7 @@
   ArticlesService.$inject = ['$resource', '$log'];
 
   function ArticlesService($resource, $log) {
-    var Article = $resource('/api/articles/:articleId', {
+    const Article = $resource('/api/articles/:articleId', {
       articleId: '@_id'
     }, {
       update: {
@@ -16,7 +16,7 @@
 
     angular.extend(Article.prototype, {
       createOrUpdate() {
-        var article = this;
+        const article = this;
         return createOrUpdate(article);
       }
     });
@@ -37,7 +37,7 @@
 
       // Handle error response
       function onError(errorResponse) {
-        var error = errorResponse.data;
+        const error = errorResponse.data;
         // Handle error internally
         handleError(error);
       }
