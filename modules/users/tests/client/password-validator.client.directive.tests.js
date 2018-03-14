@@ -2,10 +2,11 @@
   // Password Validator Directive Spec
   describe('PasswordValidatorDirective', () => {
     // Initialize global variables
-    var scope,
-      element,
-      $compile,
-      form;
+    var scope;
+
+    var element;
+    var $compile;
+    var form;
 
     // Load the main application module
     beforeEach(module(ApplicationConfiguration.applicationModuleName));
@@ -201,6 +202,5 @@
       expect(scope.requirementsColor).toEqual('success');
       expect(scope.requirementsProgress).toEqual('100');
     });
-
   });
 })());

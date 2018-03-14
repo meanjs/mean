@@ -26,13 +26,13 @@
       return linkFn;
 
       function linkFn(scope, el, attrs, formCtrl) {
-        var inputEl,
-          inputName,
-          inputNgEl,
-          options,
-          showSuccess,
-          initCheck = false,
-          showValidationMessages = false;
+        var inputEl;
+        var inputName;
+        var inputNgEl;
+        var options;
+        var showSuccess;
+        var initCheck = false;
+        var showValidationMessages = false;
 
         options = scope.$eval(attrs.showErrors) || {};
         showSuccess = options.showSuccess || false;

@@ -1,8 +1,9 @@
 ﻿((() => {
   describe('Articles Route Tests', () => {
     // Initialize global variables
-    var $scope,
-      ArticlesService;
+    var $scope;
+
+    var ArticlesService;
 
     // We can start by loading the main application module
     beforeEach(module(ApplicationConfiguration.applicationModuleName));
@@ -56,9 +57,9 @@
       });
 
       describe('Create Route', () => {
-        var createstate,
-          ArticlesAdminController,
-          mockArticle;
+        var createstate;
+        var ArticlesAdminController;
+        var mockArticle;
 
         beforeEach(inject(($controller, $state, $templateCache) => {
           createstate = $state.get('admin.articles.create');
@@ -102,9 +103,9 @@
       });
 
       describe('Edit Route', () => {
-        var editstate,
-          ArticlesAdminController,
-          mockArticle;
+        var editstate;
+        var ArticlesAdminController;
+        var mockArticle;
 
         beforeEach(inject(($controller, $state, $templateCache) => {
           editstate = $state.get('admin.articles.edit');

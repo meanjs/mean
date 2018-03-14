@@ -1,9 +1,10 @@
 ﻿((() => {
   describe('Users Admin Route Tests', () => {
     // Initialize global variables
-    var $scope,
-      Authentication,
-      $httpBackend;
+    var $scope;
+
+    var Authentication;
+    var $httpBackend;
 
     // We can start by loading the main application module
     beforeEach(module(ApplicationConfiguration.applicationModuleName));

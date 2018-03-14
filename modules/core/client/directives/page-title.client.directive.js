@@ -16,9 +16,9 @@
       $rootScope.$on('$stateChangeSuccess', listener);
 
       function listener(event, toState) {
-        var applicationCoreTitle = 'MEAN.js',
-          separator = ' - ',
-          stateTitle = applicationCoreTitle + separator;
+        var applicationCoreTitle = 'MEAN.js';
+        var separator = ' - ';
+        var stateTitle = applicationCoreTitle + separator;
 
         toState.name.split('.').forEach((value, index) => {
           stateTitle = stateTitle + value.charAt(0).toUpperCase() + value.slice(1) + separator;

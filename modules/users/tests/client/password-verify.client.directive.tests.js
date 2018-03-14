@@ -2,10 +2,11 @@
   // Password Verify Directive Spec
   describe('PasswordVerifyDirective', () => {
     // Initialize global variables
-    var scope,
-      element,
-      $compile,
-      form;
+    var scope;
+
+    var element;
+    var $compile;
+    var form;
 
     // Load the main application module
     beforeEach(module(ApplicationConfiguration.applicationModuleName));
@@ -79,6 +80,5 @@
       expect(scope.form.verifyPassword.$error.passwordVerify).toBeTruthy();
       expect(scope.form.$valid).toBeFalsy();
     });
-
   });
 })());

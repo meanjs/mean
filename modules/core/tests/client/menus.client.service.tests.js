@@ -1,8 +1,9 @@
 ((() => {
   describe('Menus', () => {
     // Initialize global variables
-    var scope,
-      menuService;
+    var scope;
+
+    var menuService;
 
     // Load the main application module
     beforeEach(module(ApplicationConfiguration.applicationModuleName));
@@ -21,8 +22,8 @@
 
     describe('addMenu', () => {
       describe('with no options', () => {
-        var menuId = 'menu1',
-          menu;
+        var menuId = 'menu1';
+        var menu;
         beforeEach(() => {
           menu = menuService.addMenu(menuId);
         });
@@ -45,11 +46,13 @@
       });
 
       describe('with options', () => {
-        var menu,
-          options = {
-            roles: ['a', 'b', 'c'],
-            items: ['d', 'e', 'f']
-          };
+        var menu;
+
+        var options = {
+          roles: ['a', 'b', 'c'],
+          items: ['d', 'e', 'f']
+        };
+
         beforeEach(() => {
           menu = menuService.addMenu('menu1', options);
         });
@@ -67,8 +70,9 @@
     describe('shouldRender', () => {
       var menuOptions = {
           roles: ['*', 'menurole']
-        },
-        menu;
+        };
+
+      var menu;
       beforeEach(() => {
         menu = menuService.addMenu('menu1', menuOptions);
       });
@@ -165,25 +169,29 @@
     });
 
     describe('addMenuItem', () => {
-      var menuId = 'menu1',
-        subMenuItem1 = {
-          title: 'sub1'
-        },
-        subMenuItem2 = {
-          title: 'sub2'
-        },
-        menuItemOptions = {
-          title: 'title',
-          state: 'state',
-          type: 'type',
-          class: 'class',
-          isPublic: false,
-          roles: ['a', 'b'],
-          position: 2,
-          items: [subMenuItem1, subMenuItem2]
-        },
-        menu,
-        menuItem;
+      var menuId = 'menu1';
+
+      var subMenuItem1 = {
+        title: 'sub1'
+      };
+
+      var subMenuItem2 = {
+        title: 'sub2'
+      };
+
+      var menuItemOptions = {
+        title: 'title',
+        state: 'state',
+        type: 'type',
+        class: 'class',
+        isPublic: false,
+        roles: ['a', 'b'],
+        position: 2,
+        items: [subMenuItem1, subMenuItem2]
+      };
+
+      var menu;
+      var menuItem;
 
       beforeEach(() => {
         menuService.validateMenuExistence = jasmine.createSpy();
@@ -267,10 +275,10 @@
     });
 
     describe('removeMenuItem', () => {
-      var menuId = 'menuId',
-        menuItemState = 'menu.state1',
-        menuItemState2 = 'menu.state2',
-        menu;
+      var menuId = 'menuId';
+      var menuItemState = 'menu.state1';
+      var menuItemState2 = 'menu.state2';
+      var menu;
 
       beforeEach(() => {
         menuService.addMenu(menuId);
@@ -303,24 +311,27 @@
         roles: ['a', 'b'],
         position: 4
       };
-      var menuId = 'menu1',
-        menuItem1Options = {
-          state: 'item1.state',
-          items: [],
-          isPublic: false
-        },
-        menuItem2Options = {
-          state: 'item2.state2',
-          items: [],
-          isPublic: true,
-          roles: ['a']
-        },
-        menuItem1,
-        menuItem2,
-        menuItem3,
-        subItem1,
-        subItem2,
-        menu;
+      var menuId = 'menu1';
+
+      var menuItem1Options = {
+        state: 'item1.state',
+        items: [],
+        isPublic: false
+      };
+
+      var menuItem2Options = {
+        state: 'item2.state2',
+        items: [],
+        isPublic: true,
+        roles: ['a']
+      };
+
+      var menuItem1;
+      var menuItem2;
+      var menuItem3;
+      var subItem1;
+      var subItem2;
+      var menu;
 
       beforeEach(() => {
         menuService.validateMenuExistence = jasmine.createSpy();

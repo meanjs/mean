@@ -1,13 +1,14 @@
 ﻿((() => {
   describe('Edit Profile Controller Tests', () => {
     // Initialize global variables
-    var EditProfileController,
-      $scope,
-      $httpBackend,
-      $location,
-      Authentication,
-      UsersService,
-      Notification;
+    var EditProfileController;
+
+    var $scope;
+    var $httpBackend;
+    var $location;
+    var Authentication;
+    var UsersService;
+    var Notification;
 
     // The $resource service augments the response object with methods for updating and deleting the resource.
     // If we were to use the standard toEqual matcher, our tests would fail because the test values would not match
@@ -103,6 +104,5 @@
         expect(Notification.error).toHaveBeenCalledWith({ message: errorMessage, title: '<i class="glyphicon glyphicon-remove"></i> Edit profile failed!' });
       }));
     });
-
   });
 })());

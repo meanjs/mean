@@ -2,13 +2,14 @@
   // Password controller Spec
   describe('PasswordController', () => {
     // Initialize global variables
-    var PasswordController,
-      scope,
-      $httpBackend,
-      $stateParams,
-      $location,
-      $window,
-      Notification;
+    var PasswordController;
+
+    var scope;
+    var $httpBackend;
+    var $stateParams;
+    var $location;
+    var $window;
+    var Notification;
 
     beforeEach(() => {
       jasmine.addMatchers({

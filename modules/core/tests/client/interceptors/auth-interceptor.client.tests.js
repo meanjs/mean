@@ -1,11 +1,12 @@
 ((() => {
   describe('authInterceptor', () => {
     // Initialize global variables
-    var authInterceptor,
-      $q,
-      $state,
-      Authentication,
-      httpProvider;
+    var authInterceptor;
+
+    var $q;
+    var $state;
+    var Authentication;
+    var httpProvider;
 
     // Load the main application module
     beforeEach(module(ApplicationConfiguration.applicationModuleName));

@@ -4,13 +4,14 @@
 ((() => {
   describe('ChatController', () => {
     // Initialize global variables
-    var $scope,
-      Socket,
-      ChatController,
-      $timeout,
-      $state,
-      Authentication,
-      $httpBackend;
+    var $scope;
+
+    var Socket;
+    var ChatController;
+    var $timeout;
+    var $state;
+    var Authentication;
+    var $httpBackend;
 
     // Load the main application module
     beforeEach(module(ApplicationConfiguration.applicationModuleName));

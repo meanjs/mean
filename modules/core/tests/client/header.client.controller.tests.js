@@ -1,10 +1,11 @@
 ((() => {
   describe('HeaderController', () => {
     // Initialize global variables
-    var scope,
-      HeaderController,
-      $state,
-      Authentication;
+    var scope;
+
+    var HeaderController;
+    var $state;
+    var Authentication;
 
     // Load the main application module
     beforeEach(module(ApplicationConfiguration.applicationModuleName));
