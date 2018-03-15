@@ -135,7 +135,7 @@ gulp.task('eslint', () => {
 });
 
 // JS minifying task
-gulp.task('uglify', () => {
+gulp.task('babel', () => {
   const assets = _.union(
     defaultAssets.client.js,
     defaultAssets.client.templates
@@ -143,11 +143,11 @@ gulp.task('uglify', () => {
   del(['public/dist/*']);
 
   return gulp.src(assets)
-    .pipe(plugins.ngAnnotate())
-    .pipe(plugins.uglify({
-      mangle: true
+    .pipe(plugins.babel({
+      presets: ['@babel/preset-env', ['minify', { removeUndefined: false }]],
+      plugins: ['angularjs-annotate']
     }).on('error', err => {
-      console.log('Uglify error : ', err.toString());
+      console.log('Babel error : ', err.toString());
     }))
     .pipe(plugins.concat('application.min.js'))
     .pipe(plugins.rev())
@@ -425,7 +425,7 @@ gulp.task('lint', done => {
 
 // Lint project files and minify them into two production files.
 gulp.task('build', done => {
-  runSequence('env:dev', 'wiredep:prod', 'lint', ['uglify', 'cssmin'], done);
+  runSequence('env:dev', 'wiredep:prod', 'lint', ['babel', 'cssmin'], done);
 });
 
 // Run the project tests
