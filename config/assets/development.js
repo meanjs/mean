@@ -1,3 +1,6 @@
 module.exports = {
-  // Development assets
+  client: {
+    css: 'public/dist/application*.min.css',
+    js: 'public/dist/application*.min.js'
+  }
 };

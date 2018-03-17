@@ -73,12 +73,18 @@ gulp.task('watch', () => {
   // Add watch rules
   gulp.watch(defaultAssets.server.views).on('change', plugins.refresh.changed);
   gulp.watch(defaultAssets.server.allJS, ['eslint']).on('change', plugins.refresh.changed);
-  gulp.watch(defaultAssets.client.js, ['eslint']).on('change', plugins.refresh.changed);
-  gulp.watch(defaultAssets.client.css, ['csslint']).on('change', plugins.refresh.changed);
   gulp.watch(defaultAssets.client.sass, ['sass', 'csslint']).on('change', plugins.refresh.changed);
   gulp.watch(defaultAssets.client.less, ['less', 'csslint']).on('change', plugins.refresh.changed);
 
   if (process.env.NODE_ENV === 'production') {
+    gulp.watch(defaultAssets.client.js, ['eslint', 'babel:prod']).on('change', plugins.refresh.changed);
+    gulp.watch(defaultAssets.client.css, ['csslint', 'cssmin:prod']).on('change', plugins.refresh.changed);
+  } else {
+    gulp.watch(defaultAssets.client.js, ['eslint', 'babel:dev']).on('change', plugins.refresh.changed);
+    gulp.watch(defaultAssets.client.css, ['csslint', 'cssmin:dev']).on('change', plugins.refresh.changed);
+  }
+
+  if (process.env.NODE_ENV === 'e') {
     gulp.watch(defaultAssets.server.gulpConfig, ['templatecache', 'eslint']);
     gulp.watch(defaultAssets.client.views, ['templatecache']).on('change', plugins.refresh.changed);
   } else {
@@ -134,20 +140,35 @@ gulp.task('eslint', () => {
     .pipe(plugins.eslint.format());
 });
 
-// JS minifying task
-gulp.task('babel', () => {
+// JS babel task
+gulp.task('babel:dev', () => {
   const assets = _.union(
     defaultAssets.client.js,
     defaultAssets.client.templates
   );
-  del(['public/dist/*']);
+
+  return gulp.src(assets)
+    .pipe(plugins.babel({
+      presets: ['@babel/preset-env'],
+      plugins: ['angularjs-annotate']
+    }).on('error', err => {
+      console.log('Babel error : ', err.toString());
+    }))
+    .pipe(plugins.concat('application.min.js'))
+    .pipe(gulp.dest('public/dist'));
+});
+
+gulp.task('babel:prod', () => {
+  const assets = _.union(
+    defaultAssets.client.js,
+    defaultAssets.client.templates
+  );
+  del(['public/dist/application-*']);
 
   return gulp.src(assets)
     .pipe(plugins.babel({
       presets: ['@babel/preset-env', ['minify', { removeUndefined: false }]],
       plugins: ['angularjs-annotate']
-    }).on('error', err => {
-      console.log('Babel error : ', err.toString());
     }))
     .pipe(plugins.concat('application.min.js'))
     .pipe(plugins.rev())
@@ -155,7 +176,12 @@ gulp.task('babel', () => {
 });
 
 // CSS minifying task
-gulp.task('cssmin', () => gulp.src(defaultAssets.client.css)
+gulp.task('cssmin:dev', () => gulp.src(defaultAssets.client.css)
+  .pipe(plugins.csso())
+  .pipe(plugins.concat('application.min.css'))
+  .pipe(gulp.dest('public/dist')));
+
+gulp.task('cssmin:prod', () => gulp.src(defaultAssets.client.css)
   .pipe(plugins.csso())
   .pipe(plugins.concat('application.min.css'))
   .pipe(plugins.rev())
@@ -423,9 +449,14 @@ gulp.task('lint', done => {
   runSequence('less', 'sass', ['csslint', 'eslint'], done);
 });
 
-// Lint project files and minify them into two production files.
-gulp.task('build', done => {
-  runSequence('env:dev', 'wiredep:prod', 'lint', ['babel', 'cssmin'], done);
+// Lint and minify project files into two files, and switch client side to es5
+gulp.task('build:dev', done => {
+  runSequence('wiredep:prod', 'lint', 'babel:dev', ['cssmin:dev'], done);
+});
+
+// Lint and minify project files into two production files, and switch client side to es5
+gulp.task('build:prod', done => {
+  runSequence('wiredep:prod', 'lint', 'babel:prod', ['cssmin:prod'], done);
 });
 
 // Run the project tests
@@ -434,7 +465,7 @@ gulp.task('test', done => {
 });
 
 gulp.task('test:server', done => {
-  runSequence('env:test', ['copyLocalEnvConfig', 'makeUploadsDir', 'dropdb'], 'lint', 'mocha', done);
+  runSequence('env:test', ['copyLocalEnvConfig', 'makeUploadsDir', 'dropdb'], 'lint', 'babel', 'mocha', done);
 });
 
 // Watch all server files for changes & run server tests (test:server) task on changes
@@ -443,25 +474,25 @@ gulp.task('test:server:watch', done => {
 });
 
 gulp.task('test:client', done => {
-  runSequence('env:test', 'lint', 'dropdb', 'karma', done);
+  runSequence('env:test', 'build:dev', 'dropdb', 'karma', done);
 });
 
 gulp.task('test:e2e', done => {
-  runSequence('env:test', 'lint', 'dropdb', 'nodemon', 'protractor', done);
+  runSequence('env:test', 'build:dev', 'babel', 'dropdb', 'nodemon', 'protractor', done);
 });
 
 gulp.task('test:coverage', done => {
-  runSequence('env:test', ['copyLocalEnvConfig', 'makeUploadsDir', 'dropdb'], 'lint', 'mocha:coverage', 'karma:coverage', done);
+  runSequence('env:test', ['copyLocalEnvConfig', 'makeUploadsDir', 'dropdb'], 'build:dev', 'mocha:coverage', 'karma:coverage', done);
 });
 
 // Run the project in development mode with node debugger enabled
 gulp.task('default', done => {
-  runSequence('env:dev', ['copyLocalEnvConfig', 'makeUploadsDir'], 'lint', ['nodemon', 'watch'], done);
+  runSequence('env:dev', ['copyLocalEnvConfig', 'makeUploadsDir'], 'build:dev', ['nodemon', 'watch'], done);
 });
 
 // Run the project in production mode
 gulp.task('prod', done => {
-  runSequence(['copyLocalEnvConfig', 'makeUploadsDir', 'templatecache'], 'build', 'env:prod', 'lint', ['nodemon-nodebug', 'watch'], done);
+  runSequence('env:prod', ['copyLocalEnvConfig', 'makeUploadsDir', 'templatecache'], 'build:prod', ['nodemon-nodebug', 'watch'], done);
 });
 
 // Run Mongo Seed with default environment config
