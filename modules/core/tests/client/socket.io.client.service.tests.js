@@ -1,21 +1,20 @@
-(function () {
-  'use strict';
-
+((() => {
   /* Creates a mock of socket.io for the browser.
    * Functionality of the service is tested through
    * the chat controller tests.
    */
 
-  var ngInjector = angular.injector(['ng']),
-    $window = ngInjector.get('$window');
+  const ngInjector = angular.injector(['ng']);
 
-  var mock = function () {
-    var io = {
+  const $window = ngInjector.get('$window');
+
+  const mock = () => {
+    const io = {
       cbs: {},
-      connect: connect,
-      emit: emit,
-      on: on,
-      removeListener: removeListener
+      connect,
+      emit,
+      on,
+      removeListener
     };
 
     connect();
@@ -40,4 +39,4 @@
   };
 
   $window.io = mock;
-}());
+})());

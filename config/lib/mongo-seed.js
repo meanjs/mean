@@ -1,34 +1,26 @@
-﻿'use strict';
-
-var _ = require('lodash'),
-  config = require('../config'),
-  mongoose = require('mongoose'),
-  chalk = require('chalk');
+const _ = require('lodash');
+const config = require('../config');
+const mongoose = require('mongoose');
+const chalk = require('chalk');
 
 exports.start = start;
 
 function start(seedConfig) {
-  return new Promise(function (resolve, reject) {
+  return new Promise((resolve, reject) => {
     seedConfig = seedConfig || {};
 
-    var options = seedConfig.options || (config.seedDB ? _.clone(config.seedDB.options, true) : {});
-    var collections = seedConfig.collections || (config.seedDB ? _.clone(config.seedDB.collections, true) : []);
+    const options = seedConfig.options || (config.seedDB ? _.clone(config.seedDB.options, true) : {});
+    const collections = seedConfig.collections || (config.seedDB ? _.clone(config.seedDB.collections, true) : []);
 
     if (!collections.length) {
       return resolve();
     }
 
-    var seeds = collections
-      .filter(function (collection) {
-        return collection.model;
-      });
+    const seeds = collections
+      .filter(collection => collection.model);
 
     // Use the reduction pattern to ensure we process seeding in desired order.
-    seeds.reduce(function (p, item) {
-      return p.then(function () {
-        return seed(item, options);
-      });
-    }, Promise.resolve()) // start with resolved promise for initial previous (p) item
+    seeds.reduce((p, item) => p.then(() => seed(item, options)), Promise.resolve()) // start with resolved promise for initial previous (p) item
       .then(onSuccessComplete)
       .catch(onError);
 
@@ -62,11 +54,11 @@ function seed(collection, options) {
   // Merge options with collection options
   options = _.merge(options || {}, collection.options || {});
 
-  return new Promise(function (resolve, reject) {
+  return new Promise((resolve, reject) => {
     const Model = mongoose.model(collection.model);
     const docs = collection.docs;
 
-    var skipWhen = collection.skip ? collection.skip.when : null;
+    const skipWhen = collection.skip ? collection.skip.when : null;
 
     if (!Model.seed) {
       return reject(new Error('Database Seeding: Invalid Model Configuration - ' + collection.model + '.seed() not implemented'));
@@ -82,22 +74,18 @@ function seed(collection, options) {
     // Mongoose query that will be used with Model.find().
     skipCollection()
       .then(seedDocuments)
-      .then(function () {
-        return resolve();
-      })
-      .catch(function (err) {
-        return reject(err);
-      });
+      .then(() => resolve())
+      .catch(err => reject(err));
 
     function skipCollection() {
-      return new Promise(function (resolve, reject) {
+      return new Promise((resolve, reject) => {
         if (!skipWhen) {
           return resolve(false);
         }
 
         Model
           .find(skipWhen)
-          .exec(function (err, results) {
+          .exec((err, results) => {
             if (err) {
               return reject(err);
             }
@@ -112,19 +100,15 @@ function seed(collection, options) {
     }
 
     function seedDocuments(skipCollection) {
-      return new Promise(function (resolve, reject) {
+      return new Promise((resolve, reject) => {
 
         if (skipCollection) {
           return onComplete([{ message: chalk.yellow('Database Seeding: ' + collection.model + ' collection skipped') }]);
         }
 
-        var workload = docs
-          .filter(function (doc) {
-            return doc.data;
-          })
-          .map(function (doc) {
-            return Model.seed(doc.data, { overwrite: doc.overwrite });
-          });
+        const workload = docs
+          .filter(doc => doc.data)
+          .map(doc => Model.seed(doc.data, { overwrite: doc.overwrite }));
 
         Promise.all(workload)
           .then(onComplete)
@@ -134,7 +118,7 @@ function seed(collection, options) {
 
         function onComplete(responses) {
           if (options.logResults) {
-            responses.forEach(function (response) {
+            responses.forEach(response => {
               if (response.message) {
                 console.log(chalk.magenta(response.message));
               }

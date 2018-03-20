@@ -1,10 +1,9 @@
-(function () {
-  'use strict';
-
-  describe('Articles Route Tests', function () {
+((() => {
+  describe('Articles Route Tests', () => {
     // Initialize global variables
-    var $scope,
-      ArticlesService;
+    let $scope;
+
+    let ArticlesService;
 
     // We can start by loading the main application module
     beforeEach(module(ApplicationConfiguration.applicationModuleName));
@@ -12,57 +11,57 @@
     // The injector ignores leading and trailing underscores here (i.e. _$httpBackend_).
     // This allows us to inject a service but then attach it to a variable
     // with the same name as the service.
-    beforeEach(inject(function ($rootScope, _ArticlesService_) {
+    beforeEach(inject(($rootScope, _ArticlesService_) => {
       // Set a new global scope
       $scope = $rootScope.$new();
       ArticlesService = _ArticlesService_;
     }));
 
-    describe('Route Config', function () {
-      describe('Main Route', function () {
-        var mainstate;
-        beforeEach(inject(function ($state) {
+    describe('Route Config', () => {
+      describe('Main Route', () => {
+        let mainstate;
+        beforeEach(inject($state => {
           mainstate = $state.get('articles');
         }));
 
-        it('Should have the correct URL', function () {
+        it('Should have the correct URL', () => {
           expect(mainstate.url).toEqual('/articles');
         });
 
-        it('Should be abstract', function () {
+        it('Should be abstract', () => {
           expect(mainstate.abstract).toBe(true);
         });
 
-        it('Should have template', function () {
+        it('Should have template', () => {
           expect(mainstate.template).toBe('<ui-view/>');
         });
       });
 
-      describe('List Route', function () {
-        var liststate;
-        beforeEach(inject(function ($state) {
+      describe('List Route', () => {
+        let liststate;
+        beforeEach(inject($state => {
           liststate = $state.get('articles.list');
         }));
 
-        it('Should have the correct URL', function () {
+        it('Should have the correct URL', () => {
           expect(liststate.url).toEqual('');
         });
 
-        it('Should not be abstract', function () {
+        it('Should not be abstract', () => {
           expect(liststate.abstract).toBe(undefined);
         });
 
-        it('Should have templateUrl', function () {
+        it('Should have templateUrl', () => {
           expect(liststate.templateUrl).toBe('/modules/articles/client/views/list-articles.client.view.html');
         });
       });
 
-      describe('View Route', function () {
-        var viewstate,
-          ArticlesController,
-          mockArticle;
+      describe('View Route', () => {
+        let viewstate;
+        let ArticlesController;
+        let mockArticle;
 
-        beforeEach(inject(function ($controller, $state, $templateCache) {
+        beforeEach(inject(($controller, $state, $templateCache) => {
           viewstate = $state.get('articles.view');
           $templateCache.put('/modules/articles/client/views/view-article.client.view.html', '');
 
@@ -75,48 +74,48 @@
 
           // Initialize Controller
           ArticlesController = $controller('ArticlesController as vm', {
-            $scope: $scope,
+            $scope,
             articleResolve: mockArticle
           });
         }));
 
-        it('Should have the correct URL', function () {
+        it('Should have the correct URL', () => {
           expect(viewstate.url).toEqual('/:articleId');
         });
 
-        it('Should have a resolve function', function () {
+        it('Should have a resolve function', () => {
           expect(typeof viewstate.resolve).toEqual('object');
           expect(typeof viewstate.resolve.articleResolve).toEqual('function');
         });
 
-        it('should respond to URL', inject(function ($state) {
+        it('should respond to URL', inject($state => {
           expect($state.href(viewstate, {
             articleId: 1
           })).toEqual('/articles/1');
         }));
 
-        it('should attach an article to the controller scope', function () {
+        it('should attach an article to the controller scope', () => {
           expect($scope.vm.article._id).toBe(mockArticle._id);
         });
 
-        it('Should not be abstract', function () {
+        it('Should not be abstract', () => {
           expect(viewstate.abstract).toBe(undefined);
         });
 
-        it('Should have templateUrl', function () {
+        it('Should have templateUrl', () => {
           expect(viewstate.templateUrl).toBe('/modules/articles/client/views/view-article.client.view.html');
         });
       });
 
-      describe('Handle Trailing Slash', function () {
-        beforeEach(inject(function ($state, $rootScope, $templateCache) {
+      describe('Handle Trailing Slash', () => {
+        beforeEach(inject(($state, $rootScope, $templateCache) => {
           $templateCache.put('/modules/articles/client/views/list-articles.client.view.html', '');
 
           $state.go('articles.list');
           $rootScope.$digest();
         }));
 
-        it('Should remove trailing slash', inject(function ($state, $location, $rootScope) {
+        it('Should remove trailing slash', inject(($state, $location, $rootScope) => {
           $location.path('articles/');
           $rootScope.$digest();
 
@@ -126,4 +125,4 @@
       });
     });
   });
-}());
+})());

@@ -1,12 +1,11 @@
-'use strict';
-
 /**
  * Module dependencies
  */
-var adminPolicy = require('../policies/admin.server.policy'),
-  admin = require('../controllers/admin.server.controller');
+const adminPolicy = require('../policies/admin.server.policy');
 
-module.exports = function (app) {
+const admin = require('../controllers/admin.server.controller');
+
+module.exports = app => {
   // User route registration first. Ref: #713
   require('./users.server.routes.js')(app);
 

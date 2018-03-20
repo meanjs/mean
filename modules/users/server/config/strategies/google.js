@@ -1,13 +1,12 @@
-'use strict';
-
 /**
  * Module dependencies
  */
-var passport = require('passport'),
-  GoogleStrategy = require('passport-google-oauth').OAuth2Strategy,
-  users = require('../../controllers/users.server.controller');
+const passport = require('passport');
 
-module.exports = function (config) {
+const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+const users = require('../../controllers/users.server.controller');
+
+module.exports = config => {
   // Use google strategy
   passport.use(new GoogleStrategy({
     clientID: config.google.clientID,
@@ -18,14 +17,14 @@ module.exports = function (config) {
       'https://www.googleapis.com/auth/userinfo.email'
     ]
   },
-    function (req, accessToken, refreshToken, profile, done) {
+    (req, accessToken, refreshToken, profile, done) => {
       // Set the provider data and include tokens
-      var providerData = profile._json;
+      const providerData = profile._json;
       providerData.accessToken = accessToken;
       providerData.refreshToken = refreshToken;
 
       // Create the user OAuth profile
-      var providerUserProfile = {
+      const providerUserProfile = {
         firstName: profile.name.givenName,
         lastName: profile.name.familyName,
         displayName: profile.displayName,
@@ -34,7 +33,7 @@ module.exports = function (config) {
         profileImageURL: (providerData.picture) ? providerData.picture : undefined,
         provider: 'google',
         providerIdentifierField: 'id',
-        providerData: providerData
+        providerData
       };
 
       // Save the user OAuth profile

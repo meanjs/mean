@@ -1,6 +1,4 @@
-(function () {
-  'use strict';
-
+((() => {
   angular
     .module('users')
     .directive('passwordValidator', passwordValidator);
@@ -8,22 +6,22 @@
   passwordValidator.$inject = ['PasswordValidator'];
 
   function passwordValidator(PasswordValidator) {
-    var directive = {
+    const directive = {
       require: 'ngModel',
-      link: link
+      link
     };
 
     return directive;
 
     function link(scope, element, attrs, ngModel) {
-      ngModel.$validators.requirements = function (password) {
-        var status = true;
+      ngModel.$validators.requirements = password => {
+        let status = true;
         if (password) {
-          var result = PasswordValidator.getResult(password);
-          var requirementsIdx = 0;
+          const result = PasswordValidator.getResult(password);
+          let requirementsIdx = 0;
 
           // Requirements Meter - visual indicator for users
-          var requirementsMeter = [{
+          const requirementsMeter = [{
             color: 'danger',
             progress: '20'
           }, {
@@ -61,4 +59,4 @@
       };
     }
   }
-}());
+})());

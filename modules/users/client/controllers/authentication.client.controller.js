@@ -1,6 +1,4 @@
-(function () {
-  'use strict';
-
+((() => {
   angular
     .module('users')
     .controller('AuthenticationController', AuthenticationController);
@@ -8,7 +6,7 @@
   AuthenticationController.$inject = ['$scope', '$state', 'UsersService', '$location', '$window', 'Authentication', 'PasswordValidator', 'Notification'];
 
   function AuthenticationController($scope, $state, UsersService, $location, $window, Authentication, PasswordValidator, Notification) {
-    var vm = this;
+    const vm = this;
 
     vm.authentication = Authentication;
     vm.getPopoverMsg = PasswordValidator.getPopoverMsg;
@@ -89,4 +87,4 @@
       Notification.error({ message: response.data.message, title: '<i class="glyphicon glyphicon-remove"></i> Signin Error!', delay: 6000 });
     }
   }
-}());
+})());

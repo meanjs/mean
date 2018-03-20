@@ -1,17 +1,16 @@
-'use strict';
-
 /**
  * Module dependencies.
  */
-var _ = require('lodash'),
-  defaultAssets = require('./config/assets/default'),
-  testAssets = require('./config/assets/test'),
-  testConfig = require('./config/env/test'),
-  karmaReporters = ['mocha'];
+const _ = require('lodash');
+
+const defaultAssets = require('./config/assets/default');
+const testAssets = require('./config/assets/test');
+const testConfig = require('./config/env/test');
+const karmaReporters = ['mocha'];
 
 // Karma configuration
-module.exports = function (karmaConfig) {
-  var configuration = {
+module.exports = karmaConfig => {
+  const configuration = {
     frameworks: ['jasmine'],
 
     preprocessors: {
@@ -21,7 +20,7 @@ module.exports = function (karmaConfig) {
     ngHtml2JsPreprocessor: {
       moduleName: 'mean',
 
-      cacheIdFromPath: function (filepath) {
+      cacheIdFromPath(filepath) {
         return filepath;
       }
     },

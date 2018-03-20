@@ -1,6 +1,4 @@
-(function () {
-  'use strict';
-
+((() => {
   angular
     .module('core.admin')
     .run(menuConfig);
@@ -15,4 +13,4 @@
       roles: ['admin']
     });
   }
-}());
+})());

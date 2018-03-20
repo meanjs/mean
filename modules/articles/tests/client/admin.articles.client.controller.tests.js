@@ -1,27 +1,26 @@
-﻿(function () {
-  'use strict';
-
-  describe('Articles Admin Controller Tests', function () {
+﻿((() => {
+  describe('Articles Admin Controller Tests', () => {
     // Initialize global variables
-    var ArticlesAdminController,
-      $scope,
-      $httpBackend,
-      $state,
-      Authentication,
-      ArticlesService,
-      mockArticle,
-      Notification;
+    let ArticlesAdminController;
+
+    let $scope;
+    let $httpBackend;
+    let $state;
+    let Authentication;
+    let ArticlesService;
+    let mockArticle;
+    let Notification;
 
     // The $resource service augments the response object with methods for updating and deleting the resource.
     // If we were to use the standard toEqual matcher, our tests would fail because the test values would not match
     // the responses exactly. To solve the problem, we define a new toEqualData Jasmine matcher.
     // When the toEqualData matcher compares two objects, it takes only object properties into
     // account and ignores methods.
-    beforeEach(function () {
+    beforeEach(() => {
       jasmine.addMatchers({
-        toEqualData: function (util, customEqualityTesters) {
+        toEqualData(util, customEqualityTesters) {
           return {
-            compare: function (actual, expected) {
+            compare(actual, expected) {
               return {
                 pass: angular.equals(actual, expected)
               };
@@ -37,7 +36,15 @@
     // The injector ignores leading and trailing underscores here (i.e. _$httpBackend_).
     // This allows us to inject a service but then attach it to a variable
     // with the same name as the service.
-    beforeEach(inject(function ($controller, $rootScope, _$state_, _$httpBackend_, _Authentication_, _ArticlesService_, _Notification_) {
+    beforeEach(inject((
+      $controller,
+      $rootScope,
+      _$state_,
+      _$httpBackend_,
+      _Authentication_,
+      _ArticlesService_,
+      _Notification_
+    ) => {
       // Set a new global scope
       $scope = $rootScope.$new();
 
@@ -65,7 +72,7 @@
 
       // Initialize the Articles controller.
       ArticlesAdminController = $controller('ArticlesAdminController as vm', {
-        $scope: $scope,
+        $scope,
         articleResolve: {}
       });
 
@@ -75,10 +82,10 @@
       spyOn(Notification, 'success');
     }));
 
-    describe('vm.save() as create', function () {
-      var sampleArticlePostData;
+    describe('vm.save() as create', () => {
+      let sampleArticlePostData;
 
-      beforeEach(function () {
+      beforeEach(() => {
         // Create a sample article object
         sampleArticlePostData = new ArticlesService({
           title: 'An Article about MEAN',
@@ -88,7 +95,7 @@
         $scope.vm.article = sampleArticlePostData;
       });
 
-      it('should send a POST request with the form input values and then locate to new object URL', inject(function (ArticlesService) {
+      it('should send a POST request with the form input values and then locate to new object URL', inject(ArticlesService => {
         // Set POST response
         $httpBackend.expectPOST('/api/articles', sampleArticlePostData).respond(mockArticle);
 
@@ -102,8 +109,8 @@
         expect($state.go).toHaveBeenCalledWith('admin.articles.list');
       }));
 
-      it('should call Notification.error if error', function () {
-        var errorMessage = 'this is an error message';
+      it('should call Notification.error if error', () => {
+        const errorMessage = 'this is an error message';
         $httpBackend.expectPOST('/api/articles', sampleArticlePostData).respond(400, {
           message: errorMessage
         });
@@ -115,13 +122,13 @@
       });
     });
 
-    describe('vm.save() as update', function () {
-      beforeEach(function () {
+    describe('vm.save() as update', () => {
+      beforeEach(() => {
         // Mock article in $scope
         $scope.vm.article = mockArticle;
       });
 
-      it('should update a valid article', inject(function (ArticlesService) {
+      it('should update a valid article', inject(ArticlesService => {
         // Set PUT response
         $httpBackend.expectPUT(/api\/articles\/([0-9a-fA-F]{24})$/).respond();
 
@@ -135,8 +142,8 @@
         expect($state.go).toHaveBeenCalledWith('admin.articles.list');
       }));
 
-      it('should  call Notification.error if error', inject(function (ArticlesService) {
-        var errorMessage = 'error';
+      it('should  call Notification.error if error', inject(ArticlesService => {
+        const errorMessage = 'error';
         $httpBackend.expectPUT(/api\/articles\/([0-9a-fA-F]{24})$/).respond(400, {
           message: errorMessage
         });
@@ -148,13 +155,13 @@
       }));
     });
 
-    describe('vm.remove()', function () {
-      beforeEach(function () {
+    describe('vm.remove()', () => {
+      beforeEach(() => {
         // Setup articles
         $scope.vm.article = mockArticle;
       });
 
-      it('should delete the article and redirect to articles', function () {
+      it('should delete the article and redirect to articles', () => {
         // Return true on confirm message
         spyOn(window, 'confirm').and.returnValue(true);
 
@@ -167,7 +174,7 @@
         expect($state.go).toHaveBeenCalledWith('admin.articles.list');
       });
 
-      it('should should not delete the article and not redirect', function () {
+      it('should should not delete the article and not redirect', () => {
         // Return false on confirm message
         spyOn(window, 'confirm').and.returnValue(false);
 
@@ -177,4 +184,4 @@
       });
     });
   });
-}());
+})());

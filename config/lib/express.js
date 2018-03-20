@@ -1,30 +1,29 @@
-'use strict';
-
 /**
  * Module dependencies.
  */
-var config = require('../config'),
-  express = require('express'),
-  morgan = require('morgan'),
-  logger = require('./logger'),
-  bodyParser = require('body-parser'),
-  session = require('express-session'),
-  MongoStore = require('connect-mongo')(session),
-  favicon = require('serve-favicon'),
-  compress = require('compression'),
-  methodOverride = require('method-override'),
-  cookieParser = require('cookie-parser'),
-  helmet = require('helmet'),
-  flash = require('connect-flash'),
-  hbs = require('express-hbs'),
-  path = require('path'),
-  _ = require('lodash'),
-  lusca = require('lusca');
+const config = require('../config');
+
+const express = require('express');
+const morgan = require('morgan');
+const logger = require('./logger');
+const bodyParser = require('body-parser');
+const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
+const favicon = require('serve-favicon');
+const compress = require('compression');
+const methodOverride = require('method-override');
+const cookieParser = require('cookie-parser');
+const helmet = require('helmet');
+const flash = require('connect-flash');
+const hbs = require('express-hbs');
+const path = require('path');
+const _ = require('lodash');
+const lusca = require('lusca');
 
 /**
  * Initialize local variables
  */
-module.exports.initLocalVariables = function (app) {
+module.exports.initLocalVariables = app => {
   // Setting application local variables
   app.locals.title = config.app.title;
   app.locals.description = config.app.description;
@@ -44,7 +43,7 @@ module.exports.initLocalVariables = function (app) {
   app.locals.domain = config.domain;
 
   // Passing the request url to environment locals
-  app.use(function (req, res, next) {
+  app.use((req, res, next) => {
     res.locals.host = req.protocol + '://' + req.hostname;
     res.locals.url = req.protocol + '://' + req.headers.host + req.originalUrl;
     next();
@@ -54,10 +53,10 @@ module.exports.initLocalVariables = function (app) {
 /**
  * Initialize application middleware
  */
-module.exports.initMiddleware = function (app) {
+module.exports.initMiddleware = app => {
   // Should be placed before express.static
   app.use(compress({
-    filter: function (req, res) {
+    filter(req, res) {
       return (/json|text|javascript|css|font|svg/).test(res.getHeader('Content-Type'));
     },
     level: 9
@@ -94,7 +93,7 @@ module.exports.initMiddleware = function (app) {
 /**
  * Configure view engine
  */
-module.exports.initViewEngine = function (app) {
+module.exports.initViewEngine = app => {
   app.engine('server.view.html', hbs.express4({
     extname: '.server.view.html'
   }));
@@ -105,7 +104,7 @@ module.exports.initViewEngine = function (app) {
 /**
  * Configure Express session
  */
-module.exports.initSession = function (app, db) {
+module.exports.initSession = (app, db) => {
   // Express MongoDB session storage
   app.use(session({
     saveUninitialized: true,
@@ -118,7 +117,7 @@ module.exports.initSession = function (app, db) {
     },
     name: config.sessionKey,
     store: new MongoStore({
-      db: db,
+      db,
       collection: config.sessionCollection
     })
   }));
@@ -130,8 +129,8 @@ module.exports.initSession = function (app, db) {
 /**
  * Invoke modules server configuration
  */
-module.exports.initModulesConfiguration = function (app) {
-  config.files.server.configs.forEach(function (configPath) {
+module.exports.initModulesConfiguration = app => {
+  config.files.server.configs.forEach(configPath => {
     require(path.resolve(configPath))(app);
   });
 };
@@ -139,9 +138,9 @@ module.exports.initModulesConfiguration = function (app) {
 /**
  * Configure Helmet headers configuration for security
  */
-module.exports.initHelmetHeaders = function (app) {
+module.exports.initHelmetHeaders = app => {
   // six months expiration period specified in seconds
-  var SIX_MONTHS = 15778476;
+  const SIX_MONTHS = 15778476;
 
   app.use(helmet.frameguard());
   app.use(helmet.xssFilter());
@@ -158,12 +157,12 @@ module.exports.initHelmetHeaders = function (app) {
 /**
  * Configure the modules static routes
  */
-module.exports.initModulesClientRoutes = function (app) {
+module.exports.initModulesClientRoutes = app => {
   // Setting the app router and static folder
   app.use('/', express.static(path.resolve('./public'), { maxAge: 86400000 }));
 
   // Globbing static routing
-  config.folders.client.forEach(function (staticPath) {
+  config.folders.client.forEach(staticPath => {
     app.use(staticPath, express.static(path.resolve('./' + staticPath)));
   });
 };
@@ -171,9 +170,9 @@ module.exports.initModulesClientRoutes = function (app) {
 /**
  * Configure the modules ACL policies
  */
-module.exports.initModulesServerPolicies = function (app) {
+module.exports.initModulesServerPolicies = app => {
   // Globbing policy files
-  config.files.server.policies.forEach(function (policyPath) {
+  config.files.server.policies.forEach(policyPath => {
     require(path.resolve(policyPath)).invokeRolesPolicies();
   });
 };
@@ -181,9 +180,9 @@ module.exports.initModulesServerPolicies = function (app) {
 /**
  * Configure the modules server routes
  */
-module.exports.initModulesServerRoutes = function (app) {
+module.exports.initModulesServerRoutes = app => {
   // Globbing routing files
-  config.files.server.routes.forEach(function (routePath) {
+  config.files.server.routes.forEach(routePath => {
     require(path.resolve(routePath))(app);
   });
 };
@@ -191,8 +190,8 @@ module.exports.initModulesServerRoutes = function (app) {
 /**
  * Configure error handling
  */
-module.exports.initErrorRoutes = function (app) {
-  app.use(function (err, req, res, next) {
+module.exports.initErrorRoutes = app => {
+  app.use((err, req, res, next) => {
     // If the error object doesn't exists
     if (!err) {
       return next();
@@ -209,9 +208,9 @@ module.exports.initErrorRoutes = function (app) {
 /**
  * Configure Socket.io
  */
-module.exports.configureSocketIO = function (app, db) {
+module.exports.configureSocketIO = (app, db) => {
   // Load the Socket.io configuration
-  var server = require('./socket.io')(app, db);
+  const server = require('./socket.io')(app, db);
 
   // Return server object
   return server;
@@ -222,7 +221,7 @@ module.exports.configureSocketIO = function (app, db) {
  */
 module.exports.init = function (db) {
   // Initialize express app
-  var app = express();
+  let app = express();
 
   // Initialize local variables
   this.initLocalVariables(app);

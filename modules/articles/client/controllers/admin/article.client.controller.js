@@ -1,6 +1,4 @@
-(function () {
-  'use strict';
-
+((() => {
   angular
     .module('articles.admin')
     .controller('ArticlesAdminController', ArticlesAdminController);
@@ -8,7 +6,7 @@
   ArticlesAdminController.$inject = ['$scope', '$state', '$window', 'articleResolve', 'Authentication', 'Notification'];
 
   function ArticlesAdminController($scope, $state, $window, article, Authentication, Notification) {
-    var vm = this;
+    const vm = this;
 
     vm.article = article;
     vm.authentication = Authentication;
@@ -19,7 +17,7 @@
     // Remove existing Article
     function remove() {
       if ($window.confirm('Are you sure you want to delete?')) {
-        vm.article.$remove(function () {
+        vm.article.$remove(() => {
           $state.go('admin.articles.list');
           Notification.success({ message: '<i class="glyphicon glyphicon-ok"></i> Article deleted successfully!' });
         });
@@ -48,4 +46,4 @@
       }
     }
   }
-}());
+})());

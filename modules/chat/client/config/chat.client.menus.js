@@ -1,6 +1,4 @@
-(function () {
-  'use strict';
-
+((() => {
   angular
     .module('chat')
     .run(menuConfig);
@@ -14,4 +12,4 @@
       state: 'chat'
     });
   }
-}());
+})());

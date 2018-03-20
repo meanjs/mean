@@ -1,43 +1,43 @@
-'use strict';
-
 /**
  * Module dependencies.
  */
-var _ = require('lodash'),
-  should = require('should'),
-  mongoose = require('mongoose'),
-  User = mongoose.model('User'),
-  path = require('path'),
-  fs = require('fs'),
-  request = require('supertest'),
-  config = require(path.resolve('./config/config')),
-  logger = require(path.resolve('./config/lib/logger')),
-  seed = require(path.resolve('./config/lib/mongo-seed')),
-  express = require(path.resolve('./config/lib/express')),
-  Article = mongoose.model('Article');
+const _ = require('lodash');
+
+const should = require('should');
+const mongoose = require('mongoose');
+const User = mongoose.model('User');
+const path = require('path');
+const fs = require('fs');
+const request = require('supertest');
+const config = require(path.resolve('./config/config'));
+const logger = require(path.resolve('./config/lib/logger'));
+const seed = require(path.resolve('./config/lib/mongo-seed'));
+const express = require(path.resolve('./config/lib/express'));
+const Article = mongoose.model('Article');
 
 /**
  * Globals
  */
-var app,
-  agent,
-  user1,
-  admin1,
-  userFromSeedConfig,
-  adminFromSeedConfig,
-  originalLogConfig;
+let app;
 
-describe('Configuration Tests:', function () {
+let agent;
+let user1;
+let admin1;
+let userFromSeedConfig;
+let adminFromSeedConfig;
+let originalLogConfig;
 
-  describe('Testing Mongo Seed', function () {
-    var _seedConfig = _.clone(config.seedDB, true);
-    var articleSeedConfig;
-    var userSeedConfig;
-    var _admin;
-    var _user;
-    var _article;
+describe('Configuration Tests:', () => {
 
-    before(function (done) {
+  describe('Testing Mongo Seed', () => {
+    const _seedConfig = _.clone(config.seedDB, true);
+    let articleSeedConfig;
+    let userSeedConfig;
+    let _admin;
+    let _user;
+    let _article;
+
+    before(done => {
       _admin = {
         username: 'test-seed-admin',
         email: 'test-admin@localhost.com',
@@ -59,16 +59,12 @@ describe('Configuration Tests:', function () {
         content: 'Testing Article Seed right now!'
       };
 
-      var articleCollections = _.filter(_seedConfig.collections, function (collection) {
-        return collection.model === 'Article';
-      });
+      const articleCollections = _.filter(_seedConfig.collections, collection => collection.model === 'Article');
 
       // articleCollections.should.be.instanceof(Array).and.have.lengthOf(1);
       articleSeedConfig = articleCollections[0];
 
-      var userCollections = _.filter(_seedConfig.collections, function (collection) {
-        return collection.model === 'User';
-      });
+      const userCollections = _.filter(_seedConfig.collections, collection => collection.model === 'User');
 
       // userCollections.should.be.instanceof(Array).and.have.lengthOf(1);
       userSeedConfig = userCollections[0];
@@ -76,20 +72,14 @@ describe('Configuration Tests:', function () {
       return done();
     });
 
-    afterEach(function (done) {
+    afterEach(done => {
       Article.remove().exec()
-        .then(function () {
-          return User.remove().exec();
-        })
-        .then(function () {
-          return done();
-        })
-        .catch(function (err) {
-          return done(err);
-        });
+        .then(() => User.remove().exec())
+        .then(() => done())
+        .catch(err => done(err));
     });
 
-    it('should have default seed configuration set for articles', function (done) {
+    it('should have default seed configuration set for articles', done => {
       articleSeedConfig.should.be.instanceof(Object);
       articleSeedConfig.docs.should.be.instanceof(Array).and.have.lengthOf(1);
       should.exist(articleSeedConfig.docs[0].data.title);
@@ -98,7 +88,7 @@ describe('Configuration Tests:', function () {
       return done();
     });
 
-    it('should have default seed configuration set for users', function (done) {
+    it('should have default seed configuration set for users', done => {
       userSeedConfig.should.be.instanceof(Object);
       userSeedConfig.docs.should.be.instanceof(Array).and.have.lengthOf(2);
 
@@ -117,43 +107,37 @@ describe('Configuration Tests:', function () {
       return done();
     });
 
-    it('should seed data from default config', function (done) {
+    it('should seed data from default config', done => {
 
       seed.start()
-        .then(function () {
-          // Check Articles Seed
-          return Article.find().exec();
-        })
-        .then(function (articles) {
+        .then(() => // Check Articles Seed
+          Article.find().exec())
+        .then(articles => {
           articles.should.be.instanceof(Array).and.have.lengthOf(articleSeedConfig.docs.length);
           // Check Users Seed
           return User.find().exec();
         })
-        .then(function (users) {
+        .then(users => {
           users.should.be.instanceof(Array).and.have.lengthOf(userSeedConfig.docs.length);
           return done();
         })
         .catch(done);
     });
 
-    it('should overwrite existing article by default', function (done) {
+    it('should overwrite existing article by default', done => {
       articleSeedConfig.docs.should.be.instanceof(Array).and.have.lengthOf(1);
 
-      var article = new Article(articleSeedConfig.docs[0].data);
+      const article = new Article(articleSeedConfig.docs[0].data);
       article.content = '_temp_test_article_';
 
       // save temp article
       article.save()
-        .then(function () {
-          return seed.start();
-        })
-        .then(function () {
-          return Article.find().exec();
-        })
-        .then(function (articles) {
+        .then(() => seed.start())
+        .then(() => Article.find().exec())
+        .then(articles => {
           articles.should.be.instanceof(Array).and.have.lengthOf(1);
 
-          var newArticle = articles.pop();
+          const newArticle = articles.pop();
           articleSeedConfig.docs[0].data.title.should.equal(newArticle.title);
           articleSeedConfig.docs[0].data.content.should.equal(newArticle.content);
 
@@ -162,52 +146,50 @@ describe('Configuration Tests:', function () {
         .catch(done);
     });
 
-    it('should overwrite existing users by default', function (done) {
+    it('should overwrite existing users by default', done => {
       userSeedConfig.docs.should.be.instanceof(Array).and.have.lengthOf(2);
 
-      var admin = new User(userSeedConfig.docs[0].data);
+      const admin = new User(userSeedConfig.docs[0].data);
       admin.email = 'temp-admin@localhost.com';
       admin.provider = 'local';
 
-      var user = new User(userSeedConfig.docs[1].data);
+      const user = new User(userSeedConfig.docs[1].data);
       user.email = 'temp-user@localhost.com';
       user.provider = 'local';
 
       admin.save()
-        .then(function () {
-          return user.save();
-        })
-        .then(function () {
-          return User.find().exec();
-        })
-        .then(function (users) {
+        .then(() => user.save())
+        .then(() => User.find().exec())
+        .then(users => {
           users.should.be.instanceof(Array).and.have.lengthOf(2);
           // Start Seed
           return seed.start();
         })
-        .then(function () {
-          return User.find().exec();
-        })
-        .then(function (users) {
+        .then(() => User.find().exec())
+        .then(users => {
           // Should still only be two users, since we removed
           // the existing users before seeding again.
           users.should.be.instanceof(Array).and.have.lengthOf(2);
 
-          return User.find({ username: admin.username }).exec();
+          return User.find({
+            username: admin.username
+          }).exec();
         })
-        .then(function (users) {
+        .then(users => {
           users.should.be.instanceof(Array).and.have.lengthOf(1);
 
-          var newAdmin = users.pop();
+          const newAdmin = users.pop();
           userSeedConfig.docs[0].data.username.should.equal(newAdmin.username);
           userSeedConfig.docs[0].data.email.should.equal(newAdmin.email);
 
-          return User.find({ username: user.username }).exec();
+          return User.find({
+            username: user.username
+          }).exec();
         })
-        .then(function (users) {
+        .then(users => {
           users.should.be.instanceof(Array).and.have.lengthOf(1);
 
-          var newUser = users.pop();
+          const newUser = users.pop();
           userSeedConfig.docs[1].data.username.should.equal(newUser.username);
           userSeedConfig.docs[1].data.email.should.equal(newUser.email);
 
@@ -216,7 +198,7 @@ describe('Configuration Tests:', function () {
         .catch(done);
     });
 
-    it('should seed single article with custom options', function (done) {
+    it('should seed single article with custom options', done => {
       seed
         .start({
           collections: [{
@@ -227,13 +209,11 @@ describe('Configuration Tests:', function () {
             }]
           }]
         })
-        .then(function () {
-          return Article.find().exec();
-        })
-        .then(function (articles) {
+        .then(() => Article.find().exec())
+        .then(articles => {
           articles.should.be.instanceof(Array).and.have.lengthOf(1);
 
-          var newArticle = articles.pop();
+          const newArticle = articles.pop();
           _article.title.should.equal(newArticle.title);
           _article.content.should.equal(newArticle.content);
 
@@ -242,7 +222,7 @@ describe('Configuration Tests:', function () {
         .catch(done);
     });
 
-    it('should seed single article with user set to custom seeded admin user', function (done) {
+    it('should seed single article with user set to custom seeded admin user', done => {
       seed
         .start({
           collections: [{
@@ -258,10 +238,8 @@ describe('Configuration Tests:', function () {
             }]
           }]
         })
-        .then(function () {
-          return User.find().exec();
-        })
-        .then(function (users) {
+        .then(() => User.find().exec())
+        .then(users => {
           users.should.be.instanceof(Array).and.have.lengthOf(1);
 
           return Article
@@ -269,10 +247,10 @@ describe('Configuration Tests:', function () {
             .populate('user', 'firstName lastName username email roles')
             .exec();
         })
-        .then(function (articles) {
+        .then(articles => {
           articles.should.be.instanceof(Array).and.have.lengthOf(1);
 
-          var newArticle = articles.pop();
+          const newArticle = articles.pop();
           _article.title.should.equal(newArticle.title);
           _article.content.should.equal(newArticle.content);
 
@@ -292,7 +270,7 @@ describe('Configuration Tests:', function () {
         .catch(done);
     });
 
-    it('should seed single article with NO user set due to seed order', function (done) {
+    it('should seed single article with NO user set due to seed order', done => {
       seed
         .start({
           collections: [{
@@ -308,10 +286,8 @@ describe('Configuration Tests:', function () {
             }]
           }]
         })
-        .then(function () {
-          return User.find().exec();
-        })
-        .then(function (users) {
+        .then(() => User.find().exec())
+        .then(users => {
           users.should.be.instanceof(Array).and.have.lengthOf(1);
 
           return Article
@@ -319,10 +295,10 @@ describe('Configuration Tests:', function () {
             .populate('user', 'firstName lastName username email roles')
             .exec();
         })
-        .then(function (articles) {
+        .then(articles => {
           articles.should.be.instanceof(Array).and.have.lengthOf(1);
 
-          var newArticle = articles.pop();
+          const newArticle = articles.pop();
           _article.title.should.equal(newArticle.title);
           _article.content.should.equal(newArticle.content);
 
@@ -333,7 +309,7 @@ describe('Configuration Tests:', function () {
         .catch(done);
     });
 
-    it('should seed admin and user accounts with custom options', function (done) {
+    it('should seed admin and user accounts with custom options', done => {
       seed
         .start({
           collections: [{
@@ -345,26 +321,28 @@ describe('Configuration Tests:', function () {
             }]
           }]
         })
-        .then(function () {
-          return User.find().exec();
-        })
-        .then(function (users) {
+        .then(() => User.find().exec())
+        .then(users => {
           users.should.be.instanceof(Array).and.have.lengthOf(2);
-          return User.find({ username: _admin.username }).exec();
+          return User.find({
+            username: _admin.username
+          }).exec();
         })
-        .then(function (users) {
+        .then(users => {
           users.should.be.instanceof(Array).and.have.lengthOf(1);
 
-          var newAdmin = users.pop();
+          const newAdmin = users.pop();
           _admin.username.should.equal(newAdmin.username);
           _admin.email.should.equal(newAdmin.email);
 
-          return User.find({ username: _user.username }).exec();
+          return User.find({
+            username: _user.username
+          }).exec();
         })
-        .then(function (users) {
+        .then(users => {
           users.should.be.instanceof(Array).and.have.lengthOf(1);
 
-          var newUser = users.pop();
+          const newUser = users.pop();
           _user.username.should.equal(newUser.username);
           _user.email.should.equal(newUser.email);
 
@@ -373,30 +351,26 @@ describe('Configuration Tests:', function () {
         .catch(done);
     });
 
-    it('should NOT overwrite existing article with custom options', function (done) {
+    it('should NOT overwrite existing article with custom options', done => {
 
-      var article = new Article(_article);
+      const article = new Article(_article);
       article.content = '_temp_article_content_';
 
       article.save()
-        .then(function () {
-          return seed.start({
-            collections: [{
-              model: 'Article',
-              docs: [{
-                overwrite: false,
-                data: _article
-              }]
+        .then(() => seed.start({
+          collections: [{
+            model: 'Article',
+            docs: [{
+              overwrite: false,
+              data: _article
             }]
-          });
-        })
-        .then(function () {
-          return Article.find().exec();
-        })
-        .then(function (articles) {
+          }]
+        }))
+        .then(() => Article.find().exec())
+        .then(articles => {
           articles.should.be.instanceof(Array).and.have.lengthOf(1);
 
-          var existingArticle = articles.pop();
+          const existingArticle = articles.pop();
           article.title.should.equal(existingArticle.title);
           article.content.should.equal(existingArticle.content);
 
@@ -405,30 +379,26 @@ describe('Configuration Tests:', function () {
         .catch(done);
     });
 
-    it('should NOT overwrite existing user with custom options', function (done) {
-      var user = new User(_user);
+    it('should NOT overwrite existing user with custom options', done => {
+      const user = new User(_user);
       user.provider = 'local';
       user.email = 'temp-test-user@localhost.com';
 
       user.save()
-        .then(function () {
-          return seed.start({
-            collections: [{
-              model: 'User',
-              docs: [{
-                overwrite: false,
-                data: _user
-              }]
+        .then(() => seed.start({
+          collections: [{
+            model: 'User',
+            docs: [{
+              overwrite: false,
+              data: _user
             }]
-          });
-        })
-        .then(function () {
-          return User.find().exec();
-        })
-        .then(function (users) {
+          }]
+        }))
+        .then(() => User.find().exec())
+        .then(users => {
           users.should.be.instanceof(Array).and.have.lengthOf(1);
 
-          var existingUser = users.pop();
+          const existingUser = users.pop();
           user.username.should.equal(existingUser.username);
           user.email.should.equal(existingUser.email);
 
@@ -437,8 +407,8 @@ describe('Configuration Tests:', function () {
         .catch(done);
     });
 
-    it('should NOT seed article when missing title with custom options', function (done) {
-      var invalid = {
+    it('should NOT seed article when missing title with custom options', done => {
+      const invalid = {
         content: '_temp_article_content_'
       };
 
@@ -451,13 +421,13 @@ describe('Configuration Tests:', function () {
             }]
           }]
         })
-        .then(function () {
+        .then(() => {
           // We should not make it here so we
           // force an assert failure to prevent hangs.
           should.exist(undefined);
           return done();
         })
-        .catch(function (err) {
+        .catch(err => {
           should.exist(err);
           err.message.should.equal('Article validation failed: title: Title cannot be blank');
 
@@ -465,8 +435,8 @@ describe('Configuration Tests:', function () {
         });
     });
 
-    it('should NOT seed user when missing username with custom options', function (done) {
-      var invalid = _.clone(_user, true);
+    it('should NOT seed user when missing username with custom options', done => {
+      const invalid = _.clone(_user, true);
       invalid.username = undefined;
 
       seed
@@ -478,13 +448,13 @@ describe('Configuration Tests:', function () {
             }]
           }]
         })
-        .then(function () {
+        .then(() => {
           // We should not make it here so we
           // force an assert failure to prevent hangs.
           should.exist(undefined);
           return done();
         })
-        .catch(function (err) {
+        .catch(err => {
           should.exist(err);
           err.message.should.equal('User validation failed: username: Please fill in a username');
 
@@ -492,8 +462,8 @@ describe('Configuration Tests:', function () {
         });
     });
 
-    it('should NOT seed user when missing email with custom options', function (done) {
-      var invalid = _.clone(_user, true);
+    it('should NOT seed user when missing email with custom options', done => {
+      const invalid = _.clone(_user, true);
       invalid.email = undefined;
 
       seed
@@ -505,13 +475,13 @@ describe('Configuration Tests:', function () {
             }]
           }]
         })
-        .then(function () {
+        .then(() => {
           // We should not make it here so we
           // force an assert failure to prevent hangs.
           should.exist(undefined);
           return done();
         })
-        .catch(function (err) {
+        .catch(err => {
           should.exist(err);
           err.message.should.equal('User validation failed: email: Please fill a valid email address');
 
@@ -519,8 +489,8 @@ describe('Configuration Tests:', function () {
         });
     });
 
-    it('should NOT seed user with invalid email with custom options', function (done) {
-      var invalid = _.clone(_user, true);
+    it('should NOT seed user with invalid email with custom options', done => {
+      const invalid = _.clone(_user, true);
       invalid.email = '...invalid-email...';
 
       seed
@@ -532,13 +502,13 @@ describe('Configuration Tests:', function () {
             }]
           }]
         })
-        .then(function () {
+        .then(() => {
           // We should not make it here so we
           // force an assert failure to prevent hangs.
           should.exist(undefined);
           return done();
         })
-        .catch(function (err) {
+        .catch(err => {
           should.exist(err);
           err.message.should.equal('User validation failed: email: Please fill a valid email address');
 
@@ -546,20 +516,18 @@ describe('Configuration Tests:', function () {
         });
     });
 
-    it('should NOT continue seed when empty collections config', function (done) {
+    it('should NOT continue seed when empty collections config', done => {
       seed
         .start({
           collections: []
         })
-        .then(function () {
-          return Article.find().exec();
-        })
-        .then(function (articles) {
+        .then(() => Article.find().exec())
+        .then(articles => {
           articles.should.be.instanceof(Array).and.have.lengthOf(0);
 
           return User.find().exec();
         })
-        .then(function (users) {
+        .then(users => {
           users.should.be.instanceof(Array).and.have.lengthOf(0);
 
           return done();
@@ -567,7 +535,7 @@ describe('Configuration Tests:', function () {
         .catch(done);
     });
 
-    it('should NOT seed any data when empty docs config', function (done) {
+    it('should NOT seed any data when empty docs config', done => {
       seed
         .start({
           collections: [{
@@ -575,15 +543,13 @@ describe('Configuration Tests:', function () {
             docs: []
           }]
         })
-        .then(function () {
-          return Article.find().exec();
-        })
-        .then(function (articles) {
+        .then(() => Article.find().exec())
+        .then(articles => {
           articles.should.be.instanceof(Array).and.have.lengthOf(0);
 
           return User.find().exec();
         })
-        .then(function (users) {
+        .then(users => {
           users.should.be.instanceof(Array).and.have.lengthOf(0);
 
           return done();
@@ -591,26 +557,26 @@ describe('Configuration Tests:', function () {
         .catch(done);
     });
 
-    it('should seed article with custom options & skip.when results are empty', function (done) {
+    it('should seed article with custom options & skip.when results are empty', done => {
       seed
         .start({
           collections: [{
             model: 'Article',
             skip: {
-              when: { title: 'should-not-find-this-title' }
+              when: {
+                title: 'should-not-find-this-title'
+              }
             },
             docs: [{
               data: _article
             }]
           }]
         })
-        .then(function () {
-          return Article.find().exec();
-        })
-        .then(function (articles) {
+        .then(() => Article.find().exec())
+        .then(articles => {
           articles.should.be.instanceof(Array).and.have.lengthOf(1);
 
-          var newArticle = articles.pop();
+          const newArticle = articles.pop();
           _article.title.should.be.equal(newArticle.title);
           _article.content.should.be.equal(newArticle.content);
 
@@ -619,21 +585,19 @@ describe('Configuration Tests:', function () {
         .catch(done);
     });
 
-    it('should skip seed on collection with custom options & skip.when has results', function (done) {
-      var article = new Article({
+    it('should skip seed on collection with custom options & skip.when has results', done => {
+      const article = new Article({
         title: 'temp-article-title',
         content: 'temp-article-content'
       });
 
       article
         .save()
-        .then(function () {
-          return Article.find().exec();
-        })
-        .then(function (articles) {
+        .then(() => Article.find().exec())
+        .then(articles => {
           articles.should.be.instanceof(Array).and.have.lengthOf(1);
 
-          var newArticle = articles.pop();
+          const newArticle = articles.pop();
           article.title.should.equal(newArticle.title);
           article.content.should.equal(newArticle.content);
 
@@ -641,7 +605,9 @@ describe('Configuration Tests:', function () {
             collections: [{
               model: 'Article',
               skip: {
-                when: { title: newArticle.title }
+                when: {
+                  title: newArticle.title
+                }
               },
               docs: [{
                 data: _article
@@ -649,14 +615,12 @@ describe('Configuration Tests:', function () {
             }]
           });
         })
-        .then(function () {
-          return Article.find().exec();
-        })
-        .then(function (articles) {
+        .then(() => Article.find().exec())
+        .then(articles => {
           // We should have the same article added at start of this unit test.
           articles.should.be.instanceof(Array).and.have.lengthOf(1);
 
-          var existingArticle = articles.pop();
+          const existingArticle = articles.pop();
           article.title.should.equal(existingArticle.title);
           article.content.should.equal(existingArticle.content);
 
@@ -665,25 +629,27 @@ describe('Configuration Tests:', function () {
         .catch(done);
     });
 
-    it('should fail seed with custom options & invalid skip.when query', function (done) {
+    it('should fail seed with custom options & invalid skip.when query', done => {
       seed
         .start({
           collections: [{
             model: 'Article',
             skip: {
-              when: { created: 'not-a-valid-date' }
+              when: {
+                created: 'not-a-valid-date'
+              }
             },
             docs: [{
               data: _article
             }]
           }]
         })
-        .then(function () {
+        .then(() => {
           // We should not get here
           should.exist(undefined);
           return done();
         })
-        .catch(function (err) {
+        .catch(err => {
           should.exist(err);
           // We expect the error message to include
           err.message.indexOf('Cast to date failed').should.equal(0);
@@ -693,9 +659,11 @@ describe('Configuration Tests:', function () {
     });
   });
 
-  describe('Testing Session Secret Configuration', function () {
-    it('should warn if using default session secret when running in production', function (done) {
-      var conf = { sessionSecret: 'MEAN' };
+  describe('Testing Session Secret Configuration', () => {
+    it('should warn if using default session secret when running in production', done => {
+      const conf = {
+        sessionSecret: 'MEAN'
+      };
       // set env to production for this test
       process.env.NODE_ENV = 'production';
       config.utils.validateSessionSecret(conf, true).should.equal(false);
@@ -704,8 +672,10 @@ describe('Configuration Tests:', function () {
       return done();
     });
 
-    it('should accept non-default session secret when running in production', function () {
-      var conf = { sessionSecret: 'super amazing secret' };
+    it('should accept non-default session secret when running in production', () => {
+      const conf = {
+        sessionSecret: 'super amazing secret'
+      };
       // set env to production for this test
       process.env.NODE_ENV = 'production';
       config.utils.validateSessionSecret(conf, true).should.equal(true);
@@ -713,8 +683,10 @@ describe('Configuration Tests:', function () {
       process.env.NODE_ENV = 'test';
     });
 
-    it('should accept default session secret when running in development', function () {
-      var conf = { sessionSecret: 'MEAN' };
+    it('should accept default session secret when running in development', () => {
+      const conf = {
+        sessionSecret: 'MEAN'
+      };
       // set env to development for this test
       process.env.NODE_ENV = 'development';
       config.utils.validateSessionSecret(conf, true).should.equal(true);
@@ -722,44 +694,46 @@ describe('Configuration Tests:', function () {
       process.env.NODE_ENV = 'test';
     });
 
-    it('should accept default session secret when running in test', function () {
-      var conf = { sessionSecret: 'MEAN' };
+    it('should accept default session secret when running in test', () => {
+      const conf = {
+        sessionSecret: 'MEAN'
+      };
       config.utils.validateSessionSecret(conf, true).should.equal(true);
     });
   });
 
-  describe('Testing Logger Configuration', function () {
+  describe('Testing Logger Configuration', () => {
 
-    beforeEach(function () {
+    beforeEach(() => {
       originalLogConfig = _.clone(config.log, true);
     });
 
-    afterEach(function () {
+    afterEach(() => {
       config.log = originalLogConfig;
     });
 
-    it('should retrieve the log format from the logger configuration', function () {
+    it('should retrieve the log format from the logger configuration', () => {
 
       config.log = {
         format: 'tiny'
       };
 
-      var format = logger.getLogFormat();
+      const format = logger.getLogFormat();
       format.should.be.equal('tiny');
     });
 
-    it('should retrieve the log options from the logger configuration for a valid stream object', function () {
+    it('should retrieve the log options from the logger configuration for a valid stream object', () => {
 
-      var options = logger.getMorganOptions();
+      const options = logger.getMorganOptions();
 
       options.should.be.instanceof(Object);
       options.should.have.property('stream');
 
     });
 
-    it('should verify that a file logger object was created using the logger configuration', function () {
-      var _dir = process.cwd();
-      var _filename = 'unit-test-access.log';
+    it('should verify that a file logger object was created using the logger configuration', () => {
+      const _dir = process.cwd();
+      const _filename = 'unit-test-access.log';
 
       config.log = {
         fileLogger: {
@@ -768,25 +742,25 @@ describe('Configuration Tests:', function () {
         }
       };
 
-      var fileTransport = logger.getLogOptions(config);
+      const fileTransport = logger.getLogOptions(config);
       fileTransport.should.be.instanceof(Object);
       fileTransport.filename.should.equal(_dir + '/' + _filename);
     });
 
-    it('should use the default log format of "combined" when an invalid format was provided', function () {
+    it('should use the default log format of "combined" when an invalid format was provided', () => {
 
-      var _logger = require(path.resolve('./config/lib/logger'));
+      const _logger = require(path.resolve('./config/lib/logger'));
 
       // manually set the config log format to be invalid
       config.log = {
         format: '_some_invalid_format_'
       };
 
-      var format = _logger.getLogFormat();
+      const format = _logger.getLogFormat();
       format.should.be.equal('combined');
     });
 
-    it('should not create a file transport object if critical options are missing: filename', function () {
+    it('should not create a file transport object if critical options are missing: filename', () => {
 
       // manually set the config stream fileName option to an empty string
       config.log = {
@@ -799,11 +773,11 @@ describe('Configuration Tests:', function () {
         }
       };
 
-      var fileTransport = logger.getLogOptions(config);
+      const fileTransport = logger.getLogOptions(config);
       fileTransport.should.be.false();
     });
 
-    it('should not create a file transport object if critical options are missing: directory', function () {
+    it('should not create a file transport object if critical options are missing: directory', () => {
 
       // manually set the config stream fileName option to an empty string
       config.log = {
@@ -816,15 +790,15 @@ describe('Configuration Tests:', function () {
         }
       };
 
-      var fileTransport = logger.getLogOptions(config);
+      const fileTransport = logger.getLogOptions(config);
       fileTransport.should.be.false();
     });
   });
 
-  describe('Testing exposing environment as a variable to layout', function () {
+  describe('Testing exposing environment as a variable to layout', () => {
 
-    ['development', 'production', 'test'].forEach(function (env) {
-      it('should expose environment set to ' + env, function (done) {
+    ['development', 'production', 'test'].forEach(env => {
+      it('should expose environment set to ' + env, done => {
         // Set env to development for this test
         process.env.NODE_ENV = env;
 
@@ -836,7 +810,7 @@ describe('Configuration Tests:', function () {
         agent.get('/')
           .expect('Content-Type', 'text/html; charset=utf-8')
           .expect(200)
-          .end(function (err, res) {
+          .end((err, res) => {
             // Set env back to test
             process.env.NODE_ENV = 'test';
             // Handle errors

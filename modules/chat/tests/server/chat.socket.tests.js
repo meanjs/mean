@@ -1,9 +1,7 @@
-'use strict';
-
 /**
  * Chat socket tests
  */
-describe('Chat Socket Tests:', function () {
+describe('Chat Socket Tests:', () => {
 
   // TODO: Add chat socket tests
 });

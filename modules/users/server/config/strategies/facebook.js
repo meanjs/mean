@@ -1,13 +1,12 @@
-'use strict';
-
 /**
  * Module dependencies
  */
-var passport = require('passport'),
-  FacebookStrategy = require('passport-facebook').Strategy,
-  users = require('../../controllers/users.server.controller');
+const passport = require('passport');
 
-module.exports = function (config) {
+const FacebookStrategy = require('passport-facebook').Strategy;
+const users = require('../../controllers/users.server.controller');
+
+module.exports = config => {
   // Use facebook strategy
   passport.use(new FacebookStrategy({
     clientID: config.facebook.clientID,
@@ -17,14 +16,14 @@ module.exports = function (config) {
     passReqToCallback: true,
     scope: ['email']
   },
-  function (req, accessToken, refreshToken, profile, done) {
+  (req, accessToken, refreshToken, profile, done) => {
     // Set the provider data and include tokens
-    var providerData = profile._json;
+    const providerData = profile._json;
     providerData.accessToken = accessToken;
     providerData.refreshToken = refreshToken;
 
     // Create the user OAuth profile
-    var providerUserProfile = {
+    const providerUserProfile = {
       firstName: profile.name.givenName,
       lastName: profile.name.familyName,
       displayName: profile.displayName,
@@ -33,14 +32,14 @@ module.exports = function (config) {
       profileImageURL: (profile.id) ? '//graph.facebook.com/' + profile.id + '/picture?type=large' : undefined,
       provider: 'facebook',
       providerIdentifierField: 'id',
-      providerData: providerData
+      providerData
     };
 
     // Save the user OAuth profile
     users.saveOAuthUserProfile(req, providerUserProfile, done);
 
     function generateUsername(profile) {
-      var username = '';
+      let username = '';
 
       if (profile.emails) {
         username = profile.emails[0].value.split('@')[0];

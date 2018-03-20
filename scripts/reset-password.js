@@ -1,18 +1,16 @@
-'use strict';
+const nodemailer = require('nodemailer');
+const mongoose = require('mongoose');
+const chalk = require('chalk');
+const config = require('../config/config');
+const mg = require('../config/lib/mongoose');
 
-var nodemailer = require('nodemailer'),
-  mongoose = require('mongoose'),
-  chalk = require('chalk'),
-  config = require('../config/config'),
-  mg = require('../config/lib/mongoose');
-
-var transporter = nodemailer.createTransport(config.mailer.options);
-var link = 'reset link here'; // PUT reset link here
-var email = {
+const transporter = nodemailer.createTransport(config.mailer.options);
+const link = 'reset link here'; // PUT reset link here
+const email = {
   from: config.mailer.from,
   subject: 'Security update'
 };
-var text = [
+const text = [
   'Dear {{name}},',
   '\n',
   'We have updated our password storage systems to be more secure and more efficient, please click the link below to reset your password so you can login in the future.',
@@ -24,23 +22,23 @@ var text = [
 
 mg.loadModels();
 
-mg.connect(function (db) {
-  var User = mongoose.model('User');
+mg.connect(db => {
+  const User = mongoose.model('User');
 
-  User.find().exec(function (err, users) {
+  User.find().exec((err, users) => {
     if (err) {
       throw err;
     }
 
-    var processedCount = 0,
-      errorCount = 0;
+    let processedCount = 0;
+    let errorCount = 0;
 
     // report and exit if no users were found
     if (users.length === 0) {
       return reportAndExit(processedCount, errorCount);
     }
 
-    for (var i = 0; i < users.length; i++) {
+    for (let i = 0; i < users.length; i++) {
       sendEmail(users[i]);
     }
 
@@ -52,7 +50,7 @@ mg.connect(function (db) {
     }
 
     function emailCallback(user) {
-      return function (err, info) {
+      return (err, info) => {
         processedCount++;
 
         if (err) {
@@ -74,14 +72,14 @@ mg.connect(function (db) {
 
     // report the processing results and exit
     function reportAndExit(processedCount, errorCount) {
-      var successCount = processedCount - errorCount;
+      const successCount = processedCount - errorCount;
 
       console.log();
 
       if (processedCount === 0) {
         console.log(chalk.yellow('No users were found.'));
       } else {
-        var alert;
+        let alert;
         if (!errorCount) {
           alert = chalk.green;
         } else if ((successCount / processedCount) < 0.8) {

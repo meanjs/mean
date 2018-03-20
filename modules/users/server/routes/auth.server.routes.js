@@ -1,13 +1,11 @@
-'use strict';
-
 /**
  * Module dependencies
  */
-var passport = require('passport');
+const passport = require('passport');
 
-module.exports = function (app) {
+module.exports = app => {
   // User Routes
-  var users = require('../controllers/users.server.controller');
+  const users = require('../controllers/users.server.controller');
 
   // Setting up the users password api
   app.route('/api/auth/forgot').post(users.forgot);

@@ -1,6 +1,4 @@
-(function () {
-  'use strict';
-
+((() => {
   angular
     .module('users')
     .controller('ChangeProfilePictureController', ChangeProfilePictureController);
@@ -8,25 +6,25 @@
   ChangeProfilePictureController.$inject = ['$timeout', 'Authentication', 'Upload', 'Notification'];
 
   function ChangeProfilePictureController($timeout, Authentication, Upload, Notification) {
-    var vm = this;
+    const vm = this;
 
     vm.user = Authentication.user;
     vm.progress = 0;
 
-    vm.upload = function (dataUrl) {
+    vm.upload = dataUrl => {
 
       Upload.upload({
         url: '/api/users/picture',
         data: {
           newProfilePicture: dataUrl
         }
-      }).then(function (response) {
-        $timeout(function () {
+      }).then(response => {
+        $timeout(() => {
           onSuccessItem(response.data);
         });
-      }, function (response) {
+      }, response => {
         if (response.status > 0) onErrorItem(response.data);
-      }, function (evt) {
+      }, evt => {
         vm.progress = parseInt(100.0 * evt.loaded / evt.total, 10);
       });
     };
@@ -53,4 +51,4 @@
       Notification.error({ message: response.message, title: '<i class="glyphicon glyphicon-remove"></i> Failed to change profile picture' });
     }
   }
-}());
+})());

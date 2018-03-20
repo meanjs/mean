@@ -1,19 +1,18 @@
-﻿'use strict';
 // Set the Node ENV
 process.env.NODE_ENV = 'development';
 
-var chalk = require('chalk'),
-  mongoose = require('../config/lib/mongoose');
+const chalk = require('chalk');
+const mongoose = require('../config/lib/mongoose');
 
 mongoose.loadModels();
 
-var _indexToRemove = 'email_1',
-  errors = [],
-  processedCount = 0;
+const _indexToRemove = 'email_1';
+const errors = [];
+const processedCount = 0;
 
-mongoose.connect(function (db) {
+mongoose.connect(db => {
   // get a reference to the User collection
-  var userCollection = db.connections[0].collections.users;
+  const userCollection = db.connections[0].collections.users;
 
   console.log();
   console.log(chalk.yellow('Removing index "' +
@@ -21,8 +20,8 @@ mongoose.connect(function (db) {
   console.log();
 
   // Remove the index
-  userCollection.dropIndex(_indexToRemove, function (err, result) {
-    var message = 'Successfully removed the index "' + _indexToRemove + '".';
+  userCollection.dropIndex(_indexToRemove, (err, result) => {
+    let message = 'Successfully removed the index "' + _indexToRemove + '".';
 
     if (err) {
       errors.push(err);
@@ -47,7 +46,7 @@ function reportAndExit(message) {
     console.log();
 
     console.log(chalk.yellow('Errors:'));
-    for (var i = 0; i < errors.length; i++) {
+    for (let i = 0; i < errors.length; i++) {
       console.log(chalk.red(errors[i]));
 
       if (i === (errors.length -1) ) {

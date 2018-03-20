@@ -1,23 +1,21 @@
-(function () {
-  'use strict';
-
+((() => {
   angular
     .module('core')
     .factory('menuService', menuService);
 
   function menuService() {
-    var shouldRender;
-    var service = {
-      addMenu: addMenu,
-      addMenuItem: addMenuItem,
-      addSubMenuItem: addSubMenuItem,
+    let shouldRender;
+    const service = {
+      addMenu,
+      addMenuItem,
+      addSubMenuItem,
       defaultRoles: ['user', 'admin'],
-      getMenu: getMenu,
+      getMenu,
       menus: {},
-      removeMenu: removeMenu,
-      removeMenuItem: removeMenuItem,
-      removeSubMenuItem: removeSubMenuItem,
-      validateMenuExistence: validateMenuExistence
+      removeMenu,
+      removeMenuItem,
+      removeSubMenuItem,
+      validateMenuExistence
     };
 
     init();
@@ -32,7 +30,7 @@
       service.menus[menuId] = {
         roles: options.roles || service.defaultRoles,
         items: options.items || [],
-        shouldRender: shouldRender
+        shouldRender
       };
 
       // Return the menu object
@@ -55,12 +53,12 @@
         roles: ((options.roles === null || typeof options.roles === 'undefined') ? service.defaultRoles : options.roles),
         position: options.position || 0,
         items: [],
-        shouldRender: shouldRender
+        shouldRender
       });
 
       // Add submenu items
       if (options.items) {
-        options.items.forEach(function (subMenuItem) {
+        options.items.forEach(subMenuItem => {
           service.addSubMenuItem(menuId, options.state, subMenuItem);
         });
       }
@@ -77,16 +75,14 @@
       service.validateMenuExistence(menuId);
 
       // Search for menu item
-      service.menus[menuId].items.filter(function (item) {
-        return item.state === parentItemState;
-      }).forEach(function (item) {
+      service.menus[menuId].items.filter(item => item.state === parentItemState).forEach(item => {
         item.items.push({
           title: options.title || '',
           state: options.state || '',
           params: options.params || {},
           roles: ((options.roles === null || typeof options.roles === 'undefined') ? item.roles : options.roles),
           position: options.position || 0,
-          shouldRender: shouldRender
+          shouldRender
         });
       });
 
@@ -114,7 +110,7 @@
           return false;
         }
 
-        var matchingRoles = user.roles.filter(function (userRole) {
+        const matchingRoles = user.roles.filter(function (userRole) {
           return this.roles.indexOf(userRole) !== -1;
         }, this);
 
@@ -141,9 +137,7 @@
       service.validateMenuExistence(menuId);
 
       // Filter out menu items that do not match the current menu item state.
-      service.menus[menuId].items = service.menus[menuId].items.filter(function (item) {
-        return item.state !== menuItemState;
-      });
+      service.menus[menuId].items = service.menus[menuId].items.filter(item => item.state !== menuItemState);
 
       // Return the menu object
       return service.menus[menuId];
@@ -155,10 +149,8 @@
       service.validateMenuExistence(menuId);
 
       // Filter out sub-menu items that do not match the current subMenuItemState
-      service.menus[menuId].items.forEach(function (parentMenuItem) {
-        parentMenuItem.items = parentMenuItem.items.filter(function (subMenuItem) {
-          return subMenuItem.state !== subMenuItemState;
-        });
+      service.menus[menuId].items.forEach(parentMenuItem => {
+        parentMenuItem.items = parentMenuItem.items.filter(subMenuItem => subMenuItem.state !== subMenuItemState);
       });
 
       // Return the menu object
@@ -176,4 +168,4 @@
       return true;
     }
   }
-}());
+})());

@@ -1,6 +1,4 @@
-(function () {
-  'use strict';
-
+((() => {
   angular
     .module('chat')
     .controller('ChatController', ChatController);
@@ -8,7 +6,7 @@
   ChatController.$inject = ['$scope', '$state', 'Authentication', 'Socket'];
 
   function ChatController($scope, $state, Authentication, Socket) {
-    var vm = this;
+    const vm = this;
 
     vm.messages = [];
     vm.messageText = '';
@@ -28,12 +26,12 @@
       }
 
       // Add an event listener to the 'chatMessage' event
-      Socket.on('chatMessage', function (message) {
+      Socket.on('chatMessage', message => {
         vm.messages.unshift(message);
       });
 
       // Remove the event listener when the controller instance is destroyed
-      $scope.$on('$destroy', function () {
+      $scope.$on('$destroy', () => {
         Socket.removeListener('chatMessage');
       });
     }
@@ -41,7 +39,7 @@
     // Create a controller method for sending messages
     function sendMessage() {
       // Create a new message object
-      var message = {
+      const message = {
         text: vm.messageText
       };
 
@@ -52,4 +50,4 @@
       vm.messageText = '';
     }
   }
-}());
+})());

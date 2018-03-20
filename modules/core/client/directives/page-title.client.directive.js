@@ -1,15 +1,13 @@
-(function () {
-  'use strict';
-
+((() => {
   angular.module('core')
     .directive('pageTitle', pageTitle);
 
   pageTitle.$inject = ['$rootScope', '$interpolate', '$state'];
 
   function pageTitle($rootScope, $interpolate, $state) {
-    var directive = {
+    const directive = {
       restrict: 'A',
-      link: link
+      link
     };
 
     return directive;
@@ -18,11 +16,11 @@
       $rootScope.$on('$stateChangeSuccess', listener);
 
       function listener(event, toState) {
-        var applicationCoreTitle = 'MEAN.js',
-          separator = ' - ',
-          stateTitle = applicationCoreTitle + separator;
+        const applicationCoreTitle = 'MEAN.js';
+        const separator = ' - ';
+        let stateTitle = applicationCoreTitle + separator;
 
-        toState.name.split('.').forEach(function (value, index) {
+        toState.name.split('.').forEach((value, index) => {
           stateTitle = stateTitle + value.charAt(0).toUpperCase() + value.slice(1) + separator;
         });
         if (toState.data && toState.data.pageTitle) {
@@ -33,4 +31,4 @@
       }
     }
   }
-}());
+})());

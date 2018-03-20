@@ -1,18 +1,17 @@
-'use strict';
-
 /**
  * Module dependencies
  */
-var mongoose = require('mongoose'),
-  Schema = mongoose.Schema,
-  path = require('path'),
-  config = require(path.resolve('./config/config')),
-  chalk = require('chalk');
+const mongoose = require('mongoose');
+
+const Schema = mongoose.Schema;
+const path = require('path');
+const config = require(path.resolve('./config/config'));
+const chalk = require('chalk');
 
 /**
  * Article Schema
  */
-var ArticleSchema = new Schema({
+const ArticleSchema = new Schema({
   created: {
     type: Date,
     default: Date.now
@@ -43,24 +42,20 @@ mongoose.model('Article', ArticleSchema);
 * and provided options.
 */
 function seed(doc, options) {
-  var Article = mongoose.model('Article');
+  const Article = mongoose.model('Article');
 
-  return new Promise(function (resolve, reject) {
+  return new Promise((resolve, reject) => {
 
     skipDocument()
       .then(findAdminUser)
       .then(add)
-      .then(function (response) {
-        return resolve(response);
-      })
-      .catch(function (err) {
-        return reject(err);
-      });
+      .then(response => resolve(response))
+      .catch(err => reject(err));
 
     function findAdminUser(skip) {
-      var User = mongoose.model('User');
+      const User = mongoose.model('User');
 
-      return new Promise(function (resolve, reject) {
+      return new Promise((resolve, reject) => {
         if (skip) {
           return resolve(true);
         }
@@ -69,7 +64,7 @@ function seed(doc, options) {
           .findOne({
             roles: { $in: ['admin'] }
           })
-          .exec(function (err, admin) {
+          .exec((err, admin) => {
             if (err) {
               return reject(err);
             }
@@ -82,12 +77,12 @@ function seed(doc, options) {
     }
 
     function skipDocument() {
-      return new Promise(function (resolve, reject) {
+      return new Promise((resolve, reject) => {
         Article
           .findOne({
             title: doc.title
           })
-          .exec(function (err, existing) {
+          .exec((err, existing) => {
             if (err) {
               return reject(err);
             }
@@ -102,7 +97,7 @@ function seed(doc, options) {
 
             // Remove Article (overwrite)
 
-            existing.remove(function (err) {
+            existing.remove(err => {
               if (err) {
                 return reject(err);
               }
@@ -114,16 +109,16 @@ function seed(doc, options) {
     }
 
     function add(skip) {
-      return new Promise(function (resolve, reject) {
+      return new Promise((resolve, reject) => {
         if (skip) {
           return resolve({
             message: chalk.yellow('Database Seeding: Article\t' + doc.title + ' skipped')
           });
         }
 
-        var article = new Article(doc);
+        const article = new Article(doc);
 
-        article.save(function (err) {
+        article.save(err => {
           if (err) {
             return reject(err);
           }

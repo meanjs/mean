@@ -1,33 +1,32 @@
-'use strict';
-
 /**
  * Module dependencies
  */
-var passport = require('passport'),
-  User = require('mongoose').model('User'),
-  path = require('path'),
-  config = require(path.resolve('./config/config'));
+const passport = require('passport');
+
+const User = require('mongoose').model('User');
+const path = require('path');
+const config = require(path.resolve('./config/config'));
 
 /**
  * Module init function
  */
-module.exports = function (app) {
+module.exports = app => {
   // Serialize sessions
-  passport.serializeUser(function (user, done) {
+  passport.serializeUser((user, done) => {
     done(null, user.id);
   });
 
   // Deserialize sessions
-  passport.deserializeUser(function (id, done) {
+  passport.deserializeUser((id, done) => {
     User.findOne({
       _id: id
-    }, '-salt -password', function (err, user) {
+    }, '-salt -password', (err, user) => {
       done(err, user);
     });
   });
 
   // Initialize strategies
-  config.utils.getGlobbedPaths(path.join(__dirname, './strategies/**/*.js')).forEach(function (strategy) {
+  config.utils.getGlobbedPaths(path.join(__dirname, './strategies/**/*.js')).forEach(strategy => {
     require(path.resolve(strategy))(config);
   });
 

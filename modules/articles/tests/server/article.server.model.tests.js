@@ -1,25 +1,25 @@
-'use strict';
-
 /**
  * Module dependencies.
  */
-var should = require('should'),
-  mongoose = require('mongoose'),
-  User = mongoose.model('User'),
-  Article = mongoose.model('Article');
+const should = require('should');
+
+const mongoose = require('mongoose');
+const User = mongoose.model('User');
+const Article = mongoose.model('Article');
 
 /**
  * Globals
  */
-var user,
-  article;
+let user;
+
+let article;
 
 /**
  * Unit tests
  */
-describe('Article Model Unit Tests:', function () {
+describe('Article Model Unit Tests:', () => {
 
-  beforeEach(function (done) {
+  beforeEach(done => {
     user = new User({
       firstName: 'Full',
       lastName: 'Name',
@@ -31,11 +31,11 @@ describe('Article Model Unit Tests:', function () {
     });
 
     user.save()
-      .then(function () {
+      .then(() => {
         article = new Article({
           title: 'Article Title',
           content: 'Article Content',
-          user: user
+          user
         });
 
         done();
@@ -43,26 +43,26 @@ describe('Article Model Unit Tests:', function () {
       .catch(done);
   });
 
-  describe('Method Save', function () {
+  describe('Method Save', () => {
     it('should be able to save without problems', function (done) {
       this.timeout(10000);
-      article.save(function (err) {
+      article.save(err => {
         should.not.exist(err);
         return done();
       });
     });
 
-    it('should be able to show an error when try to save without title', function (done) {
+    it('should be able to show an error when try to save without title', done => {
       article.title = '';
 
-      article.save(function (err) {
+      article.save(err => {
         should.exist(err);
         return done();
       });
     });
   });
 
-  afterEach(function (done) {
+  afterEach(done => {
     Article.remove().exec()
       .then(User.remove().exec())
       .then(done())
