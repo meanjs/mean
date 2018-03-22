@@ -18,11 +18,12 @@ var _ = require('lodash'),
     }
   }),
   pngquant = require('imagemin-pngquant'),
-  wiredep = require('wiredep').stream,
   path = require('path'),
   endOfLine = require('os').EOL,
   del = require('del'),
-  semver = require('semver');
+  semver = require('semver'),
+  browserify = require('browserify'),
+  through2 = require('through2');
 
 // Local settings
 var changedTestFiles = [];
@@ -143,7 +144,7 @@ gulp.task('uglify', function () {
     defaultAssets.client.js,
     defaultAssets.client.templates
   );
-  del(['public/dist/*']);
+  del(['public/dist/application*']);
 
   return gulp.src(assets)
     .pipe(plugins.ngAnnotate())
@@ -193,46 +194,37 @@ gulp.task('imagemin', function () {
     .pipe(gulp.dest('public/dist/img'));
 });
 
-// wiredep task to default
-gulp.task('wiredep', function () {
-  return gulp.src('config/assets/default.js')
-    .pipe(wiredep({
-      ignorePath: '../../'
+// Vendor JS task
+gulp.task('vendor:js', function () {
+  if (process.env.NODE_ENV === 'production') del(['public/dist/vendor-*.js']);
+  else del(['public/dist/vendor.min.js']);
+
+  return gulp.src(defaultAssets.client.lib.js)
+    .pipe(through2.obj(function (file, enc, next) {
+      browserify(file)
+        .bundle(function (err, res) {
+          file.contents = res;
+          next(null, file);
+        });
     }))
-    .pipe(gulp.dest('config/assets/'));
+    .on('error', function (error) {
+      console.log(error.stack);
+      this.emit('end');
+    })
+    .pipe(plugins.concat('vendor.min.js'))
+    .pipe(plugins.ifEnv('production', plugins.rev()))
+    .pipe(gulp.dest('public/dist'));
 });
 
-// wiredep task to production
-gulp.task('wiredep:prod', function () {
-  return gulp.src('config/assets/production.js')
-    .pipe(wiredep({
-      ignorePath: '../../',
-      fileTypes: {
-        js: {
-          replace: {
-            css: function (filePath) {
-              var minFilePath = filePath.replace('.css', '.min.css');
-              var fullPath = path.join(process.cwd(), minFilePath);
-              if (!fs.existsSync(fullPath)) {
-                return '\'' + filePath + '\',';
-              } else {
-                return '\'' + minFilePath + '\',';
-              }
-            },
-            js: function (filePath) {
-              var minFilePath = filePath.replace('.js', '.min.js');
-              var fullPath = path.join(process.cwd(), minFilePath);
-              if (!fs.existsSync(fullPath)) {
-                return '\'' + filePath + '\',';
-              } else {
-                return '\'' + minFilePath + '\',';
-              }
-            }
-          }
-        }
-      }
-    }))
-    .pipe(gulp.dest('config/assets/'));
+// Vendor css task
+gulp.task('vendor:css', function () {
+  if (process.env.NODE_ENV === 'production') del(['public/dist/vendor-*.css']);
+  else del(['public/dist/vendor.min.css']);
+
+  return gulp.src(defaultAssets.client.lib.css)
+    .pipe(plugins.concat('vendor.min.css'))
+    .pipe(plugins.ifEnv('production', plugins.rev()))
+    .pipe(gulp.dest('public/dist'));
 });
 
 // Copy local development environment config example
@@ -450,13 +442,18 @@ gulp.task('lint', function (done) {
 });
 
 // Lint project files and minify them into two production files.
+gulp.task('vendor', function (done) {
+  runSequence('vendor:js', 'vendor:css', done);
+});
+
+// Lint project files and minify them into two production files.
 gulp.task('build', function (done) {
-  runSequence('env:dev', 'wiredep:prod', 'lint', ['uglify', 'cssmin'], done);
+  runSequence('env:dev', 'lint', ['uglify', 'cssmin'], done);
 });
 
 // Run the project tests
 gulp.task('test', function (done) {
-  runSequence('env:test', 'test:server', 'karma', 'nodemon', 'protractor', done);
+  runSequence('env:test', 'vendor', 'test:server', 'karma', 'nodemon', 'protractor', done);
 });
 
 gulp.task('test:server', function (done) {
@@ -469,25 +466,25 @@ gulp.task('test:server:watch', function (done) {
 });
 
 gulp.task('test:client', function (done) {
-  runSequence('env:test', 'lint', 'dropdb', 'karma', done);
+  runSequence('env:test', 'vendor', 'lint', 'dropdb', 'karma', done);
 });
 
 gulp.task('test:e2e', function (done) {
-  runSequence('env:test', 'lint', 'dropdb', 'nodemon', 'protractor', done);
+  runSequence('env:test', 'vendor', 'lint', 'dropdb', 'nodemon', 'protractor', done);
 });
 
 gulp.task('test:coverage', function (done) {
-  runSequence('env:test', ['copyLocalEnvConfig', 'makeUploadsDir', 'dropdb'], 'lint', 'mocha:coverage', 'karma:coverage', done);
+  runSequence('env:test', ['copyLocalEnvConfig', 'makeUploadsDir', 'dropdb'], 'vendor', 'lint', 'mocha:coverage', 'karma:coverage', done);
 });
 
 // Run the project in development mode with node debugger enabled
 gulp.task('default', function (done) {
-  runSequence('env:dev', ['copyLocalEnvConfig', 'makeUploadsDir'], 'lint', ['nodemon', 'watch'], done);
+  runSequence('env:dev', ['copyLocalEnvConfig', 'makeUploadsDir'], 'vendor', 'lint', ['nodemon', 'watch'], done);
 });
 
 // Run the project in production mode
 gulp.task('prod', function (done) {
-  runSequence(['copyLocalEnvConfig', 'makeUploadsDir', 'templatecache'], 'build', 'env:prod', 'lint', ['nodemon-nodebug', 'watch'], done);
+  runSequence(['copyLocalEnvConfig', 'makeUploadsDir', 'templatecache'], 'build', 'env:prod', 'vendor', 'lint', ['nodemon-nodebug', 'watch'], done);
 });
 
 // Run Mongo Seed with default environment config
