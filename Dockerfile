@@ -38,7 +38,7 @@ RUN sudo apt-get install -yq nodejs \
  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Install MEAN.JS Prerequisites
-RUN npm install --quiet -g gulp bower yo mocha karma-cli pm2 && npm cache clean
+RUN npm install --quiet -g gulp yarn yo mocha karma-cli pm2 && npm cache clean
 
 RUN mkdir -p /opt/mean.js/public/lib
 WORKDIR /opt/mean.js
@@ -47,16 +47,11 @@ WORKDIR /opt/mean.js
 # and utilities docker container cache to not needing to rebuild
 # and install node_modules/ everytime we build the docker, but only
 # when the local package.json file changes.
-# Install npm packages
+# Install yarn packages
 COPY package.json /opt/mean.js/package.json
-RUN npm install --quiet && npm cache clean
-
-# Install bower packages
-COPY bower.json /opt/mean.js/bower.json
-COPY .bowerrc /opt/mean.js/.bowerrc
-RUN bower install --quiet --allow-root --config.interactive=false
+RUN yarn --silent && yarn cache clean
 
 COPY . /opt/mean.js
 
 # Run MEAN.JS server
-CMD npm install && npm start
+CMD yarn install && npm start
