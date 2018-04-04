@@ -19,11 +19,13 @@ const plugins = gulpLoadPlugins({
 });
 
 const pngquant = require('imagemin-pngquant');
-const wiredep = require('wiredep').stream;
 const path = require('path');
 const endOfLine = require('os').EOL;
 const del = require('del');
 const semver = require('semver');
+const webpack = require('webpack');
+const webpackStream = require('webpack-stream');
+const named = require('vinyl-named');
 
 // Local settings
 let changedTestFiles = [];
@@ -160,6 +162,30 @@ gulp.task('babel', () => {
     .pipe(gulp.dest('public/dist'));
 });
 
+// Vendor JS task
+gulp.task('vendor:js', function () {
+  if (process.env.NODE_ENV === 'production') del(['public/dist/vendor-*.js']);
+  else del(['public/dist/vendor.min.js']);
+
+  return gulp.src(defaultAssets.client.lib.js)
+    .pipe(named())
+    .pipe(webpackStream({}, webpack))
+    .pipe(plugins.concat('vendor.min.js'))
+    .pipe(plugins.ifEnv('production', plugins.rev()))
+    .pipe(gulp.dest('public/dist'));
+});
+
+// Vendor css task
+gulp.task('vendor:css', function () {
+  if (process.env.NODE_ENV === 'production') del(['public/dist/vendor-*.css']);
+  else del(['public/dist/vendor.min.css']);
+
+  return gulp.src(defaultAssets.client.lib.css)
+    .pipe(plugins.concat('vendor.min.css'))
+    .pipe(plugins.ifEnv('production', plugins.rev()))
+    .pipe(gulp.dest('public/dist'));
+});
+
 // CSS minifying task
 gulp.task('cssmin', () => {
   if (process.env.NODE_ENV === 'production') del(['public/dist/application-*.css']);
@@ -192,44 +218,6 @@ gulp.task('imagemin', () => gulp.src(defaultAssets.client.img)
     use: [pngquant()]
   }))
   .pipe(gulp.dest('public/dist/img')));
-
-// wiredep task to default
-gulp.task('wiredep', () => gulp.src('config/assets/default.js')
-  .pipe(wiredep({
-    ignorePath: '../../'
-  }))
-  .pipe(gulp.dest('config/assets/')));
-
-// wiredep task to production
-gulp.task('wiredep:prod', () => gulp.src('config/assets/production.js')
-  .pipe(wiredep({
-    ignorePath: '../../',
-    fileTypes: {
-      js: {
-        replace: {
-          css(filePath) {
-            const minFilePath = filePath.replace('.css', '.min.css');
-            const fullPath = path.join(process.cwd(), minFilePath);
-            if (!fs.existsSync(fullPath)) {
-              return '\'' + filePath + '\',';
-            } else {
-              return '\'' + minFilePath + '\',';
-            }
-          },
-          js(filePath) {
-            const minFilePath = filePath.replace('.js', '.min.js');
-            const fullPath = path.join(process.cwd(), minFilePath);
-            if (!fs.existsSync(fullPath)) {
-              return '\'' + filePath + '\',';
-            } else {
-              return '\'' + minFilePath + '\',';
-            }
-          }
-        }
-      }
-    }
-  }))
-  .pipe(gulp.dest('config/assets/')));
 
 // Copy local development environment config example
 gulp.task('copyLocalEnvConfig', () => {
@@ -434,14 +422,19 @@ gulp.task('lint', done => {
   runSequence('less', 'sass', ['csslint', 'eslint'], done);
 });
 
-// Lint and minify project files into two files, and switch client side to es5
-gulp.task('build', done => {
-  runSequence('wiredep:prod', 'lint', 'babel', ['cssmin'], done);
+// Lint project files and minify them into two production files.
+gulp.task('vendor', function (done) {
+  runSequence('vendor:js', 'vendor:css', done);
+});
+
+// Lint project files and minify them into two production files.
+gulp.task('build', function (done) {
+  runSequence('env:dev', 'lint', 'babel', ['cssmin'], done);
 });
 
 // Run the project tests
-gulp.task('test', done => {
-  runSequence('env:test', 'test:server', 'karma', 'nodemon', 'protractor', done);
+gulp.task('test', function (done) {
+  runSequence('env:test', 'vendor', 'test:server', 'karma', 'nodemon', 'protractor', done);
 });
 
 gulp.task('test:server', done => {
@@ -454,25 +447,25 @@ gulp.task('test:server:watch', done => {
 });
 
 gulp.task('test:client', done => {
-  runSequence('env:test', 'build', 'dropdb', 'karma', done);
+  runSequence('env:test', 'vendor', 'build', 'dropdb', 'karma', done);
 });
 
 gulp.task('test:e2e', done => {
-  runSequence('env:test', 'build', 'dropdb', 'nodemon', 'protractor', done);
+  runSequence('env:test', 'vendor', 'build', 'dropdb', 'nodemon', 'protractor', done);
 });
 
 gulp.task('test:coverage', done => {
-  runSequence('env:test', ['copyLocalEnvConfig', 'makeUploadsDir', 'dropdb'], 'build', 'mocha:coverage', 'karma:coverage', done);
+  runSequence('env:test', ['copyLocalEnvConfig', 'makeUploadsDir', 'dropdb'], 'vendor', 'build', 'mocha:coverage', 'karma:coverage', done);
 });
 
 // Run the project in development mode with node debugger enabled
 gulp.task('default', done => {
-  runSequence('env:dev', ['copyLocalEnvConfig', 'makeUploadsDir'], 'build', ['nodemon', 'watch'], done);
+  runSequence('env:dev', ['copyLocalEnvConfig', 'makeUploadsDir'], 'vendor', 'build', ['nodemon', 'watch'], done);
 });
 
 // Run the project in production mode
 gulp.task('prod', done => {
-  runSequence('env:prod', ['copyLocalEnvConfig', 'makeUploadsDir', 'templatecache'], 'build', ['nodemon-nodebug'], done);
+  runSequence('env:prod', ['copyLocalEnvConfig', 'makeUploadsDir', 'templatecache'], 'vendor', 'build', ['nodemon-nodebug'], done);
 });
 
 // Run Mongo Seed with default environment config

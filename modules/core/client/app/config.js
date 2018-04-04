@@ -3,9 +3,9 @@
 
   const service = {
     applicationEnvironment: window.env,
-    applicationModuleName,
-    applicationModuleVendorDependencies: ['ngResource', 'ngAnimate', 'ngMessages', 'ui.router', 'ui.bootstrap', 'ngFileUpload', 'ui-notification'],
-    registerModule
+    applicationModuleName: applicationModuleName,
+    applicationModuleVendorDependencies: ['ngResource', 'ngMessages', 'ui.router', 'ui.bootstrap', 'angularFileUpload', 'ui-notification'],
+    registerModule: registerModule
   };
 
   window.ApplicationConfiguration = service;

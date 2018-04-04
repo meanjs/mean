@@ -4,28 +4,32 @@ module.exports = {
   client: {
     lib: {
       css: [
-        // bower:css
-        'public/lib/angular-ui-notification/dist/angular-ui-notification.min.css',
-        'public/lib/bootstrap/dist/css/bootstrap.min.css',
-        'public/lib/bootstrap/dist/css/bootstrap-theme.min.css',
-        // endbower
+        // yarn:css
+        'node_modules/angular-ui-notification/dist/angular-ui-notification.min.css',
+        'node_modules/bootstrap/dist/css/bootstrap.min.css',
+        'node_modules/bootstrap/dist/css/bootstrap-theme.min.css',
+        // endyarn
       ],
       js: [
-        // bower:js
-        'public/lib/angular/angular.min.js',
-        'public/lib/angular-animate/angular-animate.min.js',
-        'public/lib/angular-bootstrap/ui-bootstrap-tpls.min.js',
-        'public/lib/angular-messages/angular-messages.min.js',
-        'public/lib/angular-mocks/angular-mocks.js',
-        'public/lib/angular-resource/angular-resource.min.js',
-        'public/lib/angular-ui-notification/dist/angular-ui-notification.min.js',
-        'public/lib/angular-ui-router/release/angular-ui-router.min.js',
-        'public/lib/ng-file-upload/ng-file-upload.min.js',
-        'public/lib/owasp-password-strength-test/owasp-password-strength-test.js',
-        // endbower
+        // yarn:js
+        'node_modules/angular/angular.min.js',
+        'node_modules/angular-animate/angular-animate.min.js',
+        'node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js',
+        'node_modules/angular-file-upload/dist/angular-file-upload.min.js',
+        'node_modules/angular-messages/angular-messages.min.js',
+        'node_modules/angular-mocks/angular-mocks.js',
+        'node_modules/angular-resource/angular-resource.min.js',
+        'node_modules/angular-ui-notification/dist/angular-ui-notification.min.js',
+        'node_modules/angular-ui-router/release/angular-ui-router.min.js',
+        'node_modules/owasp-password-strength-test/owasp-password-strength-test.js',
+        // endyarn
       ]
     },
     css: 'public/dist/application-*.min.css',
-    js: 'public/dist/application-*.min.js'
+    js: 'public/dist/application-*.min.js',
+    vendor: {
+      css: 'public/dist/vendor-*.min.css',
+      js: 'public/dist/vendor-*.min.js'
+    }
   }
 };
