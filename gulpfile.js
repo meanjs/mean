@@ -22,8 +22,9 @@ var _ = require('lodash'),
   endOfLine = require('os').EOL,
   del = require('del'),
   semver = require('semver'),
-  browserify = require('browserify'),
-  through2 = require('through2');
+  webpack = require('webpack'),
+  webpackStream = require('webpack-stream'),
+  named = require('vinyl-named');
 
 // Local settings
 var changedTestFiles = [];
@@ -200,17 +201,8 @@ gulp.task('vendor:js', function () {
   else del(['public/dist/vendor.min.js']);
 
   return gulp.src(defaultAssets.client.lib.js)
-    .pipe(through2.obj(function (file, enc, next) {
-      browserify(file)
-        .bundle(function (err, res) {
-          file.contents = res;
-          next(null, file);
-        });
-    }))
-    .on('error', function (error) {
-      console.log(error.stack);
-      this.emit('end');
-    })
+    .pipe(named())
+    .pipe(webpackStream({}, webpack))
     .pipe(plugins.concat('vendor.min.js'))
     .pipe(plugins.ifEnv('production', plugins.rev()))
     .pipe(gulp.dest('public/dist'));

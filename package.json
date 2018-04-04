@@ -46,7 +46,6 @@
     "aws-sdk": "^2.123.0",
     "body-parser": "^1.18.2",
     "bootstrap": "3.3.6",
-    "browserify": "^16.1.1",
     "chalk": "~2.1.0",
     "compression": "^1.7.1",
     "connect-flash": "~0.1.1",
@@ -80,7 +79,7 @@
     "helmet": "^3.8.2",
     "imagemin-pngquant": "~5.0.0",
     "jasmine-core": "~2.7.0",
-    "jquery": "1.9.1",
+    "jquery": "^3.3.1",
     "lodash": "~4.17.4",
     "lusca": "~1.5.1",
     "method-override": "^2.3.10",
@@ -101,8 +100,8 @@
     "run-sequence": "~2.1.0",
     "serve-favicon": "^2.4.5",
     "socket.io": "^2.0.3",
-    "through2": "^2.0.3",
     "validator": "~8.0.0",
+    "webpack": "^4.5.0",
     "winston": "~2.3.1"
   },
   "devDependencies": {
@@ -118,6 +117,8 @@
     "karma-ng-html2js-preprocessor": "~1.0.0",
     "semver": "~5.4.1",
     "should": "~11.2.1",
-    "supertest": "~3.0.0"
+    "supertest": "~3.0.0",
+    "vinyl-named": "^1.1.0",
+    "webpack-stream": "^4.0.2"
   }
 }
