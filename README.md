@@ -61,7 +61,7 @@ $ npm install
 This command does a few things:
 * First it will install the dependencies needed for the application to run.
 * If you're running in a development environment, it will then also install development dependencies needed for testing and running your application.
-* When the npm packages install process is over, npm will initiate a yarn install command to install all the front-end modules needed for the application
+* When the npm packages install process is over, npm will initiate a yarn install command to install all the modules needed for the application in node_modules folder. (Webpack will create a client vendor.js file from this for every builds)
 * To update these packages later on, just run `npm update`
 
 ## Running Your Application

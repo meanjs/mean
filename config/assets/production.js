@@ -21,12 +21,12 @@ module.exports = {
         'node_modules/angular-resource/angular-resource.min.js',
         'node_modules/angular-ui-notification/dist/angular-ui-notification.min.js',
         'node_modules/angular-ui-router/release/angular-ui-router.min.js',
-        'node_modules/owasp-password-strength-test/owasp-password-strength-test.js',
+        'node_modules/owasp-password-strength-test/owasp-password-strength-test.js'
         // endyarn
       ]
     },
-    css: 'public/dist/application-*.min.css',
-    js: 'public/dist/application-*.min.js',
+    css: 'public/dist/bundle-*.min.css',
+    js: 'public/dist/bundle-*.min.js',
     vendor: {
       css: 'public/dist/vendor-*.min.css',
       js: 'public/dist/vendor-*.min.js'

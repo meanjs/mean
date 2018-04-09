@@ -21,7 +21,7 @@ module.exports = {
         'node_modules/angular-resource/angular-resource.js',
         'node_modules/angular-ui-notification/dist/angular-ui-notification.js',
         'node_modules/angular-ui-router/release/angular-ui-router.js',
-        'node_modules/owasp-password-strength-test/owasp-password-strength-test.js',
+        '/node_modules/owasp-password-strength-test/owasp-password-strength-test.js'
         // endyarn
       ],
       tests: ['node_modules/angular-mocks/angular-mocks.js']
@@ -48,11 +48,7 @@ module.exports = {
       'modules/**/*/img/**/*.svg'
     ],
     views: ['modules/*/client/views/**/*.html'],
-    templates: ['build/templates.js'],
-    vendor: {
-      css: 'public/dist/vendor.min.css',
-      js: 'public/dist/vendor.min.js'
-    }
+    templates: ['build/templates.js']
   },
   server: {
     gulpConfig: ['gulpfile.js'],

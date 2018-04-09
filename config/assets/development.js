@@ -1,6 +1,10 @@
 module.exports = {
   client: {
-    css: 'public/dist/application.min.css',
-    js: 'public/dist/application.min.js'
+    css: 'public/dist/bundle.min.css',
+    js: 'public/dist/bundle.min.js',
+    vendor: {
+      css: 'public/dist/vendor.min.css',
+      js: 'public/dist/vendor.min.js'
+    }
   }
 };

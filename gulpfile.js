@@ -77,11 +77,11 @@ gulp.task('watch', () => {
   gulp.watch(defaultAssets.server.allJS, ['eslint']).on('change', plugins.refresh.changed);
   gulp.watch(defaultAssets.client.sass, ['sass', 'csslint']).on('change', plugins.refresh.changed);
   gulp.watch(defaultAssets.client.less, ['less', 'csslint']).on('change', plugins.refresh.changed);
-  gulp.watch(defaultAssets.client.js, ['eslint', 'babel']);
-  gulp.watch(defaultAssets.client.css, ['csslint', 'cssmin']);
-  gulp.watch('public/dist/application*').on('change', plugins.refresh.changed);
+  gulp.watch(defaultAssets.client.js, ['eslint', 'bundle:js']);
+  gulp.watch(defaultAssets.client.css, ['csslint', 'bundle:css']);
+  gulp.watch('public/dist/bundle*').on('change', plugins.refresh.changed);
 
-  if (process.env.NODE_ENV === 'e') {
+  if (process.env.NODE_ENV === 'production') {
     gulp.watch(defaultAssets.server.gulpConfig, ['templatecache', 'eslint']);
     gulp.watch(defaultAssets.client.views, ['templatecache']).on('change', plugins.refresh.changed);
   } else {
@@ -137,15 +137,15 @@ gulp.task('eslint', () => {
     .pipe(plugins.eslint.format());
 });
 
-// JS babel task
-gulp.task('babel', () => {
+// JS bundle task
+gulp.task('bundle:js', () => {
   const assets = _.union(
     defaultAssets.client.js,
     defaultAssets.client.templates
   );
 
-  if (process.env.NODE_ENV === 'production') del(['public/dist/application-*.js']);
-  else del(['public/dist/application.min.js']);
+  if (process.env.NODE_ENV === 'production') del(['public/dist/bundle-*.js']);
+  else del(['public/dist/bundle.min.js']);
 
   return gulp.src(assets)
     .pipe(plugins.babel({
@@ -157,43 +157,49 @@ gulp.task('babel', () => {
       },
       plugins: ['angularjs-annotate']
     }))
-    .pipe(plugins.concat('application.min.js'))
+    .pipe(plugins.concat('bundle.min.js'))
     .pipe(plugins.ifEnv('production', plugins.rev()))
     .pipe(gulp.dest('public/dist'));
+
 });
 
-// Vendor JS task
-gulp.task('vendor:js', function () {
+// JS bundle task
+gulp.task('vendor:js', () => {
   if (process.env.NODE_ENV === 'production') del(['public/dist/vendor-*.js']);
   else del(['public/dist/vendor.min.js']);
 
   return gulp.src(defaultAssets.client.lib.js)
     .pipe(named())
-    .pipe(webpackStream({}, webpack))
+    .pipe(webpackStream())
     .pipe(plugins.concat('vendor.min.js'))
     .pipe(plugins.ifEnv('production', plugins.rev()))
     .pipe(gulp.dest('public/dist'));
 });
 
-// Vendor css task
-gulp.task('vendor:css', function () {
+// CSS bundle task
+gulp.task('bundle:css', () => {
+  const assets = _.union(
+    defaultAssets.client.css,
+    defaultAssets.client.templates
+  );
+
+  if (process.env.NODE_ENV === 'production') del(['public/dist/bundle-*.css']);
+  else del(['public/dist/bundle.min.css']);
+
+  return gulp.src(assets)
+    .pipe(plugins.ifEnv('production', plugins.csso()))
+    .pipe(plugins.concat('bundle.min.css'))
+    .pipe(plugins.ifEnv('production', plugins.rev()))
+    .pipe(gulp.dest('public/dist'));
+});
+
+// CSS vendor task
+gulp.task('vendor:css', () => {
   if (process.env.NODE_ENV === 'production') del(['public/dist/vendor-*.css']);
   else del(['public/dist/vendor.min.css']);
 
   return gulp.src(defaultAssets.client.lib.css)
     .pipe(plugins.concat('vendor.min.css'))
-    .pipe(plugins.ifEnv('production', plugins.rev()))
-    .pipe(gulp.dest('public/dist'));
-});
-
-// CSS minifying task
-gulp.task('cssmin', () => {
-  if (process.env.NODE_ENV === 'production') del(['public/dist/application-*.css']);
-  else del(['public/dist/application.min.css']);
-
-  return gulp.src(defaultAssets.client.css)
-    .pipe(plugins.ifEnv('production', plugins.csso()))
-    .pipe(plugins.concat('application.min.css'))
     .pipe(plugins.ifEnv('production', plugins.rev()))
     .pipe(gulp.dest('public/dist'));
 });
@@ -422,19 +428,19 @@ gulp.task('lint', done => {
   runSequence('less', 'sass', ['csslint', 'eslint'], done);
 });
 
-// Lint project files and minify them into two production files.
-gulp.task('vendor', function (done) {
-  runSequence('vendor:js', 'vendor:css', done);
+// Lint babel and minify project and libs them into two production files.
+gulp.task('bundle', function (done) {
+  runSequence('bundle:js', 'vendor:js', 'bundle:css', 'vendor:css', done);
 });
 
 // Lint project files and minify them into two production files.
 gulp.task('build', function (done) {
-  runSequence('env:dev', 'lint', 'babel', ['cssmin'], done);
+  runSequence('env:dev', 'lint', 'bundle', done);
 });
 
 // Run the project tests
 gulp.task('test', function (done) {
-  runSequence('env:test', 'vendor', 'test:server', 'karma', 'nodemon', 'protractor', done);
+  runSequence('env:test', 'build', 'test:server', 'karma', 'nodemon', 'protractor', done);
 });
 
 gulp.task('test:server', done => {
@@ -447,25 +453,25 @@ gulp.task('test:server:watch', done => {
 });
 
 gulp.task('test:client', done => {
-  runSequence('env:test', 'vendor', 'build', 'dropdb', 'karma', done);
+  runSequence('env:test', 'build', 'dropdb', 'karma', done);
 });
 
 gulp.task('test:e2e', done => {
-  runSequence('env:test', 'vendor', 'build', 'dropdb', 'nodemon', 'protractor', done);
+  runSequence('env:test', 'build', 'dropdb', 'nodemon', 'protractor', done);
 });
 
 gulp.task('test:coverage', done => {
-  runSequence('env:test', ['copyLocalEnvConfig', 'makeUploadsDir', 'dropdb'], 'vendor', 'build', 'mocha:coverage', 'karma:coverage', done);
+  runSequence('env:test', ['copyLocalEnvConfig', 'makeUploadsDir', 'dropdb'], 'build', 'mocha:coverage', 'karma:coverage', done);
 });
 
 // Run the project in development mode with node debugger enabled
 gulp.task('default', done => {
-  runSequence('env:dev', ['copyLocalEnvConfig', 'makeUploadsDir'], 'vendor', 'build', ['nodemon', 'watch'], done);
+  runSequence('env:dev', ['copyLocalEnvConfig', 'makeUploadsDir'], 'build', ['nodemon', 'watch'], done);
 });
 
 // Run the project in production mode
 gulp.task('prod', done => {
-  runSequence('env:prod', ['copyLocalEnvConfig', 'makeUploadsDir', 'templatecache'], 'vendor', 'build', ['nodemon-nodebug'], done);
+  runSequence('env:prod', ['copyLocalEnvConfig', 'makeUploadsDir', 'templatecache'], 'build', ['nodemon-nodebug'], done);
 });
 
 // Run Mongo Seed with default environment config
