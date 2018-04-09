@@ -435,7 +435,7 @@ gulp.task('bundle', function (done) {
 
 // Lint project files and minify them into two production files.
 gulp.task('build', function (done) {
-  runSequence('env:dev', 'lint', 'bundle', done);
+  runSequence('lint', 'bundle', done);
 });
 
 // Run the project tests
