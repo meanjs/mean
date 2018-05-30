@@ -1,4 +1,4 @@
-((() => {
+(() => {
   // Setting up route
   angular
     .module('users.routes')
@@ -123,4 +123,4 @@
         }
       });
   }
-})());
+})();

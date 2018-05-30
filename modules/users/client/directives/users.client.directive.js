@@ -1,4 +1,4 @@
-﻿((() => {
+﻿(() => {
   // Users directive used to force lowercase input
   angular
     .module('users')
@@ -17,4 +17,4 @@
       element.css('text-transform', 'lowercase');
     }
   }
-})());
+})();

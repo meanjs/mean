@@ -20,8 +20,7 @@ module.exports = {
         'node_modules/angular-mocks/angular-mocks.js',
         'node_modules/angular-resource/angular-resource.js',
         'node_modules/angular-ui-notification/dist/angular-ui-notification.js',
-        'node_modules/angular-ui-router/release/angular-ui-router.js',
-        '/node_modules/owasp-password-strength-test/owasp-password-strength-test.js'
+        'node_modules/angular-ui-router/release/angular-ui-router.js'
         // endyarn
       ],
       tests: ['node_modules/angular-mocks/angular-mocks.js']

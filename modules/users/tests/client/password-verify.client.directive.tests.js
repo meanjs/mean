@@ -1,4 +1,4 @@
-((() => {
+(() => {
   // Password Verify Directive Spec
   describe('PasswordVerifyDirective', () => {
     // Initialize global variables
@@ -81,4 +81,4 @@
       expect(scope.form.$valid).toBeFalsy();
     });
   });
-})());
+})();

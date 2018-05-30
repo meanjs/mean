@@ -1,4 +1,4 @@
-((() => {
+(() => {
   angular
     .module('users')
     .controller('AuthenticationController', AuthenticationController);
@@ -87,4 +87,4 @@
       Notification.error({ message: response.data.message, title: '<i class="glyphicon glyphicon-remove"></i> Signin Error!', delay: 6000 });
     }
   }
-})());
+})();

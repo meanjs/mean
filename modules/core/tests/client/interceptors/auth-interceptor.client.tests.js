@@ -1,4 +1,4 @@
-((() => {
+(() => {
   describe('authInterceptor', () => {
     // Initialize global variables
     let authInterceptor;
@@ -79,4 +79,4 @@
       });
     });
   });
-})());
+})();

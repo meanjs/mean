@@ -1,4 +1,4 @@
-((() => {
+(() => {
   angular
     .module('core.admin')
     .run(menuConfig);
@@ -13,4 +13,4 @@
       roles: ['admin']
     });
   }
-})());
+})();

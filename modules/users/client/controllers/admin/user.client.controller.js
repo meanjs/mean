@@ -1,4 +1,4 @@
-((() => {
+(() => {
   angular
     .module('users.admin')
     .controller('UserController', UserController);
@@ -53,4 +53,4 @@
       return vm.user.username === vm.authentication.user.username;
     }
   }
-})());
+})();

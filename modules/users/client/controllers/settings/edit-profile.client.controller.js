@@ -1,4 +1,4 @@
-((() => {
+(() => {
   angular
     .module('users')
     .controller('EditProfileController', EditProfileController);
@@ -32,4 +32,4 @@
       });
     }
   }
-})());
+})();

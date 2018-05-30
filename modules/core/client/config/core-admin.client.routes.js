@@ -1,4 +1,4 @@
-((() => {
+(() => {
   angular
     .module('core.admin.routes')
     .config(routeConfig);
@@ -16,4 +16,4 @@
         }
       });
   }
-})());
+})();

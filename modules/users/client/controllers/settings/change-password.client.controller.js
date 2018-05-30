@@ -1,4 +1,4 @@
-((() => {
+(() => {
   angular
     .module('users')
     .controller('ChangePasswordController', ChangePasswordController);
@@ -36,4 +36,4 @@
       Notification.error({ message: response.data.message, title: '<i class="glyphicon glyphicon-remove"></i> Password change failed!' });
     }
   }
-})());
+})();

@@ -1,4 +1,4 @@
-﻿((() => {
+﻿(() => {
   angular
     .module('articles.admin.routes')
     .config(routeConfig);
@@ -61,4 +61,4 @@
   function newArticle(ArticlesService) {
     return new ArticlesService();
   }
-})());
+})();

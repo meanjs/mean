@@ -1,4 +1,4 @@
-((() => {
+(() => {
   angular
     .module('core')
     .controller('HeaderController', HeaderController);
@@ -20,4 +20,4 @@
       vm.isCollapsed = false;
     }
   }
-})());
+})();

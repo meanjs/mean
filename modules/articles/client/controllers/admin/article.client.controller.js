@@ -1,4 +1,4 @@
-((() => {
+(() => {
   angular
     .module('articles.admin')
     .controller('ArticlesAdminController', ArticlesAdminController);
@@ -46,4 +46,4 @@
       }
     }
   }
-})());
+})();

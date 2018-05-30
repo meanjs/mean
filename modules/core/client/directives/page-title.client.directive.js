@@ -1,4 +1,4 @@
-((() => {
+(() => {
   angular.module('core')
     .directive('pageTitle', pageTitle);
 
@@ -31,4 +31,4 @@
       }
     }
   }
-})());
+})();

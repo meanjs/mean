@@ -1,4 +1,4 @@
-((() => {
+(() => {
   // Authentication controller Spec
   describe('AuthenticationController', () => {
     // Initialize global variables
@@ -203,4 +203,4 @@
       });
     });
   });
-})());
+})();

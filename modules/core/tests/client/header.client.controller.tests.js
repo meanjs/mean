@@ -1,4 +1,4 @@
-((() => {
+(() => {
   describe('HeaderController', () => {
     // Initialize global variables
     let scope;
@@ -57,4 +57,4 @@
       });
     });
   });
-})());
+})();

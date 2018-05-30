@@ -1,4 +1,4 @@
-((() => {
+(() => {
   angular
     .module('core')
     .controller('ErrorController', ErrorController);
@@ -12,5 +12,5 @@
     // Display custom message if it was set
     if ($stateParams.message) vm.errorMessage = $stateParams.message;
   }
-})());
+})();
 

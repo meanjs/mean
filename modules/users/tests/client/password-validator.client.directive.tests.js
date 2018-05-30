@@ -1,4 +1,4 @@
-((() => {
+(() => {
   // Password Validator Directive Spec
   describe('PasswordValidatorDirective', () => {
     // Initialize global variables
@@ -203,4 +203,4 @@
       expect(scope.requirementsProgress).toEqual('100');
     });
   });
-})());
+})();

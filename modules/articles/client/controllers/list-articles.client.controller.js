@@ -1,4 +1,4 @@
-((() => {
+(() => {
   angular
     .module('articles')
     .controller('ArticlesListController', ArticlesListController);
@@ -10,4 +10,4 @@
 
     vm.articles = ArticlesService.query();
   }
-})());
+})();

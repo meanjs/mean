@@ -1,4 +1,4 @@
-﻿((() => {
+﻿(() => {
   describe('Articles Admin Controller Tests', () => {
     // Initialize global variables
     let ArticlesAdminController;
@@ -29,7 +29,6 @@
         }
       });
     });
-
     // Then we can start by loading the main application module
     beforeEach(module(ApplicationConfiguration.applicationModuleName));
 
@@ -184,4 +183,4 @@
       });
     });
   });
-})());
+})();

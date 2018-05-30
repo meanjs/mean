@@ -1,4 +1,4 @@
-((() => {
+(() => {
   // Authentication service for user variables
 
   angular
@@ -14,4 +14,4 @@
 
     return auth;
   }
-})());
+})();

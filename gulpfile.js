@@ -178,15 +178,11 @@ gulp.task('vendor:js', () => {
 
 // CSS bundle task
 gulp.task('bundle:css', () => {
-  const assets = _.union(
-    defaultAssets.client.css,
-    defaultAssets.client.templates
-  );
 
   if (process.env.NODE_ENV === 'production') del(['public/dist/bundle-*.css']);
   else del(['public/dist/bundle.min.css']);
-
-  return gulp.src(assets)
+  console.log(defaultAssets.client.css);
+  return gulp.src(defaultAssets.client.css)
     .pipe(plugins.ifEnv('production', plugins.csso()))
     .pipe(plugins.concat('bundle.min.css'))
     .pipe(plugins.ifEnv('production', plugins.rev()))

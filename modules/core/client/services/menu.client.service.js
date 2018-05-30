@@ -1,4 +1,4 @@
-((() => {
+(() => {
   angular
     .module('core')
     .factory('menuService', menuService);
@@ -168,4 +168,4 @@
       return true;
     }
   }
-})());
+})();

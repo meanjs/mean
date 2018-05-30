@@ -1,4 +1,4 @@
-﻿((() => {
+﻿(() => {
   describe('Chat Route Tests', () => {
     // Initialize global variables
     let $scope;
@@ -68,4 +68,4 @@
 
     });
   });
-})());
+})();

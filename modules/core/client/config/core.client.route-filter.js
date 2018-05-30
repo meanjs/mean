@@ -1,4 +1,4 @@
-((() => {
+(() => {
   angular
     .module('core')
     .run(routeFilter);
@@ -52,4 +52,4 @@
       }
     }
   }
-})());
+})();

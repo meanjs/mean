@@ -1,4 +1,4 @@
-((() => {
+(() => {
   // https://gist.github.com/rhutchison/c8c14946e88a1c8f9216
 
   angular
@@ -78,4 +78,4 @@
       }
     }
   }
-})());
+})();

@@ -1,4 +1,4 @@
-((() => {
+(() => {
   angular
     .module('users')
     .controller('SettingsController', SettingsController);
@@ -10,4 +10,4 @@
 
     vm.user = Authentication.user;
   }
-})());
+})();

@@ -1,4 +1,4 @@
-((() => {
+(() => {
   angular
     .module('articles')
     .run(menuConfig);
@@ -20,4 +20,4 @@
       roles: ['*']
     });
   }
-})());
+})();

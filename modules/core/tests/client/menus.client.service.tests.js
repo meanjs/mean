@@ -1,4 +1,4 @@
-((() => {
+(() => {
   describe('Menus', () => {
     // Initialize global variables
     let scope;
@@ -449,4 +449,4 @@
       });
     });
   });
-})());
+})();

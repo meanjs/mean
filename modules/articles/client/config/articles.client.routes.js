@@ -1,4 +1,4 @@
-((() => {
+(() => {
   angular
     .module('articles.routes')
     .config(routeConfig);
@@ -39,4 +39,4 @@
       articleId: $stateParams.articleId
     }).$promise;
   }
-})());
+})();

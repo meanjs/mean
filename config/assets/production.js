@@ -20,8 +20,7 @@ module.exports = {
         'node_modules/angular-mocks/angular-mocks.js',
         'node_modules/angular-resource/angular-resource.min.js',
         'node_modules/angular-ui-notification/dist/angular-ui-notification.min.js',
-        'node_modules/angular-ui-router/release/angular-ui-router.min.js',
-        'node_modules/owasp-password-strength-test/owasp-password-strength-test.js'
+        'node_modules/angular-ui-router/release/angular-ui-router.min.js'
         // endyarn
       ]
     },

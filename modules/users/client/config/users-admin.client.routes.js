@@ -1,4 +1,4 @@
-((() => {
+(() => {
   // Setting up route
   angular
     .module('users.admin.routes')
@@ -47,4 +47,4 @@
       }).$promise;
     }
   }
-})());
+})();

@@ -1,4 +1,4 @@
-((() => {
+(() => {
   angular
     .module('users.admin')
     .controller('UserListController', UserListController);
@@ -37,4 +37,4 @@
       vm.figureOutItemsToDisplay();
     }
   }
-})());
+})();

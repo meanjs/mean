@@ -1,4 +1,4 @@
-((() => {
+(() => {
   describe('Articles Controller Tests', () => {
     // Initialize global variables
     let ArticlesController;
@@ -74,4 +74,4 @@
       spyOn($state, 'go');
     }));
   });
-})());
+})();

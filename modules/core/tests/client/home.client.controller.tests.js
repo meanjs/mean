@@ -1,4 +1,4 @@
-((() => {
+(() => {
   describe('HomeController', () => {
     // Initialize global variables
     let scope;
@@ -16,4 +16,4 @@
       });
     }));
   });
-})());
+})();

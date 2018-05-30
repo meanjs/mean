@@ -1,7 +1,7 @@
 /**
  * Chat client controller tests
  */
-((() => {
+(() => {
   describe('ChatController', () => {
     // Initialize global variables
     let $scope;
@@ -104,4 +104,4 @@
       });
     });
   });
-})());
+})();

@@ -1,4 +1,4 @@
-((() => {
+(() => {
   angular
     .module('chat')
     .controller('ChatController', ChatController);
@@ -50,4 +50,4 @@
       vm.messageText = '';
     }
   }
-})());
+})();

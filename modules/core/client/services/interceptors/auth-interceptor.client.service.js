@@ -1,4 +1,4 @@
-((() => {
+(() => {
   angular
     .module('core')
     .factory('authInterceptor', authInterceptor);
@@ -40,4 +40,4 @@
       return $q.reject(rejection);
     }
   }
-})());
+})();

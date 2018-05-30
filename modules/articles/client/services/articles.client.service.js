@@ -1,4 +1,4 @@
-((() => {
+(() => {
   angular
     .module('articles.services')
     .factory('ArticlesService', ArticlesService);
@@ -48,4 +48,4 @@
       $log.error(error);
     }
   }
-})());
+})();

@@ -1,4 +1,4 @@
-﻿((() => {
+﻿(() => {
   describe('Admin Articles List Controller Tests', () => {
     // Initialize global variables
     let ArticlesAdminListController;
@@ -99,4 +99,4 @@
       }));
     });
   });
-})());
+})();

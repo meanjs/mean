@@ -1,4 +1,4 @@
-((() => {
+(() => {
   angular
     .module('articles')
     .controller('ArticlesController', ArticlesController);
@@ -11,4 +11,4 @@
     vm.article = article;
     vm.authentication = Authentication;
   }
-})());
+})();

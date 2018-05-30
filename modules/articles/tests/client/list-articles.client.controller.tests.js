@@ -1,4 +1,4 @@
-((() => {
+(() => {
   describe('Articles List Controller Tests', () => {
     // Initialize global variables
     let ArticlesListController;
@@ -97,4 +97,4 @@
       }));
     });
   });
-})());
+})();

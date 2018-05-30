@@ -1,4 +1,4 @@
-﻿((() => {
+﻿(() => {
   describe('Users Admin Route Tests', () => {
     // Initialize global variables
     let $scope;
@@ -107,4 +107,4 @@
 
     });
   });
-})());
+})();

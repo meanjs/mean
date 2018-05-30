@@ -1,4 +1,4 @@
-((() => {
+(() => {
   angular
     .module('core')
     .run(menuConfig);
@@ -37,4 +37,4 @@
       state: 'settings.accounts'
     });
   }
-})());
+})();

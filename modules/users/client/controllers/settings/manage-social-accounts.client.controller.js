@@ -1,4 +1,4 @@
-((() => {
+(() => {
   angular
     .module('users')
     .controller('SocialAccountsController', SocialAccountsController);
@@ -50,4 +50,4 @@
       $window.location.href = url;
     }
   }
-})());
+})();

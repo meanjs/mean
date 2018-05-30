@@ -1,4 +1,4 @@
-﻿((() => {
+﻿(() => {
   describe('Edit Profile Controller Tests', () => {
     // Initialize global variables
     let EditProfileController;
@@ -105,4 +105,4 @@
       }));
     });
   });
-})());
+})();
