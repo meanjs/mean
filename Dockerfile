@@ -24,6 +24,8 @@ RUN apt-get update -q  \
  ssh \
  gcc \
  make \
+ npm \
+ libpng-dev \ 
  build-essential \
  libkrb5-dev \
  sudo \
@@ -38,7 +40,7 @@ RUN sudo apt-get install -yq nodejs \
  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Install MEAN.JS Prerequisites
-RUN npm install --quiet -g gulp bower yo mocha karma-cli pm2 && npm cache clean
+RUN npm install --quiet -g gulp bower yo mocha karma-cli pm2 pngquant-bin && npm cache clean
 
 RUN mkdir -p /opt/mean.js/public/lib
 WORKDIR /opt/mean.js
