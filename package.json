@@ -62,7 +62,7 @@
     "gulp-csslint": "~1.0.0",
     "gulp-csso": "~3.0.0",
     "gulp-eslint": "^4.0.0",
-    "gulp-imagemin": "~3.3.0",
+    "gulp-imagemin": "~5.0.0",
     "gulp-less": "^3.3.2",
     "gulp-load-plugins": "~1.5.0",
     "gulp-ng-annotate": "~2.0.0",
