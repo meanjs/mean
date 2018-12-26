@@ -76,7 +76,7 @@
     "gulp-uglify": "~3.0.0",
     "helmet": "^3.8.2",
     "imagemin-pngquant": "~6.0.0",
-    "jasmine-core": "~2.7.0",
+    "jasmine-core": "~3.0.0",
     "lodash": "~4.17.5",
     "lusca": "~1.5.1",
     "method-override": "^2.3.10",
@@ -97,7 +97,7 @@
     "run-sequence": "~2.1.0",
     "serve-favicon": "^2.4.5",
     "socket.io": "^2.0.3",
-    "validator": "~8.0.0",
+    "validator": "~9.4.1",
     "winston": "~2.3.1",
     "wiredep": "~4.0.0",
     "snyk": "^1.116.4"
