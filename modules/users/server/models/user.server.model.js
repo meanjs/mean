@@ -223,7 +223,7 @@ UserSchema.statics.generateRandomPassphrase = function () {
 
     // Send the rejection back if the passphrase fails to pass the strength test
     if (owasp.test(password).errors.length) {
-      reject(new Error('An unexpected problem occured while generating the random passphrase'));
+      reject(new Error('An unexpected problem occurred while generating the random passphrase'));
     } else {
       // resolve with the validated passphrase
       resolve(password);
