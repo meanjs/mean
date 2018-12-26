@@ -451,7 +451,7 @@ gulp.task('lint', function (done) {
 
 // Lint project files and minify them into two production files.
 gulp.task('build', function (done) {
-  runSequence('env:dev', 'wiredep:prod', 'lint', ['uglify', 'cssmin'], done);
+  runSequence('wiredep:prod', 'lint', ['uglify', 'cssmin'], done);
 });
 
 // Run the project tests
@@ -482,12 +482,12 @@ gulp.task('test:coverage', function (done) {
 
 // Run the project in development mode with node debugger enabled
 gulp.task('default', function (done) {
-  runSequence('env:dev', ['copyLocalEnvConfig', 'makeUploadsDir'], 'lint', ['nodemon', 'watch'], done);
+  runSequence(['copyLocalEnvConfig', 'makeUploadsDir'], 'lint', ['nodemon', 'watch'], done);
 });
 
 // Run the project in production mode
 gulp.task('prod', function (done) {
-  runSequence(['copyLocalEnvConfig', 'makeUploadsDir', 'templatecache'], 'build', 'env:prod', 'lint', ['nodemon-nodebug', 'watch'], done);
+  runSequence(['copyLocalEnvConfig', 'makeUploadsDir', 'templatecache'], ['env:prod', 'build'], 'lint', ['nodemon-nodebug', 'watch'], done);
 });
 
 // Run Mongo Seed with default environment config
