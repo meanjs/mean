@@ -3,21 +3,21 @@ version: v1.13.0
 ignore: {}
 # patches apply the minimum changes required to fix a vulnerability
 patch:
-  'npm:tunnel-agent:20170305':
-    - gulp-imagemin > imagemin-gifsicle > gifsicle > bin-build > download > caw > tunnel-agent:
-        patched: '2018-06-26T02:11:21.392Z'
-    - gulp-imagemin > imagemin-gifsicle > gifsicle > bin-wrapper > download > caw > tunnel-agent:
-        patched: '2018-06-26T02:11:21.392Z'
-    - gulp-imagemin > imagemin-jpegtran > jpegtran-bin > bin-build > download > caw > tunnel-agent:
-        patched: '2018-06-26T02:11:21.392Z'
-    - gulp-imagemin > imagemin-jpegtran > jpegtran-bin > bin-wrapper > download > caw > tunnel-agent:
-        patched: '2018-06-26T02:11:21.392Z'
-    - gulp-imagemin > imagemin-optipng > optipng-bin > bin-build > download > caw > tunnel-agent:
-        patched: '2018-06-26T02:11:21.392Z'
-    - gulp-imagemin > imagemin-optipng > optipng-bin > bin-wrapper > download > caw > tunnel-agent:
-        patched: '2018-06-26T02:11:21.392Z'
-    - gulp-sass > node-sass > request > tunnel-agent:
-        patched: '2018-06-26T02:11:21.392Z'
-    - imagemin-pngquant > pngquant-bin > bin-wrapper > download > caw > tunnel-agent:
-        patched: '2018-06-26T02:11:21.392Z'
+  'npm:hoek:20180212':
+    - gulp-sass > node-sass > request > hawk > hoek:
+        patched: '2018-06-19T02:16:15.888Z'
+    - gulp-sass > node-sass > request > hawk > boom > hoek:
+        patched: '2018-06-19T02:16:15.888Z'
+    - gulp-sass > node-sass > request > hawk > sntp > hoek:
+        patched: '2018-06-19T02:16:15.888Z'
+    - gulp-sass > node-sass > request > hawk > cryptiles > boom > hoek:
+        patched: '2018-06-19T02:16:15.888Z'
+    - gulp-sass > node-sass > node-gyp > request > hawk > hoek:
+        patched: '2018-06-19T02:16:15.888Z'
+    - gulp-sass > node-sass > node-gyp > request > hawk > boom > hoek:
+        patched: '2018-06-19T02:16:15.888Z'
+    - gulp-sass > node-sass > node-gyp > request > hawk > sntp > hoek:
+        patched: '2018-06-19T02:16:15.888Z'
+    - gulp-sass > node-sass > node-gyp > request > hawk > cryptiles > boom > hoek:
+        patched: '2018-06-19T02:16:15.888Z'
         
