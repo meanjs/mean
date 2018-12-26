@@ -54,7 +54,7 @@ logger.setupFileLogger = function setupFileLogger() {
   } catch (err) {
     if (process.env.NODE_ENV !== 'test') {
       console.log();
-      console.log(chalk.red('An error has occured during the creation of the File transport logger.'));
+      console.log(chalk.red('An error has occurred during the creation of the File transport logger.'));
       console.log(chalk.red(err));
       console.log();
     }
