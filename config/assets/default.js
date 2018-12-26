@@ -1,32 +1,29 @@
-'use strict';
-
 /* eslint comma-dangle:[0, "only-multiline"] */
 
 module.exports = {
   client: {
     lib: {
       css: [
-        // bower:css
-        'public/lib/bootstrap/dist/css/bootstrap.css',
-        'public/lib/bootstrap/dist/css/bootstrap-theme.css',
-        'public/lib/angular-ui-notification/dist/angular-ui-notification.css'
-        // endbower
+        // yarn:css
+        'node_modules/bootstrap/dist/css/bootstrap.css',
+        'node_modules/bootstrap/dist/css/bootstrap-theme.css',
+        'node_modules/angular-ui-notification/dist/angular-ui-notification.css'
+        // endyarn
       ],
       js: [
-        // bower:js
-        'public/lib/angular/angular.js',
-        'public/lib/angular-animate/angular-animate.js',
-        'public/lib/angular-bootstrap/ui-bootstrap-tpls.js',
-        'public/lib/ng-file-upload/ng-file-upload.js',
-        'public/lib/angular-messages/angular-messages.js',
-        'public/lib/angular-mocks/angular-mocks.js',
-        'public/lib/angular-resource/angular-resource.js',
-        'public/lib/angular-ui-notification/dist/angular-ui-notification.js',
-        'public/lib/angular-ui-router/release/angular-ui-router.js',
-        'public/lib/owasp-password-strength-test/owasp-password-strength-test.js',
-        // endbower
+        // yarn:js
+        'node_modules/angular/angular.js',
+        'node_modules/angular-animate/angular-animate.js',
+        'node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js',
+        'node_modules/angular-file-upload/dist/angular-file-upload.js',
+        'node_modules/angular-messages/angular-messages.js',
+        'node_modules/angular-mocks/angular-mocks.js',
+        'node_modules/angular-resource/angular-resource.js',
+        'node_modules/angular-ui-notification/dist/angular-ui-notification.js',
+        'node_modules/angular-ui-router/release/angular-ui-router.js'
+        // endyarn
       ],
-      tests: ['public/lib/angular-mocks/angular-mocks.js']
+      tests: ['node_modules/angular-mocks/angular-mocks.js']
     },
     css: [
       'modules/*/client/{css,less,scss}/*.css'

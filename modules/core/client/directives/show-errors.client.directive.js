@@ -1,6 +1,4 @@
-(function () {
-  'use strict';
-
+(() => {
   // https://gist.github.com/rhutchison/c8c14946e88a1c8f9216
 
   angular
@@ -10,10 +8,10 @@
   showErrors.$inject = ['$timeout', '$interpolate'];
 
   function showErrors($timeout, $interpolate) {
-    var directive = {
+    const directive = {
       restrict: 'A',
       require: '^form',
-      compile: compile
+      compile
     };
 
     return directive;
@@ -28,13 +26,13 @@
       return linkFn;
 
       function linkFn(scope, el, attrs, formCtrl) {
-        var inputEl,
-          inputName,
-          inputNgEl,
-          options,
-          showSuccess,
-          initCheck = false,
-          showValidationMessages = false;
+        let inputEl;
+        let inputName;
+        let inputNgEl;
+        let options;
+        let showSuccess;
+        let initCheck = false;
+        let showValidationMessages = false;
 
         options = scope.$eval(attrs.showErrors) || {};
         showSuccess = options.showSuccess || false;
@@ -46,9 +44,7 @@
           throw new Error('show-errors element has no child input elements with a \'name\' attribute class');
         }
 
-        scope.$watch(function () {
-          return formCtrl[inputName] && formCtrl[inputName].$invalid;
-        }, toggleClasses);
+        scope.$watch(() => formCtrl[inputName] && formCtrl[inputName].$invalid, toggleClasses);
 
         scope.$on('show-errors-check-validity', checkValidity);
         scope.$on('show-errors-reset', reset);
@@ -64,7 +60,7 @@
 
         function reset(event, name) {
           if (angular.isUndefined(name) || formCtrl.$name === name) {
-            return $timeout(function () {
+            return $timeout(() => {
               el.removeClass('has-error');
               el.removeClass('has-success');
               showValidationMessages = false;
@@ -82,4 +78,4 @@
       }
     }
   }
-}());
+})();

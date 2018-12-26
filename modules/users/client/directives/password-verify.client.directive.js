@@ -1,37 +1,35 @@
-(function () {
-  'use strict';
-
+(() => {
   angular
     .module('users')
     .directive('passwordVerify', passwordVerify);
 
   function passwordVerify() {
-    var directive = {
+    const directive = {
       require: 'ngModel',
       scope: {
         passwordVerify: '='
       },
-      link: link
+      link
     };
 
     return directive;
 
     function link(scope, element, attrs, ngModel) {
-      var status = true;
-      scope.$watch(function () {
-        var combined;
+      const status = true;
+      scope.$watch(() => {
+        let combined;
         if (scope.passwordVerify || ngModel) {
           combined = scope.passwordVerify + '_' + ngModel;
         }
         return combined;
-      }, function (value) {
+      }, value => {
         if (value) {
-          ngModel.$validators.passwordVerify = function (password) {
-            var origin = scope.passwordVerify;
+          ngModel.$validators.passwordVerify = password => {
+            const origin = scope.passwordVerify;
             return (origin === password);
           };
         }
       });
     }
   }
-}());
+})();

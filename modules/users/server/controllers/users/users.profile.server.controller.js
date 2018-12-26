@@ -1,25 +1,24 @@
-'use strict';
-
 /**
  * Module dependencies
  */
-var _ = require('lodash'),
-  fs = require('fs'),
-  path = require('path'),
-  errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
-  mongoose = require('mongoose'),
-  multer = require('multer'),
-  multerS3 = require('multer-s3'),
-  aws = require('aws-sdk'),
-  amazonS3URI = require('amazon-s3-uri'),
-  config = require(path.resolve('./config/config')),
-  User = mongoose.model('User'),
-  validator = require('validator');
+const _ = require('lodash');
 
-var whitelistedFields = ['firstName', 'lastName', 'email', 'username'];
+const fs = require('fs');
+const path = require('path');
+const errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller'));
+const mongoose = require('mongoose');
+const multer = require('multer');
+const multerS3 = require('multer-s3');
+const aws = require('aws-sdk');
+const amazonS3URI = require('amazon-s3-uri');
+const config = require(path.resolve('./config/config'));
+const User = mongoose.model('User');
+const validator = require('validator');
 
-var useS3Storage = config.uploads.storage === 's3' && config.aws.s3;
-var s3;
+const whitelistedFields = ['firstName', 'lastName', 'email', 'username'];
+
+const useS3Storage = config.uploads.storage === 's3' && config.aws.s3;
+let s3;
 
 if (useS3Storage) {
   aws.config.update({
@@ -33,9 +32,9 @@ if (useS3Storage) {
 /**
  * Update user details
  */
-exports.update = function (req, res) {
+exports.update = (req, res) => {
   // Init Variables
-  var user = req.user;
+  let user = req.user;
 
   if (user) {
     // Update whitelisted fields only
@@ -44,13 +43,13 @@ exports.update = function (req, res) {
     user.updated = Date.now();
     user.displayName = user.firstName + ' ' + user.lastName;
 
-    user.save(function (err) {
+    user.save(err => {
       if (err) {
         return res.status(422).send({
           message: errorHandler.getErrorMessage(err)
         });
       } else {
-        req.login(user, function (err) {
+        req.login(user, err => {
           if (err) {
             res.status(400).send(err);
           } else {
@@ -69,16 +68,16 @@ exports.update = function (req, res) {
 /**
  * Update profile picture
  */
-exports.changeProfilePicture = function (req, res) {
-  var user = req.user;
-  var existingImageUrl;
-  var multerConfig;
+exports.changeProfilePicture = (req, res) => {
+  const user = req.user;
+  let existingImageUrl;
+  let multerConfig;
 
 
   if (useS3Storage) {
     multerConfig = {
       storage: multerS3({
-        s3: s3,
+        s3,
         bucket: config.aws.s3.bucket,
         acl: 'public-read'
       })
@@ -90,7 +89,7 @@ exports.changeProfilePicture = function (req, res) {
   // Filtering to upload only images
   multerConfig.fileFilter = require(path.resolve('./config/lib/multer')).imageFileFilter;
 
-  var upload = multer(multerConfig).single('newProfilePicture');
+  const upload = multer(multerConfig).single('newProfilePicture');
 
   if (user) {
     existingImageUrl = user.profileImageURL;
@@ -98,10 +97,10 @@ exports.changeProfilePicture = function (req, res) {
       .then(updateUser)
       .then(deleteOldImage)
       .then(login)
-      .then(function () {
+      .then(() => {
         res.json(user);
       })
-      .catch(function (err) {
+      .catch(err => {
         res.status(422).send(err);
       });
   } else {
@@ -111,8 +110,8 @@ exports.changeProfilePicture = function (req, res) {
   }
 
   function uploadImage() {
-    return new Promise(function (resolve, reject) {
-      upload(req, res, function (uploadError) {
+    return new Promise((resolve, reject) => {
+      upload(req, res, uploadError => {
         if (uploadError) {
           reject(errorHandler.getErrorMessage(uploadError));
         } else {
@@ -123,11 +122,11 @@ exports.changeProfilePicture = function (req, res) {
   }
 
   function updateUser() {
-    return new Promise(function (resolve, reject) {
+    return new Promise((resolve, reject) => {
       user.profileImageURL = config.uploads.storage === 's3' && config.aws.s3 ?
         req.file.location :
         '/' + req.file.path;
-      user.save(function (err, theuser) {
+      user.save((err, theuser) => {
         if (err) {
           reject(err);
         } else {
@@ -138,17 +137,17 @@ exports.changeProfilePicture = function (req, res) {
   }
 
   function deleteOldImage() {
-    return new Promise(function (resolve, reject) {
+    return new Promise((resolve, reject) => {
       if (existingImageUrl !== User.schema.path('profileImageURL').defaultValue) {
         if (useS3Storage) {
           try {
-            var { region, bucket, key } = amazonS3URI(existingImageUrl);
-            var params = {
+            const { region, bucket, key } = amazonS3URI(existingImageUrl);
+            const params = {
               Bucket: config.aws.s3.bucket,
               Key: key
             };
 
-            s3.deleteObject(params, function (err) {
+            s3.deleteObject(params, err => {
               if (err) {
                 console.log('Error occurred while deleting old profile picture.');
                 console.log('Check if you have sufficient permissions : ' + err);
@@ -162,7 +161,7 @@ exports.changeProfilePicture = function (req, res) {
             return resolve();
           }
         } else {
-          fs.unlink(path.resolve('.' + existingImageUrl), function (unlinkError) {
+          fs.unlink(path.resolve('.' + existingImageUrl), unlinkError => {
             if (unlinkError) {
 
               // If file didn't exist, no need to reject promise
@@ -188,8 +187,8 @@ exports.changeProfilePicture = function (req, res) {
   }
 
   function login() {
-    return new Promise(function (resolve, reject) {
-      req.login(user, function (err) {
+    return new Promise((resolve, reject) => {
+      req.login(user, err => {
         if (err) {
           res.status(400).send(err);
         } else {
@@ -203,10 +202,10 @@ exports.changeProfilePicture = function (req, res) {
 /**
  * Send User
  */
-exports.me = function (req, res) {
+exports.me = (req, res) => {
   // Sanitize the user - short term solution. Copied from core.server.controller.js
   // TODO create proper passport mock: See https://gist.github.com/mweibel/5219403
-  var safeUserObject = null;
+  let safeUserObject = null;
   if (req.user) {
     safeUserObject = {
       displayName: validator.escape(req.user.displayName),

@@ -1,12 +1,10 @@
-(function (window) {
-  'use strict';
-
+((window => {
   var applicationModuleName = 'mean';
 
   var service = {
     applicationEnvironment: window.env,
     applicationModuleName: applicationModuleName,
-    applicationModuleVendorDependencies: ['ngResource', 'ngAnimate', 'ngMessages', 'ui.router', 'ui.bootstrap', 'ngFileUpload', 'ui-notification'],
+    applicationModuleVendorDependencies: ['ngResource', 'ngMessages', 'ui.router', 'ui.bootstrap', 'angularFileUpload', 'ui-notification'],
     registerModule: registerModule
   };
 
@@ -22,7 +20,7 @@
   }
 
   // Angular-ui-notification configuration
-  angular.module('ui-notification').config(function (NotificationProvider) {
+  angular.module('ui-notification').config(NotificationProvider => {
     NotificationProvider.setOptions({
       delay: 2000,
       startTop: 20,
@@ -33,4 +31,4 @@
       positionY: 'bottom'
     });
   });
-}(window));
+})(window));

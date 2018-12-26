@@ -1,6 +1,4 @@
-(function () {
-  'use strict';
-
+(() => {
   angular
     .module('core.admin.routes')
     .config(routeConfig);
@@ -18,4 +16,4 @@
         }
       });
   }
-}());
+})();

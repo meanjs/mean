@@ -1,6 +1,4 @@
-(function (app) {
-  'use strict';
-
+((app => {
   // Start by defining the main module and adding the module dependencies
   angular
     .module(app.applicationModuleName, app.applicationModuleVendorDependencies);
@@ -37,7 +35,7 @@
         window.history.pushState('', document.title, window.location.pathname);
       } else {
         // Prevent scrolling by storing the page's current scroll offset
-        var scroll = {
+        const scroll = {
           top: document.body.scrollTop,
           left: document.body.scrollLeft
         };
@@ -51,4 +49,4 @@
     // Then init the app
     angular.bootstrap(document, [app.applicationModuleName]);
   }
-}(ApplicationConfiguration));
+})(ApplicationConfiguration));

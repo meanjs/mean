@@ -1,14 +1,12 @@
-'use strict';
-
-var validator = require('validator'),
-  path = require('path'),
-  config = require(path.resolve('./config/config'));
+const validator = require('validator');
+const path = require('path');
+const config = require(path.resolve('./config/config'));
 
 /**
  * Render the main application page
  */
-exports.renderIndex = function (req, res) {
-  var safeUserObject = null;
+exports.renderIndex = (req, res) => {
+  let safeUserObject = null;
   if (req.user) {
     safeUserObject = {
       displayName: validator.escape(req.user.displayName),
@@ -33,7 +31,7 @@ exports.renderIndex = function (req, res) {
 /**
  * Render the server error page
  */
-exports.renderServerError = function (req, res) {
+exports.renderServerError = (req, res) => {
   res.status(500).render('modules/core/server/views/500', {
     error: 'Oops! Something went wrong...'
   });
@@ -43,7 +41,7 @@ exports.renderServerError = function (req, res) {
  * Render the server not found responses
  * Performs content-negotiation on the Accept HTTP header
  */
-exports.renderNotFound = function (req, res) {
+exports.renderNotFound = (req, res) => {
 
   res.status(404).format({
     'text/html': function () {

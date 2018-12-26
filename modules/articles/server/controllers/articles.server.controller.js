@@ -1,21 +1,20 @@
-'use strict';
-
 /**
  * Module dependencies
  */
-var path = require('path'),
-  mongoose = require('mongoose'),
-  Article = mongoose.model('Article'),
-  errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller'));
+const path = require('path');
+
+const mongoose = require('mongoose');
+const Article = mongoose.model('Article');
+const errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller'));
 
 /**
  * Create an article
  */
-exports.create = function (req, res) {
-  var article = new Article(req.body);
+exports.create = (req, res) => {
+  const article = new Article(req.body);
   article.user = req.user;
 
-  article.save(function (err) {
+  article.save(err => {
     if (err) {
       return res.status(422).send({
         message: errorHandler.getErrorMessage(err)
@@ -29,9 +28,9 @@ exports.create = function (req, res) {
 /**
  * Show the current article
  */
-exports.read = function (req, res) {
+exports.read = (req, res) => {
   // convert mongoose document to JSON
-  var article = req.article ? req.article.toJSON() : {};
+  const article = req.article ? req.article.toJSON() : {};
 
   // Add a custom field to the Article, for determining if the current User is the "owner".
   // NOTE: This field is NOT persisted to the database, since it doesn't exist in the Article model.
@@ -43,13 +42,13 @@ exports.read = function (req, res) {
 /**
  * Update an article
  */
-exports.update = function (req, res) {
-  var article = req.article;
+exports.update = (req, res) => {
+  const article = req.article;
 
   article.title = req.body.title;
   article.content = req.body.content;
 
-  article.save(function (err) {
+  article.save(err => {
     if (err) {
       return res.status(422).send({
         message: errorHandler.getErrorMessage(err)
@@ -63,10 +62,10 @@ exports.update = function (req, res) {
 /**
  * Delete an article
  */
-exports.delete = function (req, res) {
-  var article = req.article;
+exports.delete = (req, res) => {
+  const article = req.article;
 
-  article.remove(function (err) {
+  article.remove(err => {
     if (err) {
       return res.status(422).send({
         message: errorHandler.getErrorMessage(err)
@@ -80,8 +79,8 @@ exports.delete = function (req, res) {
 /**
  * List of Articles
  */
-exports.list = function (req, res) {
-  Article.find().sort('-created').populate('user', 'displayName').exec(function (err, articles) {
+exports.list = (req, res) => {
+  Article.find().sort('-created').populate('user', 'displayName').exec((err, articles) => {
     if (err) {
       return res.status(422).send({
         message: errorHandler.getErrorMessage(err)
@@ -95,7 +94,7 @@ exports.list = function (req, res) {
 /**
  * Article middleware
  */
-exports.articleByID = function (req, res, next, id) {
+exports.articleByID = (req, res, next, id) => {
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(400).send({
@@ -103,7 +102,7 @@ exports.articleByID = function (req, res, next, id) {
     });
   }
 
-  Article.findById(id).populate('user', 'displayName').exec(function (err, article) {
+  Article.findById(id).populate('user', 'displayName').exec((err, article) => {
     if (err) {
       return next(err);
     } else if (!article) {

@@ -21,11 +21,7 @@ Make sure you have installed all of the following prerequisites on your developm
 * Git - [Download & Install Git](https://git-scm.com/downloads). OSX and Linux machines typically have this already installed.
 * Node.js - [Download & Install Node.js](https://nodejs.org/en/download/) and the npm package manager. If you encounter any problems, you can also use this [GitHub Gist](https://gist.github.com/isaacs/579814) to install Node.js.
 * MongoDB - [Download & Install MongoDB](http://www.mongodb.org/downloads), and make sure it's running on the default port (27017).
-* Bower - You're going to use the [Bower Package Manager](http://bower.io/) to manage your front-end packages. Make sure you've installed Node.js and npm first, then install bower globally using npm:
-
-```bash
-$ npm install -g bower
-```
+* Yarn - You're going to use the [Yarn](https://yarnpkg.com/lang/en/) to manage your packages.
 
 ## Downloading MEAN.JS
 There are several ways you can get the MEAN.JS boilerplate:
@@ -54,7 +50,7 @@ Another way would be to use the [Official Yo Generator](http://meanjs.org/genera
 ## Quick Install
 Once you've downloaded the boilerplate and installed all the prerequisites, you're just a few steps away from starting to develop your MEAN application.
 
-The boilerplate comes pre-bundled with a `package.json` and `bower.json` files that contain the list of modules you need to start your application.
+The boilerplate comes pre-bundled with a `package.json` files that contain the list of modules you need to start your application.
 
 To install the dependencies, run this in the application folder from the command-line:
 
@@ -65,7 +61,7 @@ $ npm install
 This command does a few things:
 * First it will install the dependencies needed for the application to run.
 * If you're running in a development environment, it will then also install development dependencies needed for testing and running your application.
-* When the npm packages install process is over, npm will initiate a bower install command to install all the front-end modules needed for the application
+* When the npm packages install process is over, npm will initiate a yarn install command to install all the modules needed for the application in node_modules folder. (Webpack will create a client vendor.js file from this for every builds)
 * To update these packages later on, just run `npm update`
 
 ## Running Your Application

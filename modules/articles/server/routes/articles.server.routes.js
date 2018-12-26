@@ -1,12 +1,11 @@
-'use strict';
-
 /**
  * Module dependencies
  */
-var articlesPolicy = require('../policies/articles.server.policy'),
-  articles = require('../controllers/articles.server.controller');
+const articlesPolicy = require('../policies/articles.server.policy');
 
-module.exports = function (app) {
+const articles = require('../controllers/articles.server.controller');
+
+module.exports = app => {
   // Articles collection routes
   app.route('/api/articles').all(articlesPolicy.isAllowed)
     .get(articles.list)

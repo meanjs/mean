@@ -1,86 +1,88 @@
-'use strict';
-
-(function () {
-  describe('Menus', function () {
+(() => {
+  describe('Menus', () => {
     // Initialize global variables
-    var scope,
-      menuService;
+    let scope;
+
+    let menuService;
 
     // Load the main application module
     beforeEach(module(ApplicationConfiguration.applicationModuleName));
 
-    beforeEach(inject(function (_menuService_) {
+    beforeEach(inject(_menuService_ => {
       menuService = _menuService_;
     }));
 
-    it('should have topbar added', function () {
+    it('should have topbar added', () => {
       expect(menuService.menus.topbar).toBeDefined();
     });
 
-    it('should have default roles to user and admin', function () {
+    it('should have default roles to user and admin', () => {
       expect(menuService.defaultRoles).toEqual(['user', 'admin']);
     });
 
-    describe('addMenu', function () {
-      describe('with no options', function () {
-        var menuId = 'menu1',
-          menu;
-        beforeEach(function () {
+    describe('addMenu', () => {
+      describe('with no options', () => {
+        const menuId = 'menu1';
+        let menu;
+        beforeEach(() => {
           menu = menuService.addMenu(menuId);
         });
 
-        it('should return menu object', function () {
+        it('should return menu object', () => {
           expect(menu).toBeDefined();
         });
 
-        it('should default roles', function () {
+        it('should default roles', () => {
           expect(menu.roles).toEqual(menuService.defaultRoles);
         });
 
-        it('should have empty items', function () {
+        it('should have empty items', () => {
           expect(menu.items).toEqual([]);
         });
 
-        it('should set shouldRender to shouldRender function handle', function () {
+        it('should set shouldRender to shouldRender function handle', () => {
           expect(menu.shouldRender()).toBeFalsy();
         });
       });
 
-      describe('with options', function () {
-        var menu,
-          options = {
-            roles: ['a', 'b', 'c'],
-            items: ['d', 'e', 'f']
-          };
-        beforeEach(function () {
+      describe('with options', () => {
+        let menu;
+
+        const options = {
+          roles: ['a', 'b', 'c'],
+          items: ['d', 'e', 'f']
+        };
+
+        beforeEach(() => {
           menu = menuService.addMenu('menu1', options);
         });
 
-        it('should set items to options.items list', function () {
+        it('should set items to options.items list', () => {
           expect(menu.items).toBe(options.items);
         });
 
-        it('should set roles to options.roles list', function () {
+        it('should set roles to options.roles list', () => {
           expect(menu.roles).toBe(options.roles);
         });
       });
     });
 
-    describe('shouldRender', function () {
-      var menuOptions = {
-          roles: ['*', 'menurole']
-        },
-        menu;
-      beforeEach(function () {
+    describe('shouldRender', () => {
+      const menuOptions = {
+        roles: ['*', 'menurole']
+      };
+
+      let menu;
+      beforeEach(() => {
         menu = menuService.addMenu('menu1', menuOptions);
       });
 
-      describe('when logged out', function () {
-        it('should render if menu is public', function () {
+      describe('when logged out', () => {
+        it('should render if menu is public', () => {
           expect(menu.shouldRender()).toBeTruthy();
         });
 
-        it('should not render if menu is private', function () {
+        it('should not render if menu is private', () => {
           menu = menuService.addMenu('menu1', {
             isPublic: false
           });
@@ -88,28 +90,28 @@
         });
       });
 
-      describe('when logged in', function () {
-        var user = {
+      describe('when logged in', () => {
+        let user = {
           roles: ['1', 'menurole', '2']
         };
-        describe('menu with * role', function () {
-          it('should render', function () {
+        describe('menu with * role', () => {
+          it('should render', () => {
             expect(menu.shouldRender(user)).toBeTruthy();
           });
         });
 
-        describe('menu without * role', function () {
-          beforeEach(function () {
+        describe('menu without * role', () => {
+          beforeEach(() => {
             menu = menuService.addMenu('menu1', {
               roles: ['b', 'menurole', 'c']
             });
           });
 
-          it('should render if user has same role as menu', function () {
+          it('should render if user has same role as menu', () => {
             expect(menu.shouldRender(user)).toBeTruthy();
           });
 
-          it('should not render if user has different roles', function () {
+          it('should not render if user has different roles', () => {
             user = {
               roles: ['1', '2', '3']
             };
@@ -119,75 +121,79 @@
       });
     });
 
-    describe('validateMenuExistence', function () {
-      describe('when menuId not provided', function () {
-        it('should throw menuId error', function () {
+    describe('validateMenuExistence', () => {
+      describe('when menuId not provided', () => {
+        it('should throw menuId error', () => {
           expect(menuService.validateMenuExistence).toThrowError('MenuId was not provided');
         });
       });
 
-      describe('when menu does not exist', function () {
-        it('should throw no menu error', function () {
-          var target = function () {
+      describe('when menu does not exist', () => {
+        it('should throw no menu error', () => {
+          const target = () => {
             menuService.validateMenuExistence('noMenuId');
           };
           expect(target).toThrowError('Menu does not exist');
         });
       });
 
-      describe('when menu exists', function () {
-        var menuId = 'menuId';
-        beforeEach(function () {
+      describe('when menu exists', () => {
+        const menuId = 'menuId';
+        beforeEach(() => {
           menuService.menus[menuId] = {};
         });
 
-        it('should return truthy', function () {
+        it('should return truthy', () => {
           expect(menuService.validateMenuExistence(menuId)).toBeTruthy();
         });
       });
     });
 
-    describe('removeMenu', function () {
-      var menu = {
+    describe('removeMenu', () => {
+      const menu = {
         id: 'menuId'
       };
-      beforeEach(function () {
+      beforeEach(() => {
         menuService.menus[menu.id] = menu;
         menuService.validateMenuExistence = jasmine.createSpy();
         menuService.removeMenu(menu.id);
       });
 
-      it('should remove existing menu from menus', function () {
+      it('should remove existing menu from menus', () => {
         expect(menuService.menus).not.toContain(menu.id);
       });
 
-      it('validates menu existance before removing', function () {
+      it('validates menu existance before removing', () => {
         expect(menuService.validateMenuExistence).toHaveBeenCalledWith(menu.id);
       });
     });
 
-    describe('addMenuItem', function () {
-      var menuId = 'menu1',
-        subMenuItem1 = {
-          title: 'sub1'
-        },
-        subMenuItem2 = {
-          title: 'sub2'
-        },
-        menuItemOptions = {
-          title: 'title',
-          state: 'state',
-          type: 'type',
-          class: 'class',
-          isPublic: false,
-          roles: ['a', 'b'],
-          position: 2,
-          items: [subMenuItem1, subMenuItem2]
-        },
-        menu,
-        menuItem;
+    describe('addMenuItem', () => {
+      const menuId = 'menu1';
 
-      beforeEach(function () {
+      const subMenuItem1 = {
+        title: 'sub1'
+      };
+
+      const subMenuItem2 = {
+        title: 'sub2'
+      };
+
+      const menuItemOptions = {
+        title: 'title',
+        state: 'state',
+        type: 'type',
+        class: 'class',
+        isPublic: false,
+        roles: ['a', 'b'],
+        position: 2,
+        items: [subMenuItem1, subMenuItem2]
+      };
+
+      let menu;
+      let menuItem;
+
+      beforeEach(() => {
         menuService.validateMenuExistence = jasmine.createSpy();
         menuService.addSubMenuItem = jasmine.createSpy();
         menuService.addMenu(menuId, {
@@ -197,139 +203,150 @@
         menuItem = menu.items[0];
       });
 
-      it('should validate menu existance', function () {
+      it('should validate menu existance', () => {
         expect(menuService.validateMenuExistence).toHaveBeenCalledWith(menuId);
       });
 
-      it('should return the menu', function () {
+      it('should return the menu', () => {
         expect(menu).toBeDefined();
       });
 
-      it('should set menu item shouldRender function', function () {
+      it('should set menu item shouldRender function', () => {
         expect(menuItem.shouldRender).toBeDefined();
       });
 
-      describe('with options set', function () {
-        it('should add menu item to menu', function () {
+      describe('with options set', () => {
+        it('should add menu item to menu', () => {
           expect(menu.items.length).toBe(1);
         });
 
-        it('should set menu item title to options title', function () {
+        it('should set menu item title to options title', () => {
           expect(menuItem.title).toBe(menuItemOptions.title);
         });
 
-        it('should set menu item state to options state', function () {
+        it('should set menu item state to options state', () => {
           expect(menuItem.state).toBe(menuItemOptions.state);
         });
 
-        it('should set menu item type to options type', function () {
+        it('should set menu item type to options type', () => {
           expect(menuItem.type).toBe(menuItemOptions.type);
         });
 
-        it('should set menu item class to options class', function () {
+        it('should set menu item class to options class', () => {
           expect(menuItem.class).toBe(menuItemOptions.class);
         });
 
-        it('should set menu item position to options position', function () {
+        it('should set menu item position to options position', () => {
           expect(menuItem.position).toBe(menuItemOptions.position);
         });
 
-        it('should call addSubMenuItem for each item in options', function () {
+        it('should call addSubMenuItem for each item in options', () => {
           expect(menuService.addSubMenuItem).toHaveBeenCalledWith(menuId, menuItemOptions.state, subMenuItem1);
           expect(menuService.addSubMenuItem).toHaveBeenCalledWith(menuId, menuItemOptions.state, subMenuItem2);
         });
       });
 
-      describe('without options set', function () {
-        beforeEach(function () {
+      describe('without options set', () => {
+        beforeEach(() => {
           menu = menuService.addMenuItem(menuId);
           menuItem = menu.items[1];
         });
 
-        it('should set menu item type to item', function () {
+        it('should set menu item type to item', () => {
           expect(menuItem.type).toBe('item');
         });
 
-        it('should set menu item title to empty', function () {
+        it('should set menu item title to empty', () => {
           expect(menuItem.title).toBe('');
         });
 
-        it('should set menu item isPublic to false', function () {
+        it('should set menu item isPublic to false', () => {
           expect(menuItem.isPublic).toBeFalsy();
         });
 
-        it('should set menu item roles to default roles', function () {
+        it('should set menu item roles to default roles', () => {
           expect(menuItem.roles).toEqual(menuService.defaultRoles);
         });
 
-        it('should set menu item position to 0', function () {
+        it('should set menu item position to 0', () => {
           expect(menuItem.position).toBe(0);
         });
       });
     });
 
-    describe('removeMenuItem', function () {
-      var menuId = 'menuId',
-        menuItemState = 'menu.state1',
-        menuItemState2 = 'menu.state2',
-        menu;
+    describe('removeMenuItem', () => {
+      const menuId = 'menuId';
+      const menuItemState = 'menu.state1';
+      const menuItemState2 = 'menu.state2';
+      let menu;
 
-      beforeEach(function () {
+      beforeEach(() => {
         menuService.addMenu(menuId);
-        menuService.addMenuItem(menuId, { state: menuItemState });
-        menuService.addMenuItem(menuId, { state: menuItemState2 });
+        menuService.addMenuItem(menuId, {
+          state: menuItemState
+        });
+        menuService.addMenuItem(menuId, {
+          state: menuItemState2
+        });
         menuService.validateMenuExistence = jasmine.createSpy();
         menu = menuService.removeMenuItem(menuId, menuItemState);
       });
 
-      it('should return menu object', function () {
+      it('should return menu object', () => {
         expect(menu).not.toBeNull();
       });
 
-      it('should validate menu existance', function () {
+      it('should validate menu existance', () => {
         expect(menuService.validateMenuExistence).toHaveBeenCalledWith(menuId);
       });
 
-      it('should remove sub menu items with same state', function () {
+      it('should remove sub menu items with same state', () => {
         expect(menu.items.length).toBe(1);
         expect(menu.items[0].state).toBe(menuItemState2);
       });
     });
 
-    describe('addSubMenuItem', function () {
-      var subItemOptions = {
+    describe('addSubMenuItem', () => {
+      const subItemOptions = {
         title: 'title',
         state: 'sub.state',
-        params: { p1: 'val1' },
+        params: {
+          p1: 'val1'
+        },
         isPublic: false,
         roles: ['a', 'b'],
         position: 4
       };
-      var menuId = 'menu1',
-        menuItem1Options = {
-          state: 'item1.state',
-          items: [],
-          isPublic: false
-        },
-        menuItem2Options = {
-          state: 'item2.state2',
-          items: [],
-          isPublic: true,
-          roles: ['a']
-        },
-        menuItem1,
-        menuItem2,
-        menuItem3,
-        subItem1,
-        subItem2,
-        menu;
+      const menuId = 'menu1';
 
-      beforeEach(function () {
+      const menuItem1Options = {
+        state: 'item1.state',
+        items: [],
+        isPublic: false
+      };
+
+      const menuItem2Options = {
+        state: 'item2.state2',
+        items: [],
+        isPublic: true,
+        roles: ['a']
+      };
+
+      let menuItem1;
+      let menuItem2;
+      let menuItem3;
+      let subItem1;
+      let subItem2;
+      let menu;
+
+      beforeEach(() => {
         menuService.validateMenuExistence = jasmine.createSpy();
         menuService.addMenu(menuId);
         menuService.addMenuItem(menuId, menuItem1Options);
         menuService.addMenuItem(menuId, menuItem2Options);
-        menuService.addMenuItem(menuId, { state: 'something.else' });
+        menuService.addMenuItem(menuId, {
+          state: 'something.else'
+        });
         menuService.addSubMenuItem(menuId, menuItem1Options.state, subItemOptions);
         menu = menuService.addSubMenuItem(menuId, menuItem1Options.state);
         menuItem1 = menu.items[0];
@@ -339,97 +356,97 @@
         subItem2 = menuItem1.items[1];
       });
 
-      afterEach(function () {
+      afterEach(() => {
         menuService.removeMenu(menuId);
       });
 
-      it('should return menu object', function () {
+      it('should return menu object', () => {
         expect(menu).not.toBeNull();
       });
 
-      it('should validate menu existance', function () {
+      it('should validate menu existance', () => {
         expect(menuService.validateMenuExistence).toHaveBeenCalledWith(menuId);
       });
 
-      it('should not add sub menu item to menu item of different state', function () {
+      it('should not add sub menu item to menu item of different state', () => {
         expect(menuItem3.items.length).toBe(0);
       });
 
-      it('should set shouldRender', function () {
+      it('should set shouldRender', () => {
         expect(subItem1.shouldRender).toBeDefined();
       });
 
-      describe('with options set', function () {
-        it('should add sub menu item to menu item', function () {
+      describe('with options set', () => {
+        it('should add sub menu item to menu item', () => {
           expect(subItem1).toBeDefined();
         });
 
-        it('should set title to options title', function () {
+        it('should set title to options title', () => {
           expect(subItem1.title).toBe(subItemOptions.title);
         });
 
-        it('should set state to options state', function () {
+        it('should set state to options state', () => {
           expect(subItem1.state).toBe(subItemOptions.state);
         });
 
-        it('should set roles to options roles', function () {
+        it('should set roles to options roles', () => {
           expect(subItem1.roles).toEqual(subItemOptions.roles);
         });
 
-        it('should set position to options position', function () {
+        it('should set position to options position', () => {
           expect(subItem1.position).toEqual(subItemOptions.position);
         });
 
-        it('should set params to options params', function () {
+        it('should set params to options params', () => {
           expect(subItem1.params).toEqual(subItemOptions.params);
         });
       });
 
-      describe('without optoins set', function () {
-        it('should add sub menu item to menu item', function () {
+      describe('without optoins set', () => {
+        it('should add sub menu item to menu item', () => {
           expect(subItem2).toBeDefined();
         });
 
-        it('should set isPublic to parent isPublic', function () {
+        it('should set isPublic to parent isPublic', () => {
           expect(subItem2.isPublic).toBe(menuItem1.isPublic);
         });
 
-        it('should set title to blank', function () {
+        it('should set title to blank', () => {
           expect(subItem2.title).toBe('');
         });
 
-        it('should set state to blank', function () {
+        it('should set state to blank', () => {
           expect(subItem2.state).toBe('');
         });
 
-        it('should set roles to parent roles', function () {
+        it('should set roles to parent roles', () => {
           expect(subItem2.roles).toEqual(menuItem1.roles);
         });
 
-        it('should set position to 0', function () {
+        it('should set position to 0', () => {
           expect(subItem2.position).toBe(0);
         });
       });
 
-      describe('then removeSubMenuItem', function () {
-        beforeEach(function () {
+      describe('then removeSubMenuItem', () => {
+        beforeEach(() => {
           menuService.validateMenuExistence = jasmine.createSpy();
           menu = menuService.removeSubMenuItem(menuId, subItem1.state);
         });
 
-        it('should validate menu existance', function () {
+        it('should validate menu existance', () => {
           expect(menuService.validateMenuExistence).toHaveBeenCalledWith(menuId);
         });
 
-        it('should return menu object', function () {
+        it('should return menu object', () => {
           expect(menu).toBeDefined();
         });
 
-        it('should remove sub menu item', function () {
+        it('should remove sub menu item', () => {
           expect(menuItem1.items.length).toBe(1);
           expect(menuItem1.items[0].state).toEqual(subItem2.state);
         });
       });
     });
   });
-}());
+})();

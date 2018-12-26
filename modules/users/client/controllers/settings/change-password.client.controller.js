@@ -1,6 +1,4 @@
-(function () {
-  'use strict';
-
+(() => {
   angular
     .module('users')
     .controller('ChangePasswordController', ChangePasswordController);
@@ -8,7 +6,7 @@
   ChangePasswordController.$inject = ['$scope', '$http', 'Authentication', 'UsersService', 'PasswordValidator', 'Notification'];
 
   function ChangePasswordController($scope, $http, Authentication, UsersService, PasswordValidator, Notification) {
-    var vm = this;
+    const vm = this;
 
     vm.user = Authentication.user;
     vm.changeUserPassword = changeUserPassword;
@@ -38,4 +36,4 @@
       Notification.error({ message: response.data.message, title: '<i class="glyphicon glyphicon-remove"></i> Password change failed!' });
     }
   }
-}());
+})();

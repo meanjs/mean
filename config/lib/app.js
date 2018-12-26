@@ -1,13 +1,12 @@
-'use strict';
-
 /**
  * Module dependencies.
  */
-var config = require('../config'),
-  mongooseService = require('./mongoose'),
-  express = require('./express'),
-  chalk = require('chalk'),
-  seed = require('./mongo-seed');
+const config = require('../config');
+
+const mongooseService = require('./mongoose');
+const express = require('./express');
+const chalk = require('chalk');
+const seed = require('./mongo-seed');
 
 function seedDB() {
   if (config.seedDB && config.seedDB.seed) {
@@ -17,26 +16,26 @@ function seedDB() {
 }
 
 module.exports.init = function init(callback) {
-  mongooseService.connect(function (db) {
+  mongooseService.connect(db => {
     // Initialize Models
     mongooseService.loadModels(seedDB);
 
     // Initialize express
-    var app = express.init(db);
+    const app = express.init(db);
     if (callback) callback(app, db, config);
 
   });
 };
 
 module.exports.start = function start(callback) {
-  var _this = this;
+  const _this = this;
 
-  _this.init(function (app, db, config) {
+  _this.init((app, db, config) => {
 
     // Start the app by listening on <port> at <host>
-    app.listen(config.port, config.host, function () {
+    app.listen(config.port, config.host, () => {
       // Create server URL
-      var server = (process.env.NODE_ENV === 'secure' ? 'https://' : 'http://') + config.host + ':' + config.port;
+      const server = (process.env.NODE_ENV === 'secure' ? 'https://' : 'http://') + config.host + ':' + config.port;
       // Logging initialization
       console.log('--');
       console.log(chalk.green(config.app.title));
