@@ -1,15 +1,45 @@
 <section>
-  <div class="page-header">
-    <h1 ng-bind="vm.article.title"></h1>
-  </div>
-  <small>
-    <em class="text-muted">
-      Posted on
-      <span ng-bind="vm.article.created | date:'mediumDate'"></span>
-      by
-      <span ng-if="vm.article.user" ng-bind="vm.article.user.displayName"></span>
-      <span ng-if="!vm.article.user">Deleted User</span>
-    </em>
-  </small>
-  <p class="lead" ng-bind="vm.article.content"></p>
+    <div class="page-header">
+        <h1 ng-bind="vm.article.title"></h1>
+    </div>
+    <small>
+        <em class="text-muted">
+            Posted on
+            <span ng-bind="vm.article.created | date:'mediumDate'"></span>
+            by
+            <span ng-if="vm.article.user" ng-bind="vm.article.user.displayName"></span>
+            <span ng-if="!vm.article.user">Deleted User</span>
+        </em>
+    </small>
+    <p class="lead" ng-bind="vm.article.content"></p>
+</section>
+<section>
+    <h2>Comments</h2>
+    <div class="list-group">
+        <a ng-repeat="comment in vm.article.comments" class="list-group-item">
+            <small class="list-group-item-text">
+                Commented on
+                <span ng-bind="comment.created | date:'mediumDate'"></span>
+                by
+                <span ng-if="comment.user" ng-bind="comment.user"></span>
+                <span ng-if="!comment.user">Guest User</span>
+            </small>
+            <p class="list-group-item-text" ng-bind="comment.comment"></p>
+        </a>
+    </div>
+    <form name="vm.form.commentForm" class="form-horizontal" ng-submit="vm.saveComment(vm.form.commentForm.$valid)" novalidate>
+        <div class="form-group" show-errors>
+            <div class="controls">
+                <textarea name="comment" required ng-model="vm.article.comment"  id="comment" class="form-control" cols="30" rows="10"
+                          placeholder="Comment"></textarea>
+            </div>
+            {{vm.form.commentForm.comment.$error}}
+            <div ng-messages="vm.form.commentForm.comment.$error" role="alert">
+                <p class="help-block error-text" ng-message="required">Comment is required.</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
 </section>
