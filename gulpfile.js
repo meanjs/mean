@@ -472,7 +472,7 @@ gulp.task('test:server',
 
 // Run the project tests
 gulp.task('test',
-  gulp.series('env:test', 'test:server', 'karma', 'nodemon'));
+  gulp.series('env:test', 'test:server', 'karma'));
 
 // Watch all server files for changes & run server tests (test:server) task on changes
 gulp.task('test:server:watch',
