@@ -106,7 +106,7 @@
     "coveralls": "~2.13.0",
     "gulp-istanbul": "~1.1.1",
     "gulp-mocha": "~3.0.1",
-    "gulp-protractor": "~4.0.0",
+    "gulp-protractor": "~4.1.0",
     "karma": "^1.7.1",
     "karma-chrome-launcher": "~2.2.0",
     "karma-coverage": "~1.1.1",
