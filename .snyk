@@ -1,5 +1,5 @@
 # Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
-version: v1.13.0
+version: v1.13.5
 ignore: {}
 # patches apply the minimum changes required to fix a vulnerability
 patch:
@@ -20,4 +20,46 @@ patch:
         patched: '2018-06-19T02:16:15.888Z'
     - gulp-sass > node-sass > node-gyp > request > hawk > cryptiles > boom > hoek:
         patched: '2018-06-19T02:16:15.888Z'
-        
+  SNYK-JS-LODASH-450202:
+    - snyk > snyk-nuget-plugin > lodash:
+        patched: '2019-07-04T05:34:41.749Z'
+    - lodash:
+        patched: '2019-07-04T05:34:41.749Z'
+    - snyk > lodash:
+        patched: '2019-07-04T05:34:41.749Z'
+    - acl > lodash:
+        patched: '2019-07-04T05:34:41.749Z'
+    - async > lodash:
+        patched: '2019-07-04T05:34:41.749Z'
+    - gulp-uglify > lodash:
+        patched: '2019-07-04T05:34:41.749Z'
+    - snyk > inquirer > lodash:
+        patched: '2019-07-04T05:34:41.749Z'
+    - gulp-eslint > eslint > lodash:
+        patched: '2019-07-04T05:34:41.749Z'
+    - acl > async > lodash:
+        patched: '2019-07-04T05:34:41.749Z'
+    - snyk > snyk-php-plugin > lodash:
+        patched: '2019-07-04T05:34:41.749Z'
+    - wiredep > lodash:
+        patched: '2019-07-04T05:34:41.749Z'
+    - mongoose > async > lodash:
+        patched: '2019-07-04T05:34:41.749Z'
+    - snyk > snyk-config > lodash:
+        patched: '2019-07-04T05:34:41.749Z'
+    - snyk > @snyk/dep-graph > lodash:
+        patched: '2019-07-04T05:34:41.749Z'
+    - snyk > snyk-nodejs-lockfile-parser > graphlib > lodash:
+        patched: '2019-07-04T05:34:41.749Z'
+    - gulp-eslint > eslint > table > lodash:
+        patched: '2019-07-04T05:34:41.749Z'
+    - snyk > @snyk/dep-graph > graphlib > lodash:
+        patched: '2019-07-04T05:34:41.749Z'
+    - gulp-eslint > eslint > inquirer > lodash:
+        patched: '2019-07-04T05:34:41.749Z'
+    - gulp-sass > node-sass > sass-graph > lodash:
+        patched: '2019-07-04T05:34:41.749Z'
+    - snyk > snyk-go-plugin > graphlib > lodash:
+        patched: '2019-07-04T05:34:41.749Z'
+    - gulp-sass > node-sass > gaze > globule > lodash:
+        patched: '2019-07-04T05:34:41.749Z'
