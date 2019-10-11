@@ -2,13 +2,13 @@ language: node_js
 dist: trusty
 sudo: required
 node_js:
-  - '6.10'
-  - '7'
   - '8'
+  - '9'
+  - '10'
+  - '11'
+  - '12'
 matrix:
   fast_finish: true
-#  allow_failures:
-#    - node_js: '8'
 os:
   - linux
   - centos
