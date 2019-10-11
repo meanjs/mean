@@ -484,17 +484,17 @@ describe('User CRUD tests', function () {
             should.exist(userRes.resetPasswordExpires);
 
             agent.get('/api/auth/reset/' + userRes.resetPasswordToken)
-            .expect(302)
-            .end(function (err, res) {
-              // Handle error
-              if (err) {
-                return done(err);
-              }
+              .expect(302)
+              .end(function (err, res) {
+                // Handle error
+                if (err) {
+                  return done(err);
+                }
 
-              res.headers.location.should.be.equal('/password/reset/' + userRes.resetPasswordToken);
+                res.headers.location.should.be.equal('/password/reset/' + userRes.resetPasswordToken);
 
-              return done();
-            });
+                return done();
+              });
           });
         });
     });
@@ -518,17 +518,17 @@ describe('User CRUD tests', function () {
 
           var invalidToken = 'someTOKEN1234567890';
           agent.get('/api/auth/reset/' + invalidToken)
-          .expect(302)
-          .end(function (err, res) {
-            // Handle error
-            if (err) {
-              return done(err);
-            }
+            .expect(302)
+            .end(function (err, res) {
+              // Handle error
+              if (err) {
+                return done(err);
+              }
 
-            res.headers.location.should.be.equal('/password/reset/invalid');
+              res.headers.location.should.be.equal('/password/reset/invalid');
 
-            return done();
-          });
+              return done();
+            });
         });
     });
   });
