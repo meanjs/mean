@@ -1,5 +1,5 @@
 language: node_js
-dist: trusty
+dist: xenial
 sudo: required
 node_js:
   - '8'
@@ -14,9 +14,8 @@ os:
   - centos
   - macosx
   - windows
-# NodeJS v4 requires gcc 4.8
 env:
-  - NODE_ENV=travis CXX="g++-4.8" CC="gcc-4.8"
+  - NODE_ENV=travis
 services:
   - mongodb
 # gcc 4.8 requires ubuntu-toolchain-r-test
@@ -25,8 +24,8 @@ addons:
     sources:
     - ubuntu-toolchain-r-test
     packages:
-    - g++-4.8
-    - gcc-4.8
+    - g++
+    - gcc
     - clang
   chrome: stable
 before_install:
