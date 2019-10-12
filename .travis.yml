@@ -18,6 +18,7 @@ env:
   - NODE_ENV=travis
 services:
   - mongodb
+  - xvfb
 # gcc 4.8 requires ubuntu-toolchain-r-test
 addons:
   apt:
