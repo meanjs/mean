@@ -19,18 +19,15 @@ env:
 services:
   - mongodb
   - xvfb
-# gcc 4.8 requires ubuntu-toolchain-r-test
 addons:
   apt:
-    sources:
-    - ubuntu-toolchain-r-test
     packages:
     - g++
     - gcc
     - clang
   chrome: stable
 before_install:
-  - npm install webdriver-manager -g && webdriver-manager update
+#   - npm install webdriver-manager -g && webdriver-manager update
   - npm install nsp -g
 #  - npm install snyk -g
   - 'export PATH=$PATH:/usr/lib/chromium-browser/'
