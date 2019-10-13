@@ -32,7 +32,8 @@ before_install:
 #  - npm install snyk -g
   - 'export PATH=$PATH:/usr/lib/chromium-browser/'
   - 'export DISPLAY=:99.0'
-#before_script:
+before_script:
+  - sleep 15
 #  - snyk auth $SNYK_TOKEN
 #  - snyk test
 after_script:
