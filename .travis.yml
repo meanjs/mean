@@ -11,8 +11,7 @@ matrix:
   fast_finish: true
 os:
   - linux
-  - centos
-  - macosx
+  - osx
   - windows
 env:
   - NODE_ENV=travis
