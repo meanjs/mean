@@ -9,6 +9,10 @@ node_js:
   - '12'
 matrix:
   fast_finish: true
+  allow_failures:
+    os:
+      - osx
+      - windows
 os:
   - linux
   - osx
@@ -31,8 +35,7 @@ before_install:
 #  - npm install snyk -g
   - 'export PATH=$PATH:/usr/lib/chromium-browser/'
   - 'export DISPLAY=:99.0'
-before_script:
-  - sleep 15
+# before_script:
 #  - snyk auth $SNYK_TOKEN
 #  - snyk test
 after_script:
