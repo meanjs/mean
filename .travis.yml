@@ -30,6 +30,7 @@ addons:
     - clang
   chrome: stable
 before_install:
+  - if [ "$TRAVIS_OS_NAME" = "osx" ]; then brew update && brew tap mongodb/brew && brew install mongodb-community@4.2 && brew services start mongodb-community@4.2; fi
 #   - npm install webdriver-manager -g && webdriver-manager update
   - npm install nsp -g
 #  - npm install snyk -g
