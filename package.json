@@ -100,7 +100,7 @@
     "validator": "~9.4.1",
     "winston": "~2.3.1",
     "wiredep": "~4.0.0",
-    "snyk": "^1.116.4"
+    "snyk": "^1.145.0"
   },
   "devDependencies": {
     "coveralls": "~2.13.0",
