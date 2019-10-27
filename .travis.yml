@@ -1,43 +1,47 @@
 language: node_js
-dist: trusty
+dist: xenial
 sudo: required
 node_js:
-  - '6.10'
-  - '7'
   - '8'
+  - '9'
+  - '10'
+  - '11'
+  - '12'
 matrix:
   fast_finish: true
-#  allow_failures:
-#    - node_js: '8'
+  allow_failures:
+    - os: windows
 os:
   - linux
-  - centos
-  - macosx
+  - osx
   - windows
-# NodeJS v4 requires gcc 4.8
+cache:
+  directories:
+    - node_modules
+    - /usr/local/Cellar
 env:
-  - NODE_ENV=travis CXX="g++-4.8" CC="gcc-4.8"
+  - NODE_ENV=travis
 services:
   - mongodb
-# gcc 4.8 requires ubuntu-toolchain-r-test
+  - xvfb
 addons:
   apt:
-    sources:
-    - ubuntu-toolchain-r-test
     packages:
-    - g++-4.8
-    - gcc-4.8
-    - clang
+      - g++
+      - gcc
+      - clang
   chrome: stable
 before_install:
-  - npm install webdriver-manager -g && webdriver-manager update
+  - if [ "$TRAVIS_OS_NAME" = "osx" ]; then brew tap mongodb/brew && brew install mongodb-community@4.2 && brew services start mongodb-community@4.2; fi
+  - if [ "$TRAVIS_OS_NAME" = "windows" ]; then choco install mongodb; fi
+  - if [ "$TRAVIS_OS_NAME" = "windows" ]; then mkdir "C:\data\db"; fi
+  - if [ "$TRAVIS_OS_NAME" = "windows" ]; then "C:\Program Files\MongoDB\Server\4.2\bin\mongod.exe" --dbpath="c:\data\db"; fi
+#   - npm install webdriver-manager -g && webdriver-manager update
   - npm install nsp -g
 #  - npm install snyk -g
   - 'export PATH=$PATH:/usr/lib/chromium-browser/'
   - 'export DISPLAY=:99.0'
-  - 'sh -e /etc/init.d/xvfb start'
-  - sleep 3
-#before_script:
+# before_script:
 #  - snyk auth $SNYK_TOKEN
 #  - snyk test
 after_script:
