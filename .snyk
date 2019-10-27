@@ -1,5 +1,5 @@
 # Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
-version: v1.13.0
+version: v1.13.5
 ignore: {}
 # patches apply the minimum changes required to fix a vulnerability
 patch:
@@ -20,4 +20,28 @@ patch:
         patched: '2018-06-19T02:16:15.888Z'
     - gulp-sass > node-sass > node-gyp > request > hawk > cryptiles > boom > hoek:
         patched: '2018-06-19T02:16:15.888Z'
-        
+  'npm:debug:20170905':
+    - gulp-nodemon > gulp > glob-watcher > chokidar > readdirp > micromatch > nanomatch > snapdragon > debug:
+        patched: '2019-10-27T20:18:39.167Z'
+    - gulp > glob-watcher > chokidar > readdirp > micromatch > snapdragon > debug:
+        patched: '2019-10-27T20:18:39.167Z'
+    - gulp > glob-watcher > chokidar > readdirp > micromatch > extglob > snapdragon > debug:
+        patched: '2019-10-27T20:18:39.167Z'
+    - gulp-nodemon > gulp > glob-watcher > chokidar > readdirp > micromatch > snapdragon > debug:
+        patched: '2019-10-27T20:18:39.167Z'
+    - gulp > glob-watcher > chokidar > readdirp > micromatch > nanomatch > snapdragon > debug:
+        patched: '2019-10-27T20:18:39.167Z'
+    - gulp > glob-watcher > chokidar > readdirp > micromatch > extglob > expand-brackets > debug:
+        patched: '2019-10-27T20:18:39.167Z'
+    - gulp > glob-watcher > chokidar > readdirp > micromatch > braces > snapdragon > debug:
+        patched: '2019-10-27T20:18:39.167Z'
+    - gulp-nodemon > gulp > glob-watcher > chokidar > readdirp > micromatch > extglob > snapdragon > debug:
+        patched: '2019-10-27T20:18:39.167Z'
+    - gulp-nodemon > gulp > glob-watcher > chokidar > readdirp > micromatch > braces > snapdragon > debug:
+        patched: '2019-10-27T20:18:39.167Z'
+    - gulp > glob-watcher > chokidar > readdirp > micromatch > extglob > expand-brackets > snapdragon > debug:
+        patched: '2019-10-27T20:18:39.167Z'
+    - gulp-nodemon > gulp > glob-watcher > chokidar > readdirp > micromatch > extglob > expand-brackets > debug:
+        patched: '2019-10-27T20:18:39.167Z'
+    - gulp-nodemon > gulp > glob-watcher > chokidar > readdirp > micromatch > extglob > expand-brackets > snapdragon > debug:
+        patched: '2019-10-27T20:18:39.167Z'
