@@ -32,7 +32,7 @@ addons:
       - clang
   chrome: stable
 before_install:
-  - if [ "$TRAVIS_OS_NAME" = "osx" ]; then brew tap mongodb/brew && brew install mongodb-community@4.2 && brew services start mongodb-community@4.2; fi
+  - if [ "$TRAVIS_OS_NAME" = "osx" ]; then brew update && brew tap mongodb/brew && brew install mongodb-community@4.2 && brew services start mongodb-community@4.2; fi
   - if [ "$TRAVIS_OS_NAME" = "windows" ]; then choco install mongodb; fi
   - if [ "$TRAVIS_OS_NAME" = "windows" ]; then mkdir "C:\data\db"; fi
   - if [ "$TRAVIS_OS_NAME" = "windows" ]; then "C:\Program Files\MongoDB\Server\4.2\bin\mongod.exe" --dbpath="c:\data\db"; fi
