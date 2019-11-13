@@ -170,7 +170,7 @@ describe('User CRUD tests', function () {
         }
 
         // Request list of users
-        agent.get('/api/users')
+        agent.get('/api/admin/users')
           .expect(403)
           .end(function (usersGetErr, usersGetRes) {
             if (usersGetErr) {
@@ -197,7 +197,7 @@ describe('User CRUD tests', function () {
           }
 
           // Request list of users
-          agent.get('/api/users')
+          agent.get('/api/admin/users')
             .expect(200)
             .end(function (usersGetErr, usersGetRes) {
               if (usersGetErr) {
@@ -228,7 +228,7 @@ describe('User CRUD tests', function () {
           }
 
           // Get single user information from the database
-          agent.get('/api/users/' + user._id)
+          agent.get('/api/admin/users/' + user._id)
             .expect(200)
             .end(function (userInfoErr, userInfoRes) {
               if (userInfoErr) {
@@ -267,7 +267,7 @@ describe('User CRUD tests', function () {
             roles: ['admin']
           };
 
-          agent.put('/api/users/' + user._id)
+          agent.put('/api/admin/users/' + user._id)
             .send(userUpdate)
             .expect(200)
             .end(function (userInfoErr, userInfoRes) {
@@ -302,7 +302,7 @@ describe('User CRUD tests', function () {
             return done(signinErr);
           }
 
-          agent.delete('/api/users/' + user._id)
+          agent.delete('/api/admin/users/' + user._id)
             .expect(200)
             .end(function (userInfoErr, userInfoRes) {
               if (userInfoErr) {
