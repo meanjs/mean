@@ -59,7 +59,7 @@
     "glob": "^7.1.4",
     "gulp": "^4.0.2",
     "gulp-angular-templatecache": "~2.0.0",
-    "gulp-autoprefixer": "~4.0.0",
+    "gulp-autoprefixer": "~6.0.0",
     "gulp-concat": "~2.6.1",
     "gulp-csslint": "^1.0.1",
     "gulp-csso": "^3.0.1",
