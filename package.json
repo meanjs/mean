@@ -72,7 +72,7 @@
     "gulp-refresh": "^1.1.0",
     "gulp-rename": "^1.2.3",
     "gulp-rev": "~8.0.0",
-    "gulp-sass": "^3.2.1",
+    "gulp-sass": "^5.0.0",
     "gulp-uglify": "^3.0.2",
     "helmet": "^3.21.1",
     "imagemin-pngquant": "~6.0.0",
